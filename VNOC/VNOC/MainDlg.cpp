@@ -1,0 +1,112 @@
+// MainDlg.cpp : 实现文件
+//
+
+#include "stdafx.h"
+#include "VNOC.h"
+#include "MainDlg.h"
+
+
+// CMainDlg 对话框
+
+IMPLEMENT_DYNAMIC(CMainDlg, CDialog)
+
+CMainDlg::CMainDlg(CWnd* pParent /*=NULL*/)
+	: CDialog(CMainDlg::IDD, pParent)
+{
+	m_bIsMove = FALSE;
+}
+
+CMainDlg::~CMainDlg()
+{
+}
+
+void CMainDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_EDIT_SEACH, m_SearchEdit);
+	DDX_Control(pDX, IDC_LIST_CLASS, m_ClassList);
+}
+
+
+BEGIN_MESSAGE_MAP(CMainDlg, CDialog)
+	ON_WM_SIZE()
+	ON_WM_SIZING()
+END_MESSAGE_MAP()
+
+
+// CMainDlg 消息处理程序
+
+void CMainDlg::OnSize(UINT nType, int cx, int cy)
+{
+	CDialog::OnSize(nType, cx, cy);
+
+	if (m_bIsMove)
+	{
+		CRect EditRect,SplitRect,DlgRect,ListRect,NoticeRect;
+		this->GetClientRect(DlgRect);
+		GetDlgItem(IDC_EDIT_SEACH)->GetWindowRect(EditRect);
+		ScreenToClient(EditRect);
+
+		EditRect.left = DlgRect.left;
+		GetDlgItem(IDC_EDIT_SEACH)->MoveWindow(EditRect);
+
+		ListRect.bottom = DlgRect.bottom;
+		ListRect.top =EditRect.bottom;
+		ListRect.left = DlgRect.left;
+		ListRect.right = DlgRect.Width()/3*2;
+		GetDlgItem(IDC_LIST_CLASS)->MoveWindow(ListRect);
+		m_ClassList.SetColumnWidth(0,ListRect.Width()/4);
+		m_ClassList.SetColumnWidth(1,ListRect.Width()-ListRect.Width()/4);
+
+		NoticeRect.bottom=DlgRect.bottom;
+		NoticeRect.top =EditRect.bottom;
+		NoticeRect.left = ListRect.right;
+		NoticeRect.right  = DlgRect.right;
+		GetDlgItem(IDC_STATIC_NOTICE)->MoveWindow(NoticeRect)	;
+
+		SplitRect.top =NoticeRect.bottom/2; 
+		SplitRect.bottom = SplitRect.top+1;
+		SplitRect.left = NoticeRect.left;
+		SplitRect.right = NoticeRect.right;
+		GetDlgItem(IDC_STATIC_SPLIT)->MoveWindow(SplitRect);
+	}
+	// TODO: 在此处添加消息处理程序代码
+}
+
+BOOL CMainDlg::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+	CRect rect;
+	m_SearchEdit.GetWindowRect(rect);
+	CFont*  ptf=m_SearchEdit.GetFont();  
+	LOGFONT  lf;  
+	ptf->GetLogFont  (&lf);  
+	lf.lfHeight=rect.Height()-5;//改变字体高度  
+	m_EditFont.CreateFontIndirect  (&lf);  
+	m_SearchEdit.SetFont  (&m_EditFont);
+	m_bIsMove = TRUE;
+
+	m_ClassList.SetExtendedStyle(m_ClassList.GetExtendedStyle()| LVS_EX_GRIDLINES);
+//	m_ClassList.ShowScrollBar(SB_VERT ,TRUE);
+	m_ClassList.InsertColumn(0,_T("  "));
+	m_ClassList.InsertColumn(1,_T(" ") );
+	GetDlgItem(IDC_STATIC_SPLIT)->EnableWindow(TRUE);
+	int nItem;
+	for (int i =0; i!=100;i++)
+	{
+		nItem = m_ClassList.InsertItem(0,_T("教室"));	
+		m_ClassList.SetItemText(nItem,1,_T("C++"));
+	}
+	::SendMessage(this->m_hWnd,WM_SIZE,0,0);
+
+	// TODO:  在此添加额外的初始化
+	return TRUE;  // return TRUE unless you set the focus to a control
+	// 异常: OCX 属性页应返回 FALSE
+}
+
+void CMainDlg::OnSizing(UINT fwSide, LPRECT pRect)
+{
+	CDialog::OnSizing(fwSide, pRect);
+	
+	// TODO: 在此处添加消息处理程序代码
+}
