@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -116,22 +116,32 @@
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="MainDlg.cpp" />
+    <ClCompile Include="NetClient.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="VNOC.cpp" />
     <ClCompile Include="VNOCDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h" />
     <ClInclude Include="MainDlg.h" />
+    <ClInclude Include="NetClient.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="tinystr.h" />
+    <ClInclude Include="tinyxml.h" />
     <ClInclude Include="VNOC.h" />
     <ClInclude Include="VNOCDlg.h" />
+    <ClInclude Include="XmlAnalysis.h" />
+    <ClInclude Include="XmlTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico" />
