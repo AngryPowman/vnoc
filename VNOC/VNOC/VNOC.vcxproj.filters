@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="CodeEditor">
+      <UniqueIdentifier>{83be4666-594d-4b5f-9df2-f0c8910087ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{264cbfda-568d-4c23-90ae-f5499a3ea5c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp">
@@ -31,18 +37,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="VNOCDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tinyXML\tinystr.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tinyXML\tinyxml.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tinyXML\tinyxmlerror.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\tinyXML\tinyxmlparser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MyNetClient\ClientConnection.cpp">
@@ -74,18 +68,6 @@
     <ClInclude Include="VNOCDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\tinyXML\tinystr.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tinyXML\tinyxml.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tinyXML\XmlAnalysis.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\tinyXML\XmlTransform.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\MyNetClient\ClientConnection.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -103,7 +85,6 @@
     <None Include="res\VNOC.rc2">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="ReadMe.txt" />
     <None Include="..\..\MyNetClient\MyNetClient.vcxproj" />
   </ItemGroup>
   <ItemGroup>

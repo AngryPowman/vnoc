@@ -50,6 +50,7 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 #include  <afxpriv.h>
 #include "easysize.h"
+#include "../../TinyXML/tinyxml.h"
 
 
 

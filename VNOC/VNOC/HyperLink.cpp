@@ -110,8 +110,8 @@ BOOL CHyperLink::SetLink(LPCTSTR lpszText, LPCTSTR lpszUrl, BOOL bRedraw)
 	if(_tcslen(lpszText) >= MAX_TEXT_LEN || _tcslen(lpszUrl) >= MAX_URL_LEN)
 		return FALSE;
 
-	_tcscpy(m_szText, lpszText);
-	_tcscpy(m_szUrl, lpszUrl);
+	_tcscpy_s(m_szText, lpszText);
+	_tcscpy_s(m_szUrl, lpszUrl);
 	if(bRedraw && m_hWnd != NULL)	//由于static不刷新背景，所以这里刷新父窗口实现。
 	{
 		RECT rcWnd = {0};
