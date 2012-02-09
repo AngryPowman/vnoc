@@ -6,7 +6,7 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-#include "NetService.h"
+#include "src/NetService.h"
 #include <iostream>
 using namespace std;
 
