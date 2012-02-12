@@ -18,13 +18,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(中华人民共和国) resources
+// Chinese (Simplified, PRC) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -107,24 +105,24 @@ BEGIN
     LTEXT           "找回密码",IDC_FOUND_PASSWORD,173,61,45,17
 END
 
-IDD_DIALOG1 DIALOGEX 0, 0, 471, 274
+IDD_RoomDlg DIALOGEX 0, 0, 471, 289
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    GROUPBOX        "已上传的文件",IDC_STATIC,7,202,99,65
-    CONTROL         "",IDC_LIST_UPFILE,"SysListView32",LVS_ALIGNLEFT | LVS_NOSCROLL | WS_BORDER | WS_TABSTOP,8,211,97,40
-    PUSHBUTTON      "上传",IDC_BUTTON_UPLOAD,29,252,51,15
-    EDITTEXT        IDC_EDIT_SEND,112,251,262,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "发送",IDC_BUTTON_SEND,377,251,29,15
-    PUSHBUTTON      "离开教室",IDC_BUTTON_LEAVE,414,224,50,18
-    GROUPBOX        "讨论",IDC_GROUP_SESSION,105,202,308,65
+    GROUPBOX        "已上传的文件",IDC_STATIC,7,200,100,82
+    CONTROL         "",IDC_LIST_UPFILE,"SysListView32",LVS_ALIGNLEFT | LVS_NOSCROLL | WS_BORDER | WS_TABSTOP,10,216,93,39
+    PUSHBUTTON      "上传",IDC_BUTTON_UPLOAD,30,258,51,15
+    EDITTEXT        IDC_EDIT_SEND,117,259,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "发送",IDC_BUTTON_SEND,355,258,29,15
+    PUSHBUTTON      "离开教室",IDC_BUTTON_LEAVE,401,264,50,18
+    GROUPBOX        "讨论",IDC_GROUP_SESSION,111,200,278,82
     GROUPBOX        "代码输出",IDC_GROUP_CODE,372,7,92,198
-    PUSHBUTTON      "运行",IDC_BUTTON_RUN,400,20,40,14
-    LTEXT           "静态",IDC_STATIC_RESULT,372,35,92,170,0,WS_EX_STATICEDGE
-    GROUPBOX        "在线人员",IDC_GROUP_ONLINE,7,6,101,194
-    CONTROL         "",IDC_RICHEDIT_REPORT,"RichEdit20A",ES_AUTOHSCROLL | ES_READONLY | WS_BORDER | WS_TABSTOP,112,211,295,39
-    CONTROL         "",IDC_LIST_ONLINE,"SysListView32",LVS_ALIGNLEFT | LVS_NOSCROLL | WS_BORDER | WS_TABSTOP,8,24,98,176
+    PUSHBUTTON      "运行",IDC_BUTTON_RUN,379,19,40,14
+    LTEXT           "静态",IDC_STATIC_RESULT,380,40,77,159,0,WS_EX_STATICEDGE
+    GROUPBOX        "在线人员",IDC_GROUP_ONLINE,7,7,100,189
+    CONTROL         "",IDC_RICHEDIT_REPORT,"RichEdit20W",ES_AUTOHSCROLL | ES_READONLY | WS_BORDER | WS_TABSTOP,117,214,266,41
+    CONTROL         "",IDC_LIST_ONLINE,"SysListView32",LVS_ALIGNLEFT | LVS_NOSCROLL | WS_BORDER | WS_TABSTOP,12,17,87,174
 END
 
 IDD_CODE DIALOGEX 0, 0, 196, 128
@@ -179,7 +177,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_MAINDLG, DIALOG
     BEGIN
@@ -197,12 +195,12 @@ BEGIN
         BOTTOMMARGIN, 132
     END
 
-    IDD_DIALOG1, DIALOG
+    IDD_RoomDlg, DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 464
         TOPMARGIN, 7
-        BOTTOMMARGIN, 267
+        BOTTOMMARGIN, 282
     END
 
     IDD_CODE, DIALOG
@@ -213,7 +211,19 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // 中文(中华人民共和国) resources
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_Sci_WndTitle        "Scintilla_On_VNOC"
+    IDS_Error_DllMissing    "缺失 %s 文件，程序无法启动。"
+END
+
+#endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

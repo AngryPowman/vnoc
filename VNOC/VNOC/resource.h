@@ -6,8 +6,12 @@
 #define IDR_MAINFRAME                   128
 #define IDD_MAINDLG                     129
 #define IDD_DIALOG1                     130
+#define IDD_RoomDlg                     130
 #define IDD_PROPPAGE_SMALL              131
 #define IDD_CODE                        131
+#define IDS_Sci_WndTitle                132
+#define IDS_Error_DllMissing_Sci        135
+#define IDS_Error_DllMissing            135
 #define IDC_EDIT2                       1001
 #define IDC_                            1002
 #define IDC_REGIST                      1004
@@ -38,7 +42,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        132
+#define _APS_NEXT_RESOURCE_VALUE        133
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           101

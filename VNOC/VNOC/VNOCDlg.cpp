@@ -103,7 +103,12 @@ void CVNOCDlg::OnBnClickedOk()
 //	pDlg->DoModal();
 //	delete pDlg;
 	CDialog *pDlg = new CRoomDlg(this);
-	pDlg->DoModal();
+	int result = pDlg->DoModal();
+	if (result == -1)
+	{
+		DWORD errNo = GetLastError();
+		errNo = errNo;
+	}
 	delete pDlg;
 //	OnOK();
 }

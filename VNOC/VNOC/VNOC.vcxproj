@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -85,6 +85,12 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>../postDispatch.bat DEBUG</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>../preLink.bat DEBUG</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -112,6 +118,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>../postDispatch.bat RELEASE</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>../preLink.bat RELEASE</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\MyNetClient\ClientConnection.cpp">
@@ -123,6 +135,7 @@
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="MainDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
+    <ClCompile Include="SciEdit.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -134,16 +147,23 @@
     <ClInclude Include="..\..\MyNetClient\ClientConnection.h" />
     <ClInclude Include="..\..\MyNetClient\MsgDef.h" />
     <ClInclude Include="..\..\MyNetClient\NetClient.h" />
+    <ClInclude Include="..\..\scintilla\include\ILexer.h" />
+    <ClInclude Include="..\..\scintilla\include\Platform.h" />
+    <ClInclude Include="..\..\scintilla\include\SciLexer.h" />
+    <ClInclude Include="..\..\scintilla\include\Scintilla.h" />
     <ClInclude Include="HyperLink.h" />
     <ClInclude Include="MainDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />
+    <ClInclude Include="SciEdit.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="VNOC.h" />
     <ClInclude Include="VNOCDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\MyNetClient\MyNetClient.vcxproj" />
+    <None Include="..\postDispatch.bat" />
+    <None Include="..\preLink.bat" />
     <None Include="res\VNOC.ico" />
     <None Include="res\VNOC.rc2" />
   </ItemGroup>

@@ -45,6 +45,9 @@
     <ClCompile Include="..\..\MyNetClient\NetClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SciEdit.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
@@ -77,6 +80,21 @@
     <ClInclude Include="..\..\MyNetClient\NetClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\ILexer.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\Platform.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\SciLexer.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\Scintilla.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SciEdit.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -86,6 +104,12 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="..\..\MyNetClient\MyNetClient.vcxproj" />
+    <None Include="..\postDispatch.bat">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\preLink.bat">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VNOC.rc">
