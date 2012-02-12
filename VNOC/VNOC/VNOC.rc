@@ -220,6 +220,10 @@ END
 STRINGTABLE
 BEGIN
     IDS_Sci_WndTitle        "Scintilla_On_VNOC"
+    IDS_Sci_Lexer_Keywords_CPP 
+                            "asm auto break case catch class const const_cast continue default delete do double dynamic_cast else enum explicit extern false for friend goto if inline mutable namespace new operator private protected public register reinterpret_cast return signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual volatile while"""
+    IDS_Sci_Lexer_VariableTypes_CPP 
+                            "bool char float int long short void wchar_t"
     IDS_Error_DllMissing    "缺失 %s 文件，程序无法启动。"
 END
 

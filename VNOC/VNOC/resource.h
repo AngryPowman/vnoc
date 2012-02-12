@@ -10,7 +10,8 @@
 #define IDD_PROPPAGE_SMALL              131
 #define IDD_CODE                        131
 #define IDS_Sci_WndTitle                132
-#define IDS_Error_DllMissing_Sci        135
+#define IDS_Sci_Lexer_Keywords_CPP      133
+#define IDS_Sci_Lexer_VariableTypes_CPP 134
 #define IDS_Error_DllMissing            135
 #define IDC_EDIT2                       1001
 #define IDC_                            1002

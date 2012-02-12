@@ -45,6 +45,10 @@ int CRoomDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CRect rec;
 	BOOL result = m_codeEdit.Create(strCodeWndTitle,rec,this,0);
 	ATLASSERT(result);
+	if (result)
+	{
+		m_codeEdit.SetLexer(SCLEX_CPP);
+	}
 	return 0;
 }
 
