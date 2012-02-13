@@ -132,6 +132,10 @@
     <ClCompile Include="..\..\MyNetClient\NetClient.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\public\CBuffer.cpp" />
+    <ClCompile Include="..\public\MD5.cpp" />
+    <ClCompile Include="..\public\TaskThread.cpp" />
+    <ClCompile Include="..\public\util.cpp" />
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="MainDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
@@ -151,6 +155,12 @@
     <ClInclude Include="..\..\scintilla\include\Platform.h" />
     <ClInclude Include="..\..\scintilla\include\SciLexer.h" />
     <ClInclude Include="..\..\scintilla\include\Scintilla.h" />
+    <ClInclude Include="..\public\CBuffer.h" />
+    <ClInclude Include="..\public\MD5.h" />
+    <ClInclude Include="..\public\MD5ChecksumDefines.h" />
+    <ClInclude Include="..\public\TaskThread.h" />
+    <ClInclude Include="..\public\ThreadDefine.h" />
+    <ClInclude Include="..\public\util.h" />
     <ClInclude Include="HyperLink.h" />
     <ClInclude Include="MainDlg.h" />
     <ClInclude Include="Resource.h" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../../scintilla/include/Platform.h"
 #include "SciEdit.h"
+#include "../public/util.h"
 
 CSciEdit::CSciEdit(HINSTANCE hInst)
 {
@@ -102,9 +103,9 @@ BOOL CSciEdit::SetLexer( DWORD lexer /*= SCLEX_CPP*/ )
 			_SendSciMessage(SCI_SETLEXER,lexer);
 			CString strKeyWords;
 			strKeyWords.LoadString(m_hinst,IDS_Sci_Lexer_Keywords_CPP);
-			_SendSciMessage(SCI_SETKEYWORDS,0,(DWORD)(LPCTSTR)strKeyWords);
+			_SendSciMessage(SCI_SETKEYWORDS,0,(DWORD)(LPCSTR)Util::String::CStringW2A(strKeyWords));
 			strKeyWords.LoadString(m_hinst,IDS_Sci_Lexer_VariableTypes_CPP);
-			_SendSciMessage(SCI_SETKEYWORDS,1,(DWORD)(LPCTSTR)strKeyWords);
+			_SendSciMessage(SCI_SETKEYWORDS,1,(DWORD)(LPCSTR)Util::String::CStringW2A(strKeyWords));
 			_SendSciMessage(SCI_STYLESETFORE, SCE_C_WORD, 0x00FF0000);   //¹Ø¼ü×Ö
 			_SendSciMessage(SCI_STYLESETFORE, SCE_C_WORD2, 0x00800080);   //¹Ø¼ü×Ö
 			_SendSciMessage(SCI_STYLESETBOLD, SCE_C_WORD2, TRUE);   //¹Ø¼ü×Ö

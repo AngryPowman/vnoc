@@ -4,6 +4,8 @@
 
 #pragma once
 
+#define MFC_APPLICATION
+
 #ifndef _SECURE_ATL
 #define _SECURE_ATL 1
 #endif
