@@ -99,8 +99,10 @@ BOOL CSciEdit::SetLexer( DWORD lexer /*= SCLEX_CPP*/ )
 		{
 			_SendSciMessage(SCI_STYLESETFONT,STYLE_DEFAULT,(DWORD)"Courier New");
 			_SendSciMessage(SCI_STYLESETSIZE, STYLE_DEFAULT,10);
-			_SendSciMessage(SCI_STYLECLEARALL); 
+			_SendSciMessage(SCI_STYLECLEARALL);
+			sptr_t temp = _SendSciMessage(SCI_GETLEXER,0,0);
 			_SendSciMessage(SCI_SETLEXER,lexer);
+			temp = _SendSciMessage(SCI_GETLEXER,0,0);
 			CString strKeyWords;
 			strKeyWords.LoadString(m_hinst,IDS_Sci_Lexer_Keywords_CPP);
 			_SendSciMessage(SCI_SETKEYWORDS,0,(DWORD)(LPCSTR)Util::String::CStringW2A(strKeyWords));

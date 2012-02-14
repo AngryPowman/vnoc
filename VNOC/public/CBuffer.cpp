@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "CBuffer.h"
 #include "stdio.h"
 #include <atldef.h>

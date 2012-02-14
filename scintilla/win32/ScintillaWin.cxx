@@ -39,6 +39,7 @@
 #include "Scintilla.h"
 
 #ifdef SCI_LEXER
+#pragma message("语法宏已经被启用")
 #include "SciLexer.h"
 #include "LexerModule.h"
 #endif

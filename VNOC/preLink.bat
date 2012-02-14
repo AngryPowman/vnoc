@@ -1,7 +1,7 @@
 @echo off
 @cd ..
 
-@if "%1"=="RELEASE" then goto gRelease
+@if "%1"=="RELEASE" goto gRelease
 @xcopy /e/c/y "../scintilla/bin" "Debug" > nul
 goto gEnd
 
