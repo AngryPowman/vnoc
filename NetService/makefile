@@ -1,5 +1,5 @@
 # author by AngryPowman, for VNOC server
-# revision : 2
+# revision : 3
 CXX=g++
 VPATH=src:test
 %.o : %.cpp
