@@ -6,6 +6,7 @@
 #include "VNOCDlg.h"
 #include "MainDlg.h"
 #include "RoomDlg.h"
+#include "Config.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -102,6 +103,15 @@ void CVNOCDlg::OnBnClickedOk()
 	//CDialog *pDlg = new CMainDlg();
 //	pDlg->DoModal();
 //	delete pDlg;
+
+// 	CConfig config;
+// 	config.LoadConfigFromXML(L"config.xml");
+// 	CStringA text;
+// 	ConfigPath path;
+// 	path.push_back("CodeEditor");
+// 	path.push_back("Language");
+// 	config.GetConfigText()
+
 	CDialog *pDlg = new CRoomDlg(this);
 	int result = pDlg->DoModal();
 	if (result == -1)

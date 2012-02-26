@@ -40,6 +40,7 @@ BOOL CSciEdit::Create( LPCTSTR lpszWindowName, const RECT& rect, CWnd* pParentWn
 			m_pDirectPtr = (sptr_t)SendMessage(SCI_GETDIRECTPOINTER);
 			if (m_pDirectPtr)
 			{
+				_InternalInitialize();
 				return TRUE;
 			}
 		}
@@ -120,8 +121,26 @@ BOOL CSciEdit::SetLexer( DWORD lexer /*= SCLEX_CPP*/ )
 
 			_SendSciMessage(SCI_SETCARETLINEVISIBLE, TRUE);
 			_SendSciMessage(SCI_SETCARETLINEBACK, 0xb0ffff); 
+			ShowLineNumber();
 		}
 		break;
 	}
 	return TRUE;
+}
+
+BOOL CSciEdit::ShowLineNumber( BOOL show /*= TRUE*/ )
+{
+	_CalcLineNumberMarginWidth();
+	_SendSciMessage(SCI_SETMARGINTYPEN,0,SC_MARGIN_NUMBER);
+	return _SendSciMessage(SCI_GETMARGINTYPEN,0,0)==SC_MARGIN_NUMBER;
+}
+
+void CSciEdit::_CalcLineNumberMarginWidth()
+{
+	_SendSciMessage(SCI_SETMARGINWIDTHN,0, 20);
+}
+
+VOID CSciEdit::_InternalInitialize()
+{
+	_SendSciMessage(SCI_SETCODEPAGE,SC_CP_UTF8);
 }

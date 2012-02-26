@@ -84,6 +84,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>../$(ConfigurationName)/TinyXML.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>../postDispatch.bat DEBUG</Command>
@@ -117,6 +118,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>../$(ConfigurationName)/TinyXML.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>../postDispatch.bat RELEASE</Command>
@@ -141,6 +143,7 @@
     <ClCompile Include="..\public\MD5.cpp" />
     <ClCompile Include="..\public\TaskThread.cpp" />
     <ClCompile Include="..\public\util.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="MainDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
@@ -166,6 +169,7 @@
     <ClInclude Include="..\public\TaskThread.h" />
     <ClInclude Include="..\public\ThreadDefine.h" />
     <ClInclude Include="..\public\util.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="HyperLink.h" />
     <ClInclude Include="MainDlg.h" />
     <ClInclude Include="Resource.h" />

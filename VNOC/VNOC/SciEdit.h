@@ -14,10 +14,14 @@ public:
 public:
 	BOOL Create(LPCTSTR lpszWindowName, const RECT& rect, CWnd* pParentWnd, UINT nID);
 	BOOL SetLexer(DWORD lexer = SCLEX_CPP);
+	BOOL ShowLineNumber(BOOL show = TRUE);
+	VOID FontConfigChanged();		// 通知控件，字体等信息有更新，刷新显示。
 private:
-	sptr_t _SendSciMessage(UINT message,DWORD wParam=0,DWORD lParam=0);
 	VOID _AddRef();
 	VOID _Release();
+	VOID _InternalInitialize();
+	sptr_t _SendSciMessage(UINT message,DWORD wParam=0,DWORD lParam=0);
+	void _CalcLineNumberMarginWidth();
 private:
 	HINSTANCE m_hinst;		// 指定资源文件所在位置
 	HMODULE m_dllHandle;

@@ -19,7 +19,7 @@
     <Filter Include="config">
       <UniqueIdentifier>{264cbfda-568d-4c23-90ae-f5499a3ea5c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="public">
+    <Filter Include="public_util">
       <UniqueIdentifier>{6a4c075c-150f-4da0-8e08-b3a87c73e4a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -52,16 +52,19 @@
       <Filter>CodeEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\public\CBuffer.cpp">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClCompile>
     <ClCompile Include="..\public\MD5.cpp">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClCompile>
     <ClCompile Include="..\public\TaskThread.cpp">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClCompile>
     <ClCompile Include="..\public\util.cpp">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,22 +114,25 @@
       <Filter>CodeEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\public\CBuffer.h">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClInclude>
     <ClInclude Include="..\public\MD5.h">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClInclude>
     <ClInclude Include="..\public\MD5ChecksumDefines.h">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClInclude>
     <ClInclude Include="..\public\TaskThread.h">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClInclude>
     <ClInclude Include="..\public\ThreadDefine.h">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
     </ClInclude>
     <ClInclude Include="..\public\util.h">
-      <Filter>public</Filter>
+      <Filter>public_util</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
