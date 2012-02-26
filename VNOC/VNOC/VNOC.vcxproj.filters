@@ -22,6 +22,9 @@
     <Filter Include="public_util">
       <UniqueIdentifier>{6a4c075c-150f-4da0-8e08-b3a87c73e4a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GlobalCenter">
+      <UniqueIdentifier>{b759fbda-a17b-420f-9e85-93f64209457b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp">
@@ -64,6 +67,12 @@
       <Filter>public_util</Filter>
     </ClCompile>
     <ClCompile Include="Config.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalCenter.cpp">
+      <Filter>GlobalCenter</Filter>
+    </ClCompile>
+    <ClCompile Include="IConfig.cpp">
       <Filter>config</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,6 +141,12 @@
       <Filter>public_util</Filter>
     </ClInclude>
     <ClInclude Include="Config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalCenter.h">
+      <Filter>GlobalCenter</Filter>
+    </ClInclude>
+    <ClInclude Include="IConfig.h">
       <Filter>config</Filter>
     </ClInclude>
   </ItemGroup>

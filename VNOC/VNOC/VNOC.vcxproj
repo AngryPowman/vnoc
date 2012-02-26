@@ -144,6 +144,8 @@
     <ClCompile Include="..\public\TaskThread.cpp" />
     <ClCompile Include="..\public\util.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="IConfig.cpp" />
+    <ClCompile Include="GlobalCenter.cpp" />
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="MainDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
@@ -170,6 +172,8 @@
     <ClInclude Include="..\public\ThreadDefine.h" />
     <ClInclude Include="..\public\util.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="IConfig.h" />
+    <ClInclude Include="GlobalCenter.h" />
     <ClInclude Include="HyperLink.h" />
     <ClInclude Include="MainDlg.h" />
     <ClInclude Include="Resource.h" />

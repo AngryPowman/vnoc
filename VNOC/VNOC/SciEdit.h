@@ -1,12 +1,20 @@
+//////////////////////////////////////////////////////////////////////////
+//	代码编辑Edit控件。
+//	目前的需求只有一处用到。如果还有其它地方用到且拥有不同的UI表现的话，请
+//		继承一个新的子类，不要尝试将代码写到这一个类体中。
+
 #pragma once
 #include "../../scintilla/include/Scintilla.h"
 #include "../../scintilla/include/SciLexer.h"
+#include "IConfig.h"
 
 #define SCINTILLA_CLASS_NAME L"scintilla"
 #define SCINTILLA_ADVANCED_DLL_NAME L"scilexer.dll"
 #define SCINTILLA_DLL_NAME L"scintilla.dll"
 
-class CSciEdit : public CWnd
+class CSciEdit : 
+	public CWnd,
+	private IConfig
 {
 public:
 	CSciEdit(HINSTANCE hInst = 0);
@@ -23,10 +31,11 @@ private:
 	sptr_t _SendSciMessage(UINT message,DWORD wParam=0,DWORD lParam=0);
 	void _CalcLineNumberMarginWidth();
 private:
+private:
 	HINSTANCE m_hinst;		// 指定资源文件所在位置
 	HMODULE m_dllHandle;
 	LONG m_refCount;
 
 	SciFnDirect m_pDirectFunc;
-	sptr_t		m_pDirectPtr; 
+	sptr_t		m_pDirectPtr;
 };

@@ -3,7 +3,8 @@
 #include "SciEdit.h"
 #include "../public/util.h"
 
-CSciEdit::CSciEdit(HINSTANCE hInst)
+CSciEdit::CSciEdit(HINSTANCE hInst) :
+IConfig("SciEdit")
 {
 	m_dllHandle = 0;
 	m_refCount = 0;
