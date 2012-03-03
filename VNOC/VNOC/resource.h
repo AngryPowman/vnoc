@@ -5,6 +5,7 @@
 #define IDD_VNOC_DIALOG                 102
 #define IDR_MAINFRAME                   128
 #define IDD_MAINDLG                     129
+#define IDD_RoomListDlg                 129
 #define IDD_DIALOG1                     130
 #define IDD_RoomDlg                     130
 #define IDD_PROPPAGE_SMALL              131
