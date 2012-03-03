@@ -2,6 +2,7 @@
 # revision : 3
 CXX=g++
 VPATH=src:test
+CXXFLAGS=-std=c++0x
 %.o : %.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
