@@ -3,6 +3,7 @@
 // Used by VNOC.rc
 //
 #define IDD_VNOC_DIALOG                 102
+#define IDD_LoginDlg                    102
 #define IDR_MAINFRAME                   128
 #define IDD_MAINDLG                     129
 #define IDD_RoomListDlg                 129
@@ -15,8 +16,12 @@
 #define IDS_Sci_Lexer_VariableTypes_CPP 134
 #define IDS_Error_DllMissing            135
 #define IDC_EDIT2                       1001
+#define IDC_LoginDlg_EDIT_PWD           1001
 #define IDC_                            1002
+#define IDC_LoginDlg_CHECKBOX_R         1002
+#define EMEMBERPWD                      1002
 #define IDC_REGIST                      1004
+#define IDC_LoginDlg_STATIC_REGIST      1004
 #define IDC_FOUND_PASSWORD              1005
 #define IDC_LIST_CLASS                  1010
 #define IDC_BUTTON_CREATE               1012
@@ -37,8 +42,12 @@
 #define IDC_GROUP_CODE                  1031
 #define IDC_GROUP_ONLINE                1032
 #define IDC_RICHEDIT_REPORT             1033
+#define IDC_LoginDlg_STATIC_USERNAME    1034
+#define IDC_LoginDlg_STATIC_PWD         1035
+#define IDC_LoginDlg_STATIC_RECOVERYPWD 1036
 #define IDC_CODE_CTRL                   9527
 #define ID_WIZBACK                      0x3023
+#define IDC_LoginDlg_EDIT_USERNAME      0x3023
 
 // Next default values for new objects
 // 
@@ -46,7 +55,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        133
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1034
+#define _APS_NEXT_CONTROL_VALUE         1037
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

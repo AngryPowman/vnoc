@@ -4,19 +4,24 @@
 #pragma once
 
 #include "HyperLink.h"
+#include "VNOCDialogBase.h"
+
 // CVNOCDlg 对话框
-class CVNOCDlg : public CDialog
+class CVNOCLoginDlg : public CDialog
+	,public CVNOCDialogBase
 {
 // 构造
 public:
-	CVNOCDlg(CWnd* pParent = NULL);	// 标准构造函数
+	CVNOCLoginDlg(CWnd* pParent = NULL);	// 标准构造函数
 
 // 对话框数据
-	enum { IDD = IDD_VNOC_DIALOG };
+	enum { IDD = IDD_LoginDlg };
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
-
+public:
+	virtual BOOL Refresh();
+	virtual BOOL LanguageChanged();
 
 // 实现
 protected:

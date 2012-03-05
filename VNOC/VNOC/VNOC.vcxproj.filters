@@ -75,6 +75,9 @@
     <ClCompile Include="IConfig.cpp">
       <Filter>config</Filter>
     </ClCompile>
+    <ClCompile Include="VNOCDialogBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
@@ -149,6 +152,9 @@
     <ClInclude Include="IConfig.h">
       <Filter>config</Filter>
     </ClInclude>
+    <ClInclude Include="VNOCDialogBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -163,6 +169,9 @@
     </None>
     <None Include="..\preLink.bat">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="resource.hm">
+      <Filter>头文件</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -17,30 +17,30 @@
 
 
 
-CVNOCDlg::CVNOCDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CVNOCDlg::IDD, pParent)
+CVNOCLoginDlg::CVNOCLoginDlg(CWnd* pParent /*=NULL*/)
+	: CDialog(CVNOCLoginDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CVNOCDlg::DoDataExchange(CDataExchange* pDX)
+void CVNOCLoginDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CVNOCDlg, CDialog)
+BEGIN_MESSAGE_MAP(CVNOCLoginDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
-	ON_BN_CLICKED(IDOK, &CVNOCDlg::OnBnClickedOk)
-	ON_BN_CLICKED(IDCANCEL, &CVNOCDlg::OnBnClickedCancel)
+	ON_BN_CLICKED(IDOK, &CVNOCLoginDlg::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &CVNOCLoginDlg::OnBnClickedCancel)
 	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
 
 // CVNOCDlg 消息处理程序
 
-BOOL CVNOCDlg::OnInitDialog()
+BOOL CVNOCLoginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
@@ -64,7 +64,7 @@ BOOL CVNOCDlg::OnInitDialog()
 //  来绘制该图标。对于使用文档/视图模型的 MFC 应用程序，
 //  这将由框架自动完成。
 
-void CVNOCDlg::OnPaint()
+void CVNOCLoginDlg::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -91,13 +91,13 @@ void CVNOCDlg::OnPaint()
 
 //当用户拖动最小化窗口时系统调用此函数取得光标显示。
 //
-HCURSOR CVNOCDlg::OnQueryDragIcon()
+HCURSOR CVNOCLoginDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
 
-void CVNOCDlg::OnBnClickedOk()
+void CVNOCLoginDlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//CDialog *pDlg = new CMainDlg();
@@ -123,13 +123,13 @@ void CVNOCDlg::OnBnClickedOk()
 //	OnOK();
 }
 
-void CVNOCDlg::OnBnClickedCancel()
+void CVNOCLoginDlg::OnBnClickedCancel()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	OnCancel();
 }
 
-int CVNOCDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
+int CVNOCLoginDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CDialog::OnCreate(lpCreateStruct) == -1)
 		return -1;
@@ -137,4 +137,14 @@ int CVNOCDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// TODO:  在此添加您专用的创建代码
 
 	return 0;
+}
+
+BOOL CVNOCLoginDlg::LanguageChanged()
+{
+	return TRUE;
+}
+
+BOOL CVNOCLoginDlg::Refresh()
+{
+	return TRUE;
 }

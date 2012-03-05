@@ -155,6 +155,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="VNOC.cpp" />
+    <ClCompile Include="VNOCDialogBase.cpp" />
     <ClCompile Include="VNOCDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -181,12 +182,14 @@
     <ClInclude Include="SciEdit.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="VNOC.h" />
+    <ClInclude Include="VNOCDialogBase.h" />
     <ClInclude Include="VNOCDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\MyNetClient\MyNetClient.vcxproj" />
     <None Include="..\postDispatch.bat" />
     <None Include="..\preLink.bat" />
+    <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />
     <None Include="res\VNOC.rc2" />
   </ItemGroup>

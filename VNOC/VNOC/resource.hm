@@ -1,4 +1,4 @@
 // Microsoft Visual C++ generated Help ID include file.
 // Used by VNOC.rc
 //
-#define HIDC_REGIST                     0x806603ec    // IDD_VNOC_DIALOG
+#define HIDC_LoginDlg_STATIC_REGIST     0x806603ec    // IDD_LoginDlg
