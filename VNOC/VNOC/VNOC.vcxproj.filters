@@ -30,9 +30,6 @@
     <ClCompile Include="HyperLink.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MainDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="RoomDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -40,9 +37,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="VNOC.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="VNOCDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MyNetClient\ClientConnection.cpp">
@@ -78,12 +72,15 @@
     <ClCompile Include="VNOCDialogBase.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="VNOCLoginDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomListDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="MainDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -96,9 +93,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="VNOC.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="VNOCDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MyNetClient\ClientConnection.h">
@@ -153,6 +147,12 @@
       <Filter>config</Filter>
     </ClInclude>
     <ClInclude Include="VNOCDialogBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCLoginDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomListDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

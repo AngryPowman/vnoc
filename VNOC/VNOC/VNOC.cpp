@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "VNOC.h"
-#include "VNOCDlg.h"
+#include "RoomListDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -58,19 +58,9 @@ BOOL CVNOCApp::InitInstance()
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
 
-	CVNOCLoginDlg dlg;
-	m_pMainWnd = &dlg;
-	INT_PTR nResponse = dlg.DoModal();
-	if (nResponse == IDOK)
-	{
-		// TODO: 在此处放置处理何时用“确定”来关闭
-		//  对话框的代码
-	}
-	else if (nResponse == IDCANCEL)
-	{
-		// TODO: 在此放置处理何时用“取消”来关闭
-		//  对话框的代码
-	}
+	CRoomListDlg roomDlg;
+	m_pMainWnd = &roomDlg;
+	return roomDlg.DoModal();
 
 	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
 	//  而不是启动应用程序的消息泵。

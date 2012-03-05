@@ -3,24 +3,25 @@
 
 #include "stdafx.h"
 #include "VNOC.h"
-#include "MainDlg.h"
+#include "RoomListDlg.h"
+#include "VNOCLoginDlg.h"
 
 
-// CMainDlg 对话框
+// CRoomListDlg 对话框
 
-IMPLEMENT_DYNAMIC(CMainDlg, CDialog)
+IMPLEMENT_DYNAMIC(CRoomListDlg, CDialog)
 
-CMainDlg::CMainDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CMainDlg::IDD, pParent)
+CRoomListDlg::CRoomListDlg(CWnd* pParent /*=NULL*/)
+	: CDialog(CRoomListDlg::IDD, pParent)
 {
 	m_bIsMove = FALSE;
 }
 
-CMainDlg::~CMainDlg()
+CRoomListDlg::~CRoomListDlg()
 {
 }
 
-void CMainDlg::DoDataExchange(CDataExchange* pDX)
+void CRoomListDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT_SEACH, m_SearchEdit);
@@ -28,15 +29,15 @@ void CMainDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CMainDlg, CDialog)
+BEGIN_MESSAGE_MAP(CRoomListDlg, CDialog)
 	ON_WM_SIZE()
 	ON_WM_SIZING()
 END_MESSAGE_MAP()
 
 
-// CMainDlg 消息处理程序
+// CRoomListDlg 消息处理程序
 
-void CMainDlg::OnSize(UINT nType, int cx, int cy)
+void CRoomListDlg::OnSize(UINT nType, int cx, int cy)
 {
 	CDialog::OnSize(nType, cx, cy);
 
@@ -73,8 +74,9 @@ void CMainDlg::OnSize(UINT nType, int cx, int cy)
 	// TODO: 在此处添加消息处理程序代码
 }
 
-BOOL CMainDlg::OnInitDialog()
+BOOL CRoomListDlg::OnInitDialog()
 {
+	Login();
 	CDialog::OnInitDialog();
 	CRect rect;
 	m_SearchEdit.GetWindowRect(rect);
@@ -104,9 +106,15 @@ BOOL CMainDlg::OnInitDialog()
 	// 异常: OCX 属性页应返回 FALSE
 }
 
-void CMainDlg::OnSizing(UINT fwSide, LPRECT pRect)
+void CRoomListDlg::OnSizing(UINT fwSide, LPRECT pRect)
 {
 	CDialog::OnSizing(fwSide, pRect);
 	
 	// TODO: 在此处添加消息处理程序代码
+}
+
+BOOL CRoomListDlg::Login()
+{
+	CVNOCLoginDlg loginDlg;
+	return loginDlg.DoModal();
 }

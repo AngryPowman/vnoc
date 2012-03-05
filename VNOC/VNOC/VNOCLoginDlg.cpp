@@ -3,8 +3,7 @@
 
 #include "stdafx.h"
 #include "VNOC.h"
-#include "VNOCDlg.h"
-#include "MainDlg.h"
+#include "VNOCLoginDlg.h"
 #include "RoomDlg.h"
 #include "Config.h"
 #ifdef _DEBUG
@@ -112,15 +111,15 @@ void CVNOCLoginDlg::OnBnClickedOk()
 // 	path.push_back("Language");
 // 	config.GetConfigText()
 
-	CDialog *pDlg = new CRoomDlg(this);
-	int result = pDlg->DoModal();
-	if (result == -1)
-	{
-		DWORD errNo = GetLastError();
-		errNo = errNo;
-	}
-	delete pDlg;
-//	OnOK();
+// 	CDialog *pDlg = new CRoomDlg(this);
+// 	int result = pDlg->DoModal();
+// 	if (result == -1)
+// 	{
+// 		DWORD errNo = GetLastError();
+// 		errNo = errNo;
+// 	}
+// 	delete pDlg;
+	OnOK();
 }
 
 void CVNOCLoginDlg::OnBnClickedCancel()

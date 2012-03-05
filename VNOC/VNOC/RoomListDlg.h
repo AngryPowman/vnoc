@@ -5,16 +5,16 @@
 
 // CMainDlg 对话框
 
-class CMainDlg : public CDialog
+class CRoomListDlg : public CDialog
 {
-	DECLARE_DYNAMIC(CMainDlg)
+	DECLARE_DYNAMIC(CRoomListDlg)
 
 public:
-	CMainDlg(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~CMainDlg();
+	CRoomListDlg(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~CRoomListDlg();
 
 // 对话框数据
-	enum { IDD = IDD_MAINDLG };
+	enum { IDD = IDD_RoomListDlg };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
@@ -27,6 +27,8 @@ public:
 public:
 	afx_msg void OnSizing(UINT fwSide, LPRECT pRect);
 
+private:
+	BOOL Login();
 private:
 	BOOL m_bIsMove;
 private:

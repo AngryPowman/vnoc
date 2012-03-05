@@ -147,7 +147,7 @@
     <ClCompile Include="IConfig.cpp" />
     <ClCompile Include="GlobalCenter.cpp" />
     <ClCompile Include="HyperLink.cpp" />
-    <ClCompile Include="MainDlg.cpp" />
+    <ClCompile Include="RoomListDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
     <ClCompile Include="SciEdit.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -156,7 +156,7 @@
     </ClCompile>
     <ClCompile Include="VNOC.cpp" />
     <ClCompile Include="VNOCDialogBase.cpp" />
-    <ClCompile Include="VNOCDlg.cpp" />
+    <ClCompile Include="VNOCLoginDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\MyNetClient\ClientConnection.h" />
@@ -176,14 +176,14 @@
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="GlobalCenter.h" />
     <ClInclude Include="HyperLink.h" />
-    <ClInclude Include="MainDlg.h" />
+    <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />
     <ClInclude Include="SciEdit.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="VNOC.h" />
     <ClInclude Include="VNOCDialogBase.h" />
-    <ClInclude Include="VNOCDlg.h" />
+    <ClInclude Include="VNOCLoginDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\MyNetClient\MyNetClient.vcxproj" />
