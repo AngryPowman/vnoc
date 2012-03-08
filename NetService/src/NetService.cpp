@@ -7,6 +7,7 @@
 
 #include "NetService.h"
 #include <unordered_map>
+#include <asio.hpp>
 using namespace std;
 const int RECV_BUF_SIZE = 512;
 
@@ -47,7 +48,7 @@ bool NetService::start(unsigned int u_port)
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
     addr.sin_port = htons(u_port);
 
-    int bind_err = bind(listen_fd_, (const sockaddr*)&addr, sizeof(addr));
+    int bind_err = ::bind(listen_fd_, (const sockaddr*)&addr, sizeof(addr));
     if (bind_err == SOCKET_ERROR)
     {
         cerr << "Bind address >>> Failed." << endl;

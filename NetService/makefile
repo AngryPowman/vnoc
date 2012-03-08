@@ -3,12 +3,15 @@
 CXX=g++
 VPATH=src:test
 CXXFLAGS=-std=c++0x
+CUR_DIR = $(shell pwd)
+INCS := $(CUR_DIR)/include
+
 %.o : %.cpp
-	$(CXX) -c $(CXXFLAGS) $< -o $@
+	$(CXX) -c $(CXXFLAGS) -I$(INCS)  $< -o $@
 
 all : Server
 Server : VNOCServer.o NetService.o 
-	$(CXX) $^ -o bin/$@
+	$(CXX) -lpthread $^ -o bin/$@
 
 clean :
 	rm -fr bin/*
