@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "VNOC.h"
 #include "RoomListDlg.h"
+#include "IVNOCFrame.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -58,11 +59,27 @@ BOOL CVNOCApp::InitInstance()
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
 
+	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
+	//  而不是启动应用程序的消息泵。
+	return TRUE;
+}
+
+
+int CVNOCApp::Run()
+{
+	// TODO: Add your specialized code here and/or call the base class
+
 	CRoomListDlg roomDlg;
 	m_pMainWnd = &roomDlg;
 	return roomDlg.DoModal();
 
-	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
-	//  而不是启动应用程序的消息泵。
-	return FALSE;
+	return CWinApp::Run();
+}
+
+
+int CVNOCApp::ExitInstance()
+{
+	// TODO: Add your specialized code here and/or call the base class
+
+	return CWinApp::ExitInstance();
 }

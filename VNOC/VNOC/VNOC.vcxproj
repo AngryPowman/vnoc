@@ -156,6 +156,7 @@
     </ClCompile>
     <ClCompile Include="VNOC.cpp" />
     <ClCompile Include="VNOCDialogBase.cpp" />
+    <ClCompile Include="VNOCFrame.cpp" />
     <ClCompile Include="VNOCLoginDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +177,9 @@
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="GlobalCenter.h" />
     <ClInclude Include="HyperLink.h" />
+    <ClInclude Include="IModule.h" />
+    <ClInclude Include="IRefCountImpl.h" />
+    <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />
@@ -183,6 +187,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="VNOC.h" />
     <ClInclude Include="VNOCDialogBase.h" />
+    <ClInclude Include="VNOCFrame.h" />
     <ClInclude Include="VNOCLoginDlg.h" />
   </ItemGroup>
   <ItemGroup>

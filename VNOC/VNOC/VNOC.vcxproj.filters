@@ -25,6 +25,12 @@
     <Filter Include="GlobalCenter">
       <UniqueIdentifier>{b759fbda-a17b-420f-9e85-93f64209457b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{2a850873-c414-44f4-8e9d-aa7b8c973c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{08f4a35e-03ff-46d9-bf09-5c8d7bc56053}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp">
@@ -77,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="RoomListDlg.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCFrame.cpp">
+      <Filter>FrameWork</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +163,18 @@
     </ClInclude>
     <ClInclude Include="RoomListDlg.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IVNOCFrame.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IRefCountImpl.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCFrame.h">
+      <Filter>FrameWork</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

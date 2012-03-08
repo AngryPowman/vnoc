@@ -26,6 +26,8 @@ public:
 // й╣ож
 
 	DECLARE_MESSAGE_MAP()
+	virtual int Run();
+	virtual int ExitInstance();
 };
 
 extern CVNOCApp theApp;
