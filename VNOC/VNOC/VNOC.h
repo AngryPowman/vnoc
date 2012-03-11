@@ -8,6 +8,7 @@
 #endif
 
 #include "resource.h"		// Ö÷·ûºÅ
+#include "VNOCFrame.h"
 
 
 // CVNOCApp:
@@ -28,6 +29,9 @@ public:
 	DECLARE_MESSAGE_MAP()
 	virtual int Run();
 	virtual int ExitInstance();
+
+private:
+	CVNOCFrame m_frame;
 };
 
 extern CVNOCApp theApp;

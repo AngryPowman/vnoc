@@ -19,9 +19,6 @@
     <Filter Include="config">
       <UniqueIdentifier>{264cbfda-568d-4c23-90ae-f5499a3ea5c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="public_util">
-      <UniqueIdentifier>{6a4c075c-150f-4da0-8e08-b3a87c73e4a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GlobalCenter">
       <UniqueIdentifier>{b759fbda-a17b-420f-9e85-93f64209457b}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,15 @@
     </Filter>
     <Filter Include="Interface">
       <UniqueIdentifier>{08f4a35e-03ff-46d9-bf09-5c8d7bc56053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Modules">
+      <UniqueIdentifier>{b256ffc7-3c72-4144-97e8-6343d544308a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog">
+      <UniqueIdentifier>{53f89d19-a7ad-47c0-9c0e-c80c540eac51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{3614b0d9-aab3-4da9-902a-97972b0e46be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,18 +60,6 @@
     <ClCompile Include="SciEdit.cpp">
       <Filter>CodeEditor</Filter>
     </ClCompile>
-    <ClCompile Include="..\public\CBuffer.cpp">
-      <Filter>public_util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\public\MD5.cpp">
-      <Filter>public_util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\public\TaskThread.cpp">
-      <Filter>public_util</Filter>
-    </ClCompile>
-    <ClCompile Include="..\public\util.cpp">
-      <Filter>public_util</Filter>
-    </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>config</Filter>
     </ClCompile>
@@ -78,14 +72,29 @@
     <ClCompile Include="VNOCDialogBase.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="VNOCLoginDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="RoomListDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="VNOCFrame.cpp">
       <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginImpl.cpp">
+      <Filter>FrameWork\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCLoginDlg.cpp">
+      <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\CBuffer.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\MD5.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\TaskThread.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\util.cpp">
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,24 +137,6 @@
     <ClInclude Include="SciEdit.h">
       <Filter>CodeEditor</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\CBuffer.h">
-      <Filter>public_util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\public\MD5.h">
-      <Filter>public_util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\public\MD5ChecksumDefines.h">
-      <Filter>public_util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\public\TaskThread.h">
-      <Filter>public_util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\public\ThreadDefine.h">
-      <Filter>public_util</Filter>
-    </ClInclude>
-    <ClInclude Include="..\public\util.h">
-      <Filter>public_util</Filter>
-    </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>config</Filter>
     </ClInclude>
@@ -156,9 +147,6 @@
       <Filter>config</Filter>
     </ClInclude>
     <ClInclude Include="VNOCDialogBase.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="VNOCLoginDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="RoomListDlg.h">
@@ -175,6 +163,33 @@
     </ClInclude>
     <ClInclude Include="VNOCFrame.h">
       <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginImpl.h">
+      <Filter>FrameWork\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogin.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCLoginDlg.h">
+      <Filter>Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\CBuffer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\MD5.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\MD5ChecksumDefines.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\TaskThread.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\ThreadDefine.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\util.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

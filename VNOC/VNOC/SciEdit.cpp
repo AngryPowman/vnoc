@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "../../scintilla/include/Platform.h"
 #include "SciEdit.h"
-#include "../public/util.h"
+#include "../util/util.h"
 
 CSciEdit::CSciEdit(HINSTANCE hInst) :
 IConfig("SciEdit")

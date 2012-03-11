@@ -136,17 +136,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\public\CBuffer.cpp">
+    <ClCompile Include="..\util\CBuffer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\public\MD5.cpp" />
-    <ClCompile Include="..\public\TaskThread.cpp" />
-    <ClCompile Include="..\public\util.cpp" />
+    <ClCompile Include="..\util\MD5.cpp" />
+    <ClCompile Include="..\util\TaskThread.cpp" />
+    <ClCompile Include="..\util\util.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="IConfig.cpp" />
     <ClCompile Include="GlobalCenter.cpp" />
     <ClCompile Include="HyperLink.cpp" />
+    <ClCompile Include="LoginImpl.cpp" />
     <ClCompile Include="RoomListDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
     <ClCompile Include="SciEdit.cpp" />
@@ -167,19 +167,21 @@
     <ClInclude Include="..\..\scintilla\include\Platform.h" />
     <ClInclude Include="..\..\scintilla\include\SciLexer.h" />
     <ClInclude Include="..\..\scintilla\include\Scintilla.h" />
-    <ClInclude Include="..\public\CBuffer.h" />
-    <ClInclude Include="..\public\MD5.h" />
-    <ClInclude Include="..\public\MD5ChecksumDefines.h" />
-    <ClInclude Include="..\public\TaskThread.h" />
-    <ClInclude Include="..\public\ThreadDefine.h" />
-    <ClInclude Include="..\public\util.h" />
+    <ClInclude Include="..\util\CBuffer.h" />
+    <ClInclude Include="..\util\MD5.h" />
+    <ClInclude Include="..\util\MD5ChecksumDefines.h" />
+    <ClInclude Include="..\util\TaskThread.h" />
+    <ClInclude Include="..\util\ThreadDefine.h" />
+    <ClInclude Include="..\util\util.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="GlobalCenter.h" />
     <ClInclude Include="HyperLink.h" />
+    <ClInclude Include="ILogin.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="IRefCountImpl.h" />
     <ClInclude Include="IVNOCFrame.h" />
+    <ClInclude Include="LoginImpl.h" />
     <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />

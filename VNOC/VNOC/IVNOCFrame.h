@@ -6,12 +6,9 @@ enum VNOCModule
 	module_userCenter,
 };
 
-interface IVNOCFrame
+interface IVNOCFrame : public IModule
 {
 public:
-	STDMETHOD( Initialize() = 0 );
-	STDMETHOD( UnInitialize() = 0 );
-
 	// ×¢²áÄ£¿é¡£
 	STDMETHOD( RegisterModule	(VNOCModule module,IModule* iModule) = 0 );
 	STDMETHOD( GetModule		(VNOCModule module,IModule** piModule) = 0 );

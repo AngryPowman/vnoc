@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "Config.h"
-#include "../public/util.h"
+#include "../util/util.h"
 
 //////////////////////////////////////////////////////////////////////////
 // CConfig
