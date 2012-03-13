@@ -35,4 +35,5 @@ bool AsioTcpServer::start(int port)
     acceptor_.async_accept(new_connetion->socket(),accept_handler);
     std::thread t(&AsioTcpServer::worker, this);
     t.join();
+    return true;
 }
