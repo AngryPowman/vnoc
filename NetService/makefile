@@ -10,7 +10,7 @@ INCS := $(CUR_DIR)/include
 	$(CXX) -c $(CXXFLAGS) -I$(INCS)  $< -o $@
 
 all : Server
-Server : VNOCServer.o NetService.o 
+Server : VNOCServer.o NetService.o AsioTcpServer.o
 	$(CXX) -lpthread $^ -o bin/$@
 
 clean :

@@ -1,16 +1,16 @@
-#ifdef SOCKETSERVER_H_
+#ifndef SOCKETSERVER_H_
 #define SOCKETSERVER_H_
 class Connection
 {
 public:
-    Connection();
-    ~Connection();
+    Connection(){};
+    virtual ~Connection(){};
 private:
     //disable copy and assignment
     Connection(const Connection& ){}
     Connection& operator=(const Connection&){}
 public:
-    virtual bool start();
+    virtual bool start() = 0;
     int recv();
     int send();
     
@@ -19,14 +19,14 @@ public:
 class SocketServer
 {
 public:
-    SocketServer();
-    ~SocketServer();
+    SocketServer(){};
+    virtual ~SocketServer(){};
 private:
     //disable copy and assignment
     SocketServer(const SocketServer& ){}
     SocketServer& operator=(const SocketServer&){}
 public:    
-    virtual bool start();
+    virtual bool start(int port) = 0;
 };
 
 
