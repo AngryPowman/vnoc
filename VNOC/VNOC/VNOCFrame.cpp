@@ -6,15 +6,28 @@ CVNOCFrame::CVNOCFrame(void)
 {
 	//m_viewThread.Start();
 	m_loginModule.AddRef();
+	m_roomListModule.AddRef();
 	RegisterModule(module_userCenter,dynamic_cast<IModule*>(&m_loginModule));
+	RegisterModule(module_roomList,dynamic_cast<IModule*>(&m_roomListModule));
 }
 
 CVNOCFrame::~CVNOCFrame(void)
 {
 }
 
-HRESULT CVNOCFrame::Initialize(IUnknown* UpperFrame)
+HRESULT CVNOCFrame::Initialize(IModule* UpperFrame)
 {
+	Util::CAutoTimedCS ac(m_mapCS);
+	ModuleMap::iterator i;
+	i = m_moduleMap.begin();
+	while (i != m_moduleMap.end())
+	{
+		if (i->second)
+		{
+			i->second->Initialize(dynamic_cast<IModule*>(this));
+		}
+		++i;
+	}
 	return S_OK;
 }
 
@@ -25,7 +38,10 @@ HRESULT CVNOCFrame::UnInitialize()
 	i = m_moduleMap.begin();
 	while (i != m_moduleMap.end())
 	{
-		i->second->Terminate();
+		if (i->second)
+		{
+			i->second->UnInitialize();
+		}
 		++i;
 	}
 	return S_OK;
@@ -84,10 +100,27 @@ VOID CVNOCFrame::_Start()
 	if (pStartupModule)
 	{
 		pStartupModule->Run();
+		ILogin* pLogin = NULL;
+		GetiModule(pStartupModule,&pLogin);
+		if (pLogin)
+		{
+			pLogin->Show();
+		}
 	}
 }
 
 HRESULT CVNOCFrame::Terminate()
 {
+	Util::CAutoTimedCS ac(m_mapCS);
+	ModuleMap::iterator i;
+	i = m_moduleMap.begin();
+	while (i != m_moduleMap.end())
+	{
+		if (i->second)
+		{
+			i->second->Terminate();
+		}
+		++i;
+	}
 	return S_OK;
 }

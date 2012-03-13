@@ -4,6 +4,8 @@
 enum VNOCModule
 {
 	module_userCenter,
+	module_roomList,
+	module_room,
 };
 
 interface IVNOCFrame : public IModule
@@ -16,3 +18,17 @@ public:
 	STDMETHOD( SetStartupModule	(VNOCModule module) = 0);
 };
 
+template<class retType>
+void GetiModule(VNOCModule module,IVNOCFrame* iFrame,retType** pRet)
+{
+	if (pRet && iFrame)
+	{
+		*pRet = NULL;
+		IModule* pModule=NULL;
+		iFrame->GetModule(module,&pModule);
+		if (pModule)
+		{
+			GetiModule(pModule,pRet);
+		}
+	}
+}

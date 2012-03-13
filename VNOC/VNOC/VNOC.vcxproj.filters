@@ -72,9 +72,6 @@
     <ClCompile Include="VNOCDialogBase.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="RoomListDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="VNOCFrame.cpp">
       <Filter>FrameWork</Filter>
     </ClCompile>
@@ -95,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="..\util\util.cpp">
       <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomListImpl.cpp">
+      <Filter>FrameWork\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomListDlg.cpp">
+      <Filter>Dialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +152,6 @@
     <ClInclude Include="VNOCDialogBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="RoomListDlg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="IVNOCFrame.h">
       <Filter>Interface</Filter>
     </ClInclude>
@@ -190,6 +190,18 @@
     </ClInclude>
     <ClInclude Include="..\util\util.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="IRoomList.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IRoom.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomListImpl.h">
+      <Filter>FrameWork\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomListDlg.h">
+      <Filter>Dialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

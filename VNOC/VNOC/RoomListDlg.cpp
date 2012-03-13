@@ -76,7 +76,6 @@ void CRoomListDlg::OnSize(UINT nType, int cx, int cy)
 
 BOOL CRoomListDlg::OnInitDialog()
 {
-	Login();
 	CDialog::OnInitDialog();
 	CRect rect;
 	m_SearchEdit.GetWindowRect(rect);

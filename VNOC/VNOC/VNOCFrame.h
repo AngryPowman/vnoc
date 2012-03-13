@@ -6,6 +6,7 @@
 
 // 先放这里。。
 #include "LoginImpl.h"
+#include "RoomListImpl.h"
 
 typedef std::map<VNOCModule,IModule*> ModuleMap;
 
@@ -16,7 +17,7 @@ public:
 	CVNOCFrame(void);
 	~CVNOCFrame(void);
 public:
-	STDMETHOD( Initialize(IUnknown* UpperFrame=NULL) );
+	STDMETHOD( Initialize(IModule* UpperFrame=NULL) );
 	STDMETHOD( UnInitialize() );
 	STDMETHOD( RegisterModule	(VNOCModule module,IModule* iModule) );
 	STDMETHOD( GetModule		(VNOCModule module,IModule** piModule) );
@@ -33,5 +34,6 @@ private:
 	ModuleMap m_moduleMap;
 	Util::CTimedCriticalSection	m_mapCS;
 	CLoginImpl m_loginModule;
+	CRoomListImpl m_roomListModule;
 };
 

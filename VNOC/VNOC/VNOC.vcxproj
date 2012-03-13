@@ -138,6 +138,7 @@
     </ClCompile>
     <ClCompile Include="..\util\CBuffer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\util\MD5.cpp" />
     <ClCompile Include="..\util\TaskThread.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="LoginImpl.cpp" />
     <ClCompile Include="RoomListDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
+    <ClCompile Include="RoomListImpl.cpp" />
     <ClCompile Include="SciEdit.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -180,11 +182,14 @@
     <ClInclude Include="ILogin.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="IRefCountImpl.h" />
+    <ClInclude Include="IRoom.h" />
+    <ClInclude Include="IRoomList.h" />
     <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="LoginImpl.h" />
     <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />
+    <ClInclude Include="RoomListImpl.h" />
     <ClInclude Include="SciEdit.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="VNOC.h" />
