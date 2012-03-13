@@ -13,6 +13,7 @@ public:
 private:
     asio::io_service& io_service_;
     asio::ip::tcp::acceptor acceptor_;
+    void worker();
 };
 
 

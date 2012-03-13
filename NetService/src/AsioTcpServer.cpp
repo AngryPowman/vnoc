@@ -1,6 +1,7 @@
 #include "AsioTcpServer.hpp"
 #include "AsioTcpConnection.hpp"
 #include <functional>
+#include <thread>
 #include "asio.hpp"
 using namespace asio;
 using namespace asio::ip;
@@ -22,12 +23,16 @@ AsioTcpServer::AsioTcpServer():
 AsioTcpServer::~AsioTcpServer()
 {
 }
-
+void AsioTcpServer::worker()
+{
+    g_io_service.run();
+}
 bool AsioTcpServer::start(int port)
 {
     tcp::endpoint endpoint(tcp::v4(), port);
     acceptor_.bind(endpoint);
     AsioTcpConnetion* new_connetion(new AsioTcpConnetion(io_service_));
-    acceptor_.async_accept(new_connetion->socket(),accept_handler);   
-    
+    acceptor_.async_accept(new_connetion->socket(),accept_handler);
+    std::thread t(&AsioTcpServer::worker, this);
+    t.join();
 }
