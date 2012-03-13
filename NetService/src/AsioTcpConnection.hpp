@@ -8,7 +8,7 @@ class AsioTcpConnetion: public Connection
 public:
     AsioTcpConnetion(asio::io_service& io_service):socket_(io_service){}
     asio::ip::tcp::socket& socket(){return socket_;} 
-    virtual bool start(){}
+    virtual bool start(){return true;}
 private:
     asio::ip::tcp::socket socket_;
 };
