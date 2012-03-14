@@ -63,8 +63,10 @@ BOOL CRoomDlg::OnInitDialog()
 	ScreenToClient(rectOnline);
 	ScreenToClient(rectCodeOut);
 	ScreenToClient(rectReport);
-	rectCodeCtrl.left = rectOnline.right; rectCodeCtrl.top =rectCodeOut.top; 
-	rectCodeCtrl.bottom=rectReport.top; rectCodeCtrl.right = rectCodeOut.left;
+	rectCodeCtrl.left = rectOnline.right; 
+    rectCodeCtrl.top = rectCodeOut.top; 
+	rectCodeCtrl.bottom = rectReport.top; 
+    rectCodeCtrl.right = rectCodeOut.left;
 
 	rectCodeCtrl.left += 5;
 	rectCodeCtrl.right -=5;
