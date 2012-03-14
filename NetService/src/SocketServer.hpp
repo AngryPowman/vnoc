@@ -26,7 +26,7 @@ private:
     SocketServer(const SocketServer& ){}
     SocketServer& operator=(const SocketServer&){}
 public:    
-    virtual bool start(int port) = 0;
+    virtual bool start(unsigned int port) = 0;
 };
 
 

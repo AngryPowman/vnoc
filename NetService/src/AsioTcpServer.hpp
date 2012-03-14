@@ -9,7 +9,7 @@ class AsioTcpServer :public SocketServer
 public:
     AsioTcpServer();
     ~AsioTcpServer();
-    virtual bool start(int port);
+    virtual bool start(unsigned int port);
 private:
     asio::io_service& io_service_;
     asio::ip::tcp::acceptor acceptor_;
