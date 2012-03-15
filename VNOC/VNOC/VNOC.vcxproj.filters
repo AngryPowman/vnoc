@@ -42,9 +42,6 @@
     <ClCompile Include="HyperLink.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="RoomDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -99,15 +96,18 @@
     <ClCompile Include="RoomListDlg.cpp">
       <Filter>Dialog</Filter>
     </ClCompile>
+    <ClCompile Include="RoomDlg.cpp">
+      <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomImpl.cpp">
+      <Filter>FrameWork\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="RoomDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -202,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="RoomListDlg.h">
       <Filter>Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomDlg.h">
+      <Filter>Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomImpl.h">
+      <Filter>FrameWork\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

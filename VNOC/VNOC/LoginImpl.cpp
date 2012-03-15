@@ -4,7 +4,6 @@
 
 CLoginImpl::CLoginImpl(void)
 {
-	m_dlg = NULL;
 	m_frame = NULL;
 }
 
@@ -24,9 +23,10 @@ HRESULT CLoginImpl::Terminate()
 
 HRESULT CLoginImpl::Show( BOOL bShow/*=TRUE*/ )
 {
-	if (m_dlg && bShow)
+	if (bShow)
 	{
-		INT_PTR ret = m_dlg->DoModal();
+		CVNOCLoginDlg dlg;
+		INT_PTR ret = dlg.DoModal();
 		if (ret == IDOK)
 		{
 			IRoomList* pRoomList;
@@ -49,18 +49,10 @@ HRESULT CLoginImpl::Initialize( IModule* UpperFrame )
 {
 	m_frame = dynamic_cast<IVNOCFrame*>(UpperFrame);
 	ATLASSERT(m_frame);
-
-	m_dlg = new CVNOCLoginDlg;
-	ATLASSERT(m_dlg);
 	return S_OK;
 }
 
 HRESULT CLoginImpl::UnInitialize()
 {
-	if (m_dlg)
-	{
-		delete m_dlg;
-		m_dlg = NULL;
-	}
 	return S_OK;
 }

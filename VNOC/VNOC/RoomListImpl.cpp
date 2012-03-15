@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "RoomListImpl.h"
-
+#include "IVNOCFrame.h"
+#include "IRoom.h"
+#include "ILogin.h"
 
 CRoomListImpl::CRoomListImpl(void)
 {
@@ -15,19 +17,11 @@ HRESULT CRoomListImpl::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
 	m_frame = dynamic_cast<IVNOCFrame*>(UpperFrame);
 	ATLASSERT(m_frame);
-
-	m_dlg = new CRoomListDlg;
-	ATLASSERT(m_dlg);
 	return S_OK;
 }
 
 HRESULT CRoomListImpl::UnInitialize()
 {
-	if (m_dlg)
-	{
-		delete m_dlg;
-		m_dlg = NULL;
-	}
 	return S_OK;
 }
 
@@ -43,15 +37,27 @@ HRESULT CRoomListImpl::Terminate()
 
 HRESULT CRoomListImpl::Show( BOOL bShow/*=TRUE*/ )
 {
-	if (m_dlg && bShow)
+	if (bShow)
 	{
-		INT_PTR ret = m_dlg->DoModal();
+		CRoomListDlg dlg;
+		INT_PTR ret = dlg.DoModal();
 		if (ret == IDOK)
 		{
+			IRoom* pRoom;
+			GetiModule(module_room,m_frame,&pRoom);
+			if (pRoom)
+			{
+				pRoom->Show();
+			}
 		}
 		else if(ret == IDCANCEL)
 		{
-			;
+			ILogin* pLogin;
+			GetiModule(module_userCenter,m_frame,&pLogin);
+			if (pLogin)
+			{
+				pLogin->Show();
+			}
 		}
 	}
 	return S_OK;

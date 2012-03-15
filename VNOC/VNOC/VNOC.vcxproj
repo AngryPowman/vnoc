@@ -148,6 +148,7 @@
     <ClCompile Include="GlobalCenter.cpp" />
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="LoginImpl.cpp" />
+    <ClCompile Include="RoomImpl.cpp" />
     <ClCompile Include="RoomListDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
     <ClCompile Include="RoomListImpl.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="IRoomList.h" />
     <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="LoginImpl.h" />
+    <ClInclude Include="RoomImpl.h" />
     <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />

@@ -16,7 +16,6 @@ public:
 	STDMETHOD( Terminate() );
 	STDMETHOD( Show(BOOL bShow=TRUE) );
 private:
-	CRoomListDlg* m_dlg;
 	IVNOCFrame* m_frame;
 };
 

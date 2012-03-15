@@ -7,6 +7,7 @@
 // 先放这里。。
 #include "LoginImpl.h"
 #include "RoomListImpl.h"
+#include "RoomImpl.h"
 
 typedef std::map<VNOCModule,IModule*> ModuleMap;
 
@@ -35,5 +36,6 @@ private:
 	Util::CTimedCriticalSection	m_mapCS;
 	CLoginImpl m_loginModule;
 	CRoomListImpl m_roomListModule;
+	CRoomImpl m_roomModule;
 };
 

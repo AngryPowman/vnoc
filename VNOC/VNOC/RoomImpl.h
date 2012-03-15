@@ -1,21 +1,19 @@
 #pragma once
-#include "ILogin.h"
 #include "IVNOCFrame.h"
-#include "VNOCLoginDlg.h"
+#include "IRoom.h"
+#include "RoomDlg.h"
 
-class CLoginImpl
-	: public ILogin
+class CRoomImpl : public IRoom
 {
 public:
-	CLoginImpl(void);
-	~CLoginImpl(void);
+	CRoomImpl(void);
+	~CRoomImpl(void);
 public:
 	STDMETHOD( Initialize(IModule* UpperFrame=NULL) );
 	STDMETHOD( UnInitialize() );
 	STDMETHOD( Run() );
 	STDMETHOD( Terminate() );
 	STDMETHOD( Show(BOOL bShow=TRUE) );
-	STDMETHOD( SetAccount(LPCTSTR userName) );
 private:
 	IVNOCFrame* m_frame;
 };

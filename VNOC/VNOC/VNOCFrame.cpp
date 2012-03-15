@@ -7,8 +7,10 @@ CVNOCFrame::CVNOCFrame(void)
 	//m_viewThread.Start();
 	m_loginModule.AddRef();
 	m_roomListModule.AddRef();
+	m_roomModule.AddRef();
 	RegisterModule(module_userCenter,dynamic_cast<IModule*>(&m_loginModule));
 	RegisterModule(module_roomList,dynamic_cast<IModule*>(&m_roomListModule));
+	RegisterModule(module_room,dynamic_cast<IModule*>(&m_roomModule));
 }
 
 CVNOCFrame::~CVNOCFrame(void)

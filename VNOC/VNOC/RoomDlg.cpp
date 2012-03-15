@@ -28,6 +28,7 @@ void CRoomDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CRoomDlg, CDialog)
 	ON_WM_CREATE()
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 
@@ -82,4 +83,11 @@ BOOL CRoomDlg::OnInitDialog()
 	// TODO:  在此添加额外的初始化
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
+}
+
+
+void CRoomDlg::OnClose()
+{
+	// TODO: Add your message handler code here and/or call default
+	OnCancel();
 }

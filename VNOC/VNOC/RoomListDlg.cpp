@@ -32,6 +32,7 @@ void CRoomListDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CRoomListDlg, CDialog)
 	ON_WM_SIZE()
 	ON_WM_SIZING()
+	ON_NOTIFY(NM_DBLCLK, IDC_LIST_CLASS, &CRoomListDlg::OnNMDblclkListClass)
 END_MESSAGE_MAP()
 
 
@@ -112,8 +113,12 @@ void CRoomListDlg::OnSizing(UINT fwSide, LPRECT pRect)
 	// TODO: 在此处添加消息处理程序代码
 }
 
-BOOL CRoomListDlg::Login()
+
+
+void CRoomListDlg::OnNMDblclkListClass(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	CVNOCLoginDlg loginDlg;
-	return loginDlg.DoModal();
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	// TODO: Add your control notification handler code here
+	OnOK();
+	*pResult = 0;
 }

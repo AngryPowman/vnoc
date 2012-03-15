@@ -28,11 +28,12 @@ public:
 	afx_msg void OnSizing(UINT fwSide, LPRECT pRect);
 
 private:
-	BOOL Login();
 private:
 	BOOL m_bIsMove;
 private:
 	CEdit m_SearchEdit;
 	CFont m_EditFont;
 	CListCtrl m_ClassList;
+public:
+	afx_msg void OnNMDblclkListClass(NMHDR *pNMHDR, LRESULT *pResult);
 };
