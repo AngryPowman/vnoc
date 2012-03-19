@@ -53,6 +53,7 @@
 #include  <afxpriv.h>
 #include "easysize.h"
 #include "resource.h"
+#include "GlobalCenter.h"
 #include "../../TinyXML/tinyxml.h"
 
 

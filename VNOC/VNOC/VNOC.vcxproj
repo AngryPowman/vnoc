@@ -147,6 +147,7 @@
     <ClCompile Include="IConfig.cpp" />
     <ClCompile Include="GlobalCenter.cpp" />
     <ClCompile Include="HyperLink.cpp" />
+    <ClCompile Include="InterfaceDefImpl.cpp" />
     <ClCompile Include="LoginImpl.cpp" />
     <ClCompile Include="RoomImpl.cpp" />
     <ClCompile Include="RoomListDlg.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="IRefCountImpl.h" />
     <ClInclude Include="IRoom.h" />
     <ClInclude Include="IRoomList.h" />
+    <ClInclude Include="IUIWnd.h" />
     <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="LoginImpl.h" />
     <ClInclude Include="RoomImpl.h" />
@@ -203,6 +205,7 @@
     <None Include="..\..\MyNetClient\MyNetClient.vcxproj" />
     <None Include="..\postDispatch.bat" />
     <None Include="..\preLink.bat" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />
     <None Include="res\VNOC.rc2" />

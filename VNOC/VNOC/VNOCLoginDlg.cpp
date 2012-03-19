@@ -59,10 +59,6 @@ BOOL CVNOCLoginDlg::OnInitDialog()
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
-// 如果向对话框添加最小化按钮，则需要下面的代码
-//  来绘制该图标。对于使用文档/视图模型的 MFC 应用程序，
-//  这将由框架自动完成。
-
 void CVNOCLoginDlg::OnPaint()
 {
 	if (IsIconic())
@@ -98,33 +94,11 @@ HCURSOR CVNOCLoginDlg::OnQueryDragIcon()
 
 void CVNOCLoginDlg::OnBnClickedOk()
 {
-	// TODO: 在此添加控件通知处理程序代码
-	//CDialog *pDlg = new CMainDlg();
-//	pDlg->DoModal();
-//	delete pDlg;
-
-// 	CConfig config;
-// 	config.LoadConfigFromXML(L"config.xml");
-// 	CStringA text;
-// 	ConfigPath path;
-// 	path.push_back("CodeEditor");
-// 	path.push_back("Language");
-// 	config.GetConfigText()
-
-// 	CDialog *pDlg = new CRoomDlg(this);
-// 	int result = pDlg->DoModal();
-// 	if (result == -1)
-// 	{
-// 		DWORD errNo = GetLastError();
-// 		errNo = errNo;
-// 	}
-// 	delete pDlg;
 	OnOK();
 }
 
 void CVNOCLoginDlg::OnBnClickedCancel()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	OnCancel();
 }
 

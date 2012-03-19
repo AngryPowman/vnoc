@@ -4,7 +4,6 @@
 
 CVNOCFrame::CVNOCFrame(void)
 {
-	//m_viewThread.Start();
 	m_loginModule.AddRef();
 	m_roomListModule.AddRef();
 	m_roomModule.AddRef();

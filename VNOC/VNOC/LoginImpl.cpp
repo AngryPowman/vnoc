@@ -56,3 +56,13 @@ HRESULT CLoginImpl::UnInitialize()
 {
 	return S_OK;
 }
+
+HRESULT CLoginImpl::Logout( LPCTSTR username/*=NULL*/ )
+{
+	return S_OK;
+}
+
+HRESULT CLoginImpl::GetCurrentUser(CString& username,CString& cookie)
+{
+	return E_NOTIMPL;
+}

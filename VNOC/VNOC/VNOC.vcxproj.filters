@@ -37,6 +37,9 @@
     <Filter Include="util">
       <UniqueIdentifier>{3614b0d9-aab3-4da9-902a-97972b0e46be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface\BaseInterface">
+      <UniqueIdentifier>{25413286-00b1-42b2-95c3-3919f2ee0eec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp">
@@ -102,6 +105,9 @@
     <ClCompile Include="RoomImpl.cpp">
       <Filter>FrameWork\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="InterfaceDefImpl.cpp">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
@@ -152,15 +158,6 @@
     <ClInclude Include="VNOCDialogBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="IVNOCFrame.h">
-      <Filter>Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IModule.h">
-      <Filter>Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IRefCountImpl.h">
-      <Filter>Interface</Filter>
-    </ClInclude>
     <ClInclude Include="VNOCFrame.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
@@ -209,6 +206,18 @@
     <ClInclude Include="RoomImpl.h">
       <Filter>FrameWork\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="IRefCountImpl.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="IVNOCFrame.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="IUIWnd.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -227,6 +236,7 @@
     <None Include="resource.hm">
       <Filter>头文件</Filter>
     </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VNOC.rc">

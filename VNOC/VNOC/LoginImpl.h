@@ -16,6 +16,8 @@ public:
 	STDMETHOD( Terminate() );
 	STDMETHOD( Show(BOOL bShow=TRUE) );
 	STDMETHOD( SetAccount(LPCTSTR userName) );
+	STDMETHOD( GetCurrentUser(CString& userName,CString& cookie) );
+	STDMETHOD( Logout(LPCTSTR username=NULL) );
 private:
 	IVNOCFrame* m_frame;
 };
