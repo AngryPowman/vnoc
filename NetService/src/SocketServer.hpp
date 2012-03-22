@@ -4,16 +4,17 @@ class Connection
 {
 public:
     Connection(){};
-    virtual ~Connection(){};
+    ~Connection(){};
 private:
     //disable copy and assignment
     Connection(const Connection& ){}
     Connection& operator=(const Connection&){}
 public:
-    virtual bool start() = 0;
-    int recv();
-    int send();
-    
+    bool start();
+    template <typename Handler> int recv(char * buf, size_t len, Handler handler);
+    template <typename Handler> int recv_some(char * buf, size_t len, Handler handler);
+    template <typename Handler> int send(char * buf, size_t len, Handler handler);
+    void *data;
     
 };
 class SocketServer
