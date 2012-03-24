@@ -34,40 +34,6 @@ namespace Util
 	}Data;
 }
 
-CStringA Util::String::CStringW2A(CStringW strW)
-{
-	wchar_t *wszStr =strW.GetBuffer(strW.GetLength()); 
-	CStringA cStr;
-	if( NULL == wszStr )
-	{
-		return cStr;
-	}
-	DWORD iSize = ::WideCharToMultiByte(  CP_ACP, 0, wszStr, -1, NULL, 0, NULL,NULL );
-	char* p = cStr.GetBuffer( iSize + 10 );
-	memset( p, 0, iSize+10 );
-	iSize = ::WideCharToMultiByte( CP_ACP, 0, wszStr, -1, p, iSize,  NULL, NULL);
-	cStr.ReleaseBuffer();
-	strW.ReleaseBuffer(strW.GetLength());
-	return cStr;
-}
-
-CStringW Util::String::CStringA2W( CStringA strA )
-{
-	char *szStr =strA.GetBuffer(strA.GetLength()); 
-	CStringW cStr;
-	if( NULL == szStr )
-	{
-		return cStr;
-	}
-	DWORD iSize = ::MultiByteToWideChar(  CP_ACP, 0, szStr, -1, NULL, 0);
-	wchar_t* p = cStr.GetBuffer( iSize + 10 );
-	memset( p, 0, (iSize+10)*sizeof(wchar_t) );
-	iSize = ::MultiByteToWideChar( CP_ACP, 0, szStr, -1, p, iSize);
-	cStr.ReleaseBuffer();
-	strA.ReleaseBuffer(strA.GetLength());
-	return cStr;
-}
-
 std::wstring Util::String::StringA2W( std::string strA )
 {
 	const char *szStr = strA.c_str(); 
@@ -110,17 +76,6 @@ std::wstring Util::String::StringToWstringNoConvert(std::string strA)
 	wp = const_cast<wchar_t*>(strW.data());
 	memcpy(wp,strA.data(),strA.length());
 	return strW;
-}
-
-CString Util::String::WStringToCString(std::wstring str)
-{
-	CString strRet;
-	strRet = L"";
-	for(UINT n=0; n<str.length(); ++n)
-	{
-		strRet += str[n];
-	}
-	return strRet;
 }
 
 CStringA Util::String::UnicodeToGBK( CStringW unicode )

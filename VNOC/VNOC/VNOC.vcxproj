@@ -136,6 +136,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\util\BLog.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\util\CBuffer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -144,7 +148,6 @@
     <ClCompile Include="..\util\TaskThread.cpp" />
     <ClCompile Include="..\util\util.cpp" />
     <ClCompile Include="Config.cpp" />
-    <ClCompile Include="IConfig.cpp" />
     <ClCompile Include="GlobalCenter.cpp" />
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="InterfaceDefImpl.cpp" />
@@ -171,16 +174,20 @@
     <ClInclude Include="..\..\scintilla\include\Platform.h" />
     <ClInclude Include="..\..\scintilla\include\SciLexer.h" />
     <ClInclude Include="..\..\scintilla\include\Scintilla.h" />
+    <ClInclude Include="..\util\BLog.h" />
     <ClInclude Include="..\util\CBuffer.h" />
     <ClInclude Include="..\util\MD5.h" />
     <ClInclude Include="..\util\MD5ChecksumDefines.h" />
+    <ClInclude Include="..\util\Performance.h" />
     <ClInclude Include="..\util\TaskThread.h" />
     <ClInclude Include="..\util\ThreadDefine.h" />
     <ClInclude Include="..\util\util.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="GlobalDefine.h" />
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="GlobalCenter.h" />
     <ClInclude Include="HyperLink.h" />
+    <ClInclude Include="IGlobal.h" />
     <ClInclude Include="ILogin.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="IRefCountImpl.h" />

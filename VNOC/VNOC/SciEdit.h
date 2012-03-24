@@ -13,8 +13,7 @@
 #define SCINTILLA_DLL_NAME L"scintilla.dll"
 
 class CSciEdit : 
-	public CWnd,
-	private IConfig
+	public CWnd
 {
 public:
 	CSciEdit(HINSTANCE hInst = 0);

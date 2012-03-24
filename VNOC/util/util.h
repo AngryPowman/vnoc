@@ -51,14 +51,10 @@ namespace Util
 		CStringW GBKToUnicode(CStringA gbk);
 		CString PHP_URLEncode(const CStringA& src);
 		CStringA PHP_URLDecode(const CStringA& src );
-		CStringA CStringW2A(CStringW strW);
-		CStringW CStringA2W(CStringA strW);
 		std::wstring StringA2W(std::string strA);
 		std::string StringW2A(std::wstring strW);
 		// 不经转换的将char转为wchar_t
 		std::wstring StringToWstringNoConvert(std::string strA);
-		// CString转std::string请使用.GetString()
-		CString WStringToCString(std::wstring str);
 		//
 		std::wstring FormatSpaceSize(unsigned __int64 size);
 	}
@@ -78,7 +74,7 @@ namespace Util
 		BOOL GetSpecialPath(DWORD dwSpecDirID,CString &path);
 		bool FindFileAttribute(const wchar_t* path, WIN32_FIND_DATA& findFileData);
 		bool CheckFileName(const wchar_t * str);
-		bool GetDirFromPath(LPCTSTR path,int &endposIndex);						// 获取路径中的目录
+		bool GetDirFromPath(LPCTSTR path,int &endposIndex);// 获取路径中的目录
 		//BOOL PathFileExists(LPCTSTR path);		// Windows有这个API
 		bool IsFileInUse(const wchar_t* path);
 	}

@@ -53,7 +53,8 @@
 #include  <afxpriv.h>
 #include "easysize.h"
 #include "resource.h"
-#include "GlobalCenter.h"
+#include "IGlobal.h"
+#include "../util/Performance.h"
 #include "../../TinyXML/tinyxml.h"
 
 

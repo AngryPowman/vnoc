@@ -4,6 +4,7 @@
 #include "list"
 #include "atlstr.h"
 #include "util.h"
+#include "Performance.h"
 
 VOID _BackendTaskThreadEntry(LPVOID param);
 
@@ -42,6 +43,8 @@ namespace Thread
 		HANDLE m_hThread;
 		ATL::CEvent m_newTaskAvaliable;
 		TaskList m_taskList;
+
+		Performance::CPerformance m_performance;
 	private:
 		DISALLOW_COPY_AND_ASSIGN(CTaskThread);
 	};
