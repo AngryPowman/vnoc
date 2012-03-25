@@ -2,11 +2,44 @@
 // 定义了全局管理器的接口
 #include "IModule.h"
 #include "IConfig.h"
+#include "GlobalDefine.h"
 
 interface IGlobal:public IModule
 {
 public:
-	STDMETHOD( GetIConfig(std::auto_ptr<IConfig>& pConfig) = 0);
+	//////////////////////////////////////////////////////////////////////////
+	// 配置接口
+	STDMETHOD( GetIConfig(IConfig** pConfig) = 0);
+	//////////////////////////////////////////////////////////////////////////
+	// log接口
+	STDMETHOD( Log(CString file,CString str) = 0 );
+	STDMETHOD( Logf(CString file,LPCTSTR str,...) = 0 );
+	// 设置log
+	// bDebugView	是否可以通过dbgView查看
+	// bConsole		是否输出到Console中显示
+	STDMETHOD( SetLog(CString file,BOOL bDbgView=TRUE,BOOL bConsole=FALSE) = 0 );
+
+	//////////////////////////////////////////////////////////////////////////
+	//
+	// 设置线程名称，主要是log使用，也可以供各模块用以分辨当前线程。
+	// 每个线程创建后都应当调用这个接口。
+	STDMETHOD( SetThreadName(CString name) = 0 );
 };
 
 extern IGlobal* Global;		// 该指针假设在所有模块的生命期内都是合法的。
+
+// 生命期内的log都将带上这个前缀
+class CLogPrefix : private CGlobalUtilBase
+{
+public:
+	CLogPrefix(CString file,CString prefix);
+	~CLogPrefix();
+};
+
+// 生命期内的log将自动向右缩进
+class CLogIndent : private CGlobalUtilBase
+{
+public:
+	CLogIndent(CString file);
+	~CLogIndent();
+};

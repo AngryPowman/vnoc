@@ -149,6 +149,7 @@
     <ClCompile Include="..\util\util.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="GlobalCenter.cpp" />
+    <ClCompile Include="GlobalLog.cpp" />
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="InterfaceDefImpl.cpp" />
     <ClCompile Include="LoginImpl.cpp" />

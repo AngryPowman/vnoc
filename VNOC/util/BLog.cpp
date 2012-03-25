@@ -5,6 +5,7 @@ namespace blog
 {
 	CBLog::CBLog(void)
 	{
+		m_indent = 0;
 	}
 
 	CBLog::~CBLog(void)
@@ -13,26 +14,24 @@ namespace blog
 		i = m_logDevice.begin();
 		while (i != m_logDevice.end())
 		{
-			i++->second->Close();
-			delete i++->second;
+			i->second->Close();
+			delete i->second;
+			++i;
 		}
 	}
 
 	void CBLog::AddDevice( BLOG_TYPE type,CLogDeviceBase* device )
 	{
-		if (device->Open())
+		m_cs.Enter();
+		if (m_logDevice.find(type) != m_logDevice.end())
 		{
-			m_cs.Enter();
-			if (m_logDevice.find(type) != m_logDevice.end())
-			{
-				delete m_logDevice[type];
-			}
-			m_logDevice.insert(std::make_pair(type,device));
-			m_cs.Leave();
+			delete m_logDevice[type];
 		}
+		m_logDevice.insert(std::make_pair(type,device));
+		m_cs.Leave();
 	}
 
-	void CBLog::Log(LPCTSTR strlog )
+	void CBLog::Log(DWORD deviceMask,LPCTSTR strlog )
 	{
 		CString logText;
 		_AddInfo(logText);
@@ -46,9 +45,23 @@ namespace blog
 		i = m_logDevice.begin();
 		while (i != m_logDevice.end())
 		{
-			i++->second->Write(logText);
+			if (deviceMask & i->first)
+			{
+				i->second->Write(logText);
+			}
+			++i;
 		}
 		m_cs.Leave();
+	}
+
+	void CBLog::Logf( DWORD deviceMask,LPCTSTR fmt,... )
+	{
+		CString strFormat;
+		va_list vlist;
+		va_start(vlist,fmt);
+		strFormat.Format(fmt,vlist);
+		va_end(vlist);
+		return Log(deviceMask,strFormat);
 	}
 
 	void CBLog::_AddIndent(CString &strLog)
@@ -114,6 +127,30 @@ namespace blog
 		}
 	}
 
+	CLogDeviceBase* CBLog::GetDevice( BLOG_TYPE type )
+	{
+		LogDeviceListType::iterator i;
+		i = m_logDevice.find(type);
+		if (i != m_logDevice.end())
+		{
+			return i->second;
+		}
+		return NULL;
+	}
+
+	CLogDeviceBase* CBLog::RemoveDevice( BLOG_TYPE type )
+	{
+		LogDeviceListType::iterator i;
+		i = m_logDevice.find(type);
+		if ( i != m_logDevice.end())
+		{
+			CLogDeviceBase* pBase = i->second;
+			m_logDevice.erase(i);
+			return pBase;
+		}
+		return NULL;
+	}
+
 
 	BOOL CLogDeviceFile::Open(LPCTSTR param)
 	{
@@ -122,7 +159,7 @@ namespace blog
 		if (param)
 		{
 			logFile = param;
-			_tfopen_s(&m_fp,logFile,_T("wb"));
+			_tfopen_s(&m_fp,logFile,_T("a"));
 			if (m_fp)
 			{
 				CTime currTime = CTime::GetCurrentTime();

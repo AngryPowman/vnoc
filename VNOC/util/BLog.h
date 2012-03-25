@@ -6,12 +6,13 @@
 #include "atlsync.h"
 #include <atltime.h>
 
+// 除了标准类型以外想加入新输出端(如多file输出)，自行定义一个数即可，不需要在这里添加定义，用static_cast强转类型
 enum BLOG_TYPE
 {
 	BLOG_NOLOG = 0,
-	BLOG_DBGVIEW,
-	BLOG_FILE,
-	BLOG_CONSOLE
+	BLOG_DBGVIEW = 1,
+	BLOG_FILE = 2,
+	BLOG_CONSOLE = 4
 };
 
 #define TIME_FORMAT_STRING _T("%Y-%m-%d %H:%M:%S")
@@ -37,8 +38,12 @@ namespace blog
 		CBLog(void);
 		~CBLog(void);
 	public:
-		void Log(LPCTSTR strlog);
+		void Log(DWORD deviceMask,LPCTSTR strlog);
+		void Logf(DWORD deviceMask,LPCTSTR fmt,...);
+
 		void AddDevice(BLOG_TYPE type,CLogDeviceBase* device);
+		CLogDeviceBase* GetDevice(BLOG_TYPE type);
+		CLogDeviceBase* RemoveDevice(BLOG_TYPE type);
 
 		void AddPrefix(LPCTSTR strPrefix);
 		void RemoveLastPrefix();
@@ -46,7 +51,6 @@ namespace blog
 		void IncreaseIndent(){++m_indent;};
 		void DecreaseIndent(){if(m_indent)--m_indent;};
 
-		void SetThreadName(LPCTSTR strThreadName,DWORD logLen);
 	private:
 		void _AddInfo(CString &strLog);
 		void _AddPrefix(CString &strLog);
@@ -152,7 +156,7 @@ namespace blog
 	{
 	public:
 		CAutoBLogPrefix(CBLog *theLog,LPCTSTR text){if(theLog){m_theLog=theLog;theLog->AddPrefix(text);}}
-		~CAutoBLogPrefix(){if(m_theLog){m_theLog->Log(_T("过程结束"));m_theLog->RemoveLastPrefix();}}
+		~CAutoBLogPrefix(){m_theLog->RemoveLastPrefix();}
 		CBLog *m_theLog;
 	};
 }

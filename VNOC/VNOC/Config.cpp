@@ -15,34 +15,40 @@ CConfig::~CConfig(void)
 
 HRESULT CConfig::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
+	Global->Log(LogFile_Config,_T("初始化"));
 	return S_OK;
 }
 
 HRESULT CConfig::UnInitialize()
 {
+	Global->Log(LogFile_Config,_T("反初始化"));
 	return S_OK;
 }
 
 HRESULT CConfig::Run()
 {
+	Global->Log(LogFile_Config,_T("启动"));
 	return S_OK;
 }
 
 HRESULT CConfig::Terminate()
 {
+	Global->Log(LogFile_Config,_T("中止"));
 	return S_OK;
 }
 
 HRESULT CConfig::LoadConfigFromXML( LPCTSTR filePath )
 {
+	Global->Log(LogFile_Config,_T("开始加载XML"));
 	m_doc.Clear();
 	BOOL bRet = m_doc.LoadFile(CStringA(filePath));
 	assert(bRet && "配置xml文件加载异常");
 	if (bRet)
 	{
-		_ParseXML(m_doc.RootElement());
+		Global->Log(LogFile_Config,_T("文件加载成功。"));
+		CLogIndent i(LogFile_Config);
+		bRet = _ParseXML(m_doc.RootElement());
 	}
-	std::auto_ptr<IConfig> ptr;
 	return bRet? S_OK:S_FALSE;
 }
 

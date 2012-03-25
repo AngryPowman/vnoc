@@ -22,6 +22,8 @@ HRESULT CGlobalCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 
 HRESULT CGlobalCenter::UnInitialize()
 {
+	_UnInitializeConfig();
+	_UnInitializeLog();
 	return S_OK;
 }
 
@@ -35,9 +37,9 @@ HRESULT CGlobalCenter::Terminate()
 	return S_OK;
 }
 
-HRESULT CGlobalCenter::GetIConfig( std::auto_ptr<IConfig>& pConfig )
+HRESULT CGlobalCenter::GetIConfig( IConfig** pConfig )
 {
-	pConfig.reset(&m_config);
+	*pConfig = dynamic_cast<IConfig*>(&m_config);
 	return S_OK;
 }
 
@@ -46,22 +48,13 @@ void CGlobalCenter::_InitializeConfig()
 	m_config.Initialize(NULL);
 }
 
-void CGlobalCenter::_InitializeLog()
+void CGlobalCenter::_UnInitializeConfig()
 {
-	CString params;
-	Util::Filesys::GetSpecialPath(CSIDL_APPDATA,params);
-	if (!params.IsEmpty())
-	{
-		params += PathSplit;
-		params += PRODUCT_NAME;
-		params += PathSplit;
-		params += LogFileName;
-		//m_log.AddDevice(BLOG_FILE,dynamic_cast<blog::CLogDeviceBase*>(logFile));
-	}
-	blog::CLogDeviceDBGView *logDbgView = new blog::CLogDeviceDBGView;
-	if (logDbgView)
-	{
-		logDbgView->Open();
-		m_log.AddDevice(BLOG_DBGVIEW,dynamic_cast<blog::CLogDeviceBase*>(logDbgView));
-	}
+	m_config.UnInitialize();
 }
+
+HRESULT CGlobalCenter::SetThreadName( CString name )
+{
+	return S_OK;
+}
+

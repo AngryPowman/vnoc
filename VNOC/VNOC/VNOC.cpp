@@ -58,6 +58,8 @@ BOOL CVNOCApp::InitInstance()
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
 
+	Global->Initialize();
+	Global->SetThreadName(L"App主线程");
 	m_frame.Initialize();
 	//TODO: 这里没有设置m_pMainWnd
 
@@ -72,6 +74,7 @@ int CVNOCApp::Run()
 	// TODO: Add your specialized code here and/or call the base class
 
 	m_frame.Run();
+	//ExitInstance();
 	return CWinApp::Run();
 }
 
@@ -80,5 +83,6 @@ int CVNOCApp::ExitInstance()
 {
 	// TODO: Add your specialized code here and/or call the base class
 	m_frame.UnInitialize();
+	Global->UnInitialize();
 	return CWinApp::ExitInstance();
 }

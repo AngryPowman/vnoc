@@ -108,6 +108,9 @@
     <ClCompile Include="..\util\BLog.cpp">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="GlobalLog.cpp">
+      <Filter>GlobalCenter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
