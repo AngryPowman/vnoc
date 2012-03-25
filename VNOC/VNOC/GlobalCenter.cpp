@@ -53,8 +53,3 @@ void CGlobalCenter::_UnInitializeConfig()
 	m_config.UnInitialize();
 }
 
-HRESULT CGlobalCenter::SetThreadName( CString name )
-{
-	return S_OK;
-}
-

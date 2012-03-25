@@ -36,9 +36,11 @@ namespace blog
 		CString logText;
 		_AddInfo(logText);
 		_AddPrefix(logText);
+		logText += _T('|');
+		logText += _T('\t');
 		_AddIndent(logText);
 		logText += strlog;
-		logText += L'\n';
+		logText += _T('\n');
 
 		m_cs.Enter();
 		LogDeviceListType::iterator i;
@@ -88,7 +90,16 @@ namespace blog
 			otm.tm_hour,otm.tm_min,otm.tm_sec,st.wMilliseconds
 			);
 		DWORD threadID = GetCurrentThreadId();
-		strLog.AppendFormat(_T("%d \t"), threadID);
+		ThreadNameMap::iterator i;
+		i = m_threadNameMap.find(threadID);
+		if ( i != m_threadNameMap.end() )
+		{
+			strLog.AppendFormat(_T("%s(%d) \t"), i->second,threadID);
+		}
+		else
+		{
+			strLog.AppendFormat(_T("%d \t"), threadID);
+		}
 	}
 
 	void CBLog::_AddPrefix( CString &strLog )
@@ -151,6 +162,20 @@ namespace blog
 		return NULL;
 	}
 
+	void CBLog::SetThreadName( DWORD threadID,LPCTSTR name )
+	{
+		ThreadNameMap::iterator i;
+		i = m_threadNameMap.find(threadID);
+		if ( i != m_threadNameMap.end())
+		{
+			i->second = name;
+		}
+		else
+		{
+			m_threadNameMap.insert(std::make_pair(threadID,name));
+		}
+	}
+
 
 	BOOL CLogDeviceFile::Open(LPCTSTR param)
 	{
@@ -159,11 +184,11 @@ namespace blog
 		if (param)
 		{
 			logFile = param;
-			_tfopen_s(&m_fp,logFile,_T("a"));
+			errno_t err = _tfopen_s(&m_fp,logFile,_T("at+"));
 			if (m_fp)
 			{
 				CTime currTime = CTime::GetCurrentTime();
-				_ftprintf_s(m_fp,_T("File Created At %s\n"),currTime.Format(TIME_FORMAT_STRING));
+				_ftprintf_s(m_fp,_T("-----------------------------------\nLog Generated At %s\n"),currTime.Format(TIME_FORMAT_STRING));
 			}
 		}
 		return m_fp!=NULL;

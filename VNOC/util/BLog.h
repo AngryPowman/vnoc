@@ -30,7 +30,8 @@ namespace blog
 	};
 
 	typedef std::map<DWORD,CLogDeviceBase*> LogDeviceListType;
-	typedef std::vector<CString>	PrefixVectorType;
+	typedef std::vector<CString>			PrefixVectorType;
+	typedef std::map<DWORD,CString>			ThreadNameMap;
 
 	class CBLog
 	{
@@ -38,6 +39,8 @@ namespace blog
 		CBLog(void);
 		~CBLog(void);
 	public:
+		void SetThreadName(DWORD threadID,LPCTSTR name);
+
 		void Log(DWORD deviceMask,LPCTSTR strlog);
 		void Logf(DWORD deviceMask,LPCTSTR fmt,...);
 
@@ -59,6 +62,7 @@ namespace blog
 		DWORD m_indent;
 		LogDeviceListType m_logDevice;
 		PrefixVectorType m_Prefix;
+		ThreadNameMap m_threadNameMap;
 		ATL::CCriticalSection	m_cs;
 	};
 

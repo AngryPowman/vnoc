@@ -12,6 +12,7 @@ void CGlobalCenter::_InitializeLog()
 		m_logPath += PathSplit;
 		m_logPath += PRODUCT_NAME;
 		m_logPath += PathSplit;
+		Util::Filesys::ForceCreateDir(m_logPath);
 	}
 }
 
@@ -82,6 +83,18 @@ HRESULT CGlobalCenter::SetLog( CString file,BOOL bDbgView/*=TRUE*/,BOOL bConsole
 				return S_OK;
 			}
 		}
+	}
+	return S_OK;
+}
+
+HRESULT CGlobalCenter::SetThreadName( CString name )
+{
+	LogMap::iterator i;
+	i = m_log.begin();
+	while (i != m_log.end())
+	{
+		i->second->SetThreadName(GetCurrentThreadId(),name);
+		++i;
 	}
 	return S_OK;
 }
@@ -164,7 +177,7 @@ blog::CBLog* CGlobalCenter::_CreateLogInstance(CString file,BOOL bDbgView/* =TRU
 			if (logFile)
 			{
 				BOOL bResult = logFile->Open(fileName);
-				//ATLASSERT(bResult && "log文件打开失败!");
+				ATLASSERT(bResult && "log文件打开失败!");
 				if (bResult)
 				{
 					log->AddDevice(BLOG_FILE,logFile);
