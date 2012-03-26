@@ -12,7 +12,7 @@ private:
 public:
     bool start();
     template <typename Handler> int recv(char * buf, size_t len, Handler handler);
-    template <typename Handler> int recv_some(char * buf, size_t len, Handler handler);
+    template <typename Handler> int read_some(char * buf, size_t len, Handler handler);
     template <typename Handler> int send(char * buf, size_t len, Handler handler);
     void *data;
     

@@ -9,9 +9,21 @@ public:
     AsioTcpConnetion(asio::io_service& io_service):socket_(io_service){}
     asio::ip::tcp::socket& socket(){return socket_;} 
     bool start(){return true;}
-    template <typename Handler> int recv(char * buf, size_t len, Handler handler);
-    template <typename Handler> int recv_some(char * buf, size_t len, Handler handler);
-    template <typename Handler> int send(char * buf, size_t len, Handler handler);
+    template <typename Handler> int recv(char * buf, size_t len, Handler handler)
+    {
+        socket_.async_receive(asio::buffer(buf, len), handler);
+        return 0;
+    }
+    template <typename Handler> int read_some(char * buf, size_t len, Handler handler)
+    {
+        socket_.async_read_some(asio::buffer(buf, len), handler);
+        return 0;
+    }
+    template <typename Handler> int send(char * buf, size_t len, Handler handler)
+    {
+        socket_.async_send(asio::buffer(buf, len), handler);
+        return 0;
+    }
 private:
     asio::ip::tcp::socket socket_;
 };
