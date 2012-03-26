@@ -41,7 +41,7 @@ namespace blog
 	public:
 		void SetThreadName(DWORD threadID,LPCTSTR name);
 
-		void Log(DWORD deviceMask,LPCTSTR strlog);
+		void Log(DWORD deviceMask,LPCTSTR strlog,BOOL info=TRUE,BOOL autoEndLine=TRUE);
 		void Logf(DWORD deviceMask,LPCTSTR fmt,...);
 
 		void AddDevice(BLOG_TYPE type,CLogDeviceBase* device);

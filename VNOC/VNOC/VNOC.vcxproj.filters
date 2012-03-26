@@ -252,6 +252,9 @@
       <Filter>头文件</Filter>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="config.xml">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VNOC.rc">

@@ -46,6 +46,12 @@ HRESULT CGlobalCenter::GetIConfig( IConfig** pConfig )
 void CGlobalCenter::_InitializeConfig()
 {
 	m_config.Initialize(NULL);
+	CString configFile;
+	GetCurrentDirectory(MAX_PATH,configFile.GetBuffer(MAX_PATH));
+	configFile.ReleaseBuffer();
+	configFile += PathSplit;
+	configFile += CONFIGXMLFILE;
+	m_config.LoadConfigFromXML(configFile);
 }
 
 void CGlobalCenter::_UnInitializeConfig()

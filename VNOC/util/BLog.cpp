@@ -31,16 +31,22 @@ namespace blog
 		m_cs.Leave();
 	}
 
-	void CBLog::Log(DWORD deviceMask,LPCTSTR strlog )
+	void CBLog::Log( DWORD deviceMask,LPCTSTR strlog,BOOL info/*=TRUE*/,BOOL autoEndLine/*=TRUE*/ )
 	{
 		CString logText;
-		_AddInfo(logText);
-		_AddPrefix(logText);
-		logText += _T('|');
-		logText += _T('\t');
-		_AddIndent(logText);
+		if (info)
+		{
+			_AddInfo(logText);
+			_AddPrefix(logText);
+			logText += _T('|');
+			logText += _T('\t');
+			_AddIndent(logText);
+		}
 		logText += strlog;
-		logText += _T('\n');
+		if (autoEndLine)
+		{
+			logText += _T('\n');
+		}
 
 		m_cs.Enter();
 		LogDeviceListType::iterator i;
@@ -63,7 +69,7 @@ namespace blog
 		va_start(vlist,fmt);
 		strFormat.Format(fmt,vlist);
 		va_end(vlist);
-		return Log(deviceMask,strFormat);
+		return Log(deviceMask,strFormat,TRUE,FALSE);
 	}
 
 	void CBLog::_AddIndent(CString &strLog)
@@ -118,7 +124,7 @@ namespace blog
 				strLog +=_T("::");
 			}
 		}
-		strLog += _T(" \t");
+		//strLog += _T(" \t");
 	}
 
 	void CBLog::AddPrefix( LPCTSTR strPrefix )

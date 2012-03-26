@@ -11,6 +11,7 @@ public:
 	STDMETHOD( UnInitialize() = 0 );
 
 	// 通知模块工作，模块内部可以使用独立线程，保证接口的线程安全即可。
+	// 对于不存在私有线程的模块，这两个接口可以不使用
 	STDMETHOD( Run() = 0 );
 	// 通知退出
 	STDMETHOD( Terminate() = 0 );

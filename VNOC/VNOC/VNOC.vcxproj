@@ -214,6 +214,7 @@
     <None Include="..\postDispatch.bat" />
     <None Include="..\preLink.bat" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="config.xml" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />
     <None Include="res\VNOC.rc2" />

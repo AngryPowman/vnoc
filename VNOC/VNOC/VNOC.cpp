@@ -59,8 +59,8 @@ BOOL CVNOCApp::InitInstance()
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
 
-	Global->Initialize();
 	Global->SetThreadName(L"App主线程");
+	Global->Initialize();
 	m_frame.Initialize();
 	//TODO: 这里没有设置m_pMainWnd
 

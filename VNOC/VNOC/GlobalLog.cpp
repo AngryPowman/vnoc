@@ -2,6 +2,26 @@
 #include "GlobalCenter.h"
 
 //////////////////////////////////////////////////////////////////////////
+// 局部util函数
+
+void _CheckFileSize(LPCTSTR file,long size)
+{
+	long fileSize = 0;
+	FILE *fp;
+	_tfopen_s(&fp,file,_T("rb"));
+	if (fp)
+	{
+		fseek(fp,0,SEEK_END);
+		fileSize = ftell(fp);
+		fclose(fp);
+	}
+	if (fileSize > size)
+	{
+		DeleteFile(file);
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
 // 实现global的log接口
 
 void CGlobalCenter::_InitializeLog()
@@ -29,12 +49,12 @@ void CGlobalCenter::_UnInitializeLog()
 	}
 }
 
-HRESULT CGlobalCenter::Log( CString file,CString str )
+HRESULT CGlobalCenter::Log( CString file,CString str,BOOL info,BOOL endLine)
 {
 	blog::CBLog* log = _GetLogInstance(file);
 	if (log)
 	{
-		log->Log(LogMask_ALL,str);
+		log->Log(LogMask_ALL,str,info,endLine);
 	}
 	else
 	{
@@ -45,12 +65,24 @@ HRESULT CGlobalCenter::Log( CString file,CString str )
 
 HRESULT CGlobalCenter::Logf( CString file,LPCTSTR str,... )
 {
-	blog::CBLog* log = _GetLogInstance(file);
-	if (log)
-	{
-		log->Logf(LogMask_ALL,str);
-	}
-	return S_OK;
+	static wchar_t buffer[_LogFormatBufferSize];
+	buffer[_LogFormatBufferSize-1] = L'\0';
+	va_list vl;
+	va_start(vl,str);
+	vswprintf_s(buffer,str,vl);
+	va_end(vl);
+	return Log(file,buffer,TRUE,FALSE);
+}
+
+HRESULT CGlobalCenter::Lognf( CString file,LPCTSTR str,... )
+{
+	static wchar_t buffer[_LogFormatBufferSize];
+	buffer[_LogFormatBufferSize-1] = L'\0';
+	va_list vl;
+	va_start(vl,str);
+	vswprintf_s(buffer,str,vl);
+	va_end(vl);
+	return Log(file,buffer,FALSE,FALSE);
 }
 
 HRESULT CGlobalCenter::SetLog( CString file,BOOL bDbgView/*=TRUE*/,BOOL bConsole/*=FALSE*/ )
@@ -90,6 +122,7 @@ HRESULT CGlobalCenter::SetLog( CString file,BOOL bDbgView/*=TRUE*/,BOOL bConsole
 
 HRESULT CGlobalCenter::SetThreadName( CString name )
 {
+	m_threadName[GetCurrentThreadId()] = name;
 	LogMap::iterator i;
 	i = m_log.begin();
 	while (i != m_log.end())
@@ -98,6 +131,18 @@ HRESULT CGlobalCenter::SetThreadName( CString name )
 		++i;
 	}
 	return S_OK;
+}
+
+HRESULT CGlobalCenter::GetThreadName( DWORD threadID,CString& name )
+{
+	ThreadNameMap::iterator i;
+	i = m_threadName.find(threadID);
+	if (i != m_threadName.end())
+	{
+		name = i->second;
+		return S_OK;
+	}
+	return S_FALSE;
 }
 
 HRESULT CGlobalCenter::LogPrefix( CString file,CString prefix,BOOL bAdd )
@@ -163,6 +208,7 @@ blog::CBLog* CGlobalCenter::_CreateLogInstance(CString file,BOOL bDbgView/* =TRU
 		ASSERT(log);
 		if (log)
 		{
+			_FillThreadNameToLogInstance(log);
 			if (bDbgView)
 			{
 				log->AddDevice(BLOG_DBGVIEW,&m_logdbgView);
@@ -177,6 +223,7 @@ blog::CBLog* CGlobalCenter::_CreateLogInstance(CString file,BOOL bDbgView/* =TRU
 			blog::CLogDeviceFile *logFile = new blog::CLogDeviceFile;
 			if (logFile)
 			{
+				_CheckFileSize(fileName,_LogFileMaxSizeBytes);
 				BOOL bResult = logFile->Open(fileName);
 				ATLASSERT(bResult && "log文件打开失败!");
 				if (bResult)
@@ -195,6 +242,19 @@ blog::CBLog* CGlobalCenter::_CreateLogInstance(CString file,BOOL bDbgView/* =TRU
 	}
 	ASSERT(FALSE);
 	return NULL;
+}
+
+void CGlobalCenter::_FillThreadNameToLogInstance( blog::CBLog* inst )
+{
+	ASSERT(inst);
+	if (inst)
+	{
+		ThreadNameMap::iterator i;
+		for (i=m_threadName.begin(); i!=m_threadName.end(); ++i)
+		{
+			inst->SetThreadName(i->first,i->second);
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

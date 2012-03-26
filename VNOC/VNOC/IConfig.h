@@ -9,7 +9,6 @@ typedef std::vector<CString>		ConfigPath;
 // 存储着属性的所有信息
 struct ConfigNode
 {
-	ConfigPath	path;			// 存储路径
 	CString		strValue;		// 值
 	AttributeMap attr;			// 属性表
 };
@@ -21,7 +20,7 @@ public:
 	STDMETHOD( LoadConfigFromXML(LPCTSTR filePath) = 0 );
 	STDMETHOD( SaveConfigToXML(LPCTSTR filePath) = 0 );
 	// 假设Get一定成功。如果xml被删除或加载失败，会加载默认配置
-	STDMETHOD( Get(ConfigNode& node) = 0 );
+	STDMETHOD( Get(ConfigNode* node) = 0 );
 	// 返回值:
 	// S_OK		修改成功
 	// S_FALSE	原来不存在值，新添。

@@ -5,6 +5,16 @@
 #include <vector>
 #include "IConfig.h"
 
+struct ConfigTreeNode;
+
+typedef std::map<CStringA,ConfigTreeNode>	ConfigMap;
+
+struct ConfigTreeNode
+{
+	ConfigNode	config;
+	ConfigMap	branch;
+};
+
 class CConfig : public IConfig
 {
 public:
@@ -17,11 +27,14 @@ public:
 	STDMETHOD( Terminate() );
 	STDMETHOD( LoadConfigFromXML(LPCTSTR filePath) );
 	STDMETHOD( SaveConfigToXML(LPCTSTR filePath) );
-	STDMETHOD( Get(ConfigNode& node) );
+	STDMETHOD( Get(ConfigNode* node) );
 	STDMETHOD( Set(const ConfigNode& node) );
 	BOOL RegisterConfigNodeOwner();
 private:
-	BOOL _ParseXML(TiXmlElement *root);
+	BOOL _ParseXMLTree(TiXmlNode *root,ConfigTreeNode& treeRoot);
+	BOOL _ParseXML(TiXmlNode *root,ConfigTreeNode& treeRoot);
+	BOOL _ParseNode(TiXmlNode *node,ConfigNode& cfg);
 private:
-	TiXmlDocument m_doc;
+	TiXmlDocument	m_doc;
+	ConfigTreeNode	m_rootNode;
 };
