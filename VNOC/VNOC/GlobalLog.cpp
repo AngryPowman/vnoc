@@ -18,11 +18,12 @@ void CGlobalCenter::_InitializeLog()
 
 void CGlobalCenter::_UnInitializeLog()
 {
-	return;
 	LogMap::iterator i;
 	i = m_log.begin();
 	while (i != m_log.end())
 	{
+		i->second->RemoveDevice(BLOG_DBGVIEW);
+		i->second->RemoveDevice(BLOG_CONSOLE);
 		delete i->second;
 		++i;
 	}
