@@ -29,6 +29,8 @@ public:
 	STDMETHOD( SaveConfigToXML(LPCTSTR filePath=NULL) );
 	STDMETHOD( Get(ConfigNode& node) );
 	STDMETHOD( Set(const ConfigNode& node) );
+	STDMETHOD( AddMonitor(ConfigPath path,IConfigMonitor* pMonitor));
+	STDMETHOD( RemoveMonitor(IConfigMonitor* pMonitor) );
 	BOOL RegisterConfigNodeOwner();
 private:
 	BOOL _ParseXMLTree(TiXmlNode *root,ConfigTreeNode& treeRoot);

@@ -82,9 +82,10 @@ BOOL CRoomListDlg::OnInitDialog()
 	if (pConfig)
 	{
 		ConfigNode node;
-		node.path.push_back(_T("VNOCConfig"));
-		node.path.push_back(_T("CodeEditor"));
-		node.path.push_back(_T("Language"));
+// 		node.path.push_back(_T("VNOCConfig"));
+// 		node.path.push_back(_T("CodeEditor"));
+// 		node.path.push_back(_T("Language"));
+		node.xPath(_T("CodeEditor///Language//"));
 		pConfig->Get(node);
 		node.attr.insert(std::make_pair(_T("test"),_T("testValue")));
 		pConfig->Set(node);

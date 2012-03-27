@@ -4,6 +4,7 @@
 #define PathSplit		_T('\\')
 
 #define CONFIGXMLFILE	_T("config.xml")
+#define ConfigPathSplit	_T('/')				// 用于xPath中的分隔符
 
 #define _LogFileExt		_T(".log")
 #define _LogFileMaxSizeBytes	64*1024*1024

@@ -245,3 +245,13 @@ BOOL CConfig::_CreateXMLTree(TiXmlNode& tree,const ConfigTreeNode& root )
 	}
 	return TRUE;
 }
+
+HRESULT CConfig::AddMonitor( ConfigPath path,IConfigMonitor* pMonitor )
+{
+	return S_OK;
+}
+
+HRESULT CConfig::RemoveMonitor( IConfigMonitor* pMonitor )
+{
+	return S_OK;
+}
