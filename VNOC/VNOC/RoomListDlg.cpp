@@ -77,6 +77,19 @@ void CRoomListDlg::OnSize(UINT nType, int cx, int cy)
 
 BOOL CRoomListDlg::OnInitDialog()
 {
+	IConfig *pConfig = NULL;
+	Global->GetIConfig(&pConfig);
+	if (pConfig)
+	{
+		ConfigNode node;
+		node.path.push_back(_T("VNOCConfig"));
+		node.path.push_back(_T("CodeEditor"));
+		node.path.push_back(_T("Language"));
+		pConfig->Get(node);
+		node.attr.insert(std::make_pair(_T("test"),_T("testValue")));
+		pConfig->Set(node);
+		pConfig->Get(node);
+	}
 	CDialog::OnInitDialog();
 	CRect rect;
 	m_SearchEdit.GetWindowRect(rect);

@@ -40,6 +40,7 @@ private:
 	void _FillThreadNameToLogInstance(blog::CBLog* inst);
 private:
 	CConfig		m_config;
+	CString		m_configFilePath;
 	
 	LogMap		m_log;
 	blog::CLogDeviceDBGView m_logdbgView;

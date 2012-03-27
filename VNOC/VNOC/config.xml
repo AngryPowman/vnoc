@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <VNOCConfig>
-	<CodeEditor>
-		<Language language="cpp">
-			<Font bold="0" italic="0" underline="0">Courier New</Font>
-			<Editor>
-				<ShowLineNum color="255,255,255">1</ShowLineNum>
-			</Editor>
-		</Language>
-	</CodeEditor>
-	<test>This is Test</test>
+    <CodeEditor>
+        <Language language="cpp">
+            <Editor>
+                <ShowLineNum color="255,255,255">1</ShowLineNum>
+            </Editor>
+            <Font bold="0" italic="0" underline="0">Courier New</Font>
+        </Language>
+    </CodeEditor>
+    <test>This is Test</test>
 </VNOCConfig>
