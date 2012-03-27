@@ -3,10 +3,10 @@
 #include "asio.hpp"
 #include "SocketServer.hpp"
 
-class AsioTcpConnetion: public Connection
+class AsioTcpConnection: public Connection
 {
 public:
-    AsioTcpConnetion(asio::io_service& io_service):socket_(io_service){}
+    AsioTcpConnection(asio::io_service& io_service):socket_(io_service){}
     asio::ip::tcp::socket& socket(){return socket_;} 
     bool start(){return true;}
     template <typename Handler> int recv(char * buf, size_t len, Handler handler)

@@ -4,6 +4,7 @@
 #include <thread>
 #include <iostream>
 #include "asio.hpp"
+#include "test/EchoTestHandler.hpp"
 using namespace asio;
 using namespace asio::ip;
 using namespace std;
@@ -33,9 +34,12 @@ bool AsioTcpServer::start(unsigned int port)
 {
     tcp::endpoint endpoint(tcp::v4(), port);
     acceptor_.open(tcp::v4());
-    acceptor_.bind(endpoint);
-    AsioTcpConnetion* new_connetion(new AsioTcpConnetion(io_service_));
-    acceptor_.async_accept(new_connetion->socket(),accept_handler);
+    acceptor_.bind(tcp::endpoint(tcp::v4(), port));
+    AsioTcpConnection* new_connection(new AsioTcpConnection(io_service_));
+    auto hanler(new EchoTestHandler(new_connection));
+    acceptor_.async_accept(new_connection->socket(),
+        std::bind(&EchoTestHandler::AcceptHandler, hanler,
+          std::placeholders::_1));
     std::thread t(&AsioTcpServer::worker, this);
     t.join();
     return true;
