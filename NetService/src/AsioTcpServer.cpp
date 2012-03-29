@@ -37,6 +37,7 @@ bool AsioTcpServer::start(unsigned int port)
     acceptor_.bind(tcp::endpoint(tcp::v4(), port));
     AsioTcpConnection* new_connection(new AsioTcpConnection(io_service_));
     auto hanler(new EchoTestHandler(new_connection));
+	acceptor_.listen();
     acceptor_.async_accept(new_connection->socket(),
         std::bind(&EchoTestHandler::AcceptHandler, hanler,
           std::placeholders::_1));
