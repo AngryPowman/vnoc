@@ -30,17 +30,33 @@ void AsioTcpServer::worker()
     cout<<"start worker"<<endl;
     g_io_service.run();
 }
+void AsioTcpServer::AcceptHandler( AsioTcpConnection* conn, const asio::error_code& error)
+{
+	if (!error)
+	{
+		auto handler(new EchoTestHandler(conn));
+		handler->start();
+		
+		AsioTcpConnection* new_connection(new AsioTcpConnection(io_service_));
+		acceptor_.async_accept(new_connection->socket(),
+			std::bind(&AsioTcpServer::AcceptHandler, this ,new_connection,
+				std::placeholders::_1));
+	} else 
+	{
+		std::cout<<error.message()<<std::endl;
+	}
+}
+
 bool AsioTcpServer::start(unsigned int port)
 {
     tcp::endpoint endpoint(tcp::v4(), port);
     acceptor_.open(tcp::v4());
     acceptor_.bind(tcp::endpoint(tcp::v4(), port));
-    AsioTcpConnection* new_connection(new AsioTcpConnection(io_service_));
-    auto hanler(new EchoTestHandler(new_connection));
 	acceptor_.listen();
+	AsioTcpConnection* new_connection(new AsioTcpConnection(io_service_));
     acceptor_.async_accept(new_connection->socket(),
-        std::bind(&EchoTestHandler::AcceptHandler, hanler,
-          std::placeholders::_1));
+        std::bind(&AsioTcpServer::AcceptHandler, this ,new_connection,
+			std::placeholders::_1));
     std::thread t(&AsioTcpServer::worker, this);
     t.join();
     return true;
