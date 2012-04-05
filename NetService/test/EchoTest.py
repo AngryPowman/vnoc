@@ -5,7 +5,7 @@ import sys
 import subprocess
 
 address= ('localhost', 12345)
-p=subprocess.Popen('../bin/Server')
+p=subprocess.Popen('../bin/EchoTestServer')
 try: 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(address)

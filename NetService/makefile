@@ -9,10 +9,13 @@ INCS := $(CUR_DIR)/include
 %.o : %.cpp
 	$(CXX) -c $(CXXFLAGS) -I$(INCS)  $< -o $@
 
-all : Server
+all : Server test_bin
 Server : VNOCServer.o NetService.o AsioTcpServer.o
 	$(CXX) -lpthread $^ -o bin/$@
+test_bin: EchoTestServer
 
+EchoTestServer : EchoTestServer.o NetService.o AsioTcpServer.o
+	$(CXX) -lpthread $^ -o bin/$@
 clean :
 	rm -fr bin/*
 	rm -f *.o
