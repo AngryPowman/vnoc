@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<VNOCConfig>
+<Language language="cpp" test="testValue">
     <CodeEditor>
         <Language language="cpp">
             <Editor>
@@ -9,4 +9,4 @@
         </Language>
     </CodeEditor>
     <test>This is Test</test>
-</VNOCConfig>
+</Language>

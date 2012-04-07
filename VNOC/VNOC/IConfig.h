@@ -33,12 +33,18 @@ public:
 	// E_FAIL	不存在该节点。
 	// S_OK		顺利取到
 	STDMETHOD( Get(ConfigNode& node) = 0 );
+	// notify	是否通知监听的模块。如果是改其它模块的设置并通知对方刷新，请设置为TRUE
 	// 返回值:
 	// S_OK		修改成功
 	// S_FALSE	原来不存在值，新添。
-	STDMETHOD( Set(const ConfigNode& node) = 0 );
+	STDMETHOD( Set(const ConfigNode& node,BOOL notify=FALSE) = 0 );
+
 	// 添加监视。一旦该节点下任何节点被修改，将得到通知。
 	STDMETHOD( AddMonitor(ConfigPath path,IConfigMonitor* pMonitor) = 0 );
 	//! 析构前一定要删除，不然会崩溃。
 	STDMETHOD( RemoveMonitor(IConfigMonitor* pMonitor) = 0 );
 };
+
+//////////////////////////////////////////////////////////////////////////
+//
+#include "Config.inl"

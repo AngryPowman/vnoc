@@ -158,7 +158,7 @@ HRESULT CConfig::Get( ConfigNode& node )
 	}
 }
 
-HRESULT CConfig::Set( const ConfigNode& node )
+HRESULT CConfig::Set( const ConfigNode& node,BOOL notify )
 {
 	Util::CAutoCS ac(m_cs);
 	CLogPrefix	lp(LogFile_Config,_T("[Config]"));
@@ -168,6 +168,10 @@ HRESULT CConfig::Set( const ConfigNode& node )
 		pNode->attr = node.attr;
 		pNode->strValue = node.strValue;
 		Global->Logf(LogFile_Config,_T("ÉèÖÃ³É¹¦(%s)"),pNode->strValue);
+		if (notify)
+		{
+			//_NotifyConfigChanged(node);
+		}
 		return S_OK;
 	}
 	return E_FAIL;

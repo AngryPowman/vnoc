@@ -118,30 +118,6 @@ wchar_t Util::GetHexW( UINT num,BOOL bUpperWord/*=TRUE*/ )
 	return num<10? num+L'0': num-10+L'A';
 }
 
-//std::string Util::String::UTF8Convert(const char* str, int sourceCodepage, int targetCodepage)   
-//{   
-//	int unicodeLen = MultiByteToWideChar(sourceCodepage, 0, str, -1, NULL, 0);   
-//
-//	wchar_t * pUnicode = new wchar_t[unicodeLen + 1];   
-//	memset(pUnicode, 0, (unicodeLen + 1) * sizeof(wchar_t));   
-//	MultiByteToWideChar(sourceCodepage, 0, str, -1, (LPWSTR)pUnicode, unicodeLen);   
-//
-//	int targetLen = WideCharToMultiByte(targetCodepage, 0, (LPWSTR)pUnicode, -1, NULL, 0, NULL, NULL);   
-//
-//	char* pTargetData = new char[targetLen+1];   
-//	memset(pTargetData, 0, targetLen+1);   
-//	WideCharToMultiByte(targetCodepage, 0, (LPWSTR)pUnicode, -1, (char *)pTargetData, targetLen, NULL, NULL);   
-//
-///*	CStringA strRet;   
-//	strRet.Format("%s", pTargetData);  */ 
-//
-//	std::string strRet(pTargetData);
-//
-//	delete pUnicode;   
-//	delete pTargetData;   
-//	return strRet;   
-//}
-
 CStringA Util::String::Unicode2UTF8(const wchar_t* pUnicode)   
 {   
 	ATLASSERT(NULL != pUnicode);
@@ -524,30 +500,20 @@ bool Util::Filesys::GetDirFromPath( LPCTSTR path,int &endposIndex )
 	return false;
 }
 
-std::wstring Util::String::FormatSpaceSize( unsigned __int64 size )
+UINT Util::String::ToUINT( LPCTSTR lpstr )
 {
-	CStringW str;
-	double dSize = 0;
-	if(size > Size_GB)
+	ATLASSERT(lpstr);
+	DWORD dw = 0;
+	if (lpstr)
 	{
-		dSize = (double)size/(double)Size_GB;
-		str.Format(L"%.3fGB",dSize);
+		while(*lpstr)
+		{
+			dw *= 10;
+			dw += *lpstr - '0';
+			++lpstr;
+		}
 	}
-	else if(size > Size_MB)
-	{
-		dSize = (double)size/(double)Size_MB;
-		str.Format(L"%.3fMB",dSize);
-	}
-	else if(size > Size_KB)
-	{
-		dSize = (double)size/(double)Size_KB;
-		str.Format(L"%.3fKB",dSize);
-	}
-	else
-	{
-		str.Format(L"%I64u×Ö½Ú",size);
-	}
-	return std::wstring(str.GetBuffer());
+	return dw;
 }
 
 namespace Util

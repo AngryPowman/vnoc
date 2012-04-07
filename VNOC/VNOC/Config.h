@@ -28,7 +28,7 @@ public:
 	STDMETHOD( LoadConfigFromXML(LPCTSTR filePath) );
 	STDMETHOD( SaveConfigToXML(LPCTSTR filePath=NULL) );
 	STDMETHOD( Get(ConfigNode& node) );
-	STDMETHOD( Set(const ConfigNode& node) );
+	STDMETHOD( Set(const ConfigNode& node,BOOL notify=FALSE) );
 	STDMETHOD( AddMonitor(ConfigPath path,IConfigMonitor* pMonitor));
 	STDMETHOD( RemoveMonitor(IConfigMonitor* pMonitor) );
 	BOOL RegisterConfigNodeOwner();

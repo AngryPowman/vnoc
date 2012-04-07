@@ -45,6 +45,7 @@ int CRoomDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	strCodeWndTitle.LoadString(AfxGetInstanceHandle(),IDS_Sci_WndTitle);
 	CRect rec;
 	BOOL result = m_codeEdit.Create(strCodeWndTitle,rec,this,0);
+	m_codeEdit.ShowLineNumber();
 	ATLASSERT(result);
 	if (result)
 	{

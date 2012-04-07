@@ -31,9 +31,6 @@
     <Filter Include="FrameWork\Modules">
       <UniqueIdentifier>{b256ffc7-3c72-4144-97e8-6343d544308a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dialog">
-      <UniqueIdentifier>{53f89d19-a7ad-47c0-9c0e-c80c540eac51}</UniqueIdentifier>
-    </Filter>
     <Filter Include="util">
       <UniqueIdentifier>{3614b0d9-aab3-4da9-902a-97972b0e46be}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,12 @@
     </Filter>
     <Filter Include="TinyXML">
       <UniqueIdentifier>{30f8f572-c62b-401d-a5a3-70c73813f9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeEditor\_headers">
+      <UniqueIdentifier>{d53b3ebe-89bd-477d-ac58-77b4e5bcef7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Dialog">
+      <UniqueIdentifier>{53f89d19-a7ad-47c0-9c0e-c80c540eac51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +82,7 @@
       <Filter>FrameWork\Modules</Filter>
     </ClCompile>
     <ClCompile Include="VNOCLoginDlg.cpp">
-      <Filter>Dialog</Filter>
+      <Filter>FrameWork\Dialog</Filter>
     </ClCompile>
     <ClCompile Include="..\util\CBuffer.cpp">
       <Filter>util</Filter>
@@ -97,10 +100,10 @@
       <Filter>FrameWork\Modules</Filter>
     </ClCompile>
     <ClCompile Include="RoomListDlg.cpp">
-      <Filter>Dialog</Filter>
+      <Filter>FrameWork\Dialog</Filter>
     </ClCompile>
     <ClCompile Include="RoomDlg.cpp">
-      <Filter>Dialog</Filter>
+      <Filter>FrameWork\Dialog</Filter>
     </ClCompile>
     <ClCompile Include="RoomImpl.cpp">
       <Filter>FrameWork\Modules</Filter>
@@ -126,6 +129,9 @@
     <ClCompile Include="..\..\TinyXML\tinyxmlparser.cpp">
       <Filter>TinyXML</Filter>
     </ClCompile>
+    <ClCompile Include="SciEditLexer.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
@@ -149,18 +155,6 @@
     <ClInclude Include="..\..\MyNetClient\NetClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\scintilla\include\ILexer.h">
-      <Filter>CodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\scintilla\include\Platform.h">
-      <Filter>CodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\scintilla\include\SciLexer.h">
-      <Filter>CodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\scintilla\include\Scintilla.h">
-      <Filter>CodeEditor</Filter>
-    </ClInclude>
     <ClInclude Include="SciEdit.h">
       <Filter>CodeEditor</Filter>
     </ClInclude>
@@ -183,7 +177,7 @@
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="VNOCLoginDlg.h">
-      <Filter>Dialog</Filter>
+      <Filter>FrameWork\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\util\CBuffer.h">
       <Filter>util</Filter>
@@ -213,10 +207,10 @@
       <Filter>FrameWork\Modules</Filter>
     </ClInclude>
     <ClInclude Include="RoomListDlg.h">
-      <Filter>Dialog</Filter>
+      <Filter>FrameWork\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="RoomDlg.h">
-      <Filter>Dialog</Filter>
+      <Filter>FrameWork\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="RoomImpl.h">
       <Filter>FrameWork\Modules</Filter>
@@ -254,6 +248,21 @@
     <ClInclude Include="..\..\TinyXML\tinyxml.h">
       <Filter>TinyXML</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\ILexer.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\Platform.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\SciLexer.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\Scintilla.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.inl">
+      <Filter>config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -262,7 +271,6 @@
     <None Include="res\VNOC.rc2">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="..\..\MyNetClient\MyNetClient.vcxproj" />
     <None Include="..\postDispatch.bat">
       <Filter>资源文件</Filter>
     </None>

@@ -3,6 +3,9 @@
 #include "SciEdit.h"
 #include "../util/util.h"
 
+BEGIN_MESSAGE_MAP(CSciEdit, CWnd)
+END_MESSAGE_MAP()
+
 CSciEdit::CSciEdit(HINSTANCE hInst)
 {
 	m_dllHandle = 0;
@@ -60,7 +63,7 @@ VOID CSciEdit::_AddRef()
 			{
 				CString strErrDllMissingSci;
 				strErrDllMissingSci.LoadString(AfxGetInstanceHandle(),IDS_Error_DllMissing);
-				strErrDllMissingSci.Format(strErrDllMissingSci,SCINTILLA_ADVANCED_DLL_NAME);
+				strErrDllMissingSci.Format(strErrDllMissingSci,SCINTILLA_DLL_USE);
 				::MessageBox(0,strErrDllMissingSci,0,0);
 			}
 		}
@@ -83,6 +86,7 @@ sptr_t CSciEdit::_SendSciMessage( UINT message,DWORD wParam,DWORD lParam )
 {
 	if (m_pDirectFunc && m_pDirectPtr)
 	{
+		//Global->Logf(LogFile_Scintilla,_T("Message(%d,%d/%d)\n"),message,wParam,lParam);
 		return m_pDirectFunc(m_pDirectPtr,message,wParam,lParam);
 	}
 	else
@@ -92,55 +96,39 @@ sptr_t CSciEdit::_SendSciMessage( UINT message,DWORD wParam,DWORD lParam )
 	return 0;
 }
 
-BOOL CSciEdit::SetLexer( DWORD lexer /*= SCLEX_CPP*/ )
-{
-	switch (lexer)
-	{
-	case SCLEX_CPP:
-		{
-			_SendSciMessage(SCI_STYLESETFONT,STYLE_DEFAULT,(DWORD)"Courier New");
-			_SendSciMessage(SCI_STYLESETSIZE, STYLE_DEFAULT,10);
-			_SendSciMessage(SCI_STYLECLEARALL);
-			sptr_t temp = _SendSciMessage(SCI_GETLEXER,0,0);
-			_SendSciMessage(SCI_SETLEXER,lexer);
-			temp = _SendSciMessage(SCI_GETLEXER,0,0);
-			CString strKeyWords;
-			strKeyWords.LoadString(m_hinst,IDS_Sci_Lexer_Keywords_CPP);
-			_SendSciMessage(SCI_SETKEYWORDS,0,(DWORD)(LPCSTR)CStringA(strKeyWords));
-			strKeyWords.LoadString(m_hinst,IDS_Sci_Lexer_VariableTypes_CPP);
-			_SendSciMessage(SCI_SETKEYWORDS,1,(DWORD)(LPCSTR)CStringA(strKeyWords));
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_WORD, 0x00FF0000);   //关键字
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_WORD2, 0x00800080);   //关键字
-			_SendSciMessage(SCI_STYLESETBOLD, SCE_C_WORD2, TRUE);   //关键字
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_STRING, 0x001515A3); //字符串
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_CHARACTER, 0x001515A3); //字符
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_PREPROCESSOR, 0x00808080);//预编译开关
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_COMMENT, 0x00008000);//块注释
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_COMMENTLINE, 0x00008000);//行注释
-			_SendSciMessage(SCI_STYLESETFORE, SCE_C_COMMENTDOC, 0x00008000);//文档注释（/**开头）
-
-			_SendSciMessage(SCI_SETCARETLINEVISIBLE, TRUE);
-			_SendSciMessage(SCI_SETCARETLINEBACK, 0xb0ffff); 
-			ShowLineNumber();
-		}
-		break;
-	}
-	return TRUE;
-}
-
 BOOL CSciEdit::ShowLineNumber( BOOL show /*= TRUE*/ )
 {
-	_CalcLineNumberMarginWidth();
 	_SendSciMessage(SCI_SETMARGINTYPEN,0,SC_MARGIN_NUMBER);
-	return _SendSciMessage(SCI_GETMARGINTYPEN,0,0)==SC_MARGIN_NUMBER;
+	_CalcLineNumberMarginWidth();
+	return TRUE;
 }
 
 void CSciEdit::_CalcLineNumberMarginWidth()
 {
-	_SendSciMessage(SCI_SETMARGINWIDTHN,0, 20);
+	sptr_t ret;
+	ret = _SendSciMessage(SCI_GETLINECOUNT,0,0);
+	DWORD lineCount = static_cast<DWORD>(ret);
+	CStringA strFmt;
+	strFmt.Format("%d",lineCount);
+	ret = _SendSciMessage(SCI_TEXTWIDTH,STYLE_LINENUMBER,(DWORD)strFmt.GetString());
+	DWORD width = static_cast<DWORD>(ret) + 5;
+	ret = _SendSciMessage(SCI_GETMARGINWIDTHN);
+	DWORD oldWidth = static_cast<DWORD>(ret);
+	Global->Logf(LogFile_Scintilla,_T("通知更新行号边栏宽度.行数:%s.旧宽度:%d,新宽度:%d\n"),CString(strFmt),oldWidth,width);
+	if (oldWidth != width)
+	{
+		_SendSciMessage(SCI_SETMARGINWIDTHN,0, width);
+	}
 }
 
 VOID CSciEdit::_InternalInitialize()
 {
 	_SendSciMessage(SCI_SETCODEPAGE,SC_CP_UTF8);
+}
+
+BOOL CSciEdit::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+	// TODO: Add your specialized code here and/or call the base class
+
+	return CWnd::OnNotify(wParam, lParam, pResult);
 }

@@ -15,6 +15,7 @@
 // logœ‡πÿ
 
 #define LogFile_Config	_T("Config")
+#define LogFile_Scintilla	_T("Scintilla")
 
 class CGlobalUtilBase
 {

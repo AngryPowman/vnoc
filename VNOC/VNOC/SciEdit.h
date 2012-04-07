@@ -8,9 +8,10 @@
 #include "../../scintilla/include/SciLexer.h"
 #include "IConfig.h"
 
-#define SCINTILLA_CLASS_NAME L"scintilla"
-#define SCINTILLA_ADVANCED_DLL_NAME L"scilexer.dll"
-#define SCINTILLA_DLL_NAME L"scintilla.dll"
+#define SCINTILLA_CLASS_NAME			_T("scintilla")
+#define SCINTILLA_ADVANCED_DLL_NAME		_T("scilexer.dll")
+#define SCINTILLA_DLL_NAME				_T("scintilla.dll")
+#define SCINTILLA_DLL_USE				SCINTILLA_ADVANCED_DLL_NAME
 
 class CSciEdit : 
 	public CWnd
@@ -24,6 +25,7 @@ public:
 	BOOL ShowLineNumber(BOOL show = TRUE);
 	VOID FontConfigChanged();		// 通知控件，字体等信息有更新，刷新显示。
 private:
+	// 引用计数主要是用以保证dll的正常加载卸载
 	VOID _AddRef();
 	VOID _Release();
 	VOID _InternalInitialize();
@@ -37,4 +39,7 @@ private:
 
 	SciFnDirect m_pDirectFunc;
 	sptr_t		m_pDirectPtr;
+public:
+	DECLARE_MESSAGE_MAP()
+	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 };

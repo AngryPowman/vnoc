@@ -55,8 +55,7 @@ namespace Util
 		std::string StringW2A(std::wstring strW);
 		// 不经转换的将char转为wchar_t
 		std::wstring StringToWstringNoConvert(std::string strA);
-		//
-		std::wstring FormatSpaceSize(unsigned __int64 size);
+		UINT ToUINT(LPCTSTR lpstr);
 	}
 	namespace Base64
 	{
