@@ -17,9 +17,10 @@ static void accept_handler(const asio::error_code& error)
     // Accept succeeded.
   }
 }
-AsioTcpServer::AsioTcpServer():
+AsioTcpServer::AsioTcpServer(SocketHandlerFactory* handlerFactory):
     io_service_(g_io_service),
-    acceptor_(g_io_service)
+    acceptor_(g_io_service),
+	handlerFactory_(handlerFactory)
 {}
 
 AsioTcpServer::~AsioTcpServer()
@@ -34,7 +35,7 @@ void AsioTcpServer::AcceptHandler( AsioTcpConnection* conn, const asio::error_co
 {
 	if (!error)
 	{
-		auto handler(new EchoTestHandler(conn));
+		SocketHandler *handler=handlerFactory_->CreateHandler(conn);
 		handler->start();
 		
 		AsioTcpConnection* new_connection(new AsioTcpConnection(io_service_));

@@ -6,10 +6,11 @@
  */
 
 #include "NetService.h"
+#include "test/EchoTestHandler.hpp"
 
 using namespace std;
-
-NetService::NetService()
+static EchoTestHandlerFactory handlerFactory_g;
+NetService::NetService():server_(&handlerFactory_g)
 {
 
 }

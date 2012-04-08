@@ -6,14 +6,16 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-#include "../src/NetService.h"
+#include "../src/AsioTcpServer.hpp"
 #include <iostream>
+#include "../src/test/EchoTestHandler.hpp"
 using namespace std;
 
 int main()
 {
-	NetService net;
-	net.start(12345);
+	EchoTestHandlerFactory factory;
+	AsioTcpServer server(&factory);
+	server.start(12345);
 
 	return 0;
 }
