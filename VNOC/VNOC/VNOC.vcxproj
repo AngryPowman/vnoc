@@ -203,7 +203,6 @@
     <ClInclude Include="..\util\ThreadDefine.h" />
     <ClInclude Include="..\util\util.h" />
     <ClInclude Include="Config.h" />
-    <ClInclude Include="Config.inl" />
     <ClInclude Include="GlobalDefine.h" />
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="GlobalCenter.h" />
@@ -233,7 +232,9 @@
     <None Include="..\postDispatch.bat" />
     <None Include="..\preLink.bat" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="Config.inl" />
     <None Include="config.xml" />
+    <None Include="Performance.inl" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />
     <None Include="res\VNOC.rc2" />

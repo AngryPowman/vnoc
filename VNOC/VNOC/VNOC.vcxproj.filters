@@ -260,9 +260,6 @@
     <ClInclude Include="..\..\scintilla\include\Scintilla.h">
       <Filter>CodeEditor\_headers</Filter>
     </ClInclude>
-    <ClInclude Include="Config.inl">
-      <Filter>config</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -283,6 +280,12 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="config.xml">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="Config.inl">
+      <Filter>config</Filter>
+    </None>
+    <None Include="Performance.inl">
+      <Filter>util</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
