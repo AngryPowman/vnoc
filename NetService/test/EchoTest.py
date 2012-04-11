@@ -3,9 +3,10 @@
 import socket
 import sys
 import subprocess
-
+import time
 address= ('localhost', 12345)
 p=subprocess.Popen('../bin/EchoTestServer')
+time.sleep(2)
 try: 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(address)
@@ -19,6 +20,7 @@ try:
 except socket.error, msg:
     sys.stderr.write("error: %s\n" % msg[1])
     print "failed"
+    p.kill()
     sys.exit(1)
 p.kill()
 sys.exit(0)
