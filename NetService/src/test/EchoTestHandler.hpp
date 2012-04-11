@@ -3,10 +3,11 @@
 #include "../AsioTcpConnection.hpp"
 #include "../SocketHandler.hpp"
 #include <iostream>
+template <typename ConnectionT>
 class EchoTestHandler: public SocketHandler
 {
 public:
-	EchoTestHandler(AsioTcpConnection *connection):connection_(connection){}
+	EchoTestHandler(ConnectionT *connection):connection_(connection){}
 	virtual void start()
 	{
         connection_->read_some(data_, sizeof(data_)-1, 
@@ -43,7 +44,7 @@ public:
 		
 	}
 private:
-    AsioTcpConnection *connection_;
+    ConnectionT *connection_;
     char data_[512];
 };
 
@@ -52,7 +53,7 @@ class EchoTestHandlerFactory: public SocketHandlerFactory
 public:
 	virtual SocketHandler* CreateHandler(AsioTcpConnection *connection)
 	{
-		return new EchoTestHandler(connection);
+		return new EchoTestHandler<AsioTcpConnection>(connection);
 	}
 };
 
