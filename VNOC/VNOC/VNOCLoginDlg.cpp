@@ -53,8 +53,8 @@ BOOL CVNOCLoginDlg::OnInitDialog()
 	m_LinkRegist.Attach(GetDlgItem(IDC_REGIST)->GetSafeHwnd());
 	m_FoundPassword.Attach(GetDlgItem(IDC_FOUND_PASSWORD)->GetSafeHwnd());
 
-	m_LinkRegist.SetLink(_T("注册账号"),_T("google.com.hk"),FALSE);
-	m_FoundPassword.SetLink(_T("找回密码"),_T("google.com.hk"),FALSE);
+	m_LinkRegist.SetLink(_T("注册账号"),_T("http://google.com.hk"),FALSE);
+	m_FoundPassword.SetLink(_T("找回密码"),_T("http://google.com.hk"),FALSE);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }

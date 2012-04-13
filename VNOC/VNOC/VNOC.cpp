@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 #include "VNOC.h"
-#include "RoomListDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -23,6 +23,7 @@
 #define IDC_REGIST                      1004
 #define IDC_LoginDlg_STATIC_REGIST      1004
 #define IDC_FOUND_PASSWORD              1005
+#define IDC_LoginDlg_STATIC_RECOVERYPWD 1005
 #define IDC_LIST_CLASS                  1010
 #define IDC_BUTTON_CREATE               1012
 #define IDC_EDIT_SEACH                  1013
@@ -44,7 +45,6 @@
 #define IDC_RICHEDIT_REPORT             1033
 #define IDC_LoginDlg_STATIC_USERNAME    1034
 #define IDC_LoginDlg_STATIC_PWD         1035
-#define IDC_LoginDlg_STATIC_RECOVERYPWD 1036
 #define IDC_STATIC_SciPosition          1037
 #define IDC_CODE_CTRL                   9527
 #define ID_WIZBACK                      0x3023
