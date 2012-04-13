@@ -3,17 +3,19 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "EchoTestHandler.hpp"
+#include "MockTcpConnection.hpp"
+
 class EchoTestHandlerTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( EchoTestHandlerTest );
     CPPUNIT_TEST( simpleTest );
     CPPUNIT_TEST( testSpecialChar );
     CPPUNIT_TEST_SUITE_END();
-    Connection *conn_;
+    MockTcpConnection *conn_;
 public:
     void setUp()
     {
-        conn_ = new Connection;
+        conn_ = new MockTcpConnection;
     }
     void tearDown()
     {
@@ -22,12 +24,12 @@ public:
 public:
     void simpleTest()
     {
-        EchoTestHandler<Connection> handler(conn_);
+        EchoTestHandler<MockTcpConnection> handler(conn_);
         CPPUNIT_ASSERT(true);
     }
     void testSpecialChar()
     {
-        EchoTestHandler<Connection> handler(conn_);
+        EchoTestHandler<MockTcpConnection> handler(conn_);
         CPPUNIT_ASSERT(true);
     }
 };
