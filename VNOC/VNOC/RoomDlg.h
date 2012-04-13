@@ -14,20 +14,16 @@ public:
 
 // 对话框数据
 	enum { IDD = IDD_RoomDlg };
+public:
+	virtual BOOL OnInitDialog();
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 
-	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-public:
-	virtual BOOL OnInitDialog();
-
 private:
 	CSciEdit m_codeEdit;
 
-public:
+	DECLARE_MESSAGE_MAP()
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnClose();
-	void _MoveToScreenCenter();
 };
