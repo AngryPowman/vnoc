@@ -29,22 +29,43 @@ CSciEdit::~CSciEdit()
 
 BOOL CSciEdit::Create( LPCTSTR lpszWindowName, const RECT& rect, CWnd* pParentWnd, UINT nID )
 {
-	BOOL bResult = CWnd::Create(SCINTILLA_CLASS_NAME,lpszWindowName,WS_CHILD|WS_CLIPCHILDREN|WS_CLIPSIBLINGS|WS_VISIBLE,rect,pParentWnd,nID);
-	if (!bResult)
+	BOOL bResult = FALSE;
+	if (_RegisterWndClass())
 	{
-		DWORD errNo = GetLastError();
-		errNo = errNo;
-	}
-	else
-	{
-		m_pDirectFunc = (SciFnDirect)SendMessage(SCI_GETDIRECTFUNCTION);
-		if (m_pDirectFunc)
+		bResult = CWnd::Create(NULL
+			,_T("SciContainerWnd")
+			,WS_CHILD|WS_VISIBLE
+			,rect
+			,pParentWnd
+			,nID
+			,NULL);
+		//Global->CheckLastError(_T("Create SciContainer"));	// MFC会截获掉。。。
+		if (bResult && m_hWnd)
 		{
-			m_pDirectPtr = (sptr_t)SendMessage(SCI_GETDIRECTPOINTER);
-			if (m_pDirectPtr)
+			m_scihWnd = CreateWindow(SCINTILLA_CLASS_NAME
+				,lpszWindowName
+				,WS_CHILD|WS_CLIPCHILDREN|WS_CLIPSIBLINGS|WS_VISIBLE
+				,0
+				,0
+				,rect.right - rect.left
+				,rect.bottom - rect.top
+				,m_hWnd
+				,NULL
+				,m_hinst
+				,NULL);
+			Global->CheckLastError(_T("CreateSci"));
+			if (m_scihWnd)
 			{
-				_InternalInitialize();
-				return TRUE;
+				m_pDirectFunc = (SciFnDirect)::SendMessage(m_scihWnd,SCI_GETDIRECTFUNCTION,0,0);
+				if (m_pDirectFunc)
+				{
+					m_pDirectPtr = (sptr_t)::SendMessage(m_scihWnd,SCI_GETDIRECTPOINTER,0,0);
+					if (m_pDirectPtr)
+					{
+						_InternalInitialize();
+						return TRUE;
+					}
+				}
 			}
 		}
 	}
@@ -105,19 +126,22 @@ BOOL CSciEdit::ShowLineNumber( BOOL show /*= TRUE*/ )
 
 void CSciEdit::_CalcLineNumberMarginWidth()
 {
-	sptr_t ret;
-	ret = _SendSciMessage(SCI_GETLINECOUNT,0,0);
-	DWORD lineCount = static_cast<DWORD>(ret);
-	CStringA strFmt;
-	strFmt.Format("%d",lineCount);
-	ret = _SendSciMessage(SCI_TEXTWIDTH,STYLE_LINENUMBER,(DWORD)strFmt.GetString());
-	DWORD width = static_cast<DWORD>(ret) + 5;
-	ret = _SendSciMessage(SCI_GETMARGINWIDTHN);
-	DWORD oldWidth = static_cast<DWORD>(ret);
-	Global->Logf(LogFile_Scintilla,_T("通知更新行号边栏宽度.行数:%s.旧宽度:%d,新宽度:%d\n"),CString(strFmt),oldWidth,width);
-	if (oldWidth != width)
+	int linesVisible = (int) _SendSciMessage(SCI_LINESONSCREEN);
+	if (linesVisible)
 	{
-		_SendSciMessage(SCI_SETMARGINWIDTHN,0, width);
+		int firstVisibleLineVis = (int) _SendSciMessage(SCI_GETFIRSTVISIBLELINE);
+		int lastVisibleLineVis = linesVisible + firstVisibleLineVis + 1;
+		int i = 0;
+		while (lastVisibleLineVis)
+		{
+			lastVisibleLineVis /= 10;
+			i++;
+		}
+		i = max(i, Scintilla_LineNumber_Min);
+		{
+			int pixelWidth = int(8 + i * _SendSciMessage(SCI_TEXTWIDTH, STYLE_LINENUMBER, (LPARAM)"8"));
+			_SendSciMessage(SCI_SETMARGINWIDTHN, 0, pixelWidth);
+		}
 	}
 }
 
@@ -128,7 +152,16 @@ VOID CSciEdit::_InternalInitialize()
 
 BOOL CSciEdit::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 {
-	// TODO: Add your specialized code here and/or call the base class
-
-	return CWnd::OnNotify(wParam, lParam, pResult);
+	SCNotification* pNotify = reinterpret_cast<SCNotification*>(lParam);
+	if (!_OnSciNotify(pNotify))
+	{
+		return CWnd::OnNotify(wParam, lParam, pResult);
+	}
+	return TRUE;
 }
+
+BOOL CSciEdit::_RegisterWndClass()
+{	// 暂不需要
+	return TRUE;
+}
+

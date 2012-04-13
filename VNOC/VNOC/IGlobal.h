@@ -34,6 +34,12 @@ public:
 	STDMETHOD( SetThreadName(CString name) = 0 );
 	STDMETHOD( GetThreadName(DWORD threadID,CString& name) = 0 );
 
+	//////////////////////////////////////////////////////////////////////////
+	// 调试
+	// 检查GetLastError,会将数据通过log输出。
+	// helpStr	用于区分函数调用者
+	STDMETHOD( CheckLastError(LPCTSTR helpStr=NULL) = 0 );
+
 };
 
 extern IGlobal* Global;		// 该指针假设在所有模块的生命期内都是合法的。

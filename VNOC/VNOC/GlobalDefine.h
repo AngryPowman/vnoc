@@ -14,6 +14,7 @@
 //////////////////////////////////////////////////////////////////////////
 // logœ‡πÿ
 
+#define LogFile_General	_T("General")
 #define LogFile_Config	_T("Config")
 #define LogFile_Scintilla	_T("Scintilla")
 

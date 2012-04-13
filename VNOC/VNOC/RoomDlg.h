@@ -29,4 +29,5 @@ private:
 
 public:
 	afx_msg void OnClose();
+	void _MoveToScreenCenter();
 };

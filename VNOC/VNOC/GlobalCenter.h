@@ -29,6 +29,7 @@ public:
 	STDMETHOD( LogIndent(CString file,BOOL bAdd));
 	STDMETHOD( SetThreadName(CString name));
 	STDMETHOD( GetThreadName(DWORD threadID,CString& name));
+	STDMETHOD( CheckLastError(LPCTSTR helpStr=NULL));
 private:
 	void _InitializeConfig();
 	void _UnInitializeConfig();

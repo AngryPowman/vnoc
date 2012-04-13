@@ -41,16 +41,6 @@ int CRoomDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// TODO:  在此添加您专用的创建代码
 
 	AfxInitRichEdit();
-	CString strCodeWndTitle;
-	strCodeWndTitle.LoadString(AfxGetInstanceHandle(),IDS_Sci_WndTitle);
-	CRect rec;
-	BOOL result = m_codeEdit.Create(strCodeWndTitle,rec,this,0);
-	m_codeEdit.ShowLineNumber();
-	ATLASSERT(result);
-	if (result)
-	{
-		m_codeEdit.SetLexer(SCLEX_CPP);
-	}
 	return 0;
 }
 
@@ -58,30 +48,24 @@ BOOL CRoomDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CRect  rectOnline,rectCodeOut,rectReport,rectThis,rectCodeCtrl;
-	GetDlgItem(IDC_GROUP_ONLINE)->GetWindowRect(rectOnline);
-	GetDlgItem(IDC_GROUP_CODE)->GetWindowRect(rectCodeOut);
-	GetDlgItem(IDC_GROUP_SESSION)->GetWindowRect(rectReport);
-	ScreenToClient(rectOnline);
-	ScreenToClient(rectCodeOut);
-	ScreenToClient(rectReport);
-	rectCodeCtrl.left = rectOnline.right; 
-    rectCodeCtrl.top = rectCodeOut.top; 
-	rectCodeCtrl.bottom = rectReport.top; 
-    rectCodeCtrl.right = rectCodeOut.left;
-
-	rectCodeCtrl.left += 5;
-	rectCodeCtrl.right -=5;
-	rectCodeCtrl.top +=5;
-	rectCodeCtrl.bottom -=5;
-	m_codeEdit.MoveWindow(rectCodeCtrl);
-	BOOL result = m_codeEdit.ShowWindow(SW_SHOW);
-	if (!result)
+	// 添加SciEdit
+	CString strCodeWndTitle;
+	strCodeWndTitle.LoadString(AfxGetInstanceHandle(),IDS_Sci_WndTitle);
+	CRect rec;
+	CWnd* pSciPosControl = GetDlgItem(IDC_STATIC_SciPosition);
+	if (pSciPosControl)
 	{
-		DWORD errNo = GetLastError();
-		errNo = errNo;
+		pSciPosControl->GetClientRect(&rec);
 	}
-	// TODO:  在此添加额外的初始化
+	BOOL result = m_codeEdit.Create(strCodeWndTitle,rec,this,0);
+	m_codeEdit.ShowLineNumber();
+	ATLASSERT(result);
+	if (result)
+	{
+		m_codeEdit.SetLexer(SCLEX_CPP);
+	}
+
+	_MoveToScreenCenter();
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
 }
@@ -91,4 +75,27 @@ void CRoomDlg::OnClose()
 {
 	// TODO: Add your message handler code here and/or call default
 	OnCancel();
+}
+
+void CRoomDlg::_MoveToScreenCenter()
+{
+	CRect  rectOnline,rectCodeOut,rectReport,rectCodeCtrl;
+	GetDlgItem(IDC_GROUP_ONLINE)->GetWindowRect(rectOnline);
+	GetDlgItem(IDC_GROUP_CODE)->GetWindowRect(rectCodeOut);
+	GetDlgItem(IDC_GROUP_SESSION)->GetWindowRect(rectReport);
+	ScreenToClient(rectOnline);
+	ScreenToClient(rectCodeOut);
+	ScreenToClient(rectReport);
+	rectCodeCtrl.left = rectOnline.right; 
+	rectCodeCtrl.top = rectCodeOut.top; 
+	rectCodeCtrl.bottom = rectReport.top; 
+	rectCodeCtrl.right = rectCodeOut.left;
+
+	rectCodeCtrl.left += 5;
+	rectCodeCtrl.right -=5;
+	rectCodeCtrl.top +=5;
+	rectCodeCtrl.bottom -=5;
+	m_codeEdit.MoveWindow(rectCodeCtrl);
+	BOOL result = m_codeEdit.ShowWindow(SW_SHOW);
+	Global->CheckLastError(_T("MoveToScreenCenter"));
 }

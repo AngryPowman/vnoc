@@ -12,6 +12,7 @@
 #define SCINTILLA_ADVANCED_DLL_NAME		_T("scilexer.dll")
 #define SCINTILLA_DLL_NAME				_T("scintilla.dll")
 #define SCINTILLA_DLL_USE				SCINTILLA_ADVANCED_DLL_NAME
+#define Scintilla_LineNumber_Min		2
 
 class CSciEdit : 
 	public CWnd
@@ -29,17 +30,20 @@ private:
 	VOID _AddRef();
 	VOID _Release();
 	VOID _InternalInitialize();
+	BOOL _RegisterWndClass();
+private:
 	sptr_t _SendSciMessage(UINT message,DWORD wParam=0,DWORD lParam=0);
 	void _CalcLineNumberMarginWidth();
-private:
+	BOOL _OnSciNotify(SCNotification* notify);
 private:
 	HINSTANCE m_hinst;		// 指定资源文件所在位置
+	HWND m_scihWnd;
 	HMODULE m_dllHandle;
 	LONG m_refCount;
 
 	SciFnDirect m_pDirectFunc;
 	sptr_t		m_pDirectPtr;
-public:
+
 	DECLARE_MESSAGE_MAP()
 	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 };

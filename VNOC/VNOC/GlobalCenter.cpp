@@ -59,3 +59,16 @@ void CGlobalCenter::_UnInitializeConfig()
 	m_config.UnInitialize();
 }
 
+HRESULT CGlobalCenter::CheckLastError(LPCTSTR helpStr)
+{
+	DWORD dw = GetLastError();
+	CString str;
+	str.Format(_T("ºÏ≤ÈLastError : %d"),dw);
+	if (helpStr)
+	{
+		str.AppendFormat(_T("(%s)"),helpStr);
+	}
+	Log(LogFile_General,str);
+	return dw;
+}
+
