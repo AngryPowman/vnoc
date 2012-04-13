@@ -1,6 +1,6 @@
 #ifndef MOCK_TCP_CONNECTION_H
 #define MOCK_TCP_CONNECTION_H
-#include "SocketServer.hpp"
+#include "../SocketServer.hpp"
 
 class MockTcpConnection: public Connection
 {
