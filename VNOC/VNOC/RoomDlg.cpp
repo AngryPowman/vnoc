@@ -60,11 +60,16 @@ BOOL CRoomDlg::OnInitDialog()
 	}
 	BOOL result = m_codeEdit.Create(strCodeWndTitle,rec,this,0);
 	m_codeEdit.ShowLineNumber();
+	m_codeEdit.ShowBreakPointMargin();
+	m_codeEdit.ShowFolderMargin();
+	m_codeEdit.ShowIndentLine();
+	//m_codeEdit.ShowInvisibleChars();
 	ATLASSERT(result);
 	if (result)
 	{
 		m_codeEdit.SetLexer(SCLEX_CPP);
 	}
+	m_codeEdit.EnableFolder();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE

@@ -52,12 +52,13 @@ HRESULT CRoomListImpl::Show( BOOL bShow/*=TRUE*/ )
 		}
 		else if(ret == IDCANCEL)
 		{
-			ILogin* pLogin;
-			GetiModule(module_userCenter,m_frame,&pLogin);
-			if (pLogin)
-			{
-				pLogin->Show();
-			}
+			// 直接退出就行了
+// 			ILogin* pLogin;
+// 			GetiModule(module_userCenter,m_frame,&pLogin);
+// 			if (pLogin)
+// 			{
+// 				pLogin->Show();
+// 			}
 		}
 	}
 	return S_OK;

@@ -28,7 +28,7 @@ CSciEdit::~CSciEdit()
 }
 
 BOOL CSciEdit::Create( LPCTSTR lpszWindowName, const RECT& rect, CWnd* pParentWnd, UINT nID )
-{
+{	// 创建一个大小与Scintila一样的父窗口，用于承载scintila及封装消息。
 	BOOL bResult = FALSE;
 	if (_RegisterWndClass())
 	{
@@ -119,7 +119,7 @@ sptr_t CSciEdit::_SendSciMessage( UINT message,DWORD wParam,DWORD lParam )
 
 BOOL CSciEdit::ShowLineNumber( BOOL show /*= TRUE*/ )
 {
-	_SendSciMessage(SCI_SETMARGINTYPEN,0,SC_MARGIN_NUMBER);
+	_SendSciMessage(SCI_SETMARGINTYPEN,Scintilla_Margin_LineNumber,SC_MARGIN_NUMBER);
 	_CalcLineNumberMarginWidth();
 	return TRUE;
 }
@@ -140,7 +140,7 @@ void CSciEdit::_CalcLineNumberMarginWidth()
 		i = max(i, Scintilla_LineNumber_Min);
 		{
 			int pixelWidth = int(8 + i * _SendSciMessage(SCI_TEXTWIDTH, STYLE_LINENUMBER, (LPARAM)"8"));
-			_SendSciMessage(SCI_SETMARGINWIDTHN, 0, pixelWidth);
+			_SendSciMessage(SCI_SETMARGINWIDTHN, Scintilla_Margin_LineNumber, pixelWidth);
 		}
 	}
 }
@@ -148,6 +148,7 @@ void CSciEdit::_CalcLineNumberMarginWidth()
 VOID CSciEdit::_InternalInitialize()
 {
 	_SendSciMessage(SCI_SETCODEPAGE,SC_CP_UTF8);
+	_SendSciMessage(SCI_SETTABWIDTH,4);
 }
 
 BOOL CSciEdit::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
@@ -162,6 +163,62 @@ BOOL CSciEdit::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 
 BOOL CSciEdit::_RegisterWndClass()
 {	// 暂不需要
+	return TRUE;
+}
+
+BOOL CSciEdit::ShowBreakPointMargin( BOOL bShow /*= TRUE*/ )
+{
+	_SendSciMessage(SCI_SETMARGINTYPEN,Scintilla_Margin_BreakPoint,SC_MARGIN_SYMBOL);
+	_SendSciMessage(SCI_SETMARGINMASKN,Scintilla_Margin_BreakPoint,SC_CURSORARROW);
+	_SendSciMessage(SCI_SETMARGINWIDTHN,Scintilla_Margin_BreakPoint,10);
+	return TRUE;
+}
+
+BOOL CSciEdit::ShowFolderMargin( BOOL bShow /*= TRUE*/ )
+{
+	_SendSciMessage(SCI_SETMARGINTYPEN,Scintilla_Margin_BreakPoint,SC_MARGIN_SYMBOL);
+	_SendSciMessage(SCI_SETMARGINWIDTHN,Scintilla_Margin_Folder,Scintilla_Margin_Folder_Width);
+	return TRUE;
+}
+
+BOOL CSciEdit::ShowIndentLine( BOOL bShow /*= TRUE*/ )
+{
+	_SendSciMessage(SCI_SETINDENTATIONGUIDES, (WPARAM)bShow?(SC_IV_LOOKBOTH):(SC_IV_NONE));
+	return TRUE;
+}
+
+BOOL CSciEdit::ShowInvisibleChars( BOOL bShow /*= TRUE*/ )
+{
+	_SendSciMessage(SCI_SETVIEWWS, bShow?SCWS_VISIBLEALWAYS:SCWS_INVISIBLE);
+	_SendSciMessage(SCI_SETVIEWEOL, bShow);
+	return TRUE;
+}
+
+BOOL CSciEdit::EnableFolder( BOOL bEnable /*= TRUE*/ )
+{
+	_SendSciMessage(SCI_SETPROPERTY,(DWORD)"fold",(DWORD)"1");
+	_SendSciMessage(SCI_SETMARGINTYPEN,Scintilla_Margin_Folder,SC_MARGIN_SYMBOL);
+	_SendSciMessage(SCI_SETMARGINMASKN,Scintilla_Margin_Folder,SC_MASK_FOLDERS);
+	_SendSciMessage(SCI_SETMARGINSENSITIVEN,Scintilla_Margin_Folder,TRUE);
+	
+	_SetMarker(SC_MARKNUM_FOLDEREND,		13,	0x00ffffff,0x00808080,0xffffff);
+	_SetMarker(SC_MARKNUM_FOLDEROPENMID,	15,	0x00ffffff,0x00808080,0xffffff);
+	_SetMarker(SC_MARKNUM_FOLDERMIDTAIL,	11,	0x00ffffff,0x00808080,0xffffff);
+	_SetMarker(SC_MARKNUM_FOLDERTAIL,		10,	0x00ffffff,0x00808080,0xffffff);
+	_SetMarker(SC_MARKNUM_FOLDERSUB,		9,	0x00ffffff,0x00808080,0xffffff);
+	_SetMarker(SC_MARKNUM_FOLDER,			12,	0x00ffffff,0x00808080,0xffffff);
+	_SetMarker(SC_MARKNUM_FOLDEROPEN,		14,	0x00ffffff,0x00808080,0xffffff);
+
+	_SendSciMessage(SCI_SETFOLDFLAGS, SC_FOLDFLAG_LINEAFTER_CONTRACTED); //如果折叠就在折叠行的上下各画一条横线
+	return TRUE;
+}
+
+BOOL CSciEdit::_SetMarker( int marker, int markerType, COLORREF fore, COLORREF back, COLORREF foreActive )
+{
+	_SendSciMessage(SCI_MARKERDEFINE, marker, markerType);
+	_SendSciMessage(SCI_MARKERSETFORE, marker, fore);
+	_SendSciMessage(SCI_MARKERSETBACK, marker, back);
+	_SendSciMessage(SCI_MARKERSETBACKSELECTED, marker, foreActive);
 	return TRUE;
 }
 

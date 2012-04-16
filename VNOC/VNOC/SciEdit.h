@@ -13,6 +13,10 @@
 #define SCINTILLA_DLL_NAME				_T("scintilla.dll")
 #define SCINTILLA_DLL_USE				SCINTILLA_ADVANCED_DLL_NAME
 #define Scintilla_LineNumber_Min		2
+#define Scintilla_Margin_BreakPoint		0
+#define Scintilla_Margin_LineNumber		1
+#define Scintilla_Margin_Folder			2
+#define Scintilla_Margin_Folder_Width	14
 
 class CSciEdit : 
 	public CWnd
@@ -24,6 +28,11 @@ public:
 	BOOL Create(LPCTSTR lpszWindowName, const RECT& rect, CWnd* pParentWnd, UINT nID);
 	BOOL SetLexer(DWORD lexer = SCLEX_CPP);
 	BOOL ShowLineNumber(BOOL show = TRUE);
+	BOOL ShowBreakPointMargin(BOOL bShow = TRUE);	// 显示断点边栏
+	BOOL ShowFolderMargin(BOOL bShow = TRUE);		// 显示大纲折叠边栏
+	BOOL ShowIndentLine(BOOL bShow = TRUE);
+	BOOL ShowInvisibleChars(BOOL bShow = TRUE);
+	BOOL EnableFolder(BOOL bEnable = TRUE);			// 启用大纲折叠
 	VOID FontConfigChanged();		// 通知控件，字体等信息有更新，刷新显示。
 private:
 	// 引用计数主要是用以保证dll的正常加载卸载
@@ -35,6 +44,7 @@ private:
 	sptr_t _SendSciMessage(UINT message,DWORD wParam=0,DWORD lParam=0);
 	void _CalcLineNumberMarginWidth();
 	BOOL _OnSciNotify(SCNotification* notify);
+	BOOL _SetMarker(int marker, int markerType, COLORREF fore, COLORREF back, COLORREF foreActive);
 private:
 	HINSTANCE m_hinst;		// 指定资源文件所在位置
 	HWND m_scihWnd;

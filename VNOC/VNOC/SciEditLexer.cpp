@@ -43,6 +43,15 @@ BOOL CSciEdit::_OnSciNotify( SCNotification* notify )
 	case SCN_PAINTED:
 		_CalcLineNumberMarginWidth();
 		break;
+	case SCN_MARGINCLICK:
+		{
+			if (notify->nmhdr.idFrom = Scintilla_Margin_Folder)
+			{
+				const int lineNum = _SendSciMessage(SCI_LINEFROMPOSITION,notify->position);
+				_SendSciMessage(SCI_TOGGLEFOLD,lineNum);
+			}
+		}
+		break;
 	}
 	return FALSE;
 }
