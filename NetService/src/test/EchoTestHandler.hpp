@@ -15,7 +15,7 @@ public:
           std::placeholders::_1,
           std::placeholders::_2));
 	}
-    virtual void ReadsomeHandler(const asio::error_code& error, size_t bytes_transferred)
+    void ReadsomeHandler(const asio::error_code& error, size_t bytes_transferred)
     {
         if (!error)
 		{
@@ -23,13 +23,14 @@ public:
             std::cout<<data_;
             connection_->send(data_, bytes_transferred, 
             std::bind(&EchoTestHandler::HandleWrite, this,
-              std::placeholders::_1));
+              std::placeholders::_1,
+			  std::placeholders::_2));
         }else
         {
             delete this;
         }
     }
-	virtual void HandleWrite(const asio::error_code& error)
+	void HandleWrite(const asio::error_code& error, size_t bytes_transferred)
 	{
 		if (!error)
 		{

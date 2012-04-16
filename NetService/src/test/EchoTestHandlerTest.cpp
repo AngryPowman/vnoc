@@ -25,7 +25,9 @@ public:
     void simpleTest()
     {
         EchoTestHandler<MockTcpConnection> handler(conn_);
-        CPPUNIT_ASSERT(true);
+		handler.start();
+		conn_->setRecv("123456", sizeof("123456"));		
+        CPPUNIT_ASSERT(conn_->expectSend("123456",sizeof("123456")));
     }
     void testSpecialChar()
     {
