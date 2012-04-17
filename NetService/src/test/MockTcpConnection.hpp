@@ -1,6 +1,5 @@
 #ifndef MOCK_TCP_CONNECTION_H
 #define MOCK_TCP_CONNECTION_H
-<<<<<<< .mine
 #include "../SocketServer.hpp"
 #include <asio.hpp>
 #include <memory>
@@ -21,10 +20,7 @@ public:
 private:
     T handler_;
 };
-=======
-#include "../SocketServer.hpp"
 
->>>>>>> .r94
 class MockTcpConnection: public Connection
 {
 public:
