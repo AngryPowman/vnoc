@@ -8,7 +8,6 @@ class AsioTcpConnection: public Connection
 public:
     AsioTcpConnection(asio::io_service& io_service):socket_(io_service){}
     asio::ip::tcp::socket& socket(){return socket_;} 
-    bool start(){return true;}
     template <typename Handler> int recv(char * buf, size_t len, Handler handler)
     {
         socket_.async_receive(asio::buffer(buf, len), handler);
