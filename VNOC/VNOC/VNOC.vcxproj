@@ -175,6 +175,7 @@
     <ClCompile Include="RoomDlg.cpp" />
     <ClCompile Include="RoomListImpl.cpp" />
     <ClCompile Include="SciEdit.cpp" />
+    <ClCompile Include="SciEditConfig.cpp" />
     <ClCompile Include="SciEditLexer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -204,11 +205,13 @@
     <ClInclude Include="..\util\ThreadDefine.h" />
     <ClInclude Include="..\util\util.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ConfigDefine.h" />
     <ClInclude Include="GlobalDefine.h" />
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="GlobalCenter.h" />
     <ClInclude Include="HyperLink.h" />
     <ClInclude Include="IGlobal.h" />
+    <ClInclude Include="ILanguage.h" />
     <ClInclude Include="ILogin.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="IRefCountImpl.h" />
@@ -222,6 +225,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RoomDlg.h" />
     <ClInclude Include="RoomListImpl.h" />
+    <ClInclude Include="SciDefine.h" />
     <ClInclude Include="SciEdit.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="VNOC.h" />

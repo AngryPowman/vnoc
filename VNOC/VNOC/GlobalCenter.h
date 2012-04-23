@@ -30,6 +30,7 @@ public:
 	STDMETHOD( SetThreadName(CString name));
 	STDMETHOD( GetThreadName(DWORD threadID,CString& name));
 	STDMETHOD( CheckLastError(LPCTSTR helpStr=NULL));
+	STDMETHOD( PtrAssert(void* p));
 private:
 	void _InitializeConfig();
 	void _UnInitializeConfig();
@@ -40,7 +41,7 @@ private:
 	blog::CBLog* _CreateLogInstance(CString file,BOOL bDbgView=TRUE,BOOL bConsole=FALSE);
 	void _FillThreadNameToLogInstance(blog::CBLog* inst);
 private:
-	CConfig		m_config;
+	CConfigImpl		m_config;
 	CString		m_configFilePath;
 	
 	LogMap		m_log;

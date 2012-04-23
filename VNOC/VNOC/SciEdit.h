@@ -7,16 +7,32 @@
 #include "../../scintilla/include/Scintilla.h"
 #include "../../scintilla/include/SciLexer.h"
 #include "IConfig.h"
+#include "SciDefine.h"
 
-#define SCINTILLA_CLASS_NAME			_T("scintilla")
-#define SCINTILLA_ADVANCED_DLL_NAME		_T("scilexer.dll")
-#define SCINTILLA_DLL_NAME				_T("scintilla.dll")
-#define SCINTILLA_DLL_USE				SCINTILLA_ADVANCED_DLL_NAME
-#define Scintilla_LineNumber_Min		2
-#define Scintilla_Margin_BreakPoint		0
-#define Scintilla_Margin_LineNumber		1
-#define Scintilla_Margin_Folder			2
-#define Scintilla_Margin_Folder_Width	14
+// π‹¿Ì≈‰÷√œÓ°£
+class CSciEditConfigBase
+	: public IConfigMonitor
+{
+public:
+	CSciEditConfigBase();
+	~CSciEditConfigBase();
+public:
+	VOID SetLexerID(SciLexerID id);
+	VOID GetLexerID(SciLexerID& id);
+	BOOL GetConfigNode(LPCTSTR path,ConfigNode& node);
+	BOOL GetConfig(LPCTSTR path,LPCTSTR key,CString& value);
+	BOOL GetConfig(LPCTSTR path,LPCTSTR key,int& value);
+	BOOL GetConfig(LPCTSTR path,LPCTSTR key,double& value);
+	VOID SetConfig(LPCTSTR path,LPCTSTR key,LPCTSTR value);
+	VOID SetConfig(LPCTSTR path,LPCTSTR key,int value);
+	VOID SetConfig(LPCTSTR path,LPCTSTR key,double value);
+
+	STDMETHOD( ConfigChanged(const ConfigNode& node));
+	STDMETHOD( LanguageChanged(CString language));
+private:
+	LanguageID m_langID;
+	SciLexerID m_lexerID;
+};
 
 class CSciEdit : 
 	public CWnd

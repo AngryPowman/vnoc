@@ -1,18 +1,56 @@
 #pragma once
 #include "IModule.h"
-#include <vector>
-#include <map>
+#include "ConfigDefine.h"
+#include "ILanguage.h"
 
-typedef std::map<CString,CString>	AttributeMap;
-typedef std::vector<CString>		ConfigPath;
-
-// 存储着属性的所有信息
 struct ConfigNode
+	: private ConfigNodeBase
 {
-	ConfigPath	path;			// 路径
-	void xPath(LPCTSTR path);	// 可以填入"VNOC/Language/UI"这样的字符串，函数负责拆分
-	CString		strValue;		// 值
-	AttributeMap attr;			// 属性表
+	BOOL	GetAttribute(LPCTSTR key,CString& value);
+	BOOL	GetAttribute(LPCTSTR key,int& value);
+	BOOL	GetAttribute(LPCTSTR key,double& value);
+	VOID	SetAttribute(LPCTSTR key,LPCTSTR value);
+	VOID	SetAttribute(LPCTSTR key,int value);
+	VOID	SetAttribute(LPCTSTR key,double value);
+
+	CString			value;
+	AttributeMap	attr;			// 属性表
+	ConfigBranchs	branch;			// 其下面子树
+
+	// 如果确定不会多线程访问，可以不加锁
+	VOID	Lock();
+	VOID	UnLock();
+};
+
+class CConfig
+{
+public:
+	CConfig();
+	CConfig(LPCTSTR path);
+	~CConfig();
+
+	// xml树路径
+	ConfigPath		path;
+
+	// 设定好path之后调用Get来获取。
+	// 如果手动设置了path，这里的path参数可以不填。
+	BOOL			Get(LPCTSTR path=NULL);
+
+	// 节点数量
+	UINT			Count();
+	// 获取节点。有时一个path对应着count个节点。
+	// 所有对该引用的修改都将是永久的。
+	// index超过范围，将返回一个空节点的引用
+	ConfigNode&		GetNode(UINT index=0);
+	ConfigNode&		operator[](UINT index);
+	// 通过属性查找第一个符合的节点。
+	ConfigNode&		GetNodeByAttr(LPCTSTR key,LPCTSTR value);
+	ConfigNode&		GetNodeByAttr(LPCTSTR key,int value);
+	ConfigNode&		GetNodeByAttr(LPCTSTR key,double value);
+private:
+	void	xPath(LPCTSTR path);
+	ConfigPtrVec	m_vec;
+	ConfigNode		emptyNode;
 };
 
 interface IConfigMonitor
@@ -28,21 +66,19 @@ interface IConfig : public IModule
 public:
 	STDMETHOD( LoadConfigFromXML(LPCTSTR filePath) = 0 );
 	STDMETHOD( SaveConfigToXML(LPCTSTR filePath=NULL) = 0 );		// 默认存入打开时的文件
-	// 传入前需要填好node中的path
+
+	//////////////////////////////////////////////////////////////////////////
+	// 以下两个接口不需要直接使用，CConfig已做好了封装。
 	// 返回值:
 	// E_FAIL	不存在该节点。
 	// S_OK		顺利取到
-	STDMETHOD( Get(ConfigNode& node) = 0 );
-	// notify	是否通知监听的模块。如果是改其它模块的设置并通知对方刷新，请设置为TRUE
-	// 返回值:
-	// S_OK		修改成功
-	// S_FALSE	原来不存在值，新添。
-	STDMETHOD( Set(const ConfigNode& node,BOOL notify=FALSE) = 0 );
+	STDMETHOD( Get(const ConfigPath& path,ConfigPtrVec& node) = 0 );
 
 	// 添加监视。一旦该节点下任何节点被修改，将得到通知。
 	STDMETHOD( AddMonitor(ConfigPath path,IConfigMonitor* pMonitor) = 0 );
 	//! 析构前一定要删除，不然会崩溃。
 	STDMETHOD( RemoveMonitor(IConfigMonitor* pMonitor) = 0 );
+	// 通知发生改变。会递归通知子树。
 };
 
 //////////////////////////////////////////////////////////////////////////

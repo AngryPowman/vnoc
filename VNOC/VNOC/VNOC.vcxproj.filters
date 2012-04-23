@@ -132,6 +132,9 @@
     <ClCompile Include="SciEditLexer.cpp">
       <Filter>CodeEditor</Filter>
     </ClCompile>
+    <ClCompile Include="SciEditConfig.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
@@ -259,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="..\..\scintilla\include\Scintilla.h">
       <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDefine.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="SciDefine.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ILanguage.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -148,7 +148,14 @@ void CSciEdit::_CalcLineNumberMarginWidth()
 VOID CSciEdit::_InternalInitialize()
 {
 	_SendSciMessage(SCI_SETCODEPAGE,SC_CP_UTF8);
-	_SendSciMessage(SCI_SETTABWIDTH,4);
+	CConfig config;
+	int tabWidth = 4;
+
+	if (config.Get(_T("SciEdit/GlobalSettings")))
+	{
+		config.GetNode().GetAttribute(_T("tabWidth"),tabWidth);
+	}
+	_SendSciMessage(SCI_SETTABWIDTH,tabWidth);
 }
 
 BOOL CSciEdit::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)

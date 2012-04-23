@@ -72,3 +72,13 @@ HRESULT CGlobalCenter::CheckLastError(LPCTSTR helpStr)
 	return dw;
 }
 
+HRESULT CGlobalCenter::PtrAssert( void* p )
+{
+	ATLASSERT(p && "Ö¸ÕëÎª¿Õ");
+	if (p)
+	{
+		ExitProcess(8);
+	}
+	return S_OK;
+}
+

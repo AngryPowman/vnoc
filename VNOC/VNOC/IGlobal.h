@@ -39,6 +39,8 @@ public:
 	// 检查GetLastError,会将数据通过log输出。
 	// helpStr	用于区分函数调用者
 	STDMETHOD( CheckLastError(LPCTSTR helpStr=NULL) = 0 );
+	// 检查指针是否为NULL，如果为NULL，将视为严重错误，并友好地退出程序。
+	STDMETHOD( PtrAssert(void* p) = 0 );
 
 };
 
