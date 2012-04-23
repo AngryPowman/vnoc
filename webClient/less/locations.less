@@ -80,18 +80,20 @@
 		.frame-bottom(@bottom);
 	}
 	// 框架水平定位;
-	.frame-horizontal(@left,@right,@parentWidth){
+	.frame-horizontal(@left,@right){
 		.frame-left(@left);
-		width:@parentWidth - @left - @right;
+		.frame-right(@right);
+		width:auto;
 	}
 	// 框架竖直定位;
-	.frame-vertical(@top,@bottom,@parentHeight){
+	.frame-vertical(@top,@bottom){
 		.frame-top(@top);
-		height:@parentHeight - @top - @bottom;
+		.frame-bottom(@bottom);
+		height:auto;
 	}
 	// 框架四角定位;
-	.frame-square(@left,@right,@top,@bottom,@parentWidth,@parentHeight){
-		.frame-horizontal(@left,@right,@parentHeight);
-		.frame-vertical(@top,@bottom,@parentWidth);
+	.frame-square(@left,@right,@top,@bottom){
+		.frame-horizontal(@left,@right);
+		.frame-vertical(@top,@bottom);
 	}
 }
