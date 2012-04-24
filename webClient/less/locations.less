@@ -96,4 +96,98 @@
 		.frame-horizontal(@left,@right);
 		.frame-vertical(@top,@bottom);
 	}
+	// 窗口上定位;
+	.window-top(@top){
+		position:fixed;
+		top:@top;
+	}
+	// 窗口下定位;
+	.window-bottom(@bottom){
+		position:fixed;
+		bottom:@bottom;
+	}
+	// 窗口左定位;
+	.window-left(@left){
+		position:fixed;
+		left:@left;
+	}
+	// 窗口右定位;
+	.window-right(@right){
+		position:fixed;
+		right:@right;
+	}
+	// 窗口水平居中;
+	.window-hcenter(@width){
+		position:fixed;
+		left:50%;
+		margin-left:@width / (-2);
+	}
+	// 窗口竖直居中;
+	.window-vcenter(@height){
+		position:fixed;
+		top:50%;
+		margin-top:@height / (-2);
+	}
+	// 窗口左上定位;
+	.window-left-top(@left,@top){
+		.window-top(@top);
+		.window-left(@left);
+	}
+	// 窗口左居中定位;
+	.window-left-center(@left,@height){
+		.window-left(@left);
+		.window-vcenter(@height);
+	}
+	// 窗口左下定位;
+	.window-left-bottom(@left,@bottom){
+		.window-left(@left);
+		.window-bottom(@bottom);
+	}
+	// 窗口中上定位;
+	.window-center-top(@width,@top){
+		.window-hcenter(@width);
+		.window-top(@top);
+	}
+	// 窗口居中定位;
+	.window-center(@width,@height){
+		.window-hcenter(@width);
+		.window-vcenter(@height);
+	}
+	// 窗口中下定位;
+	.window-center-bottom(@width,@bottom){
+		.window-hcenter(@width);
+		.window-bottom(@bottom);
+	}
+	// 窗口右上定位;
+	.window-right-top(@right,@top){
+		.window-right(@right);
+		.window-top(@top);
+	}
+	// 窗口右居中定位;
+	.window-right-center(@right,@height){
+		.window-right(@right);
+		.window-vcenter(@height);
+	}
+	// 窗口右下定位;
+	.window-right-bottom(@right,@bottom){
+		.window-right(@right);
+		.window-bottom(@bottom);
+	}
+	// 窗口水平定位;
+	.window-horizontal(@left,@right){
+		.window-left(@left);
+		.window-right(@right);
+		width:auto;
+	}
+	// 窗口竖直定位;
+	.window-vertical(@top,@bottom){
+		.window-top(@top);
+		.window-bottom(@bottom);
+		height:auto;
+	}
+	// 窗口四角定位;
+	.window-square(@left,@right,@top,@bottom){
+		.window-horizontal(@left,@right);
+		.window-vertical(@top,@bottom);
+	}
 }
