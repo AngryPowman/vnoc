@@ -1,21 +1,25 @@
-
-#frames
-{
-	.frame(@width,@height)
-    {
+// LESS - 框架;
+#frameset{
+	.frame(@width,@height,@bgcolor:#FDFDFD,@bordercolor:#FFFFFF,@linecolor:#4D4D4D,@overflow:hidden){
 		width:@width;
 		height:@height;
-		background-color:#E6E6E6;
-		border:#FFFFFF solid thin;
-		outline:#4D4D4D solid thin;
-		overflow:hidden;
+		background-color:@bgcolor;
+		border:@bordercolor solid thin;
+		outline:@linecolor solid thin;
+		overflow:@overflow;
     }
-	.field(@width,@height)
-    {
+	.field(@width,@height,@bgcolor:#FDFDFD,@linecolor:#4D4D4D,@overflow:hidden){
 		width:@width;
 		height:@height;
-		background-color:#FDFDFD;
-		border:#4D4D4D solid thin;
+		background-color:@bgcolor;
+		border:@linecolor solid thin;
+		overflow:@overflow;
+	}
+	.button(@width,@height,@bgcolor:#FDFDFD,@linecolor:#4D4D4D){
+		width:@width;
+		height:@height;
+		background-color:@bgcolor;
+		outline:@linecolor solid thin;
 		overflow:hidden;
 	}
 }
