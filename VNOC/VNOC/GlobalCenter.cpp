@@ -75,8 +75,9 @@ HRESULT CGlobalCenter::CheckLastError(LPCTSTR helpStr)
 HRESULT CGlobalCenter::PtrAssert( void* p )
 {
 	ATLASSERT(p && "指针为空");
-	if (p)
+	if (!p)
 	{
+		MessageBox(0,_T("发生了严重错误，程序将退出执行。"),_T("警告"),0);
 		ExitProcess(8);
 	}
 	return S_OK;
