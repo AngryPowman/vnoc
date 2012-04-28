@@ -8,8 +8,8 @@
 	<style>
 		p.p1{color:red;font-size:17pt;font-family:黑体;font-weight:bold;}
 		p.p2{color:blue;font-size:17pt;font-family:楷体GB_2312;font-weight:bold;}
-		div.wrap{margin:0 auto;background-color:gray;border:blue dashed thin;overflow:auto; overflow-x:hidden;text-align:left;}
-		div.wrap span{display:inline-block;height:30px;width:19.1%;background-color:orange;border:green dotted thin;text-align:center;}
+		div.wrap{margin:0 auto;background-color:gray;border:blue dashed thin;overflow:auto; overflow-x:hidden;text-align:center;}
+		div.wrap span{display:inline-block;height:30px;width:19%;background-color:orange;border:green dotted thin;text-align:center;}
 	</style>
 	<center>
 	<p class="p1">Hello，这是VNOC网页版。</p>
@@ -21,8 +21,11 @@
 	<p class="p2">你要求填写一个表单，以便我们完成测试。</p>
 	<p class="p2">每个测试大概只需要你3-4分钟时间，谢谢你的帮助！</p>
 	<div class="wrap">
-		<span><a href="less_test/locations/form.html" title="定位测试">定位测试</a></span>
-		<span><a href="less_test/locations/form.html" title="框架测试(待补充)">框架测试</a></span>
+		<?php
+			require_once("less_test/sections.php");
+			foreach($section as $id => $value)
+				echo "<span><a href='less_test/form.php?section={$id}'>{$value}</a></span>";
+		?>
 	</div>
 	</center>
 </body>

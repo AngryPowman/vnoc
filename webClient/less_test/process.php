@@ -1,7 +1,24 @@
-<?php
-	file_put_contents("../locations.csv",str_replace(",","",$_SERVER['HTTP_USER_AGENT']).",".$_POST['q1'].",".$_POST['q2'].",".$_POST['q3']."\n",FILE_APPEND);
-?>
-<script>
-	window.alert("谢谢你对VNOC的支持！\n谢谢您的参与，浏览器将转到VNOC首页。");
-	window.open('../../index.html','_self');
-</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-16" />
+<head>
+	<title>VNOC LESS/CSS 测试</title>
+</head>
+<body>
+	<?php
+		require_once("../class/mysql.php");
+		$value=0;
+		for($i=0;$i<$_GET['max'];$i++){
+			if($_POST[$i]=="1"){
+					$value=($value<<1)+1;
+			}
+		}
+		$setting=str_replace(",","",$_SERVER['HTTP_USER_AGENT']);
+		sql_query("INSERT INTO `lesstest` (`section`,`setting`,`value`,`time`) VALUES ('{$_GET['section']}','{$setting}',{$value},NOW())",false);
+	?>
+	<script>
+		window.alert("谢谢你对VNOC的支持！\n谢谢您的参与，浏览器将转回到VNOC首页。");
+		window.open('../index.php','_self');
+	</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+// 设置文件路径
+
+[sections.php]=/less_test/sections.php
+// 存储LESS测试分类的名字
+
+[comments.php]=/less_test/comments.php
+// 存储LESS测试分类中各个题目的简要说明
