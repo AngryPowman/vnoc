@@ -55,7 +55,7 @@ void CGlobalCenter::_InitializeConfig()
 
 void CGlobalCenter::_UnInitializeConfig()
 {
-	m_config.SaveConfigToXML();
+	//m_config.SaveConfigToXML();
 	m_config.UnInitialize();
 }
 
