@@ -26,13 +26,12 @@ private:
 	BOOL _ParseXMLNode(TiXmlNode *node,ConfigNode& cfg);
 
 	BOOL _CreateXML(TiXmlNode& tree,const ConfigNode& root);
-	BOOL _CreateXMLNode(TiXmlNode *node,const ConfigNode& root);
+	BOOL _CreateXMLNode(TiXmlNode **node,const ConfigNode& root);
 
 	BOOL _Find(ConfigPath path,ConfigPtrVec& vec,BOOL createIfNotExist=FALSE);
 	VOID _Clear();
 private:
 	CString			m_filePath;
-	TiXmlDocument	m_doc;
 	ConfigNode	m_rootNode;
 	ATL::CCriticalSection m_cs;
 };

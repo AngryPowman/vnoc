@@ -207,8 +207,9 @@ HRESULT CConfigImpl::Terminate()
 HRESULT CConfigImpl::LoadConfigFromXML( LPCTSTR filePath )
 {
 	Global->Log(LogFile_Config,_T("开始加载XML"));
-	m_doc.Clear();
-	BOOL bRet = m_doc.LoadFile(CStringA(filePath));		// 坑爹啊！只支持UTF8
+	TiXmlDocument doc;
+	doc.Clear();
+	BOOL bRet = doc.LoadFile(CStringA(filePath));		// 坑爹啊！只支持UTF8
 	assert(bRet && "配置xml文件加载异常");
 	if (bRet)
 	{
@@ -216,7 +217,7 @@ HRESULT CConfigImpl::LoadConfigFromXML( LPCTSTR filePath )
 		Global->Log(LogFile_Config,_T("文件加载成功。"));
 		CLogPrefix p(LogFile_Config,_T("[XML解析]"));
 		CLogIndent i(LogFile_Config);
-		bRet = _ParseXML(m_doc.RootElement(),m_rootNode);
+		bRet = _ParseXML(doc.RootElement(),m_rootNode);
 	}
 	Global->Log(LogFile_Config,_T("XML加载工作结束"));
 	return bRet? S_OK:S_FALSE;
@@ -280,21 +281,21 @@ HRESULT CConfigImpl::SaveConfigToXML( LPCTSTR filePath )
 	{
 		filePath = m_filePath;
 	}
-	if (!m_doc.RootElement())
+	TiXmlDocument doc;
+	if (!doc.RootElement())
 	{
 		TiXmlElement rootElement("root");	// 这个值反正要被改写，这里随便写一个
-		m_doc.InsertEndChild(rootElement);
+		doc.InsertEndChild(rootElement);
 	}
-	m_doc.RootElement()->Clear();
+	doc.RootElement()->Clear();
 	Global->Log(LogFile_Config,_T("创建XML树."));
-	BOOL bRet = _CreateXML(m_doc,m_rootNode);
+	BOOL bRet = _CreateXML(doc,m_rootNode);
 	Global->Logf(LogFile_Config,_T("XML树创建%s.\n"),bRet? _T("成功"): _T("失败"));
 	if (bRet)
 	{
-		bool bRet = m_doc.SaveFile(CStringA(filePath));
-		return bRet? S_OK: E_FAIL;
+		bool bRet = doc.SaveFile(CStringA(filePath));
 	}
-	return E_FAIL;
+	return bRet? S_OK: E_FAIL;
 }
 
 BOOL CConfigImpl::_CreateXML(TiXmlNode& tree,const ConfigNode& root )
@@ -308,28 +309,38 @@ BOOL CConfigImpl::_CreateXML(TiXmlNode& tree,const ConfigNode& root )
 		for (j=i->second.begin(); j!=i->second.end(); ++j)
 		{
 			TiXmlNode* pNode=NULL;
-			_CreateXMLNode(pNode,*j);
+			BOOL bRet = _CreateXMLNode(&pNode,*j);
+			_CreateXML(*pNode,*j);
+			if (bRet && pNode)
+			{
+				tree.InsertEndChild(*pNode);
+				delete pNode;
+			}
 		}
 	}
 	return TRUE;
 }
 
-BOOL CConfigImpl::_CreateXMLNode(TiXmlNode *node,const ConfigNode& root)
+BOOL CConfigImpl::_CreateXMLNode(TiXmlNode **node,const ConfigNode& root)
 {
-	ATLASSERT(!node);
+	if (!node)
+	{
+		return FALSE;
+	}
+	ATLASSERT(!*node);
 	ATLASSERT(!root.value.IsEmpty());
 	if (!root.value.IsEmpty())
 	{
 		if (root.branch.empty() && root.attr.empty())
 		{
-			node = new TiXmlText(CStringA(root.value));
-			Global->PtrAssert(node);
+			*node = new TiXmlText(CStringA(root.value));
+			Global->PtrAssert(*node);
 		}
 		else
 		{
-			node = new TiXmlElement(CStringA(root.value));
-			Global->PtrAssert(node);
-			TiXmlElement* element = node->ToElement();
+			*node = new TiXmlElement(CStringA(root.value));
+			Global->PtrAssert(*node);
+			TiXmlElement* element = (*node)->ToElement();
 
 			AttributeMap::const_iterator i;
 			for (i=root.attr.begin(); i!=root.attr.end(); ++i)
