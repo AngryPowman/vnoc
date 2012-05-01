@@ -2,7 +2,6 @@
 #include "IRefCountImpl.h"
 #include <memory>
 
-// 尽管有引用计数，但考虑到工程复杂性，目前除非明确指明使用，否则不要使用！
 interface IModule : public IRefCountImpl
 {
 public:

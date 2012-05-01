@@ -4,8 +4,10 @@
 #include "stdafx.h"
 #include "VNOC.h"
 
+#ifdef USE_VLD
 #ifdef _DEBUG
-//#include "vld.h"
+#include "vld.h"
+#endif
 #endif
 
 #ifdef _DEBUG
