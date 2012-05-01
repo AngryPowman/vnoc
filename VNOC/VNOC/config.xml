@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Language language="cpp" test="testValue">
-    <CodeEditor>
-        <Language language="cpp">
-            <Editor>
-                <ShowLineNum color="255,255,255">1</ShowLineNum>
-            </Editor>
-            <Font bold="0" italic="0" underline="0">Courier New</Font>
-        </Language>
-    </CodeEditor>
-    <test>This is Test</test>
-</Language>
+<SciEdit>
+	<Language language="cpp" test="testValue">
+		<Editor>
+			<TabWidth tabWidth=4/>
+			<ShowLineNum color="255,255,255">1</ShowLineNum>
+		</Editor>
+		<Font bold="0" italic="0" underline="0">Courier New</Font>
+		<test>This is Test</test>
+	</Language>
+</SciEdit>

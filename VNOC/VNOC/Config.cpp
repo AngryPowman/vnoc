@@ -3,74 +3,23 @@
 #include "../util/util.h"
 
 //////////////////////////////////////////////////////////////////////////
-// CConfig
-
-void CConfig::xPath(LPCTSTR cfgPath)
+// ConfigNode
+ConfigNode::ConfigNode()
 {
-	CString tempStr = cfgPath;
-	LPTSTR thePath = tempStr.GetBuffer(tempStr.GetLength());
-	ASSERT(thePath);
-	if (thePath)
-	{
-		LPCTSTR currPos = thePath;
-		LPCTSTR startPos = thePath;
-		do 
-		{
-			if (*thePath == ConfigPathSplit)
-			{
-				*thePath = _T('\0');
-				path.push_back(startPos);
-				++thePath;
-				while(*thePath == ConfigPathSplit)
-				{	//防止连着写了多个'/'符号
-					++thePath;
-				}
-				startPos = thePath;
-			}
-			else if(*thePath == _T('\0'))
-			{
-				path.push_back(startPos);
-				startPos = thePath;
-			}
-			else
-			{
-				++thePath;
-			}
-		} while (*startPos);
-	}
-	tempStr.ReleaseBuffer(0);;
 }
 
-CConfig::CConfig()
-{}
-
-CConfig::CConfig(LPCTSTR path)
+ConfigNode::~ConfigNode()
 {
-	xPath(path);
-}
-
-CConfig::~CConfig()
-{}
-
-BOOL CConfig::Get(LPCTSTR path)
-{
-	if (path)
-	{
-		xPath(path);
-	}
-	IConfig *pConf=NULL;
-	Global->GetIConfig(&pConf);
-	if (pConf)
-	{
-		HRESULT hr = pConf->Get(this->path,m_vec);
-		return SUCCEEDED(hr);
-	}
-	return FALSE;
-}
-
-UINT CConfig::Count()
-{
-	return m_vec.size();
+// 	attr.clear();
+// 	ConfigBranchs::iterator i;
+// 	for (i=branch.begin(); i!=branch.end(); ++i)
+// 	{
+// 		ConfigVec::iterator j;
+// 		for (j=i->second.begin(); j!=i->second.end(); ++j)
+// 		{
+// 			delete &(*j);
+// 		}
+// 	}
 }
 
 ConfigNode& CConfig::GetNode(UINT index)
@@ -146,14 +95,77 @@ VOID ConfigNode::SetAttribute(LPCTSTR key,double value)
 	SetAttribute(key,str);
 }
 
-VOID ConfigNode::Lock()
+//////////////////////////////////////////////////////////////////////////
+// CConfig
+
+void CConfig::xPath(LPCTSTR cfgPath)
 {
-	m_cs.Enter();
+	CString tempStr = cfgPath;
+	LPTSTR thePath = tempStr.GetBuffer(tempStr.GetLength());
+	ASSERT(thePath);
+	if (thePath)
+	{
+		LPCTSTR currPos = thePath;
+		LPCTSTR startPos = thePath;
+		do 
+		{
+			if (*thePath == ConfigPathSplit)
+			{
+				*thePath = _T('\0');
+				path.push_back(startPos);
+				++thePath;
+				while(*thePath == ConfigPathSplit)
+				{	//防止连着写了多个'/'符号
+					++thePath;
+				}
+				startPos = thePath;
+			}
+			else if(*thePath == _T('\0'))
+			{
+				path.push_back(startPos);
+				startPos = thePath;
+			}
+			else
+			{
+				++thePath;
+			}
+		} while (*startPos);
+	}
+	tempStr.ReleaseBuffer(0);;
 }
 
-VOID ConfigNode::UnLock()
+CConfig::CConfig()
+{}
+
+CConfig::CConfig(LPCTSTR path)
 {
-	m_cs.Leave();
+	xPath(path);
+	Get();
+}
+
+CConfig::~CConfig()
+{
+}
+
+BOOL CConfig::Get(LPCTSTR path)
+{
+	if (path)
+	{
+		xPath(path);
+	}
+	IConfig *pConf=NULL;
+	Global->GetIConfig(&pConf);
+	if (pConf)
+	{
+		HRESULT hr = pConf->Get(this->path,m_vec);
+		return SUCCEEDED(hr);
+	}
+	return FALSE;
+}
+
+UINT CConfig::Count()
+{
+	return m_vec.size();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -176,6 +188,7 @@ HRESULT CConfigImpl::Initialize( IModule* UpperFrame/*=NULL*/ )
 HRESULT CConfigImpl::UnInitialize()
 {
 	Global->Log(LogFile_Config,_T("反初始化"));
+	_Clear();
 	return S_OK;
 }
 
@@ -203,10 +216,62 @@ HRESULT CConfigImpl::LoadConfigFromXML( LPCTSTR filePath )
 		Global->Log(LogFile_Config,_T("文件加载成功。"));
 		CLogPrefix p(LogFile_Config,_T("[XML解析]"));
 		CLogIndent i(LogFile_Config);
-		bRet = _ParseXMLTree(m_doc.RootElement(),m_rootNode);
+		bRet = _ParseXML(m_doc.RootElement(),m_rootNode);
 	}
 	Global->Log(LogFile_Config,_T("XML加载工作结束"));
 	return bRet? S_OK:S_FALSE;
+}
+
+// 将root分析后填入treeRoot.branch
+BOOL CConfigImpl::_ParseXML(TiXmlNode *root,ConfigNode& treeRoot)
+{
+	CLogIndent li(LogFile_Config);
+	TiXmlNode *curr = root;
+
+	while(curr)
+	{
+		ConfigVec& i = treeRoot.branch[CString(curr->Value())];
+
+		ConfigNode newNode;
+
+		_ParseXMLNode(curr,newNode);
+		if (curr->FirstChild())
+		{
+			_ParseXML(curr->FirstChild(),newNode);
+		}
+		i.push_back(newNode);
+
+		curr = curr->NextSibling();
+	}
+	assert(root && "节点为空");
+	return TRUE;
+}
+
+BOOL CConfigImpl::_ParseXMLNode( TiXmlNode *tiNode,ConfigNode& node )
+{
+	CLogIndent i(LogFile_Config);
+
+	int type = tiNode->Type();
+	Global->Logf(LogFile_Config,_T("分析配置点(value = %s,type = %d)"),CString(tiNode->ValueStr().c_str()),type);
+	node.value = tiNode->ValueStr().c_str();
+	switch(type)
+	{
+	case TiXmlNode::TINYXML_ELEMENT:
+		TiXmlAttribute *attr = tiNode->ToElement()->FirstAttribute();
+		if (attr)
+		{
+			Global->Log(LogFile_Config,_T("(Attributes:"),FALSE,FALSE);
+			while(attr)
+			{
+				Global->Lognf(LogFile_Config,_T("|%s:%s|"),CString(attr->Name()),CString(attr->Value()));
+				node.attr.insert(std::make_pair(attr->Name(), attr->Value()));
+				attr = attr->Next();
+			}
+			Global->Log(LogFile_Config,_T(")"),FALSE,FALSE);
+		}
+	}
+	Global->Log(LogFile_Config,_T("\n"),FALSE,FALSE);
+	return TRUE;
 }
 
 HRESULT CConfigImpl::SaveConfigToXML( LPCTSTR filePath )
@@ -221,90 +286,70 @@ HRESULT CConfigImpl::SaveConfigToXML( LPCTSTR filePath )
 		m_doc.InsertEndChild(rootElement);
 	}
 	m_doc.RootElement()->Clear();
-	_CreateXMLTree(*m_doc.RootElement(),m_rootNode);
-	return m_doc.SaveFile(CStringA(filePath));
+	Global->Log(LogFile_Config,_T("创建XML树."));
+	BOOL bRet = _CreateXML(m_doc,m_rootNode);
+	Global->Logf(LogFile_Config,_T("XML树创建%s.\n"),bRet? _T("成功"): _T("失败"));
+	if (bRet)
+	{
+		bool bRet = m_doc.SaveFile(CStringA(filePath));
+		return bRet? S_OK: E_FAIL;
+	}
+	return E_FAIL;
 }
 
-// 填充根节点，之后的子节点由_ParseXML负责递归处理
-BOOL CConfigImpl::_ParseXMLTree(TiXmlNode *root,ConfigNode& treeRoot)
+BOOL CConfigImpl::_CreateXML(TiXmlNode& tree,const ConfigNode& root )
 {
-	ATLASSERT(root);
-	if (root)
+	CLogPrefix lp(LogFile_Config,_T("CreateTree"));
+
+	ConfigBranchs::const_iterator i;
+	for (i=root.branch.begin(); i!=root.branch.end(); ++i)
 	{
-		_ParseNode(root,treeRoot);
-		root = root->FirstChild();
-		while(root)
+		ConfigVec::const_iterator j;
+		for (j=i->second.begin(); j!=i->second.end(); ++j)
 		{
-			_ParseXML(root,treeRoot);
-			root = root->NextSibling();
+			TiXmlNode* pNode=NULL;
+			_CreateXMLNode(pNode,*j);
 		}
-		Global->Log(LogFile_Config,_T("XML树解析完成"));
+	}
+	return TRUE;
+}
+
+BOOL CConfigImpl::_CreateXMLNode(TiXmlNode *node,const ConfigNode& root)
+{
+	ATLASSERT(!node);
+	ATLASSERT(!root.value.IsEmpty());
+	if (!root.value.IsEmpty())
+	{
+		if (root.branch.empty() && root.attr.empty())
+		{
+			node = new TiXmlText(CStringA(root.value));
+			Global->PtrAssert(node);
+		}
+		else
+		{
+			node = new TiXmlElement(CStringA(root.value));
+			Global->PtrAssert(node);
+			TiXmlElement* element = node->ToElement();
+
+			AttributeMap::const_iterator i;
+			for (i=root.attr.begin(); i!=root.attr.end(); ++i)
+			{
+				element->SetAttribute(CStringA(i->first),CStringA(i->second));
+			}
+		}
 		return TRUE;
 	}
 	return FALSE;
-}
-
-// 将root分析后填入treeRoot.branch
-BOOL CConfigImpl::_ParseXML(TiXmlNode *root,ConfigNode& treeRoot)
-{
-	CLogIndent li(LogFile_Config);
-	TiXmlNode *curr = root;
-	while(curr)
-	{
-		std::pair<ConfigBranchs::iterator,bool>	ret;
-		ConfigNode *pNewNode = new ConfigNode;
-		Global->PtrAssert(pNewNode);
-		ret = treeRoot.branch.insert(std::make_pair(CStringA(curr->Value()),pNewNode));
-		if (ret.second)
-		{
-			ConfigNode& node = *ret.first->second;
-			_ParseNode(curr,node);
-			if (curr->FirstChild())
-			{
-				_ParseXML(curr->FirstChild(),*ret.first->second);
-			}
-		}
-		curr = curr->NextSibling();
-	}
-	assert(root && "节点为空");
-	return TRUE;
-}
-
-BOOL CConfigImpl::_ParseNode( TiXmlNode *node,ConfigNode& cfg )
-{
-	CLogIndent i(LogFile_Config);
-
-	int type = node->Type();
-	Global->Logf(LogFile_Config,_T("分析配置点(value = %s,type = %d)"),CString(node->ValueStr().c_str()),type);
-	switch(type)
-	{
-	case TiXmlNode::TINYXML_ELEMENT:
-		TiXmlAttribute *attr = node->ToElement()->FirstAttribute();
-		if (attr)
-		{
-			Global->Log(LogFile_Config,_T("(Attributes:"),FALSE,FALSE);
-			while(attr)
-			{
-				Global->Lognf(LogFile_Config,_T("|%s:%s|"),CString(attr->Name()),CString(attr->Value()));
-				cfg.attr.insert(std::make_pair(attr->Name(), attr->Value()));
-				attr = attr->Next();
-			}
-			Global->Log(LogFile_Config,_T(")"),FALSE,FALSE);
-		}
-	}
-	Global->Log(LogFile_Config,_T("\n"),FALSE,FALSE);
-	return TRUE;
 }
 
 HRESULT CConfigImpl::Get(const ConfigPath& path,ConfigPtrVec& node )
 {
 	Util::CAutoCS ac(m_cs);
 	CLogPrefix	lp(LogFile_Config,_T("[Config]"));
-	ConfigNode *pNode = _Find(path);
-	if (pNode)
+	BOOL bRet = _Find(path,node);
+	if (bRet)
 	{
-		Global->Logf(LogFile_Config,_T("取值成功(%s)"),pNode->value);
-		node.push_back(pNode);
+		Global->Logf(LogFile_Config,_T("取值成功."));
 		return S_OK;
 	}
 	else
@@ -314,80 +359,45 @@ HRESULT CConfigImpl::Get(const ConfigPath& path,ConfigPtrVec& node )
 	}
 }
 
-ConfigNode* CConfigImpl::_Find( ConfigPath path,BOOL createIfNotExist)
+BOOL CConfigImpl::_Find( ConfigPath path,ConfigPtrVec& vec,BOOL createIfNotExist/*=FALSE*/ )
 {
-	ConfigPath::iterator i;
-	ConfigBranchs::iterator mi;
-	i = path.begin();
-	ConfigNode *pos=&m_rootNode;
-	while (i != path.end())
+	if (path.empty())
 	{
-		mi = pos->branch.find(*i);
-		if (mi == pos->branch.end())
-		{
-			if (!createIfNotExist)
-			{
-				return NULL;
-			}
-			ConfigNode* pNewNode = new ConfigNode;
-			Global->PtrAssert(pNewNode);
-			pos->branch.insert(std::make_pair(*i,pNewNode));
-		}
-		else
-		{
-			pos = mi->second;
-			ASSERT(pos);
-		}
-		++i;
+		return FALSE;
 	}
-	ASSERT(pos);	// 理论上到这里应当不可能是NULL
-	return pos;
-}
+	ConfigPath::iterator i;
+	ConfigNode *pCurr = &m_rootNode;
 
-BOOL CConfigImpl::_CreateXMLTree(TiXmlNode& tree,const ConfigNode& root )
-{
-	CLogPrefix lp(LogFile_Config,_T("CreateTree"));
-	TiXmlElement* element = tree.ToElement();
-	while (element)
+	ConfigBranchs::iterator j;
+	for(i=path.begin(); i!=path.end(); ++i)
 	{
-		element->SetValue(CStringA(root.value));
-		AttributeMap::const_iterator i;
-		for (i=root.attr.begin(); i!=root.attr.end(); ++i)
+		j = pCurr->branch.find(*i);
+		if (j == pCurr->branch.end())
 		{
-			element->SetAttribute(CStringA(i->first),CStringA(i->second));
-		}
-		ConfigBranchs::const_iterator mi;
-		for (mi=root.branch.begin(); mi!=root.branch.end(); ++mi)
-		{
-			TiXmlNode* child = element->FirstChild(CStringA(mi->first));
-			if (!child)
-			{	// 新加入的节点
-				TiXmlNode *newChild = NULL;
-				Global->PtrAssert(mi->second);
-				if (mi->second->branch.empty() && mi->second->attr.empty())
-				{	// 新节点没有子节点，没有属性，作为一个Text节点。
-					newChild = new TiXmlText(CStringA(mi->first));
-				}
-				else
-				{
-					newChild = new TiXmlElement(CStringA(mi->first));
-				}
-				ASSERT(newChild);
-				if (newChild)
-				{
-					element->InsertEndChild(*newChild);
-					delete newChild;
-					child = element->FirstChild(CStringA(mi->first));
-				}
-			}
-			if (child)
+			if (createIfNotExist)
 			{
-				_CreateXMLTree(*child,*mi->second);
+				ConfigNode node;
+				node.value = *i;
+				pCurr->branch[*i].push_back(node);
+			}
+			else
+			{
+				return FALSE;
 			}
 		}
-		element = element->NextSiblingElement();
+		pCurr = &((j->second)[0]);
+	}
+	ConfigVec::iterator iVec;
+	for(iVec=j->second.begin(); iVec!=j->second.end(); ++iVec)
+	{
+		vec.push_back(&(*iVec));
 	}
 	return TRUE;
+}
+
+VOID CConfigImpl::_Clear()
+{
+	m_rootNode.branch.clear();
 }
 
 HRESULT CConfigImpl::AddMonitor( ConfigPath path,IConfigMonitor* pMonitor )

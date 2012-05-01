@@ -22,11 +22,14 @@ public:
 	STDMETHOD( RemoveMonitor(IConfigMonitor* pMonitor) );
 	BOOL RegisterConfigNodeOwner();
 private:
-	BOOL _ParseXMLTree(TiXmlNode *root,ConfigNode& treeRoot);
 	BOOL _ParseXML(TiXmlNode *root,ConfigNode& treeRoot);
-	BOOL _ParseNode(TiXmlNode *node,ConfigNode& cfg);
-	ConfigNode*	_Find(ConfigPath path,BOOL createIfNotExist=FALSE);
-	BOOL _CreateXMLTree(TiXmlNode& tree,const ConfigNode& root);
+	BOOL _ParseXMLNode(TiXmlNode *node,ConfigNode& cfg);
+
+	BOOL _CreateXML(TiXmlNode& tree,const ConfigNode& root);
+	BOOL _CreateXMLNode(TiXmlNode *node,const ConfigNode& root);
+
+	BOOL _Find(ConfigPath path,ConfigPtrVec& vec,BOOL createIfNotExist=FALSE);
+	VOID _Clear();
 private:
 	CString			m_filePath;
 	TiXmlDocument	m_doc;

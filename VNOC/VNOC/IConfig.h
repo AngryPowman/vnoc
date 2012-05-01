@@ -3,9 +3,18 @@
 #include "ConfigDefine.h"
 #include "ILanguage.h"
 
+typedef std::vector<ConfigNode>			ConfigVec;
+typedef std::vector<ConfigNode*>		ConfigPtrVec;
+typedef std::map<CString,ConfigVec>		ConfigBranchs;
+
 struct ConfigNode
 	: private ConfigNodeBase
 {
+
+	CString			value;
+	AttributeMap	attr;			// 属性表
+	ConfigBranchs	branch;			// 其下面子树
+
 	BOOL	GetAttribute(LPCTSTR key,CString& value);
 	BOOL	GetAttribute(LPCTSTR key,int& value);
 	BOOL	GetAttribute(LPCTSTR key,double& value);
@@ -13,13 +22,8 @@ struct ConfigNode
 	VOID	SetAttribute(LPCTSTR key,int value);
 	VOID	SetAttribute(LPCTSTR key,double value);
 
-	CString			value;
-	AttributeMap	attr;			// 属性表
-	ConfigBranchs	branch;			// 其下面子树
-
-	// 如果确定不会多线程访问，可以不加锁
-	VOID	Lock();
-	VOID	UnLock();
+	ConfigNode();
+	~ConfigNode();
 };
 
 class CConfig

@@ -151,7 +151,7 @@ VOID CSciEdit::_InternalInitialize()
 	CConfig config;
 	int tabWidth = 4;
 
-	if (config.Get(_T("SciEdit/GlobalSettings")))
+	if (config.Get(_T("SciEdit/Language/Editor/TabWidth")))
 	{
 		config.GetNode().GetAttribute(_T("tabWidth"),tabWidth);
 	}

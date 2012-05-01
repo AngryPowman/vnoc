@@ -5,6 +5,10 @@
 #include "VNOC.h"
 
 #ifdef _DEBUG
+//#include "vld.h"
+#endif
+
+#ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
