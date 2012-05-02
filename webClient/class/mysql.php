@@ -7,7 +7,7 @@ function sql_connect($host,$user,$password,$db){
 	return $MySQL;
 }
 function sql_query($sql,$isfetch=true,$type=MYSQL_ASSOC){
-	$MySQLConn=sql_connect("fdb2.runhosting.com","1025375_vnoc","vnoc","1025375_vnoc");
+	$MySQLConn=sql_connect("localhost","1025375_vnoc","vnoc","1025375_vnoc"); //fdb2.runhosting.com
 	mysql_query("SET NAMES utf8") or die;
 	$result=mysql_query($sql,$MySQLConn);
 	if($isfetch)
