@@ -29,6 +29,8 @@ public:
         recvBuf_ = buf;
 		recvBufLen = len;
 		recvHandler_.reset(new HandlerWrapper<Handler>(handler));
+		isReadSome_ = false;
+		receivedLenth_ = 0;
         return 0;
     }
     template <typename Handler> int read_some(char * buf, size_t len, Handler handler)
@@ -36,6 +38,8 @@ public:
         recvBuf_ = buf;
 		recvBufLen = len;
 		recvHandler_.reset(new HandlerWrapper<Handler>(handler));
+		isReadSome_ = true;
+		receivedLenth_ = 0;
         return 0;
     }
     template <typename Handler> int send(char * buf, size_t len, Handler handler)
@@ -55,20 +59,29 @@ public:
     }
     void setRecv(const char * buf, size_t len)
     {
-        if (len <= recvBufLen){
-            memcpy(recvBuf_, buf, len);
+        if (len <= recvBufLen - receivedLenth_){
+            memcpy(recvBuf_ + receivedLenth_, buf, len);
 			std::cout<<"recv: "<< recvBuf_<<std::endl;
 			asio::error_code ec;
-			(*recvHandler_)(ec, len);
+			if (isReadSome_) {
+				(*recvHandler_)(ec, len);
+			} else {
+				if (len == recvBufLen - receivedLenth_){
+					(*recvHandler_)(ec, recvBufLen);
+				} else {
+					receivedLenth_ += len;
+				}
+			}
         }		
     }
 private:
     std::shared_ptr<EventOperator> recvHandler_;
-    std::shared_ptr<EventOperator> readSomeHandler_;
     std::shared_ptr<EventOperator> sendHandler_;
     char* recvBuf_;
 	size_t recvBufLen;
     char sendBuf_[1024];
+	bool isReadSome_;
+	size_t receivedLenth_;
 };
 
 #endif /*MOCK_TCP_CONNECTION_H*/
