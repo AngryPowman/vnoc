@@ -1,4 +1,4 @@
-// 设置文件路径
+﻿// 设置文件路径
 
 [sections.php]=/less_test/sections.php
 // 存储LESS测试分类的名字

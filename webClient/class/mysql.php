@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // CLASS - MySQL操作类;
 
 function sql_connect($host,$user,$password,$db){

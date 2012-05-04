@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	$len=3;
 	$questions[]="1. 请<a href='locations/locations_frame.html' target='_blank'>打开网页</a>，您的页面是否如蓝色框中所示？";
 	$imgs[]     ="img1.png";
