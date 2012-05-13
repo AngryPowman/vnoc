@@ -57,6 +57,7 @@ int CNetClient::Send( CClientConnection connect,const VOID* pbuf, int size )
 
 LRESULT CNetClient::NetMsgProc( HWND hwnd, UINT uMsg, WPARAM wParam/*Ì×½Ó×Ö*/, LPARAM lParam )
 {
+
 	return 0;
 }
 

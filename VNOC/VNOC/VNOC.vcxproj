@@ -303,6 +303,7 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="Config.inl" />
     <None Include="config.xml" />
+    <None Include="MsgAnalysis.h" />
     <None Include="Performance.inl" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />

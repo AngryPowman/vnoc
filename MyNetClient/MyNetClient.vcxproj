@@ -75,7 +75,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ClientConnection.h" />
-    <ClInclude Include="MsgDef.h" />
     <ClInclude Include="NetClient.h" />
   </ItemGroup>
   <ItemGroup>

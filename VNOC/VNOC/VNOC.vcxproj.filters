@@ -152,9 +152,6 @@
     <ClInclude Include="..\..\MyNetClient\ClientConnection.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\MyNetClient\MsgDef.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\MyNetClient\NetClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -272,6 +269,9 @@
     <ClInclude Include="ILanguage.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\MyNetClient\MsgDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -298,6 +298,9 @@
     </None>
     <None Include="Performance.inl">
       <Filter>util</Filter>
+    </None>
+    <None Include="MsgAnalysis.h">
+      <Filter>头文件</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

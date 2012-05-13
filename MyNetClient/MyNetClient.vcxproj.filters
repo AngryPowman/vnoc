@@ -18,9 +18,6 @@
     <ClInclude Include="ClientConnection.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MsgDef.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="NetClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
