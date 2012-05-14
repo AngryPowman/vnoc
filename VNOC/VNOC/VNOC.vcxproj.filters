@@ -46,6 +46,9 @@
     <Filter Include="FrameWork\Dialog">
       <UniqueIdentifier>{53f89d19-a7ad-47c0-9c0e-c80c540eac51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MsgAnalysis">
+      <UniqueIdentifier>{5dc7ed6f-ac84-4129-84c5-13a3cdd97fde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp">
@@ -270,7 +273,7 @@
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MyNetClient\MsgDef.h">
-      <Filter>头文件</Filter>
+      <Filter>MsgAnalysis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,7 +303,10 @@
       <Filter>util</Filter>
     </None>
     <None Include="MsgAnalysis.h">
-      <Filter>头文件</Filter>
+      <Filter>MsgAnalysis</Filter>
+    </None>
+    <None Include="MsgAnalysis.cpp">
+      <Filter>MsgAnalysis</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

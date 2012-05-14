@@ -304,6 +304,7 @@
     <None Include="Config.inl" />
     <None Include="config.xml" />
     <None Include="MsgAnalysis.h" />
+    <None Include="MsgAnalysis.cpp" />
     <None Include="Performance.inl" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />

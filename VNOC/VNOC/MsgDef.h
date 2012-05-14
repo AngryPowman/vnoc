@@ -2,6 +2,7 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MSG_BEGIN    0x55   // 'V' 标记消息的开始
 #define MSG_END		 0x43	// 'C' 标记消息的结束
