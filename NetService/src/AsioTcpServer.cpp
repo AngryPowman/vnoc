@@ -10,13 +10,7 @@ using namespace asio::ip;
 using namespace std;
 
 static asio::io_service g_io_service;
-static void accept_handler(const asio::error_code& error)
-{
-  if (!error)
-  {
-    // Accept succeeded.
-  }
-}
+
 AsioTcpServer::AsioTcpServer(SocketHandlerFactory* handlerFactory):
     io_service_(g_io_service),
     acceptor_(g_io_service),
