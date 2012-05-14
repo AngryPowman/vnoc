@@ -184,8 +184,11 @@ int   MsgAnalysis::Analysis(MSG_CLASS* msg_class,byte* lpszData)
 	{
 		msg_class->nEnd = false;
 	}
+	else
+	{
+		msg_class->nEnd = true;
+	}
 	
-	msg_class->nEnd = true;
 
 	if (tmpCmlListLen != NULL)
 	{
