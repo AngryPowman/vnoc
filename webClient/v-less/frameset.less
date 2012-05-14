@@ -1,25 +1,70 @@
-﻿// LESS - 框架;
-#frameset{
-	.frame(@width,@height,@bgcolor:#FDFDFD,@bordercolor:#FFFFFF,@linecolor:#4D4D4D,@overflow:hidden){
-		width:@width;
-		height:@height;
-		background-color:@bgcolor;
-		border:@bordercolor solid thin;
-		outline:@linecolor solid thin;
-		overflow:@overflow;
-    }
-	.field(@width,@height,@bgcolor:#FDFDFD,@linecolor:#4D4D4D,@overflow:hidden){
-		width:@width;
-		height:@height;
-		background-color:@bgcolor;
-		border:@linecolor solid thin;
-		overflow:@overflow;
-	}
-	.button(@width,@height,@bgcolor:#FDFDFD,@linecolor:#4D4D4D){
-		width:@width;
-		height:@height;
-		background-color:@bgcolor;
-		outline:@linecolor solid thin;
-		overflow:hidden;
-	}
+﻿/**
+ ** frameset.less
+ **
+ ** This is the frameset LESS CSS file
+ ** This contains some common frameset patterns, with resetable
+ ** properties
+ ** The LESS CSS styles are bunched in 'framset'
+ */
+
+/** LESS style for frames tags like <div> and <table>
+ ** 
+ ** @_less.frameset
+ ** @param size @x - Width of frame
+ ** @param size @y - Height of frame
+ ** @param color @bc - Background color of frame, #FDFDFD(light gray)
+ **        as default
+ ** @param color @ilc - Inner line(border) color, #FFFFFF(white) as
+ **        default
+ ** @param color @olc - Outline color, #4D4D4D(darker gray) as default
+ ** @param type @o - Display type when it is overflowing, hidden as
+ **        default
+ */
+.frame(@x, @y, @bc: #FDFDFD, @ilc: #FFFFFF, @olc: #4D4D4D, @o: hidden)
+{
+	width: @x;
+	height: @y;
+	background-color: @bc;
+	border: @ilc solid thin;
+	outline: @olc solid thin;
+	overflow: @o;
+}
+
+/** LESS style for field tags like <fieldset>, <label>, <input>,
+ ** <button> and div
+ **
+ ** @_less.frameset
+ ** @param size @x - Width of frame
+ ** @param size @y - Height of frame
+ ** @param color @bc - Background color of frame, #FDFDFD(light gray)
+ **        as default
+ ** @param color @lc - Outline color, #4D4D4D(darker gray) as default
+ ** @param type @o - Display type when it is overflowing, hidden as
+ **        default
+ */
+.field(@x, @y, @bc: #FDFDFD, @lc: #4D4D4D, @o: hidden)
+{
+	width: @x;
+	height: @y;
+	background-color: @bc;
+	border: @lc solid thin;
+	overflow: @o;
+}
+
+/** LESS style only for button tags
+ **
+ ** @_less.frameset
+ ** @param size @x - Width of frame
+ ** @param size @y - Height of frame
+ ** @param color @bc - Background color of frame, #FDFDFD(light gray)
+ **        as default
+ ** @param color @lc - Outline color, #4D4D4D(darker gray) as default
+ */
+.button(@x, @y, @bc: #FDFDFD, @lc: #4D4D4D)
+{
+	width: @x;
+	height: @y;
+	background-color: @bc;
+	outline: @lc solid thin;
+	overflow: hidden;
 }

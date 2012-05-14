@@ -1,0 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-08 00:17-0700\n"
+"PO-Revision-Date: 2012-05-13 20:59-0800\n"
+"Last-Translator: Alex <deeno@qq.com>\n"
+"Language-Team: VNOC\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: C:\\Users\\Alex\\Desktop\\Websites\\VNOC\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: C:\Users\Alex\Desktop\Websites\VNOC\index.php:3
+msgid "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+msgstr ""
+
+#: C:\Users\Alex\Desktop\Websites\VNOC\index.php:4
+msgid "aqwe"
+msgstr ""
+

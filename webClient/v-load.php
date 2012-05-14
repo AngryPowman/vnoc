@@ -3,60 +3,72 @@
 	 ** v-load.php
 	 **
 	 ** This is the load file for VNOC which include useful consts
-	 ** and functions for VNOC.
+	 ** and functions for VNOC
 	 */
 	
-	/** Define the environment paths for VNOC */
+	/** Define the environment paths for VNOC
+	 **
+	 ** @ABSPATH: the root path
+	 ** @LESS:    the bunched LESS CSS file path
+	 ** @TEST:    the contents for LESS CSS compatibility test
+	 */
 	define('ABSPATH', dirname(__FILE__) . '/');
 	define('LESS'   , dirname(__FILE__) . '/v-less/');
 	define('TEST'   , dirname(__FILE__) . '/v-test/');
 	
 	/** Initialize the LESS CSS JS Script
-	 ** family: vnoc.script
-	 ** params: none
-	 ** return: script
+	 ** This must be declared after LESS CSS files
+	 **
+	 ** @_vnoc.script
+	 ** @param none
+	 ** @return script - Declare LESS CSS analyzer less.js file
 	 */
 	function v_LESS_init()
 	{
-		
+		echo '<script src=\"' . LESS . 'less.js\" type=\"text/javascript\"></script>\n';
 	}
 	
 	/** Load *.less file to current position of code
-	 ** family: vnoc.script
-	 ** params: string $less - the LESS CSS to be loaded 
-	 ** return: script
+	 ** This must be declared before less.js
+	 ** If there is not .less extension, it uses *.less as default
+	 ** Otherwise, you have to specify *.css file
+	 **
+	 ** @_vnoc.script
+	 ** @param string $less - The LESS CSS to be loaded 
+	 ** @return script - Declare LESS CSS linking
 	 */
 	function v_LESS_load($less)
 	{
-	
+		echo '<link rel=\"stylesheet/less\" type=\"text/css\" href=\"{$less}\">\n';
 	}
 	
 	/** Set the charset for the current page
-	 ** family: vnoc.browser
-	 ** params: string $charset - the charset to go, utf-8 as default
-	 ** return: none
+	 **
+	 ** @_vnoc.browser
+	 ** @param string $charset - the charset, utf-8 as default
+	 ** @return none
 	 */
 	function v_charset($charset)
 	{
-		
+		header('Content-type: text/html; charset=' . $charset);
 	}
 	
 	/** Set standard for the current page
-	 ** family: vnoc.browser
-	 ** params: string $std - the standard you are using according to
-	 **         W3C Standard
-	 ** return: script
+	 **
+	 ** @_vnoc.browser
+	 ** @param string $std - Standard to use according to W3C standard
+	 ** @return script - Declare <!DOCTYPE> and <html xmls>
 	 */
 	function v_standard($std)
 	{
-		echo '<!DOCTYPE html>\n';
-		echo '<html xmlns=\"http://www.w3.org/1999/xhtml\" {$std} />\n';
+		echo '<!DOCTYPE {$std}>\n';
 	}
 	
 	/** Redirect to a new URL
-	 ** family: vnoc.browser
-	 ** params: string $url - the url to go
-	 ** return: none
+	 **
+	 ** @_vnoc.browser
+	 ** @param string $url - the url to go
+	 ** @return none
 	 */
 	function v_redirect($url)
 	{
@@ -64,19 +76,35 @@
 	}
 	
 	/** Get the referer to this page
-	 ** family: vnoc.browser
-	 ** params: none
-	 ** return: string $referer - the referer url
+	 **
+	 ** @_vnoc.browser
+	 ** @param none
+	 ** @return string $referer - the referer url
 	 */
 	function v_referer()
 	{
 		return $_SERVER['HTTP_REFERER'];
 	}
 	
+	/** An alias for gettext function
+	 ** The funtion _ is predeclared by the system
+	 ** To avoid redeclaring, use funtion __ instead
+	 ** Just in case that system does note support aliases
+	 **
+	 ** @_vnoc.locale
+	 ** @param string $text - Text to be gettexted
+	 ** @return string $gettext - The gettexted text
+	 */
+	function __($text)
+	{
+		return gettext($text);
+	}
+	
 	/** Get current locale setting
-	 ** family: vnoc.locale
-	 ** params: none
-	 ** return: string $locale - locale setting
+	 **
+	 ** @_vnoc.locale
+	 ** @param none
+	 ** @return string $locale - locale setting
 	 */
 	function v_locale()
 	{
@@ -84,24 +112,39 @@
 	}
 	
 	/** Set locale setting to cookie
-	 ** family: vnoc.locale
-	 ** params: string $lang - locale language
-	 ** return: none
+	 **
+	 ** @_vnoc.locale
+	 ** @param string $lang - locale language
+	 ** @return none
 	 */
-	 function v_locale_tocookie($lang)
-	 {
+	function v_locale_tocookie($lang)
+	{
 		setcookie('vnoc_locale', $lang, time() + 31536000);
-	 }
+	}
+	 
+	/** Clear locale setting from cookie
+	 **
+	 ** @_vnoc.locale
+	 ** @param none
+	 ** @return none
+	 */
+	function v_locale_clear()
+	{
+		$_COOKIE['vnoc_locale']='';
+	}
 	 
 	/** Set current locale setting
-	 ** family: vnoc.locale
-	 ** params: none
-	 ** return: none
+	 ** If $_COOKIE['vnoc_locale'] is not set, use 'en_US' as default
+	 ** If you'd like to change default, modify this value below
+	 **
+	 ** @_vnoc.locale
+	 ** @param none
+	 ** @return none
 	 */
 	function v_locale_set()
 	{
-		if(!isset($_COOKIE['vnoc_locale']))
-			v_locale_tocookie('en_US');
+		if(empty($_COOKIE['vnoc_locale']))
+			v_locale_tocookie('zh_CN');
 		setlocale(LC_ALL, $_COOKIE['vnoc_locale'], 'utf-8');
 	}
 ?>
