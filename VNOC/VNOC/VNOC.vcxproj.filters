@@ -138,6 +138,9 @@
     <ClCompile Include="SciEditConfig.cpp">
       <Filter>CodeEditor</Filter>
     </ClCompile>
+    <ClCompile Include="MsgDef.cpp">
+      <Filter>MsgAnalysis</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">

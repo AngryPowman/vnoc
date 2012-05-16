@@ -1,25 +1,51 @@
 
+#pragma once
 
-#include "MsgAnalysis.h"
+#include "msganalysis.h"
 
+void MsgAnalysis::Close()
+{
+	if (nCmlCommandList)
+	{
+		for (int count = 0; (int)nCmlCount < count; count++)
+		{
+			if (nCmlCommandList[count])
+			{
+				delete [] nCmlCommandList[count];
+				nCmlCommandList[count] = NULL;
+			}
+		}
+
+		delete nCmlCommandList;
+		nCmlCommandList  = NULL;
+	}
+
+	if (nCmlListLen != NULL)
+	{
+		delete[] nCmlListLen;
+		nCmlListLen = NULL;
+	}
+
+	nCmlCount = NULL;
+}
 
 int   MsgAnalysis::byteToInt(byte* in_byte)
 {
 	if (in_byte == NULL)
 	{
-		return -1;
+		return 0;
 	}
 
 	if (strcmp((const char*)in_byte,"") == 0)
 	{
-		return -1;
+		return 0;
 	}
 	int*  lpDataLen = NULL; 
 	lpDataLen = (int *)in_byte;
 	return (*lpDataLen);
 }
 
-int   MsgAnalysis::Analysis(MSG_CLASS* msg_class,byte* lpszData)
+int   MsgAnalysis::Analysis(byte* lpszData)
 {
 	byte  szTmpDataLen[4] = {0};
 	byte  szTmpObligate[4] = {0};
@@ -34,11 +60,11 @@ int   MsgAnalysis::Analysis(MSG_CLASS* msg_class,byte* lpszData)
 	//开始标记匹配
 	if(lpszData[0] != MSG_BEGIN )
 	{
-	  msg_class->nBegin = false;
+	  this->nBegin = false;
 	  return -1;
 	}
 	//匹配标记成功 
-	msg_class->nBegin = true;
+	this->nBegin = true;
 
 	//获取包体长度           小端存放
 /*
@@ -54,57 +80,71 @@ int   MsgAnalysis::Analysis(MSG_CLASS* msg_class,byte* lpszData)
 	}
 
 	//转换
-	msg_class->nLen = byteToInt(szTmpDataLen);
+	this->nLen = byteToInt(szTmpDataLen);
 
 	//取版本号
-	msg_class->nVer = (int)lpszData[VER_INDEX];
+	this->nVer = (int)lpszData[VER_INDEX];
 
 	//取序号
-	msg_class->nSerial = (int)lpszData[SER_INDEX];
+	this->nSerial = (int)lpszData[SER_INDEX];
 
 	//获取GUID           大端存放
 	for(nPos = 0;nPos < MSG_CLASS_GUID; nPos++)
 	{
-		msg_class->nGUID[nPos] = lpszData[(GUID_INDEX)- nPos];
+		this->nGUID[nPos] = lpszData[(GUID_INDEX)- nPos];
 	}
-	msg_class->nCommand = (int)lpszData[COM_INDEX];
+	this->nCommand = (int)lpszData[COM_INDEX];
 
 	//获取保留字           大端存放
 	for(nPos = 0;nPos < MSG_CLASS_OBL; nPos++)
 	{
 		szTmpObligate[nPos] = lpszData[OBL_INDEX - nPos];
 	}
-	msg_class->nObligate = byteToInt(szTmpObligate);
+	this->nObligate = byteToInt(szTmpObligate);
 
 	//获取参数个数
-	msg_class->nCmlConst = (int)lpszData[PAC_INDEX];
+	this->nCmlCount = (int)lpszData[PAC_INDEX];
 
 	//预设空间
-	msg_class->nCmlCommandList = new byte*[msg_class->nCmlConst];
+	this->nCmlCommandList = new byte*[this->nCmlCount];
 
 	//处理参数
-	msg_class->nCmlListLen = new byte[MSG_CLASS_PARAM * msg_class->nCmlConst + 1];
-	memset(msg_class->nCmlListLen,0,sizeof(byte) * (MSG_CLASS_PARAM * msg_class->nCmlConst) + 1);
-	for(nPos = 0;nPos < (int)(MSG_CLASS_PARAM * msg_class->nCmlConst); nPos++)
+	this->nCmlListLen = new byte[MSG_CLASS_PARAM * this->nCmlCount + 1];
+	memset(this->nCmlListLen,0,sizeof(byte) * (MSG_CLASS_PARAM * this->nCmlCount) + 1);
+	for(nPos = 0;nPos < (int)(MSG_CLASS_PARAM * this->nCmlCount); nPos++)
 	{
-		msg_class->nCmlListLen[nPos] = lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * msg_class->nCmlConst)) - nPos];
+		this->nCmlListLen[nPos] = lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * this->nCmlCount)) - nPos];
 	}
 
-	int* tmpCmlListLen = new int[msg_class->nCmlConst];
+	int* tmpCmlListLen = new int[this->nCmlCount];
 
 	byte tmpComlLen[MSG_CLASS_PARAM + 1] = {0};
 
 	//参数处理
 	//计算参数所占位数及位置
-	int VerifyPos = msg_class->nCmlConst * MSG_CLASS_PARAM;
-
-	for(int i = 0;i < (int)msg_class->nCmlConst;i++)
+	int VerifyPos = this->nCmlCount * MSG_CLASS_PARAM;
+	int TmpIndex = 0;
+	int ParamLen = 0;
+	int ParamPos = 0;
+	for(int i = 0;i < (int)(this->nCmlCount);i++)
 	{
 		int j = i * 4;
 		for (int index = 0; index < MSG_CLASS_PARAM; j++,index++)
 		{
-			tmpComlLen[index] = msg_class->nCmlListLen[j];
+			tmpComlLen[index] = this->nCmlListLen[j];
 		}
+		ParamLen += byteToInt(tmpComlLen);
+		memset(tmpComlLen,0,MSG_CLASS_PARAM + 1);
+	}
+
+	for(int i = 0;i < (int)(this->nCmlCount);i++)
+	{
+		int j = i * 4;
+		for (int index = 0; index < MSG_CLASS_PARAM; j++,index++)
+		{
+			tmpComlLen[index] = this->nCmlListLen[j];
+		}
+
 		if (tmpComlLen != NULL)
 		{
 
@@ -113,14 +153,26 @@ int   MsgAnalysis::Analysis(MSG_CLASS* msg_class,byte* lpszData)
 
 			memset(tmpComlLen,0,MSG_CLASS_PARAM + 1);
 
-			msg_class->nCmlCommandList[i] = new byte[tmpCmlListLen[i] + 1];
-			memset(msg_class->nCmlCommandList[i],0,tmpCmlListLen[i] + 1);
+			this->nCmlCommandList[i] = new byte[tmpCmlListLen[i] + 1];
+			memset(this->nCmlCommandList[i],0,tmpCmlListLen[i] + 1);
+			//- (tmpCmlListLen[i] * i)
+
+			if (i == 0)
+			{
+				TmpIndex = (PAC_INDEX + (MSG_CLASS_PARAM * this->nCmlCount) + ParamLen);
+			}
+			else
+			{
+				ParamPos += tmpCmlListLen[i - 1];
+				TmpIndex = ((PAC_INDEX + (MSG_CLASS_PARAM * this->nCmlCount) + ParamLen) -  ParamPos);
+			}
 
 			for (int index = 0; index < tmpCmlListLen[i]; index++ )
 			{
-				msg_class->nCmlCommandList[i][index] = lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * msg_class->nCmlConst) + (tmpCmlListLen[i] * msg_class->nCmlConst)) - (tmpCmlListLen[i] * i)  - index];
+				this->nCmlCommandList[i][index] = lpszData[TmpIndex - index];
 				VerifyPos++;
 			}
+			//std::cout<<nCmlCommandList[i]<<std::endl;
 		}
 	}
 
@@ -130,13 +182,13 @@ int   MsgAnalysis::Analysis(MSG_CLASS* msg_class,byte* lpszData)
 		szTmpVerify[nPos] = lpszData[(VerifyPos + MSG_CLASS_VERIFY + PAC_INDEX)- nPos];
 	}
 
-	msg_class->nVerify = byteToInt(szTmpVerify);
+	this->nVerify = byteToInt(szTmpVerify);
 
 	//判断标记尾
 
-// 	if (msg_class->nLen != (VerifyPos + MSG_CLASS_VERIFY + PAC_INDEX + MSG_CLASS_END))
+// 	if (this->nLen != (VerifyPos + MSG_CLASS_VERIFY + PAC_INDEX + MSG_CLASS_END))
 // 	{
-// 		msg_class->nEnd = false;
+// 		this->nEnd = false;
 // 		if (tmpCmlListLen != NULL)
 // 		{
 // 			delete [] tmpCmlListLen;
@@ -147,11 +199,11 @@ int   MsgAnalysis::Analysis(MSG_CLASS* msg_class,byte* lpszData)
 
 	if (lpszData[VerifyPos + MSG_CLASS_VERIFY + PAC_INDEX + MSG_CLASS_END] != MSG_END)
 	{
-		msg_class->nEnd = false;
+		this->nEnd = false;
 	}
 	else
 	{
-		msg_class->nEnd = true;
+		this->nEnd = true;
 	}
 	
 
