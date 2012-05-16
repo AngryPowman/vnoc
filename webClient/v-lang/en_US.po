@@ -1,4 +1,4 @@
-# Chinese translations for PACKAGE package.
+# English translations for PACKAGE package.
 # Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Alex <EMAIL@ADDRESS>, 2012.
@@ -9,32 +9,33 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-15 15:24-0700\n"
-"PO-Revision-Date: 2012-05-15 15:24-0700\n"
+"PO-Revision-Date: 2012-05-15 15:25-0700\n"
 "Last-Translator: Alex <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese\n"
+"Language-Team: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=GBK\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: v-test.php:13
 msgid " test"
-msgstr ""
+msgstr " test"
 
 #: v-test.php:26
 msgid "Yes"
-msgstr ""
+msgstr "Yes"
 
 #: v-test.php:26
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: v-test.php:34
 msgid "reset"
-msgstr ""
+msgstr "reset"
 
 #: v-test.php:35
 msgid "submit"
-msgstr ""
+msgstr "submit"
 
 #: v-test\frameset.inc.php:7
 #, php-format
@@ -45,47 +46,54 @@ msgid ""
 "page saying \"Hello, world.\" will pop out. If it doesn't, you may ignore "
 "this error."
 msgstr ""
+"This test has one question temporily.<br />Please <a href=\"%s\" target="
+"\"_blank\">open the page</a>. Is it displayed as the blue box?<br />Follow "
+"the words in the page to check compability. If you click on button, a dialog "
+"page saying \"Hello, world.\" will pop out. If it doesn't, you may ignore "
+"this error."
 
 #: v-test\frameset.php:14
 msgid "Noname"
-msgstr ""
+msgstr "Noname"
 
 #: v-test\frameset.php:18 v-test\frameset.php:29
 msgid "Fieldset"
-msgstr ""
+msgstr "Fieldset"
 
 #: v-test\frameset.php:19 v-test\frameset.php:30
 msgid "This is fieldset."
-msgstr ""
+msgstr "This is fieldset."
 
 #: v-test\frameset.php:21 v-test\frameset.php:32
 msgid "This is inputbox."
-msgstr ""
+msgstr "This is inputbox."
 
 #: v-test\frameset.php:22 v-test\frameset.php:33
 msgid "This is button 1, try to click."
-msgstr ""
+msgstr "This is button 1, try to click."
 
 #: v-test\frameset.php:22 v-test\frameset.php:23 v-test\frameset.php:33
 #: v-test\frameset.php:34
 msgid "Hello, world."
-msgstr ""
+msgstr "Hello, world."
 
 #: v-test\frameset.php:23 v-test\frameset.php:34
 msgid "This is button 2, try to click."
-msgstr ""
+msgstr "This is button 2, try to click."
 
 #: v-test\frameset.php:24
 msgid ""
 "The color here and fillcolor are not white. Moreover, its border is in dark "
 "gray."
 msgstr ""
+"The color here and fillcolor are not white. Moreover, its border is in dark "
+"gray."
 
 #: v-test\frameset.php:25 v-test\frameset.php:36 v-test\frameset.php:37
 #: v-test\frameset.php:38 v-test\frameset.php:39 v-test\frameset.php:40
 #: v-test\frameset.php:41
 msgid "Embedded <div>"
-msgstr ""
+msgstr "Embedded <div>"
 
 #: v-test\frameset.php:35
 msgid ""
@@ -93,3 +101,6 @@ msgid ""
 "is green. There are scrollbars in the frame, fieldset and \"Embedded <div>\" "
 "below."
 msgstr ""
+"The elements inside are red; the background of frame is gray, and the border "
+"is green. There are scrollbars in the frame, fieldset and \"Embedded <div>\" "
+"below."

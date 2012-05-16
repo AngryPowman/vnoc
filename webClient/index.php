@@ -1,8 +1,6 @@
 ﻿<?php
-	require_once( dirname(__FILE__) . '/v-load.php' );
-	_('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-	_('aqwe');
-	v_locale_clear()
-	v_locale_set();
-	echo v_locale();
+	require_once(dirname(__FILE__) . '/v-load.php');
+	require_once(dirname(__FILE__) . '/v-init.php');
+	printf(__FILE__);
+	echo v_referer();
 ?>
