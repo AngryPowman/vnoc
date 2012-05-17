@@ -141,6 +141,9 @@
     <ClCompile Include="MsgDef.cpp">
       <Filter>MsgAnalysis</Filter>
     </ClCompile>
+    <ClCompile Include="MessageParser.cpp">
+      <Filter>MsgAnalysis</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
@@ -278,6 +281,9 @@
     <ClInclude Include="..\..\MyNetClient\MsgDef.h">
       <Filter>MsgAnalysis</Filter>
     </ClInclude>
+    <ClInclude Include="MessageParser.h">
+      <Filter>MsgAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -304,12 +310,6 @@
     </None>
     <None Include="Performance.inl">
       <Filter>util</Filter>
-    </None>
-    <None Include="MsgAnalysis.h">
-      <Filter>MsgAnalysis</Filter>
-    </None>
-    <None Include="MsgAnalysis.cpp">
-      <Filter>MsgAnalysis</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

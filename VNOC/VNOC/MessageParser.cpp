@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "msganalysis.h"
+#include "MessageParser.h"
 
-void MsgAnalysis::Close()
+void MessageParser::Close()
 {
 	if (nCmlCommandList)
 	{
@@ -29,23 +29,25 @@ void MsgAnalysis::Close()
 	nCmlCount = NULL;
 }
 
-int   MsgAnalysis::byteToInt(byte* in_byte)
+uint MessageParser::byteToInt(byte* in_byte)
 {
+	byte tmpByte[4] = {0};
 	if (in_byte == NULL)
 	{
 		return 0;
 	}
 
-	if (strcmp((const char*)in_byte,"") == 0)
+	for (int index = 0; index < strlen((const char*)in_byte); index++)
 	{
-		return 0;
+		tmpByte[index] = in_byte[index];
 	}
-	int*  lpDataLen = NULL; 
-	lpDataLen = (int *)in_byte;
+
+	uint*  lpDataLen = NULL; 
+	lpDataLen = (uint *)tmpByte;
 	return (*lpDataLen);
 }
 
-int   MsgAnalysis::Analysis(byte* lpszData)
+int MessageParser::Parse(byte* lpszData)
 {
 	byte  szTmpDataLen[4] = {0};
 	byte  szTmpObligate[4] = {0};
@@ -172,7 +174,6 @@ int   MsgAnalysis::Analysis(byte* lpszData)
 				this->nCmlCommandList[i][index] = lpszData[TmpIndex - index];
 				VerifyPos++;
 			}
-			//std::cout<<nCmlCommandList[i]<<std::endl;
 		}
 	}
 

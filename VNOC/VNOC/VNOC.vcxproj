@@ -233,6 +233,7 @@
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="InterfaceDefImpl.cpp" />
     <ClCompile Include="LoginImpl.cpp" />
+    <ClCompile Include="MessageParser.cpp" />
     <ClCompile Include="MsgDef.cpp" />
     <ClCompile Include="RoomImpl.cpp" />
     <ClCompile Include="RoomListDlg.cpp" />
@@ -285,6 +286,7 @@
     <ClInclude Include="IUIWnd.h" />
     <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="LoginImpl.h" />
+    <ClInclude Include="MessageParser.h" />
     <ClInclude Include="RoomImpl.h" />
     <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -304,8 +306,6 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="Config.inl" />
     <None Include="config.xml" />
-    <None Include="MsgAnalysis.h" />
-    <None Include="MsgAnalysis.cpp" />
     <None Include="Performance.inl" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />

@@ -10,7 +10,6 @@
 	purpose:	数据包解析类，分析传输数据(客户端)
 *********************************************************************/
 
-//#include "MsgDef.h"
 
 #pragma once
 
@@ -42,19 +41,19 @@
 typedef  unsigned char byte;	
 typedef  unsigned int  uint;
 
-class MsgAnalysis
+class MessageParser
 {
 public:
 
-	MsgAnalysis(){
+	MessageParser(){
 		memset(nGUID,0,17);
 		nCmlListLen  = NULL;
 		nCmlCommandList = NULL;
 	}
 
-	int Analysis(byte* lpszData);
+	int Parse(byte* lpszData);
 
-	~MsgAnalysis(){
+	~MessageParser(){
 
 	}
 
@@ -108,7 +107,7 @@ protected:
 		return nLen;
 	}
 
-	int   byteToInt(byte* in_byte);
+	uint   byteToInt(byte* in_byte);
 
 private:
 

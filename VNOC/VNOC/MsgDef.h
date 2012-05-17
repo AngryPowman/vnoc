@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "MsgAnalysis.h"
+#include "MessageParser.h"
 
 /*
 #define  MSG_ERROR_BDMISS  1
@@ -9,11 +9,9 @@
 #define  MSG_ERROR_PARAM   3
 #define  MSG_ERROR_LEN     4*/
 
-//转换
-uint Convert(byte* _Str);
 
 //RVC(获取验证码请求)
-class MSG_RVC: public MsgAnalysis
+class MSG_RVC: public MessageParser
 {
 public:
 	
@@ -48,7 +46,7 @@ private:
 };
 
 //AVC(获取验证码响应)
-class MSG_AVC: public MsgAnalysis
+class MSG_AVC: public MessageParser
 {
 public:
 
@@ -86,7 +84,7 @@ private:
 
 
 //RLI(登录请求)
-class MSG_RLI:public MsgAnalysis
+class MSG_RLI:public MessageParser
 {
 
 public:
@@ -125,7 +123,7 @@ private:
 
 
 //ALI(登录应答)
-class MSG_ALI:public MsgAnalysis
+class MSG_ALI:public MessageParser
 {
 
 public:
@@ -163,7 +161,7 @@ private:
 
 
 //RPS(个人信息同步通知)
-class MSG_RPS:public MsgAnalysis
+class MSG_RPS:public MessageParser
 {
 
 public:
@@ -205,7 +203,7 @@ private:
 
 
 //APS(个人信息同步通知确认)
-class MSG_APS:public MsgAnalysis
+class MSG_APS:public MessageParser
 {
 
 public:

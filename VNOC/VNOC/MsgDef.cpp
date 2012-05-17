@@ -2,28 +2,6 @@
 
 #include "MsgDef.h"
 
-uint Convert(byte* _Str)
-{
-	if (_Str == NULL)
-	{
-		return -1;
-	}
-	if (strcmp((const char*)_Str,"") == 0)
-	{
-		return -1;
-	}
-	//去除末尾的0
-    //int* tmpInt = new int[strlen((const char*)_Str)];
-	int * tmpInt = (int *)_Str;
-// 	byte * tmpData = new byte[strlen((const char*)_Str)];
-// 	memset(tmpData,0,strlen((const char*)_Str));
-// 	for (int index = 0; index < (int)strlen((const char*)_Str); index++)
-// 	{
-// 		tmpData[index] = _Str[index];
-// 	}
-	return (*tmpInt);
-}
-
 
 //RVC(获取验证码请求)
 void MSG_RVC::Initialize()
