@@ -233,8 +233,12 @@
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="InterfaceDefImpl.cpp" />
     <ClCompile Include="LoginImpl.cpp" />
-    <ClCompile Include="MessageParser.cpp" />
-    <ClCompile Include="MsgDef.cpp" />
+    <ClCompile Include="MessageParser.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MsgDef.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="RoomImpl.cpp" />
     <ClCompile Include="RoomListDlg.cpp" />
     <ClCompile Include="RoomDlg.cpp" />
@@ -303,7 +307,6 @@
   <ItemGroup>
     <None Include="..\postDispatch.bat" />
     <None Include="..\preLink.bat" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Config.inl" />
     <None Include="config.xml" />
     <None Include="Performance.inl" />

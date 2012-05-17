@@ -140,7 +140,6 @@ CConfig::CConfig()
 CConfig::CConfig(LPCTSTR path)
 {
 	xPath(path);
-	Get();
 }
 
 CConfig::~CConfig()

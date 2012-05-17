@@ -301,7 +301,6 @@
     <None Include="resource.hm">
       <Filter>头文件</Filter>
     </None>
-    <None Include="ClassDiagram1.cd" />
     <None Include="config.xml">
       <Filter>资源文件</Filter>
     </None>

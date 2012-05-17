@@ -29,5 +29,8 @@
     <ClCompile Include="ClientConnection.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="NetClientTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

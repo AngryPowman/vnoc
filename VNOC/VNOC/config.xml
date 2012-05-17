@@ -1,4 +1,4 @@
-<root />
+
 <SciEdit>
     <Language language="cpp" test="testValue">
         <Editor>
@@ -9,3 +9,4 @@
         <test>This is Test</test>
     </Language>
 </SciEdit>
+

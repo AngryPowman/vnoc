@@ -2,6 +2,10 @@
 
 namespace VNOC_CLIENT{
 
+CClientConnection::CClientConnection()
+{
+	;
+}
 
 CClientConnection::CClientConnection(HWND hwnd)
 {
