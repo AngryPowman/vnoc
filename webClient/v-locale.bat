@@ -17,13 +17,13 @@ color 18
   echo -------------------------------------------------------------------------------
 
   set /p input=Option Index: 
-  if %input% EQU 1 goto Template else echo Invalid Input
+  if %input% EQU 1 goto Template
   if %input% EQU 2 goto Generate
   if %input% EQU 3 goto Delete
   if %input% EQU 4 goto Update
   if %input% EQU 5 goto ShowList
   if %input% EQU 6 goto ColorSetting
-  if %input% EQU 7 exit
+  if %input% EQU 7 exit else echo Invalid Input
 
 :Template
   setlocal ENABLEDELAYEDEXPANSION
@@ -34,7 +34,7 @@ color 18
   )
   setlocal DISABLEDELAYEDEXPANSION
   xgettext.exe -k__ -f v-lang/php.lst -o v-lang/VNOC.pot --from-code=utf-8
-  del /f v-lang\php.lst
+  del /F /Q v-lang\php.lst
   goto Done
 
 :Generate
@@ -44,14 +44,15 @@ color 18
 
 :Delete
   set /p file=Please input locale name: 
-  del /f v-lang\%file%.po
+  del /F /Q v-lang\%file%.po
   goto List
 
 :Update
   for /f %%i in ('"type v-lang\list.txt"') do (
-    msgmerge -U v-lang/%%i.po v-lang/VNOC.pot
+    msgmerge -U -q v-lang/%%i.po v-lang/VNOC.pot
+    del /F /Q v-lang\%%i.po~
   )
-  goto Done
+  goto List
 
 :ShowList
   type v-lang\list.txt
@@ -59,7 +60,7 @@ color 18
   goto Done
 
 :List
-  if exist v-lang\list.txt del /f v-lang\list.txt
+  if exist v-lang\list.txt del /F /Q v-lang\list.txt
   setlocal ENABLEDELAYEDEXPANSION
   for /f %%i in ('"dir /A /S /B /N /ON v-lang\*.po"') do (
     set file=%%~fi

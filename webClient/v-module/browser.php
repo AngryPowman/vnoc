@@ -1,4 +1,4 @@
-﻿<?
+<?
 	/**
 	 ** browser.php
 	 **
@@ -38,6 +38,28 @@
 	function v_redirect($url)
 	{
 		header("location: " . $url);
+	}
+	
+	/** Refresh current page
+	 **
+	 ** @_vnoc.browser
+	 ** @param none
+	 ** @return none
+	 */
+	function v_refresh()
+	{
+		v_redirect(__FILE__);
+	}
+	
+	/** Goto previous page
+	 **
+	 ** @_vnoc.browser
+	 ** @param none
+	 ** @return none
+	 */
+	function v_back()
+	{
+		v_redirect(v_referer());
 	}
 	
 	/** Get the referer to this page

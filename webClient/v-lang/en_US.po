@@ -3,37 +3,45 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Alex <EMAIL@ADDRESS>, 2012.
 #
-#: v-test\frameset.inc.php:9
+#: v-test\frameset.inc.php:9 v-test\locations.inc.php:7
+#: v-test\locations.inc.php:9
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: VNOC\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-15 15:24-0700\n"
-"PO-Revision-Date: 2012-05-15 15:25-0700\n"
-"Last-Translator: Alex <EMAIL@ADDRESS>\n"
-"Language-Team: English\n"
+"POT-Creation-Date: 2012-05-15 19:32-0700\n"
+"PO-Revision-Date: 2012-05-15 20:47-0800\n"
+"Last-Translator: Alex <deeno@qq.com>\n"
+"Language-Team: VNOC\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=GBK\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: v-test.php:13
+#: index.php:13
+msgid "VNOC Homepage"
+msgstr "VNOC Homepage"
+
+#: v-test.php:14
 msgid " test"
 msgstr " test"
 
-#: v-test.php:26
+#: v-test.php:27
 msgid "Yes"
 msgstr "Yes"
 
-#: v-test.php:26
+#: v-test.php:27
 msgid "No"
 msgstr "No"
 
-#: v-test.php:34
+#: v-test.php:35
 msgid "reset"
 msgstr "reset"
 
-#: v-test.php:35
+#: v-test.php:36
 msgid "submit"
 msgstr "submit"
 
@@ -46,13 +54,8 @@ msgid ""
 "page saying \"Hello, world.\" will pop out. If it doesn't, you may ignore "
 "this error."
 msgstr ""
-"This test has one question temporily.<br />Please <a href=\"%s\" target="
-"\"_blank\">open the page</a>. Is it displayed as the blue box?<br />Follow "
-"the words in the page to check compability. If you click on button, a dialog "
-"page saying \"Hello, world.\" will pop out. If it doesn't, you may ignore "
-"this error."
 
-#: v-test\frameset.php:14
+#: v-test\frameset.php:14 v-test\locations.php:32
 msgid "Noname"
 msgstr "Noname"
 
@@ -104,3 +107,82 @@ msgstr ""
 "The elements inside are red; the background of frame is gray, and the border "
 "is green. There are scrollbars in the frame, fieldset and \"Embedded <div>\" "
 "below."
+
+#: v-test\locations.php:39
+msgid "Top 60px"
+msgstr "Top 60px"
+
+#: v-test\locations.php:40
+msgid "Bottom 60px"
+msgstr "Bottom 60px"
+
+#: v-test\locations.php:41
+msgid "Left 60px"
+msgstr "Left 60px"
+
+#: v-test\locations.php:42
+msgid "Right 60px"
+msgstr "Right 60px"
+
+#: v-test\locations.php:43
+msgid "Centered Horizontally"
+msgstr "Centered Horizontally"
+
+#: v-test\locations.php:44
+msgid "Centered Vertically"
+msgstr "Centered Vertically"
+
+#: v-test\locations.php:45
+msgid "Left-top 60px"
+msgstr "Left-top 60px"
+
+#: v-test\locations.php:46
+msgid "Left 60px centered"
+msgstr "Left 60px centered"
+
+#: v-test\locations.php:47
+msgid "Left-bottom 60px"
+msgstr "Left-bottom 60px"
+
+#: v-test\locations.php:48
+msgid "Top 60px centered"
+msgstr "Top 60px centered"
+
+#: v-test\locations.php:49
+msgid "Centered"
+msgstr "Centered"
+
+#: v-test\locations.php:50
+msgid "Bottom 60px centered"
+msgstr "Bottom 60px centered"
+
+#: v-test\locations.php:51
+msgid "Right-top 60px"
+msgstr "Right-top 60px"
+
+#: v-test\locations.php:52
+msgid "Right 60px centered"
+msgstr "Right 60px centered"
+
+#: v-test\locations.php:53
+msgid "Right-bottom 60px"
+msgstr "Right-bottom 60px"
+
+#: v-test\locations.php:59
+msgid "Left And Right 60px"
+msgstr "Left And Right 60px"
+
+#: v-test\locations.php:60
+msgid "Top And Bottom 60px"
+msgstr "Top And Bottom 60px"
+
+#: v-test\locations.php:61
+msgid "Each edge 60px"
+msgstr "Each edge 60px"
+
+#~ msgid ""
+#~ ");\n"
+#~ "?>"
+#~ msgstr ""
+#~ ");\n"
+#~ "?>"

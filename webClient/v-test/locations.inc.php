@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/**
 	 ** locations.inc.php
 	 */

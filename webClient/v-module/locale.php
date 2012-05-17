@@ -1,4 +1,4 @@
-﻿<?
+<?
 	/**
 	 ** locale.php
 	 **
@@ -66,10 +66,16 @@
 	function v_locale_set()
 	{
 		if(!isset($_COOKIE["vnoc_locale"]))
+		{
 			v_locale_tocookie();
-		putenv("lang=" . v_locale());
-		setlocale(LC_ALL, v_locale(), "utf-8");
-		bindtextdomain(v_locale(), LANG);
-		textdomain(v_locale());
+			v_refresh();
+		}
+		else
+		{
+			putenv("lang=" . v_locale());
+			setlocale(LC_ALL, v_locale() . ".utf8");
+			bindtextdomain(v_locale(), LANG);
+			textdomain(v_locale());
+		}
 	}
 ?>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/**
 	 ** v-setlocale.php
 	 **
@@ -7,9 +7,6 @@
 	 */
 	require_once("v-load.php");
 	
-	/** Clean locale cache from Cookies */
-	v_locale_clear();
-	
 	/** Save new locale setting to Cookies */
 	v_locale_tocookie($_GET["lang"]);
 	
@@ -17,5 +14,5 @@
 	v_locale_set();
 	
 	/** Redirect to former page */
-	v_redirect(v_referer());
+	v_back();
 ?>

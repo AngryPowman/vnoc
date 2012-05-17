@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: v-test\frameset.inc.php:9
+#: v-test\frameset.inc.php:9 v-test\locations.inc.php:7
+#: v-test\locations.inc.php:9
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-15 15:32-0700\n"
+"POT-Creation-Date: 2012-05-16 06:07-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +18,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: v-test.php:13
+#: index.php:13
+msgid "VNOC Homepage"
+msgstr ""
+
+#: v-test.php:14
 msgid " test"
 msgstr ""
 
-#: v-test.php:26
+#: v-test.php:27
 msgid "Yes"
 msgstr ""
 
-#: v-test.php:26
+#: v-test.php:27
 msgid "No"
 msgstr ""
 
-#: v-test.php:34
+#: v-test.php:35
 msgid "reset"
 msgstr ""
 
-#: v-test.php:35
+#: v-test.php:36
 msgid "submit"
 msgstr ""
 
@@ -47,7 +52,7 @@ msgid ""
 "this error."
 msgstr ""
 
-#: v-test\frameset.php:14
+#: v-test\frameset.php:14 v-test\locations.php:32
 msgid "Noname"
 msgstr ""
 
@@ -93,4 +98,76 @@ msgid ""
 "The elements inside are red; the background of frame is gray, and the border "
 "is green. There are scrollbars in the frame, fieldset and \"Embedded <div>\" "
 "below."
+msgstr ""
+
+#: v-test\locations.php:39
+msgid "Top 60px"
+msgstr ""
+
+#: v-test\locations.php:40
+msgid "Bottom 60px"
+msgstr ""
+
+#: v-test\locations.php:41
+msgid "Left 60px"
+msgstr ""
+
+#: v-test\locations.php:42
+msgid "Right 60px"
+msgstr ""
+
+#: v-test\locations.php:43
+msgid "Centered Horizontally"
+msgstr ""
+
+#: v-test\locations.php:44
+msgid "Centered Vertically"
+msgstr ""
+
+#: v-test\locations.php:45
+msgid "Left-top 60px"
+msgstr ""
+
+#: v-test\locations.php:46
+msgid "Left 60px centered"
+msgstr ""
+
+#: v-test\locations.php:47
+msgid "Left-bottom 60px"
+msgstr ""
+
+#: v-test\locations.php:48
+msgid "Top 60px centered"
+msgstr ""
+
+#: v-test\locations.php:49
+msgid "Centered"
+msgstr ""
+
+#: v-test\locations.php:50
+msgid "Bottom 60px centered"
+msgstr ""
+
+#: v-test\locations.php:51
+msgid "Right-top 60px"
+msgstr ""
+
+#: v-test\locations.php:52
+msgid "Right 60px centered"
+msgstr ""
+
+#: v-test\locations.php:53
+msgid "Right-bottom 60px"
+msgstr ""
+
+#: v-test\locations.php:59
+msgid "Left And Right 60px"
+msgstr ""
+
+#: v-test\locations.php:60
+msgid "Top And Bottom 60px"
+msgstr ""
+
+#: v-test\locations.php:61
+msgid "Each edge 60px"
 msgstr ""
