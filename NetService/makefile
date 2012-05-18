@@ -2,7 +2,7 @@
 # revision : 3
 CXX=g++
 VPATH=src:test
-CXXFLAGS=-std=c++0x
+CXXFLAGS=-std=c++0x -fpermissive
 CUR_DIR = $(shell pwd)
 INCS := $(CUR_DIR)/include
 
