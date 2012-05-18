@@ -3,6 +3,7 @@
 #include "../SocketServer.hpp"
 #include <asio.hpp>
 #include <memory>
+#include <ezlogger_headers.hpp>
 class EventOperator
 {
 public:
@@ -47,7 +48,7 @@ public:
         sendHandler_.reset(new HandlerWrapper<Handler>(handler));
 		memcpy(sendBuf_, buf, len);
 		sendBuf_[len]=0;
-		std::cout<<"send: "<<sendBuf_<<std::endl;
+		EZLOGGERSTREAM<<"send: "<<sendBuf_<<std::endl;
         return 0;
     }
     bool expectSend(const char * buf, size_t len)
@@ -61,7 +62,7 @@ public:
     {
         if (len <= recvBufLen - receivedLenth_){
             memcpy(recvBuf_ + receivedLenth_, buf, len);
-			std::cout<<"recv: "<< recvBuf_<<std::endl;
+			EZLOGGERSTREAM<<"recv: "<< recvBuf_<<std::endl;
 			asio::error_code ec;
 			if (isReadSome_) {
 				(*recvHandler_)(ec, len);

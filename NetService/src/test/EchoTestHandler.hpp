@@ -3,6 +3,7 @@
 #include "../AsioTcpConnection.hpp"
 #include "../SocketHandler.hpp"
 #include <iostream>
+#include <ezlogger_headers.hpp>
 template <typename ConnectionT>
 class EchoTestHandler: public SocketHandler
 {
@@ -20,7 +21,7 @@ public:
         if (!error)
 		{
             data_[bytes_transferred]='\0';
-            std::cout<<data_;
+            EZLOGGERSTREAM<<data_<<std::endl;;
             connection_->send(data_, bytes_transferred, 
             std::bind(&EchoTestHandler::HandleWrite, this,
               std::placeholders::_1,

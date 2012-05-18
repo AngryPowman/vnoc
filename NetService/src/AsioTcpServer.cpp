@@ -5,6 +5,7 @@
 #include <iostream>
 #include "asio.hpp"
 #include "test/EchoTestHandler.hpp"
+#include <ezlogger_headers.hpp>
 using namespace asio;
 using namespace asio::ip;
 using namespace std;
@@ -22,7 +23,7 @@ AsioTcpServer::~AsioTcpServer()
 }
 void AsioTcpServer::worker()
 {
-    cout<<"start worker"<<endl;
+    EZLOGGERSTREAM<<"start worker"<<endl;
     g_io_service.run();
 }
 void AsioTcpServer::AcceptHandler( AsioTcpConnection* conn, const asio::error_code& error)
@@ -38,7 +39,7 @@ void AsioTcpServer::AcceptHandler( AsioTcpConnection* conn, const asio::error_co
 				std::placeholders::_1));
 	} else 
 	{
-		std::cout<<error.message()<<std::endl;
+		EZLOGGERSTREAM<<error.message()<<std::endl;
 	}
 }
 
