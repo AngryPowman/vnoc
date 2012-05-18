@@ -144,7 +144,7 @@
     <ClCompile Include="MessageParser.cpp">
       <Filter>MsgParser</Filter>
     </ClCompile>
-    <ClCompile Include="测试例子.cpp">
+    <ClCompile Include="TestMsgParser.cpp">
       <Filter>MsgParser</Filter>
     </ClCompile>
   </ItemGroup>
