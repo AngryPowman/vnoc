@@ -1,5 +1,3 @@
-#ifndef ECHOTESTHANDLERTEST_H
-#define ECHOTESTHANDLERTEST_H
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "EchoTestHandler.hpp"
@@ -37,5 +35,3 @@ public:
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( EchoTestHandlerTest );
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(EchoTestHandlerTest, "EchoTestHandlerTest");
-
-#endif /*ECHOTESTHANDLERTEST_H*/
