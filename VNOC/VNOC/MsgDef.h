@@ -1,7 +1,6 @@
 
 #pragma once
 
-#include "MessageParser.h"
 
 /*
 #define  MSG_ERROR_BDMISS  1
@@ -9,9 +8,110 @@
 #define  MSG_ERROR_PARAM   3
 #define  MSG_ERROR_LEN     4*/
 
+#include <iostream>
+
+
+#define MSG_BEGIN    0x55   // 'V' 标记消息的开始
+#define MSG_END		 0x43	// 'C' 标记消息的结束
+
+#define  MSG_CLASS_BEGIN  1
+#define  MSG_CLASS_END    1
+#define  MSG_CLASS_LEN    4
+#define	 MSG_CLASS_VER    1
+#define  MSG_CLASS_SERIAL 1
+#define  MSG_CLASS_GUID   16
+#define  MSG_CLASS_COMMAND 1
+#define  MSG_CLASS_OBL    4
+#define  MSG_CLASS_PARAMCONST 1
+#define  MSG_CLASS_VERIFY 2   //效验码 未定默认为2个字节
+#define  MSG_CLASS_PARAM  4
+
+#define  VER_INDEX    MSG_CLASS_LEN + MSG_CLASS_VER
+#define	 SER_INDEX	  MSG_CLASS_LEN + MSG_CLASS_VER + MSG_CLASS_SERIAL
+#define  GUID_INDEX   MSG_CLASS_LEN + MSG_CLASS_VER + MSG_CLASS_SERIAL + MSG_CLASS_GUID
+#define  COM_INDEX	  MSG_CLASS_LEN + MSG_CLASS_VER + MSG_CLASS_SERIAL + MSG_CLASS_COMMAND + MSG_CLASS_GUID
+#define	 OBL_INDEX	  MSG_CLASS_LEN + MSG_CLASS_VER + MSG_CLASS_SERIAL + MSG_CLASS_GUID + MSG_CLASS_COMMAND + MSG_CLASS_OBL
+#define  PAC_INDEX    MSG_CLASS_LEN + MSG_CLASS_VER + MSG_CLASS_SERIAL + MSG_CLASS_GUID + MSG_CLASS_COMMAND + MSG_CLASS_OBL + MSG_CLASS_PARAMCONST
+
+
+
+typedef  unsigned char byte;	
+typedef  unsigned int  uint;
+
+
+uint byteToInt(byte* in_byte);
+
+class CMessage
+{
+public:
+
+	friend class CMessageParser;
+
+	CMessage(){
+		_Initialization();
+	}
+
+	~CMessage(){
+		_Close();
+	}
+
+protected:
+
+	bool returnBeginTab();
+
+	bool returnEndTab();
+
+	byte returnCommand();
+
+	byte* returnCmlListLen();
+
+	byte returnSerial();
+
+	byte* returnGUID();
+
+	byte** returnCmlCommandList();
+
+	uint returnVerify();
+
+	uint returnObligate();
+
+	uint returnVersion();
+
+	uint returnCmlCount();
+
+	uint returnDataLen();
+
+private:
+
+
+	bool  m_Begin;				  //标记消息的开始  统一字符'V"的ASCⅡ码 0x55
+	bool  m_End;				  //标记消息的结束  固定字符'C‘的ASCⅡ码 0x43
+
+	byte   m_Command;			  //指令			具体的指令，用来标注此数据包的功能
+	byte*  m_CmlListLen;		  //参数列表    4字节，对应参数N的长度
+	byte   m_Serial;			  //序号       指令的编号
+	byte   m_GUID[17];            //GUID       用来提供用户验证
+	byte** m_CmlCommandList;      //参数列表    编码后的参数，具体类型根据具体指令决定
+	//DWORD dwType;				  //消息类型		
+
+
+	uint  m_Verify;               //效验码 预订
+
+	uint  m_Obligate;              //预留空间
+	uint  m_Ver;				   //版本号     标志本VNOC协议的版本
+	uint  m_CmlCount;			   //参数数量    编码后的参数，具体类型根据具体指令决定
+	uint  m_Len;                   //包体长度	   4个字节，用于指定包体的长度（可以辅助数据解析）
+
+private:
+
+	void   _Initialization();
+	void   _Close();
+
+};
+
 
 //RVC(获取验证码请求)
-class MSG_RVC: public MessageParser
+class MSG_RVC: public CMessage
 {
 public:
 	
@@ -46,7 +146,7 @@ private:
 };
 
 //AVC(获取验证码响应)
-class MSG_AVC: public MessageParser
+class MSG_AVC: public CMessage
 {
 public:
 
@@ -84,7 +184,7 @@ private:
 
 
 //RLI(登录请求)
-class MSG_RLI:public MessageParser
+class MSG_RLI:public CMessage
 {
 
 public:
@@ -123,7 +223,7 @@ private:
 
 
 //ALI(登录应答)
-class MSG_ALI:public MessageParser
+class MSG_ALI:public CMessage
 {
 
 public:
@@ -161,7 +261,7 @@ private:
 
 
 //RPS(个人信息同步通知)
-class MSG_RPS:public MessageParser
+class MSG_RPS:public CMessage
 {
 
 public:
@@ -203,7 +303,7 @@ private:
 
 
 //APS(个人信息同步通知确认)
-class MSG_APS:public MessageParser
+class MSG_APS:public CMessage
 {
 
 public:

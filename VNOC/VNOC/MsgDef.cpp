@@ -3,6 +3,127 @@
 #include "MsgDef.h"
 
 
+uint byteToInt(byte* in_byte)
+{
+	byte tmpByte[4] = {0};
+	if (in_byte == NULL)
+	{
+		return 0;
+	}
+
+	for (int index = 0; index < (int)strlen((const char*)in_byte); index++)
+	{
+		tmpByte[index] = in_byte[index];
+	}
+
+	uint*  lpDataLen = NULL; 
+	lpDataLen = (uint *)tmpByte;
+	return (*lpDataLen);
+}
+
+
+bool CMessage::returnBeginTab()
+{
+	return m_Begin;
+} 
+
+bool CMessage::returnEndTab()
+{
+	return m_Begin;
+}
+
+byte CMessage::returnCommand()
+{
+	return m_Command;
+}
+
+byte* CMessage::returnCmlListLen()
+{
+	return  m_CmlListLen;
+}
+
+byte CMessage::returnSerial()
+{
+	return m_Serial;
+}
+
+byte* CMessage::returnGUID()
+{
+	return m_GUID;
+}
+
+byte** CMessage::returnCmlCommandList()
+{
+	return m_CmlCommandList;
+}
+
+uint CMessage::returnVerify()
+{
+	return m_Verify;
+}
+
+uint CMessage::returnObligate()
+{
+	return m_Obligate;
+}
+
+uint CMessage::returnVersion()
+{
+	return m_Ver;
+}
+
+uint CMessage::returnCmlCount()
+{
+	return m_CmlCount;
+}
+
+uint CMessage::returnDataLen()
+{
+	return m_Len;
+}
+
+
+void CMessage::_Initialization()
+{
+	memset(m_GUID,0,17);
+	m_CmlListLen  = NULL;
+	m_CmlCommandList = NULL;
+	m_CmlCount = 0;
+	m_Obligate = 0;
+	m_Ver = 0;
+	m_Verify  = 0;
+	m_Serial  = 0;
+	m_Len     = 0;
+	m_Command = 0;
+}
+
+void CMessage::_Close()
+{
+	if (m_CmlCommandList)
+	{
+		for (int count = 0; (int)m_CmlCount < count; count++)
+		{
+			if (m_CmlCommandList[count])
+			{
+				delete [] m_CmlCommandList[count];
+				m_CmlCommandList[count] = NULL;
+			}
+		}
+
+		delete m_CmlCommandList;
+		m_CmlCommandList  = NULL;
+	}
+
+	if (m_CmlListLen != NULL)
+	{
+		delete[] m_CmlListLen;
+		m_CmlListLen = NULL;
+	}
+
+	m_CmlCount = NULL;
+}
+
+
 //RVC(获取验证码请求)
 void MSG_RVC::Initialize()
 {

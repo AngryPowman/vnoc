@@ -3,70 +3,74 @@
 
 #include "MessageParser.h"
 
-void MessageParser::Close()
+//CMessageParser
+
+CMessage* CMessageParser::_MessageType()
 {
-	if (nCmlCommandList)
+	CMessage* msg_str = NULL;
+	switch (GetMessageType())
 	{
-		for (int count = 0; (int)nCmlCount < count; count++)
-		{
-			if (nCmlCommandList[count])
-			{
-				delete [] nCmlCommandList[count];
-				nCmlCommandList[count] = NULL;
-			}
-		}
-
-		delete nCmlCommandList;
-		nCmlCommandList  = NULL;
+	case MSG_AVC_TYPE: msg_str = new MSG_AVC; 
+		break;
+	case MSG_ALI_TYPE: msg_str = new MSG_ALI; 
+		break;
+	case MSG_RVC_TYPE: msg_str = new MSG_RVC; 
+		break;
+	case MSG_RLI_TYPE: msg_str = new MSG_RLI;
+		break;
+	case MSG_RPS_TYPE: msg_str = new MSG_RPS;
+	    break;
+	case MSG_APS_TYPE: msg_str = new MSG_APS;
+		break;
 	}
-
-	if (nCmlListLen != NULL)
-	{
-		delete[] nCmlListLen;
-		nCmlListLen = NULL;
-	}
-
-	nCmlCount = NULL;
+	return msg_str;
 }
 
-uint MessageParser::byteToInt(byte* in_byte)
+int  CMessageParser::GetMessageType()
 {
-	byte tmpByte[4] = {0};
-	if (in_byte == NULL)
+	int  _type = 0;
+	switch(m_Instruct)
 	{
-		return 0;
+	case MSG_AVC_COM: _type =  MSG_AVC_TYPE; 
+		break;
+	case MSG_ALI_COM: _type =  MSG_ALI_TYPE; 
+		break;
+	case MSG_RVC_COM: _type =  MSG_RVC_TYPE; 
+		break;
+	case MSG_RLI_COM: _type =  MSG_RLI_TYPE;
+		break;
+	case MSG_RPS_COM: _type =  MSG_RPS_TYPE;
+		break;
+	case MSG_APS_COM: _type =  MSG_APS_TYPE;
+		break;
 	}
-
-	for (int index = 0; index < strlen((const char*)in_byte); index++)
-	{
-		tmpByte[index] = in_byte[index];
-	}
-
-	uint*  lpDataLen = NULL; 
-	lpDataLen = (uint *)tmpByte;
-	return (*lpDataLen);
+	return _type;
 }
 
-int MessageParser::Parse(byte* lpszData)
+void CMessageParser::_Head(CMessage* _Messsage,byte* lpszData)
 {
-	byte  szTmpDataLen[4] = {0};
-	byte  szTmpObligate[4] = {0};
-	byte szTmpVerify[4] = {0};
-	byte  szTmpGUID[16]   = {0};
 	int    nPos      = 0;
-	int    nVer      = 0; //
+	byte  szTmpObligate[4] = {0};
+	byte  szTmpDataLen[4] = {0};
+
+	if (_Messsage == NULL)
+	{
+		return;
+	}
+
+
 	if(lpszData == NULL)
 	{
-		return -1;
+		return;
 	}
-	//开始标记匹配
+
 	if(lpszData[0] != MSG_BEGIN )
 	{
-	  this->nBegin = false;
-	  return -1;
+	  _Messsage->m_Begin = false;
+	  return;
 	}
 	//匹配标记成功 
-	this->nBegin = true;
+	_Messsage->m_Begin = true;
 
 	//获取包体长度           小端存放
 /*
@@ -82,69 +86,85 @@ int MessageParser::Parse(byte* lpszData)
 	}
 
 	//转换
-	this->nLen = byteToInt(szTmpDataLen);
+	_Messsage->m_Len = byteToInt(szTmpDataLen);
 
 	//取版本号
-	this->nVer = (int)lpszData[VER_INDEX];
+	_Messsage->m_Ver = (int)lpszData[VER_INDEX];
 
 	//取序号
-	this->nSerial = (int)lpszData[SER_INDEX];
+	_Messsage->m_Serial = (int)lpszData[SER_INDEX];
 
 	//获取GUID           大端存放
 	for(nPos = 0;nPos < MSG_CLASS_GUID; nPos++)
 	{
-		this->nGUID[nPos] = lpszData[(GUID_INDEX)- nPos];
+		_Messsage->m_GUID[nPos] = lpszData[(GUID_INDEX)- nPos];
 	}
-	this->nCommand = (int)lpszData[COM_INDEX];
+	_Messsage->m_Command = (int)lpszData[COM_INDEX];
 
 	//获取保留字           大端存放
 	for(nPos = 0;nPos < MSG_CLASS_OBL; nPos++)
 	{
 		szTmpObligate[nPos] = lpszData[OBL_INDEX - nPos];
 	}
-	this->nObligate = byteToInt(szTmpObligate);
+	_Messsage->m_Obligate = byteToInt(szTmpObligate);
 
 	//获取参数个数
-	this->nCmlCount = (int)lpszData[PAC_INDEX];
+	_Messsage->m_CmlCount = (int)lpszData[PAC_INDEX];
 
-	//预设空间
-	this->nCmlCommandList = new byte*[this->nCmlCount];
+}
 
-	//处理参数
-	this->nCmlListLen = new byte[MSG_CLASS_PARAM * this->nCmlCount + 1];
-	memset(this->nCmlListLen,0,sizeof(byte) * (MSG_CLASS_PARAM * this->nCmlCount) + 1);
-	for(nPos = 0;nPos < (int)(MSG_CLASS_PARAM * this->nCmlCount); nPos++)
+int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData)
+{
+	int   nPos   = 0;
+	if (_Messsage == NULL)
 	{
-		this->nCmlListLen[nPos] = lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * this->nCmlCount)) - nPos];
+		return 0;
 	}
 
-	int* tmpCmlListLen = new int[this->nCmlCount];
+
+	if(lpszData == NULL)
+	{
+		return 0;
+	}
+	
+	//预设空间
+	_Messsage->m_CmlCommandList = new byte*[_Messsage->m_CmlCount];
+
+	//处理参数
+	_Messsage->m_CmlListLen = new byte[MSG_CLASS_PARAM * _Messsage->m_CmlCount + 1];
+	memset(_Messsage->m_CmlListLen,0,sizeof(byte) * (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + 1);
+	for(nPos = 0;nPos < (int)(MSG_CLASS_PARAM * _Messsage->m_CmlCount); nPos++)
+	{
+		_Messsage->m_CmlListLen[nPos] = lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount)) - nPos];
+	}
+
+	int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
 
 	byte tmpComlLen[MSG_CLASS_PARAM + 1] = {0};
 
 	//参数处理
 	//计算参数所占位数及位置
-	int VerifyPos = this->nCmlCount * MSG_CLASS_PARAM;
+	int VerifyPos = _Messsage->m_CmlCount * MSG_CLASS_PARAM;
 	int TmpIndex = 0;
 	int ParamLen = 0;
 	int ParamPos = 0;
-	for(int i = 0;i < (int)(this->nCmlCount);i++)
+	for(int i = 0;i < (int)(_Messsage->m_CmlCount);i++)
 	{
 		int j = i * 4;
 		for (int index = 0; index < MSG_CLASS_PARAM; j++,index++)
 		{
-			tmpComlLen[index] = this->nCmlListLen[j];
+			tmpComlLen[index] = _Messsage->m_CmlListLen[j];
 		}
 		ParamLen += byteToInt(tmpComlLen);
 		memset(tmpComlLen,0,MSG_CLASS_PARAM + 1);
 	}
 
-	for(int i = 0;i < (int)(this->nCmlCount);i++)
+	for(int i = 0;i < (int)(_Messsage->m_CmlCount);i++)
 	{
 		int j = i * 4;
 		for (int index = 0; index < MSG_CLASS_PARAM; j++,index++)
 		{
-			tmpComlLen[index] = this->nCmlListLen[j];
+			tmpComlLen[index] = _Messsage->m_CmlListLen[j];
 		}
 
 		if (tmpComlLen != NULL)
@@ -155,63 +175,95 @@ int MessageParser::Parse(byte* lpszData)
 
 			memset(tmpComlLen,0,MSG_CLASS_PARAM + 1);
 
-			this->nCmlCommandList[i] = new byte[tmpCmlListLen[i] + 1];
-			memset(this->nCmlCommandList[i],0,tmpCmlListLen[i] + 1);
+			_Messsage->m_CmlCommandList[i] = new byte[tmpCmlListLen[i] + 1];
+			memset(_Messsage->m_CmlCommandList[i],0,tmpCmlListLen[i] + 1);
 			//- (tmpCmlListLen[i] * i)
 
 			if (i == 0)
 			{
-				TmpIndex = (PAC_INDEX + (MSG_CLASS_PARAM * this->nCmlCount) + ParamLen);
+				TmpIndex = (PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + ParamLen);
 			}
 			else
 			{
 				ParamPos += tmpCmlListLen[i - 1];
-				TmpIndex = ((PAC_INDEX + (MSG_CLASS_PARAM * this->nCmlCount) + ParamLen) -  ParamPos);
+				TmpIndex = ((PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + ParamLen) -  ParamPos);
 			}
 
 			for (int index = 0; index < tmpCmlListLen[i]; index++ )
 			{
-				this->nCmlCommandList[i][index] = lpszData[TmpIndex - index];
+				_Messsage->m_CmlCommandList[i][index] = lpszData[TmpIndex - index];
 				VerifyPos++;
 			}
+			std::cout<<_Messsage->m_CmlCommandList[i]<<std::endl;
 		}
 	}
-
-	//取出效验码
-	for(nPos = 0;nPos < MSG_CLASS_VERIFY; nPos++)
-	{
-		szTmpVerify[nPos] = lpszData[(VerifyPos + MSG_CLASS_VERIFY + PAC_INDEX)- nPos];
-	}
-
-	this->nVerify = byteToInt(szTmpVerify);
-
-	//判断标记尾
-
-// 	if (this->nLen != (VerifyPos + MSG_CLASS_VERIFY + PAC_INDEX + MSG_CLASS_END))
-// 	{
-// 		this->nEnd = false;
-// 		if (tmpCmlListLen != NULL)
-// 		{
-// 			delete [] tmpCmlListLen;
-// 			tmpCmlListLen = NULL;
-// 		}
-// 		return -1;
-// 	}
-
-	if (lpszData[VerifyPos + MSG_CLASS_VERIFY + PAC_INDEX + MSG_CLASS_END] != MSG_END)
-	{
-		this->nEnd = false;
-	}
-	else
-	{
-		this->nEnd = true;
-	}
-	
 
 	if (tmpCmlListLen != NULL)
 	{
 		delete [] tmpCmlListLen;
 		tmpCmlListLen = NULL;
 	}
-	return 0;
+
+	return VerifyPos;
+}
+
+
+void CMessageParser::_Tail(CMessage* _Messsage,byte* lpszData,int ParamLen)
+{
+	int   nPos   = 0;
+	byte szTmpVerify[4] = {0};
+	if (_Messsage == NULL)
+	{
+		return;
+	}
+
+
+	if(lpszData == NULL)
+	{
+		return;
+	}
+
+	if(ParamLen == 0)
+	{
+		return;
+	}
+
+	//取出效验码
+	for(nPos = 0;nPos < MSG_CLASS_VERIFY; nPos++)
+	{
+		szTmpVerify[nPos] = lpszData[(ParamLen + MSG_CLASS_VERIFY + PAC_INDEX)- nPos];
+	}
+
+	_Messsage->m_Verify = byteToInt(szTmpVerify);
+
+
+	if (lpszData[ParamLen + MSG_CLASS_VERIFY + PAC_INDEX + MSG_CLASS_END] != MSG_END)
+	{
+		_Messsage->m_End = false;
+	}
+	else
+	{
+		_Messsage->m_End = true;
+	}
+}
+
+CMessage* CMessageParser::Parse(byte* lpszData)
+{
+
+	//开始标记匹配
+	if(lpszData[0] != MSG_BEGIN )
+	{
+		return 0;
+	}
+	//获取指令
+	m_Instruct = (int)lpszData[COM_INDEX];
+
+	CMessage* msg_str = _MessageType();
+	int ParamLen = 0;
+
+	_Head(msg_str,lpszData);
+	ParamLen = _Body(msg_str,lpszData);
+	_Tail(msg_str,lpszData,ParamLen);
+
+	return msg_str;
 }

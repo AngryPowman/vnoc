@@ -46,7 +46,7 @@
     <Filter Include="FrameWork\Dialog">
       <UniqueIdentifier>{53f89d19-a7ad-47c0-9c0e-c80c540eac51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MsgAnalysis">
+    <Filter Include="MsgParser">
       <UniqueIdentifier>{5dc7ed6f-ac84-4129-84c5-13a3cdd97fde}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -139,10 +139,13 @@
       <Filter>CodeEditor</Filter>
     </ClCompile>
     <ClCompile Include="MsgDef.cpp">
-      <Filter>MsgAnalysis</Filter>
+      <Filter>MsgParser</Filter>
     </ClCompile>
     <ClCompile Include="MessageParser.cpp">
-      <Filter>MsgAnalysis</Filter>
+      <Filter>MsgParser</Filter>
+    </ClCompile>
+    <ClCompile Include="测试例子.cpp">
+      <Filter>MsgParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,10 +282,10 @@
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MyNetClient\MsgDef.h">
-      <Filter>MsgAnalysis</Filter>
+      <Filter>MsgParser</Filter>
     </ClInclude>
     <ClInclude Include="MessageParser.h">
-      <Filter>MsgAnalysis</Filter>
+      <Filter>MsgParser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

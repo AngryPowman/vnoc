@@ -255,6 +255,7 @@
     <ClCompile Include="VNOCDialogBase.cpp" />
     <ClCompile Include="VNOCFrame.cpp" />
     <ClCompile Include="VNOCLoginDlg.cpp" />
+    <ClCompile Include="测试例子.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\MyNetClient\ClientConnection.h" />
