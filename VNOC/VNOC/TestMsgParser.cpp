@@ -8,13 +8,13 @@
 
 #include <iostream>
 // #include <stdio.h>
-//#include <Windows.h>
-//#include <SUNIN/SString.h>
-//#include <Wininet.h>
+#include <Windows.h>
+#include <SUNIN/SString.h>
+#include <Wininet.h>
 
 #include "MessageParser.h"
 
-//#pragma comment(lib,"Wininet.lib")
+#pragma comment(lib,"Wininet.lib")
 // #include "NetClient.h"
 // #include "XmlAnalysis.h"
 // #include "XmlTransform.h"
@@ -86,9 +86,9 @@ int main()
 	CMessageParser msgParser;
 	MSG_AVC* msg_avc = (MSG_AVC *)msgParser.Parse(testAVC);
 	//cout<<msg_rvc.returnMachineAddress()<<endl;
-	cout<<msg_avc->returnLoginTag()<<endl;
-	cout<<msg_avc->returnType()<<endl;
-	cout<<msg_avc->returnCarrier()<<endl;
+	cout<<msg_avc->GetLoginTag()<<endl;
+	cout<<msg_avc->GetType()<<endl;
+	cout<<msg_avc->GetCarrier()<<endl;
 
 	return 0;
 }	

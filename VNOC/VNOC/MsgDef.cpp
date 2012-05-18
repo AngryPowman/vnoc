@@ -22,62 +22,62 @@ uint byteToInt(byte* in_byte)
 }
 
 
-bool CMessage::returnBeginTab()
+bool CMessage::GetBeginTab()
 {
 	return m_Begin;
 } 
 
-bool CMessage::returnEndTab()
+bool CMessage::GetEndTab()
 {
 	return m_Begin;
 }
 
-byte CMessage::returnCommand()
+byte CMessage::GetCommand()
 {
 	return m_Command;
 }
 
-byte* CMessage::returnCmlListLen()
+byte* CMessage::GetCmlListLen()
 {
 	return  m_CmlListLen;
 }
 
-byte CMessage::returnSerial()
+byte CMessage::GetSerial()
 {
 	return m_Serial;
 }
 
-byte* CMessage::returnGUID()
+byte* CMessage::GetGUID()
 {
 	return m_GUID;
 }
 
-byte** CMessage::returnCmlCommandList()
+byte** CMessage::GetCmlCommandList()
 {
 	return m_CmlCommandList;
 }
 
-uint CMessage::returnVerify()
+uint CMessage::GetVerify()
 {
 	return m_Verify;
 }
 
-uint CMessage::returnObligate()
+uint CMessage::GetObligate()
 {
 	return m_Obligate;
 }
 
-uint CMessage::returnVersion()
+uint CMessage::GetVersion()
 {
 	return m_Ver;
 }
 
-uint CMessage::returnCmlCount()
+uint CMessage::GetCmlCount()
 {
 	return m_CmlCount;
 }
 
-uint CMessage::returnDataLen()
+uint CMessage::GetDataLen()
 {
 	return m_Len;
 }
@@ -127,17 +127,17 @@ void CMessage::_Close()
 //RVC(获取验证码请求)
 void MSG_RVC::Initialize()
 {
-	if (returnBeginTab() != true || returnEndTab() != true)
+	if (GetBeginTab() != true || GetEndTab() != true)
 	{
 		m_Error++;
 	}
 
-	if (returnCommand() != m_Command)
+	if (GetCommand() != m_Command)
 	{
 		m_Error++;
 	}
 
-	if (returnCmlCount() != m_CmlCount)
+	if (GetCmlCount() != m_CmlCount)
 	{
 		m_Error++;
 	}
@@ -149,30 +149,30 @@ void MSG_RVC::Initialize()
 
 }
 
-byte* MSG_RVC::returnMachineAddress()
+byte* MSG_RVC::GetMachineAddress()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[0];
+	return GetCmlCommandList()[0];
 }
 
 //AVC(获取验证码响应)
 void MSG_AVC::Initialize()
 {
-	if (returnBeginTab() != true || returnEndTab() != true)
+	if (GetBeginTab() != true || GetEndTab() != true)
 	{
 		m_Error++;
 	}
 
-	if (returnCommand() != m_Command)
+	if (GetCommand() != m_Command)
 	{
 		m_Error++;
 	}
 
-	if (returnCmlCount() != m_CmlCount)
+	if (GetCmlCount() != m_CmlCount)
 	{
 		m_Error++;
 	}
@@ -184,51 +184,51 @@ void MSG_AVC::Initialize()
 
 }
 
-uint MSG_AVC::returnLoginTag()
+uint MSG_AVC::GetLoginTag()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return byteToInt(returnCmlCommandList()[2]);
+	return byteToInt(GetCmlCommandList()[2]);
 }
 
-uint MSG_AVC::returnType()
+uint MSG_AVC::GetType()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return byteToInt(returnCmlCommandList()[1]);
+	return byteToInt(GetCmlCommandList()[1]);
 }
 
-byte* MSG_AVC::returnCarrier()
+byte* MSG_AVC::GetCarrier()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[0];
+	return GetCmlCommandList()[0];
 }
 
 
 //RLI(登录请求)
 void MSG_RLI::Initialize()
 {
-	if (returnBeginTab() != true || returnEndTab() != true)
+	if (GetBeginTab() != true || GetEndTab() != true)
 	{
 		m_Error++;
 	}
 
-	if (returnCommand() != m_Command)
+	if (GetCommand() != m_Command)
 	{
 		m_Error++;
 	}
 
-	if (returnCmlCount() != m_CmlCount)
+	if (GetCmlCount() != m_CmlCount)
 	{
 		m_Error++;
 	}
@@ -239,52 +239,52 @@ void MSG_RLI::Initialize()
 	// 	}
 
 }
-byte* MSG_RLI::returnVerificationCode()
+byte* MSG_RLI::GetVerificationCode()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[2];
+	return GetCmlCommandList()[2];
 }
 
 
-byte* MSG_RLI::returnAccountNumber()
+byte* MSG_RLI::GetAccountNumber()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[1];
+	return GetCmlCommandList()[1];
 }
 
 
-byte* MSG_RLI::returnPassword()
+byte* MSG_RLI::GetPassword()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[0];
+	return GetCmlCommandList()[0];
 }
 
 //ALI(登录应答)
 void MSG_ALI::Initialize()
 {
-	if (returnBeginTab() != true || returnEndTab() != true)
+	if (GetBeginTab() != true || GetEndTab() != true)
 	{
 		m_Error++;
 	}
 
-	if (returnCommand() != m_Command)
+	if (GetCommand() != m_Command)
 	{
 		m_Error++;
 	}
 
-	if (returnCmlCount() != m_CmlCount)
+	if (GetCmlCount() != m_CmlCount)
 	{
 		m_Error++;
 	}
@@ -295,52 +295,52 @@ void MSG_ALI::Initialize()
 	// 	}
 
 }
-uint MSG_ALI::returnResult()
+uint MSG_ALI::GetResult()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return byteToInt(returnCmlCommandList()[2]);
+	return byteToInt(GetCmlCommandList()[2]);
 }
 
 
-byte* MSG_ALI::returnToken()
+byte* MSG_ALI::GetToken()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[1];
+	return GetCmlCommandList()[1];
 }
 
 
-byte* MSG_ALI::returnATLGUID()
+byte* MSG_ALI::GetATLGUID()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[0];
+	return GetCmlCommandList()[0];
 }
 
 //RPS(个人信息同步通知)
 void MSG_RPS::Initialize()
 {
-	if (returnBeginTab() != true || returnEndTab() != true)
+	if (GetBeginTab() != true || GetEndTab() != true)
 	{
 		m_Error++;
 	}
 
-	if (returnCommand() != m_Command)
+	if (GetCommand() != m_Command)
 	{
 		m_Error++;
 	}
 
-	if (returnCmlCount() != m_CmlCount)
+	if (GetCmlCount() != m_CmlCount)
 	{
 		m_Error++;
 	}
@@ -351,72 +351,72 @@ void MSG_RPS::Initialize()
 	// 	}
 
 }
-uint MSG_RPS::returnRank()
+uint MSG_RPS::GetRank()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return byteToInt(returnCmlCommandList()[4]);
+	return byteToInt(GetCmlCommandList()[4]);
 }
 
 
-byte* MSG_RPS::returnNickname()
+byte* MSG_RPS::GetNickname()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[3];
+	return GetCmlCommandList()[3];
 }
 
 
-byte* MSG_RPS::returnAutograph()
+byte* MSG_RPS::GetAutograph()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[2];
+	return GetCmlCommandList()[2];
 }
 
-uint MSG_RPS::returnHeadForm()
+uint MSG_RPS::GetHeadForm()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return byteToInt(returnCmlCommandList()[1]);
+	return byteToInt(GetCmlCommandList()[1]);
 }
 
-byte* MSG_RPS::returnHeadPortrait()
+byte* MSG_RPS::GetHeadPortrait()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[0];
+	return GetCmlCommandList()[0];
 }
 
 //APS(个人信息同步通知确认)
 void MSG_APS::Initialize()
 {
-	if (returnBeginTab() != true || returnEndTab() != true)
+	if (GetBeginTab() != true || GetEndTab() != true)
 	{
 		m_Error++;
 	}
 
-	if (returnCommand() != m_Command)
+	if (GetCommand() != m_Command)
 	{
 		m_Error++;
 	}
 
-	if (returnCmlCount() != m_CmlCount)
+	if (GetCmlCount() != m_CmlCount)
 	{
 		m_Error++;
 	}
@@ -427,12 +427,12 @@ void MSG_APS::Initialize()
 	// 	}
 
 }
-byte* MSG_APS::returnMessageSynchro()
+byte* MSG_APS::GetMessageSynchro()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return returnCmlCommandList()[0];
+	return GetCmlCommandList()[0];
 }

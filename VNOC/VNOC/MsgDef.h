@@ -57,29 +57,29 @@ public:
 
 protected:
 
-	bool returnBeginTab();
+	bool GetBeginTab();
 
-	bool returnEndTab();
+	bool GetEndTab();
 
-	byte returnCommand();
+	byte GetCommand();
 
-	byte* returnCmlListLen();
+	byte* GetCmlListLen();
 
-	byte returnSerial();
+	byte GetSerial();
 
-	byte* returnGUID();
+	byte* GetGUID();
 
-	byte** returnCmlCommandList();
+	byte** GetCmlCommandList();
 
-	uint returnVerify();
+	uint GetVerify();
 
-	uint returnObligate();
+	uint GetObligate();
 
-	uint returnVersion();
+	uint GetVersion();
 
-	uint returnCmlCount();
+	uint GetCmlCount();
 
-	uint returnDataLen();
+	uint GetDataLen();
 
 private:
 
@@ -123,7 +123,7 @@ public:
 		m_Error    = 0;
 	}
 	//机器地址
-	byte* returnMachineAddress();
+	byte* GetMachineAddress();
 	
 	~MSG_RVC(){}
 	
@@ -158,11 +158,11 @@ public:
 		m_Error    = 0;
 	}
 	//获取验证码结果：1字节，用来标志此次登录的结果
-    uint returnLoginTag();
+    uint GetLoginTag();
 	//验证码类型：标志后面的验证码是用的何种载体，（根据验证码载体的类型定义一个枚举）
-	uint returnType();
+	uint GetType();
 	//验证码载体：由验证码载体长度参数指定大小，可以是任意格式图像或者声音。
-	byte* returnCarrier();
+	byte* GetCarrier();
 
 
 	~MSG_AVC(){}
@@ -197,11 +197,11 @@ public:
 		m_Error    = 0;
 	}
 	//验证码：未知长度，为AUT传回来的图片包含的字符组成，此参数在服务器端应该与令牌绑定（有一个验证码-令牌映射）
-	byte* returnVerificationCode();
+	byte* GetVerificationCode();
 	//用户帐号：用户帐号编码的二进制数据
-	byte* returnAccountNumber();
+	byte* GetAccountNumber();
 	//用户密码：密码经过处理后的二进制数据
-	byte* returnPassword();
+	byte* GetPassword();
 
 
 	~MSG_RLI(){}
@@ -236,11 +236,11 @@ public:
 		m_Error    = 0;
 	}
 	//登录结果：1字节，用来标志此次登录的结果
-	uint returnResult();
+	uint GetResult();
 	//令牌长度：4字节，0x00 00 00 10用户帐号编码后的长度，单位为字节
-	byte* returnToken();
+	byte* GetToken();
 	//令牌：16字节，一个GUID ，帐号验证通过后生成，通过此数据包发给客户端，之后的指令在包头部均需带上此令牌
-	byte* returnATLGUID();
+	byte* GetATLGUID();
 
 
 	~MSG_ALI(){}
@@ -274,15 +274,15 @@ public:
 		m_Error    = 0;
 	}
 	//用户权限
-	uint returnRank();
+	uint GetRank();
 	//昵称
-	byte* returnNickname();
+	byte* GetNickname();
 	//个人签名
-	byte* returnAutograph();
+	byte* GetAutograph();
 	//头像格式
-	uint returnHeadForm();
+	uint GetHeadForm();
 	//头像
-	byte* returnHeadPortrait();
+	byte* GetHeadPortrait();
 
 	~MSG_RPS(){}
 
@@ -317,7 +317,7 @@ public:
 	}
 
 	//个人信息同步通知
-	byte* returnMessageSynchro();
+	byte* GetMessageSynchro();
 
 	~MSG_APS(){}
 
