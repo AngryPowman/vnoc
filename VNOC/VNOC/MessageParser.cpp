@@ -194,7 +194,6 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData)
 				_Messsage->m_CmlCommandList[i][index] = lpszData[TmpIndex - index];
 				VerifyPos++;
 			}
-			std::cout<<_Messsage->m_CmlCommandList[i]<<std::endl;
 		}
 	}
 
