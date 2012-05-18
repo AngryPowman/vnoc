@@ -2,7 +2,7 @@
 # revision : 3
 CXX=g++
 VPATH=src:test
-CXXFLAGS=-std=c++0x -fpermissive
+CXXFLAGS=-std=c++0x  -DEZLOGGER_EXCLUDE_CPRINT_METHOD
 CUR_DIR = $(shell pwd)
 INCS := $(CUR_DIR)/include
 
