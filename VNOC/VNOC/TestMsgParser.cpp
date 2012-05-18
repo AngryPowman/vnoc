@@ -8,9 +8,9 @@
 
 #include <iostream>
 // #include <stdio.h>
-#include <Windows.h>
-#include <SUNIN/SString.h>
-#include <Wininet.h>
+//#include <Windows.h>
+//#include <SUNIN/SString.h>
+//#include <Wininet.h>
 
 #include "MessageParser.h"
 
