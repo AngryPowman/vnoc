@@ -27,18 +27,15 @@
     <ClCompile Include="..\MsgDef.cpp">
       <Filter>Source Files\MsgParser</Filter>
     </ClCompile>
-    <ClCompile Include="..\TestMsgParser.cpp">
-      <Filter>Source Files\MsgParser</Filter>
-    </ClCompile>
     <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\MyNetClient\MsgDef.h">
+    <ClInclude Include="..\MessageParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\MessageParser.h">
+    <ClInclude Include="..\MsgDef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

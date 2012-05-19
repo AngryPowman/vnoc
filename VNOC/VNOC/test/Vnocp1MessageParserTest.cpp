@@ -1,6 +1,6 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include "../MessageParser.h"
+#include "MessageParser.h"
 #include <string.h>
 class Vnocp1MessageParserTest : public CppUnit::TestFixture
 {
@@ -39,17 +39,17 @@ public:
 		0x00,0x05,
 		0x43};
 		CMessageParser msgParser;
-		CMessage* msg = msgParser.Parse(testAVC, sizeof(testAVC));
+		CMessage* msg = msgParser.Parse(testAVC);
 		CPPUNIT_ASSERT(msg->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是AVC
 		MSG_AVC* msg_avc = (MSG_AVC *)msg;
 		//验证令牌
 		byte expectToken[]={0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66,0x66};
-		CPPUNIT_ASSERT(memcmp(msg_avc->GetToken(),expectToken, sizeof(expectToken)) == 0);
+		CPPUNIT_ASSERT(memcmp(msg_avc->GetGUID(),expectToken, sizeof(expectToken)) == 0);
 		//验证验证码类型
 		CPPUNIT_ASSERT(msg_avc->GetCaptchaType() == 0x01);
 		//验证验证码内容
 		byte CaptchaContent[]={0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33,0x33};
-		CPPUNIT_ASSERT(memcmp(msg_avc->GetCaptcha(),CaptchaContent(), sizeof(CaptchaContent)) == 0);
+		CPPUNIT_ASSERT(memcmp(msg_avc->GetCaptcha(),CaptchaContent, sizeof(CaptchaContent)) == 0);
 
 		CPPUNIT_ASSERT(true);
     }
