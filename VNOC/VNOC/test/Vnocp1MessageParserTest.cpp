@@ -1,11 +1,11 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include "MessageParser.h"
+#include "../MessageParser.h"
 #include <string.h>
 class Vnocp1MessageParserTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( Vnocp1MessageParserTest );
-    CPPUNIT_TEST( simpleTest );
+    CPPUNIT_TEST( MSGAVCParseTest );
     CPPUNIT_TEST_SUITE_END();
 public:
     void setUp()
@@ -17,7 +17,7 @@ public:
 
     }
 public:
-    void simpleTest()
+    void MSGAVCParseTest()
     {
         byte testAVC [] = {0x55,
 		0x00,0x00,0x00,0x1E,
