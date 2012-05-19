@@ -144,9 +144,6 @@
     <ClCompile Include="MessageParser.cpp">
       <Filter>MsgParser</Filter>
     </ClCompile>
-    <ClCompile Include="TestMsgParser.cpp">
-      <Filter>MsgParser</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HyperLink.h">
