@@ -13,13 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\MsgParser">
+      <UniqueIdentifier>{d6e9352c-fe13-4cd2-80aa-a396cb67bf4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\test\testRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\VNOCPAVCMessageTest.cpp">
+    <ClCompile Include="..\MessageParser.cpp">
+      <Filter>Source Files\MsgParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MsgDef.cpp">
+      <Filter>Source Files\MsgParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TestMsgParser.cpp">
+      <Filter>Source Files\MsgParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\MyNetClient\MsgDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MessageParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

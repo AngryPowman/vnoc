@@ -80,8 +80,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\MessageParser.cpp" />
+    <ClCompile Include="..\MsgDef.cpp" />
+    <ClCompile Include="..\TestMsgParser.cpp" />
     <ClCompile Include="..\test\testRunner.cpp" />
-    <ClCompile Include="..\test\VNOCPAVCMessageTest.cpp" />
+    <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\MyNetClient\MsgDef.h" />
+    <ClInclude Include="..\MessageParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
