@@ -20,7 +20,6 @@
 <a href="v-setlocale.php?lang=zh_TW">|| 台灣正體 ||</a>
 <a href="v-setlocale.php?lang=zh_CN">|| 简体中文 ||</a>
 <p>This is [<?php echo __("VNOC Homepage"); ?>]</p>
-<?php echo getenv("lang"); ?>
 
 <!-- This is the footer of HTML Code -->
 </body>

@@ -24,11 +24,13 @@
 	 **
 	 ** @browser: Related with browser actions
 	 ** @locale:  Related with locale settings
+	 ** @mysql:   Functions with MySQL connection
 	 ** @script:  Write out script with templates
 	 ** @test:    Functions needed for LESS CSS compatibility test
 	 */
 	include_once(MODULE . "browser.php");
 	include_once(MODULE . "locale.php");
+	include_once(MODULE . "mysql.php");
 	include_once(MODULE . "script.php");
 	include_once(MODULE . "test.php");
 ?>

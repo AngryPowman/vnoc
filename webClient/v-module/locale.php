@@ -31,6 +31,8 @@
 	{
 		if(isset($_COOKIE["vnoc_locale"]))
 			return $_COOKIE["vnoc_locale"];
+		else
+			return "";
 	}
 	
 	/** Set locale setting to cookie
@@ -56,7 +58,7 @@
 	{
 		$_COOKIE["vnoc_locale"]="";
 	}
-	 
+	
 	/** Set current locale setting using cookie value
 	 **
 	 ** @_vnoc.locale
@@ -65,17 +67,15 @@
 	 */
 	function v_locale_set()
 	{
-		if(!isset($_COOKIE["vnoc_locale"]))
-		{
+		if(v_locale()=="")
 			v_locale_tocookie();
-			v_refresh();
-		}
 		else
 		{
-			putenv("lang=" . v_locale());
-			setlocale(LC_ALL, v_locale() . ".utf8");
+			putenv("LANG=" . v_locale());
+			setlocale(LC_ALL, v_locale());
 			bindtextdomain(v_locale(), LANG);
 			textdomain(v_locale());
+			bind_textdomain_codeset(v_locale(), "UTF-8");
 		}
 	}
 ?>

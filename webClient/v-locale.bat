@@ -12,8 +12,9 @@ color 18
   echo   3; Delete        *.PO file
   echo   4; Update        *.PO files
   echo   5; Show          *.PO list
-  echo   6; Color Settings
-  echo   7; Exit
+  echo   6; Copy          *.MO files
+  echo   7; Color Settings
+  echo   8; Exit
   echo -------------------------------------------------------------------------------
 
   set /p input=Option Index: 
@@ -22,8 +23,9 @@ color 18
   if %input% EQU 3 goto Delete
   if %input% EQU 4 goto Update
   if %input% EQU 5 goto ShowList
-  if %input% EQU 6 goto ColorSetting
-  if %input% EQU 7 exit else echo Invalid Input
+  if %input% EQU 6 goto CopyFiles
+  if %input% EQU 7 goto ColorSetting
+  if %input% EQU 8 exit else echo Invalid Input
 
 :Template
   setlocal ENABLEDELAYEDEXPANSION
@@ -67,6 +69,19 @@ color 18
     set file=!file:%cd%\v-lang\=!
     set file=!file:.po=!
     echo !file! >> v-lang/list.txt
+  )
+  setlocal DISABLEDELAYEDEXPANSION
+  goto Done
+
+:CopyFiles
+  setlocal ENABLEDELAYEDEXPANSION
+  for /f %%i in ('"dir /A /S /B /N /ON v-lang\*.mo"') do (
+    set file=%%~fi
+    set file=!file:%cd%\v-lang\=!
+    set file=!file:.mo=!
+    md v-lang\!file!\LC_MESSAGES
+    attrib +h +r -s v-lang\!file!
+    copy /Y v-lang/!file!.mo /B v-lang/!file!/LC_MESSAGES/!file!.mo /B
   )
   setlocal DISABLEDELAYEDEXPANSION
   goto Done
