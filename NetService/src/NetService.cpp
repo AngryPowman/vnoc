@@ -6,10 +6,10 @@
  */
 
 #include "NetService.h"
-#include "test/EchoTestHandler.hpp"
+#include "VnocMessageHandler.hpp"
 
 using namespace std;
-static EchoTestHandlerFactory handlerFactory_g;
+static VnocMessageHandlerFactory handlerFactory_g;
 NetService::NetService():server_(&handlerFactory_g)
 {
 
