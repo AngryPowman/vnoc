@@ -284,6 +284,9 @@
     <ClInclude Include="MessageParser.h">
       <Filter>MsgParser</Filter>
     </ClInclude>
+    <ClInclude Include="PackMessage.h">
+      <Filter>MsgParser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VNOC.ico">
@@ -309,6 +312,9 @@
     </None>
     <None Include="Performance.inl">
       <Filter>util</Filter>
+    </None>
+    <None Include="PackMessage.cpp">
+      <Filter>MsgParser</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

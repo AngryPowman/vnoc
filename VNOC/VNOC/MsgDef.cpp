@@ -102,13 +102,17 @@ void CMessage::SetCommand(byte in_byte)
 	m_Command = in_byte;
 }
 
-void CMessage::SetCmlListLen(int CmlCount)
+void CMessage::SetCmlListLen(byte* in_byte_ptr,int CmlCount)
 {
 	if (CmlCount  !=  NULL)
 	{
 		delete [] m_CmlListLen;
 		m_CmlListLen = new byte[CmlCount * 4];
 		memset(m_CmlListLen,0,CmlCount * 4);
+		if (in_byte_ptr != NULL)
+		{
+			memcpy(m_CmlListLen,in_byte_ptr,CmlCount * 4);
+		}
 	}
 }
 

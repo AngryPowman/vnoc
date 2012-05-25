@@ -17,17 +17,6 @@
 
 typedef unsigned short ushort;
 
-int PackMessage(MSG_AVC* avc, byte* buf, size_t len);
-
-int PackMessage(MSG_RVC* rvc, byte* buf, size_t len);
-
-int PackMessage(MSG_ALI* ali, byte* buf, size_t len);
-
-int PackMessage(MSG_RLI* rli, byte* buf, size_t len);
-
-int PackMessage(MSG_APS* asp, byte* buf, size_t len);
-
-int PackMessage(MSG_RPS* rsp, byte* buf, size_t len);
 
 // 短整型大小端互换
 #define BigLittleSwap16(A)        ((((ushort)(A) & 0xff00) >> 8) | \

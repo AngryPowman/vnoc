@@ -293,6 +293,7 @@
     <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="LoginImpl.h" />
     <ClInclude Include="MessageParser.h" />
+    <ClInclude Include="PackMessage.h" />
     <ClInclude Include="RoomImpl.h" />
     <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -311,6 +312,7 @@
     <None Include="..\preLink.bat" />
     <None Include="Config.inl" />
     <None Include="config.xml" />
+    <None Include="PackMessage.cpp" />
     <None Include="Performance.inl" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />

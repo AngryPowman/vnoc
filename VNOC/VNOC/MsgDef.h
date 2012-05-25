@@ -120,7 +120,7 @@ public:
 
 	void SetCommand(byte in_byte);
 
-	void SetCmlListLen(int CmlCount);
+	void SetCmlListLen(byte* in_byte_ptr,int CmlCount);
 
 	void SetSerial(byte in_byte);
 
@@ -190,7 +190,7 @@ public:
 		SetCmlCount(m_CmlCount);
 		SetVerify(0);
 		//留好参数长度空间
-		SetCmlListLen(m_CmlCount);
+		SetCmlListLen(0,m_CmlCount);
 		//留好参数空间
 		SetCmlCommandList(m_CmlCount);
 	}
@@ -247,7 +247,7 @@ public:
 		SetCmlCount(m_CmlCount);
 		SetVerify(0);
 		//留好参数长度空间
-		SetCmlListLen(m_CmlCount);
+		SetCmlListLen(0,m_CmlCount);
 		//留好参数空间
 		SetCmlCommandList(m_CmlCount);
 	}
@@ -314,7 +314,7 @@ public:
 		SetCmlCount(m_CmlCount);
 		SetVerify(0);
 		//留好参数长度空间
-		SetCmlListLen(m_CmlCount);
+		SetCmlListLen(0,m_CmlCount);
 		//留好参数空间
 		SetCmlCommandList(m_CmlCount);
 	}
@@ -389,7 +389,7 @@ public:
 		SetCmlCount(m_CmlCount);
 		SetVerify(0);
 		//留好参数长度空间
-		SetCmlListLen(m_CmlCount);
+		SetCmlListLen(0,m_CmlCount);
 		//留好参数空间
 		SetCmlCommandList(m_CmlCount);
 	}
@@ -459,7 +459,7 @@ public:
 		SetCmlCount(m_CmlCount);
 		SetVerify(0);
 		//留好参数长度空间
-		SetCmlListLen(m_CmlCount);
+		SetCmlListLen(0,m_CmlCount);
 		//留好参数空间
 		SetCmlCommandList(m_CmlCount);
 	}
@@ -541,7 +541,7 @@ public:
 		SetCmlCount(m_CmlCount);
 		SetVerify(0);
 		//留好参数长度空间
-		SetCmlListLen(m_CmlCount);
+		SetCmlListLen(0,m_CmlCount);
 		//留好参数空间
 		SetCmlCommandList(m_CmlCount);
 	}
