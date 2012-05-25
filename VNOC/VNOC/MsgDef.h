@@ -13,6 +13,7 @@
 
 #define MSG_BEGIN    0x55   // 'V' 标记消息的开始
 #define MSG_END		 0x43	// 'C' 标记消息的结束
+#define MSG_VER      0		//版本号
 
 #define  MSG_CLASS_BEGIN  1
 #define  MSG_CLASS_END    1
@@ -69,6 +70,8 @@ typedef  unsigned int  uint;
 
 uint byteToInt(byte* in_byte);
 
+void IntTobyte(int in_int,byte* out_byte);
+
 class CMessage
 {
 public:
@@ -113,6 +116,29 @@ public:
 	uint GetDataLen();
 
 
+// Set
+
+	void SetCommand(byte in_byte);
+
+	void SetCmlListLen(int CmlCount);
+
+	void SetSerial(byte in_byte);
+
+	void SetGUID(byte* in_byte_ptr);
+
+	void SetCmlCommandList(int CmlCount);
+
+	void SetVerify(uint in_Int);
+
+	void SetObligate(uint in_Int);
+
+	void SetVersion(uint in_Int);
+
+	void SetCmlCount(uint in_Int);
+
+	void SetDataLen(uint in_Int);
+
+
 private:
 
 
@@ -122,7 +148,7 @@ private:
 	byte   m_Command;			  //指令			具体的指令，用来标注此数据包的功能
 	byte*  m_CmlListLen;		  //参数列表    4字节，对应参数N的长度
 	byte   m_Serial;			  //序号       指令的编号
-	byte   m_GUID[17];            //GUID       用来提供用户验证
+	byte   m_GUID[16];            //GUID       用来提供用户验证
 	byte** m_CmlCommandList;      //参数列表    编码后的参数，具体类型根据具体指令决定
 	//DWORD dwType;				  //消息类型		
 
@@ -154,9 +180,28 @@ public:
 		//0x14
 		m_Command  = 20;
 		m_Error    = 0;
+
+		//预设
+		SetDataLen(0);
+		SetVersion(MSG_VER);
+		SetSerial(0x00);
+		SetCommand(m_Command);
+		SetObligate(0);
+		SetCmlCount(m_CmlCount);
+		SetVerify(0);
+		//留好参数长度空间
+		SetCmlListLen(m_CmlCount);
+		//留好参数空间
+		SetCmlCommandList(m_CmlCount);
 	}
 	//机器地址
 	byte* GetMachineAddress();
+
+	void SetMachineAddress(byte* in_byte_ptr, size_t len);
+
+	int  GetMachineAddressLen(){
+		return  m_MachineAddressLen;
+    }
 	
 	~MSG_RVC(){}
 	
@@ -176,6 +221,9 @@ private:
 	//错误标记
 	int m_Error;
 
+	//存放MachineAddress长度
+	int m_MachineAddressLen;
+
 };
 
 //AVC(获取验证码响应)
@@ -189,6 +237,19 @@ public:
 		//0x15
 		m_Command  = 21;
 		m_Error    = 0;
+
+		//预设
+		SetDataLen(0);
+		SetVersion(MSG_VER);
+		SetSerial(0x00);
+		SetCommand(m_Command);
+		SetObligate(0);
+		SetCmlCount(m_CmlCount);
+		SetVerify(0);
+		//留好参数长度空间
+		SetCmlListLen(m_CmlCount);
+		//留好参数空间
+		SetCmlCommandList(m_CmlCount);
 	}
 	//获取验证码结果：1字节，用来标志此次登录的结果
     uint GetLoginTag();
@@ -196,7 +257,19 @@ public:
 	uint GetCaptchaType();
 	//验证码载体：由验证码载体长度参数指定大小，可以是任意格式图像或者声音。
 	byte* GetCaptcha();
+	
 
+	void SetLoginTag(byte in_byte);
+
+	void SetCaptchaType(byte in_byte);
+
+	void SetCaptcha(byte* in_byte_ptr,size_t len);
+
+
+	//
+    int GetCaptchaLen(){
+		return m_CaptchaLen;
+	}
 
 	~MSG_AVC(){}
 
@@ -213,6 +286,9 @@ private:
 	//错误标记
 	int m_Error;
 
+	//存放Captcha长度
+	int m_CaptchaLen;
+
 };
 
 
@@ -228,6 +304,19 @@ public:
 		//0x16
 		m_Command  = 22;
 		m_Error    = 0;
+
+		//预设
+		SetDataLen(0);
+		SetVersion(MSG_VER);
+		SetSerial(0x00);
+		SetCommand(m_Command);
+		SetObligate(0);
+		SetCmlCount(m_CmlCount);
+		SetVerify(0);
+		//留好参数长度空间
+		SetCmlListLen(m_CmlCount);
+		//留好参数空间
+		SetCmlCommandList(m_CmlCount);
 	}
 	//验证码：未知长度，为AUT传回来的图片包含的字符组成，此参数在服务器端应该与令牌绑定（有一个验证码-令牌映射）
 	byte* GetVerificationCode();
@@ -236,6 +325,25 @@ public:
 	//用户密码：密码经过处理后的二进制数据
 	byte* GetPassword();
 
+
+	void SetVerificationCode(byte* in_byte_ptr,size_t len);
+
+	void SetAccountNumber(byte* in_byte_ptr,size_t len);
+
+	void SetPassword(byte* in_byte_ptr,size_t len);
+
+
+	int GetVerificationCodeLen(){
+		return m_VerificationCodeLen;
+	}
+
+	int GetAccountNumberLen(){
+		return m_AccountNumberLen;
+	}
+
+	int GetPasswordLen(){
+		return m_PasswordLen;
+	}
 
 	~MSG_RLI(){}
 
@@ -252,6 +360,10 @@ private:
 	//错误标记
 	int m_Error;
 
+	//存储长度
+	int m_VerificationCodeLen;
+	int m_AccountNumberLen;
+	int m_PasswordLen;
 };
 
 
@@ -267,14 +379,41 @@ public:
 		//0x17
 		m_Command  = 23;
 		m_Error    = 0;
+
+		//预设
+		SetDataLen(0);
+		SetVersion(MSG_VER);
+		SetSerial(0x00);
+		SetCommand(m_Command);
+		SetObligate(0);
+		SetCmlCount(m_CmlCount);
+		SetVerify(0);
+		//留好参数长度空间
+		SetCmlListLen(m_CmlCount);
+		//留好参数空间
+		SetCmlCommandList(m_CmlCount);
 	}
 	//登录结果：1字节，用来标志此次登录的结果
-	uint GetResult();
+	uint GetLoginResult();
 	//令牌长度：4字节，0x00 00 00 10用户帐号编码后的长度，单位为字节
-	byte* GetToken();
+	uint GetToken();
 	//令牌：16字节，一个GUID ，帐号验证通过后生成，通过此数据包发给客户端，之后的指令在包头部均需带上此令牌
 	byte* GetATLGUID();
 
+	void SetLoginResult(byte in_byte);
+
+	void SetToken(byte* in_byte_ptr,size_t len = 4);
+
+	void SetATLGUID(byte* in_byte_ptr, size_t len = 16);
+
+
+	int GetATLGUIDLen(){
+		return m_ALTGUIDLen;
+	}
+
+	int GetTokenLen(){
+		return m_TokenLen;
+	}
 
 	~MSG_ALI(){}
 
@@ -290,6 +429,11 @@ private:
 
 	//错误标记
 	int m_Error;
+
+	//TokenLen
+	int m_TokenLen;
+	//ATLGUIDLen
+	int m_ALTGUIDLen;
 };
 
 
@@ -305,6 +449,19 @@ public:
 		//0x18
 		m_Command  = 24;
 		m_Error    = 0;
+
+		//预设
+		SetDataLen(0);
+		SetVersion(MSG_VER);
+		SetSerial(0x00);
+		SetCommand(m_Command);
+		SetObligate(0);
+		SetCmlCount(m_CmlCount);
+		SetVerify(0);
+		//留好参数长度空间
+		SetCmlListLen(m_CmlCount);
+		//留好参数空间
+		SetCmlCommandList(m_CmlCount);
 	}
 	//用户权限
 	uint GetRank();
@@ -316,6 +473,29 @@ public:
 	uint GetHeadForm();
 	//头像
 	byte* GetHeadPortrait();
+
+	void SetRank(byte in_byte);
+
+	void SetNickname(byte* in_byte_ptr,size_t len);
+
+	void SetAutograph(byte* in_byte_ptr,size_t len);
+
+	void SetHeadForm(byte in_byte);
+
+	void SetHeadPortrait(byte* in_byte_ptr,size_t len);
+
+
+	int GetNicknameLen(){
+		return m_NicknameLen;
+	}
+
+	int GetAutographLen(){
+		return m_AutographLen;
+	}
+
+	int GetHeadPortraitLen(){
+		return m_HeadPortraitLen;
+	}
 
 	~MSG_RPS(){}
 
@@ -332,6 +512,10 @@ private:
 	//错误标记
 	int m_Error;
 
+	//长度
+	int m_NicknameLen;
+	int m_AutographLen;
+	int m_HeadPortraitLen;
 };
 
 
@@ -347,10 +531,29 @@ public:
 		//0x19
 		m_Command  = 25;
 		m_Error    = 0;
+
+		//预设
+		SetDataLen(0);
+		SetVersion(MSG_VER);
+		SetSerial(0x00);
+		SetCommand(m_Command);
+		SetObligate(0);
+		SetCmlCount(m_CmlCount);
+		SetVerify(0);
+		//留好参数长度空间
+		SetCmlListLen(m_CmlCount);
+		//留好参数空间
+		SetCmlCommandList(m_CmlCount);
 	}
 
 	//个人信息同步通知
 	byte* GetMessageSynchro();
+
+	void SetMessageSynchro(byte* in_byte_ptr,size_t len);
+
+	int GetMessageSynchroLen(){
+		return m_MessageSynchroLen;
+	}
 
 	~MSG_APS(){}
 
@@ -367,4 +570,6 @@ private:
 	//错误标记
 	int m_Error;
 
+	//长度
+	int m_MessageSynchroLen;
 };

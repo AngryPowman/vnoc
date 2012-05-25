@@ -21,6 +21,14 @@ uint byteToInt(byte* in_byte)
 	return (*lpDataLen);
 }
 
+void IntTobyte(int in_int,byte* out_byte)
+{
+	for(int i = 0; i < 4; i++)
+	{
+		out_byte[i]=(byte)(in_int>>(24-i*8));
+	}
+}
+
 int  CMessage::GetMessageType()
 {
 	return _MessageType();
@@ -87,6 +95,83 @@ uint CMessage::GetDataLen()
 }
 
 
+// Set
+
+void CMessage::SetCommand(byte in_byte)
+{
+	m_Command = in_byte;
+}
+
+void CMessage::SetCmlListLen(int CmlCount)
+{
+	if (CmlCount  !=  NULL)
+	{
+		delete [] m_CmlListLen;
+		m_CmlListLen = new byte[CmlCount * 4];
+		memset(m_CmlListLen,0,CmlCount * 4);
+	}
+}
+
+void CMessage::SetSerial(byte in_byte)
+{
+	m_Serial = in_byte;
+}
+
+void CMessage::SetGUID(byte* in_byte_ptr)
+{
+	if (in_byte_ptr  != NULL)
+	{
+		memset(m_GUID,0,16);
+		memcpy(m_GUID,in_byte_ptr,16);
+	}
+}
+
+void CMessage::SetCmlCommandList(int CmlCount)
+{
+	if (CmlCount  !=  NULL)
+	{
+		for (int count = 0; (int)m_CmlCount < count; count++)
+		{
+			if (m_CmlCommandList[count])
+			{
+				delete [] m_CmlCommandList[count];
+				m_CmlCommandList[count] = NULL;
+			}
+		}
+
+		delete m_CmlCommandList;
+		m_CmlCommandList = new byte*[CmlCount];
+	}
+}
+
+
+void CMessage::SetVerify(uint in_Int)
+{
+	m_Verify = in_Int;
+}
+
+void CMessage::SetObligate(uint in_Int)
+{
+	m_Obligate = in_Int;
+}
+
+void CMessage::SetVersion(uint in_Int)
+{
+	m_Ver = in_Int;
+}
+
+void CMessage::SetCmlCount(uint in_Int)
+{
+	m_CmlCount = in_Int;
+}
+
+void CMessage::SetDataLen(uint in_Int)
+{
+	m_Len = in_Int;
+}
+
+
+
 int  CMessage::_MessageType()
 {
 	int  _type = 0;
@@ -110,7 +195,9 @@ int  CMessage::_MessageType()
 
 void CMessage::_Initialization()
 {
-	memset(m_GUID,0,17);
+	memset(m_GUID,0,16);
+	m_Begin = false;
+	m_End   = false;
 	m_CmlListLen  = NULL;
 	m_CmlCommandList = NULL;
 	m_CmlCount = 0;
@@ -184,6 +271,21 @@ byte* MSG_RVC::GetMachineAddress()
 	return GetCmlCommandList()[0];
 }
 
+void MSG_RVC::SetMachineAddress( byte* in_byte_ptr, size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_MachineAddressLen = len;
+	if (GetCmlCommandList()[0] != NULL)
+	{
+		GetCmlCommandList()[0] = new byte[len];
+	}
+	memset(GetCmlCommandList()[0],0,len);
+	memcpy(GetCmlCommandList()[0],in_byte_ptr,16);
+}
+
 //AVC(获取验证码响应)
 void MSG_AVC::Initialize()
 {
@@ -239,6 +341,41 @@ byte* MSG_AVC::GetCaptcha()
 	return GetCmlCommandList()[0];
 }
 
+
+void MSG_AVC::SetLoginTag(byte in_byte)
+{
+	//只占一个字节
+	if (GetCmlCommandList()[2] != NULL)
+	{
+		GetCmlCommandList()[2] = new byte[1];
+	}
+	GetCmlCommandList()[2][0] = in_byte;
+}
+
+void MSG_AVC::SetCaptchaType(byte in_byte)
+{
+	//只占一个字节
+	if (GetCmlCommandList()[1] != NULL)
+	{
+		GetCmlCommandList()[1] = new byte[1];
+	}
+	GetCmlCommandList()[1][0] = in_byte;
+}
+
+void MSG_AVC::SetCaptcha(byte* in_byte_ptr,size_t len)
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_CaptchaLen = len;
+	if (GetCmlCommandList()[0] != NULL)
+	{
+		GetCmlCommandList()[0] = new byte[len];
+	}
+	memset(GetCmlCommandList()[0],0,len);
+	memcpy(GetCmlCommandList()[0],in_byte_ptr,len);
+}
 
 //RLI(登录请求)
 void MSG_RLI::Initialize()
@@ -296,6 +433,51 @@ byte* MSG_RLI::GetPassword()
 	return GetCmlCommandList()[0];
 }
 
+void MSG_RLI::SetVerificationCode( byte* in_byte_ptr,size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_VerificationCodeLen = len;
+	if (GetCmlCommandList()[2] != NULL)
+	{
+		GetCmlCommandList()[2] = new byte[len];
+	}
+	memset(GetCmlCommandList()[2],0,len);
+	memcpy(GetCmlCommandList()[2],in_byte_ptr,len);
+}
+
+void MSG_RLI::SetAccountNumber( byte* in_byte_ptr,size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_AccountNumberLen = len;
+	if (GetCmlCommandList()[1] != NULL)
+	{
+		GetCmlCommandList()[1] = new byte[len];
+	}
+	memset(GetCmlCommandList()[1],0,len);
+	memcpy(GetCmlCommandList()[1],in_byte_ptr,len);
+}
+
+void MSG_RLI::SetPassword( byte* in_byte_ptr,size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_PasswordLen = len;
+	if (GetCmlCommandList()[0] != NULL)
+	{
+		GetCmlCommandList()[0] = new byte[len];
+	}
+	memset(GetCmlCommandList()[0],0,len);
+	memcpy(GetCmlCommandList()[0],in_byte_ptr,len);
+}
+
 //ALI(登录应答)
 void MSG_ALI::Initialize()
 {
@@ -320,7 +502,7 @@ void MSG_ALI::Initialize()
 	// 	}
 
 }
-uint MSG_ALI::GetResult()
+uint MSG_ALI::GetLoginResult()
 {
 	Initialize();
 	if (m_Error != 0)
@@ -331,14 +513,14 @@ uint MSG_ALI::GetResult()
 }
 
 
-byte* MSG_ALI::GetToken()
+uint MSG_ALI::GetToken()
 {
 	Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
 	}
-	return GetCmlCommandList()[1];
+	return byteToInt(GetCmlCommandList()[1]);
 }
 
 
@@ -351,6 +533,47 @@ byte* MSG_ALI::GetATLGUID()
 	}
 	return GetCmlCommandList()[0];
 }
+
+void MSG_ALI::SetLoginResult( byte in_byte )
+{
+	if (GetCmlCommandList()[2] != NULL)
+	{
+		GetCmlCommandList()[2] = new byte[1];
+	}
+	GetCmlCommandList()[2][0] = in_byte;
+}
+
+void MSG_ALI::SetToken( byte* in_byte_ptr, size_t len /*= 4*/)
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_TokenLen = len;
+	if (GetCmlCommandList()[1] != NULL)
+	{
+		GetCmlCommandList()[1] = new byte[len];
+	}
+	memset(GetCmlCommandList()[1],0,len);
+	memcpy(GetCmlCommandList()[1],in_byte_ptr,len);
+}
+
+void MSG_ALI::SetATLGUID( byte* in_byte_ptr, size_t len /*= 16*/ )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_ALTGUIDLen = len;
+	if (GetCmlCommandList()[0] != NULL)
+	{
+		GetCmlCommandList()[0] = new byte[len];
+	}
+	memset(GetCmlCommandList()[0],0,len);
+	memcpy(GetCmlCommandList()[0],in_byte_ptr,len);
+}
+
+
 
 //RPS(个人信息同步通知)
 void MSG_RPS::Initialize()
@@ -428,6 +651,74 @@ byte* MSG_RPS::GetHeadPortrait()
 	return GetCmlCommandList()[0];
 }
 
+void MSG_RPS::SetRank( byte in_byte )
+{
+	if (GetCmlCommandList()[4] != NULL)
+	{
+		GetCmlCommandList()[4] = new byte[1];
+	}
+	GetCmlCommandList()[4][0] = in_byte;
+}
+
+
+void MSG_RPS::SetNickname( byte* in_byte_ptr,size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_NicknameLen = len;
+	if (GetCmlCommandList()[3] != NULL)
+	{
+		GetCmlCommandList()[3] = new byte[len];
+	}
+	memset(GetCmlCommandList()[3],0,len);
+	memcpy(GetCmlCommandList()[3],in_byte_ptr,len);
+}
+
+
+void MSG_RPS::SetAutograph( byte* in_byte_ptr,size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_AutographLen = len;
+	if (GetCmlCommandList()[2] != NULL)
+	{
+		GetCmlCommandList()[2] = new byte[len];
+	}
+	memset(GetCmlCommandList()[2],0,len);
+	memcpy(GetCmlCommandList()[2],in_byte_ptr,len);
+}
+
+void MSG_RPS::SetHeadForm( byte in_byte )
+{
+	if (GetCmlCommandList()[1] != NULL)
+	{
+		GetCmlCommandList()[1] = new byte[1];
+	}
+	GetCmlCommandList()[1][0] = in_byte;
+}
+
+void MSG_RPS::SetHeadPortrait( byte* in_byte_ptr,size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_HeadPortraitLen = len;
+	if (GetCmlCommandList()[0] != NULL)
+	{
+		GetCmlCommandList()[0] = new byte[len];
+	}
+	memset(GetCmlCommandList()[0],0,len);
+	memcpy(GetCmlCommandList()[0],in_byte_ptr,len);
+}
+
+
+
+
 //APS(个人信息同步通知确认)
 void MSG_APS::Initialize()
 {
@@ -460,4 +751,19 @@ byte* MSG_APS::GetMessageSynchro()
 		return 0;
 	}
 	return GetCmlCommandList()[0];
+}
+
+void MSG_APS::SetMessageSynchro( byte* in_byte_ptr,size_t len )
+{
+	if (in_byte_ptr == NULL)
+	{
+		return;
+	}
+	m_MessageSynchroLen = len;
+	if (GetCmlCommandList()[0] != NULL)
+	{
+		GetCmlCommandList()[0] = new byte[len];
+	}
+	memset(GetCmlCommandList()[0],0,len);
+	memcpy(GetCmlCommandList()[0],in_byte_ptr,len);
 }
