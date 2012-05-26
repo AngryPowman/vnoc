@@ -1,13 +1,11 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include "../MessageParser.h"
 #include "../PackMessage.h"
 #include <string.h>
 class Vnocp1MessageParserTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( Vnocp1MessageParserTest );
     CPPUNIT_TEST( MSGParseTest );
-	CPPUNIT_TEST( MSGPackTest );
     CPPUNIT_TEST_SUITE_END();
 public:
     void setUp()
@@ -179,32 +177,32 @@ public:
 
 		//AVC
 		CMessageParser msgParser;
-		CMessage* msgAVC = msgParser.Parse(testAVC);
+		CMessage* msgAVC = msgParser.Parse(testAVC,62);
 		CPPUNIT_ASSERT(msgAVC->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是AVC
 		MSG_AVC* msg_avc = (MSG_AVC *)msgAVC;
 
 		//RVC
-		CMessage* msgRVC = msgParser.Parse(testRVC);
+		CMessage* msgRVC = msgParser.Parse(testRVC,52);
 		CPPUNIT_ASSERT(msgRVC->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RVC
 		MSG_RVC* msg_rvc = (MSG_RVC *)msgRVC;
 
 		//RLI
-		CMessage* msgRLI = msgParser.Parse(testRLI);
+		CMessage* msgRLI = msgParser.Parse(testRLI,77);
 		CPPUNIT_ASSERT(msgRLI->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RLI
 		MSG_RLI* msg_rli = (MSG_RLI *)msgRLI;
 
 		//ALI
-		CMessage* msgALI = msgParser.Parse(testALI);
+		CMessage* msgALI = msgParser.Parse(testALI,77);
 		CPPUNIT_ASSERT(msgALI->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是ALI
 		MSG_ALI* msg_ali = (MSG_ALI *)msgALI;
 
 		//RPS
-		CMessage* msgRPS = msgParser.Parse(testRPS);
+		CMessage* msgRPS = msgParser.Parse(testRPS,86);
 		CPPUNIT_ASSERT(msgRPS->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RPS
 		MSG_RPS* msg_rps = (MSG_RPS *)msgRPS;
 		
 		//APS
-		CMessage* msgAPS = msgParser.Parse(testAPS);
+		CMessage* msgAPS = msgParser.Parse(testAPS,52);
 		CPPUNIT_ASSERT(msgAPS->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RPS
 		MSG_APS* msg_aps = (MSG_APS *)msgAPS;
 
@@ -219,120 +217,6 @@ public:
 
 		CPPUNIT_ASSERT(true);
     }
-
-	void MSGPackTest()
-	{
-		byte testParamO [] = {0x02,0x02,0x02,0x02,
-			0x02,0x02,0x02,0x02,
-			0x02,0x02,0x02,0x02,
-			0x02,0x02,0x02,0x02};
-		byte testParamT [] = {0x03,0x03,0x03,0x03,
-			0x03,0x03,0x03,0x03,
-			0x03,0x03,0x03,0x03,
-			0x03,0x03,0x03,0x03};
-		byte testParamS [] = {0x04,0x04,0x04,0x04,
-			0x04,0x04,0x04,0x04,
-			0x04,0x04,0x04,0x04,
-			0x04,0x04,0x04,0x04};
-		byte testComLenRVC[] = {
-			0x00,0x00,0x00,0x10,
-		};
-
-		byte testComLenAVC[] = {
-			0x00,0x00,0x00,0x01,
-			0x00,0x00,0x00,0x01,
-			0x00,0x00,0x00,0x10
-		};
-		byte testComLenRLI[] = {
-			0x00,0x00,0x00,0x10,
-			0x00,0x00,0x00,0x10,
-			0x00,0x00,0x00,0x10
-		};
-		byte testComLenALI[] = {
-			0x00,0x00,0x00,0x10,
-			0x00,0x00,0x00,0x10,
-			0x00,0x00,0x00,0x10
-		};
-
-		byte testComLenRPS[] = {
-			0x00,0x00,0x00,0x01,
-			0x00,0x00,0x00,0x10,
-			0x00,0x00,0x00,0x10,
-			0x00,0x00,0x00,0x01,
-			0x00,0x00,0x00,0x10
-		};
-
-		byte testComLenAPS[] = {
-			0x00,0x00,0x00,0x10,
-		};
-
-		byte testPackAVC[62] = {0};
-		byte testPackRVC[52] = {0};
-		byte testPackRLI[100] = {0};
-		byte testPackALI[100] = {0};
-		byte testPackRPS[100] = {0};
-		byte testPackAPS[100] = {0};
-		//已经填充过的对象 使用前请保证调用过_Close否则会导致内存泄露
-		//需要自己填充参数长度msg_xxx.SetCmlListLen(byte* in_byte_ptr);
-		//AVC
-		MSG_AVC msg_avc;
-		msg_avc.SetSerial(0x01);
-		msg_avc.SetGUID(testParamO);
-		msg_avc.SetCmlListLen(testComLenAVC,3);
-		msg_avc.SetCaptcha(testParamO,16);
-		msg_avc.SetLoginTag(0x1e);
-		msg_avc.SetCaptchaType(0x1e);
-		PackMessage(&msg_avc,testPackAVC,62);
-		//RVC
-		MSG_RVC msg_rvc;
-		msg_rvc.SetCmlListLen(testComLenRVC,1);
-		msg_rvc.SetMachineAddress(testParamO,16);
-		PackMessage(&msg_rvc,testPackRVC,52);
-
-
-		//RLI
-		MSG_RLI msg_rli;
-		msg_rli.SetSerial(0x01);
-		msg_rli.SetGUID(testParamO);
-		msg_rli.SetCmlListLen(testComLenRLI,3);
-		msg_rli.SetVerificationCode(testParamO,16);
-		msg_rli.SetAccountNumber(testParamT,16);
-		msg_rli.SetPassword(testParamS,16);
-		PackMessage(&msg_rli,testPackRLI,100);
-		//ALI
-		MSG_ALI msg_ali;
-		msg_ali.SetSerial(0x01);
-		msg_ali.SetGUID(testParamO);
-		msg_ali.SetCmlListLen(testComLenALI,3);
-		msg_ali.SetLoginResult(0x1E);
-		msg_ali.SetToken(testParamO,16);
-		msg_ali.SetATLGUID(testParamT,16);
-		PackMessage(&msg_ali,testPackALI,100);
-
-
-		//RPS
-		MSG_RPS msg_rps;
-		msg_rps.SetSerial(0x01);
-		msg_rps.SetGUID(testParamO);
-		msg_rps.SetCmlListLen(testComLenRPS,5);
-		msg_rps.SetRank(0x01);
-		msg_rps.SetNickname(testParamO,16);
-		msg_rps.SetAutograph(testParamT,16);
-		msg_rps.SetHeadForm('A');
-		msg_rps.SetHeadPortrait(testParamS,16);
-		PackMessage(&msg_rps,testPackRPS,100);
-
-
-		//APS
-		MSG_APS msg_aps;
-		msg_aps.SetSerial(0x01);
-		msg_aps.SetGUID(testParamO);
-		msg_aps.SetCmlListLen(testComLenAPS,1);
-		msg_aps.SetMessageSynchro(testParamO,16);
-		PackMessage(&msg_aps,testPackAPS,100);
-
-		CPPUNIT_ASSERT(true);
-	}
 
 
 };

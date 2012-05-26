@@ -3,7 +3,7 @@
 #include "MsgDef.h"
 
 
-uint byteToInt(byte* in_byte)
+uint byteToInt(byte* in_byte,size_t len)
 {
 	byte tmpByte[4] = {0};
 	if (in_byte == NULL)
@@ -11,7 +11,7 @@ uint byteToInt(byte* in_byte)
 		return 0;
 	}
 
-	for (int index = 0; index < (int)strlen((const char*)in_byte); index++)
+	for (int index = 0; index < (int)len; index++)
 	{
 		tmpByte[index] = in_byte[index];
 	}
@@ -31,6 +31,10 @@ void IntTobyte(int in_int,byte* out_byte)
 
 int  CMessage::GetMessageType()
 {
+	if (GetBeginTab() != true || GetEndTab() != true)
+	{
+		return -1;
+	}
 	return _MessageType();
 }
 
@@ -97,14 +101,15 @@ uint CMessage::GetDataLen()
 
 // Set
 
-void CMessage::SetCommand(byte in_byte)
+bool CMessage::SetCommand(byte in_byte)
 {
 	m_Command = in_byte;
+	return true;
 }
 
-void CMessage::SetCmlListLen(byte* in_byte_ptr,int CmlCount)
+bool CMessage::SetCmlListLen(byte* in_byte_ptr,int CmlCount)
 {
-	if (CmlCount  !=  NULL)
+	if (CmlCount  !=  0)
 	{
 		delete [] m_CmlListLen;
 		m_CmlListLen = new byte[CmlCount * 4];
@@ -113,26 +118,31 @@ void CMessage::SetCmlListLen(byte* in_byte_ptr,int CmlCount)
 		{
 			memcpy(m_CmlListLen,in_byte_ptr,CmlCount * 4);
 		}
+		return true;
 	}
+	return false;
 }
 
-void CMessage::SetSerial(byte in_byte)
+bool CMessage::SetSerial(byte in_byte)
 {
 	m_Serial = in_byte;
+	return true;
 }
 
-void CMessage::SetGUID(byte* in_byte_ptr)
+bool CMessage::SetGUID(byte* in_byte_ptr)
 {
 	if (in_byte_ptr  != NULL)
 	{
 		memset(m_GUID,0,16);
 		memcpy(m_GUID,in_byte_ptr,16);
+		return true;
 	}
+	return false;
 }
 
-void CMessage::SetCmlCommandList(int CmlCount)
+bool CMessage::SetCmlCommandList(int CmlCount)
 {
-	if (CmlCount  !=  NULL)
+	if (CmlCount  !=  0)
 	{
 		for (int count = 0; (int)m_CmlCount < count; count++)
 		{
@@ -145,33 +155,40 @@ void CMessage::SetCmlCommandList(int CmlCount)
 
 		delete m_CmlCommandList;
 		m_CmlCommandList = new byte*[CmlCount];
+		return true;
 	}
+	return false;
 }
 
 
-void CMessage::SetVerify(uint in_Int)
+bool CMessage::SetVerify(uint in_Int)
 {
 	m_Verify = in_Int;
+	return true;
 }
 
-void CMessage::SetObligate(uint in_Int)
+bool CMessage::SetObligate(uint in_Int)
 {
 	m_Obligate = in_Int;
+	return true;
 }
 
-void CMessage::SetVersion(uint in_Int)
+bool CMessage::SetVersion(uint in_Int)
 {
 	m_Ver = in_Int;
+	return true;
 }
 
-void CMessage::SetCmlCount(uint in_Int)
+bool CMessage::SetCmlCount(uint in_Int)
 {
 	m_CmlCount = in_Int;
+	return true;
 }
 
-void CMessage::SetDataLen(uint in_Int)
+bool CMessage::SetDataLen(uint in_Int)
 {
 	m_Len = in_Int;
+	return true;
 }
 
 
@@ -243,10 +260,10 @@ void CMessage::_Close()
 //RVC(获取验证码请求)
 void MSG_RVC::Initialize()
 {
-	if (GetBeginTab() != true || GetEndTab() != true)
-	{
-		m_Error++;
-	}
+// 	if (GetBeginTab() != true || GetEndTab() != true)
+// 	{
+// 		m_Error++;
+// 	}
 
 	if (GetCommand() != m_Command)
 	{
@@ -293,10 +310,10 @@ void MSG_RVC::SetMachineAddress( byte* in_byte_ptr, size_t len )
 //AVC(获取验证码响应)
 void MSG_AVC::Initialize()
 {
-	if (GetBeginTab() != true || GetEndTab() != true)
-	{
-		m_Error++;
-	}
+// 	if (GetBeginTab() != true || GetEndTab() != true)
+// 	{
+// 		m_Error++;
+// 	}
 
 	if (GetCommand() != m_Command)
 	{
@@ -322,7 +339,7 @@ uint MSG_AVC::GetLoginTag()
 	{
 		return 0;
 	}
-	return byteToInt(GetCmlCommandList()[2]);
+	return byteToInt(GetCmlCommandList()[2],1);
 }
 
 uint MSG_AVC::GetCaptchaType()
@@ -332,7 +349,7 @@ uint MSG_AVC::GetCaptchaType()
 	{
 		return 0;
 	}
-	return byteToInt(GetCmlCommandList()[1]);
+	return byteToInt(GetCmlCommandList()[1],1);
 }
 
 byte* MSG_AVC::GetCaptcha()
@@ -384,10 +401,10 @@ void MSG_AVC::SetCaptcha(byte* in_byte_ptr,size_t len)
 //RLI(登录请求)
 void MSG_RLI::Initialize()
 {
-	if (GetBeginTab() != true || GetEndTab() != true)
-	{
-		m_Error++;
-	}
+// 	if (GetBeginTab() != true || GetEndTab() != true)
+// 	{
+// 		m_Error++;
+// 	}
 
 	if (GetCommand() != m_Command)
 	{
@@ -485,10 +502,10 @@ void MSG_RLI::SetPassword( byte* in_byte_ptr,size_t len )
 //ALI(登录应答)
 void MSG_ALI::Initialize()
 {
-	if (GetBeginTab() != true || GetEndTab() != true)
-	{
-		m_Error++;
-	}
+// 	if (GetBeginTab() != true || GetEndTab() != true)
+// 	{
+// 		m_Error++;
+// 	}
 
 	if (GetCommand() != m_Command)
 	{
@@ -513,7 +530,7 @@ uint MSG_ALI::GetLoginResult()
 	{
 		return 0;
 	}
-	return byteToInt(GetCmlCommandList()[2]);
+	return byteToInt(GetCmlCommandList()[2],1);
 }
 
 
@@ -524,7 +541,7 @@ uint MSG_ALI::GetToken()
 	{
 		return 0;
 	}
-	return byteToInt(GetCmlCommandList()[1]);
+	return byteToInt(GetCmlCommandList()[1],4);
 }
 
 
@@ -582,10 +599,10 @@ void MSG_ALI::SetATLGUID( byte* in_byte_ptr, size_t len /*= 16*/ )
 //RPS(个人信息同步通知)
 void MSG_RPS::Initialize()
 {
-	if (GetBeginTab() != true || GetEndTab() != true)
-	{
-		m_Error++;
-	}
+// 	if (GetBeginTab() != true || GetEndTab() != true)
+// 	{
+// 		m_Error++;
+// 	}
 
 	if (GetCommand() != m_Command)
 	{
@@ -610,7 +627,7 @@ uint MSG_RPS::GetRank()
 	{
 		return 0;
 	}
-	return byteToInt(GetCmlCommandList()[4]);
+	return byteToInt(GetCmlCommandList()[4],1);
 }
 
 
@@ -642,7 +659,7 @@ uint MSG_RPS::GetHeadForm()
 	{
 		return 0;
 	}
-	return byteToInt(GetCmlCommandList()[1]);
+	return byteToInt(GetCmlCommandList()[1],1);
 }
 
 byte* MSG_RPS::GetHeadPortrait()
@@ -726,10 +743,10 @@ void MSG_RPS::SetHeadPortrait( byte* in_byte_ptr,size_t len )
 //APS(个人信息同步通知确认)
 void MSG_APS::Initialize()
 {
-	if (GetBeginTab() != true || GetEndTab() != true)
-	{
-		m_Error++;
-	}
+// 	if (GetBeginTab() != true || GetEndTab() != true)
+// 	{
+// 		m_Error++;
+// 	}
 
 	if (GetCommand() != m_Command)
 	{

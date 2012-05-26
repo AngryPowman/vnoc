@@ -82,12 +82,15 @@
   <ItemGroup>
     <ClCompile Include="..\MessageParser.cpp" />
     <ClCompile Include="..\MsgDef.cpp" />
+    <ClCompile Include="..\PackMessage.cpp" />
+    <ClCompile Include="..\test\testPackMessage.cpp" />
     <ClCompile Include="..\test\testRunner.cpp" />
     <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\MessageParser.h" />
     <ClInclude Include="..\MsgDef.h" />
+    <ClInclude Include="..\PackMessage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

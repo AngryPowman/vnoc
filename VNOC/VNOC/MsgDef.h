@@ -68,7 +68,7 @@ typedef  unsigned char byte;
 typedef  unsigned int  uint;
 
 
-uint byteToInt(byte* in_byte);
+uint byteToInt(byte* in_byte,size_t len);
 
 void IntTobyte(int in_int,byte* out_byte);
 
@@ -118,25 +118,25 @@ public:
 
 // Set
 
-	void SetCommand(byte in_byte);
+	bool SetCommand(byte in_byte);
 
-	void SetCmlListLen(byte* in_byte_ptr,int CmlCount);
+	bool SetCmlListLen(byte* in_byte_ptr,int CmlCount);
 
-	void SetSerial(byte in_byte);
+	bool SetSerial(byte in_byte);
 
-	void SetGUID(byte* in_byte_ptr);
+	bool SetGUID(byte* in_byte_ptr);
 
-	void SetCmlCommandList(int CmlCount);
+	bool SetCmlCommandList(int CmlCount);
 
-	void SetVerify(uint in_Int);
+	bool SetVerify(uint in_Int);
 
-	void SetObligate(uint in_Int);
+	bool SetObligate(uint in_Int);
 
-	void SetVersion(uint in_Int);
+	bool SetVersion(uint in_Int);
 
-	void SetCmlCount(uint in_Int);
+	bool SetCmlCount(uint in_Int);
 
-	void SetDataLen(uint in_Int);
+	bool SetDataLen(uint in_Int);
 
 
 private:
