@@ -14,11 +14,12 @@
 <body>
 
 <!-- These are the cotents of HTML Code -->
-<a href="v-setlocale.php?lang=en_US">|| American English ||</a>
-<a href="v-setlocale.php?lang=en_GB">|| British English ||</a>
-<a href="v-setlocale.php?lang=zh_HK">|| 港澳繁體 ||</a>
-<a href="v-setlocale.php?lang=zh_TW">|| 台灣正體 ||</a>
-<a href="v-setlocale.php?lang=zh_CN">|| 简体中文 ||</a>
+<a href="v-setlocale.php?lang=en-US">|| American English ||</a>
+<a href="v-setlocale.php?lang=en-GB">|| British English ||</a>
+<a href="v-setlocale.php?lang=zh-HK">|| 港澳繁體 ||</a>
+<a href="v-setlocale.php?lang=zh-TW">|| 台灣正體 ||</a>
+<a href="v-setlocale.php?lang=zh-CN">|| 简体中文 ||</a>
+<?php echo $_SERVER["HTTP_USER_AGENT"]; ?>
 <p>This is [<?php echo __("VNOC Homepage"); ?>]</p>
 
 <!-- This is the footer of HTML Code -->

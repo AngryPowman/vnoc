@@ -36,14 +36,14 @@
 	}
 	
 	/** Set locale setting to cookie
-	 ** If the language is not specific, it will use "en_US" as default
+	 ** If the language is not specific, it will use "en-US" as default
 	 ** If you like to change the default, 
 	 **
 	 ** @_vnoc.locale
 	 ** @param optional string $lang - Locale language
 	 ** @return none
 	 */
-	function v_locale_tocookie($lang="en_US")
+	function v_locale_tocookie($lang="en-US")
 	{
 		setcookie("vnoc_locale", $lang, time() + 31536000);
 	}

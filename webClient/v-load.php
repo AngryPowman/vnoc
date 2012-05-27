@@ -23,14 +23,19 @@
 	/** Include in the modules needed for VNOC
 	 **
 	 ** @browser: Related with browser actions
+	 ** @config:  If the configurations are not included in specific
+	 **           class(es), it will be include in this part
 	 ** @locale:  Related with locale settings
 	 ** @mysql:   Functions with MySQL connection
+	 ** @parse:   Functions of parsers
 	 ** @script:  Write out script with templates
 	 ** @test:    Functions needed for LESS CSS compatibility test
 	 */
 	include_once(MODULE . "browser.php");
+	include_once(MODULE . "config.php");
 	include_once(MODULE . "locale.php");
 	include_once(MODULE . "mysql.php");
+	include_once(MODULE . "parse.php");
 	include_once(MODULE . "script.php");
 	include_once(MODULE . "test.php");
 ?>

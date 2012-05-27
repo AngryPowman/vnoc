@@ -74,14 +74,16 @@ color 18
   goto Done
 
 :CopyFiles
+  set CUR=%cd%
   setlocal ENABLEDELAYEDEXPANSION
   for /f %%i in ('"dir /A /S /B /N /ON v-lang\*.mo"') do (
     set file=%%~fi
     set file=!file:%cd%\v-lang\=!
     set file=!file:.mo=!
-    md v-lang\!file!\LC_MESSAGES
+    md %CUR%\v-lang\!file!\LC_MESSAGES
+    cd %CUR%
+    copy /Y v-lang\!file!.mo /B v-lang\!file!\LC_MESSAGES\!file!.mo /B
     attrib +h +r -s v-lang\!file!
-    copy /Y v-lang/!file!.mo /B v-lang/!file!/LC_MESSAGES/!file!.mo /B
   )
   setlocal DISABLEDELAYEDEXPANSION
   goto Done

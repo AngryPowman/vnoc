@@ -30,6 +30,6 @@
 	 */
 	function v_LESS_load($less)
 	{
-		echo "<link rel=\"stylesheet/less\" type=\"text/css\" href=\"{$less}\">\n";
+		echo "<link rel=\"stylesheet/less\" type=\"text/css\" href=\"$less\">\n";
 	}
 ?>

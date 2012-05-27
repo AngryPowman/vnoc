@@ -1,5 +1,5 @@
-en_GB 
-en_US 
-zh_HK 
-zh_TW 
+en-GB 
+en-US 
 zh-CN 
+zh-HK 
+zh-TW 

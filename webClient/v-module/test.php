@@ -66,7 +66,7 @@
 		$count=0;
 		foreach($source as $id => $value)
 		{
-			if(preg_match("/^({$prefix})\w+({$suffix})$/" . ($nocase ? "i" : ""), $id))
+			if(preg_match("/^($prefix)\s+($suffix)$/" . ($nocase ? "i" : ""), $id))
 			{
 				$integer=($integer << 1);
 				$count+=1;
