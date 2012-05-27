@@ -177,32 +177,32 @@ public:
 
 		//AVC
 		CMessageParser msgParser;
-		CMessage* msgAVC = msgParser.Parse(testAVC,62);
+		CMessage* msgAVC = msgParser.Parse(testAVC,sizeof(testAVC));
 		CPPUNIT_ASSERT(msgAVC->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是AVC
 		MSG_AVC* msg_avc = (MSG_AVC *)msgAVC;
 
 		//RVC
-		CMessage* msgRVC = msgParser.Parse(testRVC,52);
+		CMessage* msgRVC = msgParser.Parse(testRVC,sizeof(testRVC));
 		CPPUNIT_ASSERT(msgRVC->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RVC
 		MSG_RVC* msg_rvc = (MSG_RVC *)msgRVC;
 
 		//RLI
-		CMessage* msgRLI = msgParser.Parse(testRLI,77);
+		CMessage* msgRLI = msgParser.Parse(testRLI,sizeof(testRLI));
 		CPPUNIT_ASSERT(msgRLI->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RLI
 		MSG_RLI* msg_rli = (MSG_RLI *)msgRLI;
 
 		//ALI
-		CMessage* msgALI = msgParser.Parse(testALI,77);
+		CMessage* msgALI = msgParser.Parse(testALI,sizeof(testALI));
 		CPPUNIT_ASSERT(msgALI->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是ALI
 		MSG_ALI* msg_ali = (MSG_ALI *)msgALI;
 
 		//RPS
-		CMessage* msgRPS = msgParser.Parse(testRPS,86);
+		CMessage* msgRPS = msgParser.Parse(testRPS,sizeof(testRPS));
 		CPPUNIT_ASSERT(msgRPS->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RPS
 		MSG_RPS* msg_rps = (MSG_RPS *)msgRPS;
 		
 		//APS
-		CMessage* msgAPS = msgParser.Parse(testAPS,52);
+		CMessage* msgAPS = msgParser.Parse(testAPS,sizeof(testAPS));
 		CPPUNIT_ASSERT(msgAPS->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是RPS
 		MSG_APS* msg_aps = (MSG_APS *)msgAPS;
 
