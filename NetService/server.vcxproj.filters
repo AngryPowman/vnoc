@@ -13,6 +13,9 @@
     <ClInclude Include="src\SocketServer.hpp">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="src\VnocMessageHandler.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">

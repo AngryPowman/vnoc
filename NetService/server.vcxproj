@@ -147,6 +147,7 @@
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\SocketServer.hpp" />
+    <ClInclude Include="src\VnocMessageHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp" />
