@@ -3,15 +3,18 @@
 #include "MsgDef.h"
 
 
-void BigSwapLittleByte(byte* in_byte,byte* out_byte,size_t len)
+void LittleSwapBigByte(byte* in_byte_ptr,size_t len)
 {
-	if ((in_byte != NULL)&&(out_byte != NULL))
+	byte* tmpByte_ptr = new byte[len];
+	if (in_byte_ptr != NULL)
 	{
 		for (int index = 0,Pos = 1; index < (int)len; index++,Pos++)
 		{
-			out_byte[index] = in_byte[len - Pos];
+			tmpByte_ptr[index] = in_byte_ptr[len - Pos];
 		}
+		memcpy(in_byte_ptr,tmpByte_ptr,len);
 	}
+	delete [] tmpByte_ptr;
 }
 
 uint byteToInt(byte* in_byte,size_t len)
@@ -34,6 +37,10 @@ uint byteToInt(byte* in_byte,size_t len)
 
 void IntTobyte(int in_int,byte* out_byte)
 {
+	if (out_byte == NULL)
+	{
+		return;
+	}
 	for(int i = 0; i < 4; i++)
 	{
 		out_byte[i]=(byte)(in_int>>(24-i*8));
@@ -72,7 +79,7 @@ byte* CMessage::GetCmlListLen()
 
 uint CMessage::GetSerial()
 {
-	return byteToInt(m_Serial,2);
+	return BigLittleSwap16(byteToInt(m_Serial,2));
 }
 
 byte* CMessage::GetGUID()
@@ -136,12 +143,17 @@ bool CMessage::SetCmlListLen(byte* in_byte_ptr,int CmlCount)
 }
 
 
-bool CMessage::SetSerial(byte* in_byte_ptr)
+bool CMessage::SetSerial(ushort in_short)
 {
-	if (in_byte_ptr  != NULL)
+	byte tmpbyte[4] = {0};
+	if (m_Serial != NULL)
 	{
-		memset(m_Serial,0,2);
-		memcpy(m_Serial,in_byte_ptr,2);
+		IntTobyte(in_short,tmpbyte);
+		//È¡µÍ2Î»
+		for(int i = 2,Pos = 0; i < 4;Pos++,i++)
+		{
+			m_Serial[Pos] = tmpbyte[i];
+		}
 		return true;
 	}
 	return false;

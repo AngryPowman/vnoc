@@ -8,7 +8,6 @@ int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 	int index = 0;
 	int tmpInt = 0;
 	byte tmpByte[4] = {0};
-	byte tmpByteTwo[2] = {0};
 	if (buf == NULL)
 	{
 		return -2;
@@ -31,15 +30,15 @@ int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 	buf[index] = msg_clss->GetVersion();
 	index++;
 	CHECKUP_DATALEN(index,len);
-	// = msg_clss->GetSerial();
 	memset(tmpByte,0,4);
 	IntTobyte(msg_clss->GetSerial(),tmpByte);
-	//因为效验码预订2位 所以只取低位
+	//因为序号只有2位 所以只取低位
 	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	for (int i = 2; i < 4; i++,index++)
 	{
 		buf[index] = tmpByte[ i ];
 	}
+
 
 	memset(tmpByte,0,4);
 	IntTobyte(msg_clss->GetDataLen(),tmpByte);
@@ -88,7 +87,7 @@ int PackMessage::_Tail(CMessage* msg_clss,byte* buf,int index,size_t len)
 	IntTobyte(msg_clss->GetVerify(),tmpByte);
 	//因为效验码预订2位 所以只取低位
 	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	for (int i = 2; i < 4; i++,index++)
 	{
 		buf[index] = tmpByte[ i ];
 	}

@@ -11,16 +11,6 @@
 #include <iostream>
 
 
-// 短整型大小端互换
-#define BigLittleSwap16(A)        ((((ushort)(A) & 0xff00) >> 8) | \
-	(((ushort)(A) & 0x00ff) << 8))
-
-// 长整型大小端互换
-#define BigLittleSwap32(A)        ((((uint)(A) & 0xff000000) >> 24) | \
-	(((uint)(A) & 0x00ff0000) >> 8) | \
-	(((uint)(A) & 0x0000ff00) << 8) | \
-	(((uint)(A) & 0x000000ff) << 24))
-
 #define MSG_BEGIN    0x55   // 'V' 标记消息的开始
 #define MSG_END		 0x43	// 'C' 标记消息的结束
 #define MSG_VER      0		//版本号
@@ -77,13 +67,24 @@ enum  MSGCONMMAND
 
 typedef  unsigned char byte;	
 typedef  unsigned int  uint;
+typedef unsigned short ushort;
+
+// 短整型大小端互换
+#define BigLittleSwap16(A)        ((((ushort)(A) & 0xff00) >> 8) | \
+	(((ushort)(A) & 0x00ff) << 8))
+
+// 长整型大小端互换
+#define BigLittleSwap32(A)        ((((uint)(A) & 0xff000000) >> 24) | \
+	(((uint)(A) & 0x00ff0000) >> 8) | \
+	(((uint)(A) & 0x0000ff00) << 8) | \
+	(((uint)(A) & 0x000000ff) << 24))
 
 
 uint byteToInt(byte* in_byte,size_t len);
 
 void IntTobyte(int in_int,byte* out_byte);
 
-void BigSwapLittleByte(byte* in_byte,byte* out_byte,size_t len);
+void LittleSwapBigByte(byte* in_byte_ptr,size_t len);
 
 
 class CMessage
@@ -136,7 +137,7 @@ public:
 
 	bool SetCmlListLen(byte* in_byte_ptr,int CmlCount);
 
-	bool SetSerial(byte* in_byte_ptr);
+	bool SetSerial(ushort in_short);
 
 	bool SetGUID(byte* in_byte_ptr);
 

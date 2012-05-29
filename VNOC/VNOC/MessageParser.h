@@ -15,8 +15,6 @@
 
 #include "msgdef.h"
 
-typedef unsigned short ushort;
-
 
 class CMessageParser
 {

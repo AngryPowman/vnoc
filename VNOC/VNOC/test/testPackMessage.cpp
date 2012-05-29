@@ -273,11 +273,6 @@ public:
 			0x00,0x00,
 			0x43};
 
-		byte  testSerial[] = {0x00,0x01};
-		byte  testByte16[2] = {0};
-		//转换为大端存放
-		BigSwapLittleByte(testSerial,testByte16,2);
-		//已经填充过的对象 使用前请保证调用过_Close否则会导致内存泄露
 		//需要自己填充参数长度msg_xxx.SetCmlListLen(byte* in_byte_ptr);
 		//AVC
 		MSG_AVC msg_avc;
@@ -286,7 +281,8 @@ public:
 		msg_avc.SetDataLen(30);
 		msg_avc.SetVersion(1);
 
-		msg_avc.SetSerial(testByte16);
+		msg_avc.SetSerial(1);
+		int xx = msg_avc.GetSerial();
 		CPPUNIT_ASSERT(msg_avc.GetSerial() == 1);
 		msg_avc.SetGUID(testParamO);
 		CPPUNIT_ASSERT(memcmp(msg_avc.GetGUID(),testParamO,sizeof(byte) * 16) == 0);
@@ -299,14 +295,6 @@ public:
 		CPPUNIT_ASSERT(msg_avc.GetCaptchaType() == 0x1e);
 		CPPUNIT_ASSERT(msg_pack.Pack(&msg_avc,testPackAVC,63) == 0);
 		//与正确包对比
-		int i = 0;
-		for (i = 0; i < sizeof(testAVC);i++)
-		{
-			if (testAVC[i] != testPackAVC[i])
-			{
-				break;
-			}
-		}
 		CPPUNIT_ASSERT(memcmp(testAVC,testPackAVC,sizeof(testAVC)) == 0);
 
 		//RVC
@@ -315,7 +303,7 @@ public:
 		msg_rvc.SetDataLen(30);
 		msg_rvc.SetVersion(1);
 		msg_rvc.SetCommand(0x14);
-		msg_rvc.SetSerial(testByte16);
+		msg_rvc.SetSerial(1);
 
 		msg_rvc.SetGUID(testParamO);
 		CPPUNIT_ASSERT(memcmp(msg_rvc.GetGUID(),testParamO,sizeof(byte) * 16) == 0);
@@ -338,7 +326,7 @@ public:
 		msg_rli.SetCommand(0x16);
 
 
-		msg_rli.SetSerial(testByte16);
+		msg_rli.SetSerial(1);
 		CPPUNIT_ASSERT(msg_rli.GetSerial() == 1);
 
 		msg_rli.SetGUID(testParamO);
@@ -369,7 +357,7 @@ public:
 		msg_ali.SetCommand(0x17);
 
 
-		msg_ali.SetSerial(testByte16);
+		msg_ali.SetSerial(1);
 		CPPUNIT_ASSERT(msg_ali.GetSerial() == 1);
 
 		msg_ali.SetGUID(testParamO);
@@ -399,7 +387,7 @@ public:
 		msg_rps.SetVersion(1);
 		msg_rps.SetCommand(0x18);
 
-		msg_rps.SetSerial(testByte16);
+		msg_rps.SetSerial(1);
 		CPPUNIT_ASSERT(msg_rps.GetSerial() == 1);
 
 		msg_rps.SetGUID(testParamO);
@@ -434,7 +422,7 @@ public:
 		msg_aps.SetVersion(1);
 		msg_aps.SetCommand(0x19);
 
-		msg_aps.SetSerial(testByte16);
+		msg_aps.SetSerial(1);
 		CPPUNIT_ASSERT(msg_aps.GetSerial() == 1);
 
 		msg_aps.SetGUID(testParamO);
