@@ -8,6 +8,7 @@ int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 	int index = 0;
 	int tmpInt = 0;
 	byte tmpByte[4] = {0};
+	byte tmpByteTwo[2] = {0};
 	if (buf == NULL)
 	{
 		return -2;
@@ -30,10 +31,17 @@ int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 	buf[index] = msg_clss->GetVersion();
 	index++;
 	CHECKUP_DATALEN(index,len);
-	buf[index] = msg_clss->GetSerial();
-	index++;
+	// = msg_clss->GetSerial();
+	memset(tmpByte,0,4);
+	IntTobyte(msg_clss->GetSerial(),tmpByte);
+	//因为效验码预订2位 所以只取低位
+	CHECKUP_DATALEN(index,len);
+	for (int i = 2; i < 4; index++ , i++)
+	{
+		buf[index] = tmpByte[ i ];
+	}
 
-	tmpInt = msg_clss->GetDataLen();
+	memset(tmpByte,0,4);
 	IntTobyte(msg_clss->GetDataLen(),tmpByte);
 	CHECKUP_DATALEN(index,len);
 	for (int record = 0; record < 4; index++,record++ )
@@ -71,6 +79,7 @@ int PackMessage::_Tail(CMessage* msg_clss,byte* buf,int index,size_t len)
 	byte tmpByte[4] = {0};
 	//Tail
 	//效验码
+	CHECKUP_DATALEN(index,len);
 	if ((msg_clss == NULL) || (buf == NULL))
 	{
 		return -1;

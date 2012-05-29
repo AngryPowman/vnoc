@@ -18,16 +18,6 @@
 typedef unsigned short ushort;
 
 
-// 短整型大小端互换
-#define BigLittleSwap16(A)        ((((ushort)(A) & 0xff00) >> 8) | \
-	(((ushort)(A) & 0x00ff) << 8))
-
-// 长整型大小端互换
-#define BigLittleSwap32(A)        ((((uint)(A) & 0xff000000) >> 24) | \
-	(((uint)(A) & 0x00ff0000) >> 8) | \
-	(((uint)(A) & 0x0000ff00) << 8) | \
-	(((uint)(A) & 0x000000ff) << 24))
-
 class CMessageParser
 {
 public:

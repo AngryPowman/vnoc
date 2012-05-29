@@ -82,7 +82,11 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 
 	//取序号
 	CHECLUP_LEN(SER_INDEX + 1, len );
-	_Messsage->m_Serial = (int)lpszData[SER_INDEX];
+	//_Messsage->m_Serial = (int)lpszData[SER_INDEX];
+	for (int index = 0; index < 2; index++)
+	{
+		_Messsage->m_Serial[index] = (int)lpszData[SER_INDEX - index];
+	}
 
 	//获取包体长度           小端存放
 /*

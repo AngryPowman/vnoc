@@ -11,6 +11,16 @@
 #include <iostream>
 
 
+// 短整型大小端互换
+#define BigLittleSwap16(A)        ((((ushort)(A) & 0xff00) >> 8) | \
+	(((ushort)(A) & 0x00ff) << 8))
+
+// 长整型大小端互换
+#define BigLittleSwap32(A)        ((((uint)(A) & 0xff000000) >> 24) | \
+	(((uint)(A) & 0x00ff0000) >> 8) | \
+	(((uint)(A) & 0x0000ff00) << 8) | \
+	(((uint)(A) & 0x000000ff) << 24))
+
 #define MSG_BEGIN    0x55   // 'V' 标记消息的开始
 #define MSG_END		 0x43	// 'C' 标记消息的结束
 #define MSG_VER      0		//版本号
@@ -19,7 +29,7 @@
 #define  MSG_CLASS_END    1
 #define  MSG_CLASS_LEN    4
 #define	 MSG_CLASS_VER    1
-#define  MSG_CLASS_SERIAL 1
+#define  MSG_CLASS_SERIAL 2
 #define  MSG_CLASS_GUID   16
 #define  MSG_CLASS_COMMAND 1
 #define  MSG_CLASS_OBL    4
@@ -73,6 +83,9 @@ uint byteToInt(byte* in_byte,size_t len);
 
 void IntTobyte(int in_int,byte* out_byte);
 
+void BigSwapLittleByte(byte* in_byte,byte* out_byte,size_t len);
+
+
 class CMessage
 {
 public:
@@ -100,7 +113,7 @@ public:
 
 	byte* GetCmlListLen();
 
-	byte GetSerial();
+	uint GetSerial();
 
 	byte* GetGUID();
 
@@ -123,7 +136,7 @@ public:
 
 	bool SetCmlListLen(byte* in_byte_ptr,int CmlCount);
 
-	bool SetSerial(byte in_byte);
+	bool SetSerial(byte* in_byte_ptr);
 
 	bool SetGUID(byte* in_byte_ptr);
 
@@ -148,7 +161,7 @@ private:
 
 	byte   m_Command;			  //指令			具体的指令，用来标注此数据包的功能
 	byte*  m_CmlListLen;		  //参数列表    4字节，对应参数N的长度
-	byte   m_Serial;			  //序号       指令的编号
+	byte   m_Serial[2];			  //序号       指令的编号
 	byte   m_GUID[16];            //GUID       用来提供用户验证
 	byte** m_CmlCommandList;      //参数列表    编码后的参数，具体类型根据具体指令决定
 	//DWORD dwType;				  //消息类型		

@@ -3,6 +3,17 @@
 #include "MsgDef.h"
 
 
+void BigSwapLittleByte(byte* in_byte,byte* out_byte,size_t len)
+{
+	if ((in_byte != NULL)&&(out_byte != NULL))
+	{
+		for (int index = 0,Pos = 1; index < (int)len; index++,Pos++)
+		{
+			out_byte[index] = in_byte[len - Pos];
+		}
+	}
+}
+
 uint byteToInt(byte* in_byte,size_t len)
 {
 	byte tmpByte[4] = {0};
@@ -28,6 +39,7 @@ void IntTobyte(int in_int,byte* out_byte)
 		out_byte[i]=(byte)(in_int>>(24-i*8));
 	}
 }
+
 
 int  CMessage::GetMessageType()
 {
@@ -58,9 +70,9 @@ byte* CMessage::GetCmlListLen()
 	return  m_CmlListLen;
 }
 
-byte CMessage::GetSerial()
+uint CMessage::GetSerial()
 {
-	return m_Serial;
+	return byteToInt(m_Serial,2);
 }
 
 byte* CMessage::GetGUID()
@@ -123,11 +135,18 @@ bool CMessage::SetCmlListLen(byte* in_byte_ptr,int CmlCount)
 	return false;
 }
 
-bool CMessage::SetSerial(byte in_byte)
+
+bool CMessage::SetSerial(byte* in_byte_ptr)
 {
-	m_Serial = in_byte;
-	return true;
+	if (in_byte_ptr  != NULL)
+	{
+		memset(m_Serial,0,2);
+		memcpy(m_Serial,in_byte_ptr,2);
+		return true;
+	}
+	return false;
 }
+
 
 bool CMessage::SetGUID(byte* in_byte_ptr)
 {
@@ -217,6 +236,7 @@ int  CMessage::_MessageType()
 void CMessage::_Initialization()
 {
 	memset(m_GUID,0,16);
+	memset(m_Serial,0,2);
 	m_Begin = false;
 	m_End   = false;
 	m_CmlListLen  = NULL;
@@ -225,7 +245,7 @@ void CMessage::_Initialization()
 	m_Obligate = 0;
 	m_Ver = 0;
 	m_Verify  = 0;
-	m_Serial  = 0;
+	//m_Serial  = 0;
 	m_Len     = 0;
 	m_Command = 0;
 }

@@ -5,7 +5,7 @@
 #include "MessageParser.h"
 
 
-#define  CHECKUP_DATALEN(Index,DataLen)   if(Index > (int)DataLen){return - 1;}
+#define  CHECKUP_DATALEN(Index,DataLen)   if(Index >= (int)DataLen){return - 1;}
 
 class PackMessage
 {
