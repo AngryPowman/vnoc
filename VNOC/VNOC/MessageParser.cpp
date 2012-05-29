@@ -75,6 +75,15 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 	//匹配标记成功 
 	_Messsage->m_Begin = true;
 
+
+	//取版本号
+	CHECLUP_LEN(VER_INDEX + 1, len );
+	_Messsage->m_Ver = (int)lpszData[VER_INDEX];
+
+	//取序号
+	CHECLUP_LEN(SER_INDEX + 1, len );
+	_Messsage->m_Serial = (int)lpszData[SER_INDEX];
+
 	//获取包体长度           小端存放
 /*
  	for(nPos = 0;nPos < MSG_CLASS_LEN; nPos++)
@@ -85,20 +94,13 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 	//获取包体长度           大端存放
 	for(nPos = 0;nPos < MSG_CLASS_LEN; nPos++)
 	{
-		szTmpDataLen[nPos] = lpszData[MSG_CLASS_LEN- nPos];
+		szTmpDataLen[nPos] = lpszData[LEN_INDEX- nPos];
 	}
 
 	//转换
 	CHECLUP_LEN(MSG_CLASS_LEN + 1, len );
 	_Messsage->m_Len = byteToInt(szTmpDataLen,4);
 
-	//取版本号
-	CHECLUP_LEN(VER_INDEX + 1, len );
-	_Messsage->m_Ver = (int)lpszData[VER_INDEX];
-
-	//取序号
-	CHECLUP_LEN(SER_INDEX + 1, len );
-	_Messsage->m_Serial = (int)lpszData[SER_INDEX];
 
 	CHECLUP_LEN(COM_INDEX + 1, len );
 	//获取GUID           大端存放

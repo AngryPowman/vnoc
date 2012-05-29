@@ -2,9 +2,8 @@
 
 #include "PackMessage.h"
 
-int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
+int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 {
-
 	//head---------------------
 	int index = 0;
 	int tmpInt = 0;
@@ -25,42 +24,77 @@ int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
 	// 	}
 
 	buf[0] = MSG_BEGIN;
-	tmpInt = rvc->GetDataLen();
-	IntTobyte(rvc->GetDataLen(),tmpByte);
+	index++;
+
 	CHECKUP_DATALEN(index,len);
-	for (index = 1; index < 5; index++ )
+	buf[index] = msg_clss->GetVersion();
+	index++;
+	CHECKUP_DATALEN(index,len);
+	buf[index] = msg_clss->GetSerial();
+	index++;
+
+	tmpInt = msg_clss->GetDataLen();
+	IntTobyte(msg_clss->GetDataLen(),tmpByte);
+	CHECKUP_DATALEN(index,len);
+	for (int record = 0; record < 4; index++,record++ )
 	{
-		buf[index] = tmpByte[index - 1];
+		buf[index] = tmpByte[record];
 	}
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rvc->GetVersion();
-	index++;
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rvc->GetSerial();
-	index++;
 	//GUID
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < 16; index++, i++)
 	{
-		buf[index] = rvc->GetGUID()[i];
+		buf[index] = msg_clss->GetGUID()[i];
 	}
 	//指令
 	CHECKUP_DATALEN(index,len);
-	buf[index] = rvc->GetCommand();
+	buf[index] = msg_clss->GetCommand();
 	index++;
 	//保留位置
 	CHECKUP_DATALEN(index,len);
 	memset(tmpByte,0,4);
-	IntTobyte(rvc->GetObligate(),tmpByte);
+	IntTobyte(msg_clss->GetObligate(),tmpByte);
 	for (int i = 0; i < 4; index++ , i++)
 	{
 		buf[index] = tmpByte[ i ];
 	}
 	//参数数量
 	CHECKUP_DATALEN(index,len);
-	buf[index]  = rvc->GetCmlCount();
+	buf[index]  = msg_clss->GetCmlCount();
 	index++;
 
+	return index;
+}
+
+int PackMessage::_Tail(CMessage* msg_clss,byte* buf,int index,size_t len)
+{
+	byte tmpByte[4] = {0};
+	//Tail
+	//效验码
+	if ((msg_clss == NULL) || (buf == NULL))
+	{
+		return -1;
+	}
+	memset(tmpByte,0,4);
+	IntTobyte(msg_clss->GetVerify(),tmpByte);
+	//因为效验码预订2位 所以只取低位
+	CHECKUP_DATALEN(index,len);
+	for (int i = 2; i < 4; index++ , i++)
+	{
+		buf[index] = tmpByte[ i ];
+	}
+	//结尾符
+	CHECKUP_DATALEN(index,len);
+	buf[index] = MSG_END;
+	return 0;
+}
+
+int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
+{
+
+	byte tmpByte[4] = {0};
+
+	int index = _Head(rvc,buf,len);
 	//body
 	//参数长度
 	CHECKUP_DATALEN(index,len);
@@ -77,82 +111,19 @@ int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
 	}
 
 	//Tail
-	//效验码
-	memset(tmpByte,0,4);
-	IntTobyte(rvc->GetVerify(),tmpByte);
-	//因为效验码预订2位 所以只取低位
-	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	if (_Tail(rvc,buf,index,len) != 0)
 	{
-		buf[index] = tmpByte[ i ];
+		return -1;
 	}
-	//结尾符
-	CHECKUP_DATALEN(index,len);
-	buf[index] = MSG_END;
-
-
 	return 0;
 }
 
 
 int PackMessage::Pack(MSG_AVC* avc, byte* buf, size_t len)
 {
-	//head---------------------
-	int index = 0;
-	int tmpInt = 0;
 	byte tmpByte[4] = {0};
-	if (buf == NULL)
-	{
-		return -2;
-	}
 
-	// 	if (len < avc->GetDataLen())
-	// 	{
-	// 		return -1;
-	// 	}
-	//忽视头尾标记  自动填充
-	// 	if ((avc->GetBeginTab() != true ) && (avc->GetEndTab() != true))
-	// 	{
-	// 		return -1;
-	// 	}
-
-	buf[0] = MSG_BEGIN;
-	tmpInt = avc->GetDataLen();
-	IntTobyte(avc->GetDataLen(),tmpByte);
-	CHECKUP_DATALEN(index,len);
-	for (index = 1; index < 5; index++ )
-	{
-		buf[index] = tmpByte[index - 1];
-	}
-	CHECKUP_DATALEN(index,len);
-	buf[index] = avc->GetVersion();
-	index++;
-	CHECKUP_DATALEN(index,len);
-	buf[index] = avc->GetSerial();
-	index++;
-	//GUID
-	CHECKUP_DATALEN(index,len);
-	for (int i = 0; i < 16; index++, i++)
-	{
-		buf[index] = avc->GetGUID()[i];
-	}
-	//指令
-	CHECKUP_DATALEN(index,len);
-	buf[index] = avc->GetCommand();
-	index++;
-	//保留位置
-	CHECKUP_DATALEN(index,len);
-	memset(tmpByte,0,4);
-	IntTobyte(avc->GetObligate(),tmpByte);
-	for (int i = 0; i < 4; index++ , i++)
-	{
-		buf[index] = tmpByte[ i ];
-	}
-	//参数数量
-	CHECKUP_DATALEN(index,len);
-	buf[index]  = avc->GetCmlCount();
-	index++;
-
+	int index = _Head(avc,buf,len);
 	//body
 	//参数长度
 	CHECKUP_DATALEN(index,len);
@@ -176,18 +147,10 @@ int PackMessage::Pack(MSG_AVC* avc, byte* buf, size_t len)
 		buf[index] = avc->GetCmlCommandList()[0][i];
 	}
 	//Tail
-	//效验码
-	memset(tmpByte,0,4);
-	IntTobyte(avc->GetVerify(),tmpByte);
-	//因为效验码预订2位 所以只取低位
-	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	if (_Tail(avc,buf,index,len) != 0)
 	{
-		buf[index] = tmpByte[ i ];
+		return -1;
 	}
-	//结尾符
-	CHECKUP_DATALEN(index,len);
-	buf[index] = MSG_END;
 
 	return 0;
 }
@@ -195,61 +158,9 @@ int PackMessage::Pack(MSG_AVC* avc, byte* buf, size_t len)
 
 int PackMessage::Pack(MSG_RLI* rli,byte* buf, size_t len)
 {
-	//head---------------------
-	int index = 0;
-	int tmpInt = 0;
 	byte tmpByte[4] = {0};
-	if (buf == NULL)
-	{
-		return -2;
-	}
 
-	// 	if (len < avc->GetDataLen())
-	// 	{
-	// 		return -1;
-	// 	}
-	//忽视头尾标记  自动填充
-	// 	if ((avc->GetBeginTab() != true ) && (avc->GetEndTab() != true))
-	// 	{
-	// 		return -1;
-	// 	}
-
-	buf[0] = MSG_BEGIN;
-	tmpInt = rli->GetDataLen();
-	IntTobyte(rli->GetDataLen(),tmpByte);
-	CHECKUP_DATALEN(index,len);
-	for (index = 1; index < 5; index++ )
-	{
-		buf[index] = tmpByte[index - 1];
-	}
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rli->GetVersion();
-	index++;
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rli->GetSerial();
-	index++;
-	//GUID
-	CHECKUP_DATALEN(index,len);
-	for (int i = 0; i < 16; index++, i++)
-	{
-		buf[index] = rli->GetGUID()[i];
-	}
-	//指令
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rli->GetCommand();
-	index++;
-	//保留位置
-	CHECKUP_DATALEN(index,len);
-	memset(tmpByte,0,4);
-	IntTobyte(rli->GetObligate(),tmpByte);
-	for (int i = 0; i < 4; index++ , i++)
-	{
-		buf[index] = tmpByte[ i ];
-	}
-	//参数数量
-	CHECKUP_DATALEN(index,len);
-	buf[index]  = rli->GetCmlCount();
-	index++;
+	int index = _Head(rli,buf,len);
 
 	//body
 	//参数长度
@@ -280,79 +191,19 @@ int PackMessage::Pack(MSG_RLI* rli,byte* buf, size_t len)
 	}
 
 	//Tail
-	//效验码
-	memset(tmpByte,0,4);
-	IntTobyte(rli->GetVerify(),tmpByte);
-	//因为效验码预订2位 所以只取低位
-	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	if (_Tail(rli,buf,index,len) != 0)
 	{
-		buf[index] = tmpByte[ i ];
+		return -1;
 	}
-	//结尾符
-	CHECKUP_DATALEN(index,len);
-	buf[index] = MSG_END;
 
 	return 0;
 }
 
 int PackMessage::Pack(MSG_ALI* ali,byte* buf, size_t len)
 {
-	//head---------------------
-	int index = 0;
-	int tmpInt = 0;
 	byte tmpByte[4] = {0};
-	if (buf == NULL)
-	{
-		return -2;
-	}
 
-	// 	if (len < avc->GetDataLen())
-	// 	{
-	// 		return -1;
-	// 	}
-	//忽视头尾标记  自动填充
-	// 	if ((avc->GetBeginTab() != true ) && (avc->GetEndTab() != true))
-	// 	{
-	// 		return -1;
-	// 	}
-
-	buf[0] = MSG_BEGIN;
-	tmpInt = ali->GetDataLen();
-	IntTobyte(ali->GetDataLen(),tmpByte);
-	CHECKUP_DATALEN(index,len);
-	for (index = 1; index < 5; index++ )
-	{
-		buf[index] = tmpByte[index - 1];
-	}
-	CHECKUP_DATALEN(index,len);
-	buf[index] = ali->GetVersion();
-	index++;
-	CHECKUP_DATALEN(index,len);
-	buf[index] = ali->GetSerial();
-	index++;
-	//GUID
-	CHECKUP_DATALEN(index,len);
-	for (int i = 0; i < 16; index++, i++)
-	{
-		buf[index] = ali->GetGUID()[i];
-	}
-	//指令
-	CHECKUP_DATALEN(index,len);
-	buf[index] = ali->GetCommand();
-	index++;
-	//保留位置
-	CHECKUP_DATALEN(index,len);
-	memset(tmpByte,0,4);
-	IntTobyte(ali->GetObligate(),tmpByte);
-	for (int i = 0; i < 4; index++ , i++)
-	{
-		buf[index] = tmpByte[ i ];
-	}
-	//参数数量
-	CHECKUP_DATALEN(index,len);
-	buf[index]  = ali->GetCmlCount();
-	index++;
+	int index = _Head(ali,buf,len);
 
 	//body
 	//参数长度
@@ -380,18 +231,10 @@ int PackMessage::Pack(MSG_ALI* ali,byte* buf, size_t len)
 	}
 
 	//Tail
-	//效验码
-	memset(tmpByte,0,4);
-	IntTobyte(ali->GetVerify(),tmpByte);
-	//因为效验码预订2位 所以只取低位
-	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	if (_Tail(ali,buf,index,len) != 0)
 	{
-		buf[index] = tmpByte[ i ];
+		return -1;
 	}
-	//结尾符
-	CHECKUP_DATALEN(index,len);
-	buf[index] = MSG_END;
 
 	return 0;
 
@@ -400,61 +243,9 @@ int PackMessage::Pack(MSG_ALI* ali,byte* buf, size_t len)
 
 int PackMessage::Pack(MSG_RPS* rps,byte* buf, size_t len)
 {
-	//head---------------------
-	int index = 0;
-	int tmpInt = 0;
 	byte tmpByte[4] = {0};
-	if (buf == NULL)
-	{
-		return -2;
-	}
 
-	// 	if (len < avc->GetDataLen())
-	// 	{
-	// 		return -1;
-	// 	}
-	//忽视头尾标记  自动填充
-	// 	if ((avc->GetBeginTab() != true ) && (avc->GetEndTab() != true))
-	// 	{
-	// 		return -1;
-	// 	}
-
-	buf[0] = MSG_BEGIN;
-	tmpInt = rps->GetDataLen();
-	IntTobyte(rps->GetDataLen(),tmpByte);
-	CHECKUP_DATALEN(index,len);
-	for (index = 1; index < 5; index++ )
-	{
-		buf[index] = tmpByte[index - 1];
-	}
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rps->GetVersion();
-	index++;
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rps->GetSerial();
-	index++;
-	//GUID
-	CHECKUP_DATALEN(index,len);
-	for (int i = 0; i < 16; index++, i++)
-	{
-		buf[index] = rps->GetGUID()[i];
-	}
-	//指令
-	CHECKUP_DATALEN(index,len);
-	buf[index] = rps->GetCommand();
-	index++;
-	//保留位置
-	CHECKUP_DATALEN(index,len);
-	memset(tmpByte,0,4);
-	IntTobyte(rps->GetObligate(),tmpByte);
-	for (int i = 0; i < 4; index++ , i++)
-	{
-		buf[index] = tmpByte[ i ];
-	}
-	//参数数量
-	CHECKUP_DATALEN(index,len);
-	buf[index]  = rps->GetCmlCount();
-	index++;
+	int index = _Head(rps,buf,len);
 
 
 	//body
@@ -493,18 +284,10 @@ int PackMessage::Pack(MSG_RPS* rps,byte* buf, size_t len)
 	}
 
 	//Tail
-	//效验码
-	memset(tmpByte,0,4);
-	IntTobyte(rps->GetVerify(),tmpByte);
-	//因为效验码预订2位 所以只取低位
-	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	if (_Tail(rps,buf,index,len) != 0)
 	{
-		buf[index] = tmpByte[ i ];
+		return -1;
 	}
-	//结尾符
-	CHECKUP_DATALEN(index,len);
-	buf[index] = MSG_END;
 
 	return 0;
 
@@ -513,62 +296,9 @@ int PackMessage::Pack(MSG_RPS* rps,byte* buf, size_t len)
 
 int PackMessage::Pack(MSG_APS* aps,byte* buf, size_t len)
 {
-	//head---------------------
-	int index = 0;
-	int tmpInt = 0;
 	byte tmpByte[4] = {0};
-	if (buf == NULL)
-	{
-		return -2;
-	}
 
-	// 	if (len < avc->GetDataLen())
-	// 	{
-	// 		return -1;
-	// 	}
-	//忽视头尾标记  自动填充
-	// 	if ((avc->GetBeginTab() != true ) && (avc->GetEndTab() != true))
-	// 	{
-	// 		return -1;
-	// 	}
-
-	buf[0] = MSG_BEGIN;
-	tmpInt = aps->GetDataLen();
-	IntTobyte(aps->GetDataLen(),tmpByte);
-	CHECKUP_DATALEN(index,len);
-	for (index = 1; index < 5; index++ )
-	{
-		buf[index] = tmpByte[index - 1];
-	}
-	CHECKUP_DATALEN(index,len);
-	buf[index] = aps->GetVersion();
-	index++;
-	CHECKUP_DATALEN(index,len);
-	buf[index] = aps->GetSerial();
-	index++;
-	//GUID
-	CHECKUP_DATALEN(index,len);
-	for (int i = 0; i < 16; index++, i++)
-	{
-		buf[index] = aps->GetGUID()[i];
-	}
-	//指令
-	CHECKUP_DATALEN(index,len);
-	buf[index] = aps->GetCommand();
-	index++;
-	//保留位置
-	CHECKUP_DATALEN(index,len);
-	memset(tmpByte,0,4);
-	IntTobyte(aps->GetObligate(),tmpByte);
-	for (int i = 0; i < 4; index++ , i++)
-	{
-		buf[index] = tmpByte[ i ];
-	}
-	//参数数量
-	CHECKUP_DATALEN(index,len);
-	buf[index]  = aps->GetCmlCount();
-	index++;
-
+	int index = _Head(aps,buf,len);
 	//body
 	//参数长度
 	CHECKUP_DATALEN(index,len);
@@ -585,18 +315,10 @@ int PackMessage::Pack(MSG_APS* aps,byte* buf, size_t len)
 	}
 
 	//Tail
-	//效验码
-	memset(tmpByte,0,4);
-	IntTobyte(aps->GetVerify(),tmpByte);
-	//因为效验码预订2位 所以只取低位
-	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; index++ , i++)
+	if (_Tail(aps,buf,index,len) != 0)
 	{
-		buf[index] = tmpByte[ i ];
+		return -1;
 	}
-	//结尾符
-	CHECKUP_DATALEN(index,len);
-	buf[index] = MSG_END;
 
 	return 0;
 }

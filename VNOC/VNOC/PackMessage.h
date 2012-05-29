@@ -28,6 +28,11 @@ public:
 
 	int Pack(MSG_RPS* rsp, byte* buf, size_t len);
 
+private:
+	
+	int _Head(CMessage* msg_clss,byte* buf, size_t len);
+	int _Tail(CMessage* msg_clss,byte* buf,int index ,size_t len);
+
 };
 
 
