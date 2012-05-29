@@ -49,6 +49,12 @@
     <Filter Include="MsgParser">
       <UniqueIdentifier>{5dc7ed6f-ac84-4129-84c5-13a3cdd97fde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Net">
+      <UniqueIdentifier>{f555e30c-f795-4202-bba0-5a67156b7d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Socket">
+      <UniqueIdentifier>{5ebfe572-f0db-40bd-b1b1-b94caeb2bb93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp">
@@ -143,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="MessageParser.cpp">
       <Filter>MsgParser</Filter>
+    </ClCompile>
+    <ClCompile Include="NET.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCSocket.cpp">
+      <Filter>Net\Socket</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +298,18 @@
     </ClInclude>
     <ClInclude Include="PackMessage.h">
       <Filter>MsgParser</Filter>
+    </ClInclude>
+    <ClInclude Include="INet.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="ISocket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCSocket.h">
+      <Filter>Net\Socket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
