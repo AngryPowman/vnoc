@@ -35,6 +35,7 @@ HRESULT CNetCenter::Terminate()
 
 HRESULT CNetCenter::ConnectServer( LPCTSTR ipv4Addr,DWORD port )
 {
+	m_serverSocket.Connect(ipv4Addr,port);
 	return S_OK;
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "INet.h"
+#include "VNOCSocket.h"
 
 class CNetCenter
 {
@@ -17,4 +18,6 @@ public:
 	STDMETHOD( IsServerConnected() );
 	STDMETHOD( SendServer(const CMessage& netMsg) );
 	STDMETHOD( SetListener(const CNetListenerHelper &helper) );
+private:
+	CSocketImpl m_serverSocket;
 };
