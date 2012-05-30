@@ -18,13 +18,17 @@
 
 CVNOCLoginDlg::CVNOCLoginDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CVNOCLoginDlg::IDD, pParent)
+    , m_strUsername(_T(""))
+    , m_strPassword(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CVNOCLoginDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+    CDialog::DoDataExchange(pDX);
+    DDX_Text(pDX, IDC_LoginDlg_EDIT_USERNAME, m_strUsername);
+    DDX_Text(pDX, IDC_LoginDlg_EDIT_PWD, m_strPassword);
 }
 
 BEGIN_MESSAGE_MAP(CVNOCLoginDlg, CDialog)
@@ -94,6 +98,10 @@ HCURSOR CVNOCLoginDlg::OnQueryDragIcon()
 
 void CVNOCLoginDlg::OnBnClickedOk()
 {
+    UpdateData(TRUE);
+	CString strTemp;
+	strTemp.Format(L"user:%s pass:%s", m_strUsername, m_strPassword);
+    MessageBox(strTemp);
 	OnOK();
 }
 

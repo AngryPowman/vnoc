@@ -39,4 +39,8 @@ private:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+
+private:
+    CString m_strUsername;
+    CString m_strPassword;
 };
