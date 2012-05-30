@@ -88,22 +88,24 @@ BOOL CRoomListDlg::OnInitDialog()
 	m_SearchEdit.SetFont  (&m_EditFont);
 	m_bIsMove = TRUE;
 
-	m_ClassList.SetExtendedStyle(m_ClassList.GetExtendedStyle()| LVS_EX_GRIDLINES);
+	m_ClassList.SetExtendedStyle(m_ClassList.GetExtendedStyle()
+		| LVS_EX_GRIDLINES
+		| LVS_EX_FULLROWSELECT );
 //	m_ClassList.ShowScrollBar(SB_VERT ,TRUE);
 	m_ClassList.InsertColumn(0,_T("  "));
-	m_ClassList.InsertColumn(1,_T(" ") );
+	m_ClassList.InsertColumn(1,_T(" "));
 	GetDlgItem(IDC_STATIC_SPLIT)->EnableWindow(TRUE);
 	int nItem;
-	for (int i =0; i!=100;i++)
+	for (int i = 0; i < 10; i++)
 	{
-		nItem = m_ClassList.InsertItem(0,_T("教室"));	
-		m_ClassList.SetItemText(nItem,1,_T("C++"));
+		CString strRoomName;
+		strRoomName.Format(L"教室-%d", i);
+		nItem = m_ClassList.InsertItem(0, strRoomName);	
+		m_ClassList.SetItemText(nItem, 1, _T("C++"));
 	}
-	::SendMessage(this->m_hWnd,WM_SIZE,0,0);
+	::SendMessage(this->m_hWnd, WM_SIZE, 0, 0);
 
-	// TODO:  在此添加额外的初始化
-	return TRUE;  // return TRUE unless you set the focus to a control
-	// 异常: OCX 属性页应返回 FALSE
+	return TRUE;
 }
 
 void CRoomListDlg::OnSizing(UINT fwSide, LPRECT pRect)
