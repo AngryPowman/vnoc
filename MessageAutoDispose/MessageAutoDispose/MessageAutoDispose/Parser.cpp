@@ -3,21 +3,27 @@
 
 #include "stdafx.h"
 #include "Parser.h"
+#include <fstream>
+#include <string>
+#include <AtlBase.h>
+using namespace std;
 
 int MessageAutoDispose::Open(TCHAR* Path)
 {
 	int Command = 0;
-	CString  ctemporary;
+	ifstream  file;
+	string line;
 	if (Path == NULL)
 	{
 		return -1;
 	}
-	if(!m_File.Open(Path,CFile::modeReadWrite))
-	{
+	file.open(Path);
+	if (!file){
 		return -1;
 	}
-	for (;m_File.ReadString(ctemporary) != 0; m_LineMax++)
+	for (;getline(file,line); m_LineMax++)
 	{
+		CString ctemporary=CA2CT(line.c_str(), CP_ACP);
 		//MSGTYPE
 		if ((ctemporary.Find(_T("enum")) != -1) && (ctemporary.Find(_T("MSGTYPE")) != -1))
 		{
