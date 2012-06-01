@@ -30,6 +30,7 @@ HRESULT CNetCenter::Run()
 
 HRESULT CNetCenter::Terminate()
 {
+	// 关闭所有连接
 	return S_OK;
 }
 
@@ -50,6 +51,11 @@ HRESULT CNetCenter::SendServer( const CMessage& netMsg )
 }
 
 HRESULT CNetCenter::SetListener( const CNetListenerHelper &helper )
+{
+	return S_OK;
+}
+
+HRESULT CNetCenter::Send( LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg )
 {
 	return S_OK;
 }

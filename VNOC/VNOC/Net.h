@@ -17,6 +17,7 @@ public:
 	STDMETHOD( ConnectServer(LPCTSTR ipv4Addr,DWORD port) );
 	STDMETHOD( IsServerConnected() );
 	STDMETHOD( SendServer(const CMessage& netMsg) );
+	STDMETHOD( Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg) );
 	STDMETHOD( SetListener(const CNetListenerHelper &helper) );
 private:
 	CSocketImpl m_serverSocket;
