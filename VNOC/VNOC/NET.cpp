@@ -39,6 +39,11 @@ HRESULT CNetCenter::ConnectServer( LPCTSTR ipv4Addr,DWORD port )
 	return S_OK;
 }
 
+HRESULT CNetCenter::IsServerConnected()
+{
+    return S_OK;
+}
+
 HRESULT CNetCenter::SendServer( const CMessage &helper )
 {
 	return S_OK;

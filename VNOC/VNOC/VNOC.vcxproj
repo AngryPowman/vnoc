@@ -251,7 +251,6 @@
     <ClCompile Include="VNOCSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\MyNetClient\MsgDef.h" />
     <ClInclude Include="..\..\scintilla\include\ILexer.h" />
     <ClInclude Include="..\..\scintilla\include\Platform.h" />
     <ClInclude Include="..\..\scintilla\include\SciLexer.h" />
@@ -285,6 +284,7 @@
     <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="LoginImpl.h" />
     <ClInclude Include="MessageParser.h" />
+    <ClInclude Include="MsgDef.h" />
     <ClInclude Include="Net.h" />
     <ClInclude Include="PackMessage.h" />
     <ClInclude Include="RoomImpl.h" />
