@@ -2,14 +2,16 @@
 // 定义了全局管理器的接口
 #include "IModule.h"
 #include "IConfig.h"
+#include "INet.h"
 #include "GlobalDefine.h"
 
 interface IGlobal:public IModule
 {
 public:
 	//////////////////////////////////////////////////////////////////////////
-	// 配置接口
+	// 接口
 	STDMETHOD( GetIConfig(IConfig** pConfig) = 0);
+	STDMETHOD( GetINetCenter(INetCenter** pNetCenter) = 0);
 
 	//////////////////////////////////////////////////////////////////////////
 	// log接口

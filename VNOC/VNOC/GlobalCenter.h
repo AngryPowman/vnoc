@@ -3,6 +3,7 @@
 #pragma once
 #include "IGlobal.h"
 #include "Config.h"
+#include "Net.h"
 #include "../util/BLog.h"
 
 typedef std::map<CString,blog::CBLog*>	LogMap;
@@ -31,6 +32,8 @@ public:
 	STDMETHOD( GetThreadName(DWORD threadID,CString& name));
 	STDMETHOD( CheckLastError(LPCTSTR helpStr=NULL));
 	STDMETHOD( PtrAssert(void* p));
+
+	STDMETHOD( GetINetCenter(INetCenter** pNetCenter) );
 private:
 	void _InitializeConfig();
 	void _UnInitializeConfig();
@@ -40,8 +43,12 @@ private:
 	blog::CBLog* _GetLogInstance(CString file);
 	blog::CBLog* _CreateLogInstance(CString file,BOOL bDbgView=TRUE,BOOL bConsole=FALSE);
 	void _FillThreadNameToLogInstance(blog::CBLog* inst);
+
+	void _InitializeNetCenter();
+	void _UnInitializeNetCenter();
 private:
 	CConfigImpl		m_config;
+	CNetCenter		m_netCenter;
 	CString		m_configFilePath;
 	
 	LogMap		m_log;

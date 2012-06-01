@@ -17,11 +17,13 @@ HRESULT CGlobalCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
 	_InitializeLog();		// 所有地方都依赖log，所以当最先初始化
 	_InitializeConfig();
+	_InitializeNetCenter();
 	return S_OK;
 }
 
 HRESULT CGlobalCenter::UnInitialize()
 {
+	_UnInitializeNetCenter();
 	_UnInitializeConfig();
 	_UnInitializeLog();
 	return S_OK;
@@ -80,6 +82,22 @@ HRESULT CGlobalCenter::PtrAssert( void* p )
 		MessageBox(0,_T("发生了严重错误，程序将退出执行。"),_T("警告"),0);
 		ExitProcess(8);
 	}
+	return S_OK;
+}
+
+void CGlobalCenter::_InitializeNetCenter()
+{
+	m_netCenter.Initialize(NULL);
+}
+
+void CGlobalCenter::_UnInitializeNetCenter()
+{
+	m_netCenter.UnInitialize();
+}
+
+HRESULT CGlobalCenter::GetINetCenter( INetCenter** pNetCenter )
+{
+	*pNetCenter = dynamic_cast<INetCenter*>(&m_netCenter);
 	return S_OK;
 }
 

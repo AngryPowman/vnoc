@@ -48,6 +48,9 @@ BOOL CRoomDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
+	CEdit *pEdit = new CEdit;
+	pEdit->Create(WS_VISIBLE|WS_CHILD,CRect(200,350,300,400),this,0);
+
 	// Ìí¼ÓSciEdit
 	CString strCodeWndTitle;
 	strCodeWndTitle.LoadString(AfxGetInstanceHandle(),IDS_Sci_WndTitle);
