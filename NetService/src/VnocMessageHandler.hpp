@@ -1,6 +1,7 @@
 #ifndef VNOCMESSAGEHANDLER_HPP
 #define VNOCMESSAGEHANDLER_HPP
 #include <stdint.h>
+#include <memory>
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
 
@@ -12,7 +13,7 @@ public:
     VnocMessageHandler(ConnectionT *connection):connection_(connection){}
     virtual void start()
     {
-        connection_->recv(headerData_, sizeof(headerData_)-1, 
+        connection_->recv(headerData_, sizeof(headerData_), 
             std::bind(&VnocMessageHandler::ReadHeadHandler, this,
           std::placeholders::_1,
           std::placeholders::_2));
@@ -27,16 +28,37 @@ private:
         }
         if (bytes_transferred != HEAD_LEN) {
             EZLOGGERVLSTREAM(axter::log_often)<<"head lenth miss match\n";
-            connection_->recv(headerData_, sizeof(headerData_)-1, 
+            connection_->recv(headerData_, sizeof(headerData_), 
                 std::bind(&VnocMessageHandler::ReadHeadHandler, this,
                 std::placeholders::_1,
                 std::placeholders::_2));
             return;
         }
+        size_t package_len = htonl(*(int *)(headerData_+4));
+        char *messageBuffer ( new char[package_len]);
+        memcpy(messageBuffer, headerData_, HEAD_LEN);
+        connection_->recv(&messageBuffer[HEAD_LEN], package_len - HEAD_LEN, 
+                std::bind(&VnocMessageHandler::ReadBodyHandler, this, messageBuffer,
+                std::placeholders::_1,
+                std::placeholders::_2));
+
     }
-	void ReadBodyHandler(const asio::error_code& error, size_t bytes_transferred){
+	void ReadBodyHandler(char *messageBuffer, const asio::error_code& error, size_t bytes_transferred){
+        std::unique_ptr<char[]> safe_buf(messageBuffer);
+        if (error) {
+            delete this;
+            return;
+        }
+        //process the message here
+        EZLOGGERVLSTREAM(axter::log_rarely)<<"receve message body\n";
+        
+        connection_->recv(headerData_, sizeof(headerData_), 
+            std::bind(&VnocMessageHandler::ReadHeadHandler, this,
+          std::placeholders::_1,
+          std::placeholders::_2));
+
 	}
-    const static size_t HEAD_LEN = 29;
+    const static size_t HEAD_LEN = 30;
     char headerData_[HEAD_LEN];
     ConnectionT *connection_;
 };
