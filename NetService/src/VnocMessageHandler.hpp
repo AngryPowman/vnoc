@@ -2,9 +2,10 @@
 #define VNOCMESSAGEHANDLER_HPP
 #include <stdint.h>
 #include <memory>
+
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
-
+#include "message\MessageParser.h"
 #include <ezlogger_headers.hpp>
 template <typename ConnectionT>
 class VnocMessageHandler : public SocketHandler
@@ -51,13 +52,41 @@ private:
         }
         //process the message here
         EZLOGGERVLSTREAM(axter::log_rarely)<<"receve message body\n";
-        
-        connection_->recv(headerData_, sizeof(headerData_), 
-            std::bind(&VnocMessageHandler::ReadHeadHandler, this,
-          std::placeholders::_1,
-          std::placeholders::_2));
+        CMessageParser parser;
+        CMessage *msg = parser.Parse((byte*)safe_buf.get(), bytes_transferred + HEAD_LEN);
+        int ret=0;
+        if (msg != NULL){
+            int type = msg->GetMessageType();
 
+            switch (type){
+            case MSG_RVC_TYPE:
+                ret = HandlerRVCMessage((MSG_RVC*)msg);
+                break;
+            default:
+                ret = 0;
+            };
+        }
+        if (ret == 0){
+            //message is not handled, we need post a read opeartion
+            connection_->recv(headerData_, sizeof(headerData_), 
+                std::bind(&VnocMessageHandler::ReadHeadHandler, this,
+                std::placeholders::_1,
+                std::placeholders::_2));
+        }        
 	}
+
+    int HandlerRVCMessage(MSG_RVC *rvcMessage)
+    {
+        MSG_AVC avcMessage;
+        avcMessage.SetCaptchaType(0);
+        byte captcha[] = {0x02,0x02,0x02,0x02,
+            0x02,0x02,0x02,0x02,
+            0x02,0x02,0x02,0x02,
+            0x02,0x02,0x02,0x02};
+        avcMessage.SetCaptcha(captcha,sizeof(captcha));
+        
+        return 0;
+    }
     const static size_t HEAD_LEN = 30;
     char headerData_[HEAD_LEN];
     ConnectionT *connection_;

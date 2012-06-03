@@ -27,6 +27,15 @@
     <ClCompile Include="src\VNOCServer.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="src\message\PackMessage.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\message\MessageParser.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\message\MsgDef.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
