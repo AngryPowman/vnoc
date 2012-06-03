@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "msgdef.h"
+#include "MsgDef.h"
 
 
 class CMessageParser
