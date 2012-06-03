@@ -69,7 +69,6 @@ int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 	CHECKUP_DATALEN(index,len);
 	buf[index]  = msg_clss->GetCmlCount();
 	index++;
-
 	return index;
 }
 
@@ -94,7 +93,7 @@ int PackMessage::_Tail(CMessage* msg_clss,byte* buf,int index,size_t len)
 	//½áÎ²·û
 	CHECKUP_DATALEN(index,len);
 	buf[index] = MSG_END;
-	return 0;
+	return index;
 }
 
 int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
@@ -119,11 +118,7 @@ int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
 	}
 
 	//Tail
-	if (_Tail(rvc,buf,index,len) != 0)
-	{
-		return -1;
-	}
-	return 0;
+	return _Tail(rvc,buf,index,len);
 }
 
 
@@ -155,12 +150,7 @@ int PackMessage::Pack(MSG_AVC* avc, byte* buf, size_t len)
 		buf[index] = avc->GetCmlCommandList()[0][i];
 	}
 	//Tail
-	if (_Tail(avc,buf,index,len) != 0)
-	{
-		return -1;
-	}
-
-	return 0;
+	return _Tail(avc,buf,index,len);
 }
 
 
@@ -199,12 +189,7 @@ int PackMessage::Pack(MSG_RLI* rli,byte* buf, size_t len)
 	}
 
 	//Tail
-	if (_Tail(rli,buf,index,len) != 0)
-	{
-		return -1;
-	}
-
-	return 0;
+	return _Tail(rli,buf,index,len);
 }
 
 int PackMessage::Pack(MSG_ALI* ali,byte* buf, size_t len)
@@ -239,12 +224,7 @@ int PackMessage::Pack(MSG_ALI* ali,byte* buf, size_t len)
 	}
 
 	//Tail
-	if (_Tail(ali,buf,index,len) != 0)
-	{
-		return -1;
-	}
-
-	return 0;
+	return _Tail(ali,buf,index,len);
 
 }
 
@@ -292,12 +272,7 @@ int PackMessage::Pack(MSG_RPS* rps,byte* buf, size_t len)
 	}
 
 	//Tail
-	if (_Tail(rps,buf,index,len) != 0)
-	{
-		return -1;
-	}
-
-	return 0;
+	return _Tail(rps,buf,index,len);
 
 }
 
@@ -323,10 +298,70 @@ int PackMessage::Pack(MSG_APS* aps,byte* buf, size_t len)
 	}
 
 	//Tail
-	if (_Tail(aps,buf,index,len) != 0)
+	return _Tail(aps,buf,index,len);
+}
+
+//GetMessageLen
+
+// int PackMessage::GetMessageLen( MSG_AVC* avc )
+// {
+// 	int Head = 30;
+// 	int Tail = 3;
+// 	int Param;
+// 	int PLen;
+// 	PLen = avc->GetCmlCount() * 4;
+// 	Param = avc->GetCaptchaLen() + 1 + 1;
+// 	return Param + PLen + Head + Tail;
+// }
+
+int PackMessage::GetMessageLen(CMessage* msg)
+{
+	int Head = 30;
+	int Tail = 3;
+	int Param = 0;
+	int PLen  = 0;
+
+	MSG_AVC* avc;
+	MSG_RVC* rvc;
+	MSG_ALI* ali;
+	MSG_RLI* rli;
+	MSG_RPS* rps;
+	MSG_APS* aps;
+
+	if (!msg)
 	{
-		return -1;
+		return 0;
 	}
 
-	return 0;
+
+	PLen  =  msg->GetCmlCount() * 4;
+	
+	switch (msg->GetMessageType())
+	{
+	case MSG_AVC_TYPE:
+		avc = (MSG_AVC*)msg;
+		Param = avc->GetCaptchaLen() + 1 + 1;
+		break;
+	case MSG_RVC_TYPE:
+		rvc = (MSG_RVC*)msg;
+		Param = rvc->GetMachineAddressLen();
+		break;
+	case MSG_ALI_TYPE:
+		ali = (MSG_ALI*)msg;
+		Param = ali->GetATLGUIDLen() + ali->GetTokenLen() + 1;
+		break;
+	case MSG_RLI_TYPE:
+		rli = (MSG_RLI*)msg;
+		Param = rli->GetAccountNumberLen() + rli->GetPasswordLen() + rli->GetVerificationCodeLen();
+		break;
+	case MSG_RPS_TYPE:
+		rps = (MSG_RPS*)msg;
+		Param = rps->GetNicknameLen() + rps->GetAutographLen() + rps->GetHeadPortraitLen() + 1 + 1;
+		break;
+	case MSG_APS_TYPE:
+		aps = (MSG_APS*)msg;
+		Param = aps->GetMessageSynchroLen();
+		break;
+	}
+	return Param + PLen + Head + Tail;
 }

@@ -293,7 +293,7 @@ public:
 		CPPUNIT_ASSERT(msg_avc.GetLoginTag() == 0x1e);
 		msg_avc.SetCaptchaType(0x1e);
 		CPPUNIT_ASSERT(msg_avc.GetCaptchaType() == 0x1e);
-		CPPUNIT_ASSERT(msg_pack.Pack(&msg_avc,testPackAVC,63) == 0);
+		CPPUNIT_ASSERT(msg_pack.Pack(&msg_avc,testPackAVC,msg_pack.GetMessageLen(&msg_avc)) != -1);
 		//与正确包对比
 		CPPUNIT_ASSERT(memcmp(testAVC,testPackAVC,sizeof(testAVC)) == 0);
 
@@ -311,7 +311,7 @@ public:
 		msg_rvc.SetMachineAddress(testParamO,16);
 		CPPUNIT_ASSERT(memcmp(msg_rvc.GetMachineAddress(),testParamO,16) == 0);
 
-		CPPUNIT_ASSERT(msg_pack.Pack(&msg_rvc,testPackRVC,53) == 0);
+		CPPUNIT_ASSERT(msg_pack.Pack(&msg_rvc,testPackRVC,msg_pack.GetMessageLen(&msg_rvc)) != -1);
 
 		//与正确包对比
 		CPPUNIT_ASSERT(memcmp(testRVC,testPackRVC,sizeof(testRVC)) == 0);
@@ -342,7 +342,7 @@ public:
 
 		msg_rli.SetPassword(testParamS,16);
 		CPPUNIT_ASSERT(memcmp(msg_rli.GetPassword(),testParamS,16) == 0);
-		CPPUNIT_ASSERT(msg_pack.Pack(&msg_rli,testPackRLI,100) == 0);
+		CPPUNIT_ASSERT(msg_pack.Pack(&msg_rli,testPackRLI,msg_pack.GetMessageLen(&msg_rli)) != -1);
 
 
 		//与正确包对比
@@ -373,7 +373,7 @@ public:
 
 		msg_ali.SetATLGUID(testParamT,16);
 		CPPUNIT_ASSERT(memcmp(msg_ali.GetATLGUID(),testParamT,sizeof(byte) * 16) == 0);
-		CPPUNIT_ASSERT(msg_pack.Pack(&msg_ali,testPackALI,100) == 0);
+		CPPUNIT_ASSERT(msg_pack.Pack(&msg_ali,testPackALI,msg_pack.GetMessageLen(&msg_ali)) != -1);
 
 		//与正确包对比
 		CPPUNIT_ASSERT(memcmp(testALI,testPackALI,sizeof(testALI)) == 0);
@@ -410,7 +410,7 @@ public:
 		msg_rps.SetHeadPortrait(testParamS,16);
 		CPPUNIT_ASSERT(memcmp(msg_rps.GetHeadPortrait(),testParamS,sizeof(byte) * 16) == 0);
 
-		CPPUNIT_ASSERT(msg_pack.Pack(&msg_rps,testPackRPS,120) == 0);
+		CPPUNIT_ASSERT(msg_pack.Pack(&msg_rps,testPackRPS,msg_pack.GetMessageLen(&msg_rps)) != -1);
 
 		//与正确包对比
 		CPPUNIT_ASSERT(memcmp(testRPS,testPackRPS,sizeof(testRPS)) == 0);
@@ -434,7 +434,7 @@ public:
 		msg_aps.SetMessageSynchro(testParamO,16);
 		CPPUNIT_ASSERT(memcmp(msg_aps.GetMessageSynchro(),testParamO,sizeof(byte) * 16) == 0);
 
-		CPPUNIT_ASSERT(msg_pack.Pack(&msg_aps,testPackAPS,100) == 0);
+		CPPUNIT_ASSERT(msg_pack.Pack(&msg_aps,testPackAPS,msg_pack.GetMessageLen(&msg_aps)) != -1);
 
 		//与正确包对比
 		CPPUNIT_ASSERT(memcmp(testAPS,testPackAPS,sizeof(testAPS)) == 0);
