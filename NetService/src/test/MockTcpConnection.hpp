@@ -46,6 +46,7 @@ public:
     template <typename Handler> int send(char * buf, size_t len, Handler handler)
     {
         sendHandler_.reset(new HandlerWrapper<Handler>(handler));
+        sendLen_ = len;
 		memcpy(sendBuf_, buf, len);
 		sendBuf_[len]=0;
 		EZLOGGERSTREAM<<"send: "<<sendBuf_<<std::endl;
@@ -75,11 +76,14 @@ public:
 			}
         }		
     }
+    size_t getSendLen(){return sendLen_;}
+    char *getSendBuf(){return sendBuf_;}
 private:
     std::shared_ptr<EventOperator> recvHandler_;
     std::shared_ptr<EventOperator> sendHandler_;
     char* recvBuf_;
 	size_t recvBufLen;
+    size_t sendLen_;
     char sendBuf_[1024];
 	bool isReadSome_;
 	size_t receivedLenth_;

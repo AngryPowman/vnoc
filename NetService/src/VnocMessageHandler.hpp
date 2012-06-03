@@ -74,7 +74,7 @@ private:
                 std::bind(&VnocMessageHandler::ReadHeadHandler, this,
                 std::placeholders::_1,
                 std::placeholders::_2));
-        }        
+        }
 	}
 
     void SendHandler(byte* buffer, const asio::error_code& error, size_t bytes_transferred)

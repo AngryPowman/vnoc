@@ -10,7 +10,7 @@ INCS := $(CUR_DIR)/include
 	$(CXX) -c $(CXXFLAGS) -I$(INCS)  $< -o $@
 
 all : Server test_bin
-Server : VNOCServer.o NetService.o AsioTcpServer.o
+Server : VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage.o MsgDef.o
 	$(CXX) -lpthread $^ -o bin/$@
 test_bin: EchoTestServer
 
