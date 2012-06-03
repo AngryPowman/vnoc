@@ -5,8 +5,8 @@
 
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
-#include "message\MessageParser.h"
-#include "message\PackMessage.h"
+#include "message/MessageParser.h"
+#include "message/PackMessage.h"
 #include <ezlogger_headers.hpp>
 template <typename ConnectionT>
 class VnocMessageHandler : public SocketHandler
