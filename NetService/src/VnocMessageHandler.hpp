@@ -6,6 +6,7 @@
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
 #include "message\MessageParser.h"
+#include "message\PackMessage.h"
 #include <ezlogger_headers.hpp>
 template <typename ConnectionT>
 class VnocMessageHandler : public SocketHandler
@@ -44,6 +45,7 @@ private:
                 std::placeholders::_2));
 
     }
+
 	void ReadBodyHandler(char *messageBuffer, const asio::error_code& error, size_t bytes_transferred){
         std::unique_ptr<char[]> safe_buf(messageBuffer);
         if (error) {
@@ -75,6 +77,17 @@ private:
         }        
 	}
 
+    void SendHandler(byte* buffer, const asio::error_code& error, size_t bytes_transferred)
+    {
+        delete []buffer;
+        if (!error){
+            connection_->recv(headerData_, sizeof(headerData_), 
+                std::bind(&VnocMessageHandler::ReadHeadHandler, this,
+                std::placeholders::_1,
+                std::placeholders::_2));
+        }
+    }
+
     int HandlerRVCMessage(MSG_RVC *rvcMessage)
     {
         MSG_AVC avcMessage;
@@ -84,8 +97,11 @@ private:
             0x02,0x02,0x02,0x02,
             0x02,0x02,0x02,0x02};
         avcMessage.SetCaptcha(captcha,sizeof(captcha));
-        
-        return 0;
+        PackMessage packer;
+        size_t avcLen = packer.GetMessageLen(&avcMessage);
+        byte *avcPack = new byte[avcLen];
+        packer.Pack(&avcMessage,avcPack, avcLen);
+        return 1;
     }
     const static size_t HEAD_LEN = 30;
     char headerData_[HEAD_LEN];

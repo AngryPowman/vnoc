@@ -50,11 +50,28 @@ void IntTobyte(int in_int,byte* out_byte)
 
 int  CMessage::GetMessageType()
 {
-	if (GetBeginTab() != true || GetEndTab() != true)
+// 	if (GetBeginTab() != true || GetEndTab() != true)
+// 	{
+// 		return -1;
+	// 	}
+
+	int  _type = 0;
+	switch(m_Command)
 	{
-		return -1;
+	case MSG_AVC_COM: _type =  MSG_AVC_TYPE; 
+		break;
+	case MSG_ALI_COM: _type =  MSG_ALI_TYPE; 
+		break;
+	case MSG_RVC_COM: _type =  MSG_RVC_TYPE; 
+		break;
+	case MSG_RLI_COM: _type =  MSG_RLI_TYPE;
+		break;
+	case MSG_RPS_COM: _type =  MSG_RPS_TYPE;
+		break;
+	case MSG_APS_COM: _type =  MSG_APS_TYPE;
+		break;
 	}
-	return _MessageType();
+	return _type;
 }
 
 bool CMessage::GetBeginTab()
