@@ -1,14 +1,3 @@
-/********************************************************************
-	created:	2012/05/13
-	created:	13:05:2012   00:46
-	filename: 	D:\vnoc\trunk\VNOC\VNOC\MessageParser.h
-	file path:	D:\vnoc\trunk\VNOC\VNOC\MessageParser.h
-	file base:	Message Parser
-	file ext:	h
-	author:		Sum.
-	
-	purpose:	数据包解析类，分析传输数据(客户端)
-*********************************************************************/
 
 
 #pragma once

@@ -1,14 +1,3 @@
-/********************************************************************
-	created:	2012/05/13
-	created:	13:05:2012   00:46
-	filename: 	D:\vnoc\trunk\VNOC\VNOC\MsgDef.h
-	file path:	D:\vnoc\trunk\VNOC\VNOC\MsgDef.h
-	file base:	Message Define
-	file ext:	h
-	author:		Sum.
-	
-	purpose:	消息定义(客户端)
-*********************************************************************/
 
 
 #pragma once
