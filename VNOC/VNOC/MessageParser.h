@@ -1,9 +1,9 @@
 /********************************************************************
 	created:	2012/05/13
 	created:	13:05:2012   00:46
-	filename: 	D:\vnoc\trunk\VNOC\VNOC\MsgAnalysis.h
-	file path:	D:\vnoc\trunk\VNOC\VNOC\MsgAnalysis.h
-	file base:	Message Analysis
+	filename: 	D:\vnoc\trunk\VNOC\VNOC\MessageParser.h
+	file path:	D:\vnoc\trunk\VNOC\VNOC\MessageParser.h
+	file base:	Message Parser
 	file ext:	h
 	author:		Sum.
 	

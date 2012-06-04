@@ -1,4 +1,14 @@
-
+/********************************************************************
+	created:	2012/05/13
+	created:	13:05:2012   00:46
+	filename: 	D:\vnoc\trunk\VNOC\VNOC\PackMessage.h
+	file path:	D:\vnoc\trunk\VNOC\VNOC\PackMessage.h
+	file base:	Message Pack
+	file ext:	h
+	author:		Sum.
+	
+	purpose:	消息打包(客户端)
+*********************************************************************/
 #pragma  once
 
 
