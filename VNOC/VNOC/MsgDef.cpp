@@ -1,6 +1,12 @@
 
 #include "MsgDef.h"
 
+#include <cstring>
+
+//CMessageParser
+
+
+using namespace std;
 
 void LittleSwapBigByte(byte* in_byte_ptr,size_t len)
 {
