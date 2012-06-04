@@ -25,6 +25,7 @@ HRESULT CNetCenter::UnInitialize()
 
 HRESULT CNetCenter::Run()
 {
+	m_serverSocket.SetListener(dynamic_cast<ISocketListener*>(this));
 	return S_OK;
 }
 
@@ -36,6 +37,7 @@ HRESULT CNetCenter::Terminate()
 
 HRESULT CNetCenter::ConnectServer( LPCTSTR ipv4Addr,DWORD port )
 {
+	m_serverSocket.Connect(_T("192.168.0.1"),2508);
 	return S_OK;
 }
 
@@ -57,4 +59,36 @@ HRESULT CNetCenter::SetListener( const CNetListenerHelper &helper )
 HRESULT CNetCenter::Send( LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg )
 {
 	return S_OK;
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+void CNetCenter::OnAccept( int nErrorCode,CAsyncSocket* pSock )
+{
+	Global->Log(LogFile_Net,_T("OnAccept"));
+}
+
+void CNetCenter::OnClose( int nErrorCode,CAsyncSocket* pSock )
+{
+	Global->Log(LogFile_Net,_T("OnClose"));
+}
+
+void CNetCenter::OnConnect( int nErrorCode,CAsyncSocket* pSock )
+{
+	Global->Log(LogFile_Net,_T("OnConnect"));
+}
+
+void CNetCenter::OnOutOfBandData( int nErrorCode,CAsyncSocket* pSock )
+{
+	Global->Log(LogFile_Net,_T("OnOutOfBandData"));
+}
+
+void CNetCenter::OnReceive( int nErrorCode,CAsyncSocket* pSock )
+{
+	Global->Log(LogFile_Net,_T("OnReceive"));
+}
+
+void CNetCenter::OnSend( int nErrorCode,CAsyncSocket* pSock )
+{
+
 }
