@@ -110,7 +110,7 @@ namespace axter
 			common_constructor_imp(isstreamoutput);
 		}
 
-		template<typename T> inline ezlogger& operator<<(T& Data) {
+		template<typename T> inline ezlogger& operator<<(const T& Data) {
 			if (m_verbosity_level <= EZLOGGER_VERBOSITY_LEVEL_POLICY::get_verbosity_level_tolerance()) 
 			{
 				if (m_alternate_output)

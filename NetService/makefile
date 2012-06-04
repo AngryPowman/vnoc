@@ -1,7 +1,7 @@
 # author by AngryPowman, for VNOC server
 # revision : 3
 CXX=g++
-VPATH=src:test
+VPATH=src:test:src/message
 CXXFLAGS=-std=c++0x  
 CUR_DIR = $(shell pwd)
 INCS := $(CUR_DIR)/include
@@ -14,7 +14,7 @@ Server : VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage.o
 	$(CXX) -lpthread $^ -o bin/$@
 test_bin: EchoTestServer
 
-EchoTestServer : EchoTestServer.o NetService.o AsioTcpServer.o
+EchoTestServer : EchoTestServer.o  AsioTcpServer.o
 	$(CXX) -lpthread $^ -o bin/$@
 clean :
 	rm -fr bin/*

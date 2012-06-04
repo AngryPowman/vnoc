@@ -1,7 +1,7 @@
-#pragma once
 
 #include "PackMessage.h"
-
+#include <cstring>
+using namespace std;
 int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 {
 	//head---------------------

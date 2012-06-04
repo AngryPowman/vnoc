@@ -1,10 +1,7 @@
-
-#pragma once
-
 #include "MessageParser.h"
-
+#include <cstring>
 //CMessageParser
-
+using namespace std;
 #define  CHECLUP_LEN(X,Y) if (_CheckUpLen(X,Y) != 0){return -1;}
 
 

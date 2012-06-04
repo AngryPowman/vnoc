@@ -1,7 +1,7 @@
-#pragma once
 
 #include "MsgDef.h"
-
+#include <cstring>
+using namespace std;
 
 void LittleSwapBigByte(byte* in_byte_ptr,size_t len)
 {
