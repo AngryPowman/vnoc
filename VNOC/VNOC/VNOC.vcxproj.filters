@@ -66,12 +66,6 @@
     <ClCompile Include="VNOC.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\MyNetClient\ClientConnection.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\MyNetClient\NetClient.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="SciEdit.cpp">
       <Filter>CodeEditor</Filter>
     </ClCompile>
@@ -168,12 +162,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="VNOC.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MyNetClient\ClientConnection.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MyNetClient\NetClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SciEdit.h">
@@ -290,9 +278,6 @@
     <ClInclude Include="ILanguage.h">
       <Filter>Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\MyNetClient\MsgDef.h">
-      <Filter>MsgParser</Filter>
-    </ClInclude>
     <ClInclude Include="MessageParser.h">
       <Filter>MsgParser</Filter>
     </ClInclude>
@@ -310,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="VNOCSocket.h">
       <Filter>Net\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgDef.h">
+      <Filter>MsgParser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
