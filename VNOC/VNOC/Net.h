@@ -3,6 +3,9 @@
 #include "INet.h"
 #include "VNOCSocket.h"
 
+#include <map>
+#include <list>
+
 class CNetCenter : public INetCenter
 	,public ISocketListener
 {
@@ -19,7 +22,8 @@ public:
 	STDMETHOD( IsServerConnected() );
 	STDMETHOD( SendServer(const CMessage& netMsg) );
 	STDMETHOD( Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg) );
-	STDMETHOD( SetListener(const CNetListenerHelper &helper) );
+	STDMETHOD( SetListener(MSGTYPE msgType,INetListener *listener) );
+	STDMETHOD( RemoveListener(MSGTYPE msgType,INetListener *listener) );
 
 VNOC_Private:
 	virtual void OnAccept	(int nErrorCode,CAsyncSocket* pSock);
@@ -31,4 +35,6 @@ VNOC_Private:
 private:
 	CSocketImpl m_serverSocket;
 	WSADATA m_wsaData;
+	std::map<MSGTYPE,std::list<INetListener*> >	m_listeners;
+	ATL::CCriticalSection	m_cs;
 };

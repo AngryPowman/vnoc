@@ -5,14 +5,17 @@
 
 #include "HyperLink.h"
 #include "VNOCDialogBase.h"
+#include "INet.h"
 
 // CVNOCDlg 对话框
 class CVNOCLoginDlg : public CDialog
 	,public CVNOCDialogBase
+	,public INetListener
 {
 // 构造
 public:
 	CVNOCLoginDlg(CWnd* pParent = NULL);	// 标准构造函数
+	virtual ~CVNOCLoginDlg();
 
 // 对话框数据
 	enum { IDD = IDD_LoginDlg };
@@ -22,6 +25,8 @@ public:
 public:
 	virtual BOOL Refresh();
 	virtual BOOL LanguageChanged();
+
+	STDMETHOD( OnMessage(const CMessage& msg));
 
 // 实现
 protected:
@@ -43,4 +48,6 @@ private:
 private:
     CString m_strUsername;
     CString m_strPassword;
+
+	CNetListenerHelper m_nlHelper;
 };

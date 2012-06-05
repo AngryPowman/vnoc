@@ -53,6 +53,10 @@ HRESULT CRoomListImpl::Show( BOOL bShow/*=TRUE*/ )
 					hr = pRoom->Show();
 				}
 			}
+			else
+			{
+				break;
+			}
 		}
 	}
 	return S_OK;

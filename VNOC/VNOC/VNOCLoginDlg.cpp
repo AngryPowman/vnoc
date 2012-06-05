@@ -24,6 +24,13 @@ CVNOCLoginDlg::CVNOCLoginDlg(CWnd* pParent /*=NULL*/)
     , m_strPassword(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_nlHelper.AddFilter(MSG_AVC_TYPE,this);
+	m_nlHelper.Set();
+}
+
+CVNOCLoginDlg::~CVNOCLoginDlg()
+{
+	m_nlHelper.UnSet();
 }
 
 void CVNOCLoginDlg::DoDataExchange(CDataExchange* pDX)
@@ -139,4 +146,10 @@ BOOL CVNOCLoginDlg::LanguageChanged()
 BOOL CVNOCLoginDlg::Refresh()
 {
 	return TRUE;
+}
+
+HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
+{
+	Global->Log(LogFile_Net,_T("接收到网络包"));
+	return S_OK;
 }

@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "Net.h"
+#include "../../Message/PackMessage.h"
+#include "../util/util.h"
+
+#include <algorithm>
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -58,12 +62,35 @@ HRESULT CNetCenter::IsServerConnected()
 
 HRESULT CNetCenter::SendServer( const CMessage &helper )
 {
-	m_serverSocket.Send(NULL,0);		//? ·¢É¶°¡¡£¡£¡£
+	PackMessage packer;
+	int len = packer.GetMessageLen(&helper);
+	CBuffer buffer;
+	buffer.Alloc(len);
+	packer.Pack(&helper,buffer.GetBuffer(),len);
+	m_serverSocket.Send(buffer.GetBuffer(),len);
 	return S_OK;
 }
 
-HRESULT CNetCenter::SetListener( const CNetListenerHelper &helper )
+HRESULT CNetCenter::SetListener( MSGTYPE msgType,INetListener *listener )
 {
+	Util::CAutoCS ac(m_cs);
+	m_listeners[msgType].push_back(listener);
+	return S_OK;
+}
+
+HRESULT CNetCenter::RemoveListener( MSGTYPE msgType,INetListener *listener )
+{
+	Util::CAutoCS ac(m_cs);
+	auto si = m_listeners.find(msgType);
+	if (si != m_listeners.end())
+	{
+		auto i = std::find(si->second.begin(),si->second.end(),listener);
+		do 
+		{
+			si->second.erase(i);
+			i = std::find(si->second.begin(),si->second.end(),listener);
+		} while (i != si->second.end());
+	}
 	return S_OK;
 }
 
@@ -101,5 +128,44 @@ void CNetCenter::OnReceive( int nErrorCode,CAsyncSocket* pSock )
 
 void CNetCenter::OnSend( int nErrorCode,CAsyncSocket* pSock )
 {
+	Global->Log(LogFile_Net,_T("OnSend"));
+}
 
+//////////////////////////////////////////////////////////////////////////
+
+CNetListenerHelper::CNetListenerHelper()
+{
+}
+
+CNetListenerHelper::~CNetListenerHelper()
+{
+}
+
+void CNetListenerHelper::AddFilter(MSGTYPE msgType,INetListener *listener)
+{
+	m_vec.push_back(std::make_pair(msgType,listener));
+}
+
+void CNetListenerHelper::Set()
+{
+	INetCenter *pCenter=NULL;
+	Global->GetINetCenter(&pCenter);
+	Global->PtrAssert(pCenter);
+
+	for(auto i=m_vec.begin(); i!=m_vec.end(); ++i)
+	{
+		pCenter->SetListener(i->first,i->second);
+	}
+}
+
+void CNetListenerHelper::UnSet()
+{
+	INetCenter *pCenter=NULL;
+	Global->GetINetCenter(&pCenter);
+	Global->PtrAssert(pCenter);
+
+	for(auto i=m_vec.begin(); i!=m_vec.end(); ++i)
+	{
+		pCenter->RemoveListener(i->first,i->second);
+	}
 }
