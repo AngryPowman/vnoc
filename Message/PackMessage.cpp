@@ -525,7 +525,7 @@ int PackMessage::GetMessageLen(const CMessage* const msg)
 	return Param + PLen + Head + Tail;
 }
 
-int PackMessage::Pack( CMessage* const msg, byte* buf, size_t len )
+int PackMessage::Pack(const CMessage* const msg, byte* buf, size_t len )
 {
 	int Result = 0;
 

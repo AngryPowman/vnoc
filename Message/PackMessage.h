@@ -16,7 +16,7 @@ public:
 
 public:
 
-	int Pack( CMessage* const msg, byte* buf, size_t len);
+	int Pack( const CMessage* const msg, byte* buf, size_t len);
 
 	int GetMessageLen(const CMessage* const msg);
 
