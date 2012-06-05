@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
+int PackMessage::_Head(const CMessage* const msg_clss,byte* buf, size_t len)
 {
 	//head---------------------
 	int index = 0;
@@ -76,7 +76,7 @@ int PackMessage::_Head(CMessage* msg_clss,byte* buf, size_t len)
 	return index;
 }
 
-int PackMessage::_Tail(CMessage* msg_clss,byte* buf,int index,size_t len)
+int PackMessage::_Tail(const CMessage* const msg_clss,byte* buf,int index,size_t len)
 {
 	byte tmpByte[4] = {0};
 	//Tail
@@ -100,7 +100,7 @@ int PackMessage::_Tail(CMessage* msg_clss,byte* buf,int index,size_t len)
 	return index;
 }
 
-int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
+int PackMessage::Pack(const MSG_RVC* const rvc,byte* buf, size_t len)
 {
 
 	byte tmpByte[4] = {0};
@@ -126,7 +126,7 @@ int PackMessage::Pack(MSG_RVC* rvc,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(MSG_AVC* avc, byte* buf, size_t len)
+int PackMessage::Pack(const MSG_AVC* const avc, byte* buf, size_t len)
 {
 	byte tmpByte[4] = {0};
 
@@ -158,7 +158,7 @@ int PackMessage::Pack(MSG_AVC* avc, byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(MSG_RLI* rli,byte* buf, size_t len)
+int PackMessage::Pack(const MSG_RLI* const rli,byte* buf, size_t len)
 {
 	byte tmpByte[4] = {0};
 
@@ -196,7 +196,7 @@ int PackMessage::Pack(MSG_RLI* rli,byte* buf, size_t len)
 	return _Tail(rli,buf,index,len);
 }
 
-int PackMessage::Pack(MSG_ALI* ali,byte* buf, size_t len)
+int PackMessage::Pack(const MSG_ALI* const ali,byte* buf, size_t len)
 {
 	byte tmpByte[4] = {0};
 
@@ -233,7 +233,7 @@ int PackMessage::Pack(MSG_ALI* ali,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(MSG_RPS* rps,byte* buf, size_t len)
+int PackMessage::Pack(const MSG_RPS* const rps,byte* buf, size_t len)
 {
 	byte tmpByte[4] = {0};
 
@@ -281,7 +281,7 @@ int PackMessage::Pack(MSG_RPS* rps,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(MSG_APS* aps,byte* buf, size_t len)
+int PackMessage::Pack(const MSG_APS* const aps,byte* buf, size_t len)
 {
 	byte tmpByte[4] = {0};
 
@@ -318,7 +318,7 @@ int PackMessage::Pack(MSG_APS* aps,byte* buf, size_t len)
 // 	return Param + PLen + Head + Tail;
 // }
 
-int PackMessage::GetMessageLen(CMessage* msg)
+int PackMessage::GetMessageLen(const CMessage* const msg)
 {
 	int Head = 30;
 	int Tail = 3;
