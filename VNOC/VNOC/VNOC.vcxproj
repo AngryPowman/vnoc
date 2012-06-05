@@ -184,6 +184,9 @@
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Message\MessageParser.cpp" />
+    <ClCompile Include="..\..\Message\MsgDef.cpp" />
+    <ClCompile Include="..\..\Message\PackMessage.cpp" />
     <ClCompile Include="..\..\TinyXML\tinystr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
@@ -223,14 +226,6 @@
     <ClCompile Include="HyperLink.cpp" />
     <ClCompile Include="InterfaceDefImpl.cpp" />
     <ClCompile Include="LoginImpl.cpp" />
-    <ClCompile Include="MessageParser.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="MsgDef.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="NET.cpp" />
     <ClCompile Include="RoomImpl.cpp" />
     <ClCompile Include="RoomListDlg.cpp" />
@@ -251,6 +246,9 @@
     <ClCompile Include="VNOCSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Message\MessageParser.h" />
+    <ClInclude Include="..\..\Message\MsgDef.h" />
+    <ClInclude Include="..\..\Message\PackMessage.h" />
     <ClInclude Include="..\..\scintilla\include\ILexer.h" />
     <ClInclude Include="..\..\scintilla\include\Platform.h" />
     <ClInclude Include="..\..\scintilla\include\SciLexer.h" />
@@ -283,10 +281,7 @@
     <ClInclude Include="IUIWnd.h" />
     <ClInclude Include="IVNOCFrame.h" />
     <ClInclude Include="LoginImpl.h" />
-    <ClInclude Include="MessageParser.h" />
-    <ClInclude Include="MsgDef.h" />
     <ClInclude Include="Net.h" />
-    <ClInclude Include="PackMessage.h" />
     <ClInclude Include="RoomImpl.h" />
     <ClInclude Include="RoomListDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -306,7 +301,6 @@
     <None Include="..\preLink.bat" />
     <None Include="Config.inl" />
     <None Include="config.xml" />
-    <None Include="PackMessage.cpp" />
     <None Include="Performance.inl" />
     <None Include="resource.hm" />
     <None Include="res\VNOC.ico" />

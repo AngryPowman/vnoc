@@ -46,14 +46,14 @@
     <Filter Include="FrameWork\Dialog">
       <UniqueIdentifier>{53f89d19-a7ad-47c0-9c0e-c80c540eac51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MsgParser">
-      <UniqueIdentifier>{5dc7ed6f-ac84-4129-84c5-13a3cdd97fde}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Net">
       <UniqueIdentifier>{f555e30c-f795-4202-bba0-5a67156b7d69}</UniqueIdentifier>
     </Filter>
     <Filter Include="Net\Socket">
       <UniqueIdentifier>{5ebfe572-f0db-40bd-b1b1-b94caeb2bb93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Message">
+      <UniqueIdentifier>{218d1f90-dafb-4a6f-a941-3ffc566413f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,17 +138,20 @@
     <ClCompile Include="SciEditConfig.cpp">
       <Filter>CodeEditor</Filter>
     </ClCompile>
-    <ClCompile Include="MsgDef.cpp">
-      <Filter>MsgParser</Filter>
-    </ClCompile>
-    <ClCompile Include="MessageParser.cpp">
-      <Filter>MsgParser</Filter>
-    </ClCompile>
     <ClCompile Include="NET.cpp">
       <Filter>Net</Filter>
     </ClCompile>
     <ClCompile Include="VNOCSocket.cpp">
       <Filter>Net\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MessageParser.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MsgDef.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\PackMessage.cpp">
+      <Filter>Message</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,12 +281,6 @@
     <ClInclude Include="ILanguage.h">
       <Filter>Interface</Filter>
     </ClInclude>
-    <ClInclude Include="MessageParser.h">
-      <Filter>MsgParser</Filter>
-    </ClInclude>
-    <ClInclude Include="PackMessage.h">
-      <Filter>MsgParser</Filter>
-    </ClInclude>
     <ClInclude Include="INet.h">
       <Filter>Net</Filter>
     </ClInclude>
@@ -296,8 +293,14 @@
     <ClInclude Include="VNOCSocket.h">
       <Filter>Net\Socket</Filter>
     </ClInclude>
-    <ClInclude Include="MsgDef.h">
-      <Filter>MsgParser</Filter>
+    <ClInclude Include="..\..\Message\MessageParser.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MsgDef.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\PackMessage.h">
+      <Filter>Message</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -324,9 +327,6 @@
     </None>
     <None Include="Performance.inl">
       <Filter>util</Filter>
-    </None>
-    <None Include="PackMessage.cpp">
-      <Filter>MsgParser</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

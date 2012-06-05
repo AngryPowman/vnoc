@@ -21,30 +21,30 @@
     <ClCompile Include="..\test\testRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\MessageParser.cpp">
-      <Filter>Source Files\MsgParser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\MsgDef.cpp">
-      <Filter>Source Files\MsgParser</Filter>
-    </ClCompile>
     <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\PackMessage.cpp">
-      <Filter>Source Files\MsgParser</Filter>
     </ClCompile>
     <ClCompile Include="..\test\testPackMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Message\MessageParser.cpp">
+      <Filter>Source Files\MsgParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Message\MsgDef.cpp">
+      <Filter>Source Files\MsgParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Message\PackMessage.cpp">
+      <Filter>Source Files\MsgParser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\MessageParser.h">
+    <ClInclude Include="..\..\..\Message\MessageParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\MsgDef.h">
+    <ClInclude Include="..\..\..\Message\MsgDef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\PackMessage.h">
+    <ClInclude Include="..\..\..\Message\PackMessage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

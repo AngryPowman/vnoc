@@ -1,6 +1,6 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include "../PackMessage.h"
+#include "..\..\Message\PackMessage.h"
 #include <string.h>
 
 
