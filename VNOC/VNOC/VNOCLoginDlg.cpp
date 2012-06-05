@@ -6,6 +6,8 @@
 #include "VNOCLoginDlg.h"
 #include "RoomDlg.h"
 #include "Config.h"
+#include "INet.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -101,7 +103,16 @@ void CVNOCLoginDlg::OnBnClickedOk()
     UpdateData(TRUE);
 	CString strTemp;
 	strTemp.Format(L"user:%s pass:%s", m_strUsername, m_strPassword);
-    MessageBox(strTemp);
+	INetCenter *pInet=NULL;
+	Global->GetINetCenter(&pInet);
+	ATLASSERT(pInet);
+	if (pInet)
+	{
+		MSG_RVC mRVC;
+		byte MAC[16]={0};
+		mRVC.SetMachineAddress(MAC,16);
+		pInet->SendServer(mRVC);
+	}
 	OnOK();
 }
 

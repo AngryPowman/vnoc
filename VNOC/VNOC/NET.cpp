@@ -5,7 +5,7 @@
 
 CNetCenter::CNetCenter()
 {
-
+	ZeroMemory(&m_wsaData,sizeof(m_wsaData));
 }
 
 CNetCenter::~CNetCenter()
@@ -15,11 +15,15 @@ CNetCenter::~CNetCenter()
 
 HRESULT CNetCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
+	WSAStartup(MAKEWORD(2,2),&m_wsaData);
+	m_serverSocket.Create(0,SOCK_STREAM);
 	return S_OK;
 }
 
 HRESULT CNetCenter::UnInitialize()
 {
+	m_serverSocket.Close();
+	WSACleanup();
 	return S_OK;
 }
 
@@ -37,7 +41,13 @@ HRESULT CNetCenter::Terminate()
 
 HRESULT CNetCenter::ConnectServer( LPCTSTR ipv4Addr,DWORD port )
 {
-	m_serverSocket.Connect(_T("192.168.0.1"),2508);
+	BOOL bSuccess = m_serverSocket.Connect(ipv4Addr,port);
+	if (!bSuccess && m_serverSocket.GetLastError()!=WSAEWOULDBLOCK)
+	{
+		Global->Logf(LogFile_Net,_T("连接服务器失败.错误码%d\n"),m_serverSocket.GetLastError());
+		return E_FAIL;
+	}
+	Global->Logf(LogFile_Net,_T("连接服务器成功,错误码%d\n"),m_serverSocket.GetLastError());
 	return S_OK;
 }
 
@@ -48,6 +58,7 @@ HRESULT CNetCenter::IsServerConnected()
 
 HRESULT CNetCenter::SendServer( const CMessage &helper )
 {
+	m_serverSocket.Send(NULL,0);		//? 发啥啊。。。
 	return S_OK;
 }
 

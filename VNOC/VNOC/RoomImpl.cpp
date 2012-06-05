@@ -41,15 +41,11 @@ HRESULT CRoomImpl::Show( BOOL bShow/*=TRUE*/ )
 		INT_PTR ret = dlg.DoModal();
 		if (ret == IDOK)
 		{
+			return S_OK;
 		}
 		else if(ret == IDCANCEL)
 		{
-			IRoomList* pRoomList;
-			GetiModule(module_roomList,m_frame,&pRoomList);
-			if (pRoomList)
-			{
-				pRoomList->Show();
-			}
+			return S_FALSE;
 		}
 	}
 	return S_OK;

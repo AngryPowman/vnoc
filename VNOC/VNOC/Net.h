@@ -3,7 +3,8 @@
 #include "INet.h"
 #include "VNOCSocket.h"
 
-class CNetCenter : public ISocketListener
+class CNetCenter : public INetCenter
+	,public ISocketListener
 {
 public:
 	CNetCenter();
@@ -29,4 +30,5 @@ VNOC_Private:
 	virtual void OnSend		(int nErrorCode,CAsyncSocket* pSock);
 private:
 	CSocketImpl m_serverSocket;
+	WSADATA m_wsaData;
 };

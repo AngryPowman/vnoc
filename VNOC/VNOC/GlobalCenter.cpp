@@ -88,10 +88,17 @@ HRESULT CGlobalCenter::PtrAssert( void* p )
 void CGlobalCenter::_InitializeNetCenter()
 {
 	m_netCenter.Initialize(NULL);
+	m_netCenter.Run();
+	HRESULT hr = m_netCenter.ConnectServer(_T("127.0.0.1"),2508);
+	if (FAILED(hr))
+	{
+		MessageBox(0,_T("无法连接服务器"),0,0);
+	}
 }
 
 void CGlobalCenter::_UnInitializeNetCenter()
 {
+	m_netCenter.Terminate();
 	m_netCenter.UnInitialize();
 }
 

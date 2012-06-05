@@ -33,7 +33,7 @@ HRESULT CLoginImpl::Show( BOOL bShow/*=TRUE*/ )
 			GetiModule(module_roomList,m_frame,&pRoomList);
 			if (pRoomList)
 			{
-				HRESULT hr = pRoomList->Show();
+				pRoomList->Show();
 			}
 		}
 	}

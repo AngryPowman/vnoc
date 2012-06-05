@@ -39,26 +39,20 @@ HRESULT CRoomListImpl::Show( BOOL bShow/*=TRUE*/ )
 {
 	if (bShow)
 	{
-		CRoomListDlg dlg;
-		INT_PTR ret = dlg.DoModal();
-		if (ret == IDOK)
+		HRESULT hr = E_FAIL;
+		while (FAILED(hr))
 		{
-			IRoom* pRoom;
-			GetiModule(module_room,m_frame,&pRoom);
-			if (pRoom)
+			CRoomListDlg dlg;
+			INT_PTR ret = dlg.DoModal();
+			if (ret == IDOK)
 			{
-				pRoom->Show();
+				IRoom* pRoom;
+				GetiModule(module_room,m_frame,&pRoom);
+				if (pRoom)
+				{
+					hr = pRoom->Show();
+				}
 			}
-		}
-		else if(ret == IDCANCEL)
-		{
-			// 直接退出就行了
-// 			ILogin* pLogin;
-// 			GetiModule(module_userCenter,m_frame,&pLogin);
-// 			if (pLogin)
-// 			{
-// 				pLogin->Show();
-// 			}
 		}
 	}
 	return S_OK;
