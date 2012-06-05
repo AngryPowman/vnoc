@@ -62,7 +62,7 @@ private:
 
             switch (type){
             case MSG_RVC_TYPE:
-                ret = HandlerRVCMessage((MSG_RVC*)msg.get());
+                ret = HandlerRVCMessage(dynamic_cast<MSG_RVC*>(msg.get()));
                 break;
             default:
                 ret = 0;
@@ -78,7 +78,7 @@ private:
         }
 	}
 
-    void SendHandler(byte* buffer, const asio::error_code& error, size_t bytes_transferred)
+    void SendHandler(char* buffer, const asio::error_code& error, size_t bytes_transferred)
     {
         delete []buffer;
         if (!error){
@@ -93,15 +93,17 @@ private:
     {
         MSG_AVC avcMessage;
         avcMessage.SetCaptchaType(0);
-        byte captcha[] = {0x02,0x02,0x02,0x02,
-            0x02,0x02,0x02,0x02,
-            0x02,0x02,0x02,0x02,
-            0x02,0x02,0x02,0x02};
+        byte captcha[] = {0};
         avcMessage.SetCaptcha(captcha,sizeof(captcha));
         PackMessage packer;
         size_t avcLen = packer.GetMessageLen(&avcMessage);
-        byte *avcPack = new byte[avcLen];
-        packer.Pack(&avcMessage,avcPack, avcLen);
+        char *avcPack = new char[avcLen];
+        packer.Pack(&avcMessage, (byte*)avcPack, avcLen);
+        connection_->send(avcPack, avcLen,
+                std::bind(&VnocMessageHandler::SendHandler, this, avcPack,
+                std::placeholders::_1,
+                std::placeholders::_2));
+
         return 1;
     }
     const static size_t HEAD_LEN = 30;

@@ -1,4 +1,5 @@
 
+
 #pragma once
 
 
@@ -80,7 +81,7 @@ typedef unsigned short ushort;
 	(((uint)(A) & 0x000000ff) << 24))
 
 
-uint byteToInt(byte* in_byte,size_t len);
+uint byteToInt(const byte* in_byte,size_t len);
 
 void IntTobyte(int in_int,byte* out_byte);
 
@@ -97,38 +98,38 @@ public:
 		_Initialization();
 	}
 
-	~CMessage(){
+	virtual ~CMessage(){
 		_Close();
 	}
 	//获取消息类型
-	int  GetMessageType();
+	int  GetMessageType() const;
 
 
 public:
 
-	bool GetBeginTab();
+	bool GetBeginTab() const ;
 
-	bool GetEndTab();
+	bool GetEndTab() const;
 
-	byte GetCommand();
+	byte GetCommand() const;
 
-	byte* GetCmlListLen();
+	byte* GetCmlListLen() const;
 
-	uint GetSerial();
+	uint GetSerial() const;
 
-	byte* GetGUID();
+	const byte* GetGUID() const;
 
-	byte** GetCmlCommandList();
+	byte** GetCmlCommandList() const;
 
-	uint GetVerify();
+	uint GetVerify() const;
 
-	uint GetObligate();
+	uint GetObligate() const;
 
-	uint GetVersion();
+	uint GetVersion() const;
 
-	uint GetCmlCount();
+	uint GetCmlCount() const;
 
-	uint GetDataLen();
+	uint GetDataLen() const;
 
 
 // Set
@@ -210,11 +211,11 @@ public:
 		SetCmlCommandList(m_CmlCount);
 	}
 	//机器地址
-	byte* GetMachineAddress();
+	byte* GetMachineAddress() const;
 
 	void SetMachineAddress(byte* in_byte_ptr, size_t len);
 
-	int  GetMachineAddressLen(){
+	int  GetMachineAddressLen()const{
 		return  m_MachineAddressLen;
     }
 	
@@ -267,11 +268,11 @@ public:
 		SetCmlCommandList(m_CmlCount);
 	}
 	//获取验证码结果：1字节，用来标志此次登录的结果
-    uint GetLoginTag();
+    uint GetLoginTag() const;
 	//验证码类型：标志后面的验证码是用的何种载体，（根据验证码载体的类型定义一个枚举）
-	uint GetCaptchaType();
+	uint GetCaptchaType() const;
 	//验证码载体：由验证码载体长度参数指定大小，可以是任意格式图像或者声音。
-	byte* GetCaptcha();
+	byte* GetCaptcha() const;
 	
 
 	void SetLoginTag(byte in_byte);
@@ -282,7 +283,7 @@ public:
 
 
 	//
-    int GetCaptchaLen(){
+    int GetCaptchaLen() const {
 		return m_CaptchaLen;
 	}
 
@@ -334,11 +335,11 @@ public:
 		SetCmlCommandList(m_CmlCount);
 	}
 	//验证码：未知长度，为AUT传回来的图片包含的字符组成，此参数在服务器端应该与令牌绑定（有一个验证码-令牌映射）
-	byte* GetVerificationCode();
+	byte* GetVerificationCode() const;
 	//用户帐号：用户帐号编码的二进制数据
-	byte* GetAccountNumber();
+	byte* GetAccountNumber() const;
 	//用户密码：密码经过处理后的二进制数据
-	byte* GetPassword();
+	byte* GetPassword() const;
 
 
 	void SetVerificationCode(byte* in_byte_ptr,size_t len);
@@ -348,15 +349,15 @@ public:
 	void SetPassword(byte* in_byte_ptr,size_t len);
 
 
-	int GetVerificationCodeLen(){
+	int GetVerificationCodeLen() const{
 		return m_VerificationCodeLen;
 	}
 
-	int GetAccountNumberLen(){
+	int GetAccountNumberLen() const{
 		return m_AccountNumberLen;
 	}
 
-	int GetPasswordLen(){
+	int GetPasswordLen() const{
 		return m_PasswordLen;
 	}
 
@@ -409,11 +410,11 @@ public:
 		SetCmlCommandList(m_CmlCount);
 	}
 	//登录结果：1字节，用来标志此次登录的结果
-	uint GetLoginResult();
+	uint GetLoginResult() const;
 	//令牌长度：4字节，0x00 00 00 10用户帐号编码后的长度，单位为字节
-	uint GetToken();
+	uint GetToken() const;
 	//令牌：16字节，一个GUID ，帐号验证通过后生成，通过此数据包发给客户端，之后的指令在包头部均需带上此令牌
-	byte* GetATLGUID();
+	byte* GetATLGUID() const;
 
 	void SetLoginResult(byte in_byte);
 
@@ -422,11 +423,11 @@ public:
 	void SetATLGUID(byte* in_byte_ptr, size_t len = 16);
 
 
-	int GetATLGUIDLen(){
+	int GetATLGUIDLen() const{
 		return m_ALTGUIDLen;
 	}
 
-	int GetTokenLen(){
+	int GetTokenLen() const{
 		return m_TokenLen;
 	}
 
@@ -479,15 +480,15 @@ public:
 		SetCmlCommandList(m_CmlCount);
 	}
 	//用户权限
-	uint GetRank();
+	uint GetRank() const;
 	//昵称
-	byte* GetNickname();
+	byte* GetNickname() const;
 	//个人签名
-	byte* GetAutograph();
+	byte* GetAutograph() const;
 	//头像格式
-	uint GetHeadForm();
+	uint GetHeadForm() const;
 	//头像
-	byte* GetHeadPortrait();
+	byte* GetHeadPortrait() const;
 
 	void SetRank(byte in_byte);
 
@@ -500,15 +501,15 @@ public:
 	void SetHeadPortrait(byte* in_byte_ptr,size_t len);
 
 
-	int GetNicknameLen(){
+	int GetNicknameLen() const{
 		return m_NicknameLen;
 	}
 
-	int GetAutographLen(){
+	int GetAutographLen() const{
 		return m_AutographLen;
 	}
 
-	int GetHeadPortraitLen(){
+	int GetHeadPortraitLen() const{
 		return m_HeadPortraitLen;
 	}
 
@@ -562,11 +563,11 @@ public:
 	}
 
 	//个人信息同步通知
-	byte* GetMessageSynchro();
+	byte* GetMessageSynchro() const;
 
 	void SetMessageSynchro(byte* in_byte_ptr,size_t len);
 
-	int GetMessageSynchroLen(){
+	int GetMessageSynchroLen() const{
 		return m_MessageSynchroLen;
 	}
 

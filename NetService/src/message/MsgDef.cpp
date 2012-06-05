@@ -1,6 +1,11 @@
 
 #include "MsgDef.h"
+
 #include <cstring>
+
+//CMessageParser
+
+
 using namespace std;
 
 void LittleSwapBigByte(byte* in_byte_ptr,size_t len)
@@ -17,7 +22,7 @@ void LittleSwapBigByte(byte* in_byte_ptr,size_t len)
 	delete [] tmpByte_ptr;
 }
 
-uint byteToInt(byte* in_byte,size_t len)
+uint byteToInt(const byte* in_byte,size_t len)
 {
 	byte tmpByte[4] = {0};
 	if (in_byte == NULL)
@@ -48,7 +53,7 @@ void IntTobyte(int in_int,byte* out_byte)
 }
 
 
-int  CMessage::GetMessageType()
+int  CMessage::GetMessageType() const 
 {
 // 	if (GetBeginTab() != true || GetEndTab() != true)
 // 	{
@@ -74,62 +79,62 @@ int  CMessage::GetMessageType()
 	return _type;
 }
 
-bool CMessage::GetBeginTab()
+bool CMessage::GetBeginTab() const
 {
 	return m_Begin;
 } 
 
-bool CMessage::GetEndTab()
+bool CMessage::GetEndTab() const
 {
 	return m_Begin;
 }
 
-byte CMessage::GetCommand()
+byte CMessage::GetCommand() const
 {
 	return m_Command;
 }
 
-byte* CMessage::GetCmlListLen()
+byte* CMessage::GetCmlListLen() const
 {
 	return  m_CmlListLen;
 }
 
-uint CMessage::GetSerial()
+uint CMessage::GetSerial() const
 {
 	return BigLittleSwap16(byteToInt(m_Serial,2));
 }
 
-byte* CMessage::GetGUID()
+const byte* CMessage::GetGUID() const
 {
 	return m_GUID;
 }
 
-byte** CMessage::GetCmlCommandList()
+byte** CMessage::GetCmlCommandList() const
 {
 	return m_CmlCommandList;
 }
 
-uint CMessage::GetVerify()
+uint CMessage::GetVerify() const
 {
 	return m_Verify;
 }
 
-uint CMessage::GetObligate()
+uint CMessage::GetObligate() const
 {
 	return m_Obligate;
 }
 
-uint CMessage::GetVersion()
+uint CMessage::GetVersion() const
 {
 	return m_Ver;
 }
 
-uint CMessage::GetCmlCount()
+uint CMessage::GetCmlCount() const
 {
 	return m_CmlCount;
 }
 
-uint CMessage::GetDataLen()
+uint CMessage::GetDataLen() const
 {
 	return m_Len;
 }
@@ -209,7 +214,7 @@ bool CMessage::SetCmlCommandList(int CmlCount)
 }
 
 
-bool CMessage::SetVerify(uint in_Int)
+bool CMessage::SetVerify(uint in_Int) 
 {
 	m_Verify = in_Int;
 	return true;
@@ -262,7 +267,7 @@ int  CMessage::_MessageType()
 	return _type;
 }
 
-void CMessage::_Initialization()
+void CMessage::_Initialization() 
 {
 	memset(m_GUID,0,16);
 	memset(m_Serial,0,2);
@@ -307,7 +312,7 @@ void CMessage::_Close()
 
 
 //RVC(获取验证码请求)
-void MSG_RVC::Initialize()
+void MSG_RVC::Initialize() 
 {
 // 	if (GetBeginTab() != true || GetEndTab() != true)
 // 	{
@@ -331,9 +336,9 @@ void MSG_RVC::Initialize()
 
 }
 
-byte* MSG_RVC::GetMachineAddress()
+byte* MSG_RVC::GetMachineAddress() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -381,9 +386,9 @@ void MSG_AVC::Initialize()
 
 }
 
-uint MSG_AVC::GetLoginTag()
+uint MSG_AVC::GetLoginTag() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -391,9 +396,9 @@ uint MSG_AVC::GetLoginTag()
 	return byteToInt(GetCmlCommandList()[2],1);
 }
 
-uint MSG_AVC::GetCaptchaType()
+uint MSG_AVC::GetCaptchaType() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -401,9 +406,9 @@ uint MSG_AVC::GetCaptchaType()
 	return byteToInt(GetCmlCommandList()[1],1);
 }
 
-byte* MSG_AVC::GetCaptcha()
+byte* MSG_AVC::GetCaptcha() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -471,9 +476,9 @@ void MSG_RLI::Initialize()
 	// 	}
 
 }
-byte* MSG_RLI::GetVerificationCode()
+byte* MSG_RLI::GetVerificationCode() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -482,9 +487,9 @@ byte* MSG_RLI::GetVerificationCode()
 }
 
 
-byte* MSG_RLI::GetAccountNumber()
+byte* MSG_RLI::GetAccountNumber() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -493,9 +498,9 @@ byte* MSG_RLI::GetAccountNumber()
 }
 
 
-byte* MSG_RLI::GetPassword()
+byte* MSG_RLI::GetPassword() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -572,9 +577,9 @@ void MSG_ALI::Initialize()
 	// 	}
 
 }
-uint MSG_ALI::GetLoginResult()
+uint MSG_ALI::GetLoginResult() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -583,9 +588,9 @@ uint MSG_ALI::GetLoginResult()
 }
 
 
-uint MSG_ALI::GetToken()
+uint MSG_ALI::GetToken() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -594,9 +599,9 @@ uint MSG_ALI::GetToken()
 }
 
 
-byte* MSG_ALI::GetATLGUID()
+byte* MSG_ALI::GetATLGUID() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -669,9 +674,9 @@ void MSG_RPS::Initialize()
 	// 	}
 
 }
-uint MSG_RPS::GetRank()
+uint MSG_RPS::GetRank() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -680,9 +685,9 @@ uint MSG_RPS::GetRank()
 }
 
 
-byte* MSG_RPS::GetNickname()
-{
-	Initialize();
+byte* MSG_RPS::GetNickname() const
+{ 
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -691,9 +696,9 @@ byte* MSG_RPS::GetNickname()
 }
 
 
-byte* MSG_RPS::GetAutograph()
+byte* MSG_RPS::GetAutograph() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -701,9 +706,9 @@ byte* MSG_RPS::GetAutograph()
 	return GetCmlCommandList()[2];
 }
 
-uint MSG_RPS::GetHeadForm()
+uint MSG_RPS::GetHeadForm() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -711,9 +716,9 @@ uint MSG_RPS::GetHeadForm()
 	return byteToInt(GetCmlCommandList()[1],1);
 }
 
-byte* MSG_RPS::GetHeadPortrait()
+byte* MSG_RPS::GetHeadPortrait() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
@@ -813,9 +818,9 @@ void MSG_APS::Initialize()
 	// 	}
 
 }
-byte* MSG_APS::GetMessageSynchro()
+byte* MSG_APS::GetMessageSynchro() const
 {
-	Initialize();
+	// Initialize();
 	if (m_Error != 0)
 	{
 		return 0;
