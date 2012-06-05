@@ -98,7 +98,7 @@ public:
 		_Initialization();
 	}
 
-	~CMessage(){
+	virtual ~CMessage(){
 		_Close();
 	}
 	//获取消息类型
