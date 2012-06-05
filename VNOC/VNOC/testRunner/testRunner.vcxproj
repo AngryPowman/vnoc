@@ -81,9 +81,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Message\MessageParser.cpp" />
-    <ClCompile Include="..\..\..\Message\MsgDef.cpp" />
-    <ClCompile Include="..\..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\..\Message\MessageParser.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Message\MsgDef.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Message\PackMessage.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="..\test\testPackMessage.cpp" />
     <ClCompile Include="..\test\testRunner.cpp" />
     <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />

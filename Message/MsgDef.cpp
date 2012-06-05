@@ -206,7 +206,7 @@ bool CMessage::SetCmlCommandList(int CmlCount)
 			}
 		}
 
-		delete m_CmlCommandList;
+		delete [] m_CmlCommandList;
 		m_CmlCommandList = new byte*[CmlCount];
 		return true;
 	}
@@ -297,7 +297,7 @@ void CMessage::_Close()
 			}
 		}
 
-		delete m_CmlCommandList;
+		delete [] m_CmlCommandList;
 		m_CmlCommandList  = NULL;
 	}
 

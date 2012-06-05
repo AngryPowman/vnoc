@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IModule.h"
-#include "MsgDef.h"
+#include "..\..\Message\MsgDef.h"
 
 class CNetListenerHelper;
 
