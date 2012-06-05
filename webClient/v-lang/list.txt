@@ -1,5 +1,0 @@
-en-GB 
-en-US 
-zh-CN 
-zh-HK 
-zh-TW 
