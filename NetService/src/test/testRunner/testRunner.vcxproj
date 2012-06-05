@@ -158,9 +158,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\message\MessageParser.cpp" />
-    <ClCompile Include="..\..\message\MsgDef.cpp" />
-    <ClCompile Include="..\..\message\PackMessage.cpp" />
+    <ClCompile Include="..\..\..\..\Message\MessageParser.cpp" />
+    <ClCompile Include="..\..\..\..\Message\MsgDef.cpp" />
+    <ClCompile Include="..\..\..\..\Message\PackMessage.cpp" />
     <ClCompile Include="..\EchoTestHandlerTest.cpp" />
     <ClCompile Include="..\testRunner.cpp" />
     <ClCompile Include="..\VnocMessageHandlerTest.cpp" />

@@ -151,10 +151,10 @@
     <ClInclude Include="src\VnocMessageHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Message\MessageParser.cpp" />
+    <ClCompile Include="..\Message\MsgDef.cpp" />
+    <ClCompile Include="..\Message\PackMessage.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
-    <ClCompile Include="src\message\MessageParser.cpp" />
-    <ClCompile Include="src\message\MsgDef.cpp" />
-    <ClCompile Include="src\message\PackMessage.cpp" />
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
   </ItemGroup>

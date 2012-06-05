@@ -5,8 +5,8 @@
 
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
-#include "message/MessageParser.h"
-#include "message/PackMessage.h"
+#include "../../Message/MessageParser.h"
+#include "../../Message/PackMessage.h"
 #include <ezlogger_headers.hpp>
 template <typename ConnectionT>
 class VnocMessageHandler : public SocketHandler
@@ -37,6 +37,14 @@ private:
             return;
         }
         size_t package_len = htonl(*(int *)(headerData_+4));
+        if (package_len <= HEAD_LEN) {
+            EZLOGGERVLSTREAM(axter::log_often)<<"package_len <= HEAD_LEN\n";
+            connection_->recv(headerData_, sizeof(headerData_), 
+                std::bind(&VnocMessageHandler::ReadHeadHandler, this,
+                std::placeholders::_1,
+                std::placeholders::_2));
+            return;
+        } 
         char *messageBuffer ( new char[package_len]);
         memcpy(messageBuffer, headerData_, HEAD_LEN);
         connection_->recv(&messageBuffer[HEAD_LEN], package_len - HEAD_LEN, 
@@ -95,6 +103,7 @@ private:
         avcMessage.SetCaptchaType(0);
         byte captcha[] = {0};
         avcMessage.SetCaptcha(captcha,sizeof(captcha));
+        avcMessage.SetLoginTag(1);
         PackMessage packer;
         size_t avcLen = packer.GetMessageLen(&avcMessage);
         char *avcPack = new char[avcLen];

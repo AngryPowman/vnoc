@@ -24,13 +24,13 @@
     <ClCompile Include="..\VnocMessageHandlerTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\message\MessageParser.cpp">
+    <ClCompile Include="..\..\..\..\Message\MessageParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\message\MsgDef.cpp">
+    <ClCompile Include="..\..\..\..\Message\MsgDef.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\message\PackMessage.cpp">
+    <ClCompile Include="..\..\..\..\Message\PackMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
