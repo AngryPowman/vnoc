@@ -1,7 +1,7 @@
 # author by AngryPowman, for VNOC server
 # revision : 3
 CXX=g++
-VPATH=src:test:src/message
+VPATH=src:test:../Message
 CXXFLAGS=-std=c++0x  
 CUR_DIR = $(shell pwd)
 INCS := $(CUR_DIR)/include
