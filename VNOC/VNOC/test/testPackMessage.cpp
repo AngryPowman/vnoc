@@ -77,9 +77,9 @@ public:
 
 
 		byte testRVC [] = {0x55,
-			0x01,
+			0x00,
 			0x00,0x01,
-			0x00,0x00,0x00,0x1E,
+			0x00,0x00,0x00,0x35,
 
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
@@ -102,9 +102,9 @@ public:
 
 
 		byte testAVC [] = {0x55,
-			0x01,
+			0x00,
 			0x00,0x01,
-			0x00,0x00,0x00,0x1E,
+			0x00,0x00,0x00,0x3F,
 
 
 			0x02,0x02,0x02,0x02,
@@ -134,9 +134,9 @@ public:
 
 
 		byte testRLI [] = {0x55,
-			0x01,
+			0x00,
 			0x00,0x01,
-			0x00,0x00,0x00,0x1E,
+			0x00,0x00,0x00,0x5D,
 
 
 			0x02,0x02,0x02,0x02,
@@ -173,9 +173,9 @@ public:
 			0x43};
 
 		byte testALI [] = {0x55,
-			0x01,
+			0x00,
 			0x00,0x01,
-			0x00,0x00,0x00,0x1E,
+			0x00,0x00,0x00,0x4E,
 
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
@@ -207,9 +207,9 @@ public:
 			0x43};
 
 		byte testRPS [] = {0x55,
-			0x01,
+			0x00,
 			0x00,0x01,
-			0x00,0x00,0x00,0x1E,
+			0x00,0x00,0x00,0x67,
 
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
@@ -251,9 +251,9 @@ public:
 
 
 		byte testAPS [] = {0x55,
-			0x01,
+			0x00,
 			0x00,0x01,
-			0x00,0x00,0x00,0x1E,
+			0x00,0x00,0x00,0x35,
 
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
@@ -273,16 +273,11 @@ public:
 			0x00,0x00,
 			0x43};
 
-		//需要自己填充参数长度msg_xxx.SetCmlListLen(byte* in_byte_ptr);
 		//AVC
 		MSG_AVC msg_avc;
 		PackMessage msg_pack;
-		//test
-		msg_avc.SetDataLen(30);
-		msg_avc.SetVersion(1);
 
 		msg_avc.SetSerial(1);
-		int xx = msg_avc.GetSerial();
 		CPPUNIT_ASSERT(msg_avc.GetSerial() == 1);
 		msg_avc.SetGUID(testParamO);
 		CPPUNIT_ASSERT(memcmp(msg_avc.GetGUID(),testParamO,sizeof(byte) * 16) == 0);
@@ -299,10 +294,7 @@ public:
 
 		//RVC
 		MSG_RVC msg_rvc;
-		//test
-		msg_rvc.SetDataLen(30);
-		msg_rvc.SetVersion(1);
-		msg_rvc.SetCommand(0x14);
+
 		msg_rvc.SetSerial(1);
 
 		msg_rvc.SetGUID(testParamO);
@@ -319,12 +311,6 @@ public:
 
 		//RLI
 		MSG_RLI msg_rli;
-
-		//test
-		msg_rli.SetDataLen(30);
-		msg_rli.SetVersion(1);
-		msg_rli.SetCommand(0x16);
-
 
 		msg_rli.SetSerial(1);
 		CPPUNIT_ASSERT(msg_rli.GetSerial() == 1);
@@ -351,11 +337,6 @@ public:
 
 		//ALI
 		MSG_ALI msg_ali;
-		//test
-		msg_ali.SetDataLen(30);
-		msg_ali.SetVersion(1);
-		msg_ali.SetCommand(0x17);
-
 
 		msg_ali.SetSerial(1);
 		CPPUNIT_ASSERT(msg_ali.GetSerial() == 1);
@@ -383,9 +364,6 @@ public:
 
 		//RPS
 		MSG_RPS msg_rps;
-		msg_rps.SetDataLen(30);
-		msg_rps.SetVersion(1);
-		msg_rps.SetCommand(0x18);
 
 		msg_rps.SetSerial(1);
 		CPPUNIT_ASSERT(msg_rps.GetSerial() == 1);
@@ -418,9 +396,6 @@ public:
 
 		//APS
 		MSG_APS msg_aps;
-		msg_aps.SetDataLen(30);
-		msg_aps.SetVersion(1);
-		msg_aps.SetCommand(0x19);
 
 		msg_aps.SetSerial(1);
 		CPPUNIT_ASSERT(msg_aps.GetSerial() == 1);

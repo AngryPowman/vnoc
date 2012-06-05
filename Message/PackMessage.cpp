@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int PackMessage::_Head(const CMessage* const msg_clss,byte* buf, size_t len)
+int PackMessage::_Head( CMessage* const msg_clss,byte* buf, size_t len)
 {
 	//head---------------------
 	int index = 0;
@@ -15,6 +15,9 @@ int PackMessage::_Head(const CMessage* const msg_clss,byte* buf, size_t len)
 	{
 		return -2;
 	}
+
+	//设置包长度
+	msg_clss->SetDataLen(len);
 
 	// 	if (len < rvc->GetDataLen())
 	// 	{
@@ -75,7 +78,7 @@ int PackMessage::_Head(const CMessage* const msg_clss,byte* buf, size_t len)
 	return index;
 }
 
-int PackMessage::_Tail(const CMessage* const msg_clss,byte* buf,int index,size_t len)
+int PackMessage::_Tail( CMessage* const msg_clss,byte* buf,int index,size_t len)
 {
 	byte tmpByte[4] = {0};
 	//Tail
@@ -99,13 +102,26 @@ int PackMessage::_Tail(const CMessage* const msg_clss,byte* buf,int index,size_t
 	return index;
 }
 
-int PackMessage::Pack(const MSG_RVC* const rvc,byte* buf, size_t len)
+int PackMessage::Pack( MSG_RVC* const rvc,byte* buf, size_t len)
 {
-
+	byte tmpComLen[4] = {0}; 
+	//byte OneComLen[] = {0x00,0x00,0x00,0x01};
 	byte tmpByte[4] = {0};
 
 	int index = _Head(rvc,buf,len);
 	//body
+	byte* ComLenList = new byte[rvc->GetCmlCount() * 4];
+	memset(ComLenList,0,rvc->GetCmlCount() * 4);
+	//设置参数长度
+	//1
+	IntTobyte(rvc->GetMachineAddressLen(),tmpComLen);
+	for (int i = 0; i < 4; i++)
+	{
+		ComLenList[i] = tmpComLen[i];
+	}
+	rvc->SetCmlListLen(ComLenList,rvc->GetCmlCount());
+	delete [] ComLenList;
+	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(rvc->GetCmlCount() * 4); i++, index++)
@@ -125,12 +141,37 @@ int PackMessage::Pack(const MSG_RVC* const rvc,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(const MSG_AVC* const avc, byte* buf, size_t len)
+int PackMessage::Pack( MSG_AVC* const avc, byte* buf, size_t len)
 {
+	byte tmpComLen[4] = {0}; 
+	byte OneComLen[] = {0x00,0x00,0x00,0x01};
 	byte tmpByte[4] = {0};
 
 	int index = _Head(avc,buf,len);
 	//body
+	byte* ComLenList = new byte[avc->GetCmlCount() * 4];
+	memset(ComLenList,0,avc->GetCmlCount() * 4);
+	//设置参数长度
+	//1
+	int Pos = 0;
+	for (; Pos < 4; Pos++)
+	{
+		ComLenList[Pos] = OneComLen[Pos];
+	}
+	//2
+	for (int i = 0; Pos < 8; Pos++,i++)
+	{
+		ComLenList[Pos] = OneComLen[ i ];
+	}
+	//3
+	IntTobyte(avc->GetCaptchaLen(),tmpComLen);
+	for (int i = 0; Pos < 12; Pos++, i++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	avc->SetCmlListLen(ComLenList,avc->GetCmlCount());
+	delete [] ComLenList;
+	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(avc->GetCmlCount() * 4); i++, index++)
@@ -157,13 +198,44 @@ int PackMessage::Pack(const MSG_AVC* const avc, byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(const MSG_RLI* const rli,byte* buf, size_t len)
+int PackMessage::Pack( MSG_RLI* const rli,byte* buf, size_t len)
 {
+	byte tmpComLen[4] = {0}; 
+	byte OneComLen[] = {0x00,0x00,0x00,0x01};
+
 	byte tmpByte[4] = {0};
 
 	int index = _Head(rli,buf,len);
 
 	//body
+	byte* ComLenList = new byte[rli->GetCmlCount() * 4];
+	memset(ComLenList,0,rli->GetCmlCount() * 4);
+	//设置参数长度
+	//1
+	int Pos = 0;
+	IntTobyte(rli->GetVerificationCodeLen(),tmpComLen);
+	for (;Pos < 4; Pos++)
+	{
+		ComLenList[Pos] = tmpComLen[Pos];
+	}
+	memset(tmpComLen,0,4);
+	//2
+	IntTobyte(rli->GetAccountNumberLen(),tmpComLen);
+	for (int i = 0; Pos < 8; Pos++,i++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	memset(tmpComLen,0,4);
+	//3
+	IntTobyte(rli->GetPasswordLen(),tmpComLen);
+	for (int i = 0; Pos < 12; Pos++,i++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	memset(tmpComLen,0,4);
+	rli->SetCmlListLen(ComLenList,rli->GetCmlCount());
+	delete [] ComLenList;
+	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(rli->GetCmlCount() * 4); i++, index++)
@@ -195,13 +267,41 @@ int PackMessage::Pack(const MSG_RLI* const rli,byte* buf, size_t len)
 	return _Tail(rli,buf,index,len);
 }
 
-int PackMessage::Pack(const MSG_ALI* const ali,byte* buf, size_t len)
+int PackMessage::Pack( MSG_ALI* const ali,byte* buf, size_t len)
 {
+	byte tmpComLen[4] = {0}; 
+	byte OneComLen[] = {0x00,0x00,0x00,0x01};
 	byte tmpByte[4] = {0};
 
 	int index = _Head(ali,buf,len);
 
 	//body
+	byte* ComLenList = new byte[ali->GetCmlCount() * 4];
+	memset(ComLenList,0,ali->GetCmlCount() * 4);
+	//设置参数长度
+	//1
+	int Pos = 0;
+	for (; Pos < 4; Pos++)
+	{
+		ComLenList[Pos] = OneComLen[Pos];
+	}
+	//2
+	IntTobyte(ali->GetTokenLen(),tmpComLen);
+	for (int i = 0; Pos < 8; Pos++,i++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	memset(tmpComLen,0,4);
+	//3
+	IntTobyte(ali->GetATLGUIDLen(),tmpComLen);
+	for (int i = 0; Pos < 12; Pos++, i++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	memset(tmpComLen,0,4);
+	ali->SetCmlListLen(ComLenList,ali->GetCmlCount());
+	delete [] ComLenList;
+	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(ali->GetCmlCount() * 4); i++, index++)
@@ -232,14 +332,54 @@ int PackMessage::Pack(const MSG_ALI* const ali,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(const MSG_RPS* const rps,byte* buf, size_t len)
+int PackMessage::Pack( MSG_RPS* const rps,byte* buf, size_t len)
 {
+	byte tmpComLen[4] = {0}; 
+	byte OneComLen[] = {0x00,0x00,0x00,0x01};
 	byte tmpByte[4] = {0};
 
 	int index = _Head(rps,buf,len);
 
 
 	//body
+	byte* ComLenList = new byte[rps->GetCmlCount() * 4];
+	memset(ComLenList,0,rps->GetCmlCount() * 4);
+	//设置参数长度
+	//1
+	int Pos = 0;
+	for (; Pos < 4; Pos++)
+	{
+		ComLenList[Pos] = OneComLen[Pos];
+	}
+	//2
+	IntTobyte(rps->GetNicknameLen(),tmpComLen);
+	for (int i = 0; Pos < 8; Pos++, i ++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	memset(tmpComLen,0,4);
+	//3
+	IntTobyte(rps->GetAutographLen(),tmpComLen);
+	for (int i = 0; Pos < 12; Pos++,i++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	memset(tmpComLen,0,4);
+	//4
+	for (int i = 0; Pos < 16; Pos++,i++)
+	{
+		ComLenList[Pos] = OneComLen[ i ];
+	}
+	//5
+	IntTobyte(rps->GetHeadPortraitLen(),tmpComLen);
+	for (int i = 0; Pos < 20; Pos++,i++)
+	{
+		ComLenList[Pos] = tmpComLen[ i ];
+	}
+	memset(tmpComLen,0,4);
+	rps->SetCmlListLen(ComLenList,rps->GetCmlCount());
+	delete [] ComLenList;
+	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(rps->GetCmlCount() * 4); i++, index++)
@@ -280,12 +420,28 @@ int PackMessage::Pack(const MSG_RPS* const rps,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack(const MSG_APS* const aps,byte* buf, size_t len)
+int PackMessage::Pack( MSG_APS* const aps,byte* buf, size_t len)
 {
+	byte tmpComLen[4] = {0}; 
+	byte OneComLen[] = {0x00,0x00,0x00,0x01};
 	byte tmpByte[4] = {0};
 
 	int index = _Head(aps,buf,len);
 	//body
+	byte* ComLenList = new byte[aps->GetCmlCount() * 4];
+	memset(ComLenList,0,aps->GetCmlCount() * 4);
+	//设置参数长度
+	//1
+	IntTobyte(aps->GetMessageSynchroLen(),tmpComLen);
+	int Pos = 0;
+	for (; Pos < 4; Pos++)
+	{
+		ComLenList[Pos] = tmpComLen[Pos];
+	}
+	memset(tmpComLen,0,4);
+	aps->SetCmlListLen(ComLenList,aps->GetCmlCount());
+	delete [] ComLenList;
+	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(aps->GetCmlCount() * 4); i++, index++)

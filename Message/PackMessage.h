@@ -16,17 +16,17 @@ public:
 
 public:
 
-	int Pack(const MSG_AVC* const avc, byte* buf, size_t len);
+	int Pack( MSG_AVC* const avc, byte* buf, size_t len);
 
-	int Pack(const MSG_RVC* const rvc, byte* buf, size_t len);
+	int Pack( MSG_RVC* const rvc, byte* buf, size_t len);
 
-	int Pack(const MSG_ALI* const ali, byte* buf, size_t len);
+	int Pack( MSG_ALI* const ali, byte* buf, size_t len);
 
-	int Pack(const MSG_RLI* const rli, byte* buf, size_t len);
+	int Pack( MSG_RLI* const rli, byte* buf, size_t len);
 
-	int Pack(const MSG_APS* const asp, byte* buf, size_t len);
+	int Pack( MSG_APS* const asp, byte* buf, size_t len);
 
-	int Pack(const MSG_RPS* const rsp, byte* buf, size_t len);
+	int Pack( MSG_RPS* const rsp, byte* buf, size_t len);
 
 	int GetMessageLen(const CMessage* const msg);
 
@@ -45,8 +45,8 @@ public:
 private:
 	
 
-	int _Head(const CMessage* const msg_clss,byte* buf, size_t len);
-	int _Tail(const CMessage* const msg_clss,byte* buf,int index ,size_t len);
+	int _Head( CMessage* const msg_clss,byte* buf, size_t len);
+	int _Tail( CMessage* const msg_clss,byte* buf,int index ,size_t len);
 
 };
 
