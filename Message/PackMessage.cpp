@@ -119,21 +119,21 @@ int PackMessage::_Pack( MSG_RVC* const rvc,byte* buf, size_t len)
 	{
 		ComLenList[i] = tmpComLen[i];
 	}
-	rvc->SetCmlListLen(ComLenList,rvc->GetCmlCount());
+	rvc->SetComListLen(ComLenList,rvc->GetCmlCount());
 	delete [] ComLenList;
 	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(rvc->GetCmlCount() * 4); i++, index++)
 	{
-		buf[index] = rvc->GetCmlListLen()[i];
+		buf[index] = rvc->GetComListLen()[i];
 	}
 	//参数
 	//1
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rvc->GetMachineAddressLen(); i++, index++)
 	{
-		buf[index] = rvc->GetCmlCommandList()[0][i];
+		buf[index] = rvc->GetComCommandList()[0][i];
 	}
 
 	//Tail
@@ -169,29 +169,29 @@ int PackMessage::_Pack( MSG_AVC* const avc, byte* buf, size_t len)
 	{
 		ComLenList[Pos] = tmpComLen[ i ];
 	}
-	avc->SetCmlListLen(ComLenList,avc->GetCmlCount());
+	avc->SetComListLen(ComLenList,avc->GetCmlCount());
 	delete [] ComLenList;
 	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(avc->GetCmlCount() * 4); i++, index++)
 	{
-		buf[index] = avc->GetCmlListLen()[i];
+		buf[index] = avc->GetComListLen()[i];
 	}
 	//参数部分
 	//1
 	CHECKUP_DATALEN(index,len);
-	buf[index] = avc->GetCmlCommandList()[2][0];
+	buf[index] = avc->GetComCommandList()[2][0];
 	index++;
 	//2
 	CHECKUP_DATALEN(index,len);
-	buf[index] = avc->GetCmlCommandList()[1][0];
+	buf[index] = avc->GetComCommandList()[1][0];
 	index++;
 	//3
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < avc->GetCaptchaLen(); i++, index++)
 	{
-		buf[index] = avc->GetCmlCommandList()[0][i];
+		buf[index] = avc->GetComCommandList()[0][i];
 	}
 	//Tail
 	return _Tail(avc,buf,index,len);
@@ -233,14 +233,14 @@ int PackMessage::_Pack( MSG_RLI* const rli,byte* buf, size_t len)
 		ComLenList[Pos] = tmpComLen[ i ];
 	}
 	memset(tmpComLen,0,4);
-	rli->SetCmlListLen(ComLenList,rli->GetCmlCount());
+	rli->SetComListLen(ComLenList,rli->GetCmlCount());
 	delete [] ComLenList;
 	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(rli->GetCmlCount() * 4); i++, index++)
 	{
-		buf[index] = rli->GetCmlListLen()[i];
+		buf[index] = rli->GetComListLen()[i];
 	}
 
 	//参数部分
@@ -248,19 +248,19 @@ int PackMessage::_Pack( MSG_RLI* const rli,byte* buf, size_t len)
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rli->GetVerificationCodeLen(); i++, index++)
 	{
-		buf[index] = rli->GetCmlCommandList()[2][i];
+		buf[index] = rli->GetComCommandList()[2][i];
 	}
 	//2
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rli->GetAccountNumberLen(); i++, index++)
 	{
-		buf[index] = rli->GetCmlCommandList()[1][i];
+		buf[index] = rli->GetComCommandList()[1][i];
 	}
 	//3
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rli->GetPasswordLen(); i++, index++)
 	{
-		buf[index] = rli->GetCmlCommandList()[0][i];
+		buf[index] = rli->GetComCommandList()[0][i];
 	}
 
 	//Tail
@@ -299,31 +299,31 @@ int PackMessage::_Pack( MSG_ALI* const ali,byte* buf, size_t len)
 		ComLenList[Pos] = tmpComLen[ i ];
 	}
 	memset(tmpComLen,0,4);
-	ali->SetCmlListLen(ComLenList,ali->GetCmlCount());
+	ali->SetComListLen(ComLenList,ali->GetCmlCount());
 	delete [] ComLenList;
 	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(ali->GetCmlCount() * 4); i++, index++)
 	{
-		buf[index] = ali->GetCmlListLen()[i];
+		buf[index] = ali->GetComListLen()[i];
 	}
 	//参数部分
 	//1
 	CHECKUP_DATALEN(index,len);
-	buf[index] = ali->GetCmlCommandList()[2][0];
+	buf[index] = ali->GetComCommandList()[2][0];
 	index++;
 	//2
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < ali->GetTokenLen(); i++, index++)
 	{
-		buf[index] = ali->GetCmlCommandList()[1][i];
+		buf[index] = ali->GetComCommandList()[1][i];
 	}
 	//3
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < ali->GetTokenLen(); i++, index++)
 	{
-		buf[index] = ali->GetCmlCommandList()[0][i];
+		buf[index] = ali->GetComCommandList()[0][i];
 	}
 
 	//Tail
@@ -377,41 +377,41 @@ int PackMessage::_Pack( MSG_RPS* const rps,byte* buf, size_t len)
 		ComLenList[Pos] = tmpComLen[ i ];
 	}
 	memset(tmpComLen,0,4);
-	rps->SetCmlListLen(ComLenList,rps->GetCmlCount());
+	rps->SetComListLen(ComLenList,rps->GetCmlCount());
 	delete [] ComLenList;
 	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(rps->GetCmlCount() * 4); i++, index++)
 	{
-		buf[index] = rps->GetCmlListLen()[i];
+		buf[index] = rps->GetComListLen()[i];
 	}
 	//参数部分
 	//1
 	CHECKUP_DATALEN(index,len);
-	buf[index] = rps->GetCmlCommandList()[4][0];
+	buf[index] = rps->GetComCommandList()[4][0];
 	index++;
 	//2
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rps->GetNicknameLen(); i++, index++)
 	{
-		buf[index] = rps->GetCmlCommandList()[3][i];
+		buf[index] = rps->GetComCommandList()[3][i];
 	}
 	//3
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rps->GetAutographLen(); i++, index++)
 	{
-		buf[index] = rps->GetCmlCommandList()[2][i];
+		buf[index] = rps->GetComCommandList()[2][i];
 	}
 	//4
 	CHECKUP_DATALEN(index,len);
-	buf[index] = rps->GetCmlCommandList()[1][0];
+	buf[index] = rps->GetComCommandList()[1][0];
 	index++;
 	//5
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rps->GetHeadPortraitLen(); i++, index++)
 	{
-		buf[index] = rps->GetCmlCommandList()[0][i];
+		buf[index] = rps->GetComCommandList()[0][i];
 	}
 
 	//Tail
@@ -439,21 +439,21 @@ int PackMessage::_Pack( MSG_APS* const aps,byte* buf, size_t len)
 		ComLenList[Pos] = tmpComLen[Pos];
 	}
 	memset(tmpComLen,0,4);
-	aps->SetCmlListLen(ComLenList,aps->GetCmlCount());
+	aps->SetComListLen(ComLenList,aps->GetCmlCount());
 	delete [] ComLenList;
 	ComLenList = NULL;
 	//参数长度
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < (int)(aps->GetCmlCount() * 4); i++, index++)
 	{
-		buf[index] = aps->GetCmlListLen()[i];
+		buf[index] = aps->GetComListLen()[i];
 	}
 	//参数部分
 	//1
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < aps->GetMessageSynchroLen(); i++, index++)
 	{
-		buf[index] = aps->GetCmlCommandList()[0][i];
+		buf[index] = aps->GetComCommandList()[0][i];
 	}
 
 	//Tail

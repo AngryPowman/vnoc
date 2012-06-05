@@ -143,16 +143,18 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 	}
 	
 	//预设空间
-	_Messsage->m_CmlCommandList = new byte*[_Messsage->m_CmlCount];
-
+	_Messsage->m_ComCommandList.clear();
+	_Messsage->m_ComCommandList.resize(_Messsage->m_CmlCount);
 	//处理参数
 	CHECLUP_LEN((PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount)) + 1, len );
 
-	_Messsage->m_CmlListLen = new byte[MSG_CLASS_PARAM * _Messsage->m_CmlCount + 1];
-	memset(_Messsage->m_CmlListLen,0,sizeof(byte) * (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + 1);
+	_Messsage->m_ComListLen.clear();
+	_Messsage->m_ComListLen.resize(MSG_CLASS_PARAM * _Messsage->m_CmlCount);
+	//_Messsage->m_CmlListLen = new byte[MSG_CLASS_PARAM * _Messsage->m_CmlCount + 1];
+	//memset(_Messsage->m_CmlListLen,0,sizeof(byte) * (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + 1);
 	for(nPos = 0;nPos < (int)(MSG_CLASS_PARAM * _Messsage->m_CmlCount); nPos++)
 	{
-		_Messsage->m_CmlListLen[nPos] = lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount)) - nPos];
+		_Messsage->m_ComListLen[nPos] = lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount)) - nPos];
 	}
 
 	int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
@@ -170,7 +172,7 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 		int j = i * 4;
 		for (int index = 0; index < MSG_CLASS_PARAM; j++,index++)
 		{
-			tmpComlLen[index] = _Messsage->m_CmlListLen[j];
+			tmpComlLen[index] = _Messsage->m_ComListLen[j];
 		}
 		ParamLen += byteToInt(tmpComlLen,4);
 		memset(tmpComlLen,0,MSG_CLASS_PARAM);
@@ -181,7 +183,7 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 		int j = i * 4;
 		for (int index = 0; index < MSG_CLASS_PARAM; j++,index++)
 		{
-			tmpComlLen[index] = _Messsage->m_CmlListLen[j];
+			tmpComlLen[index] = _Messsage->m_ComListLen[j];
 		}
 
 		if (tmpComlLen != NULL)
@@ -193,10 +195,8 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 
 			memset(tmpComlLen,0,MSG_CLASS_PARAM);
 
-			_Messsage->m_CmlCommandList[i] = new byte[tmpCmlListLen[i] + 1];
-			memset(_Messsage->m_CmlCommandList[i],0,tmpCmlListLen[i] + 1);
-			//- (tmpCmlListLen[i] * i)
-
+			_Messsage->m_ComCommandList[i].clear();
+			_Messsage->m_ComCommandList[i].resize(tmpCmlListLen[i]);
 			if (i == 0)
 			{
 				TmpIndex = (PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + ParamLen);
@@ -209,7 +209,7 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 
 			for (int index = 0; index < tmpCmlListLen[i]; index++ )
 			{
-				_Messsage->m_CmlCommandList[i][index] = lpszData[TmpIndex - index];
+				_Messsage->m_ComCommandList[i][index] = lpszData[TmpIndex - index];
 				VerifyPos++;
 			}
 		}
