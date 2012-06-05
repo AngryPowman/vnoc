@@ -10,7 +10,8 @@
 #define  MSG_ERROR_LEN     4*/
 
 #include <iostream>
-
+#include <vector>
+#include <string>
 
 #define MSG_BEGIN    0x55   // 'V' 标记消息的开始
 #define MSG_END		 0x43	// 'C' 标记消息的结束
@@ -161,6 +162,8 @@ private:
 	bool  m_Begin;				  //标记消息的开始  统一字符'V"的ASCⅡ码 0x55
 	bool  m_End;				  //标记消息的结束  固定字符'C‘的ASCⅡ码 0x43
 
+	std::string				     m_ComListLen;        
+	std::vector<std::string>     m_ComCommandList;
 	byte   m_Command;			  //指令			具体的指令，用来标注此数据包的功能
 	byte*  m_CmlListLen;		  //参数列表    4字节，对应参数N的长度
 	byte   m_Serial[2];			  //序号       指令的编号

@@ -102,7 +102,7 @@ int PackMessage::_Tail( CMessage* const msg_clss,byte* buf,int index,size_t len)
 	return index;
 }
 
-int PackMessage::Pack( MSG_RVC* const rvc,byte* buf, size_t len)
+int PackMessage::_Pack( MSG_RVC* const rvc,byte* buf, size_t len)
 {
 	byte tmpComLen[4] = {0}; 
 	//byte OneComLen[] = {0x00,0x00,0x00,0x01};
@@ -141,7 +141,7 @@ int PackMessage::Pack( MSG_RVC* const rvc,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack( MSG_AVC* const avc, byte* buf, size_t len)
+int PackMessage::_Pack( MSG_AVC* const avc, byte* buf, size_t len)
 {
 	byte tmpComLen[4] = {0}; 
 	byte OneComLen[] = {0x00,0x00,0x00,0x01};
@@ -198,7 +198,7 @@ int PackMessage::Pack( MSG_AVC* const avc, byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack( MSG_RLI* const rli,byte* buf, size_t len)
+int PackMessage::_Pack( MSG_RLI* const rli,byte* buf, size_t len)
 {
 	byte tmpComLen[4] = {0}; 
 	byte OneComLen[] = {0x00,0x00,0x00,0x01};
@@ -267,7 +267,7 @@ int PackMessage::Pack( MSG_RLI* const rli,byte* buf, size_t len)
 	return _Tail(rli,buf,index,len);
 }
 
-int PackMessage::Pack( MSG_ALI* const ali,byte* buf, size_t len)
+int PackMessage::_Pack( MSG_ALI* const ali,byte* buf, size_t len)
 {
 	byte tmpComLen[4] = {0}; 
 	byte OneComLen[] = {0x00,0x00,0x00,0x01};
@@ -332,7 +332,7 @@ int PackMessage::Pack( MSG_ALI* const ali,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack( MSG_RPS* const rps,byte* buf, size_t len)
+int PackMessage::_Pack( MSG_RPS* const rps,byte* buf, size_t len)
 {
 	byte tmpComLen[4] = {0}; 
 	byte OneComLen[] = {0x00,0x00,0x00,0x01};
@@ -420,7 +420,7 @@ int PackMessage::Pack( MSG_RPS* const rps,byte* buf, size_t len)
 }
 
 
-int PackMessage::Pack( MSG_APS* const aps,byte* buf, size_t len)
+int PackMessage::_Pack( MSG_APS* const aps,byte* buf, size_t len)
 {
 	byte tmpComLen[4] = {0}; 
 	byte OneComLen[] = {0x00,0x00,0x00,0x01};
@@ -523,4 +523,32 @@ int PackMessage::GetMessageLen(const CMessage* const msg)
 		break;
 	}
 	return Param + PLen + Head + Tail;
+}
+
+int PackMessage::Pack( CMessage* const msg, byte* buf, size_t len )
+{
+	int Result = 0;
+
+	switch (msg->GetMessageType())
+	{
+	case MSG_AVC_TYPE:
+		Result = _Pack((MSG_AVC*)msg,buf,len);
+		break;
+	case MSG_RVC_TYPE:
+		Result = _Pack((MSG_RVC*)msg,buf,len);
+		break;
+	case MSG_ALI_TYPE:
+		Result = _Pack((MSG_ALI*)msg,buf,len);
+		break;
+	case MSG_RLI_TYPE:
+		Result = _Pack((MSG_RLI*)msg,buf,len);
+		break;
+	case MSG_RPS_TYPE:
+		Result = _Pack((MSG_RPS*)msg,buf,len);
+		break;
+	case MSG_APS_TYPE:
+		Result = _Pack((MSG_APS*)msg,buf,len);
+		break;
+	}
+	return Result;
 }
