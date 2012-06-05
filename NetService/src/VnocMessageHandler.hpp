@@ -55,19 +55,20 @@ private:
         //process the message here
         EZLOGGERVLSTREAM(axter::log_rarely)<<"receve message body\n";
         CMessageParser parser;
-        CMessage *msg = parser.Parse((byte*)safe_buf.get(), bytes_transferred + HEAD_LEN);
+        std::unique_ptr<CMessage> msg(parser.Parse((byte*)safe_buf.get(), bytes_transferred + HEAD_LEN));
         int ret=0;
         if (msg != NULL){
             int type = msg->GetMessageType();
 
             switch (type){
             case MSG_RVC_TYPE:
-                ret = HandlerRVCMessage((MSG_RVC*)msg);
+                ret = HandlerRVCMessage((MSG_RVC*)msg.get());
                 break;
             default:
                 ret = 0;
             };
         }
+
         if (ret == 0){
             //message is not handled, we need post a read opeartion
             connection_->recv(headerData_, sizeof(headerData_), 
