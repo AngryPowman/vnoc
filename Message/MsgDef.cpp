@@ -109,7 +109,7 @@ const byte* CMessage::GetGUID() const
 	return m_GUID;
 }
 
-std::vector<std::string> CMessage::GetComCommandList()const
+std::vector<ByteArr> CMessage::GetComCommandList()const
 {
 	return m_ComCommandList;
 }
@@ -287,7 +287,7 @@ void CMessage::_Initialization()
 
 void CMessage::_Close()
 {
-	//保留
+   //保留
 }
 
 
@@ -401,16 +401,16 @@ void MSG_AVC::SetLoginTag(byte in_byte)
 {
 	//只占一个字节
 	m_ComCommandList[2].clear();
-	m_ComCommandList[2].resize(1);
-	m_ComCommandList[2][0] = in_byte;
+	 
+	m_ComCommandList[2].push_back(in_byte);
 }
 
 void MSG_AVC::SetCaptchaType(byte in_byte)
 {
 	//只占一个字节
 	m_ComCommandList[1].clear();
-	m_ComCommandList[1].resize(1);
-	m_ComCommandList[1][0] = in_byte;
+
+	m_ComCommandList[1].push_back(in_byte);
 }
 
 void MSG_AVC::SetCaptcha(byte* in_byte_ptr,size_t len)
@@ -421,10 +421,10 @@ void MSG_AVC::SetCaptcha(byte* in_byte_ptr,size_t len)
 	}
 	m_CaptchaLen = len;
 	m_ComCommandList[0].clear();
-	m_ComCommandList[0].resize(len);
+
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[0][index] = in_byte_ptr[index];
+		m_ComCommandList[0].push_back(in_byte_ptr[index]);
 	}
 	//m_ComCommandList[0].append((char*)in_byte_ptr);
 	//memset(GetCmlCommandList()[0],0,len);
@@ -495,10 +495,10 @@ void MSG_RLI::SetVerificationCode( byte* in_byte_ptr,size_t len )
 	}
 	m_VerificationCodeLen = len;
 	m_ComCommandList[2].clear();
-	m_ComCommandList[2].resize(len);
+
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[2][index] = in_byte_ptr[index];
+		m_ComCommandList[2].push_back(in_byte_ptr[index]);
 	}
 }
 
@@ -510,10 +510,10 @@ void MSG_RLI::SetAccountNumber( byte* in_byte_ptr,size_t len )
 	}
 	m_AccountNumberLen = len;
 	m_ComCommandList[1].clear();
-	m_ComCommandList[1].resize(len);
+	 
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[1][index] = in_byte_ptr[index];
+		m_ComCommandList[1].push_back(in_byte_ptr[index]);
 	}
 }
 
@@ -525,10 +525,10 @@ void MSG_RLI::SetPassword( byte* in_byte_ptr,size_t len )
 	}
 	m_PasswordLen = len;
 	m_ComCommandList[0].clear();
-	m_ComCommandList[0].resize(len);
+
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[0][index] = in_byte_ptr[index];
+		m_ComCommandList[0].push_back(in_byte_ptr[index]);
 	}
 }
 
@@ -591,8 +591,8 @@ byte* MSG_ALI::GetATLGUID() const
 void MSG_ALI::SetLoginResult( byte in_byte )
 {
 	m_ComCommandList[2].clear();
-	m_ComCommandList[2].resize(1);
-	m_ComCommandList[2][0] = in_byte;
+	 
+	m_ComCommandList[2].push_back(in_byte);
 }
 
 void MSG_ALI::SetToken( byte* in_byte_ptr, size_t len /*= 4*/)
@@ -603,10 +603,10 @@ void MSG_ALI::SetToken( byte* in_byte_ptr, size_t len /*= 4*/)
 	}
 	m_TokenLen = len;
 	m_ComCommandList[1].clear();
-	m_ComCommandList[1].resize(len);
+	 
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[1][index] = in_byte_ptr[index];
+		m_ComCommandList[1].push_back(in_byte_ptr[index]);
 	}
 }
 
@@ -618,10 +618,10 @@ void MSG_ALI::SetATLGUID( byte* in_byte_ptr, size_t len /*= 16*/ )
 	}
 	m_ALTGUIDLen = len;
 	m_ComCommandList[0].clear();
-	m_ComCommandList[0].resize(len);
+	 
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[0][index] = in_byte_ptr[index];
+		m_ComCommandList[0].push_back(in_byte_ptr[index]);
 	}
 }
 
@@ -707,8 +707,8 @@ void MSG_RPS::SetRank( byte in_byte )
 {
 
 	m_ComCommandList[4].clear();
-	m_ComCommandList[4].resize(1);
-	m_ComCommandList[4][0] = in_byte;
+	
+	m_ComCommandList[4].push_back(in_byte);
 }
 
 
@@ -720,10 +720,10 @@ void MSG_RPS::SetNickname( byte* in_byte_ptr,size_t len )
 	}
 	m_NicknameLen = len;
 	m_ComCommandList[3].clear();
-	m_ComCommandList[3].resize(len);
+	 
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[3][index] = in_byte_ptr[index];
+		m_ComCommandList[3].push_back(in_byte_ptr[index]);
 	}
 }
 
@@ -736,18 +736,18 @@ void MSG_RPS::SetAutograph( byte* in_byte_ptr,size_t len )
 	}
 	m_AutographLen = len;
 	m_ComCommandList[2].clear();
-	m_ComCommandList[2].resize(len);
+	
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[2][index] = in_byte_ptr[index];
+		m_ComCommandList[2].push_back(in_byte_ptr[index]);
 	}
 }
 
 void MSG_RPS::SetHeadForm( byte in_byte )
 {
 	m_ComCommandList[1].clear();
-	m_ComCommandList[1].resize(1);
-	m_ComCommandList[1][0] = in_byte;
+	
+	m_ComCommandList[1].push_back(in_byte);
 }
 
 void MSG_RPS::SetHeadPortrait( byte* in_byte_ptr,size_t len )
@@ -758,10 +758,10 @@ void MSG_RPS::SetHeadPortrait( byte* in_byte_ptr,size_t len )
 	}
 	m_HeadPortraitLen = len;
 	m_ComCommandList[0].clear();
-	m_ComCommandList[0].resize(len);
+	
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[0][index] = in_byte_ptr[index];
+		m_ComCommandList[0].push_back(in_byte_ptr[index]);
 	}
 }
 
@@ -810,9 +810,8 @@ void MSG_APS::SetMessageSynchro( byte* in_byte_ptr,size_t len )
 	}
 	m_MessageSynchroLen = len;
 	m_ComCommandList[0].clear();
-	m_ComCommandList[0].resize(len);
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[0][index] = in_byte_ptr[index];
+		m_ComCommandList[0].push_back(in_byte_ptr[index]);
 	}
 }

@@ -66,10 +66,12 @@ enum  MSGCONMMAND
 	MSG_APS_COM = 0x19,
 };
 
-
 typedef  unsigned char byte;	
 typedef  unsigned int  uint;
 typedef unsigned short ushort;
+
+
+typedef std::vector<byte> ByteArr;
 
 // 短整型大小端互换
 #define BigLittleSwap16(A)        ((((ushort)(A) & 0xff00) >> 8) | \
@@ -120,7 +122,7 @@ public:
 
 	const byte* GetGUID() const;
 
-	std::vector<std::string> GetComCommandList() const;
+	std::vector<ByteArr> GetComCommandList() const;
 
 
 	uint GetVerify() const;
@@ -165,7 +167,7 @@ protected:
 								  //参数列表    4字节，对应参数N的长度
 	std::vector<byte>			 m_ComListLen;  
 								 //参数列表    编码后的参数，具体类型根据具体指令决定
-	std::vector<std::string>     m_ComCommandList;
+	std::vector<ByteArr>         m_ComCommandList;
 	byte   m_Command;			  //指令			具体的指令，用来标注此数据包的功能
 	byte   m_Serial[2];			  //序号       指令的编号
 	byte   m_GUID[16];            //GUID       用来提供用户验证
