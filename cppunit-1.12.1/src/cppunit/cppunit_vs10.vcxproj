@@ -93,6 +93,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\Release_vs10\</OutDir>
     <IntDir>.\Release_vs10\</IntDir>
+    <TargetName>cppunit</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -122,7 +123,7 @@
       <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" ..\..\..\vnoc\lib\$(TargetName).lib</Command>
+      <Command>copy "$(TargetPath)" ..\..\..\VNOC\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
     <ResourceCompile>
