@@ -33,6 +33,8 @@ VNOC_Private:
 	virtual void OnReceive	(int nErrorCode,CAsyncSocket* pSock);
 	virtual void OnSend		(int nErrorCode,CAsyncSocket* pSock);
 private:
+	void _DispatchMessage(const CMessage* pMsg);
+private:
 	CSocketImpl m_serverSocket;
 	WSADATA m_wsaData;
 	std::map<MSGTYPE,std::list<INetListener*> >	m_listeners;

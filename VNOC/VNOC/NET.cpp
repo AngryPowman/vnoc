@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Net.h"
 #include "../../Message/PackMessage.h"
+#include "../../Message/MessageParser.h"
 #include "../util/util.h"
 
 #include <algorithm>
@@ -123,12 +124,39 @@ void CNetCenter::OnOutOfBandData( int nErrorCode,CAsyncSocket* pSock )
 
 void CNetCenter::OnReceive( int nErrorCode,CAsyncSocket* pSock )
 {
-	Global->Log(LogFile_Net,_T("OnReceive"));
+	Global->PtrAssert(pSock);
+	CBuffer buffer;
+	buffer.Alloc(1024);
+	int length = pSock->Receive(buffer.GetBuffer(),1024);
+	Global->Logf(LogFile_Net,_T("OnReceive, size:%d\n"),length);
+
+	CMessageParser parser;
+	CMessage *pMsg=NULL;
+	pMsg = parser.Parse(buffer.GetBuffer(),length);
+	if (pMsg)
+	{
+		_DispatchMessage(pMsg);
+		delete pMsg;
+	}
 }
 
 void CNetCenter::OnSend( int nErrorCode,CAsyncSocket* pSock )
 {
 	Global->Log(LogFile_Net,_T("OnSend"));
+}
+
+void CNetCenter::_DispatchMessage( const CMessage* pMsg )
+{
+	Util::CAutoCS ac(m_cs);
+	auto i = m_listeners.find((MSGTYPE)pMsg->GetMessageType());
+	if ( i != m_listeners.end())
+	{
+		auto ii = i->second.begin();
+		for (; ii!=i->second.end();++ii)
+		{
+			(*ii)->OnMessage(*pMsg);
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
