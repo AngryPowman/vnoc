@@ -287,15 +287,7 @@ void CMessage::_Initialization()
 
 void CMessage::_Close()
 {
-	for (int count = 0; (int)m_CmlCount < count; count++)
-	{
-		if (!m_ComCommandList[count].empty())
-		{
-			m_ComCommandList[count].clear();
-		}
-	}
-	m_ComCommandList.clear();
-	m_ComListLen.clear();
+	//±£Áô
 }
 
 
