@@ -20,10 +20,12 @@ public:
 
 private:
     void ReadHeaderHandler(const asio::error_code& error, size_t bytes_transferred);
-	void ReadBodyHandler(char *messageBuffer, const asio::error_code& error, size_t bytes_transferred);
+    void ReadBodyHandler(char *messageBuffer, const asio::error_code& error, size_t bytes_transferred);
     void SendHandler(char* buffer, const asio::error_code& error, size_t bytes_transferred);
 
     int HandleRVCMessage(MSG_RVC *rvcMessage);
+    int HandleRLIMessage(MSG_RLI *rliMessage);
+
     const static size_t HEADER_LEN = 30;
     char headerData_[HEADER_LEN];
     ConnectionT *connection_;

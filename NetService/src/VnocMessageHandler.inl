@@ -39,8 +39,8 @@ void VnocMessageHandler<ConnectionT>::ReadHeaderHandler(const asio::error_code& 
     memcpy(messageBuffer, headerData_, HEADER_LEN);
     connection_->recv(&messageBuffer[HEADER_LEN], package_len - HEADER_LEN, 
         std::bind(&VnocMessageHandler::ReadBodyHandler, this, messageBuffer,
-        std::placeholders::_1,
-        std::placeholders::_2));
+            std::placeholders::_1,
+            std::placeholders::_2));
 }
 
 template <typename ConnectionT>
@@ -61,6 +61,9 @@ void VnocMessageHandler<ConnectionT>::ReadBodyHandler(char *messageBuffer, const
         switch (type){
         case MSG_RVC_TYPE:
             ret = HandleRVCMessage(dynamic_cast<MSG_RVC*>(msg.get()));
+            break;
+        case MSG_RLI_TYPE:
+            ret = HandleRLIMessage(dynamic_cast<MSG_RLI*>(msg.get()));
             break;
         default:
             ret = 0;
@@ -96,8 +99,25 @@ int VnocMessageHandler<ConnectionT>::HandleRVCMessage(MSG_RVC *rvcMessage)
     packer.Pack(&avcMessage, (byte*)avcPack, avcLen);
     connection_->send(avcPack, avcLen,
         std::bind(&VnocMessageHandler::SendHandler, this, avcPack,
-        std::placeholders::_1,
-        std::placeholders::_2));
+            std::placeholders::_1,
+            std::placeholders::_2));
 
+    return 1;
+}
+
+template <typename ConnectionT>
+int VnocMessageHandler<ConnectionT>::HandleRLIMessage(MSG_RLI *rliMessage)
+{
+    MSG_ALI aliMessage;
+    aliMessage.SetLoginResult(0);
+    PackMessage packer;
+    size_t aliLen = packer.GetMessageLen(&aliMessage);
+    assert(aliLen != 0);
+    char *Pack = new char[aliLen];
+    packer.Pack(&aliMessage, (byte*)Pack, aliLen);
+    connection_->send(Pack, aliLen,
+        std::bind(&VnocMessageHandler::SendHandler, this, Pack,
+            std::placeholders::_1,
+            std::placeholders::_2));
     return 1;
 }
