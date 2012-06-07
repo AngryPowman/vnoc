@@ -1,0 +1,1 @@
+ gcc -L/local/lib -lcppunit -ldl -lpthread -I/home/y/include -I../../include -std=c++0x -fpermissive -L/home/y/lib64 testRunner.cpp EchoTestHandlerTest.cpp VnocMessageHandlerTest.cpp ../../../Message/MessageParser.cpp ../../../Message/MsgDef.cpp ../../../Message/PackMessage.cpp -o testRunner.out
