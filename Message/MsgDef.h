@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm> 
 
 #define MSG_BEGIN    0x55   // 'V' 标记消息的开始
 #define MSG_END		 0x43	// 'C' 标记消息的结束
@@ -90,6 +91,7 @@ void IntTobyte(int in_int,byte* out_byte);
 
 void LittleSwapBigByte(byte* in_byte_ptr,size_t len);
 
+void LittleSwapBigByte(ByteArr* arr);
 
 class CMessage
 {
@@ -140,13 +142,13 @@ public:
 
 	bool SetCommand(byte in_byte);
 
-	bool SetComListLen(byte* in_byte_ptr,int CmlCount);
-
 	bool SetSerial(ushort in_short);
 
 	bool SetGUID(byte* in_byte_ptr);
 
 	bool SetComCommandList(int ComCount);
+	
+	bool SetComListLen(byte* in_byte_ptr,int CmlCount);
 
 	bool SetVerify(uint in_Int);
 

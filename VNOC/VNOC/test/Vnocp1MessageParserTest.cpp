@@ -25,7 +25,7 @@ public:
 
 	void MSGAVCParseTest()
 	{
-		byte testParamO [] = {0x02,0x02,0x02,0x02,
+		byte testParamO [] = {0x01,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02};
@@ -44,7 +44,7 @@ public:
 			0x00,0x00,0x00,0x3F,
 
 
-			0x02,0x02,0x02,0x02,
+			0x01,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
@@ -61,7 +61,7 @@ public:
 
 			0x1e,
 
-			0x02,0x02,0x02,0x02,
+			0x01,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
@@ -77,7 +77,7 @@ public:
 		CMessage* msgAVC = msgParser.Parse(testAVC,sizeof(testAVC));
 		CPPUNIT_ASSERT(msgAVC->GetMessageType() == MSG_AVC_TYPE);//验证消息类型是AVC
 		MSG_AVC* msg_avc = (MSG_AVC *)msgAVC;
-		//CPPUNIT_ASSERT(msg_avc->GetSerial() == 1);
+		CPPUNIT_ASSERT(msg_avc->GetSerial() == 1);
 		CPPUNIT_ASSERT(memcmp(msg_avc->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 		CPPUNIT_ASSERT(memcmp(msg_avc->GetCaptcha(),testParamO,16) == 0);
 		CPPUNIT_ASSERT(msg_avc->GetLoginTag() == 0x1e);
@@ -130,7 +130,7 @@ public:
 		CPPUNIT_ASSERT(msgRVC->GetMessageType() == MSG_RVC_TYPE);//验证消息类型是RVC
 		MSG_RVC* msg_rvc = (MSG_RVC *)msgRVC;
 
-		//CPPUNIT_ASSERT(msg_rvc->GetSerial() == 1);
+		CPPUNIT_ASSERT(msg_rvc->GetSerial() == 1);
 
 		CPPUNIT_ASSERT(memcmp(msg_rvc->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 		CPPUNIT_ASSERT(memcmp(msg_rvc->GetMachineAddress(),testParamO,16) == 0);
@@ -198,7 +198,7 @@ public:
 		CPPUNIT_ASSERT(msgRLI->GetMessageType() == MSG_RLI_TYPE);//验证消息类型是RLI
 		MSG_RLI* msg_rli = (MSG_RLI *)msgRLI;
 
-		//CPPUNIT_ASSERT(msg_rli->GetSerial() == 1);
+		CPPUNIT_ASSERT(msg_rli->GetSerial() == 1);
 
 		CPPUNIT_ASSERT(memcmp(msg_rli->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 
@@ -277,7 +277,7 @@ public:
 		CPPUNIT_ASSERT(msgRPS->GetMessageType() == MSG_RPS_TYPE);//验证消息类型是RPS
 		MSG_RPS* msg_rps = (MSG_RPS *)msgRPS;
 
-		//CPPUNIT_ASSERT(msg_rps->GetSerial() == 1);
+		CPPUNIT_ASSERT(msg_rps->GetSerial() == 1);
 
 		CPPUNIT_ASSERT(memcmp(msg_rps->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 
@@ -338,7 +338,7 @@ public:
 		CPPUNIT_ASSERT(msgAPS->GetMessageType() == MSG_APS_TYPE);//验证消息类型是RPS
 		MSG_APS* msg_aps = (MSG_APS *)msgAPS;
 	
-		//CPPUNIT_ASSERT(msg_aps->GetSerial() == 1);
+		CPPUNIT_ASSERT(msg_aps->GetSerial() == 1);
 
 		CPPUNIT_ASSERT(memcmp(msg_aps->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 
@@ -401,7 +401,7 @@ public:
 		CPPUNIT_ASSERT(msgALI->GetMessageType() == MSG_ALI_TYPE);//验证消息类型是ALI
 		MSG_ALI* msg_ali = (MSG_ALI *)msgALI;
 
-		//CPPUNIT_ASSERT(msg_ali->GetSerial() == 1);
+		CPPUNIT_ASSERT(msg_ali->GetSerial() == 1);
 
 		CPPUNIT_ASSERT(memcmp(msg_ali->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 

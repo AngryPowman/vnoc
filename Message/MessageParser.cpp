@@ -55,7 +55,7 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 	int    nPos      = 0;
 	byte  szTmpObligate[4] = {0};
 	byte  szTmpDataLen[4] = {0};
-
+	byte  szTmpSerial[2] =  {0};
 	if (_Messsage == NULL)
 	{
 		return -1;
@@ -86,6 +86,8 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 	{
 		_Messsage->m_Serial[index] = (int)lpszData[SER_INDEX - index];
 	}
+	//转换 按照大端存放 
+	LittleSwapBigByte(_Messsage->m_Serial,2);
 
 	//获取包体长度           大端存放
 	for(nPos = 0;nPos < MSG_CLASS_LEN; nPos++)
@@ -99,11 +101,14 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 
 
 	CHECLUP_LEN(COM_INDEX + 1, len );
-	//获取GUID           大端存放
+	//获取GUID           小端端存放
 	for(nPos = 0;nPos < MSG_CLASS_GUID; nPos++)
 	{
 		_Messsage->m_GUID[nPos] = lpszData[(GUID_INDEX)- nPos];
 	}
+	//转换 按照大端存放 
+	LittleSwapBigByte(_Messsage->m_GUID,MSG_CLASS_GUID);
+
 	_Messsage->m_Command = (int)lpszData[COM_INDEX];
 
 	CHECLUP_LEN(OBL_INDEX + 1, len );
@@ -139,9 +144,10 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 
 	_Messsage->m_ComListLen.clear();
 
+	//按照大端存放
 	for(nPos = 0;nPos < (int)(MSG_CLASS_PARAM * _Messsage->m_CmlCount); nPos++)
 	{
-		_Messsage->m_ComListLen.push_back(lpszData[(PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount)) - nPos]);
+		_Messsage->m_ComListLen.push_back(lpszData[(PAC_INDEX +(MSG_CLASS_PARAM * _Messsage->m_CmlCount)) -nPos]);
 	}
 
 	int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
@@ -198,6 +204,7 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 				_Messsage->m_ComCommandList[i].push_back(lpszData[TmpIndex - index]);
 				VerifyPos++;
 			}
+			LittleSwapBigByte(&_Messsage->m_ComCommandList[i]);
 		}
 	}
 

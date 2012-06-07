@@ -22,6 +22,21 @@ void LittleSwapBigByte(byte* in_byte_ptr,size_t len)
 	delete [] tmpByte_ptr;
 }
 
+void LittleSwapBigByte(ByteArr* arr)
+{
+	ByteArr tmpArr;
+	if (!arr->empty())
+	{
+		tmpArr.resize(arr->size());
+		std::copy(arr->begin(),arr->end(),tmpArr.begin());
+		arr->clear();
+		for (int index = 0,Pos = 1; index < (int)tmpArr.size(); index++,Pos++)
+		{
+			arr->push_back(tmpArr[tmpArr.size() - Pos]);
+		}
+	}
+}
+
 uint byteToInt(const byte* in_byte,size_t len)
 {
 	byte tmpByte[4] = {0};
