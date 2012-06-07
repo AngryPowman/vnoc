@@ -103,7 +103,7 @@ public:
 
     }
     size_t getSendLen(){return sendLen_;}
-    char *getSendBuf(){return sendBuf_;}
+    const char *getSendBuf(){return sendBuf_;}
 private:
     std::shared_ptr<EventOperator> recvHandler_;
     std::shared_ptr<EventOperator> sendHandler_;

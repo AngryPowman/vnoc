@@ -47,6 +47,9 @@ public:
             0x00,0x00,
             0x43};
         conn_->setRecv(rvc, sizeof(rvc));
+        const char *sendBuf = conn_->getSendBuf();
+        //return a AVC message
+        CPPUNIT_ASSERT(sendBuf[24]==0x15);
     }
 
 };
