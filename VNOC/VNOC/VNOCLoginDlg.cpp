@@ -119,8 +119,8 @@ void CVNOCLoginDlg::OnBnClickedOk()
 		byte MAC[16]={0};
 		mRVC.SetMachineAddress(MAC,16);
 		pInet->SendServer(mRVC);
+		_SetVerifyState(TRUE);
 	}
-	OnOK();
 }
 
 void CVNOCLoginDlg::OnBnClickedCancel()
@@ -151,5 +151,27 @@ BOOL CVNOCLoginDlg::Refresh()
 HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
 {
 	Global->Log(LogFile_Net,_T("接收到网络包"));
+	if (msg.GetMessageType() == MSG_AVC_TYPE)
+	{
+		const MSG_AVC* ma = dynamic_cast<const MSG_AVC*>(&msg);
+		if (ma->GetLoginTag() == 1)
+		{
+			_SetVerifyState(FALSE);
+			OnOK();
+		}
+	}
 	return S_OK;
+}
+
+void CVNOCLoginDlg::_SetVerifyState( BOOL bVerifying )
+{
+	CEdit* pEditun = (CEdit*)GetDlgItem(IDC_LoginDlg_EDIT_USERNAME);	ATLASSERT(pEditun);
+	CEdit* pEditpw = (CEdit*)GetDlgItem(IDC_LoginDlg_EDIT_PWD);			ATLASSERT(pEditpw);
+	CButton* pBtnrp = (CButton*)GetDlgItem(IDC_LoginDlg_CHECKBOX_R);		ATLASSERT(pBtnrp);
+	CButton* pBtnLogin = (CButton*)GetDlgItem(IDOK);						ATLASSERT(pBtnLogin);
+
+	pEditun->EnableWindow(!bVerifying);
+	pEditpw->EnableWindow(!bVerifying);
+	pBtnrp->EnableWindow(!bVerifying);
+	pBtnLogin->EnableWindow(!bVerifying);
 }
