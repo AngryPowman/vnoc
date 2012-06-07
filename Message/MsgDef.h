@@ -201,7 +201,7 @@ public:
 		//0x14
 		m_Command  = 20;
 		m_Error    = 0;
-
+		m_MachineAddressLen = 0;
 		//预设
 		SetDataLen(0);
 		SetVersion(MSG_VER);
@@ -255,7 +255,7 @@ public:
 		//0x15
 		m_Command  = 21;
 		m_Error    = 0;
-
+		m_CaptchaLen =0;
 		//预设
 		SetDataLen(0);
 		SetVersion(MSG_VER);
@@ -322,7 +322,9 @@ public:
 		//0x16
 		m_Command  = 22;
 		m_Error    = 0;
-
+		m_VerificationCodeLen = 0;
+	    m_AccountNumberLen = 0;
+		m_PasswordLen  = 0;
 		//预设
 		SetDataLen(0);
 		SetVersion(MSG_VER);
@@ -397,7 +399,8 @@ public:
 		//0x17
 		m_Command  = 23;
 		m_Error    = 0;
-
+		m_TokenLen = 0;
+		m_ALTGUIDLen = 0;
 		//预设
 		SetDataLen(0);
 		SetVersion(MSG_VER);
@@ -467,7 +470,9 @@ public:
 		//0x18
 		m_Command  = 24;
 		m_Error    = 0;
-
+	    m_NicknameLen = 0;
+		m_AutographLen = 0;
+		m_HeadPortraitLen = 0;
 		//预设
 		SetDataLen(0);
 		SetVersion(MSG_VER);
@@ -549,7 +554,7 @@ public:
 		//0x19
 		m_Command  = 25;
 		m_Error    = 0;
-
+		m_MessageSynchroLen = 0;
 		//预设
 		SetDataLen(0);
 		SetVersion(MSG_VER);

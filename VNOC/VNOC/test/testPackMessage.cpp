@@ -386,6 +386,7 @@ public:
 		PackMessage msg_pack;
 
 		msg_aps.SetSerial(1);
+
 		CPPUNIT_ASSERT(msg_aps.GetSerial() == 1);
 
 		msg_aps.SetGUID(testParamO);
@@ -476,7 +477,7 @@ public:
 
 		msg_ali.SetATLGUID(testParamT,16);
 		CPPUNIT_ASSERT(memcmp(msg_ali.GetATLGUID(),testParamT,sizeof(byte) * 16) == 0);
-		CPPUNIT_ASSERT(packer.GetMessageLen(&msg_ali) == sizeof (testALI));
+		CPPUNIT_ASSERT(msg_pack.GetMessageLen(&msg_ali) == sizeof (testALI));
 		CPPUNIT_ASSERT(msg_pack.Pack(&msg_ali,testPackALI,msg_pack.GetMessageLen(&msg_ali)) != -1);
 
 		//与正确包对比

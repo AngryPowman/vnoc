@@ -333,10 +333,9 @@ void MSG_RVC::SetMachineAddress( byte* in_byte_ptr, size_t len )
 	}
 	m_MachineAddressLen = len;
 	m_ComCommandList[0].clear();
-	m_ComCommandList[0].resize(len);
 	for (int index = 0; index < (int)len; index++)
 	{
-		m_ComCommandList[0][index] = in_byte_ptr[index];
+		m_ComCommandList[0].push_back(in_byte_ptr[index]);
 	}
 }
 
