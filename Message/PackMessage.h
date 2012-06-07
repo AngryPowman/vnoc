@@ -20,18 +20,6 @@ public:
 
 	int GetMessageLen(const CMessage* const msg);
 
-// 	int GetMessageLen(MSG_AVC* avc);
-// 
-// 	int GetMessageLen(MSG_RVC* rvc);
-// 
-// 	int GetMessageLen(MSG_ALI* ali);
-// 
-// 	int GetMessageLen(MSG_RLI* rli);
-// 
-// 	int GetMessageLen(MSG_APS* asp);
-// 
-// 	int GetMessageLen(MSG_RPS* rsp);
-
 private:
 	
 	int _Pack( MSG_AVC* const avc, byte* buf, size_t len);

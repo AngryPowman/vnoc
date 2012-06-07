@@ -105,7 +105,6 @@ int PackMessage::_Tail( CMessage* const msg_clss,byte* buf,int index,size_t len)
 int PackMessage::_Pack( MSG_RVC* const rvc,byte* buf, size_t len)
 {
 	byte tmpComLen[4] = {0}; 
-	//byte OneComLen[] = {0x00,0x00,0x00,0x01};
 	byte tmpByte[4] = {0};
 
 	int index = _Head(rvc,buf,len);
@@ -461,17 +460,6 @@ int PackMessage::_Pack( MSG_APS* const aps,byte* buf, size_t len)
 }
 
 //GetMessageLen
-
-// int PackMessage::GetMessageLen( MSG_AVC* avc )
-// {
-// 	int Head = 30;
-// 	int Tail = 3;
-// 	int Param;
-// 	int PLen;
-// 	PLen = avc->GetCmlCount() * 4;
-// 	Param = avc->GetCaptchaLen() + 1 + 1;
-// 	return Param + PLen + Head + Tail;
-// }
 
 int PackMessage::GetMessageLen(const CMessage* const msg)
 {

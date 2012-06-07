@@ -156,7 +156,6 @@ bool CMessage::SetComListLen(byte* in_byte_ptr,int CmlCount)
 		if (CmlCount != 0)
 		{
 			m_ComListLen.clear();
-			//m_ComListLen.resize(CmlCount * 4);
 			for (int index = 0; index < (CmlCount * 4); index++)
 			{
 				m_ComListLen.push_back(in_byte_ptr[index]);
@@ -426,9 +425,6 @@ void MSG_AVC::SetCaptcha(byte* in_byte_ptr,size_t len)
 	{
 		m_ComCommandList[0].push_back(in_byte_ptr[index]);
 	}
-	//m_ComCommandList[0].append((char*)in_byte_ptr);
-	//memset(GetCmlCommandList()[0],0,len);
-	//memcpy(GetCmlCommandList()[0],in_byte_ptr,len);
 }
 
 //RLI(µÇÂ¼ÇëÇó)

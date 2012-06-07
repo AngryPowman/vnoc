@@ -229,9 +229,6 @@ public:
 private:
 
 	void Initialize();
-
-	//机器地址
-	//byte* m_MachineAddress;
 	
 	//参数数量
 	int m_CmlCount;
