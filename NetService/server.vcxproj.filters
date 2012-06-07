@@ -45,4 +45,9 @@
       <UniqueIdentifier>{393855ef-cd99-460d-b224-78fd97847471}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\VnocMessageHandler.inl">
+      <Filter>header</Filter>
+    </None>
+  </ItemGroup>
 </Project>

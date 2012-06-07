@@ -159,6 +159,9 @@
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\VnocMessageHandler.inl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
