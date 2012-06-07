@@ -439,7 +439,7 @@ public:
 			0x00,0x00,0x00,0x10,
 			0x00,0x00,0x00,0x10,
 
-			0x1e,
+			0x00,
 
 			0x02,0x02,0x02,0x02,
 			0x02,0x02,0x02,0x02,
@@ -468,14 +468,15 @@ public:
 
 		//CPPUNIT_ASSERT(msg_ali.SetCmlListLen(testComLenALI,3));
 
-		msg_ali.SetLoginResult(0x1E);
-		CPPUNIT_ASSERT(msg_ali.GetLoginResult() == 0x1E);
+		msg_ali.SetLoginResult(0x0);
+		CPPUNIT_ASSERT(msg_ali.GetLoginResult() == 0x0);
 
 		msg_ali.SetToken(testParamO,16);
 		//CPPUNIT_ASSERT(memcmp(msg_ali.GetToken(),testParamO,sizeof(byte) * 16) == 0);
 
 		msg_ali.SetATLGUID(testParamT,16);
 		CPPUNIT_ASSERT(memcmp(msg_ali.GetATLGUID(),testParamT,sizeof(byte) * 16) == 0);
+		CPPUNIT_ASSERT(packer.GetMessageLen(&msg_ali) == sizeof (testALI));
 		CPPUNIT_ASSERT(msg_pack.Pack(&msg_ali,testPackALI,msg_pack.GetMessageLen(&msg_ali)) != -1);
 
 		//与正确包对比
