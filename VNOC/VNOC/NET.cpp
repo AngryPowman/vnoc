@@ -174,7 +174,7 @@ void CNetListenerHelper::AddFilter(MSGTYPE msgType,INetListener *listener)
 	m_vec.push_back(std::make_pair(msgType,listener));
 }
 
-void CNetListenerHelper::Set()
+void CNetListenerHelper::StartListen()
 {
 	INetCenter *pCenter=NULL;
 	Global->GetINetCenter(&pCenter);
@@ -186,7 +186,7 @@ void CNetListenerHelper::Set()
 	}
 }
 
-void CNetListenerHelper::UnSet()
+void CNetListenerHelper::StopListen()
 {
 	INetCenter *pCenter=NULL;
 	Global->GetINetCenter(&pCenter);

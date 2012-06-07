@@ -27,8 +27,8 @@ public:
 	~CNetListenerHelper();
 public:
 	void AddFilter(MSGTYPE msgType,INetListener *listener);
-	void Set();
-	void UnSet();
+	void StartListen();
+	void StopListen();
 private:
 	std::vector<std::pair<MSGTYPE,INetListener*> >	m_vec;
 };

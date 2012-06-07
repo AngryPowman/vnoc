@@ -25,12 +25,12 @@ CVNOCLoginDlg::CVNOCLoginDlg(CWnd* pParent /*=NULL*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_nlHelper.AddFilter(MSG_AVC_TYPE,this);
-	m_nlHelper.Set();
+	m_nlHelper.StartListen();
 }
 
 CVNOCLoginDlg::~CVNOCLoginDlg()
 {
-	m_nlHelper.UnSet();
+	m_nlHelper.StopListen();
 }
 
 void CVNOCLoginDlg::DoDataExchange(CDataExchange* pDX)

@@ -16,8 +16,13 @@ public:
 	STDMETHOD( Terminate() );
 	STDMETHOD( Show(BOOL bShow=TRUE) );
 	STDMETHOD( SetAccount(LPCTSTR userName) );
+	VOID Login(LPCTSTR username,LPCTSTR pwd);
 	STDMETHOD( GetCurrentUser(CString& userName,CString& cookie) );
 	STDMETHOD( Logout(LPCTSTR username=NULL) );
+
+VNOC_Private:
+	VOID SetLoginDlg(CVNOCLoginDlg* dlg);
+	VOID UnSetLoginDlg(CVNOCLoginDlg* dlg);
 private:
 	IVNOCFrame* m_frame;
 };

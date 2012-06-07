@@ -3,9 +3,10 @@
 
 #pragma once
 
-#include "HyperLink.h"
 #include "VNOCDialogBase.h"
+#include "LoginImpl.h"
 #include "INet.h"
+#include "HyperLink.h"
 
 // CVNOCDlg ¶Ô»°¿ò
 class CVNOCLoginDlg : public CDialog
