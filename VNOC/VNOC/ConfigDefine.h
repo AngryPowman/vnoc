@@ -9,8 +9,3 @@
 typedef std::map<CString,CString>	AttributeMap;
 typedef std::vector<CString>		ConfigPath;
 
-struct ConfigNodeBase
-{
-};
-
-struct ConfigNode;

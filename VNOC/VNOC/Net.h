@@ -18,7 +18,6 @@ public:
 	STDMETHOD( Run() );
 	STDMETHOD( Terminate() );
 
-	STDMETHOD( ConnectServer(LPCTSTR ipv4Addr,DWORD port) );
 	STDMETHOD( IsServerConnected() );
 	STDMETHOD( SendServer(const CMessage& netMsg) );
 	STDMETHOD( Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg) );
@@ -33,8 +32,14 @@ VNOC_Private:
 	virtual void OnReceive	(int nErrorCode,CAsyncSocket* pSock);
 	virtual void OnSend		(int nErrorCode,CAsyncSocket* pSock);
 private:
+	HRESULT _GetServerAddress();
+	HRESULT _ConnectServer();
 	void _DispatchMessage(const CMessage* pMsg);
 private:
+	CString	m_serverIP;
+	UINT	m_serverPort;
+	BOOL	m_isConnected;
+
 	CSocketImpl m_serverSocket;
 	WSADATA m_wsaData;
 	std::map<MSGTYPE,std::list<INetListener*> >	m_listeners;

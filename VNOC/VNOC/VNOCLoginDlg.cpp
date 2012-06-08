@@ -23,6 +23,7 @@ CVNOCLoginDlg::CVNOCLoginDlg(CWnd* pParent /*=NULL*/)
     , m_strUsername(_T(""))
     , m_strPassword(_T(""))
 {
+	m_bVerifying = FALSE;
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_nlHelper.AddFilter(MSG_AVC_TYPE,this);
 	m_nlHelper.StartListen();
@@ -47,6 +48,7 @@ BEGIN_MESSAGE_MAP(CVNOCLoginDlg, CDialog)
 	ON_BN_CLICKED(IDOK, &CVNOCLoginDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CVNOCLoginDlg::OnBnClickedCancel)
 	ON_WM_CREATE()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -124,6 +126,7 @@ void CVNOCLoginDlg::OnBnClickedOk()
 		mRVC.SetMachineAddress(MAC,16);
 		pInet->SendServer(mRVC);
 		_SetVerifyState(TRUE);
+		SetTimer(0,5000,NULL);
 	}
 }
 
@@ -163,12 +166,17 @@ HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
 			_SetVerifyState(FALSE);
 			OnOK();
 		}
+		else
+		{
+			MessageBox(_T("µÇÂ½Ê§°Ü£¬·þÎñÆ÷¾Ü¾øµÇÂ½."));
+		}
 	}
 	return S_OK;
 }
 
 void CVNOCLoginDlg::_SetVerifyState( BOOL bVerifying )
 {
+	m_bVerifying = bVerifying;
 	CEdit* pEditun = (CEdit*)GetDlgItem(IDC_LoginDlg_EDIT_USERNAME);	ATLASSERT(pEditun);
 	CEdit* pEditpw = (CEdit*)GetDlgItem(IDC_LoginDlg_EDIT_PWD);			ATLASSERT(pEditpw);
 	CButton* pBtnrp = (CButton*)GetDlgItem(IDC_LoginDlg_CHECKBOX_R);		ATLASSERT(pBtnrp);
@@ -178,4 +186,13 @@ void CVNOCLoginDlg::_SetVerifyState( BOOL bVerifying )
 	pEditpw->EnableWindow(!bVerifying);
 	pBtnrp->EnableWindow(!bVerifying);
 	pBtnLogin->EnableWindow(!bVerifying);
+}
+
+void CVNOCLoginDlg::OnTimer( UINT nIDEvent )
+{
+	if(m_bVerifying)
+	{
+		_SetVerifyState(FALSE);
+		MessageBox(_T("µÇÂ¼Ê§°Ü£¬Çë¼ì²éÍøÂçÁ¬½Ó."));
+	}
 }

@@ -3,24 +3,27 @@
 #include "ConfigDefine.h"
 #include "ILanguage.h"
 
+class ConfigNode;
+
 typedef std::vector<ConfigNode>			ConfigVec;
 typedef std::vector<ConfigNode*>		ConfigPtrVec;
 typedef std::map<CString,ConfigVec>		ConfigBranchs;
 
-struct ConfigNode
-	: private ConfigNodeBase
+class ConfigNode
 {
-
+public:
 	CString			value;
 	AttributeMap	attr;			// 属性表
 	ConfigBranchs	branch;			// 其下面子树
 
-	BOOL	GetAttribute(LPCTSTR key,CString& value);
-	BOOL	GetAttribute(LPCTSTR key,int& value);
-	BOOL	GetAttribute(LPCTSTR key,double& value);
-	VOID	SetAttribute(LPCTSTR key,LPCTSTR value);
-	VOID	SetAttribute(LPCTSTR key,int value);
-	VOID	SetAttribute(LPCTSTR key,double value);
+	virtual BOOL	GetAttribute(LPCTSTR key,CString& value);
+	virtual BOOL	GetAttribute(LPCTSTR key,int& value);
+	virtual BOOL	GetAttribute(LPCTSTR key,UINT& value);
+	virtual BOOL	GetAttribute(LPCTSTR key,double& value);
+	virtual VOID	SetAttribute(LPCTSTR key,LPCTSTR value);
+	virtual VOID	SetAttribute(LPCTSTR key,int value);
+	virtual VOID	SetAttribute(LPCTSTR key,UINT value);
+	virtual VOID	SetAttribute(LPCTSTR key,double value);
 
 	ConfigNode();
 	~ConfigNode();

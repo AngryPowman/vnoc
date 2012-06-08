@@ -32,6 +32,7 @@ public:
 	STDMETHOD( GetThreadName(DWORD threadID,CString& name));
 	STDMETHOD( CheckLastError(LPCTSTR helpStr=NULL));
 	STDMETHOD( PtrAssert(void* p));
+	STDMETHOD( CriticalError(LPCTSTR message));
 
 	STDMETHOD( GetINetCenter(INetCenter** pNetCenter) );
 private:

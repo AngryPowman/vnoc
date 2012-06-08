@@ -46,12 +46,14 @@ private:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnTimer(UINT nIDEvent);
 
 private:
 	CHyperLink m_LinkRegist;
 	CHyperLink m_FoundPassword;
     CString m_strUsername;
     CString m_strPassword;
+	BOOL m_bVerifying;
 
 	CNetListenerHelper m_nlHelper;
 };

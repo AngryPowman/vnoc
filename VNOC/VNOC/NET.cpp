@@ -3,6 +3,7 @@
 #include "../../Message/PackMessage.h"
 #include "../../Message/MessageParser.h"
 #include "../util/util.h"
+#include "IConfig.h"
 
 #include <algorithm>
 
@@ -20,6 +21,7 @@ CNetCenter::~CNetCenter()
 
 HRESULT CNetCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
+	m_isConnected = FALSE;
 	WSAStartup(MAKEWORD(2,2),&m_wsaData);
 	m_serverSocket.Create(0,SOCK_STREAM);
 	return S_OK;
@@ -44,25 +46,58 @@ HRESULT CNetCenter::Terminate()
 	return S_OK;
 }
 
-HRESULT CNetCenter::ConnectServer( LPCTSTR ipv4Addr,DWORD port )
+HRESULT CNetCenter::_GetServerAddress()
 {
-	BOOL bSuccess = m_serverSocket.Connect(ipv4Addr,port);
+	CConfig cfg(_T("VNOC/Net/ServerAddress"));
+	cfg.Get();
+	ConfigNode node = cfg.GetNode();
+
+	m_serverPort = 0;
+
+	if ( node.GetAttribute(_T("ServerIP"),m_serverIP)
+		&& node.GetAttribute(_T("ServerPort"),m_serverPort))
+	{
+		if (!m_serverIP.IsEmpty())
+		{
+			return S_OK;
+		}
+	}
+	Global->CriticalError(_T("配置文件损坏，无法获取服务器地址."));
+	return E_FAIL;
+}
+
+HRESULT CNetCenter::_ConnectServer()
+{
+	if (m_serverIP.IsEmpty())
+	{
+		_GetServerAddress();
+	}
+	if (m_serverIP.IsEmpty())
+	{
+		return E_INVALIDARG;
+	}
+	BOOL bSuccess = m_serverSocket.Connect(m_serverIP,m_serverPort);
 	if (!bSuccess && m_serverSocket.GetLastError()!=WSAEWOULDBLOCK)
 	{
 		Global->Logf(LogFile_Net,_T("连接服务器失败.错误码%d\n"),m_serverSocket.GetLastError());
 		return E_FAIL;
 	}
 	Global->Logf(LogFile_Net,_T("连接服务器成功,错误码%d\n"),m_serverSocket.GetLastError());
+	m_isConnected = TRUE;
 	return S_OK;
 }
 
 HRESULT CNetCenter::IsServerConnected()
 {
-    return S_OK;
+    return m_isConnected? S_OK: E_FAIL;
 }
 
 HRESULT CNetCenter::SendServer( const CMessage &helper )
 {
+	if (!m_isConnected)
+	{
+		_ConnectServer();
+	}
 	PackMessage packer;
 	int len = packer.GetMessageLen(&helper);
 	CBuffer buffer;

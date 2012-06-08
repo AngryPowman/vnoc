@@ -61,6 +61,17 @@ BOOL ConfigNode::GetAttribute(LPCTSTR key,int& value)
 	return FALSE;
 }
 
+BOOL ConfigNode::GetAttribute(LPCTSTR key,UINT& value)
+{
+	CString attrValue;
+	if (GetAttribute(key,attrValue))
+	{
+		value = (UINT)_ttoi(attrValue);
+		return TRUE;
+	}
+	return FALSE;
+}
+
 BOOL ConfigNode::GetAttribute(LPCTSTR key,double& value)
 {
 	CString attrValue;
@@ -86,6 +97,11 @@ VOID ConfigNode::SetAttribute(LPCTSTR key,int value)
 	CString str;
 	str.Format(_T("%d"),value);
 	SetAttribute(key,str);
+}
+
+VOID ConfigNode::SetAttribute(LPCTSTR key,UINT value)
+{
+	SetAttribute(key,(int)value);
 }
 
 VOID ConfigNode::SetAttribute(LPCTSTR key,double value)

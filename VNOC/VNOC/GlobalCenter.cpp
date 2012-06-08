@@ -89,11 +89,6 @@ void CGlobalCenter::_InitializeNetCenter()
 {
 	m_netCenter.Initialize(NULL);
 	m_netCenter.Run();
-	HRESULT hr = m_netCenter.ConnectServer(_T("127.0.0.1"),2508);
-	if (FAILED(hr))
-	{
-		MessageBox(0,_T("无法连接服务器"),0,0);
-	}
 }
 
 void CGlobalCenter::_UnInitializeNetCenter()
@@ -105,6 +100,13 @@ void CGlobalCenter::_UnInitializeNetCenter()
 HRESULT CGlobalCenter::GetINetCenter( INetCenter** pNetCenter )
 {
 	*pNetCenter = dynamic_cast<INetCenter*>(&m_netCenter);
+	return S_OK;
+}
+
+HRESULT CGlobalCenter::CriticalError( LPCTSTR message )
+{
+	MessageBox(NULL,message,0,0);
+	TerminateProcess(GetCurrentProcess(),1);
 	return S_OK;
 }
 
