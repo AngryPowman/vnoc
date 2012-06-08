@@ -2,7 +2,7 @@
 #include "../../Message/MessageParser.h"
 #include "../../Message/PackMessage.h"
 #include <ezlogger_headers.hpp>
-
+const size_t MAX_PACKAGE_LEN = 1024*1024U;
 template <typename ConnectionT>
 void VnocMessageHandler<ConnectionT>::readHeader(){
     connection_->recv(headerData_, sizeof(headerData_), 
@@ -32,6 +32,11 @@ void VnocMessageHandler<ConnectionT>::ReadHeaderHandler(const asio::error_code& 
     size_t package_len = htonl(*(int *)(headerData_+4));
     if (package_len <= HEADER_LEN) {
         EZLOGGERVLSTREAM(axter::log_often)<<"package_len <= HEAD_LEN\n";
+        readHeader();
+        return;
+    }
+	if (package_len > MAX_PACKAGE_LEN) {
+        EZLOGGERVLSTREAM(axter::log_often)<<"package_len > MAX_PACKAGE_LEN\n";
         readHeader();
         return;
     } 
