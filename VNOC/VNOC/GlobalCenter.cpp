@@ -47,11 +47,17 @@ HRESULT CGlobalCenter::GetIConfig( IConfig** pConfig )
 
 void CGlobalCenter::_InitializeConfig()
 {
-	m_config.Initialize(NULL);
-	GetCurrentDirectory(MAX_PATH,m_configFilePath.GetBuffer(MAX_PATH));
+	UINT buffSize = MAX_PATH * sizeof(TCHAR);
+	GetModuleFileName(GetModuleHandle(NULL),m_configFilePath.GetBuffer(buffSize),buffSize);
 	m_configFilePath.ReleaseBuffer();
+	int nPos=0;
+	Util::Filesys::GetDirFromPath(m_configFilePath,nPos);
+	m_configFilePath = m_configFilePath.Left(nPos);
+
+	m_config.Initialize(NULL);
 	m_configFilePath += PathSplit;
 	m_configFilePath += CONFIGXMLFILE;
+	Global->Logf(LogFile_General,_T("ÅäÖÃXMLµÄÂ·¾¶Îª:%s\n"),m_configFilePath);
 	m_config.LoadConfigFromXML(m_configFilePath);
 }
 
