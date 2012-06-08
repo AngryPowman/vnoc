@@ -168,7 +168,7 @@ HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
 		}
 		else
 		{
-			MessageBox(_T("µÇÂ½Ê§°Ü£¬·þÎñÆ÷¾Ü¾øµÇÂ½."));
+			MessageBox(_T("µÇÂ½Ê§°Ü£¬·þÎñÆ÷¾Ü¾øµÇÂ½ ."));
 		}
 	}
 	return S_OK;
