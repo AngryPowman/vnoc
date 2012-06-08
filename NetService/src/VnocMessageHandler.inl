@@ -29,6 +29,11 @@ void VnocMessageHandler<ConnectionT>::ReadHeaderHandler(const asio::error_code& 
         readHeader();
         return;
     }
+	if (headerData_[0] != 'V'){
+	    EZLOGGERVLSTREAM(axter::log_often)<<"This is not VNOC header.\n";
+        readHeader();
+        return;
+	}
     size_t package_len = htonl(*(int *)(headerData_+4));
     if (package_len <= HEADER_LEN) {
         EZLOGGERVLSTREAM(axter::log_often)<<"package_len <= HEAD_LEN\n";
