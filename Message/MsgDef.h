@@ -51,6 +51,7 @@ enum  MSGTYPE
 
 	MSG_RPS_TYPE,
 	MSG_APS_TYPE,
+    MSGTYPE_END
 };
 
 enum  MSGCONMMAND

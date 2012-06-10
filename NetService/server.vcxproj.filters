@@ -13,7 +13,19 @@
     <ClInclude Include="src\SocketServer.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="src\VnocMessageHandler.hpp">
+    <ClInclude Include="src\util.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VnocProtocol.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VnocMessageSocketHandler.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RliMessageHandler.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RvcMessageHandler.hpp">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -36,6 +48,9 @@
     <ClCompile Include="..\Message\PackMessage.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="src\VnocProtocol.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -46,7 +61,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\VnocMessageHandler.inl">
+    <None Include="src\VnocMessageSocketHandler.inl">
       <Filter>header</Filter>
     </None>
   </ItemGroup>

@@ -1,7 +1,10 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include "../VnocMessageHandler.hpp"
+#include "../VnocMessageSocketHandler.hpp"
+#include "../VnocProtocol.hpp"
 #include "MockTcpConnection.hpp"
+#include "../RvcMessageHandler.hpp"
+#include "../RliMessageHandler.hpp"
 
 class VnocMessageHandlerTest : public CppUnit::TestFixture
 {
@@ -10,19 +13,24 @@ class VnocMessageHandlerTest : public CppUnit::TestFixture
     CPPUNIT_TEST( testRLI );
     CPPUNIT_TEST_SUITE_END();
     MockTcpConnection *conn_;
+    VnocProtocol *protocol_;
 public:
     void setUp()
     {
         conn_ = new MockTcpConnection;
+        protocol_ = new VnocProtocol();
     }
     void tearDown()
     {
         delete conn_;
+        delete protocol_;
     }
 public:
     void testRVC()
     {
-        VnocMessageHandler<MockTcpConnection> handler(conn_);
+        RvcMessageHandler rvcHandler(protocol_);
+        VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
+        handler.setProtocol(protocol_);
         handler.start();
         char rvc[]={0x56,
             0x00,
@@ -92,11 +100,13 @@ public:
 
             0x00,0x00,
             0x43};
-        VnocMessageHandler<MockTcpConnection> handler(conn_);
+        RliMessageHandler rvcHandler(protocol_);
+        VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
+        handler.setProtocol(protocol_);
         handler.start();
         conn_->setRecv(testRLI, sizeof(testRLI));
         const char *sendBuf = conn_->getSendBuf();
-        //return a AVC message
+        //return an AVC message
         CPPUNIT_ASSERT(sendBuf[24]==0x17);
     }
 

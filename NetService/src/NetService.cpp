@@ -6,23 +6,30 @@
  */
 
 #include "NetService.h"
-#include "VnocMessageHandler.hpp"
+#include "RliMessageHandler.hpp"
+#include "RvcMessageHandler.hpp"
 
 using namespace std;
-static VnocMessageHandlerFactory handlerFactory_g;
-NetService::NetService():server_(&handlerFactory_g)
+
+NetService::NetService()
 {
 
 }
 
 NetService::~NetService()
 {
-
+    delete server_;
+    delete protocol_;
 }
 
 bool NetService::start(unsigned int u_port)
 {
-    server_.start(u_port);
+    protocol_ = new VnocProtocol();
+    RliMessageHandler rliHandler(protocol_);
+    RvcMessageHandler rvcHandler(protocol_);
+    
+    server_= new AsioTcpServer(protocol_->getSocketHandlerFactory());
+    server_->start(u_port);
     return true;
 }
 

@@ -9,6 +9,7 @@
 #define NETSERVICE_H_
 
 #include "AsioTcpServer.hpp"
+#include "VnocProtocol.hpp"
 
 class NetService
 {
@@ -19,7 +20,8 @@ public:
 public:
     bool start(unsigned int u_port);
 private:
-    AsioTcpServer server_;
+    AsioTcpServer *server_;
+    VnocProtocol *protocol_;
 };
 
 #endif /* NETSERVICE_H_ */

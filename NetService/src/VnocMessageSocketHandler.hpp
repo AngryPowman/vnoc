@@ -7,36 +7,54 @@
 #include "SocketHandler.hpp"
 #include "../../Message/MsgDef.h"
 #include <ezlogger_headers.hpp>
-template <typename ConnectionT>
-class VnocMessageHandler : public SocketHandler
+struct MessageContext;
+class IMessageHandler;
+class VnocProtocol;
+class IVnocMessageProtocolHandler
 {
 public:
-    VnocMessageHandler(ConnectionT *connection):connection_(connection){}
+    virtual void SendVnocMessage(const CMessage *msg) = 0;
+};
+
+
+template <typename ConnectionT>
+class VnocMessageSocketHandler : public SocketHandler, IVnocMessageProtocolHandler
+{
+public:
+    VnocMessageSocketHandler(ConnectionT *connection);
+    ~VnocMessageSocketHandler();
+
     //start handler the message on the connection
     virtual void start();
-
-    //post a read operation to wait for message header.
-    void readHeader();
+    void setProtocol(VnocProtocol* protocol){protocol_= protocol;}
+    virtual void SendVnocMessage(const CMessage *msg);
 
 private:
     void ReadHeaderHandler(const asio::error_code& error, size_t bytes_transferred);
     void ReadBodyHandler(char *messageBuffer, const asio::error_code& error, size_t bytes_transferred);
     void SendHandler(char* buffer, const asio::error_code& error, size_t bytes_transferred);
 
+    //post a read operation to wait for message header.
+    void readHeader();
     int HandleRVCMessage(MSG_RVC *rvcMessage);
-    int HandleRLIMessage(MSG_RLI *rliMessage);
 
     const static size_t HEADER_LEN = 30;
     char headerData_[HEADER_LEN];
     ConnectionT *connection_;
+    MessageContext *ctx_;
+    VnocProtocol* protocol_;
+
 };
 class VnocMessageHandlerFactory: public SocketHandlerFactory
 {
 public:
     virtual SocketHandler* CreateHandler(AsioTcpConnection *connection)
     {
-        return new VnocMessageHandler<AsioTcpConnection>(connection);
+        auto handler = new VnocMessageSocketHandler<AsioTcpConnection>(connection);
+        handler->setProtocol(protocol);
+        return handler;
     }
+        VnocProtocol *protocol;
 };
-#include "VnocMessageHandler.inl"
+#include "VnocMessageSocketHandler.inl"
 #endif //VNOCMESSAGEHANDLER_HPP
