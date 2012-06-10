@@ -10,11 +10,6 @@
 
 class IMessageHandler;
 class VnocProtocol;
-struct MessageContext
-{
-    IVnocMessageProtocolHandler *connection; 
-    std::string userName;
-};
 
 class IVnocMessageProtocolHandler
 {
@@ -22,6 +17,11 @@ public:
     virtual void SendVnocMessage(const CMessage *msg) = 0;
 };
 
+struct MessageContext
+{
+    IVnocMessageProtocolHandler *connection; 
+    std::string userName;
+};
 
 template <typename ConnectionT>
 class VnocMessageSocketHandler : public SocketHandler, IVnocMessageProtocolHandler
