@@ -7,9 +7,15 @@
 #include "SocketHandler.hpp"
 #include "../../Message/MsgDef.h"
 #include <ezlogger_headers.hpp>
-struct MessageContext;
+
 class IMessageHandler;
 class VnocProtocol;
+struct MessageContext
+{
+    IVnocMessageProtocolHandler *connection; 
+    std::string userName;
+};
+
 class IVnocMessageProtocolHandler
 {
 public:

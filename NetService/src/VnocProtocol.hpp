@@ -12,12 +12,6 @@ using std::array;
 
 class IVnocMessageProtocolHandler;
 
-struct MessageContext
-{
-    IVnocMessageProtocolHandler *connection; 
-    std::string userName;
-};
-
 class IMessageHandler
 {
 public:
