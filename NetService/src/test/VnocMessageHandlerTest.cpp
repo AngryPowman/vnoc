@@ -24,7 +24,7 @@ public:
     {
         VnocMessageHandler<MockTcpConnection> handler(conn_);
         handler.start();
-        char rvc[]={0x55,
+        char rvc[]={0x56,
             0x00,
             0x00,0x01,
             0x00,0x00,0x00,0x35,
@@ -54,7 +54,7 @@ public:
     }
     void testRLI()
     {
-        char testRLI [] = {0x55,
+        char testRLI [] = {0x56,
             0x00,
             0x00,0x01,
             0x00,0x00,0x00,0x5D,
