@@ -14,7 +14,7 @@
 #include <string>
 #include <algorithm> 
 
-#define MSG_BEGIN    0x55   // 'V' 标记消息的开始
+#define MSG_BEGIN    0x56   // 'V' 标记消息的开始
 #define MSG_END		 0x43	// 'C' 标记消息的结束
 #define MSG_VER      0		//版本号
 
