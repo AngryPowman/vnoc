@@ -27,7 +27,6 @@ private:
 
     //post a read operation to wait for message header.
     void readHeader();
-    int HandleRVCMessage(MSG_RVC *rvcMessage);
 
     const static size_t HEADER_LEN = 30;
     char headerData_[HEADER_LEN];
