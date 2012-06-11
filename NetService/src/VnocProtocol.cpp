@@ -9,7 +9,10 @@ void VnocProtocol::RegisterMessageHandler(IMessageHandler *MessageHandler)
     assert (type < MSGTYPE_END);
     handlerMap_[type].push_back(MessageHandler);
 }
-
+void VnocProtocol::RegisterSocketHandlerFactory(SocketHandlerFactory *factory)
+{
+	handlerFactory_ = factory;
+}
 list<IMessageHandler *>& VnocProtocol::getHandler(MSGTYPE msgType)
 {
     assert (msgType != MSGTYPE_NULL);

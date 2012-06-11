@@ -1,16 +1,28 @@
 #pragma once
 #ifndef VNOC_PROTOCOL_H
 #define VNOC_PROTOCOL_H
-#include "VnocMessageSocketHandler.hpp"
+
 #include "../../Message/MsgDef.h"
 #include <string>
 #include <list>
 #include <unordered_map>
 #include <array>
+#include "SocketHandler.hpp"
+
 using std::list;
 using std::array;
 
-class IVnocMessageProtocolHandler;
+class IVnocMessageProtocolHandler
+{
+public:
+    virtual void SendVnocMessage(const CMessage *msg) = 0;
+};
+
+struct MessageContext
+{
+    IVnocMessageProtocolHandler *connection; 
+    std::string userName;
+};
 
 class IMessageHandler
 {
@@ -20,21 +32,19 @@ public:
     virtual MSGTYPE getMessageType() const = 0;
 };
 
-
-
 class VnocProtocol
 {
 public:
-    SocketHandlerFactory* getSocketHandlerFactory(){return &handlerFactory_;}
-    VnocProtocol (){
-        handlerFactory_.protocol = this;
+    SocketHandlerFactory* getSocketHandlerFactory(){return handlerFactory_;}
+    VnocProtocol (){        
     }
     void RegisterMessageHandler(IMessageHandler *MessageHandler);
+	void RegisterSocketHandlerFactory(SocketHandlerFactory *factory);
     void SendVnocMessage(const CMessage *msg, MessageContext *ctx);
     list<IMessageHandler *>& getHandler(MSGTYPE msgType);
 
 private:
-    VnocMessageHandlerFactory handlerFactory_;
+    SocketHandlerFactory *handlerFactory_;
     array<list<IMessageHandler *>,MSGTYPE::MSGTYPE_END > handlerMap_;
 };
 

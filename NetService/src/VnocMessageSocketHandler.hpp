@@ -2,26 +2,11 @@
 #define VNOCMESSAGEHANDLER_HPP
 #include <stdint.h>
 #include <memory>
-
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
 #include "../../Message/MsgDef.h"
+#include "VnocProtocol.hpp"
 #include <ezlogger_headers.hpp>
-
-class IMessageHandler;
-class VnocProtocol;
-
-class IVnocMessageProtocolHandler
-{
-public:
-    virtual void SendVnocMessage(const CMessage *msg) = 0;
-};
-
-struct MessageContext
-{
-    IVnocMessageProtocolHandler *connection; 
-    std::string userName;
-};
 
 template <typename ConnectionT>
 class VnocMessageSocketHandler : public SocketHandler, IVnocMessageProtocolHandler
@@ -54,6 +39,7 @@ private:
 class VnocMessageHandlerFactory: public SocketHandlerFactory
 {
 public:
+    VnocMessageHandlerFactory(VnocProtocol *protocol){}
     virtual SocketHandler* CreateHandler(AsioTcpConnection *connection)
     {
         auto handler = new VnocMessageSocketHandler<AsioTcpConnection>(connection);
