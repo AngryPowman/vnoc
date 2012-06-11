@@ -38,14 +38,19 @@ private:
 class VnocMessageHandlerFactory: public SocketHandlerFactory
 {
 public:
-    VnocMessageHandlerFactory(VnocProtocol *protocol){}
+    VnocMessageHandlerFactory(VnocProtocol *protocol){
+
+        protocol->RegisterSocketHandlerFactory(this);
+        protocol_ = protocol;
+    }
     virtual SocketHandler* CreateHandler(AsioTcpConnection *connection)
     {
         auto handler = new VnocMessageSocketHandler<AsioTcpConnection>(connection);
-        handler->setProtocol(protocol);
+        handler->setProtocol(protocol_);
         return handler;
     }
-        VnocProtocol *protocol;
+private:
+        VnocProtocol *protocol_;
 };
 #include "VnocMessageSocketHandler.inl"
 #endif //VNOCMESSAGEHANDLER_HPP

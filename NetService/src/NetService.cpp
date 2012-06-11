@@ -26,7 +26,7 @@ NetService::~NetService()
 bool NetService::start(unsigned int u_port)
 {
     protocol_ = new VnocProtocol();
-	VnocMessageHandlerFactory socketHandlerFactory(protocol_);
+    VnocMessageHandlerFactory socketHandlerFactory(protocol_);
     RliMessageHandler rliHandler(protocol_);
     RvcMessageHandler rvcHandler(protocol_);
     
