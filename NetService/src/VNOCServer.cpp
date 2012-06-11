@@ -6,6 +6,7 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
+
 #include "../src/NetService.h"
 #include <iostream>
 using namespace std;
@@ -17,3 +18,7 @@ int main()
 
 	return 0;
 }
+
+#ifdef WIN32
+#include "../../VisualLeakDetector/include/vld.h"
+#endif
