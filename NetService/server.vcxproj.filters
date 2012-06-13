@@ -28,6 +28,9 @@
     <ClInclude Include="src\RvcMessageHandler.hpp">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="src\Config.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">
@@ -51,6 +54,39 @@
     <ClCompile Include="src\VnocProtocol.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\program_options\cmdline.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\config_file.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\options_description.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\parsers.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\positional_options.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\split.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\value_semantic.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\variables_map.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\winmain.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\convert.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\utf8_codecvt_facet.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -58,6 +94,9 @@
     </Filter>
     <Filter Include="header">
       <UniqueIdentifier>{393855ef-cd99-460d-b224-78fd97847471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\po">
+      <UniqueIdentifier>{def1898a-4f9c-4311-bf47-46283aca1628}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

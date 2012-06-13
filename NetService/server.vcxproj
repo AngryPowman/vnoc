@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="src\AsioTcpConnection.hpp" />
     <ClInclude Include="src\AsioTcpServer.hpp" />
+    <ClInclude Include="src\Config.hpp" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
@@ -176,6 +177,17 @@
     <ClCompile Include="..\Message\MessageParser.cpp" />
     <ClCompile Include="..\Message\MsgDef.cpp" />
     <ClCompile Include="..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\program_options\cmdline.cpp" />
+    <ClCompile Include="..\program_options\config_file.cpp" />
+    <ClCompile Include="..\program_options\convert.cpp" />
+    <ClCompile Include="..\program_options\options_description.cpp" />
+    <ClCompile Include="..\program_options\parsers.cpp" />
+    <ClCompile Include="..\program_options\positional_options.cpp" />
+    <ClCompile Include="..\program_options\split.cpp" />
+    <ClCompile Include="..\program_options\utf8_codecvt_facet.cpp" />
+    <ClCompile Include="..\program_options\value_semantic.cpp" />
+    <ClCompile Include="..\program_options\variables_map.cpp" />
+    <ClCompile Include="..\program_options\winmain.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />

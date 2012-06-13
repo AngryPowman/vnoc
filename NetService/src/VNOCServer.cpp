@@ -7,8 +7,11 @@
 //============================================================================
 
 
-#include "../src/NetService.h"
+
 #include <iostream>
+#include "NetService.h"
+#include "Config.hpp"
+
 using namespace std;
 
 int main()
