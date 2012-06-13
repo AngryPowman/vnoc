@@ -175,7 +175,7 @@ HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
 	if (msg.GetMessageType() == MSG_ALI_TYPE)
 	{
 		const MSG_ALI* ma = dynamic_cast<const MSG_ALI*>(&msg);
-		if (ma->GetLoginResult() == 1)
+		if (ma->GetLoginResult() == 0)
 		{
 			OnOK();
 		}
