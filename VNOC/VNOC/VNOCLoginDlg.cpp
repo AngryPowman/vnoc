@@ -121,13 +121,9 @@ void CVNOCLoginDlg::OnBnClickedOk()
 	ATLASSERT(pInet);
 	if (pInet)
 	{
-		byte Name[MAX_NAME_LEN] = {0};
-		byte Password[MAX_PASSWORD_LEN] = {0};
-		memcpy(Password,(LPCTSTR)m_strPassword,lstrlen((LPCTSTR)m_strPassword )*(sizeof(TCHAR))+1);
-		memcpy(Name,(LPCTSTR)m_strUsername,lstrlen((LPCTSTR)m_strUsername)*(sizeof(TCHAR))+1);
 		MSG_RLI mRli;
-		mRli.SetAccountNumber(Name,lstrlen((LPCTSTR)m_strUsername)*(sizeof(TCHAR))+1);
-		mRli.SetPassword(Password,lstrlen((LPCTSTR)m_strUsername)*(sizeof(TCHAR))+1);
+		mRli.SetAccountNumber((const byte*)(LPCTSTR)m_strUsername,m_strUsername.GetLength()*sizeof(TCHAR));
+		mRli.SetPassword((const byte*)(LPCTSTR)m_strPassword,m_strUsername.GetLength()*sizeof(TCHAR));
 		pInet->SendServer(mRli);
 		//mRli.SetVerificationCode()
 		_SetVerifyState(TRUE);
@@ -163,7 +159,7 @@ BOOL CVNOCLoginDlg::Refresh()
 HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
 {
 	Global->Log(LogFile_Net,_T("接收到网络包"));
-	if (msg.GetMessageType() == MSG_AVC_TYPE)
+	if (msg.GetMessageType() == MSG_ALI_TYPE)
 	{
 		const MSG_ALI* ma = dynamic_cast<const MSG_ALI*>(&msg);
 		if (ma->GetLoginResult() == 1)

@@ -221,7 +221,7 @@ public:
 	//机器地址
 	byte* GetMachineAddress() const;
 
-	void SetMachineAddress(byte* in_byte_ptr, size_t len);
+	void SetMachineAddress(const byte* in_byte_ptr, size_t len);
 
 	int  GetMachineAddressLen()const{
 		return  m_MachineAddressLen;
@@ -284,7 +284,7 @@ public:
 
 	void SetCaptchaType(byte in_byte);
 
-	void SetCaptcha(byte* in_byte_ptr,size_t len);
+	void SetCaptcha(const byte* in_byte_ptr,size_t len);
 
 
 	//
@@ -349,11 +349,11 @@ public:
 	byte* GetPassword() const;
 
 
-	void SetVerificationCode(byte* in_byte_ptr,size_t len);
+	void SetVerificationCode(const byte* in_byte_ptr,size_t len);
 
-	void SetAccountNumber(byte* in_byte_ptr,size_t len);
+	void SetAccountNumber(const byte* in_byte_ptr,size_t len);
 
-	void SetPassword(byte* in_byte_ptr,size_t len);
+	void SetPassword(const byte* in_byte_ptr,size_t len);
 
 
 	int GetVerificationCodeLen() const{
@@ -426,9 +426,9 @@ public:
 
 	void SetLoginResult(byte in_byte);
 
-	void SetToken(byte* in_byte_ptr,size_t len = 4);
+	void SetToken(const byte* in_byte_ptr,size_t len = 4);
 
-	void SetATLGUID(byte* in_byte_ptr, size_t len = 16);
+	void SetATLGUID(const byte* in_byte_ptr, size_t len = 16);
 
 
 	int GetATLGUIDLen() const{
@@ -502,13 +502,13 @@ public:
 
 	void SetRank(byte in_byte);
 
-	void SetNickname(byte* in_byte_ptr,size_t len);
+	void SetNickname(const byte* in_byte_ptr,size_t len);
 
-	void SetAutograph(byte* in_byte_ptr,size_t len);
+	void SetAutograph(const byte* in_byte_ptr,size_t len);
 
 	void SetHeadForm(byte in_byte);
 
-	void SetHeadPortrait(byte* in_byte_ptr,size_t len);
+	void SetHeadPortrait(const byte* in_byte_ptr,size_t len);
 
 
 	int GetNicknameLen() const{
@@ -575,7 +575,7 @@ public:
 	//个人信息同步通知
 	byte* GetMessageSynchro() const;
 
-	void SetMessageSynchro(byte* in_byte_ptr,size_t len);
+	void SetMessageSynchro(const byte* in_byte_ptr,size_t len);
 
 	int GetMessageSynchroLen() const{
 		return m_MessageSynchroLen;

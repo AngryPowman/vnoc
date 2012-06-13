@@ -340,7 +340,7 @@ byte* MSG_RVC::GetMachineAddress() const
 	return (byte*)(m_ComCommandList[0].data());
 }
 
-void MSG_RVC::SetMachineAddress( byte* in_byte_ptr, size_t len )
+void MSG_RVC::SetMachineAddress(const byte* in_byte_ptr, size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -426,7 +426,7 @@ void MSG_AVC::SetCaptchaType(byte in_byte)
 	m_ComCommandList[1].push_back(in_byte);
 }
 
-void MSG_AVC::SetCaptcha(byte* in_byte_ptr,size_t len)
+void MSG_AVC::SetCaptcha(const byte* in_byte_ptr,size_t len)
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -497,7 +497,7 @@ byte* MSG_RLI::GetPassword() const
 	return (byte*)(m_ComCommandList[0].data());
 }
 
-void MSG_RLI::SetVerificationCode( byte* in_byte_ptr,size_t len )
+void MSG_RLI::SetVerificationCode(const byte* in_byte_ptr,size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -512,7 +512,7 @@ void MSG_RLI::SetVerificationCode( byte* in_byte_ptr,size_t len )
 	}
 }
 
-void MSG_RLI::SetAccountNumber( byte* in_byte_ptr,size_t len )
+void MSG_RLI::SetAccountNumber(const byte* in_byte_ptr,size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -527,7 +527,7 @@ void MSG_RLI::SetAccountNumber( byte* in_byte_ptr,size_t len )
 	}
 }
 
-void MSG_RLI::SetPassword( byte* in_byte_ptr,size_t len )
+void MSG_RLI::SetPassword(const byte* in_byte_ptr,size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -605,7 +605,7 @@ void MSG_ALI::SetLoginResult( byte in_byte )
 	m_ComCommandList[2].push_back(in_byte);
 }
 
-void MSG_ALI::SetToken( byte* in_byte_ptr, size_t len /*= 4*/)
+void MSG_ALI::SetToken(const byte* in_byte_ptr, size_t len /*= 4*/)
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -620,7 +620,7 @@ void MSG_ALI::SetToken( byte* in_byte_ptr, size_t len /*= 4*/)
 	}
 }
 
-void MSG_ALI::SetATLGUID( byte* in_byte_ptr, size_t len /*= 16*/ )
+void MSG_ALI::SetATLGUID(const byte* in_byte_ptr, size_t len /*= 16*/ )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -722,7 +722,7 @@ void MSG_RPS::SetRank( byte in_byte )
 }
 
 
-void MSG_RPS::SetNickname( byte* in_byte_ptr,size_t len )
+void MSG_RPS::SetNickname(const byte* in_byte_ptr,size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -738,7 +738,7 @@ void MSG_RPS::SetNickname( byte* in_byte_ptr,size_t len )
 }
 
 
-void MSG_RPS::SetAutograph( byte* in_byte_ptr,size_t len )
+void MSG_RPS::SetAutograph(const byte* in_byte_ptr,size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -760,7 +760,7 @@ void MSG_RPS::SetHeadForm( byte in_byte )
 	m_ComCommandList[1].push_back(in_byte);
 }
 
-void MSG_RPS::SetHeadPortrait( byte* in_byte_ptr,size_t len )
+void MSG_RPS::SetHeadPortrait(const byte* in_byte_ptr,size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
@@ -812,7 +812,7 @@ byte* MSG_APS::GetMessageSynchro() const
 	return (byte*)(m_ComCommandList[0].data());
 }
 
-void MSG_APS::SetMessageSynchro( byte* in_byte_ptr,size_t len )
+void MSG_APS::SetMessageSynchro(const byte* in_byte_ptr,size_t len )
 {
 	if (in_byte_ptr == NULL)
 	{
