@@ -15,8 +15,8 @@
 
 // CVNOCDlg 对话框
 
-
-
+#define  MAX_NAME_LEN     128
+#define  MAX_PASSWORD_LEN 128
 
 CVNOCLoginDlg::CVNOCLoginDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CVNOCLoginDlg::IDD, pParent)
@@ -121,10 +121,15 @@ void CVNOCLoginDlg::OnBnClickedOk()
 	ATLASSERT(pInet);
 	if (pInet)
 	{
-		MSG_RVC mRVC;
-		byte MAC[16]={0};
-		mRVC.SetMachineAddress(MAC,16);
-		pInet->SendServer(mRVC);
+		byte Name[MAX_NAME_LEN] = {0};
+		byte Password[MAX_PASSWORD_LEN] = {0};
+		memcpy(Password,(LPCTSTR)m_strPassword,lstrlen((LPCTSTR)m_strPassword )*(sizeof(TCHAR))+1);
+		memcpy(Name,(LPCTSTR)m_strUsername,lstrlen((LPCTSTR)m_strUsername)*(sizeof(TCHAR))+1);
+		MSG_RLI mRli;
+		mRli.SetAccountNumber(Name,lstrlen((LPCTSTR)m_strUsername)*(sizeof(TCHAR))+1);
+		mRli.SetPassword(Password,lstrlen((LPCTSTR)m_strUsername)*(sizeof(TCHAR))+1);
+		pInet->SendServer(mRli);
+		//mRli.SetVerificationCode()
 		_SetVerifyState(TRUE);
 		SetTimer(0,5000,NULL);
 	}
@@ -160,8 +165,8 @@ HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
 	Global->Log(LogFile_Net,_T("接收到网络包"));
 	if (msg.GetMessageType() == MSG_AVC_TYPE)
 	{
-		const MSG_AVC* ma = dynamic_cast<const MSG_AVC*>(&msg);
-		if (ma->GetLoginTag() == 1)
+		const MSG_ALI* ma = dynamic_cast<const MSG_ALI*>(&msg);
+		if (ma->GetLoginResult() == 1)
 		{
 			_SetVerifyState(FALSE);
 			OnOK();

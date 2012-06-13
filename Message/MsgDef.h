@@ -165,7 +165,7 @@ public:
 protected:
 
 
-	bool  m_Begin;				  //标记消息的开始  统一字符'V"的ASCⅡ码 0x55
+	bool  m_Begin;				  //标记消息的开始  统一字符'V"的ASCⅡ码 0x56
 	bool  m_End;				  //标记消息的结束  固定字符'C‘的ASCⅡ码 0x43
 								  //参数列表    4字节，对应参数N的长度
 	std::vector<byte>			 m_ComListLen;  
