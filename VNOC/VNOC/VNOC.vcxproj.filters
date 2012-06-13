@@ -58,6 +58,9 @@
     <Filter Include="ErrorMessage">
       <UniqueIdentifier>{b2fd2961-0b64-4e90-adc9-8ff245d8b7a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util\sha1">
+      <UniqueIdentifier>{c02f1cda-9213-4df7-932a-10b0be8ed19e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyperLink.cpp">
@@ -158,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="Error.cpp">
       <Filter>ErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sha1\sha1.cpp">
+      <Filter>util\sha1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="ErrorBase.h">
       <Filter>ErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sha1\sha1.h">
+      <Filter>util\sha1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

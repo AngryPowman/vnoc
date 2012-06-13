@@ -8,6 +8,8 @@
 #include "Config.h"
 #include "INet.h"
 
+#include "../../sha1/sha1.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -25,7 +27,7 @@ CVNOCLoginDlg::CVNOCLoginDlg(CWnd* pParent /*=NULL*/)
 {
 	m_bVerifying = FALSE;
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	m_nlHelper.AddFilter(MSG_AVC_TYPE,this);
+	m_nlHelper.AddFilter(MSG_ALI_TYPE,this);
 	m_nlHelper.StartListen();
 }
 
@@ -105,7 +107,7 @@ HCURSOR CVNOCLoginDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
-
+#include <atlconv.h>
 
 void CVNOCLoginDlg::OnBnClickedOk()
 {
@@ -116,16 +118,27 @@ void CVNOCLoginDlg::OnBnClickedOk()
 		OnOK();
 	}
 
+	SHA1 shaer;
+	shaer.Reset();
+
+	CStringA pwdBuffer = CT2A(m_strPassword);
+	shaer.Input(pwdBuffer,pwdBuffer.GetLength());
+	UINT pResult[5];
+	shaer.Result(pResult);
+	pwdBuffer.Format("%08x%08x%08x%08x%08x"
+		,pResult[0],pResult[1],pResult[2],pResult[3],pResult[4]);
+	Global->Logf(LogFile_General,_T("SHA1ºóµÄÃÜÂëÎª:%s\n"),CA2T(pwdBuffer));
+
 	INetCenter *pInet=NULL;
 	Global->GetINetCenter(&pInet);
 	ATLASSERT(pInet);
 	if (pInet)
 	{
 		MSG_RLI mRli;
-		mRli.SetAccountNumber((const byte*)(LPCTSTR)m_strUsername,m_strUsername.GetLength()*sizeof(TCHAR));
-		mRli.SetPassword((const byte*)(LPCTSTR)m_strPassword,m_strUsername.GetLength()*sizeof(TCHAR));
+		mRli.SetAccountNumber((byte*)(LPCTSTR)m_strUsername,m_strUsername.GetLength()*sizeof(TCHAR));
+		mRli.SetPassword((byte*)(LPCSTR)pwdBuffer,pwdBuffer.GetLength()*sizeof(TCHAR));
 		pInet->SendServer(mRli);
-		//mRli.SetVerificationCode()
+
 		_SetVerifyState(TRUE);
 		SetTimer(0,5000,NULL);
 	}
@@ -164,13 +177,13 @@ HRESULT CVNOCLoginDlg::OnMessage( const CMessage& msg )
 		const MSG_ALI* ma = dynamic_cast<const MSG_ALI*>(&msg);
 		if (ma->GetLoginResult() == 1)
 		{
-			_SetVerifyState(FALSE);
 			OnOK();
 		}
 		else
 		{
 			MessageBox(_T("µÇÂ½Ê§°Ü£¬·þÎñÆ÷¾Ü¾øµÇÂ½ ."));
 		}
+		_SetVerifyState(FALSE);
 	}
 	return S_OK;
 }
