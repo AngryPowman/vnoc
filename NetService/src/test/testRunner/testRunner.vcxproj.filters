@@ -36,8 +36,8 @@
     <ClCompile Include="..\..\VnocProtocol.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\testUserManage.hpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="..\..\testUserManage.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
