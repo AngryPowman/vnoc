@@ -39,6 +39,8 @@
 #define  PAC_INDEX    (MSG_CLASS_LEN + MSG_CLASS_VER + MSG_CLASS_SERIAL + MSG_CLASS_GUID + MSG_CLASS_COMMAND + MSG_CLASS_OBL + MSG_CLASS_PARAMCONST)
 
 
+#define MSG_INIT  		SetDataLen(0);SetVersion(MSG_VER);SetSerial(0x00);SetCommand(m_Command);SetObligate(0);SetCmlCount(m_CmlCount);SetVerify(0);
+
 enum  MSGTYPE
 {
 	MSGTYPE_NULL,
@@ -206,13 +208,7 @@ public:
 		m_Error    = 0;
 		m_MachineAddressLen = 0;
 		//预设
-		SetDataLen(0);
-		SetVersion(MSG_VER);
-		SetSerial(0x00);
-		SetCommand(m_Command);
-		SetObligate(0);
-		SetCmlCount(m_CmlCount);
-		SetVerify(0);
+		MSG_INIT;
 		//留好参数长度空间
 		SetComListLen( 0, m_CmlCount );
 		//留好参数空间
@@ -260,13 +256,7 @@ public:
 		m_Error    = 0;
 		m_CaptchaLen =0;
 		//预设
-		SetDataLen(0);
-		SetVersion(MSG_VER);
-		SetSerial(0x00);
-		SetCommand(m_Command);
-		SetObligate(0);
-		SetCmlCount(m_CmlCount);
-		SetVerify(0);
+		MSG_INIT;
 		//留好参数长度空间
 		SetComListLen( 0, m_CmlCount );
 		//留好参数空间
@@ -329,13 +319,7 @@ public:
 	    m_AccountNumberLen = 0;
 		m_PasswordLen  = 0;
 		//预设
-		SetDataLen(0);
-		SetVersion(MSG_VER);
-		SetSerial(0x00);
-		SetCommand(m_Command);
-		SetObligate(0);
-		SetCmlCount(m_CmlCount);
-		SetVerify(0);
+		MSG_INIT;	
 		//留好参数长度空间
 		SetComListLen( 0, m_CmlCount );
 		//留好参数空间
@@ -405,13 +389,7 @@ public:
 		m_TokenLen = 0;
 		m_ALTGUIDLen = 0;
 		//预设
-		SetDataLen(0);
-		SetVersion(MSG_VER);
-		SetSerial(0x00);
-		SetCommand(m_Command);
-		SetObligate(0);
-		SetCmlCount(m_CmlCount);
-		SetVerify(0);
+		MSG_INIT;
 		//留好参数长度空间
 		SetComListLen( 0, m_CmlCount );
 		//留好参数空间
@@ -477,13 +455,7 @@ public:
 		m_AutographLen = 0;
 		m_HeadPortraitLen = 0;
 		//预设
-		SetDataLen(0);
-		SetVersion(MSG_VER);
-		SetSerial(0x00);
-		SetCommand(m_Command);
-		SetObligate(0);
-		SetCmlCount(m_CmlCount);
-		SetVerify(0);
+		MSG_INIT;
 		//留好参数长度空间
 		SetComListLen( 0, m_CmlCount );
 		//留好参数空间
@@ -559,13 +531,7 @@ public:
 		m_Error    = 0;
 		m_MessageSynchroLen = 0;
 		//预设
-		SetDataLen(0);
-		SetVersion(MSG_VER);
-		SetSerial(0x00);
-		SetCommand(m_Command);
-		SetObligate(0);
-		SetCmlCount(m_CmlCount);
-		SetVerify(0);
+		MSG_INIT;
 		//留好参数长度空间
 		SetComListLen( 0, m_CmlCount );
 		//留好参数空间

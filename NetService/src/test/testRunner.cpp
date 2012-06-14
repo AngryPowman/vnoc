@@ -1,7 +1,6 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
 
-#include "..\testUserManage.hpp"
 
 int main( int argc, char **argv)
 {

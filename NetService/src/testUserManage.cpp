@@ -6,6 +6,9 @@
 class CUserManageTest : public CppUnit::TestFixture
 {
 private:
+    CPPUNIT_TEST_SUITE( CUserManageTest );
+    CPPUNIT_TEST( AuthenticateTest );
+    CPPUNIT_TEST_SUITE_END();
 	CUserManage um;
 public:
     void setUp()
@@ -28,3 +31,5 @@ public:
     }
 
 };
+CPPUNIT_TEST_SUITE_REGISTRATION ( CUserManageTest );
+CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(CUserManageTest, "CUserManageTest");
