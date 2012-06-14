@@ -162,6 +162,7 @@
     <ClCompile Include="..\..\..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\..\..\Message\MsgDef.cpp" />
     <ClCompile Include="..\..\..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\testUserManage.hpp" />
     <ClCompile Include="..\..\VnocProtocol.cpp" />
     <ClCompile Include="..\EchoTestHandlerTest.cpp" />
     <ClCompile Include="..\testRunner.cpp" />

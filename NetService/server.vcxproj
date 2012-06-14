@@ -169,6 +169,7 @@
     <ClInclude Include="src\RliMessageHandler.hpp" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
     <ClInclude Include="src\SocketServer.hpp" />
+    <ClInclude Include=".\src\UserManage.hpp" />
     <ClInclude Include="src\util.hpp" />
     <ClInclude Include="src\VnocMessageSocketHandler.hpp" />
     <ClInclude Include="src\VnocProtocol.hpp" />

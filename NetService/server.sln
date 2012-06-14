@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 11
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "server.vcxproj", "{D19666CB-CB3B-49CD-4968-C85337B74D8A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoTestServer", "EchoTestServer\EchoTestServer.vcxproj", "{111C4F30-3E77-FA0D-1C5E-B1E1B2B15020}"
