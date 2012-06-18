@@ -1,0 +1,253 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Simplified, PRC) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\VNOC.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""afxres.rc""     // 标准组件\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\VNOC.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_RoomListDlg DIALOGEX 0, 0, 355, 218
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MainPage"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    GROUPBOX        "",IDC_STATIC_NOTICE,219,25,130,186
+    PUSHBUTTON      "创建课堂",IDC_BUTTON_CREATE,158,7,104,20
+    EDITTEXT        IDC_EDIT_SEACH,7,7,113,20,ES_AUTOHSCROLL
+    PUSHBUTTON      "搜索",IDC_BUTTON_SEACH,119,7,37,20
+    CONTROL         "",IDC_STATIC_SPLIT,"Static",SS_BLACKFRAME,221,116,128,2
+    CONTROL         "",IDC_LIST_CLASS,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,8,28,213,183,WS_EX_STATICEDGE
+END
+
+IDD_LoginDlg DIALOGEX 0, 0, 269, 137
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "VNOC"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "取消",IDCANCEL,211,112,50,16
+    DEFPUSHBUTTON   "登录",IDOK,146,112,50,16
+    LTEXT           "账号:",IDC_LoginDlg_STATIC_USERNAME,23,35,29,16
+    LTEXT           "密码",IDC_LoginDlg_STATIC_PWD,23,62,23,16
+    EDITTEXT        IDC_LoginDlg_EDIT_USERNAME,55,31,108,17
+    EDITTEXT        IDC_LoginDlg_EDIT_PWD,55,61,107,17,ES_PASSWORD
+    CONTROL         "记住密码",EMEMBERPWD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,55,88,48,16
+    LTEXT           "注册账号",IDC_LoginDlg_STATIC_REGIST,173,31,45,17,0,0,HIDC_LoginDlg_STATIC_REGIST
+    LTEXT           "找回密码",IDC_LoginDlg_STATIC_RECOVERYPWD,173,61,45,17
+END
+
+IDD_RoomDlg DIALOGEX 0, 0, 471, 289
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "已上传的文件",IDC_STATIC,7,200,100,82
+    CONTROL         "",IDC_LIST_UPFILE,"SysListView32",LVS_ALIGNLEFT | LVS_NOSCROLL | WS_BORDER | WS_TABSTOP,10,216,93,39
+    PUSHBUTTON      "上传",IDC_BUTTON_UPLOAD,30,258,51,15
+    EDITTEXT        IDC_EDIT_SEND,117,259,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "发送",IDC_BUTTON_SEND,355,258,29,15
+    PUSHBUTTON      "离开教室",IDC_BUTTON_LEAVE,401,264,50,18
+    GROUPBOX        "讨论",IDC_GROUP_SESSION,111,200,278,82
+    GROUPBOX        "代码输出",IDC_GROUP_CODE,372,7,92,198
+    PUSHBUTTON      "运行",IDC_BUTTON_RUN,379,19,40,14
+    LTEXT           "静态",IDC_STATIC_RESULT,380,40,77,159,0,WS_EX_STATICEDGE
+    GROUPBOX        "在线人员",IDC_GROUP_ONLINE,7,7,100,189
+    CONTROL         "",IDC_LIST_ONLINE,"SysListView32",LVS_ALIGNLEFT | LVS_NOSCROLL | WS_BORDER | WS_TABSTOP,12,17,87,174
+    LTEXT           "Scintilla位置",IDC_STATIC_SciPosition,111,14,255,184,NOT WS_VISIBLE | WS_BORDER
+END
+
+IDD_CODE DIALOGEX 0, 0, 196, 128
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_BORDER
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "CompanyName", "TODO: <公司名>"
+            VALUE "FileDescription", "TODO: <文件说明>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "VNOC.exe"
+            VALUE "LegalCopyright", "TODO: (C) <公司名>。保留所有权利。"
+            VALUE "OriginalFilename", "VNOC.exe"
+            VALUE "ProductName", "TODO: <产品名>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_RoomListDlg, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 349
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 211
+    END
+
+    IDD_LoginDlg, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 262
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 132
+    END
+
+    IDD_RoomDlg, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 464
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 282
+    END
+
+    IDD_CODE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 195
+        BOTTOMMARGIN, 127
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_Sci_WndTitle        "Scintilla_On_VNOC"
+    IDS_Sci_Lexer_Keywords_CPP 
+                            "asm auto break case catch class const const_cast continue default delete do double dynamic_cast else enum explicit extern false for friend goto if inline mutable namespace new operator private protected public register reinterpret_cast return signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual volatile while"""
+    IDS_Sci_Lexer_VariableTypes_CPP 
+                            "bool char float int long short void wchar_t"
+    IDS_Error_DllMissing    "缺失 %s 文件，程序无法启动。"
+END
+
+#endif    // Chinese (Simplified, PRC) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\VNOC.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "afxres.rc"     // 标准组件
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

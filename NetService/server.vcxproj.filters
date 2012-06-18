@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="src\AsioTcpConnection.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AsioTcpServer.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NetService.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SocketServer.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VnocProtocol.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VnocMessageSocketHandler.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RliMessageHandler.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RvcMessageHandler.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AsioTcpServer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NetService.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VNOCServer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Message\MessageParser.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Message\MsgDef.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Message\PackMessage.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VnocProtocol.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\cmdline.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\config_file.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\options_description.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\parsers.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\positional_options.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\split.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\value_semantic.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\variables_map.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\winmain.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\convert.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="..\program_options\utf8_codecvt_facet.cpp">
+      <Filter>source\po</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{c6301850-38aa-4a4c-978f-a2463b9e0c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{393855ef-cd99-460d-b224-78fd97847471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\po">
+      <UniqueIdentifier>{def1898a-4f9c-4311-bf47-46283aca1628}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\VnocMessageSocketHandler.inl">
+      <Filter>header</Filter>
+    </None>
+  </ItemGroup>
+</Project>

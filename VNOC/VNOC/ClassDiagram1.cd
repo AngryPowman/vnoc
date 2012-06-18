@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IRefCountImpl" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAABAAAAAAAAAAAAAAAgAgAAAAAABACAAA=</HashCode>
+      <FileName>IRefCountImpl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRoomListImpl" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAQAAAAAAAEAAIAAEAAAAAAAEAAAAAAo=</HashCode>
+      <FileName>RoomListImpl.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CRoomImpl" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAEAAAAgEAAAAAAAEAAAAAAo=</HashCode>
+      <FileName>RoomImpl.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CLoginImpl" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAASAEAAAAAEAAAAAEAAAAAAAEACAAAAo=</HashCode>
+      <FileName>LoginImpl.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CRoomDlg" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAABFAAAAAACAAAAAAAAIAAAAAgAA=</HashCode>
+      <FileName>RoomDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRoomListDlg" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAEAIAEAAECAADAAACgAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>RoomListDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVNOCLoginDlg" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CVNOCLoginDlg::__unnamed_enum_0032_1" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>VNOCLoginDlg.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAiIAAEAAABAAAAAABAAEAAAQCAAQAQAAAAEAAAQAAA=</HashCode>
+      <FileName>VNOCLoginDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IVNOCFrame" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAABAAAAAAAAAAAAAAQAAAAAIAAAAAAA=</HashCode>
+      <FileName>IVNOCFrame.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ILogin" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAEAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ILogin.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IModule" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAEAAAAAAo=</HashCode>
+      <FileName>IModule.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IRoom" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IRoom.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IRoomList" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IRoomList.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IUIWnd" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IUIWnd.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

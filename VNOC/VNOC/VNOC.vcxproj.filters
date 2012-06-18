@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="CodeEditor">
+      <UniqueIdentifier>{83be4666-594d-4b5f-9df2-f0c8910087ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{264cbfda-568d-4c23-90ae-f5499a3ea5c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalCenter">
+      <UniqueIdentifier>{b759fbda-a17b-420f-9e85-93f64209457b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{2a850873-c414-44f4-8e9d-aa7b8c973c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{08f4a35e-03ff-46d9-bf09-5c8d7bc56053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Modules">
+      <UniqueIdentifier>{b256ffc7-3c72-4144-97e8-6343d544308a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{3614b0d9-aab3-4da9-902a-97972b0e46be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\BaseInterface">
+      <UniqueIdentifier>{25413286-00b1-42b2-95c3-3919f2ee0eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{30f8f572-c62b-401d-a5a3-70c73813f9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeEditor\_headers">
+      <UniqueIdentifier>{d53b3ebe-89bd-477d-ac58-77b4e5bcef7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Dialog">
+      <UniqueIdentifier>{53f89d19-a7ad-47c0-9c0e-c80c540eac51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net">
+      <UniqueIdentifier>{f555e30c-f795-4202-bba0-5a67156b7d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Socket">
+      <UniqueIdentifier>{5ebfe572-f0db-40bd-b1b1-b94caeb2bb93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Message">
+      <UniqueIdentifier>{218d1f90-dafb-4a6f-a941-3ffc566413f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ErrorMessage">
+      <UniqueIdentifier>{b2fd2961-0b64-4e90-adc9-8ff245d8b7a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\sha1">
+      <UniqueIdentifier>{c02f1cda-9213-4df7-932a-10b0be8ed19e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HyperLink.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOC.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SciEdit.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalCenter.cpp">
+      <Filter>GlobalCenter</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCDialogBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCFrame.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginImpl.cpp">
+      <Filter>FrameWork\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCLoginDlg.cpp">
+      <Filter>FrameWork\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\CBuffer.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\MD5.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\TaskThread.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\util.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomListImpl.cpp">
+      <Filter>FrameWork\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomListDlg.cpp">
+      <Filter>FrameWork\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomDlg.cpp">
+      <Filter>FrameWork\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomImpl.cpp">
+      <Filter>FrameWork\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="InterfaceDefImpl.cpp">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\util\BLog.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalLog.cpp">
+      <Filter>GlobalCenter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinystr.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxml.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlerror.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlparser.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="SciEditLexer.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SciEditConfig.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="NET.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCSocket.cpp">
+      <Filter>Net\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MessageParser.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MsgDef.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\PackMessage.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>ErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sha1\sha1.cpp">
+      <Filter>util\sha1</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HyperLink.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOC.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SciEdit.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalCenter.h">
+      <Filter>GlobalCenter</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCDialogBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCFrame.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginImpl.h">
+      <Filter>FrameWork\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogin.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCLoginDlg.h">
+      <Filter>FrameWork\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\CBuffer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\MD5.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\MD5ChecksumDefines.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\TaskThread.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\ThreadDefine.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="IRoomList.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IRoom.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomListImpl.h">
+      <Filter>FrameWork\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomListDlg.h">
+      <Filter>FrameWork\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomDlg.h">
+      <Filter>FrameWork\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomImpl.h">
+      <Filter>FrameWork\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="IRefCountImpl.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="IVNOCFrame.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="IUIWnd.h">
+      <Filter>Interface\BaseInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\Performance.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util\BLog.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="IGlobal.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalDefine.h">
+      <Filter>GlobalCenter</Filter>
+    </ClInclude>
+    <ClInclude Include="IConfig.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinystr.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinyxml.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\ILexer.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\Platform.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\SciLexer.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\scintilla\include\Scintilla.h">
+      <Filter>CodeEditor\_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDefine.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="SciDefine.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ILanguage.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="INet.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="ISocket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCSocket.h">
+      <Filter>Net\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageParser.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MsgDef.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\PackMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>ErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorBase.h">
+      <Filter>ErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sha1\sha1.h">
+      <Filter>util\sha1</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\VNOC.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\VNOC.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\postDispatch.bat">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\preLink.bat">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="resource.hm">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="config.xml">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Config.inl">
+      <Filter>config</Filter>
+    </None>
+    <None Include="Performance.inl">
+      <Filter>util</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VNOC.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
