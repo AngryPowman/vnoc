@@ -19,7 +19,7 @@ int main()
     Config::getInstance()->Initialize("vnoc.conf");
     cout<<"port:"<<Config::getInstance()->getValue("port")<<endl;
     NetService net;
-    net.start(2508);
+    net.start(Config::getInstance()->getValue("port"));
 
     return 0;
 }
