@@ -27,7 +27,7 @@ bool Config::Initialize(std::string config_file)
     return true;
 }
 
-std::string Config::getValue(std::string key)
+std::string Config::getStringValue(std::string key)
 {
     if (vm_.count(key)){
         return vm_[key].as<string>();
