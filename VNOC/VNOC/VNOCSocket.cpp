@@ -70,3 +70,22 @@ void CSocketImpl::SetListener( ISocketListener *pListener )
 }
 
 //////////////////////////////////////////////////////////////////////////
+
+CVNOCSocket::CVNOCSocket( ISocketListener *pListener/*=NULL*/ )
+	:CSocketImpl(pListener)
+{
+
+}
+
+CVNOCSocket::~CVNOCSocket()
+{
+}
+
+void CVNOCSocket::OnReceive( int nErrorCode )
+{
+	int length = 0;
+	length = ((CAsyncSocket*)this)->Receive(m_buffer.AllocAppend(1024),1024);
+	m_buffer.AccomplishAppend(length);
+}
+
+//////////////////////////////////////////////////////////////////////////
