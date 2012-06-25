@@ -190,6 +190,7 @@
     <ClCompile Include="..\program_options\variables_map.cpp" />
     <ClCompile Include="..\program_options\winmain.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
+    <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />

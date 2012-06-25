@@ -11,15 +11,17 @@
 #include <iostream>
 #include "NetService.h"
 #include "Config.hpp"
-
+#include <string>
 using namespace std;
 
 int main()
 {
-	NetService net;
-	net.start(2508);
+    Config::getInstance()->Initialize("vnoc.conf");
+    cout<<"port:"<<Config::getInstance()->getValue("port")<<endl;
+    NetService net;
+    net.start(Config::getInstance()->getValue("port"));
 
-	return 0;
+    return 0;
 }
 
 #ifdef WIN32
