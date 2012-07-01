@@ -280,7 +280,7 @@ BOOL CConfigImpl::_ParseXMLNode( TiXmlNode *tiNode,ConfigNode& node )
 			while(attr)
 			{
 				Global->Lognf(LogFile_Config,_T("|%s:%s|"),CString(attr->Name()),CString(attr->Value()));
-				node.attr.insert(std::make_pair(attr->Name(), attr->Value()));
+				node.attr.insert(std::make_pair(CString(attr->Name()), CString(attr->Value())));
 				attr = attr->Next();
 			}
 			Global->Log(LogFile_Config,_T(")"),FALSE,FALSE);
