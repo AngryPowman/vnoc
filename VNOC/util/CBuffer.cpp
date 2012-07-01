@@ -1,5 +1,6 @@
 #include "CBuffer.h"
 #include "stdio.h"
+#include <tchar.h>
 #include <atldef.h>
 
 CBuffer::CBuffer( LPCTSTR _debug/*=NULL*/ )
@@ -105,7 +106,7 @@ void CBuffer::memset( byte value/*=0*/ )
 BOOL CBuffer::WriteToFile( LPCTSTR filePath ) const
 {
 	FILE* fp=NULL;
-	_wfopen_s(&fp,filePath,L"wb");
+	_tfopen_s(&fp,filePath,TEXT("wb"));
 	if (fp)
 	{
 		size_t temp;

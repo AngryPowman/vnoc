@@ -26,7 +26,7 @@ namespace Thread
 		{
 			Start();
 		}
-		m_performance.MileStone(L"构造");
+		m_performance.MileStone(_T("构造"));
 	}
 
 	VOID CTaskThread::Start()
@@ -39,12 +39,12 @@ namespace Thread
 
 	CTaskThread::~CTaskThread( VOID )
 	{
-		m_performance.MileStone(L"开始析构");
+		m_performance.MileStone(_T("开始析构"));
 		m_bAlive = FALSE;
 		m_newTaskAvaliable.Set();
 		WaitForSingleObject(m_hThread,10000);
 		CloseHandle(m_hThread);
-		m_performance.MileStone(L"析构完成");
+		m_performance.MileStone(_T("析构完成"));
 	}
 
 	VOID CTaskThread::OnThreadQuit()

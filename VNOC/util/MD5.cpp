@@ -147,7 +147,7 @@ CString CMD5Checksum::GetMD5(BYTE* pBuf, UINT nLength)
 	return MD5Checksum.Final();
 }
 
-BOOL CMD5Checksum::GetMD5(const wchar_t* path, CString& md5)
+BOOL CMD5Checksum::GetMD5(LPCTSTR path, CString& md5)
 {
 	if(NULL == path || !PathFileExists(path))
 	{

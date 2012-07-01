@@ -4,6 +4,9 @@
 #include "GlobalDefine.h"
 #include "../util/CBuffer.h"
 
+#include <afxsock.h>
+#include <atlsync.h>
+
 class CSocketImpl : public CAsyncSocket
 {
 public:
@@ -27,6 +30,9 @@ public:
 	virtual ~CVNOCSocket();
 	virtual void OnReceive(int nErrorCode);
 private:
+	VOID _TryParse();
+private:
 	CAutoStreamBuffer	m_buffer;
+	CCriticalSection	m_cs;
 };
 

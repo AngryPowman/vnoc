@@ -1,6 +1,27 @@
 #include "stdafx.h"
-#include <afxsock.h>
 #include "VNOCSocket.h"
+
+#include "../util/util.h"
+
+#define VNOCProtocol_
+#define VNOCProtocol_HeadFlag	'V'
+#define VNOCProtocol_HeadFlagSize	1
+#define VNOCProtocol_VersionSize	1
+#define VNOCProtocol_SeqNumSize		2
+#define VNOCProtocol_HeadLeadSize	\
+	VNOCProtocol_HeadFlagSize+ \
+	VNOCProtocol_VersionSize+ \
+	VNOCProtocol_SeqNumSize
+#define VNOCProtocol_BodyLengthParamSize	4
+#define VNOCProtocol_TokenSize		16
+#define VNOCProtocol_CommandSize	1
+#define VNOCProtocol_ReserveSize	4
+#define VNOCProtocol_ParamCountSize	1
+#define VNOCProtocol_HeadParamSize	\
+	VNOCProtocol_TokenSize+ \
+	VNOCProtocol_CommandSize+ \
+	VNOCProtocol_ReserveSize+ \
+	VNOCProtocol_ParamCountSize
 
 CSocketImpl::CSocketImpl(ISocketListener *pListener) : m_listener(pListener)
 {
@@ -84,8 +105,38 @@ CVNOCSocket::~CVNOCSocket()
 void CVNOCSocket::OnReceive( int nErrorCode )
 {
 	int length = 0;
+	Util::CAutoCS ac(m_cs);
 	length = ((CAsyncSocket*)this)->Receive(m_buffer.AllocAppend(1024),1024);
 	m_buffer.AccomplishAppend(length);
+}
+#include <Tmschema.h>
+VOID CVNOCSocket::_TryParse()
+{ // 解析buffer，将数据包分离出来
+	BYTE* pBuffer;
+	DWORD bufSize;
+	pBuffer = m_buffer.GetBuffer();
+	bufSize = m_buffer.GetSize();
+	DWORD startPos=0;
+	while(startPos<bufSize && *pBuffer!=VNOCProtocol_HeadFlag)
+	{
+		++startPos;
+	}
+	if (startPos)
+	{
+		m_buffer.Get(NULL,startPos);	// 跳过不可识别数据
+		Global->Logf(LogFile_Net,_T("出现了不可识别字符,长度为%d字节"),startPos);
+		_TryParse();	// 理论上只会递归一次
+		return;
+	}
+	if (bufSize > VNOCProtocol_HeadLeadSize+VNOCProtocol_BodyLengthParamSize)	// 检查长度是否足够
+	{
+		DWORD packSize=0;
+		packSize = *((DWORD*)startPos + 1);
+		if (bufSize-startPos-packSize >= VNOCProtocol_HeadParamSize)
+		{
+			m_buffer;
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
