@@ -149,10 +149,6 @@ CStringW Util::String::UTF82Unicode(const char* pChar)
 }
 
 
-CStringW Util::String::Unicode_URLEncode(const wchar_t* pStr)
-{
-	return PHP_URLEncode(Unicode2UTF8(pStr));
-}
 
 CStringW Util::String::Unicode_URLDecode(const char* pStr)
 {
@@ -281,7 +277,7 @@ BOOL Util::MD5::HashMD5( ConstReferenceBuffer buffer,CString &md5 )
 	return !md5.IsEmpty();
 }
 
-BOOL Util::MD5::GetFileMD5(const wchar_t* path, CString& md5)
+BOOL Util::MD5::GetFileMD5( LPCTSTR path, CString& md5 )
 {
 	return CMD5Checksum::GetMD5(path, md5);
 }
@@ -344,21 +340,7 @@ BOOL Util::Filesys::GetSpecialPath( DWORD dwSpecDirID,CString &path )
 	return bResult;
 }
 
-bool Util::Filesys::FindFileAttribute(const wchar_t* path, WIN32_FIND_DATA& findFileData)
-{
-	ATLASSERT(NULL != path);
-
-	memset(&findFileData, 0, sizeof(WIN32_FIND_DATA));
-	HANDLE hFind = FindFirstFile(path, &findFileData);
-	if(INVALID_HANDLE_VALUE != hFind)
-	{
-		FindClose(hFind);
-		return true;
-	}
-	return false;
-}
-
-bool Util::Filesys::IsFileInUse(const wchar_t* path)
+bool Util::Filesys::IsFileInUse( LPCTSTR path )
 {
 	ATLASSERT(NULL != path);
 	if(!PathFileExists(path))

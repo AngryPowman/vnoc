@@ -78,7 +78,7 @@ VOID CSciEdit::_AddRef()
 	{
 		if (!m_dllHandle)
 		{
-			m_dllHandle = LoadLibraryW(SCINTILLA_ADVANCED_DLL_NAME);
+			m_dllHandle = LoadLibrary(SCINTILLA_ADVANCED_DLL_NAME);
 			ATLASSERT(m_dllHandle);
 			if (m_dllHandle == 0)
 			{
