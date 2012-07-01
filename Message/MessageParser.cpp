@@ -67,6 +67,8 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 		return -1;
 	}
 
+
+
 	if(lpszData[0] != MSG_BEGIN )
 	{
 	  _Messsage->m_Begin = false;
@@ -280,4 +282,39 @@ CMessage* CMessageParser::Parse(byte* lpszData,size_t len)
 	_Tail(m_MessageStr,lpszData,ParamLen,len);
 
 	return m_MessageStr;
+}
+
+int CMessageParser::_Checking( byte* lpszDate,size_t len )
+{
+	int Begin = 0;
+	int End   = 0;
+	for(int index = 0; index < (int)len;index++)
+	{
+		if (lpszDate[index] ==  MSG_BEGIN)
+		{
+			Begin = index;
+			break;
+		}
+	}
+
+	for(int index = 0; index < (int)len;index++)
+	{
+		if (lpszDate[index] == MSG_END)
+		{
+			End = index;
+			break;
+		}
+	}
+
+	if ( End  == 0 )
+	{
+		return -1;
+	}
+
+	if ( Begin != 0 )
+	{
+		return Begin;
+	}
+
+	return -1;
 }

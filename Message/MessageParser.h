@@ -28,6 +28,8 @@ private:
 
 	byte   m_Instruct;			  //指令			具体的指令，用来标注此数据包的功能
 
+	static int _Checking(CMessage* _MessageType,byte* lpszDate,size_t len);
+
 	int _Head(CMessage* _Messsage,byte* lpszData,size_t len);
 
 	int _Body(CMessage* _Messsage,byte* lpszData,size_t len);
