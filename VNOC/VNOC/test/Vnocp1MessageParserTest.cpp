@@ -100,7 +100,7 @@ public:
 		CPPUNIT_ASSERT(CMessageParser::Check(testLengthLack,sizeof(testLengthLack)) == 0);
 		CPPUNIT_ASSERT(CMessageParser::Check(testNoTailRubbish,sizeof(testNoTailRubbish)) == 0);
 		CPPUNIT_ASSERT(CMessageParser::Check(testGood,sizeof(testGood)) == 0x10);
-		CPPUNIT_ASSERT(CMessageParser::Check(testRubbishWithGood,sizeof(testRubbishWithGood)) == 0x10);
+		CPPUNIT_ASSERT(CMessageParser::Check(testRubbishWithGood,sizeof(testRubbishWithGood)) == 0x2c);
 	}
 
 	void MSGAVCParseTest()
