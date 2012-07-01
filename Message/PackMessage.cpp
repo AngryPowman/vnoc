@@ -180,7 +180,7 @@ int PackMessage::_Pack( MSG_AVC* const avc, byte* buf, size_t len)
 	//参数部分
 	//1
 	CHECKUP_DATALEN(index,len);
-	buf[index] = avc->GetComCommandList()[2][0];
+	buf[index] = avc->GetComCommandList()[0][0];
 	index++;
 	//2
 	CHECKUP_DATALEN(index,len);
@@ -190,7 +190,7 @@ int PackMessage::_Pack( MSG_AVC* const avc, byte* buf, size_t len)
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < avc->GetCaptchaLen(); i++, index++)
 	{
-		buf[index] = avc->GetComCommandList()[0][i];
+		buf[index] = avc->GetComCommandList()[2][i];
 	}
 	//Tail
 	return _Tail(avc,buf,index,len);
@@ -247,7 +247,7 @@ int PackMessage::_Pack( MSG_RLI* const rli,byte* buf, size_t len)
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rli->GetVerificationCodeLen(); i++, index++)
 	{
-		buf[index] = rli->GetComCommandList()[2][i];
+		buf[index] = rli->GetComCommandList()[0][i];
 	}
 	//2
 	CHECKUP_DATALEN(index,len);
@@ -259,7 +259,7 @@ int PackMessage::_Pack( MSG_RLI* const rli,byte* buf, size_t len)
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rli->GetPasswordLen(); i++, index++)
 	{
-		buf[index] = rli->GetComCommandList()[0][i];
+		buf[index] = rli->GetComCommandList()[2][i];
 	}
 
 	//Tail
@@ -310,7 +310,7 @@ int PackMessage::_Pack( MSG_ALI* const ali,byte* buf, size_t len)
 	//参数部分
 	//1
 	CHECKUP_DATALEN(index,len);
-	buf[index] = ali->GetComCommandList()[2][0];
+	buf[index] = ali->GetComCommandList()[0][0];
 	index++;
 	//2
 	CHECKUP_DATALEN(index,len);
@@ -322,7 +322,7 @@ int PackMessage::_Pack( MSG_ALI* const ali,byte* buf, size_t len)
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < ali->GetTokenLen(); i++, index++)
 	{
-		buf[index] = ali->GetComCommandList()[0][i];
+		buf[index] = ali->GetComCommandList()[2][i];
 	}
 
 	//Tail
@@ -388,13 +388,13 @@ int PackMessage::_Pack( MSG_RPS* const rps,byte* buf, size_t len)
 	//参数部分
 	//1
 	CHECKUP_DATALEN(index,len);
-	buf[index] = rps->GetComCommandList()[4][0];
+	buf[index] = rps->GetComCommandList()[0][0];
 	index++;
 	//2
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rps->GetNicknameLen(); i++, index++)
 	{
-		buf[index] = rps->GetComCommandList()[3][i];
+		buf[index] = rps->GetComCommandList()[1][i];
 	}
 	//3
 	CHECKUP_DATALEN(index,len);
@@ -404,13 +404,13 @@ int PackMessage::_Pack( MSG_RPS* const rps,byte* buf, size_t len)
 	}
 	//4
 	CHECKUP_DATALEN(index,len);
-	buf[index] = rps->GetComCommandList()[1][0];
+	buf[index] = rps->GetComCommandList()[3][0];
 	index++;
 	//5
 	CHECKUP_DATALEN(index,len);
 	for (int i = 0; i < rps->GetHeadPortraitLen(); i++, index++)
 	{
-		buf[index] = rps->GetComCommandList()[0][i];
+		buf[index] = rps->GetComCommandList()[4][i];
 	}
 
 	//Tail
