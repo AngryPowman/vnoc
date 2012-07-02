@@ -32,6 +32,9 @@
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include=".\src\UserManage.hpp" />
+    <ClInclude Include="src\UserStorage.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">
