@@ -92,10 +92,6 @@ uint byteToInt(const byte* in_byte,size_t len);
 
 void IntTobyte(int in_int,byte* out_byte);
 
-void LittleSwapBigByte(byte* in_byte_ptr,size_t len);
-
-void LittleSwapBigByte(ByteArr* arr);
-
 class CMessage
 {
 public:

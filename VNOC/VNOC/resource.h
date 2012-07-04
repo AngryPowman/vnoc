@@ -46,6 +46,7 @@
 #define IDC_LoginDlg_STATIC_USERNAME    1034
 #define IDC_LoginDlg_STATIC_PWD         1035
 #define IDC_STATIC_SciPosition          1037
+#define IDC_SPIN2                       1047
 #define IDC_CODE_CTRL                   9527
 #define ID_WIZBACK                      0x3023
 #define IDC_LoginDlg_EDIT_USERNAME      0x3023
@@ -56,7 +57,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        133
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1038
+#define _APS_NEXT_CONTROL_VALUE         1048
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

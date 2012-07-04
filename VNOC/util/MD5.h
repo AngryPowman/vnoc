@@ -293,7 +293,7 @@ public:
 	static CString GetMD5(BYTE* pBuf, UINT nLength);
 //	static CString GetMD5(CFile& File);
 //	static CString GetMD5(const CString& strFilePath);
-	static BOOL GetMD5(const wchar_t* path, CString& md5);
+	static BOOL GetMD5(LPCTSTR path, CString& md5);
 
 protected:
 	//constructor/destructor

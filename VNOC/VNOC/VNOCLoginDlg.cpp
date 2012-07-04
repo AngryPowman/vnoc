@@ -112,7 +112,7 @@ HCURSOR CVNOCLoginDlg::OnQueryDragIcon()
 void CVNOCLoginDlg::OnBnClickedOk()
 {
     UpdateData(TRUE);
-	Global->Logf(LogFile_Net,L"登陆操作，用户名:%s 密码:%s\n", m_strUsername, m_strPassword);
+	Global->Logf(LogFile_Net,_T("登陆操作，用户名:%s 密码:%s\n"), m_strUsername, m_strPassword);
 	if (m_strUsername.IsEmpty())
 	{
 		OnOK();

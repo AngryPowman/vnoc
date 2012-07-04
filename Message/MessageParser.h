@@ -21,6 +21,8 @@ public:
 	//解析
 	CMessage* Parse(byte* lpszData,size_t len);
 
+	static int Check(byte* lpszDate,size_t len); //效验包的长度
+
 
 private:
 
