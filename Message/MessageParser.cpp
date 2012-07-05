@@ -291,24 +291,36 @@ int CMessageParser::Check( byte* lpszDate,size_t len )
 			break;
 		}
 	}
-
-	if (lpszDate[index + len] == MSG_END)
+	index = 0;
+	if (lpszDate[Begin + (len - 1)] == MSG_END)
 	{
-		End++;
+		End = Begin + (len - 1);
 	}
+	else
+	{
+		if (End == 0)
+		{
+			End++;
+		}
+		if (len < 2)
+		{
+			return -1;
+		}
+		else
+		{
+			return Check(lpszDate + Begin,len - End);
+		}
+	}
+
 
 	if ( End  == 0 )
 	{
 		return -1;
 	}
-	else
-	{
-		return Check(lpszDate + Begin,len - Begin);
-	}
 
-	if ( Begin != 0 )
+	if ( End != 0 )
 	{
-		return Begin;
+		return (End + 1);
 	}
 
 	return -1;

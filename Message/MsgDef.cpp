@@ -72,7 +72,7 @@ bool CMessage::GetBeginTab() const
 
 bool CMessage::GetEndTab() const
 {
-	return m_Begin;
+	return m_End;
 }
 
 byte CMessage::GetCommand() const
