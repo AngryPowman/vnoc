@@ -4,7 +4,7 @@
 
 
 #include <string>
-#include "include/mysql.h"
+#include "SQL/include/mysql.h"
 
 #pragma comment (lib,"include/SQL/lib/libmysql.lib")
 

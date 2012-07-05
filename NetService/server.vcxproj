@@ -164,7 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\SQL\MysqlWrapper.h" />
+    <ClInclude Include="mysql\MysqlWrapper.h" />
     <ClInclude Include="src\AsioTcpConnection.hpp" />
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Config.hpp" />
@@ -192,7 +192,7 @@
     <ClCompile Include="..\program_options\value_semantic.cpp" />
     <ClCompile Include="..\program_options\variables_map.cpp" />
     <ClCompile Include="..\program_options\winmain.cpp" />
-    <ClCompile Include="include\SQL\MysqlWrapper.cpp" />
+    <ClCompile Include="mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
     <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\NetService.cpp" />
