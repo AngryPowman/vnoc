@@ -1,5 +1,6 @@
 #pragma once
 
+#include "UserInfo.hpp"
 #include "UserStorage.hpp"
 #include <string>
 #define NULLPOINT			-1
@@ -21,14 +22,15 @@ public:
 	//如果登陆成功则获得用户信息
 	int Authenticate(string sUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 20)
 {
-	char strPass[20] = {0};
-	m_us.GetPassword(sUser.c_str(), strPass, 20);
+	
 
 	if ( !m_us.IfUserExist(sUser.c_str()) )//账号是否存在 查数据库
 	{
 		return TEST_FALSE;
 	}
-	
+	char strPass[20] = {0};
+	m_us.GetPassword(sUser.c_str(), strPass, 20);
+
 	int i = 0; //密码验证
 	do
 	{
