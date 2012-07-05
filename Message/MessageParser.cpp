@@ -292,23 +292,19 @@ int CMessageParser::Check( byte* lpszDate,size_t len )
 		}
 	}
 	index = 0;
-	if (lpszDate[Begin + (len - 1)] == MSG_END)
+	if (lpszDate[len - 1] == MSG_END)
 	{
-		End = Begin + (len - 1);
+		End = len;
 	}
 	else
 	{
-		if (End == 0)
-		{
-			End++;
-		}
 		if (len < 2)
 		{
 			return -1;
 		}
 		else
 		{
-			return Check(lpszDate + Begin,len - End);
+			return Check(lpszDate,len - 1);
 		}
 	}
 
@@ -318,10 +314,5 @@ int CMessageParser::Check( byte* lpszDate,size_t len )
 		return -1;
 	}
 
-	if ( End != 0 )
-	{
-		return (End + 1);
-	}
-
-	return -1;
+	return End;
 }
