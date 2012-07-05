@@ -4,9 +4,9 @@
 
 
 #include <string>
-#include "SQL/include/mysql.h"
+#include "MySQL/mysql.h"
 
-#pragma comment (lib,"include/SQL/lib/libmysql.lib")
+#pragma comment (lib,"lib/libmysql.lib")
 
 typedef std::string string;
 

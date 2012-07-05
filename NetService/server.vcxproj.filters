@@ -32,7 +32,7 @@
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include=".\src\UserManage.hpp" />
-    <ClInclude Include="mysql\MysqlWrapper.h">
+    <ClInclude Include="src\mysql\MysqlWrapper.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -94,7 +94,7 @@
     <ClCompile Include="src\Config.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="mysql\MysqlWrapper.cpp">
+    <ClCompile Include="src\mysql\MysqlWrapper.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

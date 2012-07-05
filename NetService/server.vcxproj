@@ -164,10 +164,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="mysql\MysqlWrapper.h" />
     <ClInclude Include="src\AsioTcpConnection.hpp" />
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Config.hpp" />
+    <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
@@ -192,9 +192,9 @@
     <ClCompile Include="..\program_options\value_semantic.cpp" />
     <ClCompile Include="..\program_options\variables_map.cpp" />
     <ClCompile Include="..\program_options\winmain.cpp" />
-    <ClCompile Include="mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
     <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
