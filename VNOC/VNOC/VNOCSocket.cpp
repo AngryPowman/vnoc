@@ -2,30 +2,7 @@
 #include "VNOCSocket.h"
 
 #include "../util/util.h"
-
-#define VNOCProtocol_
-#define VNOCProtocol_HeadFlag	'V'
-#define VNOCProtocol_HeadFlagSize	1
-#define VNOCProtocol_VersionSize	1
-#define VNOCProtocol_SeqNumSize		2
-#define VNOCProtocol_HeadLeadSize	\
-	VNOCProtocol_HeadFlagSize+ \
-	VNOCProtocol_VersionSize+ \
-	VNOCProtocol_SeqNumSize
-#define VNOCProtocol_BodyLengthParamSize	4
-#define VNOCProtocol_TokenSize		16
-#define VNOCProtocol_CommandSize	1
-#define VNOCProtocol_ReserveSize	4
-#define VNOCProtocol_ParamCountSize	1
-#define VNOCProtocol_HeadParamSize	\
-	VNOCProtocol_TokenSize+ \
-	VNOCProtocol_CommandSize+ \
-	VNOCProtocol_ReserveSize+ \
-	VNOCProtocol_ParamCountSize
-#define VNOCProtocol_VerifyCodeSize	4
-#define VNOCProtocol_TailFlag		'C'
-#define VNOCProtocol_TailFlagSize	1
-#define VNOCProtocol_PackTailSize	VNOCProtocol_VerifyCodeSize+VNOCProtocol_TailFlagSize
+#include "../../Message/MessageParser.h"
 
 CSocketImpl::CSocketImpl(ISocketListener *pListener) : m_listener(pListener)
 {
@@ -127,35 +104,19 @@ VOID CVNOCSocket::_TryParse()
 	DWORD bufSize;
 	pBuffer = m_buffer.GetBuffer();
 	bufSize = m_buffer.GetSize();
-	DWORD startPos=0;
-	while(startPos<bufSize && *pBuffer!=VNOCProtocol_HeadFlag)
+	int checkResult = CMessageParser::Check(pBuffer,bufSize);
+	if (checkResult != -1)
 	{
-		++startPos;
-	}
-	if (startPos)
-	{
-		m_buffer.Get(NULL,startPos);	// 跳过不可识别数据
-		Global->Logf(LogFile_Net,_T("出现了不可识别字符,长度为%d字节"),startPos);
-		_TryParse();	// 理论上只会递归一次
-		return;
-	}
-	if (bufSize > VNOCProtocol_HeadLeadSize+VNOCProtocol_BodyLengthParamSize)	// 检查长度是否足够
-	{
-		DWORD packSize=0;
-		packSize = *((DWORD*)pBuffer + 1);
-		if (bufSize >= packSize)
+		CBuffer buffer;
+		buffer.Attach(pBuffer,checkResult);
+		IVNOCSocketListener *pListener=NULL;
+		pListener = dynamic_cast<IVNOCSocketListener*>(m_listener);
+		if (pListener)
 		{
-			IVNOCSocketListener *pListener=NULL;
-			pListener = dynamic_cast<IVNOCSocketListener*>(m_listener);
-			if (pListener)
-			{
-				CBuffer buffer;
-				buffer.Attach(pBuffer,packSize);
-				pListener->OnPackReady(buffer);
-				buffer.Detach();
-			}
-			m_buffer.Get(NULL,packSize);
+			pListener->OnPackReady(buffer);
 		}
+		buffer.Detach();
+		m_buffer.Get(NULL,checkResult);
 	}
 }
 
