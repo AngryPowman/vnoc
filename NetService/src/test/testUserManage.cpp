@@ -23,11 +23,20 @@ public:
 	void AuthenticateTest()
 	{
 		UserStorage us;
-		CUserManage um(us);
-		string strUser = "user00";
-		char strPassword[20] = "0000000000000000000"; 
-		userinfo stInfo = {};
-		CPPUNIT_ASSERT(um.Authenticate(strUser, (char*)strPassword, &stInfo));
+		CUserManage um(&us);
+		char strUser0[] = "user00"; //用户名不存在
+		char strPassword0[20] = "0000000000000000000"; 
+		userinfo stInfo0 = {};
+		CPPUNIT_ASSERT(um.Authenticate(strUser0, (char*)strPassword0, &stInfo0));
+		char strUser1[] = "admin"; //成功登陆
+		char strPassword1[20] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+		userinfo stInfo1 = {};
+		CPPUNIT_ASSERT(um.Authenticate(strUser1, (char*)strPassword1, &stInfo1));
+		char strUser2[] = "able"; //密码错误
+		char strPassword2[20] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+		userinfo stInfo2 = {};
+		CPPUNIT_ASSERT(um.Authenticate(strUser2, (char*)strPassword2, &stInfo2));
+
     }
 
 };

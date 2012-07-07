@@ -1,4 +1,3 @@
-#pragma once
 #include <fstream>
 #include "UserInfo.hpp"
 using namespace std;
@@ -18,15 +17,18 @@ private:
 
 UserStorage::UserStorage()
 {
-	fstream file;
-	int nSize;
-	file.open("../userinfo", ios::binary|ios::in,0);
-	file.seekg(0, ios::end);
-	nSize = file.tellg();
-	nUserCount = nSize/148;
-	pUserTable = new userinfo[nUserCount];
-	file.seekg(0, ios::beg);
-	file.read((char *)pUserTable, nSize);
+	ifstream file;
+	streampos nSize;
+	file.open("userinfo", ios_base::in );
+	if (file.is_open())
+	{
+		file.seekg(0, ios::end);
+		nSize = file.tellg();
+		nUserCount = nSize/148;
+		pUserTable = new userinfo[nUserCount];
+		file.seekg(0, ios::beg);
+		file.read((char *)pUserTable, nSize);
+	}
 	file.close();
 }
 
