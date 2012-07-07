@@ -22,6 +22,10 @@
 	VNOCProtocol_CommandSize+ \
 	VNOCProtocol_ReserveSize+ \
 	VNOCProtocol_ParamCountSize
+#define VNOCProtocol_VerifyCodeSize	4
+#define VNOCProtocol_TailFlag		'C'
+#define VNOCProtocol_TailFlagSize	1
+#define VNOCProtocol_PackTailSize	VNOCProtocol_VerifyCodeSize+VNOCProtocol_TailFlagSize
 
 CSocketImpl::CSocketImpl(ISocketListener *pListener) : m_listener(pListener)
 {
@@ -107,9 +111,16 @@ void CVNOCSocket::OnReceive( int nErrorCode )
 	int length = 0;
 	Util::CAutoCS ac(m_cs);
 	length = ((CAsyncSocket*)this)->Receive(m_buffer.AllocAppend(1024),1024);
+	if (FAILED(length))
+	{
+		Global->Logf(LogFile_Net,_T("Socket错误，错误码:%d"),GetLastError());
+		Global->CriticalError(_T("Socket异常，无法工作"));
+		return;
+	}
 	m_buffer.AccomplishAppend(length);
+	_TryParse();
 }
-#include <Tmschema.h>
+
 VOID CVNOCSocket::_TryParse()
 { // 解析buffer，将数据包分离出来
 	BYTE* pBuffer;
@@ -131,10 +142,19 @@ VOID CVNOCSocket::_TryParse()
 	if (bufSize > VNOCProtocol_HeadLeadSize+VNOCProtocol_BodyLengthParamSize)	// 检查长度是否足够
 	{
 		DWORD packSize=0;
-		packSize = *((DWORD*)startPos + 1);
-		if (bufSize-startPos-packSize >= VNOCProtocol_HeadParamSize)
+		packSize = *((DWORD*)pBuffer + 1);
+		if (bufSize >= packSize)
 		{
-			m_buffer;
+			IVNOCSocketListener *pListener=NULL;
+			pListener = dynamic_cast<IVNOCSocketListener*>(m_listener);
+			if (pListener)
+			{
+				CBuffer buffer;
+				buffer.Attach(pBuffer,packSize);
+				pListener->OnPackReady(buffer);
+				buffer.Detach();
+			}
+			m_buffer.Get(NULL,packSize);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "../util/CBuffer.h"
 
 class CAsyncSocket;
 
@@ -11,4 +12,10 @@ public:
 	virtual void OnOutOfBandData	(int nErrorCode,CAsyncSocket* pSock)	=0;
 	virtual void OnReceive	(int nErrorCode,CAsyncSocket* pSock)	=0;
 	virtual void OnSend		(int nErrorCode,CAsyncSocket* pSock)	=0;
+};
+
+interface IVNOCSocketListener : public ISocketListener
+{
+public:
+	virtual void OnPackReady(ConstReferenceBuffer buffer)	=0;
 };

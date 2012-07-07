@@ -194,6 +194,20 @@ void CNetCenter::_DispatchMessage( const CMessage* pMsg )
 	}
 }
 
+void CNetCenter::OnPackReady( ConstReferenceBuffer buffer )
+{
+	Global->Logf(LogFile_Net,_T("OnPackReady, size:%d\n"),buffer.GetSize());
+
+	CMessageParser parser;
+	CMessage *pMsg=NULL;
+	pMsg = parser.Parse(buffer.GetBuffer(),buffer.GetSize());
+	if (pMsg)
+	{
+		_DispatchMessage(pMsg);
+		delete pMsg;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 CNetListenerHelper::CNetListenerHelper()

@@ -230,7 +230,7 @@ VOID CAutoStreamBuffer::Append( const void *pData,DWORD dataSize )
 BYTE* CAutoStreamBuffer::AllocAppend( DWORD dataSize )
 {
 	_CheckBuffer(dataSize);
-	return (BYTE*)m_writePos;
+	return m_pBuf+m_writePos;
 }
 
 BOOL CAutoStreamBuffer::AccomplishAppend( DWORD dataSize/*=0*/ )
@@ -261,7 +261,7 @@ BOOL CAutoStreamBuffer::AccomplishAppend( DWORD dataSize/*=0*/ )
 
 void CAutoStreamBuffer::_CheckBuffer(DWORD requestSize)
 {
-	if (m_writePos+requestSize < m_bufSize)
+	if (m_writePos+requestSize > m_bufSize)
 	{
 		Alloc(m_writePos + requestSize + 16);
 	}
@@ -298,7 +298,10 @@ DWORD CAutoStreamBuffer::Get( void *pOut,DWORD bytesToRead )
 	{
 		bytesToRead = m_writePos-m_readPos;
 	}
-	memcpy(pOut,m_pBuf+m_readPos,bytesToRead);
+	if (pOut)
+	{
+		memcpy(pOut,m_pBuf+m_readPos,bytesToRead);
+	}
 	m_readPos += bytesToRead;
 	_TryReorganize();
 	return bytesToRead;
