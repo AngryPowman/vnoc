@@ -31,11 +31,13 @@
     <ClInclude Include="src\Config.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include=".\src\UserManage.hpp" />
     <ClInclude Include="src\UserStorage.hpp">
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="src\UserInfo.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include=".\src\UserManage.hpp">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
