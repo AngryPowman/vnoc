@@ -95,10 +95,10 @@ public:
 			0x12,0x12,0x12,0x12,
 			0x12,0x12,0x12,'C',
 		};
-		CPPUNIT_ASSERT(CMessageParser::Check(testAllRubbish,sizeof(testAllRubbish)) == 0);
-		CPPUNIT_ASSERT(CMessageParser::Check(testHasHeadRubbish,sizeof(testHasHeadRubbish)) == 0);
-		CPPUNIT_ASSERT(CMessageParser::Check(testLengthLack,sizeof(testLengthLack)) == 0);
-		CPPUNIT_ASSERT(CMessageParser::Check(testNoTailRubbish,sizeof(testNoTailRubbish)) == 0);
+		CPPUNIT_ASSERT(CMessageParser::Check(testAllRubbish,sizeof(testAllRubbish)) == -1);
+		CPPUNIT_ASSERT(CMessageParser::Check(testHasHeadRubbish,sizeof(testHasHeadRubbish)) == -1);
+		CPPUNIT_ASSERT(CMessageParser::Check(testLengthLack,sizeof(testLengthLack)) == -1);
+		CPPUNIT_ASSERT(CMessageParser::Check(testNoTailRubbish,sizeof(testNoTailRubbish)) == -1);
 		CPPUNIT_ASSERT(CMessageParser::Check(testGood,sizeof(testGood)) == 0x10);
 		CPPUNIT_ASSERT(CMessageParser::Check(testRubbishWithGood,sizeof(testRubbishWithGood)) == 0x2c);
 	}

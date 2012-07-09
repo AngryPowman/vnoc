@@ -19,7 +19,7 @@ public:
 	virtual void OnReceive(int nErrorCode);
 	virtual void OnSend(int nErrorCode);
 	void SetListener(ISocketListener *pListener);	//  一个实例只能有一个监听者
-private:
+protected:
 	ISocketListener *m_listener;
 };
 

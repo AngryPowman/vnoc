@@ -7,7 +7,7 @@
 #include <list>
 
 class CNetCenter : public INetCenter
-	,public ISocketListener
+	,public IVNOCSocketListener
 {
 public:
 	CNetCenter();
@@ -31,6 +31,7 @@ VNOC_Private:
 	virtual void OnOutOfBandData	(int nErrorCode,CAsyncSocket* pSock);
 	virtual void OnReceive	(int nErrorCode,CAsyncSocket* pSock);
 	virtual void OnSend		(int nErrorCode,CAsyncSocket* pSock);
+	virtual void OnPackReady(ConstReferenceBuffer buffer);
 private:
 	HRESULT _GetServerAddress();
 	HRESULT _ConnectServer();
@@ -40,7 +41,7 @@ private:
 	UINT	m_serverPort;
 	BOOL	m_isConnected;
 
-	CSocketImpl m_serverSocket;
+	CVNOCSocket m_serverSocket;
 	WSADATA m_wsaData;
 	std::map<MSGTYPE,std::list<INetListener*> >	m_listeners;
 	ATL::CCriticalSection	m_cs;
