@@ -72,6 +72,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(MSBuildProjectDirectory)/include;$(IncludePath)</IncludePath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -165,6 +167,7 @@
     <ClInclude Include="src\AsioTcpConnection.hpp" />
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Config.hpp" />
+    <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
@@ -193,6 +196,7 @@
     <ClCompile Include="..\program_options\winmain.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
     <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
