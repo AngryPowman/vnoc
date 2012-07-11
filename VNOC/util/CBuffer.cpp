@@ -1,5 +1,6 @@
 #include "CBuffer.h"
 #include "stdio.h"
+#include <tchar.h>
 #include <atldef.h>
 
 CBuffer::CBuffer( LPCTSTR _debug/*=NULL*/ )
@@ -105,7 +106,7 @@ void CBuffer::memset( byte value/*=0*/ )
 BOOL CBuffer::WriteToFile( LPCTSTR filePath ) const
 {
 	FILE* fp=NULL;
-	_wfopen_s(&fp,filePath,L"wb");
+	_tfopen_s(&fp,filePath,TEXT("wb"));
 	if (fp)
 	{
 		size_t temp;
@@ -193,6 +194,125 @@ void CStreamBuffer::ResetWritePos()
 }
 
 void CStreamBuffer::ResetReadPos()
+{
+	m_readPos = 0;
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+CAutoStreamBuffer::CAutoStreamBuffer()
+{
+	m_writePos = 0;
+	m_readPos = 0;
+	m_referenceSize = 1024;
+	m_readTimes = 0;
+}
+
+CAutoStreamBuffer::~CAutoStreamBuffer()
+{
+
+}
+
+VOID CAutoStreamBuffer::SetReferenceSize( DWORD size )
+{
+	m_referenceSize = size;
+}
+
+VOID CAutoStreamBuffer::Append( const void *pData,DWORD dataSize )
+{
+	_CheckBuffer(dataSize);
+	memcpy(m_pBuf+m_writePos,pData,dataSize);
+	m_writePos += dataSize;
+}
+
+BYTE* CAutoStreamBuffer::AllocAppend( DWORD dataSize )
+{
+	_CheckBuffer(dataSize);
+	return m_pBuf+m_writePos;
+}
+
+BOOL CAutoStreamBuffer::AccomplishAppend( DWORD dataSize/*=0*/ )
+{
+	if (dataSize)
+	{
+		ATLASSERT(m_writePos+dataSize < m_bufSize);
+		m_writePos += dataSize;
+		return TRUE;
+	}
+	else
+	{
+		DWORD nPos = m_writePos;
+		for(; nPos<m_bufSize; ++nPos)
+		{
+			if (m_pBuf[nPos] == 0)
+			{
+				m_writePos = nPos + 1;
+				_CheckBuffer(nPos+1 - m_writePos);
+				m_writePos = nPos + 1;
+				return TRUE;
+			}
+		}
+		m_writePos = m_bufSize-1;
+		return FALSE;
+	}
+}
+
+void CAutoStreamBuffer::_CheckBuffer(DWORD requestSize)
+{
+	if (m_writePos+requestSize > m_bufSize)
+	{
+		Alloc(m_writePos + requestSize + 16);
+	}
+}
+
+void CAutoStreamBuffer::_TryReorganize()
+{
+	++m_readTimes;
+	if (m_readTimes > 8)
+	{
+		ATLASSERT(m_writePos > m_readPos);
+		DWORD used = m_writePos-1-m_readPos;
+		if (m_readPos > 1024)	// too far,moveto front
+		{
+			memcpy(m_pBuf,m_pBuf+m_readPos,used);
+			m_writePos = used+1;
+			m_readPos = 0;
+		}
+		if (used < m_bufSize/16)
+		{
+			DWORD newSize = m_referenceSize;
+			if (newSize < used)
+			{
+				newSize = used;
+			}
+			Alloc(newSize);
+		}
+	}
+}
+
+DWORD CAutoStreamBuffer::Get( void *pOut,DWORD bytesToRead )
+{
+	if (bytesToRead+m_readPos >= m_writePos)
+	{
+		bytesToRead = m_writePos-m_readPos;
+	}
+	if (pOut)
+	{
+		memcpy(pOut,m_pBuf+m_readPos,bytesToRead);
+	}
+	m_readPos += bytesToRead;
+	_TryReorganize();
+	return bytesToRead;
+}
+
+void CAutoStreamBuffer::ResetWritePos()
+{
+	m_writePos = 0;
+}
+
+void CAutoStreamBuffer::ResetReadPos()
 {
 	m_readPos = 0;
 }

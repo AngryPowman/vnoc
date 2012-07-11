@@ -1,3 +1,26 @@
 
 /NetService/Debug
 /NetService/bin
+/vnoc/Debug
+/C:/Users/tengda/Documents/GitHub/vnoc/VNOC/VNOC.sdf
+/VNOC/VNOC.sdf
+/netservice/Debug
+/netservice/Release
+*.obj
+*.tlog
+*.user
+*.log
+*.res
+*.pch
+*.lastbuildstate
+*.rc
+*.idb
+*.ipch
+*.suo
+*.pdb
+*.manifest
+*.opensdf
+*.cache
+*.lib
+!libmysql.lib
+!mysqlclient.lib

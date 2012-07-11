@@ -52,7 +52,7 @@ protected:
 #define BufferIn CBuffer	// 调用者负责分配、释放
 #define BufferOut CBuffer	// 调用者负责释放、函数负责分配
 
-// 管道型Buffer
+// 管道型Buffer,固定buffer大小
 class CStreamBuffer : public CBuffer
 {
 public:
@@ -60,7 +60,7 @@ public:
 	~CStreamBuffer();
 public:
 	// 写入,返回实际写入字节数
-	DWORD Append(const void *pData,DWORD dataSize);
+	DWORD	Append(const void *pData,DWORD dataSize);
 
 	// 读取,返回实际读取字节数
 	DWORD Get(void *pOut,DWORD bytesToRead);
@@ -70,4 +70,36 @@ private:
 	void operator =(const CStreamBuffer &src);
 	volatile DWORD m_writePos;		// 写入位置，就是个数组下标
 	DWORD m_readPos;
+};
+
+// 管道型Buffer,自动增大buffer大小
+class CAutoStreamBuffer : public CBuffer
+{
+public:
+	CAutoStreamBuffer();
+	~CAutoStreamBuffer();
+public:
+	// 设定一个参考buffer大小
+	VOID	SetReferenceSize(DWORD size);
+
+	// 写入
+	VOID	Append(const void *pData,DWORD dataSize);
+	// 分配一段buffer供写入，但未AccomplishAppend前，数据是不会写入的
+	BYTE*	AllocAppend(DWORD dataSize);
+	// 未指定大小时将搜索以\0作为结尾
+	BOOL	AccomplishAppend(DWORD dataSize=0);
+
+	// 读取
+	DWORD Get(void *pOut,DWORD bytesToRead);
+	void ResetWritePos();
+	void ResetReadPos();
+private:
+	void _CheckBuffer(DWORD requestSize);
+	void _TryReorganize();
+private:
+	void operator =(const CAutoStreamBuffer &src);
+	DWORD	m_referenceSize;
+	volatile DWORD m_writePos;		// 写入位置，就是个数组下标
+	DWORD m_readPos;
+	DWORD m_readTimes;
 };

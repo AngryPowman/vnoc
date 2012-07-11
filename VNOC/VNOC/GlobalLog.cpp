@@ -65,22 +65,22 @@ HRESULT CGlobalCenter::Log( CString file,CString str,BOOL info,BOOL endLine)
 
 HRESULT CGlobalCenter::Logf( CString file,LPCTSTR str,... )
 {
-	static wchar_t buffer[_LogFormatBufferSize];
+	static TCHAR buffer[_LogFormatBufferSize];
 	buffer[_LogFormatBufferSize-1] = L'\0';
 	va_list vl;
 	va_start(vl,str);
-	vswprintf_s(buffer,str,vl);
+	_vstprintf_s(buffer,str,vl);
 	va_end(vl);
 	return Log(file,buffer,TRUE,FALSE);
 }
 
 HRESULT CGlobalCenter::Lognf( CString file,LPCTSTR str,... )
 {
-	static wchar_t buffer[_LogFormatBufferSize];
+	static TCHAR buffer[_LogFormatBufferSize];
 	buffer[_LogFormatBufferSize-1] = L'\0';
 	va_list vl;
 	va_start(vl,str);
-	vswprintf_s(buffer,str,vl);
+	_vstprintf_s(buffer,str,vl);
 	va_end(vl);
 	return Log(file,buffer,FALSE,FALSE);
 }

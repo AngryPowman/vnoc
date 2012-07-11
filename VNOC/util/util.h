@@ -64,7 +64,7 @@ namespace Util
 	namespace MD5
 	{
 		BOOL HashMD5(ConstReferenceBuffer buffer,CString &md5);
-		BOOL GetFileMD5(const wchar_t* path, CString& md5);
+		BOOL GetFileMD5(LPCTSTR path, CString& md5);
 	}
 	namespace Filesys
 	{
@@ -75,7 +75,7 @@ namespace Util
 		bool CheckFileName(const wchar_t * str);
 		bool GetDirFromPath(LPCTSTR path,int &endposIndex);// 获取路径中的目录
 		//BOOL PathFileExists(LPCTSTR path);		// Windows有这个API
-		bool IsFileInUse(const wchar_t* path);
+		bool IsFileInUse(LPCTSTR path);
 	}
 
 	namespace Time

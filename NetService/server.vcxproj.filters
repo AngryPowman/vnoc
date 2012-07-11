@@ -31,6 +31,10 @@
     <ClInclude Include="src\Config.hpp">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include=".\src\UserManage.hpp" />
+    <ClInclude Include="src\mysql\MysqlWrapper.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">
@@ -86,6 +90,12 @@
     </ClCompile>
     <ClCompile Include="..\program_options\utf8_codecvt_facet.cpp">
       <Filter>source\po</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Config.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mysql\MysqlWrapper.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

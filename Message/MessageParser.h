@@ -11,6 +11,7 @@ public:
 	
 	CMessageParser(){
 		m_Instruct = 0;
+		m_SubPos = 0;
 	}
 
 	~CMessageParser(){
@@ -21,10 +22,14 @@ public:
 	//解析
 	CMessage* Parse(byte* lpszData,size_t len);
 
+	static int Check(byte* lpszDate,size_t len); //效验包的长度
+
 
 private:
 
 	CMessage* m_MessageStr;           //
+
+    int       m_SubPos;
 
 	byte   m_Instruct;			  //指令			具体的指令，用来标注此数据包的功能
 

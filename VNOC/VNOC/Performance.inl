@@ -52,15 +52,15 @@ namespace Performance
 					LONGLONG during = i->first.second.QuadPart - i->first.first.QuadPart;
 					useTime = (during/dfreq)*1000;
 
-					log.AppendFormat(L"\t\t%s : %.6lfms\n"
-						, (i->second.IsEmpty()? (i+1==m_vec.end()? L"剩余": L"N/A"): i->second)
+					log.AppendFormat(_T("\t\t%s : %.6lfms\n")
+						, (i->second.IsEmpty()? (i+1==m_vec.end()? _T("剩余"): _T("N/A")): i->second)
 						, useTime);
 					total += useTime;
 					++i;
 				}
 			}
 			CString head;
-			head.Format(L"    性能统计: %-50s\t共用时%lfms\n",m_taskName,total);
+			head.Format(_T("    性能统计: %-50s\t共用时%lfms\n"),m_taskName,total);
 			head += log;
 			head += L"\n";
 			//global::log2(m_logFile,head);

@@ -336,6 +336,7 @@ public:
 		CPPUNIT_ASSERT(msg_pack.Pack(&msg_rps,testPackRPS,msg_pack.GetMessageLen(&msg_rps)) != -1);
 
 		//与正确包对比
+
 		CPPUNIT_ASSERT(memcmp(testRPS,testPackRPS,sizeof(testRPS)) == 0);
 
 		CPPUNIT_ASSERT(true);

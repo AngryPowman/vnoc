@@ -101,7 +101,7 @@ namespace blog
 		};
 		virtual void flush(){};
 
-		void get_log(std::wstring& str){str = m_log;};
+		void get_log(std::wstring& str){str = CStringW(m_log);};
 
 	private:
 		CString m_log;

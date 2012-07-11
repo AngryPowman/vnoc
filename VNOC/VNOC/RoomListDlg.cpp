@@ -99,7 +99,7 @@ BOOL CRoomListDlg::OnInitDialog()
 	for (int i = 0; i < 10; i++)
 	{
 		CString strRoomName;
-		strRoomName.Format(L"ฝฬสา-%d", i);
+		strRoomName.Format(_T("ฝฬสา-%d"), i);
 		nItem = m_ClassList.InsertItem(0, strRoomName);	
 		m_ClassList.SetItemText(nItem, 1, _T("C++"));
 	}
