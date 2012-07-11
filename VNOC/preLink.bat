@@ -10,4 +10,4 @@ goto gEnd
 @xcopy /e/c/y "../scintilla/bin" "Release" > nul
 
 :gEnd
-@echo "PreLink Event OK!"
+@echo "PreLink Event OK! "
