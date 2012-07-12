@@ -33,7 +33,7 @@
     </ClInclude>
     <ClInclude Include=".\src\UserManage.hpp" />
     <ClInclude Include="src\mysql\MysqlWrapper.h">
-      <Filter>header</Filter>
+    <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
