@@ -16,6 +16,7 @@ VnocMessageSocketHandler<ConnectionT>::~VnocMessageSocketHandler()
 {
     EZLOGGERVLSTREAM(axter::log_often)<<"delete connection Handler."<<endl;
 	delete ctx_;
+	delete connection_;
 }
 
 template <typename ConnectionT>

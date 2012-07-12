@@ -30,7 +30,7 @@ private:
 
     const static size_t HEADER_LEN = 30;
     char headerData_[HEADER_LEN];
-    ConnectionT *connection_;
+    ConnectionT* connection_;
     MessageContext *ctx_;
     VnocProtocol* protocol_;
 
