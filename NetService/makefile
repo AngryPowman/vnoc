@@ -12,7 +12,7 @@ Server_OBJ=VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage
 
 all : Server test_bin
 Server : $(Server_OBJ)
-	$(CXX) -lpthread $^ -o bin/$@
+	$(CXX) -lpthread -lmysql $^ -o bin/$@
 test_bin: EchoTestServer
 
 EchoTestServer : EchoTestServer.o  AsioTcpServer.o
