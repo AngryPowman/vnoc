@@ -22,7 +22,6 @@ public:
     }
     void tearDown()
     {
-        delete conn_;
         delete protocol_;
     }
 public:
