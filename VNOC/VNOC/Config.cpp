@@ -268,11 +268,11 @@ BOOL CConfigImpl::_ParseXMLNode( TiXmlNode *tiNode,ConfigNode& node )
 	CLogIndent i(LogFile_Config);
 
 	int type = tiNode->Type();
-	Global->Logf(LogFile_Config,_T("分析配置点(value = %s,type = %d)"),CString(tiNode->ValueStr().c_str()),type);
-	node.value = tiNode->ValueStr().c_str();
+	Global->Logf(LogFile_Config,_T("分析配置点(value = %s,type = %d)"),CString(tiNode->ValueTStr().c_str()),type);
+	node.value = tiNode->ValueTStr().c_str();
 	switch(type)
 	{
-	case TiXmlNode::TINYXML_ELEMENT:
+	case TiXmlNode::ELEMENT:
 		TiXmlAttribute *attr = tiNode->ToElement()->FirstAttribute();
 		if (attr)
 		{
