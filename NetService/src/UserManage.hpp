@@ -1,7 +1,9 @@
 #pragma once
 
 #include "UserInfo.hpp"
-#include "UserStorage.hpp"
+#include "FileUserStorage.h"
+#include "SQLUserStorage.h"
+
 #include <string>
 #define NULLPOINT			-1
 #define LOGIN_OK			1
@@ -20,7 +22,7 @@ public:
 	}
 	//返回值： LOGIN_OK 登陆成功 TEST_FALSE 验证失败 NULLPOINT 指针无效
 	//如果登陆成功则获得用户信息
-	int Authenticate(char* szUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 20)
+	int Authenticate(char* szUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
 {
 	
 
@@ -28,8 +30,8 @@ public:
 	{
 		return TEST_FALSE;
 	}
-	char strPass[20] = {0};
-	m_us->GetPassword(szUser, strPass, 20);
+	char strPass[40] = {0};
+	m_us->GetPassword(szUser, strPass, 40);
 
 	int i = 0; //密码验证
 	do

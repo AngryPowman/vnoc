@@ -4,12 +4,13 @@ struct userinfo
 {
 	//其中有很多用户信息
 	char strUser[40];
-	char passwordData[20];
+	char passwordData[40];
 	char strNickname[40];
 	char strEmailAddr[40];
 	int gender; //1 male 2female
 	unsigned int uOld;
 };//148byte
+
 
 
 /*

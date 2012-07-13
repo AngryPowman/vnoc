@@ -10,7 +10,7 @@ int MWConnection::Connect( string host,string name,string password,string db,int
 	{
 		return MW_SQL_ERR;
 	}
-	 
+	
 	if(mysql_real_connect(&m_Mysql,host.c_str(),name.c_str(),password.c_str(),db.c_str(),port,0,0))
 	{
 		return MW_SQL_OK;
@@ -66,17 +66,66 @@ MYSQL_ROW MWCommand::FetchNext()
 	return (m_Row = mysql_fetch_row(m_Result));
 }
 
+
+MYSQL_ROW  MWCommand::First()
+{
+	if (m_SQL == NULL)
+	{
+		return 0;
+	}
+
+	if (m_Result == NULL)
+	{
+	  m_Result = mysql_store_result(m_SQL);
+	}
+
+	m_Field_Num = mysql_num_fields(m_Result);
+	
+	m_Line_Num  = (int)mysql_num_rows(m_Result);
+
+	return (m_Row = mysql_fetch_row(m_Result));
+}
+
 MWType* MWCommand::GetData( int index )
 {
 	if (m_Row == NULL)
 	{
 		return NULL;
 	}	
+	
+	if (m_MWTpye != NULL)
+	{
+		delete m_MWTpye;
+		m_MWTpye = NULL;
+	}
 
 	m_MWTpye = new MWType;
 
 	m_MWTpye->m_Data = m_Row[index];
 
+	return m_MWTpye;
+}
+
+MWType* MWCommand::GetOneData()
+{
+
+	if (m_MWTpye != NULL)
+	{
+		delete m_MWTpye;
+		m_MWTpye = NULL;
+	}
+    if (GetField_Num() == 0)
+    {
+		m_MWTpye = new MWType;
+
+		m_MWTpye->m_Data = m_Row[GetField_Num()];
+    }
+	else
+	{
+		m_MWTpye = new MWType;
+
+		m_MWTpye->m_Data = m_Row[GetField_Num() - 1];
+	}
 	return m_MWTpye;
 }
 
@@ -94,6 +143,7 @@ void MWCommand::_Close()
 		m_MWTpye = NULL;
 	}
 }
+
 
 //MWType
 

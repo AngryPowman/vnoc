@@ -22,7 +22,7 @@ public:
 public:
 	void AuthenticateTest()
 	{
-		UserStorage us;
+		fUserStorage us;
 		CUserManage um(&us);
 		char strUser0[] = "user00"; //用户名不存在
 		char strPassword0[20] = "0000000000000000000"; 

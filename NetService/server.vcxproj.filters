@@ -31,9 +31,23 @@
     <ClInclude Include="src\Config.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include=".\src\UserManage.hpp" />
     <ClInclude Include="src\mysql\MysqlWrapper.h">
-    <Filter>header</Filter>
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInfo.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include=".\src\UserManage.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include=".\src\UserStorage.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileUserStorage.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SQLUserStorage.h">
+      <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +109,15 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="src\mysql\MysqlWrapper.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UserStorage.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileUserStorage.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SQLUserStorage.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
