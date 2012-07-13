@@ -17,8 +17,7 @@
 #pragma once
 
 #include "../bkres/bkbmppool.h"
-
-#define abs(value) (value >= 0 ? value : -value)
+#include <math.h>
 
 #ifdef __AFXWIN_H__ // If MFC
     #define M_HOBJECT m_hObject

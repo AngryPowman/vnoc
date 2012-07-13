@@ -107,6 +107,8 @@
     <ClInclude Include="..\..\TinyXML\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\tinyxml.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="src\Base\IModule.h" />
+    <ClInclude Include="src\Base\IRefCountImpl.h" />
     <ClInclude Include="src\BKWin\bkres\bkbmppool.h" />
     <ClInclude Include="src\BKWin\bkres\bkfontpool.h" />
     <ClInclude Include="src\BKWin\bkres\bkpngpool.h" />
@@ -158,6 +160,16 @@
     <ClInclude Include="src\BKWin\wtl\atluser.h" />
     <ClInclude Include="src\BKWin\wtl\atlwince.h" />
     <ClInclude Include="src\BKWin\wtl\atlwinx.h" />
+    <ClInclude Include="src\FrameWork\FrameWork.h" />
+    <ClInclude Include="src\FrameWork\IFrameWork.h" />
+    <ClInclude Include="src\util\BLog.h" />
+    <ClInclude Include="src\util\CBuffer.h" />
+    <ClInclude Include="src\util\MD5.h" />
+    <ClInclude Include="src\util\MD5ChecksumDefines.h" />
+    <ClInclude Include="src\util\Performance.h" />
+    <ClInclude Include="src\util\TaskThread.h" />
+    <ClInclude Include="src\util\ThreadDefine.h" />
+    <ClInclude Include="src\util\util.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VNOCC.h" />
@@ -182,6 +194,32 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\FrameWork\FrameWork.cpp" />
+    <ClCompile Include="src\util\BLog.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\util\CBuffer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\util\MD5.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\util\TaskThread.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\util\util.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -13,7 +13,6 @@
 *.res
 *.pch
 *.lastbuildstate
-*.rc
 *.idb
 *.ipch
 *.suo
