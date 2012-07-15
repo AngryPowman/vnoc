@@ -85,4 +85,26 @@ protected:
 	virtual void OnClose(int nErrorCode);
 public:
 	virtual ~CAsyncSocket();
+	static CAsyncSocket* PASCAL LookupHandle(SOCKET hSocket, BOOL bDead = FALSE);
+	static void PASCAL AttachHandle(SOCKET hSocket, CAsyncSocket* pSocket, BOOL bDead = FALSE);
+	static void PASCAL DetachHandle(SOCKET hSocket, BOOL bDead = FALSE);
+	static void PASCAL KillSocket(SOCKET hSocket, CAsyncSocket* pSocket);
+	static void PASCAL DoCallBack(WPARAM wParam, LPARAM lParam);
+
+	BOOL Socket(int nSocketType=SOCK_STREAM, long lEvent =
+		FD_READ | FD_WRITE | FD_OOB | FD_ACCEPT | FD_CONNECT | FD_CLOSE,
+		int nProtocolType = 0, int nAddressFormat = PF_INET);
+
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+#endif
+
+protected:
+	friend class CSocketWnd;
+
+	virtual BOOL ConnectHelper(const SOCKADDR* lpSockAddr, int nSockAddrLen);
+	virtual int ReceiveFromHelper(void* lpBuf, int nBufLen,
+		SOCKADDR* lpSockAddr, int* lpSockAddrLen, int nFlags);
+	virtual int SendToHelper(const void* lpBuf, int nBufLen,
+		const SOCKADDR* lpSockAddr, int nSockAddrLen, int nFlags);
 };
