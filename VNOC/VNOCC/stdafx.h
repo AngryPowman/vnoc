@@ -10,7 +10,10 @@
 #define _SECURE_ATL 1
 
 // Windows Header Files:
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <ShellAPI.h>
+#include <CommCtrl.h>
 
 // C RunTime Header Files
 #include <stdlib.h>
@@ -40,3 +43,5 @@
 
 #include "src/BKWin/bkwin/bkdlgview.h"
 #include "src/BKWin/bkres/bkres.h"
+
+#include "src/util/util.h"

@@ -100,6 +100,71 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="bkwinres.rc2" />
+    <None Include="res\autoopt_done.png" />
+    <None Include="res\beikesafe.ico" />
+    <None Include="res\btn_sys_close.bmp" />
+    <None Include="res\btn_sys_close.png" />
+    <None Include="res\btn_sys_maximize.bmp" />
+    <None Include="res\btn_sys_maximize.png" />
+    <None Include="res\btn_sys_minimize.bmp" />
+    <None Include="res\btn_sys_minimize.png" />
+    <None Include="res\btn_sys_restore.bmp" />
+    <None Include="res\btn_sys_restore.png" />
+    <None Include="res\btn_tab.bmp" />
+    <None Include="res\btn_virscan_bg.bmp" />
+    <None Include="res\clear_bk.bmp" />
+    <None Include="res\clear_panel.bmp" />
+    <None Include="res\config.xml" />
+    <None Include="res\def_skin.xml" />
+    <None Include="res\def_skin.xml.bak" />
+    <None Include="res\def_string.xml" />
+    <None Include="res\def_style.xml" />
+    <None Include="res\dlgfile_foot.xml" />
+    <None Include="res\dlgfile_header.xml" />
+    <None Include="res\dlgfile_opt.xml" />
+    <None Include="res\dlgfile_opt.xml.bak" />
+    <None Include="res\dlg_main.xml" />
+    <None Include="res\dlg_mgr_listtip.xml" />
+    <None Include="res\dlg_mgr_powersweep_tip.xml" />
+    <None Include="res\dlg_more_bkwin.xml" />
+    <None Include="res\dlg_msgbox.xml" />
+    <None Include="res\dlg_msgbox2.xml" />
+    <None Include="res\dlg_runautoopt.xml" />
+    <None Include="res\dlg_runopt_ignore.xml" />
+    <None Include="res\dlg_runopt_list.xml" />
+    <None Include="res\dlg_sysopt_setting.xml" />
+    <None Include="res\exam_status_icon.png" />
+    <None Include="res\frame_panel.bmp" />
+    <None Include="res\frame_panel_gray.bmp" />
+    <None Include="res\ignore_tip.png" />
+    <None Include="res\listctrl_check.bmp" />
+    <None Include="res\listctrl_header.bmp" />
+    <None Include="res\listctrl_radio.bmp" />
+    <None Include="res\loaddlg_panel.bmp" />
+    <None Include="res\loadinfo_dlgbk.bmp" />
+    <None Include="res\loadinfo_tip_softmgr.png" />
+    <None Include="res\loading_runopt.png" />
+    <None Include="res\msgbox_bg.bmp" />
+    <None Include="res\msgbox_body_bg.bmp" />
+    <None Include="res\no_runtask.png" />
+    <None Include="res\regedit.ico" />
+    <None Include="res\runopt_listheader.bmp" />
+    <None Include="res\run_remain.ico" />
+    <None Include="res\run_system.ico" />
+    <None Include="res\run_unknown.ico" />
+    <None Include="res\scan_result_list_bar.bmp" />
+    <None Include="res\small.ico" />
+    <None Include="res\startuptime_setting.png" />
+    <None Include="res\status_40.bmp" />
+    <None Include="res\status_icon.bmp" />
+    <None Include="res\status_icon.png" />
+    <None Include="res\stat_runopt.bmp" />
+    <None Include="res\sysopt_listbk.bmp" />
+    <None Include="res\sysopt_more.bmp" />
+    <None Include="res\tab_left.bmp" />
+    <None Include="res\tab_left_splitter.bmp" />
+    <None Include="res\tab_normal.bmp" />
+    <None Include="res\tab_normal_ex.bmp" />
     <None Include="small.ico" />
     <None Include="VNOCC.ico" />
   </ItemGroup>
@@ -162,6 +227,14 @@
     <ClInclude Include="src\BKWin\wtl\atlwinx.h" />
     <ClInclude Include="src\FrameWork\FrameWork.h" />
     <ClInclude Include="src\FrameWork\IFrameWork.h" />
+    <ClInclude Include="src\Global\GlobalCenter.h" />
+    <ClInclude Include="src\Global\GlobalDefine.h" />
+    <ClInclude Include="src\Global\IGlobal.h" />
+    <ClInclude Include="src\net\INet.h" />
+    <ClInclude Include="src\net\Net.h" />
+    <ClInclude Include="src\net\socket\AsyncSocket.h" />
+    <ClInclude Include="src\net\Socket\ISocket.h" />
+    <ClInclude Include="src\net\Socket\VNOCSocket.h" />
     <ClInclude Include="src\util\BLog.h" />
     <ClInclude Include="src\util\CBuffer.h" />
     <ClInclude Include="src\util\MD5.h" />
@@ -196,6 +269,19 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\FrameWork\FrameWork.cpp" />
+    <ClCompile Include="src\Global\GlobalCenter.cpp" />
+    <ClCompile Include="src\Global\GlobalLog.cpp" />
+    <ClCompile Include="src\net\Net.cpp" />
+    <ClCompile Include="src\net\socket\AsyncSocket.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\net\Socket\VNOCSocket.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\util\BLog.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -231,6 +317,9 @@
   <ItemGroup>
     <ResourceCompile Include="src\BKWin\bkres\bkres.rc" />
     <ResourceCompile Include="VNOCC.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\beikesafe.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

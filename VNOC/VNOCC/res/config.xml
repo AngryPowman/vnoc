@@ -1,0 +1,17 @@
+<root />
+<VNOC>
+    <Net>
+        <ServerAddress ServerIP="127.0.0.1" ServerPort="2508" />
+    </Net>
+    <SciEdit>
+        <Language language="cpp" test="testValue">
+            <Editor>
+                <ShowLineNum color="255,255,255">1</ShowLineNum>
+                <TabWidth tabWidth="4" />
+            </Editor>
+            <Font bold="0" italic="0" underline="0">Courier New</Font>
+            <test>This is Test</test>
+        </Language>
+    </SciEdit>
+</VNOC>
+root
