@@ -45,3 +45,4 @@
 #include "src/BKWin/bkres/bkres.h"
 
 #include "src/util/util.h"
+#include "src/Global/IGlobal.h"

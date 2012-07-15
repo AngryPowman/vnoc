@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "Config.h"
-#include "../util/util.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ConfigNode
@@ -24,7 +23,7 @@ ConfigNode::~ConfigNode()
 
 ConfigNode& CConfig::GetNode(UINT index)
 {
-	ASSERT(index < m_vec.size());
+	ATLASSERT(index < m_vec.size());
 	if (index < m_vec.size())
 	{
 		return *m_vec[index];
@@ -118,7 +117,7 @@ void CConfig::xPath(LPCTSTR cfgPath)
 {
 	CString tempStr = cfgPath;
 	LPTSTR thePath = tempStr.GetBuffer(tempStr.GetLength());
-	ASSERT(thePath);
+	ATLASSERT(thePath);
 	if (thePath)
 	{
 		LPCTSTR currPos = thePath;
@@ -225,7 +224,7 @@ HRESULT CConfigImpl::LoadConfigFromXML( LPCTSTR filePath )
 	TiXmlDocument doc;
 	doc.Clear();
 	BOOL bRet = doc.LoadFile(CStringA(filePath));		// 坑爹啊！只支持UTF8
-	assert(bRet && "配置xml文件加载异常");
+	ATLASSERT(bRet && "配置xml文件加载异常");
 	if (bRet)
 	{
 		m_filePath = filePath;
@@ -259,7 +258,7 @@ BOOL CConfigImpl::_ParseXML(TiXmlNode *root,ConfigNode& treeRoot)
 
 		curr = curr->NextSibling();
 	}
-	assert(root && "节点为空");
+	ATLASSERT(root && "节点为空");
 	return TRUE;
 }
 
