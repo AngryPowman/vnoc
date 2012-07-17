@@ -162,10 +162,11 @@
     <ClCompile Include="..\..\..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\..\..\Message\MsgDef.cpp" />
     <ClCompile Include="..\..\..\..\Message\PackMessage.cpp" />
-    <ClCompile Include="..\..\testUserManage.cpp" />
+    <ClCompile Include="..\..\UserStorage.cpp" />
     <ClCompile Include="..\..\VnocProtocol.cpp" />
     <ClCompile Include="..\EchoTestHandlerTest.cpp" />
     <ClCompile Include="..\testRunner.cpp" />
+    <ClCompile Include="..\testUserManage.cpp" />
     <ClCompile Include="..\VnocMessageHandlerTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
