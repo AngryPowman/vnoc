@@ -1,7 +1,6 @@
 #pragma once
-
+#include "../../util/TLS.h"
 #include <WS2tcpip.h>
-
 #include <atlstr.h>
 
 class CAsyncSocket
@@ -95,9 +94,8 @@ public:
 		FD_READ | FD_WRITE | FD_OOB | FD_ACCEPT | FD_CONNECT | FD_CLOSE,
 		int nProtocolType = 0, int nAddressFormat = PF_INET);
 
-#ifdef _DEBUG
-	virtual void AssertValid() const;
-#endif
+protected:
+	static CTLS m_wndTls;
 
 protected:
 	friend class CSocketWnd;

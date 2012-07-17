@@ -1,5 +1,6 @@
 #include "AsyncSocket.h"
 #include <atlbase.h>
+#pragma comment(lib,"ws2_32.lib")
 
 #define VERIFY(_i)	ATLASSERT(_i)
 
@@ -380,12 +381,12 @@ int CAsyncSocket::SendTo( const void* lpBuf, int nBufLen, const SOCKADDR* lpSock
 BOOL CAsyncSocket::AsyncSelect( long lEvent /*= FD_READ | FD_WRITE | FD_OOB | FD_ACCEPT | FD_CONNECT | FD_CLOSE*/ )
 {
 	ATLASSERT(m_hSocket != INVALID_SOCKET);
-
-	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
-	ATLASSERT(pState->m_hSocketWindow != NULL);
-
-	return WSAAsyncSelect(m_hSocket, pState->m_hSocketWindow,
-		WM_SOCKET_NOTIFY, lEvent) != SOCKET_ERROR;
+	return TRUE;
+// 	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
+// 	ATLASSERT(pState->m_hSocketWindow != NULL);
+// 
+// 	return WSAAsyncSelect(m_hSocket, pState->m_hSocketWindow,
+// 		WM_SOCKET_NOTIFY, lEvent) != SOCKET_ERROR;
 }
 
 CAsyncSocket::~CAsyncSocket()
@@ -395,71 +396,70 @@ CAsyncSocket::~CAsyncSocket()
 
 CAsyncSocket* PASCAL CAsyncSocket::LookupHandle( SOCKET hSocket, BOOL bDead /*= FALSE*/ )
 {
-	CAsyncSocket* pSocket;
-	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
-	if (!bDead)
-	{
-		pSocket = (CAsyncSocket*)
-			pState->m_pmapSocketHandle->GetValueAt((void*)hSocket);
-		if (pSocket != NULL)
-			return pSocket;
-	}
-	else
-	{
-		pSocket = (CAsyncSocket*)
-			pState->m_pmapDeadSockets->GetValueAt((void*)hSocket);
-		if (pSocket != NULL)
-			return pSocket;
-	}
+// 	CAsyncSocket* pSocket;
+// 	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
+// 	if (!bDead)
+// 	{
+// 		pSocket = (CAsyncSocket*)
+// 			pState->m_pmapSocketHandle->GetValueAt((void*)hSocket);
+// 		if (pSocket != NULL)
+// 			return pSocket;
+// 	}
+// 	else
+// 	{
+// 		pSocket = (CAsyncSocket*)
+// 			pState->m_pmapDeadSockets->GetValueAt((void*)hSocket);
+// 		if (pSocket != NULL)
+// 			return pSocket;
+// 	}
 	return NULL;
 }
 
 void PASCAL CAsyncSocket::AttachHandle( SOCKET hSocket, CAsyncSocket* pSocket, BOOL bDead /*= FALSE*/ )
 {
-	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
-
-//	TRY 
-	{
-		if (!bDead)
-		{
-			ATLASSERT(CAsyncSocket::LookupHandle(hSocket, bDead) == NULL);
-			if (pState->m_pmapSocketHandle->IsEmpty())
-			{
-				ATLASSERT(pState->m_pmapDeadSockets->IsEmpty());
-				ATLASSERT(pState->m_hSocketWindow == NULL);
-
-				CSocketWnd* pWnd = new CSocketWnd;
-				pWnd->m_hWnd = NULL;
-
-				if (!pWnd->CreateEx(0, AfxRegisterWndClass(0),
-					_T("Socket Notification Sink"),
-					WS_OVERLAPPED, 0, 0, 0, 0, NULL, NULL))
-				{
-					TRACE(traceSocket, 0, "Warning: unable to create socket notify window!\n");
-					delete pWnd;
-					AfxThrowResourceException();
-				}
-
-				ATLASSERT(pWnd->m_hWnd != NULL);
-				ATLASSERT(CWnd::FromHandlePermanent(pWnd->m_hWnd) == pWnd);
-				pState->m_hSocketWindow = pWnd->m_hWnd;
-			}
-			pState->m_pmapSocketHandle->SetAt((void*)hSocket, pSocket);
-		}
-		else
-		{
-			void* pvCount;
-			INT_PTR nCount;
-			if (pState->m_pmapDeadSockets->Lookup((void*)hSocket, pvCount))
-			{
-				nCount = (INT_PTR)pvCount;
-				nCount++;
-			}
-			else
-				nCount = 1;
-			pState->m_pmapDeadSockets->SetAt((void*)hSocket, (void*)nCount);
-		}
-	}
+// 	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
+// 
+// //	TRY 
+// 	{
+// 		if (!bDead)
+// 		{
+// 			ATLASSERT(CAsyncSocket::LookupHandle(hSocket, bDead) == NULL);
+// 			if (pState->m_pmapSocketHandle->IsEmpty())
+// 			{
+// 				ATLASSERT(pState->m_pmapDeadSockets->IsEmpty());
+// 				ATLASSERT(pState->m_hSocketWindow == NULL);
+// 
+// 				CSocketWnd* pWnd = new CSocketWnd;
+// 				pWnd->m_hWnd = NULL;
+// 
+// 				if (!pWnd->CreateEx(0, AfxRegisterWndClass(0),
+// 					_T("Socket Notification Sink"),
+// 					WS_OVERLAPPED, 0, 0, 0, 0, NULL, NULL))
+// 				{
+// 					TRACE(traceSocket, 0, "Warning: unable to create socket notify window!\n");
+// 					delete pWnd;
+// 				}
+// 
+// 				ATLASSERT(pWnd->m_hWnd != NULL);
+// 				ATLASSERT(CWnd::FromHandlePermanent(pWnd->m_hWnd) == pWnd);
+// 				pState->m_hSocketWindow = pWnd->m_hWnd;
+// 			}
+// 			pState->m_pmapSocketHandle->SetAt((void*)hSocket, pSocket);
+// 		}
+// 		else
+// 		{
+// 			void* pvCount;
+// 			INT_PTR nCount;
+// 			if (pState->m_pmapDeadSockets->Lookup((void*)hSocket, pvCount))
+// 			{
+// 				nCount = (INT_PTR)pvCount;
+// 				nCount++;
+// 			}
+// 			else
+// 				nCount = 1;
+// 			pState->m_pmapDeadSockets->SetAt((void*)hSocket, (void*)nCount);
+// 		}
+// 	}
 // 	CATCH_ALL (e) 
 // 	{ 
 // 	} 
@@ -468,62 +468,62 @@ void PASCAL CAsyncSocket::AttachHandle( SOCKET hSocket, CAsyncSocket* pSocket, B
 
 void PASCAL CAsyncSocket::DetachHandle( SOCKET hSocket, BOOL bDead /*= FALSE*/ )
 {
-	ATLASSERT(CAsyncSocket::LookupHandle(hSocket, bDead) != NULL);
-
-	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
-	if (!bDead)
-	{
-		pState->m_pmapSocketHandle->RemoveKey((void*)hSocket);
-		if (pState->m_pmapSocketHandle->IsEmpty())
-		{
-			ATLASSERT(pState->m_hSocketWindow != NULL);
-			CWnd* pWnd =
-				CWnd::FromHandlePermanent(pState->m_hSocketWindow);
-			ASSERT_VALID(pWnd);
-
-			if (pWnd != NULL)
-			{
-				pWnd->DestroyWindow();
-				delete pWnd;
-			}
-
-			pState->m_hSocketWindow = NULL;
-
-			pState->m_pmapDeadSockets->RemoveAll();
-
-			while (!pState->m_plistSocketNotifications->IsEmpty())
-				delete pState->m_plistSocketNotifications->RemoveHead();
-		}
-	}
-	else
-	{
-		void* pvCount;
-		INT_PTR nCount;
-		if (pState->m_pmapDeadSockets->Lookup((void*)hSocket, pvCount))
-		{
-			nCount = (INT_PTR)pvCount;
-			nCount--;
-			if (nCount == 0)
-				pState->m_pmapDeadSockets->RemoveKey((void*)hSocket);
-			else
-				pState->m_pmapDeadSockets->SetAt((void*)hSocket, (void*)nCount);
-		}
-	}
+// 	ATLASSERT(CAsyncSocket::LookupHandle(hSocket, bDead) != NULL);
+// 
+// 	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
+// 	if (!bDead)
+// 	{
+// 		pState->m_pmapSocketHandle->RemoveKey((void*)hSocket);
+// 		if (pState->m_pmapSocketHandle->IsEmpty())
+// 		{
+// 			ATLASSERT(pState->m_hSocketWindow != NULL);
+// 			CWnd* pWnd =
+// 				CWnd::FromHandlePermanent(pState->m_hSocketWindow);
+// 			ASSERT_VALID(pWnd);
+// 
+// 			if (pWnd != NULL)
+// 			{
+// 				pWnd->DestroyWindow();
+// 				delete pWnd;
+// 			}
+// 
+// 			pState->m_hSocketWindow = NULL;
+// 
+// 			pState->m_pmapDeadSockets->RemoveAll();
+// 
+// 			while (!pState->m_plistSocketNotifications->IsEmpty())
+// 				delete pState->m_plistSocketNotifications->RemoveHead();
+// 		}
+// 	}
+// 	else
+// 	{
+// 		void* pvCount;
+// 		INT_PTR nCount;
+// 		if (pState->m_pmapDeadSockets->Lookup((void*)hSocket, pvCount))
+// 		{
+// 			nCount = (INT_PTR)pvCount;
+// 			nCount--;
+// 			if (nCount == 0)
+// 				pState->m_pmapDeadSockets->RemoveKey((void*)hSocket);
+// 			else
+// 				pState->m_pmapDeadSockets->SetAt((void*)hSocket, (void*)nCount);
+// 		}
+// 	}
 }
 
 void PASCAL CAsyncSocket::KillSocket( SOCKET hSocket, CAsyncSocket* pSocket )
 {
-	ATLASSERT(CAsyncSocket::LookupHandle(hSocket, FALSE) != NULL);
-
-	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
-
-	CAsyncSocket::DetachHandle(hSocket, FALSE);
-	if (pState->m_hSocketWindow != NULL)
-	{
-		::PostMessage(pState->m_hSocketWindow, WM_SOCKET_DEAD,
-			(WPARAM)hSocket, 0L);
-		CAsyncSocket::AttachHandle(hSocket, pSocket, TRUE);
-	}
+// 	ATLASSERT(CAsyncSocket::LookupHandle(hSocket, FALSE) != NULL);
+// 
+// 	_AFX_SOCK_THREAD_STATE* pState = _afxSockThreadState;
+// 
+// 	CAsyncSocket::DetachHandle(hSocket, FALSE);
+// 	if (pState->m_hSocketWindow != NULL)
+// 	{
+// 		::PostMessage(pState->m_hSocketWindow, WM_SOCKET_DEAD,
+// 			(WPARAM)hSocket, 0L);
+// 		CAsyncSocket::AttachHandle(hSocket, pSocket, TRUE);
+// 	}
 }
 
 void PASCAL CAsyncSocket::DoCallBack( WPARAM wParam, LPARAM lParam )
@@ -604,12 +604,6 @@ BOOL CAsyncSocket::Socket( int nSocketType/*=SOCK_STREAM*/, long lEvent /*= FD_R
 	}
 	return FALSE;
 }
-
-void CAsyncSocket::AssertValid() const
-{
-	ASSERT(m_hSocket == INVALID_SOCKET || CAsyncSocket::FromHandle(m_hSocket) != NULL);
-}
-
 BOOL CAsyncSocket::ConnectHelper( const SOCKADDR* lpSockAddr, int nSockAddrLen )
 {
 	return connect(m_hSocket, lpSockAddr, nSockAddrLen) != SOCKET_ERROR;
