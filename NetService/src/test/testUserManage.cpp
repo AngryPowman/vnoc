@@ -1,7 +1,7 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "../UserManage.hpp"
-
+#include "../FileUserStorage.h"
 
 class CUserManageTest : public CppUnit::TestFixture
 {

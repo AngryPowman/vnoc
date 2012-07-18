@@ -1,8 +1,7 @@
 #pragma once
 
 #include "UserInfo.hpp"
-#include "FileUserStorage.h"
-#include "SQLUserStorage.h"
+#include "UserStorage.h"
 
 #include <string>
 #define NULLPOINT			-1
@@ -30,7 +29,7 @@ public:
 	{
 		return TEST_FALSE;
 	}
-	char strPass[40] = {0};
+	char strPass[40] = {0};	
 	m_us->GetPassword(szUser, strPass, 40);
 
 	int i = 0; //√‹¬Î—È÷§
