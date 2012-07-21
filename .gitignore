@@ -26,3 +26,4 @@
 !libmysql.lib
 !mysqlclient.lib
 /NetService/src/test/testRunner/Release
+*~
