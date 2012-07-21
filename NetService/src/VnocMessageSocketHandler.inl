@@ -85,7 +85,7 @@ void VnocMessageSocketHandler<ConnectionT>::ReadBodyHandler(char *messageBuffer,
     CMessageParser parser;
     std::unique_ptr<CMessage> msg(parser.Parse((byte*)safe_buf.get(), bytes_transferred + HEADER_LEN));
     int ret=0;
-    if (msg != NULL){
+    if (msg){
         int type = msg->GetMessageType();
         EZLOGGERVLSTREAM(axter::log_often)<<"message type: "<<type<<endl;
         auto handlers = protocol_->getHandler((MSGTYPE)type);
