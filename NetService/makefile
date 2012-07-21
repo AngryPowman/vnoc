@@ -1,6 +1,7 @@
 # author by AngryPowman, for VNOC server
 # revision : 3
 CXX=g++
+LD=g++
 VPATH=src:test:../Message:../program_options
 CXXFLAGS=-std=c++0x  
 CUR_DIR = $(shell pwd)
@@ -12,11 +13,13 @@ Server_OBJ=VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage
 
 all : Server test_bin
 Server : $(Server_OBJ)
-	$(CXX) -lpthread -lmysql $^ -o bin/$@
+	mkdir -p bin
+	$(LD) -lpthread -lmysql $^ -o bin/$@
 test_bin: EchoTestServer
 
 EchoTestServer : EchoTestServer.o  AsioTcpServer.o
-	$(CXX) -lpthread $^ -o bin/$@
+	mkdir -p bin
+	$(LD) -lpthread $^ -o bin/$@
 clean :
 	rm -fr bin/*
 	rm -f *.o
