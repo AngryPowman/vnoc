@@ -1,0 +1,3 @@
+[submodule "NetService/dependencies/libmysql"]
+	path = NetService/dependencies/libmysql
+	url = git://github.com/tyeken8/libmysql
