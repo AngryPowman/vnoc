@@ -5,6 +5,7 @@
 #include "../config/Config.h"
 #include "../net/Net.h"
 #include "../util/BLog.h"
+#include "../FrameWork/FrameWork.h"
 
 typedef std::map<CString,blog::CBLog*>	LogMap;
 typedef std::map<DWORD,CString>	ThreadNameMap;
@@ -35,6 +36,8 @@ public:
 	STDMETHOD( CriticalError(LPCTSTR message));
 
 	STDMETHOD( GetINetCenter(INetCenter** pNetCenter) );
+
+	STDMETHOD( GetIFrameModule(IFrameWork** pFrame) );
 private:
 	void _InitializeConfig();
 	void _UnInitializeConfig();
@@ -47,9 +50,13 @@ private:
 
 	void _InitializeNetCenter();
 	void _UnInitializeNetCenter();
+
+	void _InitializeFrameWork();
+	void _UnInitializeFrameWork();
 private:
 	CConfigImpl		m_config;
 	CNetCenter		m_netCenter;
+	CFrameWork		m_frameWork;
 	CString		m_configFilePath;
 	
 	LogMap		m_log;

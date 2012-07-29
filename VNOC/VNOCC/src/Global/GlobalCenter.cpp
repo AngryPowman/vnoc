@@ -18,11 +18,13 @@ HRESULT CGlobalCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 	_InitializeLog();		// 所有地方都依赖log，所以当最先初始化
 	_InitializeConfig();
 	_InitializeNetCenter();
+	_InitializeFrameWork();
 	return S_OK;
 }
 
 HRESULT CGlobalCenter::UnInitialize()
 {
+	_UnInitializeFrameWork();
 	_UnInitializeNetCenter();
 	_UnInitializeConfig();
 	_UnInitializeLog();
@@ -93,7 +95,7 @@ HRESULT CGlobalCenter::PtrAssert( void* p )
 
 void CGlobalCenter::_InitializeNetCenter()
 {
-	m_netCenter.Initialize(NULL);
+	m_netCenter.Initialize(this);
 	m_netCenter.Run();
 }
 
@@ -114,5 +116,22 @@ HRESULT CGlobalCenter::CriticalError( LPCTSTR message )
 	MessageBox(NULL,message,0,0);
 	TerminateProcess(GetCurrentProcess(),1);
 	return S_OK;
+}
+
+HRESULT CGlobalCenter::GetIFrameModule( IFrameWork** pFrame )
+{
+	return S_OK;
+}
+
+void CGlobalCenter::_InitializeFrameWork()
+{
+	m_frameWork.Initialize(this);
+	m_frameWork.Run();
+}
+
+void CGlobalCenter::_UnInitializeFrameWork()
+{
+	m_frameWork.Terminate();
+	m_frameWork.UnInitialize();
 }
 

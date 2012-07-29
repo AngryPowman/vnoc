@@ -3,6 +3,7 @@
 #include "../Base/IModule.h"
 #include "../config/IConfig.h"
 #include "../net/INet.h"
+#include "../FrameWork/IFrameWork.h"
 #include "GlobalDefine.h"
 
 interface IGlobal:public IModule
@@ -12,6 +13,7 @@ public:
 	// 接口
 	STDMETHOD( GetIConfig(IConfig** pConfig) = 0);
 	STDMETHOD( GetINetCenter(INetCenter** pNetCenter) = 0);
+	STDMETHOD( GetIFrameModule(IFrameWork** pFrame) = 0);
 
 	//////////////////////////////////////////////////////////////////////////
 	// log接口
