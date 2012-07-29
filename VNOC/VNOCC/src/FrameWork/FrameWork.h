@@ -1,5 +1,6 @@
 #pragma once
 #include "IFrameWork.h"
+#include "Dialogs/LoginImpl.h"
 #include <atlsync.h>
 #include <map>
 
@@ -18,11 +19,11 @@ public:
 	STDMETHOD( RegisterModule	(IModule* iModule,FrameModule module) );
 	STDMETHOD( GetModule		(IModule** piModule,FrameModule module) );
 	STDMETHOD( RemoveModule		(IModule* iModule) );
-	STDMETHOD( SetStartupModule	(FrameModule module) );
 private:
 	IModule* _FindModule(FrameModule module);
 private:
-	FrameModule m_startupModule;
 	ModuleMap m_map;
 	ATL::CCriticalSection m_cs;
+
+	CLoginImpl	m_loginModule;
 };

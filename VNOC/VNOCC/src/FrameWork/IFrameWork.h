@@ -23,8 +23,6 @@ public:
 	STDMETHOD( GetModule		(IModule** piModule,FrameModule module) = 0 );
 	// 删除模块
 	STDMETHOD( RemoveModule		(IModule* iModule) = 0);
-	// 设定启动时第一个打开的模块
-	STDMETHOD( SetStartupModule	(FrameModule module) = 0);
 };
 
 template<class retType>

@@ -254,6 +254,9 @@
     <ClInclude Include="src\config\Config.h" />
     <ClInclude Include="src\config\ConfigDefine.h" />
     <ClInclude Include="src\config\IConfig.h" />
+    <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h" />
+    <ClInclude Include="src\FrameWork\Dialogs\ILogin.h" />
+    <ClInclude Include="src\FrameWork\Dialogs\LoginImpl.h" />
     <ClInclude Include="src\FrameWork\FrameWork.h" />
     <ClInclude Include="src\FrameWork\IFrameWork.h" />
     <ClInclude Include="src\Global\GlobalCenter.h" />
@@ -315,6 +318,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\config\Config.cpp" />
+    <ClCompile Include="src\FrameWork\Dialogs\BKWinLogin.cpp" />
+    <ClCompile Include="src\FrameWork\Dialogs\LoginImpl.cpp" />
     <ClCompile Include="src\FrameWork\FrameWork.cpp" />
     <ClCompile Include="src\Global\GlobalCenter.cpp" />
     <ClCompile Include="src\Global\GlobalLog.cpp" />

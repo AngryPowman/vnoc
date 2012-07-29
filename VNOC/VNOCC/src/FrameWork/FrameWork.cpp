@@ -14,6 +14,12 @@ CFrameWork::~CFrameWork()
 
 HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
+	RegisterModule(&m_loginModule,module_LoginWin);
+
+	BkString::Load(IDR_BK_STRING_DEF);
+	BkFontPool::SetDefaultFont(BkString::Get(0), -12);
+	BkSkin::LoadSkins(IDR_XML_SKIN_DEF);
+	BkStyle::LoadStyles(IDR_BK_STYLE_DEF);
 	return S_OK;
 }
 
@@ -24,6 +30,8 @@ HRESULT CFrameWork::UnInitialize()
 
 HRESULT CFrameWork::Run()
 {
+	m_loginModule.Run();
+	m_loginModule.Show(SW_SHOW);
 	return S_OK;
 }
 
@@ -69,12 +77,6 @@ HRESULT CFrameWork::RemoveModule( IModule* iModule )
 		}
 	}
 	ATLASSERT(FALSE && "删除不存在的模块");
-	return S_OK;
-}
-
-HRESULT CFrameWork::SetStartupModule( FrameModule module )
-{
-	m_startupModule = module;
 	return S_OK;
 }
 
