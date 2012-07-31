@@ -73,7 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(MSBuildProjectDirectory)/include;$(IncludePath)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -82,6 +82,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(MSBuildProjectDirectory)/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -98,7 +99,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../VisualLeakDetector/lib/win32/vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../VisualLeakDetector/lib/win32/vld.lib;$(ProjectDir)/lib/libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -169,12 +170,16 @@
     <ClInclude Include="src\AsioTcpConnection.hpp" />
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Config.hpp" />
+    <ClInclude Include="src\FileUserStorage.h" />
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
     <ClInclude Include="src\SocketServer.hpp" />
     <ClInclude Include=".\src\UserManage.hpp" />
+    <ClInclude Include="src\SQLUserStorage.h" />
+    <ClInclude Include="src\UserInfo.hpp" />
+    <ClInclude Include=".\src\UserStorage.h" />
     <ClInclude Include="src\util.hpp" />
     <ClInclude Include="src\VnocMessageSocketHandler.hpp" />
     <ClInclude Include="src\VnocProtocol.hpp" />
@@ -196,8 +201,11 @@
     <ClCompile Include="..\program_options\winmain.cpp" />
     <ClCompile Include="src\AsioTcpServer.cpp" />
     <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\FileUserStorage.cpp" />
     <ClCompile Include="src\mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\NetService.cpp" />
+    <ClCompile Include="src\SQLUserStorage.cpp" />
+    <ClCompile Include="src\UserStorage.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
   </ItemGroup>

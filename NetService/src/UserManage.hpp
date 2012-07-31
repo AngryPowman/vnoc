@@ -1,11 +1,8 @@
-/*
-用户管理模块
-操作1 用户验证
-操作2 用户注册
-操作3 找回密码
-操作4 上传文件
-操作5 用户下线
-*/
+#pragma once
+
+#include "UserInfo.hpp"
+#include "UserStorage.h"
+
 #include <string>
 #define NULLPOINT			-1
 #define LOGIN_OK			1
@@ -13,27 +10,29 @@
 
 using namespace std;
 
-struct userinfo
-{
-	//其中有很多用户信息
-};
 class CUserManage
 {
 private:
-	
+	UserStorage *m_us;
 public:
+	CUserManage(UserStorage* _UserStorage)
+	{
+		m_us = _UserStorage;
+	}
 	//返回值： LOGIN_OK 登陆成功 TEST_FALSE 验证失败 NULLPOINT 指针无效
 	//如果登陆成功则获得用户信息
-	int Authenticate(string sUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 20)
+	int Authenticate(char* szUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
 {
-	char strPass[20] = "0000000000000000000";
 	
-	if (false)//账号是否存在 查数据库
+
+	if ( !m_us->IfUserExist(szUser) )//账号是否存在 查数据库
 	{
 		return TEST_FALSE;
 	}
-	
-	int i = 0;
+	char strPass[40] = {0};	
+	m_us->GetPassword(szUser, strPass, 40);
+
+	int i = 0; //密码验证
 	do
 	{
 		if (strPass[i] != pPassword[i])
@@ -49,7 +48,8 @@ public:
 	}
 
 	//获得用户信息
-	//userinfo->xx == xx;
+	m_us->GetUserInfo(szUser, pUserInfo);
+
 	return LOGIN_OK;
 }
 

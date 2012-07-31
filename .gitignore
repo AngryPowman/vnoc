@@ -22,5 +22,8 @@
 *.opensdf
 *.cache
 *.lib
+*.o
 !libmysql.lib
 !mysqlclient.lib
+/NetService/src/test/testRunner/Release
+*~
