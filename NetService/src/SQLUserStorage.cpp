@@ -1,10 +1,29 @@
 #include "SQLUserStorage.h"
-
+#include "Config.hpp"
+#include <ezlogger_headers.hpp>
+#include <iostream>
+void sUserStorage ::SaveConnLog(string host,string name,string password,string db,int port /*= 3306*/ )
+{
+	EZLOGGERSTREAM<<"MySQL host :"<<host<<std::endl;
+	EZLOGGERSTREAM<<"MySQL name :"<<name<<std::endl;
+	EZLOGGERSTREAM<<"MySQL password :"<<password<<std::endl;
+	EZLOGGERSTREAM<<"MySQL db :"<<db<<std::endl;
+	EZLOGGERSTREAM<<"MySQL port :"<<port<<std::endl;
+}
 sUserStorage ::sUserStorage ()
 {
-	if (conn.Connect("xxy1991.dlinkddns.com", "vnoc", "ldldld", "vnoc", 3306) == MW_SQL_ERR)
+	string host = Config::getInstance()->getValue("host");
+	string name = Config::getInstance()->getValue("name");
+	string password = Config::getInstance()->getValue("password");
+	string db = Config::getInstance()->getValue("db");
+	int port = Config::getInstance()->getValue("port");
+
+	SaveConnLog(host, name, password, db, port);
+
+	if (conn.Connect(host, name, password, db, port) == MW_SQL_ERR)
 	{
 		bIsConn = false;
+		EZLOGGERSTREAM<<"Connet MySQL Data Base failure"<<std::endl;
 		return;
 	}
 	bIsConn = true;

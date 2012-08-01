@@ -7,7 +7,8 @@
 #include "../../include/Mysql/mysql.h"
 
 
-typedef std::string string;
+
+using std::string;
 
 
 #define   MW_SQL_OK   0
