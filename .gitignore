@@ -2,8 +2,7 @@
 /NetService/Debug
 /NetService/bin
 /vnoc/Debug
-/C:/Users/tengda/Documents/GitHub/vnoc/VNOC/VNOC.sdf
-/VNOC/VNOC.sdf
+*.sdf
 /netservice/Debug
 /netservice/Release
 *.obj
