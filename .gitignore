@@ -27,3 +27,6 @@
 !mysqlclient.lib
 /NetService/src/test/testRunner/Release
 *~
+
+/NetService/src/test/testRunner/Release
+/NetService/src/test/testRunner/Release
