@@ -87,23 +87,41 @@ void CVNOCSocket::OnReceive( int nErrorCode )
 {
 	int length = 0;
 	Util::CAutoCS ac(m_cs);
-	length = ((CAsyncSocket*)this)->Receive(m_buffer.AllocAppend(1024),1024);
-	if (FAILED(length))
+	length = ((CAsyncSocket*)this)->Receive(m_recvBuffer.AllocAppend(1024),1024);
+	if (length == SOCKET_ERROR)
 	{
-		Global->Logf(LogFile_Net,_T("Socket错误，错误码:%d"),GetLastError());
-		Global->CriticalError(_T("Socket异常，无法工作"));
-		return;
+		if (GetLastError() != WSAEWOULDBLOCK)
+		{
+			Global->Logf(LogFile_Net,_T("Socket错误，错误码:%d"),GetLastError());
+			Global->CriticalError(_T("Socket异常，无法工作"));
+			return;
+		}
 	}
-	m_buffer.AccomplishAppend(length);
+	m_recvBuffer.AccomplishAppend(length);
 	_TryParse();
+}
+
+void CVNOCSocket::OnSend( int nErrorCode )
+{
+	CSocketImpl::OnSend(nErrorCode);
+	int ret = CSocketImpl::Send(m_sendBuffer,m_sendBuffer.GetSize());
+	if (ret != SOCKET_ERROR)
+	{
+		m_sendBuffer.Get(NULL,ret);
+		AsyncSelect(FD_READ);
+	}
+	else
+	{
+		DWORD le = WSAGetLastError();
+	}
 }
 
 VOID CVNOCSocket::_TryParse()
 { // 解析buffer，将数据包分离出来
 	BYTE* pBuffer;
 	DWORD bufSize;
-	pBuffer = m_buffer.GetBuffer();
-	bufSize = m_buffer.GetSize();
+	pBuffer = m_recvBuffer.GetBuffer();
+	bufSize = m_recvBuffer.GetSize();
 	int checkResult = CMessageParser::Check(pBuffer,bufSize);
 	if (checkResult != -1)
 	{
@@ -116,8 +134,15 @@ VOID CVNOCSocket::_TryParse()
 			pListener->OnPackReady(buffer);
 		}
 		buffer.Detach();
-		m_buffer.Get(NULL,checkResult);
+		m_recvBuffer.Get(NULL,checkResult);
 	}
+}
+
+int CVNOCSocket::Send( const void* lpBuf, int nBufLen, int nFlags /*= 0*/ )
+{
+	m_sendBuffer.Append(lpBuf,nBufLen);
+	CAsyncSocket::AsyncSelect(FD_WRITE);
+	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////

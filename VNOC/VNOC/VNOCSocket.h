@@ -29,10 +29,13 @@ public:
 	CVNOCSocket(ISocketListener *pListener=NULL);
 	virtual ~CVNOCSocket();
 	virtual void OnReceive(int nErrorCode);
+	virtual int Send(const void* lpBuf, int nBufLen, int nFlags = 0);
+	virtual void OnSend(int nErrorCode);
 private:
 	VOID _TryParse();
 private:
-	CAutoStreamBuffer	m_buffer;
+	CAutoStreamBuffer	m_sendBuffer;
+	CAutoStreamBuffer	m_recvBuffer;
 	CCriticalSection	m_cs;
 };
 
