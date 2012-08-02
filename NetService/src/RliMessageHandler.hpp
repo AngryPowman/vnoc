@@ -1,7 +1,7 @@
 #pragma once
 #include "VnocProtocol.hpp"
 #include "UserManage.hpp"
-#include "SQLUserStorage.h"
+#include "FileUserStorage.h"
 class RliMessageHandler : public IMessageHandler
 {
 public:
@@ -15,7 +15,7 @@ public:
     }
     virtual int operator()(const CMessage *msg, MessageContext *ctx)
     {
-		sUserStorage us;
+		fUserStorage us;
 		CUserManage um(&us);
         MSG_ALI aliMessage;
 		const MSG_RLI * rliMessage = dynamic_cast<const MSG_RLI *>(msg);
