@@ -1,3 +1,4 @@
+#pragma once
 #include "UserStorage.h"
 #include "mysql\MysqlWrapper.h"
 #pragma comment(lib, "../lib/libmysql.lib")

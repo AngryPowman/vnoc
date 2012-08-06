@@ -1,7 +1,7 @@
 #pragma once
 #include "VnocProtocol.hpp"
 #include "UserManage.hpp"
-#include "FileUserStorage.h"
+
 class RliMessageHandler : public IMessageHandler
 {
 public:
@@ -15,12 +15,10 @@ public:
     }
     virtual int operator()(const CMessage *msg, MessageContext *ctx)
     {
-		fUserStorage us;
-		CUserManage um(&us);
         MSG_ALI aliMessage;
 		const MSG_RLI * rliMessage = dynamic_cast<const MSG_RLI *>(msg);
 		userinfo UserInfo = {0};
-		if (um.Authenticate((char*)rliMessage->GetAccountNumber(), (char*)rliMessage->GetPassword(), &UserInfo) == LOGIN_OK)
+		if (CUserManage::GetInstance()->Authenticate((char*)rliMessage->GetAccountNumber(), (char*)rliMessage->GetPassword(), &UserInfo) == LOGIN_OK)
 		{
 			aliMessage.SetLoginResult(0); //µÇÂ½³É¹¦
 		}

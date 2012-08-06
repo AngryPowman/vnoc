@@ -23,19 +23,19 @@ public:
 	void AuthenticateTest()
 	{
 		fUserStorage us;
-		CUserManage um(&us);
+		CUserManage::GetInstance()->initial(&us);
 		char strUser0[] = "user00"; //用户名不存在
-		char strPassword0[20] = "0000000000000000000"; 
+		char strPassword0[40] = "00000000000000000000000000000000000000"; 
 		userinfo stInfo0 = {};
-		CPPUNIT_ASSERT(um.Authenticate(strUser0, (char*)strPassword0, &stInfo0));
+		CPPUNIT_ASSERT(CUserManage::GetInstance()->Authenticate( strUser0, (char*)strPassword0, &stInfo0));
 		char strUser1[] = "admin"; //成功登陆
-		char strPassword1[20] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+		char strPassword1[40] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		userinfo stInfo1 = {};
-		CPPUNIT_ASSERT(um.Authenticate(strUser1, (char*)strPassword1, &stInfo1));
+		CPPUNIT_ASSERT(CUserManage::GetInstance()->Authenticate( strUser1, (char*)strPassword1, &stInfo1));
 		char strUser2[] = "able"; //密码错误
-		char strPassword2[20] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+		char strPassword2[40] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		userinfo stInfo2 = {};
-		CPPUNIT_ASSERT(um.Authenticate(strUser2, (char*)strPassword2, &stInfo2));
+		CPPUNIT_ASSERT(CUserManage::GetInstance()->Authenticate( strUser2, (char*)strPassword2, &stInfo2));
 
     }
 
