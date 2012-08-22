@@ -13,13 +13,13 @@ void sUserStorage ::SaveConnLog(string host,string name,string password,string d
 }
 sUserStorage ::sUserStorage ()
 {
-	string host = Config::getInstance()->getValue("host");
-	string name = Config::getInstance()->getValue("name");
-	string password = Config::getInstance()->getValue("password");
-	string db = Config::getInstance()->getValue("db");
-	int port = Config::getInstance()->getValue("port");
+	string host = "xxy1991.dlinkddns.com";//Config::getInstance()->getValue("host");
+	string name = "vnoc";//Config::getInstance()->getValue("name");
+	string password = "ldldld";//Config::getInstance()->getValue("password");
+	string db = "vnoc";//Config::getInstance()->getValue("db");
+	int port = 3306;//Config::getInstance()->getValue("port");
 
-	//SaveConnLog(host, name, password, db, port);
+	SaveConnLog(host, name, password, db, port);
 
 	if (conn.Connect(host, name, password, db, port) == MW_SQL_ERR)
 	{
@@ -79,35 +79,36 @@ bool sUserStorage::GetPassword(const char* pUser, char* pPassWordBuff, long cbBu
 	{
 		return false;
 	}
+	strcpy(pPassWordBuff, p);
 
-	int a=0,b=0;
+	/*int a=0,b=0;
 	for (int i = 0; i < 40; i+=2)
 	{
-		if ( p[i] >= 'A' && p[i]<='Z' )
+		if ( p[i] >= 'A' && p[i]<='F' )
 		{
 			a = p[i] - 'A' +10;
 		}else if (p[i] >= '0' && p[i]<='9' )
 		{
 			a = p[i] - '0' ;
 		}
-		else if ( p[i] >= 'a' && p[i]<='z' )
+		else if ( p[i] >= 'a' && p[i]<='f' )
 		{
 			a = p[i] - 'a' + 10;
 		}
-		if ( p[i+1] >= 'A' && p[i+1]<='Z' )
+		if ( p[i+1] >= 'A' && p[i+1]<='F' )
 		{
 			b = p[i+1] - 'A' +10;
 		}else if (p[i+1] >= '0' && p[i+1]<='9' )
 		{
 			b = p[i+1] - '0' ;
 		}
-		else if ( p[i+1] >= 'a' && p[i+1]<='z' )
+		else if ( p[i+1] >= 'a' && p[i+1]<='f' )
 		{
 			b = p[i+1] - 'a' + 10;
 		}
 
 		pPassWordBuff[i/2] = a*16 + b;
-	}
+	}*/
 	return true;
 }
 bool sUserStorage::GetUserInfo(const char* pUser, userinfo* pUserInfo)
@@ -129,7 +130,38 @@ bool sUserStorage::GetUserInfo(const char* pUser, userinfo* pUserInfo)
 	}
 	
 	strcpy(pUserInfo->strUser, pUser);
-	strcpy(pUserInfo->passwordData, com.GetOneData()->asString());
+
+	int a=0,b=0;
+
+	const char* p = com.GetOneData()->asString();
+	for (int i = 0; i < 40; i+=2)
+	{
+		if ( p[i] >= 'A' && p[i]<='F' )
+		{
+			a = p[i] - 'A' +10;
+		}else if (p[i] >= '0' && p[i]<='9' )
+		{
+			a = p[i] - '0' ;
+		}
+		else if ( p[i] >= 'a' && p[i]<='f' )
+		{
+			a = p[i] - 'a' + 10;
+		}
+		if ( p[i+1] >= 'A' && p[i+1]<='F' )
+		{
+			b = p[i+1] - 'A' +10;
+		}else if (p[i+1] >= '0' && p[i+1]<='9' )
+		{
+			b = p[i+1] - '0' ;
+		}
+		else if ( p[i+1] >= 'a' && p[i+1]<='f' )
+		{
+			b = p[i+1] - 'a' + 10;
+		}
+
+		pUserInfo->passwordData[i/2] = a*16 + b;
+	}
+	
 
 	char SQL1[100] = "select nickname from vnoc.user_info where user='";
 	strcat(SQL1, pUser);
