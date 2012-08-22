@@ -23,7 +23,7 @@ public:
 	{
 		_us = us;
 	}
-	int Authenticate(char* szUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
+	int Authenticate(char* szUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 20)
 	{
 	
 
@@ -31,8 +31,8 @@ public:
 		{
 			return TEST_FALSE;
 		}
-		char strPass[40] = {0};	
-		_us->GetPassword(szUser, strPass, 40);
+		char strPass[20] = {0};	
+		_us->GetPassword(szUser, strPass, 20);
 
 		int i = 0; //ÃÜÂëÑéÖ¤
 		do
