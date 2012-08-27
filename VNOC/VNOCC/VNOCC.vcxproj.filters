@@ -533,6 +533,9 @@
     <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h">
       <Filter>FrameWork\Dialogs</Filter>
     </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndedit.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

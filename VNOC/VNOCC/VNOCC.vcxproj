@@ -143,10 +143,16 @@
     <None Include="res\def_string.xml" />
     <None Include="res\def_style.xml" />
     <None Include="res\dlgfile_foot.xml" />
-    <None Include="res\dlgfile_header.xml" />
-    <None Include="res\dlgfile_opt.xml" />
+    <None Include="res\dlgfile_header.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="res\dlgfile_opt.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="res\dlgfile_opt.xml.bak" />
-    <None Include="res\dlg_main.xml" />
+    <None Include="res\dlg_main.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="res\dlg_mgr_listtip.xml" />
     <None Include="res\dlg_mgr_powersweep_tip.xml" />
     <None Include="res\dlg_more_bkwin.xml" />
@@ -220,6 +226,7 @@
     <ClInclude Include="src\BKWin\bkwin\bkwndcmnctrl.h" />
     <ClInclude Include="src\BKWin\bkwin\bkwnddlg.h" />
     <ClInclude Include="src\BKWin\bkwin\bkwnddlgfile.h" />
+    <ClInclude Include="src\BKWin\bkwin\bkwndedit.h" />
     <ClInclude Include="src\BKWin\bkwin\bkwndnotify.h" />
     <ClInclude Include="src\BKWin\bkwin\bkwndpanel.h" />
     <ClInclude Include="src\BKWin\bkwin\bkwndrichtxt.h" />

@@ -9,6 +9,7 @@
 
 #include "bkwndcmnctrl.h"
 #include "bkwndrichtxt.h"
+//#include "bkwndedit.h"
 
 class CBkPanel : public CBkContainerWnd
 {

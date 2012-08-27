@@ -19,7 +19,7 @@ void CLoginWnd::OnBkBtnClose()
 
 void CLoginWnd::OnBkBtnMax()
 {
-
+	int a=0;
 }
 
 void CLoginWnd::OnBkBtnMin()
