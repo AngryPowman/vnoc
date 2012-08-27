@@ -21,10 +21,14 @@
 #define LogMask_ALL		0xffffffff
 
 //////////////////////////////////////////////////////////////////////////
+// FrameWork
+
+//////////////////////////////////////////////////////////////////////////
 // logœ‡πÿ
 
 #define LogFile_General	_T("General")
 #define LogFile_Config	_T("Config")
+#define LogFile_FrameWork	_T("FrameWork")
 #define LogFile_Scintilla	_T("Scintilla")
 #define LogFile_Net		_T("Net")
 

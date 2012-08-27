@@ -1,5 +1,6 @@
 #pragma once
 #include "../Base/IModule.h"
+#include "ResDefine.h"
 
 enum FrameModule
 {

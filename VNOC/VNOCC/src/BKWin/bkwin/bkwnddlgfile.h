@@ -27,8 +27,13 @@ public:
 			return FALSE;
 
 		CStringA	strXML;
-		UINT		uResId = atoi(strSrc);
-		BOOL		bRet   = BkResManager::LoadResource(uResId,strXML);
+		BOOL		bRet = FALSE;
+		bRet = BkResManager::LoadResource(CString(strSrc),strXML);
+		if (!bRet)
+		{
+			UINT		uResId = atoi(strSrc);
+			bRet = BkResManager::LoadResource(uResId,strXML);
+		}
 		
 		ATLASSERT(bRet);
 

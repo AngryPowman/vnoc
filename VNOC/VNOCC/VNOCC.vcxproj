@@ -266,6 +266,7 @@
     <ClInclude Include="src\FrameWork\Dialogs\LoginImpl.h" />
     <ClInclude Include="src\FrameWork\FrameWork.h" />
     <ClInclude Include="src\FrameWork\IFrameWork.h" />
+    <ClInclude Include="src\FrameWork\ResDefine.h" />
     <ClInclude Include="src\Global\GlobalCenter.h" />
     <ClInclude Include="src\Global\GlobalDefine.h" />
     <ClInclude Include="src\Global\IGlobal.h" />

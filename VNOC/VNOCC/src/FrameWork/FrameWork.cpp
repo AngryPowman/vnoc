@@ -20,6 +20,13 @@ HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 	BkFontPool::SetDefaultFont(BkString::Get(0), -12);
 	BkSkin::LoadSkins(IDR_XML_SKIN_DEF);
 	BkStyle::LoadStyles(IDR_BK_STYLE_DEF);
+	CString strPath;
+	GetModuleFileName(nullptr,strPath.GetBuffer(MAX_PATH),MAX_PATH);
+	strPath.ReleaseBuffer();
+	Util::Filesys::SplitPath(strPath,strPath,CString());
+	strPath += BKWinResDir;
+	Global->Logf(LogFile_FrameWork,_T("初始化资源文件夹: %s"),strPath);
+	BkResManager::SetResourcePath(strPath);
 	return S_OK;
 }
 

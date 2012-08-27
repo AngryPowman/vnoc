@@ -72,14 +72,47 @@ public:
 
                 ::CloseHandle(hFile);
             }
-        }
+		}
+		bRet = _LoadEmbedResource(uResID, strBuffRet, lpszResType);
+		BKRES_ASSERT(bRet, L"Failed loading %s %u", lpszResType, uResID);
+		return bRet;
+	}
 
-        bRet = _LoadEmbedResource(uResID, strBuffRet, lpszResType);
+	static BOOL LoadResource(LPCTSTR fileName, CStringA &strBuffRet, LPCTSTR lpszResType = BKRES_TYPE)
+	{
+		BOOL bRet = FALSE;
 
-        BKRES_ASSERT(bRet, L"Failed loading %s %u", lpszResType, uResID);
+		if (!_Instance()->m_strResourcePath.IsEmpty())
+		{
+			CString strFileName;
 
-        return bRet;
-    }
+			strFileName.Format(_T("%s\\%s"), _Instance()->m_strResourcePath, fileName);
+
+			HANDLE hFile = ::CreateFile(
+				strFileName, GENERIC_READ, FILE_SHARE_READ, 
+				NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+			if (INVALID_HANDLE_VALUE != hFile)
+			{
+				DWORD dwSize = ::GetFileSize(hFile, NULL);
+				if (0 != dwSize)
+				{
+					DWORD dwRead = 0;
+					bRet = ::ReadFile(hFile, strBuffRet.GetBuffer(dwSize + 10), dwSize, &dwRead, NULL);
+					if (bRet && dwRead == dwSize)
+					{
+						strBuffRet.ReleaseBuffer(dwSize);
+						return TRUE;
+					}
+
+					strBuffRet.ReleaseBuffer(0);
+				}
+
+				::CloseHandle(hFile);
+			}
+		}
+
+		return bRet;
+	}
 
     static BOOL LoadResource(UINT uResID, HBITMAP &hBitmap)
     {

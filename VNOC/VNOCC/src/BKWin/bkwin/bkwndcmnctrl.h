@@ -113,6 +113,21 @@ class CBkStatic : public CBkWindow
 class CBkLink : public CBkWindow
 {
     BKOBJ_DECLARE_CLASS_NAME(CBkLink, "link")
+public:
+
+	virtual BOOL Load(TiXmlElement* pTiXmlElem)
+	{
+		if (!CBkWindow::Load(pTiXmlElem))
+			return FALSE;
+
+		return TRUE;
+	}
+
+private:
+	BOOL m_hasUnderLine;
+	BKWIN_DECLARE_ATTRIBUTES_BEGIN()
+		BKWIN_INT_ATTRIBUTE("underline", m_hasUnderLine, FALSE)
+	BKWIN_DECLARE_ATTRIBUTES_END()
 };
 
 //////////////////////////////////////////////////////////////////////////

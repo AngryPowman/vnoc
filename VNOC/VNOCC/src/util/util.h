@@ -75,8 +75,15 @@ namespace Util
 		bool FindFileAttribute(const wchar_t* path, WIN32_FIND_DATA& findFileData);
 		bool CheckFileName(const wchar_t * str);
 		bool GetDirFromPath(LPCTSTR path,int &endposIndex);// 获取路径中的目录
+		BOOL SplitPath(LPCTSTR dirPath,CString& dir,CString& fileName);
 		//BOOL PathFileExists(LPCTSTR path);		// Windows有这个API
 		bool IsFileInUse(LPCTSTR path);
+
+		void FormatPathSplit(CString& strPath,BOOL slashOrNot=TRUE);
+		void FormatPathString( CString& strDirRoot,BOOL slashOrNot=TRUE );
+		void FormatDirPathString( CString& strDirRoot,BOOL slashOrNot=TRUE );
+		BOOL MakeSurePathFileValid(CString& path);
+		std::wstring AutoRenameLocalPathIfExists(const std::wstring& path);
 	}
 
 	namespace Time

@@ -1485,7 +1485,19 @@ public:
             return FALSE;
 
         return SetXml(strXml);
-    }
+	}
+
+	BOOL Load(LPCTSTR fileName)
+	{
+		CStringA strXml;
+
+		BOOL bRet = BkResManager::LoadResource(fileName, strXml);
+
+		if (!bRet)
+			return FALSE;
+
+		return SetXml(strXml);
+	}
 
     BOOL SetXml(LPCSTR lpszXml)
     {

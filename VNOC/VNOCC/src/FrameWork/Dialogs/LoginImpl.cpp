@@ -26,7 +26,7 @@ HRESULT CLoginImpl::Show( BOOL bShow/*=TRUE*/ )
 	if (bShow)
 	{
 		CLoginWnd wnd;
-		wnd.Load(IDR_BK_MAIN_DIALOG);
+		wnd.Load(BKDlg_LoginWin);
 		wnd.DoModal();
 	}
 	return S_OK;

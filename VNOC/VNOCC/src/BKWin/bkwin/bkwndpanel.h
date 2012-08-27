@@ -9,7 +9,7 @@
 
 #include "bkwndcmnctrl.h"
 #include "bkwndrichtxt.h"
-//#include "bkwndedit.h"
+#include "bkwndedit.h"
 
 class CBkPanel : public CBkContainerWnd
 {
@@ -689,6 +689,10 @@ inline CBkWindow* CBkPanel::_CreateBkWindowByName(LPCSTR lpszName)
         return pNewWindow;
 
 	pNewWindow = CBkMemoryImage::CheckAndNew(lpszName);
+	if (pNewWindow)
+		return pNewWindow;
+
+	pNewWindow = CBkEdit::CheckAndNew(lpszName);
 	if (pNewWindow)
 		return pNewWindow;
 

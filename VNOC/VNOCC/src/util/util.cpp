@@ -481,6 +481,133 @@ bool Util::Filesys::GetDirFromPath( LPCTSTR path,int &endposIndex )
 	return false;
 }
 
+BOOL Util::Filesys::SplitPath( LPCTSTR dirPath,CString& dir,CString& fileName )
+{
+	CString strDirPath = dirPath;
+	int pos;
+	if (GetDirFromPath(strDirPath,pos))
+	{
+		dir = strDirPath.Left(pos);
+		fileName = strDirPath.Right(strDirPath.GetLength()-pos-1);
+		FormatDirPathString(dir);
+		FormatPathString(fileName);
+		return TRUE;
+	}
+	return FALSE;
+}
+void Util::Filesys::FormatPathString( CString& strDirRoot ,BOOL slashOrNot)
+{
+	if (strDirRoot.IsEmpty())
+	{
+		return;
+	}
+	FormatPathSplit(strDirRoot,slashOrNot);
+}
+
+void Util::Filesys::FormatDirPathString( CString& strDirRoot ,BOOL slashOrNot)
+{
+	FormatPathString(strDirRoot,slashOrNot);
+	if (strDirRoot.Right(1) != (slashOrNot? _T('/'): _T('\\')))
+	{
+		strDirRoot += (slashOrNot? _T('/'): _T('\\'));
+	}
+}
+
+std::wstring Util::Filesys::AutoRenameLocalPathIfExists(const std::wstring& path)
+{
+	std::wstring new_path = path;
+
+	ATL::CString str_path = path.c_str();
+	int pos = str_path.ReverseFind(L'.');
+	if(-1 == pos)
+	{
+		pos = str_path.GetLength();
+	}
+
+	int index = 2;  
+	while(PathFileExists(new_path.c_str()))
+	{		
+		ATL::CString str_new_path = path.c_str();
+		ATL::CString strFormat;
+		strFormat.Format(L"(%d)", index++);
+		str_new_path.Insert(pos, strFormat);
+
+		new_path = str_new_path;
+	}
+
+	return new_path;
+}
+
+void Util::Filesys::FormatPathSplit(CString& strPath,BOOL slashOrNot)
+{
+	LPCTSTR bef,aft,dblaft;
+	if (slashOrNot)
+	{
+		bef = _T("\\");
+		aft = _T("/");
+		dblaft = _T("//");
+	}
+	else
+	{
+		bef = _T("/");
+		aft = _T("\\");
+		dblaft = _T("\\\\");
+	}
+	strPath.Replace(bef,aft);
+	while(-1 != strPath.Find(dblaft))
+	{
+		strPath.Replace(dblaft,aft);
+	}
+}
+
+BOOL Util::Filesys::MakeSurePathFileValid( CString& path )
+{
+	if (path.IsEmpty())
+	{
+		return FALSE;
+	}
+	if (!PathFileExists(path))
+	{
+		return TRUE;
+	}
+	CString extName;
+	CString forePath;
+	CString dir;
+	CString filename;
+	SplitPath(path,dir,filename);
+	if (!PathFileExists(dir))
+	{
+		ForceCreateDir(dir);
+		if (!PathFileExists(dir))
+		{
+			return FALSE;
+		}
+	}
+	int nPos = path.ReverseFind(_T('.'));
+	if (nPos == -1)
+	{
+		forePath = path;
+	}
+	else
+	{
+		forePath = path.Left(nPos);
+		extName = path.Right(path.GetLength()-nPos);
+	}
+	CString tryPath;
+	int indexCount = 2;
+	do 
+	{
+		tryPath.Format(_T("%s(%d)%s"),forePath,indexCount,extName);
+		++indexCount;
+	} while (PathFileExists(tryPath) && indexCount<CHAR_MAX);
+	if (indexCount >= CHAR_MAX)
+	{
+		return FALSE;
+	}
+	path = tryPath;
+	return TRUE;
+}
+
 UINT Util::String::ToUINT( LPCTSTR lpstr )
 {
 	ATLASSERT(lpstr);

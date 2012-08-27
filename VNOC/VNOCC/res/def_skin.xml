@@ -8,7 +8,7 @@
 
 <imgframe name=msgboxhead src=4 top=32 left=5 crbg=FBFCFD part=top/>
 <imgframe name=dlgbody src=4 top=32 left=5 crbg=FBFCFD part=middle/>
-<imgframe name=dlgfoot src=4 top=32 left=5 crbg=FBFCFD part=bottom/>
+<imgframe name=dlgfoot src=4 top=32 left=5 crbg=EEEEEE part=bottom/>
 <imgframe name=msgboxbody src=29 top=0 left=2 crbg=FBFCFD part=middle/>
 <imgframe name=msgboxfoot src=29 top=0 left=2 crbg=FBFCFD part=bottom/>
 <button name=uglybtn/>  

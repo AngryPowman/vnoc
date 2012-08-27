@@ -536,6 +536,9 @@
     <ClInclude Include="src\BKWin\bkwin\bkwndedit.h">
       <Filter>BKWin\BKWin</Filter>
     </ClInclude>
+    <ClInclude Include="src\FrameWork\ResDefine.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

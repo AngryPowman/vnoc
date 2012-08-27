@@ -42,6 +42,7 @@
 #include "src/BKWin/bkwin/bkatldefine.h"
 
 #include "src/BKWin/bkwin/bkdlgview.h"
+#include "src/BKWin/bkwin/bkwnddlgfile.h"
 #include "src/BKWin/bkres/bkres.h"
 
 #include "src/util/util.h"
