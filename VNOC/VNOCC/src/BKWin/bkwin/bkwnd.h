@@ -108,7 +108,7 @@ public:
 
         if (pBkWnd)
         {
-			_Instance();
+			_Instance();	// 这里保证唯一的实例创建成功，否则临界区变量未初始化
 
 			::EnterCriticalSection(&ms_lockWndMap);
 
