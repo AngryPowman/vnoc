@@ -138,27 +138,27 @@ HRESULT CNetCenter::Send( LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg )
 
 //////////////////////////////////////////////////////////////////////////
 
-void CNetCenter::OnAccept( int nErrorCode,CAsyncSocket* pSock )
+void CNetCenter::OnAccept( int nErrorCode,CAsyncSocketEx* pSock )
 {
 	Global->Log(LogFile_Net,_T("OnAccept"));
 }
 
-void CNetCenter::OnClose( int nErrorCode,CAsyncSocket* pSock )
+void CNetCenter::OnClose( int nErrorCode,CAsyncSocketEx* pSock )
 {
 	Global->Log(LogFile_Net,_T("OnClose"));
 }
 
-void CNetCenter::OnConnect( int nErrorCode,CAsyncSocket* pSock )
+void CNetCenter::OnConnect( int nErrorCode,CAsyncSocketEx* pSock )
 {
 	Global->Log(LogFile_Net,_T("OnConnect"));
 }
 
-void CNetCenter::OnOutOfBandData( int nErrorCode,CAsyncSocket* pSock )
+void CNetCenter::OnOutOfBandData( int nErrorCode,CAsyncSocketEx* pSock )
 {
 	Global->Log(LogFile_Net,_T("OnOutOfBandData"));
 }
 
-void CNetCenter::OnReceive( int nErrorCode,CAsyncSocket* pSock )
+void CNetCenter::OnReceive( int nErrorCode,CAsyncSocketEx* pSock )
 {
 	Global->PtrAssert(pSock);
 	CBuffer buffer;
@@ -176,7 +176,7 @@ void CNetCenter::OnReceive( int nErrorCode,CAsyncSocket* pSock )
 	}
 }
 
-void CNetCenter::OnSend( int nErrorCode,CAsyncSocket* pSock )
+void CNetCenter::OnSend( int nErrorCode,CAsyncSocketEx* pSock )
 {
 	Global->Log(LogFile_Net,_T("OnSend"));
 }

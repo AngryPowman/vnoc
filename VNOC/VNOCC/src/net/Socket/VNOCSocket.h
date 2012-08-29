@@ -1,13 +1,14 @@
 #pragma once
 
-#include "AsyncSocket.h"
+#define NOLAYERS
+#include "AsyncSocketEx.h"
 #include "ISocket.h"
 #include "../../Global/GlobalDefine.h"
 #include "../../util/CBuffer.h"
 
 #include <atlsync.h>
 
-class CSocketImpl : public CAsyncSocket
+class CSocketImpl : public CAsyncSocketEx
 {
 public:
 	CSocketImpl(ISocketListener *pListener=NULL);

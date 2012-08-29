@@ -22,6 +22,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	_Module.Init(NULL,hInstance);
+	IGlobal::GlobalDeliver();
+
 	::CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
 	Global->Initialize();
 

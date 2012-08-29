@@ -262,22 +262,22 @@ void CGlobalCenter::_FillThreadNameToLogInstance( blog::CBLog* inst )
 CLogIndent::CLogIndent(CString file)
 {
 	m_file = file;
-	Global2.LogIndent(m_file,TRUE);
+	Global->LogIndent(m_file,TRUE);
 }
 
 CLogIndent::~CLogIndent()
 {
-	Global2.LogIndent(m_file,FALSE);
+	Global->LogIndent(m_file,FALSE);
 }
 
 CLogPrefix::CLogPrefix(CString file,CString prefix)
 {
 	m_file = file;
 	m_prefix = prefix;
-	Global2.LogPrefix(m_file,m_prefix,TRUE);
+	Global->LogPrefix(m_file,m_prefix,TRUE);
 }
 
 CLogPrefix::~CLogPrefix()
 {
-	Global2.LogPrefix(m_file,m_prefix,FALSE);
+	Global->LogPrefix(m_file,m_prefix,FALSE);
 }

@@ -71,6 +71,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>WS2_32.LIB;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>preLink.bat $(Configuration)</Command>
@@ -89,6 +90,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>WS2_32.LIB;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ManifestResourceCompile />
     <Manifest />
@@ -113,6 +115,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>WS2_32.LIB;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>preLink.bat $(Configuration)</Command>
@@ -272,7 +275,7 @@
     <ClInclude Include="src\Global\IGlobal.h" />
     <ClInclude Include="src\net\INet.h" />
     <ClInclude Include="src\net\Net.h" />
-    <ClInclude Include="src\net\socket\AsyncSocket.h" />
+    <ClInclude Include="src\net\Socket\AsyncSocketEx.h" />
     <ClInclude Include="src\net\Socket\ISocket.h" />
     <ClInclude Include="src\net\Socket\SockWnd.h" />
     <ClInclude Include="src\net\Socket\VNOCSocket.h" />
@@ -332,11 +335,7 @@
     <ClCompile Include="src\Global\GlobalCenter.cpp" />
     <ClCompile Include="src\Global\GlobalLog.cpp" />
     <ClCompile Include="src\net\Net.cpp" />
-    <ClCompile Include="src\net\socket\AsyncSocket.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp" />
     <ClCompile Include="src\net\Socket\SockWnd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

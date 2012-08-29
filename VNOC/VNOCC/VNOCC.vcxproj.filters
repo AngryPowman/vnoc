@@ -497,9 +497,6 @@
     <ClInclude Include="src\net\Socket\VNOCSocket.h">
       <Filter>net\socket</Filter>
     </ClInclude>
-    <ClInclude Include="src\net\socket\AsyncSocket.h">
-      <Filter>net\socket</Filter>
-    </ClInclude>
     <ClInclude Include="src\config\Config.h">
       <Filter>config</Filter>
     </ClInclude>
@@ -538,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="src\FrameWork\ResDefine.h">
       <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\Socket\AsyncSocketEx.h">
+      <Filter>net\socket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -589,9 +589,6 @@
     <ClCompile Include="src\net\Socket\VNOCSocket.cpp">
       <Filter>net\socket</Filter>
     </ClCompile>
-    <ClCompile Include="src\net\socket\AsyncSocket.cpp">
-      <Filter>net\socket</Filter>
-    </ClCompile>
     <ClCompile Include="src\config\Config.cpp">
       <Filter>config</Filter>
     </ClCompile>
@@ -615,6 +612,9 @@
     </ClCompile>
     <ClCompile Include="src\FrameWork\Dialogs\BKWinLogin.cpp">
       <Filter>FrameWork\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp">
+      <Filter>net\socket</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,8 @@
 interface IGlobal:public IModule
 {
 public:
+	// 创建Global对象。程序启动后即需要调用
+	static VOID GlobalDeliver();
 	//////////////////////////////////////////////////////////////////////////
 	// 接口
 	STDMETHOD( GetIConfig(IConfig** pConfig) = 0);
@@ -25,6 +27,9 @@ public:
 	STDMETHOD( Logf(CString file,LPCTSTR str,...) = 0 );
 	// 强制不会自动回车换行,不带时间等信息
 	STDMETHOD( Lognf(CString file,LPCTSTR str,...) = 0 );
+
+	STDMETHOD( LogPrefix(CString file,CString prefix,BOOL bAdd) = 0);
+	STDMETHOD( LogIndent(CString file,BOOL bAdd) = 0);
 	
 	// 设置log
 	// bDebugView	是否可以通过dbgView查看

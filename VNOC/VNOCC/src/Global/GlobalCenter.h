@@ -13,8 +13,12 @@ typedef std::map<DWORD,CString>	ThreadNameMap;
 class CGlobalCenter : public IGlobal
 {
 public:
-	CGlobalCenter(void);
+	CGlobalCenter(CString appName){m_appName = appName;};
 	~CGlobalCenter(void);
+private:
+	CGlobalCenter(void);
+	CGlobalCenter(const CGlobalCenter&){};
+	CGlobalCenter& operator=(const CGlobalCenter&){};
 public:
 	STDMETHOD( Initialize(IModule* UpperFrame=NULL) );
 	STDMETHOD( UnInitialize() );
@@ -54,6 +58,8 @@ private:
 	void _InitializeFrameWork();
 	void _UnInitializeFrameWork();
 private:
+	CString	m_appName;
+
 	CConfigImpl		m_config;
 	CNetCenter		m_netCenter;
 	CFrameWork		m_frameWork;
@@ -66,6 +72,3 @@ private:
 
 	ThreadNameMap	m_threadName;
 };
-
-
-extern CGlobalCenter Global2;

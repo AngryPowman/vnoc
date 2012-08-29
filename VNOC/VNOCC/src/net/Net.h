@@ -25,12 +25,12 @@ public:
 	STDMETHOD( RemoveListener(MSGTYPE msgType,INetListener *listener) );
 
 VNOC_Private:
-	virtual void OnAccept	(int nErrorCode,CAsyncSocket* pSock);
-	virtual void OnClose	(int nErrorCode,CAsyncSocket* pSock);
-	virtual void OnConnect	(int nErrorCode,CAsyncSocket* pSock);
-	virtual void OnOutOfBandData	(int nErrorCode,CAsyncSocket* pSock);
-	virtual void OnReceive	(int nErrorCode,CAsyncSocket* pSock);
-	virtual void OnSend		(int nErrorCode,CAsyncSocket* pSock);
+	virtual void OnAccept	(int nErrorCode,CAsyncSocketEx* pSock);
+	virtual void OnClose	(int nErrorCode,CAsyncSocketEx* pSock);
+	virtual void OnConnect	(int nErrorCode,CAsyncSocketEx* pSock);
+	virtual void OnOutOfBandData	(int nErrorCode,CAsyncSocketEx* pSock);
+	virtual void OnReceive	(int nErrorCode,CAsyncSocketEx* pSock);
+	virtual void OnSend		(int nErrorCode,CAsyncSocketEx* pSock);
 	virtual void OnPackReady(ConstReferenceBuffer buffer);
 private:
 	HRESULT _GetServerAddress();

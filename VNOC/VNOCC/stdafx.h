@@ -8,6 +8,7 @@
 #include "targetver.h"
 
 #define _SECURE_ATL 1
+#define NOLAYERS 
 
 // Windows Header Files:
 #define WIN32_LEAN_AND_MEAN

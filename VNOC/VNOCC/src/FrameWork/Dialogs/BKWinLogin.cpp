@@ -17,5 +17,12 @@ void CLoginWnd::OnBkBtnClose()
 
 void CLoginWnd::OnLoginClick()
 {
-	MessageBox(_T(""));
+	CString userName;
+	CBkDialogImpl::GetDlgItemText(DlgControl_LoginWin_Edit_UserName,userName);
+	MessageBox(userName);
+}
+
+HRESULT CLoginWnd::OnMessage( const CMessage& msg )
+{
+	return S_OK;
 }

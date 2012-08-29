@@ -17,7 +17,7 @@ void CSocketImpl::OnAccept(int nErrorCode)
 	{
 		m_listener->OnAccept(nErrorCode,this);
 	}
-	CAsyncSocket::OnAccept(nErrorCode);
+	CAsyncSocketEx::OnAccept(nErrorCode);
 }
 
 void CSocketImpl::OnClose(int nErrorCode)
@@ -26,7 +26,7 @@ void CSocketImpl::OnClose(int nErrorCode)
 	{
 		m_listener->OnClose(nErrorCode,this);
 	}
-	CAsyncSocket::OnClose(nErrorCode);
+	CAsyncSocketEx::OnClose(nErrorCode);
 }
 
 void CSocketImpl::OnConnect(int nErrorCode)
@@ -35,7 +35,7 @@ void CSocketImpl::OnConnect(int nErrorCode)
 	{
 		m_listener->OnConnect(nErrorCode,this);
 	}
-	CAsyncSocket::OnConnect(nErrorCode);
+	CAsyncSocketEx::OnConnect(nErrorCode);
 }
 
 void CSocketImpl::OnOutOfBandData(int nErrorCode)
@@ -44,7 +44,7 @@ void CSocketImpl::OnOutOfBandData(int nErrorCode)
 	{
 		m_listener->OnOutOfBandData(nErrorCode,this);
 	}
-	CAsyncSocket::OnOutOfBandData(nErrorCode);
+	//CAsyncSocketEx::OnOutOfBandData(nErrorCode);
 }
 
 void CSocketImpl::OnReceive(int nErrorCode)
@@ -53,7 +53,7 @@ void CSocketImpl::OnReceive(int nErrorCode)
 	{
 		m_listener->OnReceive(nErrorCode,this);
 	}
-	CAsyncSocket::OnReceive(nErrorCode);
+	CAsyncSocketEx::OnReceive(nErrorCode);
 }
 
 void CSocketImpl::OnSend(int nErrorCode)
@@ -62,7 +62,7 @@ void CSocketImpl::OnSend(int nErrorCode)
 	{
 		m_listener->OnSend(nErrorCode,this);
 	}
-	CAsyncSocket::OnSend(nErrorCode);
+	CAsyncSocketEx::OnSend(nErrorCode);
 }
 
 void CSocketImpl::SetListener( ISocketListener *pListener )
@@ -86,7 +86,7 @@ void CVNOCSocket::OnReceive( int nErrorCode )
 {
 	int length = 0;
 	Util::CAutoCS ac(m_cs);
-	length = ((CAsyncSocket*)this)->Receive(m_buffer.AllocAppend(1024),1024);
+	length = ((CAsyncSocketEx*)this)->Receive(m_buffer.AllocAppend(1024),1024);
 	if (FAILED(length))
 	{
 		Global->Logf(LogFile_Net,_T("Socket´íÎó£¬´íÎóÂë:%d"),GetLastError());

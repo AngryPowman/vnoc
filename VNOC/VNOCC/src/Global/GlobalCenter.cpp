@@ -1,13 +1,17 @@
 #include "StdAfx.h"
 #include "GlobalCenter.h"
 
-CGlobalCenter Global2;			// 实体
-IGlobal* Global = &Global2;		// App全局访问接口
+IGlobal* Global = NULL;		// App全局访问接口
+
+VOID IGlobal::GlobalDeliver()
+{
+	static CGlobalCenter globalCenter(_T("VNOC"));
+	Global = &globalCenter;
+}
 
 CGlobalCenter::CGlobalCenter(void)
 {
 }
-
 
 CGlobalCenter::~CGlobalCenter(void)
 {
