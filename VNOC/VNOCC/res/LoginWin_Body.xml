@@ -1,1 +1,1 @@
-﻿<dlg pos="0,0,-0,-0">	<text pos="20,25">用户名</text>	<edit id="10100" pos="65,20,245,50" show="1"/>	<text pos="20,65">密码</text>	<link pos="20,100">密码</link>	<edit id="10100" pos="65,60,245,90" show="1" password="1"/></dlg>
+﻿<dlg pos="0,0,-0,-0">	<text pos="20,25">用户名</text>	<edit id="10100" pos="65,20,245,50" show="1"/>	<text pos="20,65">密码</text>	<edit id="10101" pos="65,60,245,90" show="1" password="1"/>	<button id="10110" class="normalbtn" pos="-80,-30,-20,-10">登陆</button></dlg>

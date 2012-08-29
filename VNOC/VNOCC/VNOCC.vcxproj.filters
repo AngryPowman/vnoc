@@ -72,9 +72,6 @@
     <None Include="bkwinres.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\config.xml">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\tab_left_splitter.bmp">
       <Filter>Resource Files\BKres</Filter>
     </None>
@@ -266,6 +263,9 @@
     </None>
     <None Include="res\tab_left.bmp">
       <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="config\config.xml">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

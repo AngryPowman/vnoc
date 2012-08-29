@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="bkwinres.rc2" />
+    <None Include="config\config.xml" />
     <None Include="res\autoopt_done.png" />
     <None Include="res\beikesafe.ico" />
     <None Include="res\btn_sys_close.bmp" />
@@ -140,7 +141,6 @@
     <None Include="res\btn_virscan_bg.bmp" />
     <None Include="res\clear_bk.bmp" />
     <None Include="res\clear_panel.bmp" />
-    <None Include="res\config.xml" />
     <None Include="res\def_skin.xml" />
     <None Include="res\def_skin.xml.bak" />
     <None Include="res\def_string.xml" />
