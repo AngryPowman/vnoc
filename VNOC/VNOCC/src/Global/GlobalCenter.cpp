@@ -124,18 +124,31 @@ HRESULT CGlobalCenter::CriticalError( LPCTSTR message )
 
 HRESULT CGlobalCenter::GetIFrameModule( IFrameWork** pFrame )
 {
-	return S_OK;
+	if (m_pFrameWork)
+	{
+		*pFrame = m_pFrameWork;
+		(*pFrame)->AddRef();
+		return S_OK;
+	}
+	return E_FAIL;
 }
 
 void CGlobalCenter::_InitializeFrameWork()
 {
-	m_frameWork.Initialize(this);
-	m_frameWork.Run();
+	m_pFrameWork = new CFrameWork;
+	PtrAssert(m_pFrameWork);
+	m_pFrameWork->AddRef();
+	m_pFrameWork->Initialize(this);
+	m_pFrameWork->Run();
 }
 
 void CGlobalCenter::_UnInitializeFrameWork()
 {
-	m_frameWork.Terminate();
-	m_frameWork.UnInitialize();
+	if (m_pFrameWork)
+	{
+		m_pFrameWork->Terminate();
+		m_pFrameWork->UnInitialize();
+		m_pFrameWork->Release();
+	}
 }
 

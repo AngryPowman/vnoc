@@ -97,3 +97,8 @@ IModule* CFrameWork::_FindModule( FrameModule module )
 	}
 	return NULL;
 }
+
+HRESULT CFrameWork::SendXMessage( XMessage* pMsg )
+{
+	return S_OK;
+}

@@ -15,11 +15,36 @@ void CLoginWnd::OnBkBtnClose()
 	EndDialog(0);
 }
 
+struct sa
+{
+};
+
+struct sb : public sa
+{
+};
+
+template <typename T>
+struct T
+{
+};
+
+class A
+{
+};
+
 void CLoginWnd::OnLoginClick()
 {
 	CString userName;
-	CBkDialogImpl::GetDlgItemText(DlgControl_LoginWin_Edit_UserName,userName);
-	MessageBox(userName);
+	CString pwd;
+	CBkWindow* pUsernameEdit = NULL;
+	CBkWindow* pPwdEdit = NULL;
+	pUsernameEdit = m_richView.FindChildByCmdID(DlgControl_LoginWin_Edit_UserName);
+	pPwdEdit = m_richView.FindChildByCmdID(DlgControl_LoginWin_Edit_PassWord);
+	if (pUsernameEdit && pPwdEdit)
+	{
+		userName = pUsernameEdit->GetInnerText();
+		pwd = pPwdEdit->GetInnerText();
+	}
 }
 
 HRESULT CLoginWnd::OnMessage( const CMessage& msg )

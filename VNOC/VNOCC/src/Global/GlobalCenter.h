@@ -62,7 +62,7 @@ private:
 
 	CConfigImpl		m_config;
 	CNetCenter		m_netCenter;
-	CFrameWork		m_frameWork;
+	CFrameWork*		m_pFrameWork;
 	CString		m_configFilePath;
 	
 	LogMap		m_log;

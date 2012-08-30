@@ -539,6 +539,9 @@
     <ClInclude Include="src\net\Socket\AsyncSocketEx.h">
       <Filter>net\socket</Filter>
     </ClInclude>
+    <ClInclude Include="src\FrameWork\ViewBase.hpp">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

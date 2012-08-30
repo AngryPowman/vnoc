@@ -2,6 +2,8 @@
 #include "../Base/IModule.h"
 #include "ResDefine.h"
 
+typedef DWORD BkWin_UIID;
+
 enum FrameModule
 {
 	module_Invalid=-1,
@@ -15,6 +17,15 @@ enum FrameModule
 	module_DataEnd
 };
 
+struct XMessage : public IRefCountImpl
+{
+	DWORD	msgID;
+	BkWin_UIID uiID;
+	FrameModule	module;
+
+	HRESULT	result;
+};
+
 interface IFrameWork : public IModule
 {
 public:
@@ -24,6 +35,8 @@ public:
 	STDMETHOD( GetModule		(IModule** piModule,FrameModule module) = 0 );
 	// É¾³ýÄ£¿é
 	STDMETHOD( RemoveModule		(IModule* iModule) = 0);
+	//
+	STDMETHOD( SendXMessage		(XMessage* msg) = 0);
 };
 
 template<class retType>

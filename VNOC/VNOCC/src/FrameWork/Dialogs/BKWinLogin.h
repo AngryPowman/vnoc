@@ -1,8 +1,10 @@
 #pragma once
 #include "../../BKWin/wtlhelper/whwindow.h"
 #include "../../net/INet.h"
+#include "../ViewBase.hpp"
 
 class CLoginWnd:public CBkDialogImpl<CLoginWnd>
+	,public CViewBase
 	,public INetListener
 {
 public:

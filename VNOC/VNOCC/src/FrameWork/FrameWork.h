@@ -19,6 +19,7 @@ public:
 	STDMETHOD( RegisterModule	(IModule* iModule,FrameModule module) );
 	STDMETHOD( GetModule		(IModule** piModule,FrameModule module) );
 	STDMETHOD( RemoveModule		(IModule* iModule) );
+	STDMETHOD( SendXMessage		(XMessage* pMsg) );
 private:
 	IModule* _FindModule(FrameModule module);
 private:
