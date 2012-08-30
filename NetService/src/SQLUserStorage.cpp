@@ -13,11 +13,11 @@ void sUserStorage ::SaveConnLog(string host,string name,string password,string d
 }
 sUserStorage ::sUserStorage ()
 {
-	string host = "xxy1991.dlinkddns.com";//Config::getInstance()->getValue("host");
-	string name = "vnoc";//Config::getInstance()->getValue("name");
-	string password = "ldldld";//Config::getInstance()->getValue("password");
-	string db = "vnoc";//Config::getInstance()->getValue("db");
-	int port = 3306;//Config::getInstance()->getValue("port");
+	string host = Config::getInstance()->getValue("host");
+	string name = Config::getInstance()->getValue("name");
+	string password = Config::getInstance()->getValue("password");
+	string db = Config::getInstance()->getValue("db");
+	int port = Config::getInstance()->getValue("port");
 
 	SaveConnLog(host, name, password, db, port);
 
