@@ -5,6 +5,8 @@
 #include "MockTcpConnection.hpp"
 #include "../RvcMessageHandler.hpp"
 #include "../RliMessageHandler.hpp"
+#include "../FileUserStorage.h"
+#include "../UserManage.hpp"
 
 class VnocMessageHandlerTest : public CppUnit::TestFixture
 {
@@ -15,10 +17,13 @@ class VnocMessageHandlerTest : public CppUnit::TestFixture
     MockTcpConnection *conn_;
     VnocProtocol *protocol_;
 public:
+	fUserStorage us;
+
     void setUp()
     {
         conn_ = new MockTcpConnection;
         protocol_ = new VnocProtocol();
+		CUserManage::GetInstance()->initial(&us);
     }
     void tearDown()
     {

@@ -205,6 +205,7 @@
     <ClCompile Include="src\mysql\MysqlWrapper.cpp" />
     <ClCompile Include="src\NetService.cpp" />
     <ClCompile Include="src\SQLUserStorage.cpp" />
+    <ClCompile Include="src\UserManage.cpp" />
     <ClCompile Include="src\UserStorage.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />

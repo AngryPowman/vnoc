@@ -1,5 +1,6 @@
 #pragma once
 #include "VnocProtocol.hpp"
+#include "UserManage.hpp"
 
 class RliMessageHandler : public IMessageHandler
 {
@@ -15,7 +16,16 @@ public:
     virtual int operator()(const CMessage *msg, MessageContext *ctx)
     {
         MSG_ALI aliMessage;
-        aliMessage.SetLoginResult(0);
+		const MSG_RLI * rliMessage = dynamic_cast<const MSG_RLI *>(msg);
+		userinfo UserInfo = {0};
+		if (CUserManage::GetInstance()->Authenticate((char*)rliMessage->GetAccountNumber(), (char*)rliMessage->GetPassword(), &UserInfo) == LOGIN_OK)
+		{
+			aliMessage.SetLoginResult(0); //µÇÂ½³É¹¦
+		}
+		else
+		{
+			aliMessage.SetLoginResult(1);//Ê§°Ü
+		}
         protocol_->SendVnocMessage(&aliMessage, ctx);
         return 1;
     }
