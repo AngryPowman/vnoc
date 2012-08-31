@@ -4,7 +4,7 @@ struct userinfo
 {
 	//其中有很多用户信息
 	char strUser[40];
-	char passwordData[40];
+	char passwordData[20];
 	char strNickname[40];
 	char strEmailAddr[40];
 	int gender; //1 male 2female
