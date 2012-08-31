@@ -1,0 +1,20 @@
+﻿<layer width="600" height="500" appwin="1">
+  <header class="msgboxhead" width="full" height="31">
+    <text class="dlgtitle" pos="25,10">bkwin范例</text>
+    <imgbtn id="1001" class="linkimage" skin="closeonlybtn" pos="-43,0"/>
+  </header>
+  <footer class="msgboxfoot" width="full" height="55">
+  </footer>
+  <body class="msgboxbody" width="full" height="full">
+    <button id="1002" pos="100,50,200,100" class="normalbtn">神奇的对话框</button>
+
+    <combo id="1003" pos="10,120,200,140"></combo>
+
+    <text pos="20,220,100,240">用户名：</text>
+    <edit id="1004" defaultfont="0200" pos="100,225,230,245">编辑框</edit>
+    <text pos="20,250,100,270">密码：</text>
+    <edit id="1005" defaultfont="0200" pos="100,255,230,275" password="1"></edit>
+    <button id="1006" pos="20,300,100,350" class="normalbtn">清空</button>
+    <button id="1007" pos="120,300,200,350" class="normalbtn">登陆</button>
+  </body>
+</layer>

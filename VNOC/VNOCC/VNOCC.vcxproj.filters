@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="BKWin">
+      <UniqueIdentifier>{a88fbd8f-e6d6-45c1-97d2-65d5b4cd3c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BKWin\WTL">
+      <UniqueIdentifier>{1f1c9c1a-4bfd-4f4a-a6db-ed3cf8bcb359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BKWin\WTLHelper">
+      <UniqueIdentifier>{af15bd79-c665-4569-bb5b-1dd9a6f4a01d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BKWin\BKWin">
+      <UniqueIdentifier>{a45b08dd-7a15-4ea8-9c4a-16b09f170ba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BKWin\BKRes">
+      <UniqueIdentifier>{f280b5c0-7e15-47b4-9373-dce4a92b04c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{5bd75656-0ac7-423c-b4d9-4a5ebae83a05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{bce0fed3-53ca-4e01-aa2f-0428ff7f4d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{f40e5b73-c41f-49e2-b9a0-5425c240b1ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{0f494ec5-3a7e-49ab-839c-627dfd429eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{a2e2132e-16ff-4094-acd3-42c428c5473b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\BKres">
+      <UniqueIdentifier>{a0651011-d52b-49fd-8f8d-9ee4b0919620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{76f14ad7-87c2-49b7-8a01-1215e7ccd866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\socket">
+      <UniqueIdentifier>{458cc060-a234-4331-a497-88d12b810c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{57a7601b-4b40-43ce-83d6-c7b3399f78cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\MessageParser">
+      <UniqueIdentifier>{1a8ebc35-76e9-4061-9d94-481e4ac20490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Dialogs">
+      <UniqueIdentifier>{3f98e31c-fd53-4abb-be75-a29829623c62}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VNOCC.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bkwinres.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_left_splitter.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\tab_normal.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\tab_normal_ex.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\autoopt_done.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\beikesafe.ico">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_close.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_close.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_maximize.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_maximize.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_minimize.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_minimize.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_restore.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_sys_restore.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_tab.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\btn_virscan_bg.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\clear_bk.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\clear_panel.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\def_skin.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\def_skin.xml.bak">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\def_string.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\def_style.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_main.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_mgr_listtip.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_mgr_powersweep_tip.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_more_bkwin.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_msgbox.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_msgbox2.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_runautoopt.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_runopt_ignore.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_runopt_list.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlg_sysopt_setting.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlgfile_foot.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlgfile_header.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlgfile_opt.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\dlgfile_opt.xml.bak">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\exam_status_icon.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\frame_panel.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\frame_panel_gray.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\ignore_tip.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\listctrl_check.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\listctrl_header.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\listctrl_radio.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\loaddlg_panel.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\loadinfo_dlgbk.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\loadinfo_tip_softmgr.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\loading_runopt.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\msgbox_bg.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\msgbox_body_bg.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\no_runtask.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\regedit.ico">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\run_remain.ico">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\run_system.ico">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\run_unknown.ico">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\runopt_listheader.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\scan_result_list_bar.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\small.ico">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\startuptime_setting.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\stat_runopt.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\status_40.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\status_icon.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\status_icon.png">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\sysopt_listbk.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\sysopt_more.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="res\tab_left.bmp">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="config\config.xml">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VNOCC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkatldefine.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkcolor.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkdlgview.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkimage.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bklistbox.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bklistview.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkobject.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkskin.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bktheme.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwnd.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndcmnctrl.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwnddlg.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwnddlgfile.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndnotify.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndpanel.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndrichtxt.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndstyle.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndtabctrl.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\listboxbase.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkres\bkbmppool.h">
+      <Filter>BKWin\BKRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkres\bkfontpool.h">
+      <Filter>BKWin\BKRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkres\bkpngpool.h">
+      <Filter>BKWin\BKRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkres\bkres.h">
+      <Filter>BKWin\BKRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkres\bkresutil.h">
+      <Filter>BKWin\BKRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkres\bkstringpool.h">
+      <Filter>BKWin\BKRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtlhelper\bkfolderbrowsectrl.h">
+      <Filter>BKWin\WTLHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtlhelper\iidl.h">
+      <Filter>BKWin\WTLHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtlhelper\wh3statecheckimglst.h">
+      <Filter>BKWin\WTLHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtlhelper\whthreadnotify.h">
+      <Filter>BKWin\WTLHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtlhelper\whwindow.h">
+      <Filter>BKWin\WTLHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlapp.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlcrack.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlctrls.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlctrlw.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlctrlx.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlddx.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atldlgs.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlfind.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlframe.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlgdi.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlmisc.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlprint.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlres.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlresce.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlscrl.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlsplit.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atltheme.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atluser.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlwince.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\wtl\atlwinx.h">
+      <Filter>BKWin\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinystr.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinyxml.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkres\bkwinres.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\FrameWork.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\IFrameWork.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Base\IModule.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Base\IRefCountImpl.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\BLog.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\CBuffer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\MD5.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\MD5ChecksumDefines.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\Performance.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\TaskThread.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\ThreadDefine.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Global\GlobalCenter.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Global\GlobalDefine.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Global\IGlobal.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\INet.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\Net.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\Socket\ISocket.h">
+      <Filter>net\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\Socket\VNOCSocket.h">
+      <Filter>net\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config\Config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config\ConfigDefine.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config\IConfig.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\TLS.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\Socket\SockWnd.h">
+      <Filter>net\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageParser.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MsgDef.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\PackMessage.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\ILogin.h">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\LoginImpl.h">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\bkwndedit.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\ResDefine.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\net\Socket\AsyncSocketEx.h">
+      <Filter>net\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\FrameBase.hpp">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VNOCC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinystr.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxml.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlerror.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlparser.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameWork\FrameWork.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\BLog.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\CBuffer.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\MD5.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\TaskThread.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\util.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global\GlobalCenter.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global\GlobalLog.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\Net.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\Socket\VNOCSocket.cpp">
+      <Filter>net\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\Config.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\TLS.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\Socket\SockWnd.cpp">
+      <Filter>net\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MessageParser.cpp">
+      <Filter>net\MessageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MsgDef.cpp">
+      <Filter>net\MessageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\PackMessage.cpp">
+      <Filter>net\MessageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameWork\Dialogs\LoginImpl.cpp">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameWork\Dialogs\BKWinLogin.cpp">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp">
+      <Filter>net\socket</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VNOCC.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="src\BKWin\bkres\bkres.rc">
+      <Filter>BKWin\BKRes</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\beikesafe.manifest">
+      <Filter>Resource Files\BKres</Filter>
+    </Manifest>
+  </ItemGroup>
+</Project>

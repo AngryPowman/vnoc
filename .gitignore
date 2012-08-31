@@ -3,7 +3,7 @@
 /NetService/bin
 /vnoc/Debug
 /C:/Users/tengda/Documents/GitHub/vnoc/VNOC/VNOC.sdf
-/VNOC/VNOC.sdf
+*.sdf
 /netservice/Debug
 /netservice/Release
 *.obj
@@ -13,7 +13,6 @@
 *.res
 *.pch
 *.lastbuildstate
-*.rc
 *.idb
 *.ipch
 *.suo
@@ -22,7 +21,7 @@
 *.opensdf
 *.cache
 *.lib
-*.o
+
 !libmysql.lib
 !mysqlclient.lib
 /NetService/src/test/testRunner/Release
