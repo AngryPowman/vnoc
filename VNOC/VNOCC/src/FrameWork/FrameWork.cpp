@@ -49,14 +49,14 @@ HRESULT CFrameWork::Terminate()
 
 HRESULT CFrameWork::RegisterModule( IModule* iModule,FrameModule module )
 {
-	Util::CAutoCS ac(m_cs);
+	Util::CAutoCS ac(m_mapcs);
 	m_map[module] = iModule;
 	return S_OK;
 }
 
 HRESULT CFrameWork::GetModule( IModule** piModule,FrameModule module )
 {
-	Util::CAutoCS ac(m_cs);
+	Util::CAutoCS ac(m_mapcs);
 	if (piModule == NULL)
 	{
 		//
@@ -73,7 +73,7 @@ HRESULT CFrameWork::GetModule( IModule** piModule,FrameModule module )
 
 HRESULT CFrameWork::RemoveModule( IModule* iModule )
 {
-	Util::CAutoCS ac(m_cs);
+	Util::CAutoCS ac(m_mapcs);
 
 	for (auto i=m_map.begin(); i!=m_map.end(); ++i)
 	{
@@ -89,7 +89,7 @@ HRESULT CFrameWork::RemoveModule( IModule* iModule )
 
 IModule* CFrameWork::_FindModule( FrameModule module )
 {
-	Util::CAutoCS ac(m_cs);
+	Util::CAutoCS ac(m_mapcs);
 	auto i = m_map.find(module);
 	if (i != m_map.end())
 	{
@@ -100,5 +100,37 @@ IModule* CFrameWork::_FindModule( FrameModule module )
 
 HRESULT CFrameWork::SendXMessage( XMessage* pMsg )
 {
+	Util::CAutoCS ac(m_listcs);
+	auto i = m_actorList.begin();
+	while (i != m_actorList.end())
+	{
+		BOOL bRet = (*i)->ProcessXMessage(pMsg);
+		if (bRet)
+		{
+			i = m_actorList.end();
+		}
+	}
+	return S_OK;
+}
+
+HRESULT CFrameWork::AddActor( IFrameAdapter* actor )
+{
+	Util::CAutoCS ac(m_listcs);
+	auto i = m_actorList.begin();
+	while (i != m_actorList.end())
+	{
+		if (*i == actor)
+		{
+			return S_OK;
+		}
+	}
+	m_actorList.push_front(actor);
+	return S_OK;
+}
+
+HRESULT CFrameWork::RemoveActor( IFrameAdapter* actor )
+{
+	Util::CAutoCS ac(m_listcs);
+	m_actorList.remove(actor);
 	return S_OK;
 }

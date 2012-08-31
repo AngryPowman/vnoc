@@ -26,6 +26,13 @@ struct XMessage : public IRefCountImpl
 	HRESULT	result;
 };
 
+interface IFrameAdapter
+{
+public:
+	// 返回TRUE则表明消息不需要再往其它actor传递了。
+	virtual BOOL ProcessXMessage(XMessage* pMsg) = 0;
+};
+
 interface IFrameWork : public IModule
 {
 public:
@@ -37,6 +44,10 @@ public:
 	STDMETHOD( RemoveModule		(IModule* iModule) = 0);
 	//
 	STDMETHOD( SendXMessage		(XMessage* msg) = 0);
+	//
+	STDMETHOD( AddActor			(IFrameAdapter* actor) = 0 );
+	//
+	STDMETHOD( RemoveActor		(IFrameAdapter* actor) = 0 );
 };
 
 template<class retType>

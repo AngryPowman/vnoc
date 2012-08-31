@@ -7,7 +7,7 @@
 
 interface INetListener
 {
-	STDMETHOD( OnMessage(const CMessage& msg) = 0);
+	STDMETHOD( OnNetMessage(const CMessage& msg) = 0);
 };
 
 interface INetCenter: public IModule

@@ -47,7 +47,7 @@ void CLoginWnd::OnLoginClick()
 	}
 }
 
-HRESULT CLoginWnd::OnMessage( const CMessage& msg )
+BOOL CLoginWnd::ProcessXMessage( XMessage* msg )
 {
-	return S_OK;
+	return TRUE;
 }

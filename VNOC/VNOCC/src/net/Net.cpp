@@ -190,7 +190,7 @@ void CNetCenter::_DispatchMessage( const CMessage* pMsg )
 		auto ii = i->second.begin();
 		for (; ii!=i->second.end();++ii)
 		{
-			(*ii)->OnMessage(*pMsg);
+			(*ii)->OnNetMessage(*pMsg);
 		}
 	}
 }

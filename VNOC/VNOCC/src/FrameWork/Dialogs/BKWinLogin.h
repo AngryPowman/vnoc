@@ -1,17 +1,16 @@
 #pragma once
 #include "../../BKWin/wtlhelper/whwindow.h"
 #include "../../net/INet.h"
-#include "../ViewBase.hpp"
+#include "../FrameBase.hpp"
 
 class CLoginWnd:public CBkDialogImpl<CLoginWnd>
-	,public CViewBase
-	,public INetListener
+	,public CFrameBase
 {
 public:
 	void		OnBkBtnClose();
 	void		OnLoginClick();
 
-	STDMETHOD( OnMessage(const CMessage& msg));
+	virtual BOOL ProcessXMessage(XMessage* msg);
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
