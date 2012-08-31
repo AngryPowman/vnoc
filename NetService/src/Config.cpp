@@ -21,7 +21,7 @@ bool Config::Initialize(std::string config_file)
         EZLOGGERVLSTREAM(axter::log_often) << "can not open config file: " << config_file << "\n";
         return 0;
     } else {
-        store(po::parse_config_file(ifs, config_file_options), vm_);
+        store(po::parse_config_file(ifs, config_file_options, true), vm_);
         notify(vm_);
     }
     return true;
