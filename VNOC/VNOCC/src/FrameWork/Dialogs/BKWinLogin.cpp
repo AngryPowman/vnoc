@@ -15,23 +15,6 @@ void CLoginWnd::OnBkBtnClose()
 	EndDialog(0);
 }
 
-struct sa
-{
-};
-
-struct sb : public sa
-{
-};
-
-template <typename T>
-struct T
-{
-};
-
-class A
-{
-};
-
 void CLoginWnd::OnLoginClick()
 {
 	CString userName;
@@ -44,10 +27,9 @@ void CLoginWnd::OnLoginClick()
 	{
 		userName = pUsernameEdit->GetInnerText();
 		pwd = pPwdEdit->GetInnerText();
+		XMessage_Login msg;
+		msg.username = userName;
+		msg.pwd = pwd;
+		SendXMessage(&msg);
 	}
-}
-
-BOOL CLoginWnd::ProcessXMessage( XMessage* msg )
-{
-	return TRUE;
 }

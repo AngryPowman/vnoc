@@ -14,7 +14,11 @@ CFrameWork::~CFrameWork()
 
 HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
-	RegisterModule(&m_loginModule,module_LoginWin);
+	m_loginModule = new CLoginImpl;
+	m_loginModule->AddRef();
+	m_loginModule->Initialize(this);
+	m_loginModule->Run();
+	RegisterModule(m_loginModule,module_LoginWin);
 
 	BkString::Load(IDR_BK_STRING_DEF);
 	BkFontPool::SetDefaultFont(BkString::Get(0), -12);
@@ -32,13 +36,14 @@ HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 
 HRESULT CFrameWork::UnInitialize()
 {
+	m_loginModule->UnInitialize();
+	m_loginModule->Release();
 	return S_OK;
 }
 
 HRESULT CFrameWork::Run()
 {
-	m_loginModule.Run();
-	m_loginModule.Show(SW_SHOW);
+	m_loginModule->Show(SW_SHOW);
 	return S_OK;
 }
 
@@ -109,6 +114,10 @@ HRESULT CFrameWork::SendXMessage( XMessage* pMsg )
 		{
 			i = m_actorList.end();
 		}
+		else
+		{
+			++i;
+		}
 	}
 	return S_OK;
 }
@@ -123,6 +132,7 @@ HRESULT CFrameWork::AddActor( IFrameAdapter* actor )
 		{
 			return S_OK;
 		}
+		++i;
 	}
 	m_actorList.push_front(actor);
 	return S_OK;

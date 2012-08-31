@@ -19,6 +19,7 @@ enum FrameModule
 
 struct XMessage : public IRefCountImpl
 {
+	XMessage(DWORD msgID):msgID(msgID){}
 	DWORD	msgID;
 	BkWin_UIID uiID;
 	FrameModule	module;

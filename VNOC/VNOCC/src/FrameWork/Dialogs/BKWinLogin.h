@@ -10,8 +10,6 @@ public:
 	void		OnBkBtnClose();
 	void		OnLoginClick();
 
-	virtual BOOL ProcessXMessage(XMessage* msg);
-
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
 		BK_NOTIFY_ID_COMMAND(DlgControl_LoginWin_ImgBtn_Close,	OnBkBtnClose)
@@ -19,4 +17,7 @@ public:
 	BK_NOTIFY_MAP_END()
 
 	BEGIN_MSG_MAP_EX_DECLARE(CLoginWnd)
+
+	Begin_XMessage(CLoginWnd)
+	End_XMessage()
 };

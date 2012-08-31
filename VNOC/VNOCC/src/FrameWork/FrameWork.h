@@ -30,5 +30,5 @@ private:
 	std::list<IFrameAdapter*>	m_actorList;
 	ATL::CCriticalSection		m_listcs;
 
-	CLoginImpl	m_loginModule;
+	CLoginImpl*	m_loginModule;
 };

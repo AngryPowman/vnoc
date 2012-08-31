@@ -13,7 +13,7 @@ CLoginImpl::~CLoginImpl(void)
 
 HRESULT CLoginImpl::Run()
 {
-	netHelper.AddFilter(MSG_RLI_TYPE,this);
+	netHelper.AddFilter(MSG_ALI_TYPE,this);
 	netHelper.StartListen();
 	return S_OK;
 }
@@ -75,14 +75,25 @@ BOOL CLoginImpl::OnLogin( XMessage* pMsg )
 
 HRESULT CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 {
-	return S_OK;
+	INetCenter* pNetCenter = NULL;
+	Global->GetINetCenter(&pNetCenter);
+	if (pNetCenter)
+	{
+		MSG_RLI netMsg;
+		netMsg.SetAccountNumber((const byte*)username,_tcslen(username)*sizeof(TCHAR));
+		netMsg.SetPassword((const byte*)pwd,_tcslen(pwd)*sizeof(TCHAR));
+		pNetCenter->SendServer(netMsg);
+		return S_OK;
+	}
+	return E_FAIL;
 }
 
 HRESULT CLoginImpl::OnNetMessage( const CMessage& msg )
 {
 	switch(msg.GetMessageType())
 	{
-	case MSG_RLI_TYPE:
+	case MSG_ALI_TYPE:
+		MessageBox(0,_T(""),0,0);
 		break;
 	}
 	return S_OK;
