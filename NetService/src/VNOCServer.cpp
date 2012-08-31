@@ -12,12 +12,19 @@
 #include "NetService.h"
 #include "Config.hpp"
 #include <string>
+#include "SQLUserStorage.h"
+#include "UserManage.hpp"
 using namespace std;
+sUserStorage us;
 
 int main()
 {
     Config::getInstance()->Initialize("vnoc.conf");
     cout<<"port:"<<Config::getInstance()->getValue("port")<<endl;
+
+	
+	CUserManage::GetInstance()->initial(&us);
+
     NetService net;
     net.start(Config::getInstance()->getValue("port"));
 
