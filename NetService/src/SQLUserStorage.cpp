@@ -13,11 +13,11 @@ void sUserStorage ::SaveConnLog(string host,string name,string password,string d
 }
 sUserStorage ::sUserStorage ()
 {
-	string host = Config::getInstance()->getValue("host");
-	string name = Config::getInstance()->getValue("name");
-	string password = Config::getInstance()->getValue("password");
-	string db = Config::getInstance()->getValue("db");
-	int port = Config::getInstance()->getValue("port");
+	string host = Config::getInstance()->getValue("sql_host");
+	string name = Config::getInstance()->getValue("sql_username");
+	string password = Config::getInstance()->getValue("sql_password");
+	string db = Config::getInstance()->getValue("user_db");
+	int port = Config::getInstance()->getValue("sql_port");
 
 	SaveConnLog(host, name, password, db, port);
 
@@ -55,7 +55,7 @@ bool sUserStorage::IfUserExist(const char* pUser)
 	}
 	return true;
 }
-bool sUserStorage::GetPassword(const char* pUser, char* pPassWordBuff, long cbBuff)
+bool sUserStorage::GetPassword(const char* pUser, char* pPassWordBuff, size_t cbBuff)
 {
 
 	if (!bIsConn)

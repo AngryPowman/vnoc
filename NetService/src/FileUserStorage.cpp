@@ -21,7 +21,7 @@ bool fUserStorage::IfUserExist(const char* pUser)
 	}
 	return false;
 }
-bool fUserStorage::GetPassword(const char* pUser, char* pPassWordBuff, long cbBuff)
+bool fUserStorage::GetPassword(const char* pUser, char* pPassWordBuff, size_t cbBuff)
 {
 	for (int i = 0; i < nUserCount; i++)
 	{
