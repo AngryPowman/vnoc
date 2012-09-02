@@ -13,7 +13,7 @@ bool UserStorage::IfUserExist(const char* pUser)
 {
 	return false;
 }
-bool UserStorage::GetPassword(const char* pUser, char* pPassWordBuff, long cbBuff)
+bool UserStorage::GetPassword(const char* pUser, char* pPassWordBuff, size_t cbBuff)
 {
 	return false;
 }
