@@ -1,8 +1,8 @@
-// VNOCC.cpp : Defines the entry point for the application.
+// VNOC.cpp : Defines the entry point for the application.
 //
 
 #include "stdafx.h"
-#include "VNOCC.h"
+#include "VNOC.h"
 #include "src/FrameWork/IFrameWork.h"
 
 #ifdef USE_VLD

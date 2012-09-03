@@ -17,7 +17,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{06E90441-F473-4E9E-99C9-F482C1073E0E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>VNOCC</RootNamespace>
+    <RootNamespace>VNOC</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -198,7 +198,7 @@
     <None Include="res\tab_normal.bmp" />
     <None Include="res\tab_normal_ex.bmp" />
     <None Include="small.ico" />
-    <None Include="VNOCC.ico" />
+    <None Include="VNOC.ico" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Message\MessageParser.h" />
@@ -291,7 +291,7 @@
     <ClInclude Include="src\util\util.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="VNOCC.h" />
+    <ClInclude Include="VNOC.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Message\MessageParser.cpp">
@@ -382,11 +382,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="VNOCC.cpp" />
+    <ClCompile Include="VNOC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\BKWin\bkres\bkres.rc" />
-    <ResourceCompile Include="VNOCC.rc" />
+    <ResourceCompile Include="VNOC.rc" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="res\beikesafe.manifest" />

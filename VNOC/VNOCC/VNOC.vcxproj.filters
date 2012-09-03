@@ -66,7 +66,7 @@
     <None Include="small.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="VNOCC.ico">
+    <None Include="VNOC.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="bkwinres.rc2">
@@ -278,7 +278,7 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VNOCC.h">
+    <ClInclude Include="VNOC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\BKWin\bkwin\bkatldefine.h">
@@ -547,7 +547,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VNOCC.cpp">
+    <ClCompile Include="VNOC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\TinyXML\tinystr.cpp">
@@ -621,7 +621,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="VNOCC.rc">
+    <ResourceCompile Include="VNOC.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
     <ResourceCompile Include="src\BKWin\bkres\bkres.rc">
