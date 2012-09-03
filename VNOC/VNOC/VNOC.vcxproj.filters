@@ -542,6 +542,12 @@
     <ClInclude Include="src\FrameWork\FrameBase.hpp">
       <Filter>FrameWork</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\bind.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

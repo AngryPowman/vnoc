@@ -201,6 +201,7 @@
     <None Include="VNOC.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
     <ClInclude Include="..\..\Message\MessageParser.h" />
     <ClInclude Include="..\..\Message\MsgDef.h" />
     <ClInclude Include="..\..\Message\PackMessage.h" />
@@ -280,6 +281,7 @@
     <ClInclude Include="src\net\Socket\ISocket.h" />
     <ClInclude Include="src\net\Socket\SockWnd.h" />
     <ClInclude Include="src\net\Socket\VNOCSocket.h" />
+    <ClInclude Include="src\util\bind.hpp" />
     <ClInclude Include="src\util\BLog.h" />
     <ClInclude Include="src\util\CBuffer.h" />
     <ClInclude Include="src\util\MD5.h" />
