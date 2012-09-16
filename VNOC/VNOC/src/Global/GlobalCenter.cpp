@@ -139,7 +139,6 @@ void CGlobalCenter::_InitializeFrameWork()
 	PtrAssert(m_pFrameWork);
 	m_pFrameWork->AddRef();
 	m_pFrameWork->Initialize(this);
-	m_pFrameWork->Run();
 }
 
 void CGlobalCenter::_UnInitializeFrameWork()
