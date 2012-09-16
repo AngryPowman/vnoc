@@ -103,7 +103,7 @@ HRESULT CLoginImpl::OnNetMessage( const CMessage& msg )
 	switch(msg.GetMessageType())
 	{
 	case MSG_ALI_TYPE:
-		MessageBox(0,_T(""),0,0);
+		MessageBox(0,_T("³É¹¦µÇÂ½!"),0,0);
 		break;
 	}
 	return S_OK;
