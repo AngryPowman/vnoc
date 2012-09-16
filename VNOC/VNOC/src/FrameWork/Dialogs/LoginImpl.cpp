@@ -2,6 +2,8 @@
 #include "LoginImpl.h"
 #include "BKWinLogin.h"
 
+#include "../../../../../VisualLeakDetector/include/vld.h"
+
 CLoginImpl::CLoginImpl(void)
 {
 	m_frame = NULL;
@@ -26,12 +28,15 @@ HRESULT CLoginImpl::Terminate()
 
 HRESULT CLoginImpl::Show( BOOL bShow/*=TRUE*/ )
 {
+	UINT count=0;
+		count = VLDGetLeaksCount();
 	if (bShow)
 	{
 		CLoginWnd wnd;
 		wnd.Load(BKDlg_LoginWin);
 		wnd.DoModal();
 	}
+	count = VLDGetLeaksCount();
 	return S_OK;
 }
 
@@ -44,11 +49,16 @@ HRESULT CLoginImpl::Initialize( IModule* UpperFrame )
 {
 	m_frame = dynamic_cast<IFrameWork*>(UpperFrame);
 	ATLASSERT(m_frame);
+	m_frame->AddRef();
 	return S_OK;
 }
 
 HRESULT CLoginImpl::UnInitialize()
 {
+	if (m_frame)
+	{
+		m_frame->Release();
+	}
 	return S_OK;
 }
 

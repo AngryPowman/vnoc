@@ -35,14 +35,14 @@ public:
 
     static HBITMAP GetBitmap(UINT uBmpResID)
     {
-        _TypeBitmapPool::CPair* pPairRet = _Instance()->m_mapBitmap.Lookup(uBmpResID);
+        _TypeBitmapPool::CPair* pPairRet = _Instance().m_mapBitmap.Lookup(uBmpResID);
         HBITMAP hbmpRet = NULL;
 
         if (NULL == pPairRet)
         {
             BkResManager::LoadResource(uBmpResID, hbmpRet);
             if (hbmpRet)
-                _Instance()->m_mapBitmap[uBmpResID] = hbmpRet;
+                _Instance().m_mapBitmap[uBmpResID] = hbmpRet;
         }
         else
             hbmpRet = pPairRet->m_value;
@@ -52,20 +52,15 @@ public:
 
     static size_t GetCount()
     {
-        return _Instance()->m_mapBitmap.GetCount();
+        return _Instance().m_mapBitmap.GetCount();
     }
 
 protected:
     _TypeBitmapPool m_mapBitmap;
 
-    static BkBmpPool* ms_pInstance;
-
-    static BkBmpPool* _Instance()
+    static BkBmpPool& _Instance()
     {
-        if (!ms_pInstance)
-            ms_pInstance = new BkBmpPool;
-        return ms_pInstance;
+        static BkBmpPool bmpPool;
+        return bmpPool;
     }
 };
-
-__declspec(selectany) BkBmpPool* BkBmpPool::ms_pInstance = NULL;

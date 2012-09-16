@@ -65,12 +65,12 @@ public:
     static const BkStyle& GetStyle(LPCSTR lpszName)
     {
         CStringA strName = lpszName;
-        const __StylePoolClass::CPair *pFindRet = _GetStylePool()->Lookup(strName);
+        const __StylePoolClass::CPair *pFindRet = _GetStylePool().Lookup(strName);
 
         if (pFindRet)
             return pFindRet->m_value;
         else
-            return (*_GetStylePool())[""];
+            return _GetStylePool()[""];
     }
 
     static BOOL LoadStyles(UINT uResID)
@@ -88,9 +88,7 @@ public:
     {
         TiXmlDocument xmlDoc;
 
-        _GetStylePool()->RemoveAll();
-
-        (*_GetStylePool())[""];
+        _GetStylePool().RemoveAll();
 
         xmlDoc.Parse(lpszXml, NULL, TIXML_ENCODING_UTF8);
 
@@ -104,7 +102,7 @@ public:
 
     static size_t GetCount()
     {
-        return _GetStylePool()->GetCount();
+        return _GetStylePool().GetCount();
     }
 
 protected:
@@ -113,13 +111,10 @@ protected:
 
     CStringA m_strClassName;
 
-    static __StylePoolClass* ms_pStylePool;
-
-    static __StylePoolClass* _GetStylePool()
+    static __StylePoolClass& _GetStylePool()
     {
-        if (!ms_pStylePool)
-            ms_pStylePool = new __StylePoolClass;
-        return ms_pStylePool;
+		static __StylePoolClass stylePool;
+        return stylePool;
     }
 
 //     static __StylePoolClass& _GetStylePool()
@@ -146,7 +141,7 @@ protected:
             if (!lpszClassName)
                 continue;
 
-            (*_GetStylePool())[lpszClassName].Load(pXmlChild);
+            _GetStylePool()[lpszClassName].Load(pXmlChild);
         }
     }
 
@@ -173,4 +168,4 @@ protected:
     BKWIN_DECLARE_ATTRIBUTES_END()
 };
 
-__declspec(selectany) BkStyle::__StylePoolClass* BkStyle::ms_pStylePool = NULL;
+//__declspec(selectany) BkStyle::__StylePoolClass* BkStyle::ms_pStylePool = NULL;

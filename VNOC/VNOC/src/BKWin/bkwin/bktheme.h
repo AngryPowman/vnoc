@@ -40,14 +40,14 @@ public:
 
     static BOOL IsValid()
     {
-        return _Instance()->m_bThemeValid;
+        return _Instance().m_bThemeValid;
     }
 
     static HTHEME OpenThemeData(HWND hwnd, LPCWSTR pszClassList)
     {
-        if (_Instance()->m_pfnOpenThemeData)
+        if (_Instance().m_pfnOpenThemeData)
         {
-            return _Instance()->m_pfnOpenThemeData(hwnd, pszClassList);
+            return _Instance().m_pfnOpenThemeData(hwnd, pszClassList);
         }
         else
             return NULL;
@@ -55,9 +55,9 @@ public:
 
     static HRESULT CloseThemeData(HTHEME hTheme)
     {
-        if (_Instance()->m_pfnCloseThemeData)
+        if (_Instance().m_pfnCloseThemeData)
         {
-            return _Instance()->m_pfnCloseThemeData(hTheme);
+            return _Instance().m_pfnCloseThemeData(hTheme);
         }
         else
             return E_NOTIMPL;
@@ -65,9 +65,9 @@ public:
 
     static HRESULT DrawThemeBackground(HTHEME hTheme, HDC hdc, int iPartId, int iStateId, const RECT *pRect, OPTIONAL const RECT *pClipRect)
     {
-        if (_Instance()->m_pfnDrawThemeBackground)
+        if (_Instance().m_pfnDrawThemeBackground)
         {
-            return _Instance()->m_pfnDrawThemeBackground(hTheme, hdc, iPartId, iStateId, pRect, pClipRect);
+            return _Instance().m_pfnDrawThemeBackground(hTheme, hdc, iPartId, iStateId, pRect, pClipRect);
         }
         else
             return E_NOTIMPL;
@@ -75,9 +75,9 @@ public:
 
     static HRESULT SetWindowTheme(HWND hwnd, LPCWSTR pszSubAppName, LPCWSTR pszSubIdList)
     {
-        if (_Instance()->m_pfnSetWindowTheme)
+        if (_Instance().m_pfnSetWindowTheme)
         {
-            return _Instance()->m_pfnSetWindowTheme(hwnd, pszSubAppName, pszSubIdList);
+            return _Instance().m_pfnSetWindowTheme(hwnd, pszSubAppName, pszSubIdList);
         }
         else
             return E_NOTIMPL;
@@ -114,24 +114,15 @@ private:
     FnDrawThemeBackground   m_pfnDrawThemeBackground;
     FnSetWindowTheme        m_pfnSetWindowTheme;
 
-    static BkWinThemeFunc* ms_pInstance;
 
-    static BkWinThemeFunc* _Instance()
+    static BkWinThemeFunc& _Instance()
     {
-        if (!ms_pInstance)
-            ms_pInstance = new BkWinThemeFunc;
-        return ms_pInstance;
+        static BkWinThemeFunc s_obj;
+        return s_obj;
     }
-
-//     static BkWinThemeFunc& _Instance()
-//     {
-//         static BkWinThemeFunc s_obj;
-// 
-//         return s_obj;
-//     }
 };
 
-__declspec(selectany) BkWinThemeFunc* BkWinThemeFunc::ms_pInstance = NULL;
+//__declspec(selectany) BkWinThemeFunc* BkWinThemeFunc::ms_pInstance = NULL;
 
 template<int t_nThemeId, int t_partid>
 class CBkWinTheme

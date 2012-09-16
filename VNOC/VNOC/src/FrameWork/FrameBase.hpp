@@ -1,19 +1,20 @@
 #pragma once
 #include "IFrameWork.h"
+#include <atlcomcli.h>
 
 class CFrameBase : public IFrameAdapter
 {
 public:
 	CFrameBase()
 	{
-		IFrameWork* pFrameWork;
+		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		Global->PtrAssert(pFrameWork);
 		pFrameWork->AddActor(this);
 	}
 	virtual ~CFrameBase()
 	{
-		IFrameWork* pFrameWork;
+		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		if (pFrameWork)
 		{
@@ -23,10 +24,9 @@ public:
 	VOID SendXMessage(XMessage* msg)
 	{
 		ATLASSERT(msg);
-		IFrameWork* pFrameWork;
+		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		pFrameWork->SendXMessage(msg);
-		pFrameWork->Release();
 	}
 };
 

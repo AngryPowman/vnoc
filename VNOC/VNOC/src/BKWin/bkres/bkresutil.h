@@ -30,26 +30,26 @@ public:
 
     static void SetResourcePath(LPCTSTR lpszPath)
     {
-        _Instance()->m_strResourcePath = lpszPath;
+        _Instance().m_strResourcePath = lpszPath;
     }
 
     static void SetResourceDLL(LPCTSTR lpszPath)
     {
-        if (_Instance()->m_hInstanceRes)
-            ::FreeLibrary(_Instance()->m_hInstanceRes);
+        if (_Instance().m_hInstanceRes)
+            ::FreeLibrary(_Instance().m_hInstanceRes);
 
-        _Instance()->m_hInstanceRes = ::LoadLibrary(lpszPath);
+        _Instance().m_hInstanceRes = ::LoadLibrary(lpszPath);
     }
 
     static BOOL LoadResource(UINT uResID, CStringA &strBuffRet, LPCTSTR lpszResType = BKRES_TYPE)
     {
         BOOL bRet = FALSE;
 
-        if (!_Instance()->m_strResourcePath.IsEmpty())
+        if (!_Instance().m_strResourcePath.IsEmpty())
         {
             CString strFileName;
 
-            strFileName.Format(_T("%s\\%d.%s"), _Instance()->m_strResourcePath, uResID, lpszResType);
+            strFileName.Format(_T("%s\\%d.%s"), _Instance().m_strResourcePath, uResID, lpszResType);
 
             HANDLE hFile = ::CreateFile(
                 strFileName, GENERIC_READ, FILE_SHARE_READ, 
@@ -82,11 +82,11 @@ public:
 	{
 		BOOL bRet = FALSE;
 
-		if (!_Instance()->m_strResourcePath.IsEmpty())
+		if (!_Instance().m_strResourcePath.IsEmpty())
 		{
 			CString strFileName;
 
-			strFileName.Format(_T("%s\\%s"), _Instance()->m_strResourcePath, fileName);
+			strFileName.Format(_T("%s\\%s"), _Instance().m_strResourcePath, fileName);
 
 			HANDLE hFile = ::CreateFile(
 				strFileName, GENERIC_READ, FILE_SHARE_READ, 
@@ -118,11 +118,11 @@ public:
     {
         BOOL bRet = FALSE;
 
-        if (!_Instance()->m_strResourcePath.IsEmpty())
+        if (!_Instance().m_strResourcePath.IsEmpty())
         {
             CString strFileName;
 
-            strFileName.Format(_T("%s\\%d.bmp"), _Instance()->m_strResourcePath, uResID);
+            strFileName.Format(_T("%s\\%d.bmp"), _Instance().m_strResourcePath, uResID);
 
             hBitmap = (HBITMAP)::LoadImage(NULL, strFileName, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
@@ -130,9 +130,9 @@ public:
                 return TRUE;
         }
 
-        if (_Instance()->m_hInstanceRes)
+        if (_Instance().m_hInstanceRes)
         {
-            hBitmap = ::LoadBitmap(_Instance()->m_hInstanceRes, MAKEINTRESOURCE(uResID));
+            hBitmap = ::LoadBitmap(_Instance().m_hInstanceRes, MAKEINTRESOURCE(uResID));
             if (NULL != hBitmap)
                 return TRUE;
         }
@@ -146,11 +146,10 @@ public:
 
 protected:
 
-    static BkResManager* _Instance()
+    static BkResManager& _Instance()
     {
-        static BkResManager* s_pIns = new BkResManager;
-
-        return s_pIns;
+        static BkResManager resManager;
+        return resManager;
     }
 
     static BOOL _LoadEmbedResource(UINT uResID, CStringA &strRet, LPCTSTR lpszResType = BKRES_TYPE)

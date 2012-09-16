@@ -734,21 +734,21 @@ public:
     {
         TiXmlDocument xmlDoc;
 
-        _Instance()->_Clear();
+        _Instance()._Clear();
 
         xmlDoc.Parse(lpszXml, NULL, TIXML_ENCODING_UTF8);
 
         if (xmlDoc.Error())
             return FALSE;
 
-        _Instance()->_LoadSkins(xmlDoc.RootElement());
+        _Instance()._LoadSkins(xmlDoc.RootElement());
 
         return TRUE;
     }
 
     static CBkSkinBase* GetSkin(LPCSTR lpszSkinName)
     {
-        __BkSkinPool::CPair *pairRet = _Instance()->m_mapPool.Lookup(lpszSkinName);
+        __BkSkinPool::CPair *pairRet = _Instance().m_mapPool.Lookup(lpszSkinName);
 
         if (pairRet)
             return pairRet->m_value;
@@ -758,28 +758,19 @@ public:
 
     static size_t GetCount()
     {
-        return _Instance()->m_mapPool.GetCount();
+        return _Instance().m_mapPool.GetCount();
     }
 
 protected:
 
     typedef CAtlMap<CStringA, CBkSkinBase *> __BkSkinPool;
 
-    static BkSkin* ms_pInstance;
-
-    static BkSkin* _Instance()
+    static BkSkin& _Instance()
     {
-        if (!ms_pInstance)
-            ms_pInstance = new BkSkin;
-        return ms_pInstance;
-    }
+        static BkSkin s_obj;
 
-//     static BkSkin& _Instance()
-//     {
-//         static BkSkin s_obj;
-// 
-//         return s_obj;
-//     }
+        return s_obj;
+    }
 
     __BkSkinPool m_mapPool;
 
@@ -819,7 +810,7 @@ protected:
 
             pSkin->Load(pXmlChild);
 
-            /*_Instance()->*/m_mapPool[lpszSkinName] = pSkin;
+            m_mapPool[lpszSkinName] = pSkin;
         }
     }
 
@@ -854,5 +845,3 @@ protected:
         return NULL;
     }
 };
-
-__declspec(selectany) BkSkin* BkSkin::ms_pInstance = NULL;

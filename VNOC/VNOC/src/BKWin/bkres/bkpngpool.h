@@ -44,14 +44,14 @@ public:
 
     static Gdiplus::Image* Get(UINT uResID)
     {
-        _TypePngPool::CPair* pPairRet = _Instance()->m_mapPng.Lookup(uResID);
+        _TypePngPool::CPair* pPairRet = _Instance().m_mapPng.Lookup(uResID);
         Gdiplus::Image* pImg = NULL;
 
         if (NULL == pPairRet)
         {
             _LoadPNGImageFromResourceID(uResID, pImg);
             if (pImg)
-                _Instance()->m_mapPng[uResID] = pImg;
+                _Instance().m_mapPng[uResID] = pImg;
         }
         else
             pImg = pPairRet->m_value;
@@ -61,7 +61,7 @@ public:
 
     static size_t GetCount()
     {
-        return _Instance()->m_mapPng.GetCount();
+        return _Instance().m_mapPng.GetCount();
     }
 
 protected:
@@ -70,13 +70,10 @@ protected:
 
     _TypePngPool m_mapPng;
 
-    static BkPngPool* ms_pInstance;
-
-    static BkPngPool* _Instance()
+    static BkPngPool& _Instance()
     {
-        if (!ms_pInstance)
-            ms_pInstance = new BkPngPool;
-        return ms_pInstance;
+        static BkPngPool pngPool;
+        return pngPool;
     }
 
     static BOOL _LoadPNGImageFromResourceID(UINT nID, Gdiplus::Image* &pImg)
@@ -102,5 +99,3 @@ protected:
         return TRUE;
     }
 };
-
-__declspec(selectany) BkPngPool* BkPngPool::ms_pInstance = NULL;
