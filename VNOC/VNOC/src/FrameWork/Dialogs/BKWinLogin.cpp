@@ -17,6 +17,7 @@ void CLoginWnd::OnBkBtnClose()
 
 void CLoginWnd::OnLoginClick()
 {
+	Disable();
 	CString userName;
 	CString pwd;
 	CBkWindow* pUsernameEdit = NULL;
@@ -32,4 +33,48 @@ void CLoginWnd::OnLoginClick()
 		msg.pwd = pwd;
 		SendXMessage(&msg);
 	}
+}
+
+BOOL CLoginWnd::OnLoginResult( XMessage* pMsg )
+{
+	XMessage_Login_Result *pResult = dynamic_cast<XMessage_Login_Result*>(pMsg);
+	if (pResult)
+	{
+		if (pResult->success == TRUE)
+		{
+			MessageBox(_T("³É¹¦µÇÂ½!"));
+		}
+		else
+		{
+			MessageBox(_T("µÇÂ½Ê§°Ü!"));
+		}
+	}
+	return TRUE;
+}
+
+VOID CLoginWnd::Disable()
+{
+	CBkWindow* pUsernameEdit = NULL;
+	pUsernameEdit = m_richView.FindChildByCmdID(DlgControl_LoginWin_Edit_UserName);
+	if (pUsernameEdit)
+	{
+		pUsernameEdit->ModifyState(BkWndState_Disable,0);
+	}
+	CBkWindow* pPwdEdit = NULL;
+	pPwdEdit = m_richView.FindChildByCmdID(DlgControl_LoginWin_Edit_PassWord);
+	if (pPwdEdit)
+	{
+		pPwdEdit->ModifyState(BkWndState_Disable,0);
+	}
+	CBkWindow* pLoginBtn = NULL;
+	pLoginBtn = m_richView.FindChildByCmdID(DlgControl_LoginWin_Button_Login);
+	if (pLoginBtn)
+	{
+		pLoginBtn->ModifyState(BkWndState_Disable,0);
+	}
+}
+
+VOID CLoginWnd::Enable()
+{
+
 }

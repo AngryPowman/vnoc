@@ -47,10 +47,19 @@ public:
 //////////////////////////////////////////////////////////////////////////
 // Messages
 
-#define XMessageID_Login	1024
+#define XMessageID_Login	_T("Login")
 struct XMessage_Login : public XMessage
 {
 	XMessage_Login():XMessage(XMessageID_Login){}
 	CString username;
 	CString pwd;
+};
+
+#define XMessageID_Login_Result	_T("LoginResult")
+struct XMessage_Login_Result : public XMessage
+{
+	XMessage_Login_Result():XMessage(XMessageID_Login_Result){}
+	BOOL success;
+	DWORD	userToken;
+	BYTE	guid[16];
 };

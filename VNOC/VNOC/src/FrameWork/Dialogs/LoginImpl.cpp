@@ -103,7 +103,20 @@ HRESULT CLoginImpl::OnNetMessage( const CMessage& msg )
 	switch(msg.GetMessageType())
 	{
 	case MSG_ALI_TYPE:
-		MessageBox(0,_T("³É¹¦µÇÂ½!"),0,0);
+		const MSG_ALI* msgReal = dynamic_cast<const MSG_ALI*>(&msg);
+		if (msgReal)
+		{
+			XMessage_Login_Result loginResult;
+			loginResult.success = msgReal->GetLoginResult()?TRUE:FALSE;
+			loginResult.userToken = msgReal->GetToken();
+			BYTE* pGuid = msgReal->GetATLGUID();
+			if (pGuid && 
+				msgReal->GetATLGUIDLen()==sizeof(loginResult.guid)/sizeof(loginResult.guid[0]))
+			{
+				memcpy(loginResult.guid,pGuid,sizeof(loginResult.guid)/sizeof(loginResult.guid[0]));
+			}
+			SendXMessage(&loginResult);
+		}
 		break;
 	}
 	return S_OK;

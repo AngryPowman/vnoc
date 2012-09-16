@@ -7,8 +7,13 @@ class CLoginWnd:public CBkDialogImpl<CLoginWnd>
 	,public CFrameBase
 {
 public:
-	void		OnBkBtnClose();
-	void		OnLoginClick();
+	void	OnBkBtnClose();
+	void	OnLoginClick();
+	BOOL	OnLoginResult(XMessage* pMsg);
+
+protected:
+	VOID	Disable();
+	VOID	Enable();
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
@@ -19,5 +24,6 @@ public:
 	BEGIN_MSG_MAP_EX_DECLARE(CLoginWnd)
 
 	Begin_XMessage(CLoginWnd)
+		OnXMessage(XMessageID_Login_Result,OnLoginResult);
 	End_XMessage()
 };
