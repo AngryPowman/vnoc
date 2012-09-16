@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "BKWinLogin.h"
 
+#define TimerID_LoginTimeout	0
 
 BEGIN_MSG_MAP_EX_IMP(CLoginWnd)
 	MSG_BK_NOTIFY(IDC_RICHVIEW_WIN)
 	CHAIN_MSG_MAP(CBkDialogImpl<CLoginWnd>)
-	// 	MSG_WM_INITDIALOG(OnInitDialog)
-	// 	MSG_WM_SYSCOMMAND(OnSysCommand)
+	MSG_WM_TIMER(OnTimer)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP()
 
@@ -18,6 +18,7 @@ void CLoginWnd::OnBkBtnClose()
 void CLoginWnd::OnLoginClick()
 {
 	Disable();
+	SetTimer(TimerID_LoginTimeout,5000);
 	CString userName;
 	CString pwd;
 	CBkWindow* pUsernameEdit = NULL;
@@ -76,5 +77,30 @@ VOID CLoginWnd::Disable()
 
 VOID CLoginWnd::Enable()
 {
+	CBkWindow* pUsernameEdit = NULL;
+	pUsernameEdit = m_richView.FindChildByCmdID(DlgControl_LoginWin_Edit_UserName);
+	if (pUsernameEdit)
+	{
+		pUsernameEdit->ModifyState(0,BkWndState_Disable);
+	}
+	CBkWindow* pPwdEdit = NULL;
+	pPwdEdit = m_richView.FindChildByCmdID(DlgControl_LoginWin_Edit_PassWord);
+	if (pPwdEdit)
+	{
+		pPwdEdit->ModifyState(0,BkWndState_Disable);
+	}
+	CBkWindow* pLoginBtn = NULL;
+	pLoginBtn = m_richView.FindChildByCmdID(DlgControl_LoginWin_Button_Login);
+	if (pLoginBtn)
+	{
+		pLoginBtn->ModifyState(0,BkWndState_Disable);
+		pLoginBtn->NotifyInvalidate();
+	}
+}
 
+VOID CLoginWnd::OnTimer( UINT_PTR id )
+{
+	KillTimer(id);
+	MessageBox(_T("µÇÂ½³¬Ê±"));
+	Enable();
 }

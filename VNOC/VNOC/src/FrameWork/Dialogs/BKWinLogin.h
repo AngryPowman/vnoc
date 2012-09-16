@@ -14,6 +14,7 @@ public:
 protected:
 	VOID	Disable();
 	VOID	Enable();
+	VOID	OnTimer(UINT_PTR id);
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
