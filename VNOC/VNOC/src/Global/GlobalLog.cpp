@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GlobalCenter.h"
+#include "../util/DbgHelper.hpp"
 
 //////////////////////////////////////////////////////////////////////////
 // ¾Ö²¿utilº¯Êý
@@ -122,6 +123,11 @@ HRESULT CGlobalCenter::SetLog( CString file,BOOL bDbgView/*=TRUE*/,BOOL bConsole
 
 HRESULT CGlobalCenter::SetThreadName( CString name )
 {
+	if (name.IsEmpty())
+	{
+		return S_FALSE;
+	}
+	SetThreadNameToDebugInfo(GetCurrentThreadId(),CStringA(name));
 	m_threadName[GetCurrentThreadId()] = name;
 	LogMap::iterator i;
 	i = m_log.begin();

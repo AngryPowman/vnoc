@@ -548,6 +548,9 @@
     <ClInclude Include="..\..\Message\MessageErrorDefine.hpp">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\DbgHelper.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

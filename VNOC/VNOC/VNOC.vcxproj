@@ -284,6 +284,7 @@
     <ClInclude Include="src\util\bind.hpp" />
     <ClInclude Include="src\util\BLog.h" />
     <ClInclude Include="src\util\CBuffer.h" />
+    <ClInclude Include="src\util\DbgHelper.hpp" />
     <ClInclude Include="src\util\MD5.h" />
     <ClInclude Include="src\util\MD5ChecksumDefines.h" />
     <ClInclude Include="src\util\Performance.h" />
