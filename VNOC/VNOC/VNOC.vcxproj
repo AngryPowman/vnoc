@@ -281,6 +281,9 @@
     <ClInclude Include="src\net\Socket\ISocket.h" />
     <ClInclude Include="src\net\Socket\SockWnd.h" />
     <ClInclude Include="src\net\Socket\VNOCSocket.h" />
+    <ClInclude Include="src\room\IRoomMgr.h" />
+    <ClInclude Include="src\room\room.h" />
+    <ClInclude Include="src\room\roomMgr.h" />
     <ClInclude Include="src\util\bind.hpp" />
     <ClInclude Include="src\util\BLog.h" />
     <ClInclude Include="src\util\CBuffer.h" />
@@ -350,6 +353,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\room\room.cpp" />
+    <ClCompile Include="src\room\roomMgr.cpp" />
     <ClCompile Include="src\util\BLog.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

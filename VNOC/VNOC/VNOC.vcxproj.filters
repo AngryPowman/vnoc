@@ -61,6 +61,15 @@
     <Filter Include="FrameWork\Dialogs">
       <UniqueIdentifier>{3f98e31c-fd53-4abb-be75-a29829623c62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Logic">
+      <UniqueIdentifier>{2cb4171c-a2c3-42bb-958a-a1d03d744a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\UserSession">
+      <UniqueIdentifier>{897327a5-961e-453d-931d-4f16ba67e1aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\room">
+      <UniqueIdentifier>{d540b725-8c4e-44e8-a158-7632bd34cbfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="small.ico">
@@ -521,12 +530,6 @@
     <ClInclude Include="..\..\Message\PackMessage.h">
       <Filter>net\MessageParser</Filter>
     </ClInclude>
-    <ClInclude Include="src\FrameWork\Dialogs\ILogin.h">
-      <Filter>FrameWork\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\FrameWork\Dialogs\LoginImpl.h">
-      <Filter>FrameWork\Dialogs</Filter>
-    </ClInclude>
     <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h">
       <Filter>FrameWork\Dialogs</Filter>
     </ClInclude>
@@ -550,6 +553,21 @@
     </ClInclude>
     <ClInclude Include="src\util\DbgHelper.hpp">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\ILogin.h">
+      <Filter>Logic\UserSession</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\LoginImpl.h">
+      <Filter>Logic\UserSession</Filter>
+    </ClInclude>
+    <ClInclude Include="src\room\room.h">
+      <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\room\roomMgr.h">
+      <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\room\IRoomMgr.h">
+      <Filter>Logic\room</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -619,14 +637,20 @@
     <ClCompile Include="..\..\Message\PackMessage.cpp">
       <Filter>net\MessageParser</Filter>
     </ClCompile>
-    <ClCompile Include="src\FrameWork\Dialogs\LoginImpl.cpp">
-      <Filter>FrameWork\Dialogs</Filter>
-    </ClCompile>
     <ClCompile Include="src\FrameWork\Dialogs\BKWinLogin.cpp">
       <Filter>FrameWork\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp">
       <Filter>net\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameWork\Dialogs\LoginImpl.cpp">
+      <Filter>Logic\UserSession</Filter>
+    </ClCompile>
+    <ClCompile Include="src\room\room.cpp">
+      <Filter>Logic\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\room\roomMgr.cpp">
+      <Filter>Logic\room</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
