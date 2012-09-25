@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppunit_vs10", "..\cppunit-1.12.1\src\cppunit\cppunit_vs10.vcxproj", "{6250D3CB-F76B-1127-A577-BB2BA8A3C165}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppunit_vs10", "..\cppunit-1.12.1\src\cppunit\cppunit_vs10.vcxproj", "{95F840C0-9600-4F98-71F2-A4DDF20245A9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testRunner", "testRunner\testRunner.vcxproj", "{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}"
 EndProject
@@ -17,15 +17,15 @@ Global
 		VldMemLeakCheck|Win64 = VldMemLeakCheck|Win64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.Debug|Win32.ActiveCfg = Debug|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.Debug|Win32.Build.0 = Debug|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.Debug|Win64.ActiveCfg = Debug|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.Release|Win32.ActiveCfg = Release|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.Release|Win64.ActiveCfg = Release|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.VldMemLeakCheck|Win32.ActiveCfg = Debug|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.VldMemLeakCheck|Win32.Build.0 = Debug|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.VldMemLeakCheck|Win64.ActiveCfg = Debug|Win32
-		{6250D3CB-F76B-1127-A577-BB2BA8A3C165}.VldMemLeakCheck|Win64.Build.0 = Debug|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.Debug|Win32.Build.0 = Debug|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.Debug|Win64.ActiveCfg = Debug|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.Release|Win32.ActiveCfg = Release|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.Release|Win64.ActiveCfg = Release|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.VldMemLeakCheck|Win32.ActiveCfg = Debug|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.VldMemLeakCheck|Win32.Build.0 = Debug|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.VldMemLeakCheck|Win64.ActiveCfg = Debug|Win32
+		{95F840C0-9600-4F98-71F2-A4DDF20245A9}.VldMemLeakCheck|Win64.Build.0 = Debug|Win32
 		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Debug|Win32.ActiveCfg = Debug|Win32
 		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Debug|Win32.Build.0 = Debug|Win32
 		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Debug|Win64.ActiveCfg = Debug|Win32
