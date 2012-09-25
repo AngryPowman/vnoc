@@ -1,19 +1,20 @@
 #pragma once
 #include "IFrameWork.h"
+#include <atlcomcli.h>
 
 class CFrameBase : public IFrameAdapter
 {
 public:
 	CFrameBase()
 	{
-		IFrameWork* pFrameWork;
+		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		Global->PtrAssert(pFrameWork);
 		pFrameWork->AddActor(this);
 	}
 	virtual ~CFrameBase()
 	{
-		IFrameWork* pFrameWork;
+		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		if (pFrameWork)
 		{
@@ -23,10 +24,9 @@ public:
 	VOID SendXMessage(XMessage* msg)
 	{
 		ATLASSERT(msg);
-		IFrameWork* pFrameWork;
+		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		pFrameWork->SendXMessage(msg);
-		pFrameWork->Release();
 	}
 };
 
@@ -47,10 +47,19 @@ public:
 //////////////////////////////////////////////////////////////////////////
 // Messages
 
-#define XMessageID_Login	1024
+#define XMessageID_Login	_T("Login")
 struct XMessage_Login : public XMessage
 {
 	XMessage_Login():XMessage(XMessageID_Login){}
 	CString username;
 	CString pwd;
+};
+
+#define XMessageID_Login_Result	_T("LoginResult")
+struct XMessage_Login_Result : public XMessage
+{
+	XMessage_Login_Result():XMessage(XMessageID_Login_Result){}
+	BOOL success;
+	DWORD	userToken;
+	BYTE	guid[16];
 };

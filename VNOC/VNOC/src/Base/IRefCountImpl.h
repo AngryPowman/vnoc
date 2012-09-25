@@ -23,6 +23,6 @@ public:
 	{
 		return E_NOTIMPL;
 	}
-private:
+protected:
 	LONG m_refCount;
 };

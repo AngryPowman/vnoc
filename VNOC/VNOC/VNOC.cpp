@@ -7,7 +7,7 @@
 
 #ifdef USE_VLD
 #ifdef _DEBUG
-#pragma comment(lib,"VldMemLeakCheck\\vld.lib")
+#pragma comment(lib,"vld.lib")
 #include "../../VisualLeakDetector/include/vld.h"
 #endif
 #endif
@@ -27,7 +27,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	::CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
 	Global->Initialize();
 
-	IFrameWork* pFrame = NULL;
+	CComPtr<IFrameWork> pFrame;
 	Global->GetIFrameModule(&pFrame);
 	if (pFrame)
 	{

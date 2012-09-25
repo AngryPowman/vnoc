@@ -60,16 +60,16 @@ public:
 
     static HFONT GetFont(WORD uKey)
     {
-        _TypeFontPool::CPair* pPairRet = _Instance()->m_mapFont.Lookup(uKey);
+        _TypeFontPool::CPair* pPairRet = _Instance().m_mapFont.Lookup(uKey);
         HFONT hftRet = NULL;
 
         if (NULL == pPairRet)
         {
-            hftRet = _Instance()->_CreateNewFont(
+            hftRet = _Instance()._CreateNewFont(
                 BKF_ISBOLD(uKey), BKF_ISUNDERLINE(uKey), BKF_ISITALIC(uKey), BKF_GETADDING(uKey)
                 );
             if (hftRet)
-                _Instance()->m_mapFont[uKey] = hftRet;
+                _Instance().m_mapFont[uKey] = hftRet;
         }
         else
             hftRet = pPairRet->m_value;
@@ -84,17 +84,17 @@ public:
 
     static void SetDefaultFont(LPCTSTR lpszFaceName, LONG lSize)
     {
-        _Instance()->m_strFaceName = lpszFaceName;
-        _Instance()->m_lFontSize = lSize;
+        _Instance().m_strFaceName = lpszFaceName;
+        _Instance().m_lFontSize = lSize;
 
-        HFONT hftOld = _Instance()->m_mapFont[BKF_DEFAULTFONT];
-        _Instance()->m_mapFont[BKF_DEFAULTFONT] = _Instance()->_GetDefaultGUIFont();
+        HFONT hftOld = _Instance().m_mapFont[BKF_DEFAULTFONT];
+        _Instance().m_mapFont[BKF_DEFAULTFONT] = _Instance()._GetDefaultGUIFont();
         ::DeleteObject(hftOld);
     }
 
     static size_t GetCount()
     {
-        return _Instance()->m_mapFont.GetCount();
+        return _Instance().m_mapFont.GetCount();
     }
 
 protected:
@@ -104,13 +104,10 @@ protected:
     CString m_strFaceName;
     LONG m_lFontSize;
 
-    static BkFontPool* ms_pInstance;
-
-    static BkFontPool* _Instance()
+    static BkFontPool& _Instance()
     {
-        if (!ms_pInstance)
-            ms_pInstance = new BkFontPool;
-        return ms_pInstance;
+		static BkFontPool fontPool;
+        return fontPool;
     }
 
     HFONT _GetDefaultGUIFont()
@@ -157,5 +154,3 @@ protected:
         //         return lHeight;
     }
 };
-
-__declspec(selectany) BkFontPool* BkFontPool::ms_pInstance = NULL;
