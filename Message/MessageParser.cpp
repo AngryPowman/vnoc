@@ -200,7 +200,6 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 				_Messsage->m_ComCommandList[i].push_back(lpszData[TmpIndex]);
 				VerifyPos++;
 			}
-			_Messsage->m_ComCommandList[i].push_back(0);
 		}
 	}
 
