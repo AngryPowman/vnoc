@@ -6,7 +6,7 @@
 #define NULLPOINT			-1
 #define LOGIN_OK			1
 #define TEST_FALSE			2
-
+#define ACCOUNT_NULL		3
 
 class CUserManage
 {
@@ -29,7 +29,7 @@ public:
 
 		if ( !_us->IfUserExist(szUser) )//账号是否存在 查数据库
 		{
-			return TEST_FALSE;
+			return ACCOUNT_NULL;
 		}
 		char strPass[41] = {0};	
 		_us->GetPassword(szUser, strPass, 40);
