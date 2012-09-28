@@ -37,6 +37,7 @@ HRESULT CGlobalCenter::UnInitialize()
 
 HRESULT CGlobalCenter::Run()
 {
+	m_pFrameWork->Run();
 	return S_OK;
 }
 
@@ -61,6 +62,7 @@ void CGlobalCenter::_InitializeConfig()
 	m_configFilePath = m_configFilePath.Left(nPos);
 
 	m_config.Initialize(NULL);
+	m_config.Run();
 	m_configFilePath += PathSplit;
 	m_configFilePath += CONFIGXMLFILE;
 	Global->Logf(LogFile_General,_T("ÅäÖÃXMLµÄÂ·¾¶Îª:%s\n"),m_configFilePath);
