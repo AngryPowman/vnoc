@@ -8,7 +8,12 @@ BEGIN_MSG_MAP_EX_IMP(CLoginWnd)
 	CHAIN_MSG_MAP(CBkDialogImpl<CLoginWnd>)
 	MSG_WM_TIMER(OnTimer)
 	REFLECT_NOTIFICATIONS_EX()
-END_MSG_MAP_IMP()
+END_MSG_MAP_IMP();
+
+CLoginWnd::CLoginWnd()
+{
+
+}
 
 void CLoginWnd::OnBkBtnClose()
 {
