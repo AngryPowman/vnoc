@@ -10,7 +10,7 @@ BEGIN_MSG_MAP_EX_IMP(CLoginWnd)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP();
 
-CLoginWnd::CLoginWnd()
+CLoginWnd::CLoginWnd() : CBkDialogImpl(BKDlg_LoginWin)
 {
 
 }

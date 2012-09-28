@@ -33,7 +33,6 @@ HRESULT CLoginImpl::Show( BOOL bShow/*=TRUE*/ )
 	if (bShow)
 	{
 		CLoginWnd wnd;
-		wnd.Load(BKDlg_LoginWin);
 		wnd.DoModal();
 	}
 	count = VLDGetLeaksCount();

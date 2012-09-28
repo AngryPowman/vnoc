@@ -1358,7 +1358,14 @@ public:
         , m_bShowWindow(TRUE)
         , m_bExitModalLoop(FALSE)
     {
-    }
+	}
+	CBkDialogImpl(LPCTSTR xmlPath)
+		: m_xmlPath(xmlPath)
+		, m_uResID(0)
+		, m_bShowWindow(TRUE)
+		, m_bExitModalLoop(FALSE)
+	{
+	}
     virtual ~CBkDialogImpl()
     {
 
@@ -1368,6 +1375,7 @@ protected:
     typedef CBkDialogImpl<T, TBkView, TBase, TWinTraits> __thisClass;
 
     UINT m_uResID;
+	CString m_xmlPath;
     UINT m_uRetCode;
 
     TBkView m_richView;
@@ -1497,6 +1505,20 @@ public:
 			return FALSE;
 
 		return SetXml(strXml);
+	}
+
+	BOOL Load()	// already set xml
+	{
+		BOOL bRet = FALSE;
+		if (m_uResID)
+		{
+			bRet = Load(m_uResID);
+		}
+		if (!bRet && !m_xmlPath.IsEmpty())
+		{
+			bRet = Load(m_xmlPath);
+		}
+		return bRet;
 	}
 
     BOOL SetXml(LPCSTR lpszXml)
@@ -1673,7 +1695,7 @@ public:
     {
         if (!m_richView.XmlLoaded())
         {
-            if (0 == m_uResID || !Load(m_uResID))
+            if (!Load())
             {
                 return NULL;
             }
