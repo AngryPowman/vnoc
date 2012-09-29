@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RoomMgr.h"
-#include "../FrameWork/Dialogs/BKWinRoomList.h"
+#include "../../FrameWork/Dialogs/BKWinRoomList.h"
 
 CRoomMgr::CRoomMgr()
 {

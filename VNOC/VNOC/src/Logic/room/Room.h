@@ -1,6 +1,6 @@
 #pragma once
 // 定义房间
-#include "../Base/IRefCountImpl.h"
+#include "../../Base/IRefCountImpl.h"
 #include <atlstr.h>
 #include <atltime.h>
 
