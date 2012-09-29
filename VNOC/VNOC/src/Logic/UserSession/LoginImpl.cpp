@@ -85,9 +85,6 @@ BOOL CLoginImpl::OnLogin( XMessage* pMsg )
 
 HRESULT CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 {
-	CRoomListWnd wnd;
-	wnd.DoModal();
-	return S_FALSE;
 	INetCenter* pNetCenter = NULL;
 	Global->GetINetCenter(&pNetCenter);
 	if (pNetCenter)

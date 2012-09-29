@@ -527,15 +527,6 @@
     <ClInclude Include="src\util\DbgHelper.hpp">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="src\room\room.h">
-      <Filter>Logic\room</Filter>
-    </ClInclude>
-    <ClInclude Include="src\room\roomMgr.h">
-      <Filter>Logic\room</Filter>
-    </ClInclude>
-    <ClInclude Include="src\room\IRoomMgr.h">
-      <Filter>Logic\room</Filter>
-    </ClInclude>
     <ClInclude Include="src\FrameWork\Dialogs\BKWinRoomList.h">
       <Filter>FrameWork\Dialogs</Filter>
     </ClInclude>
@@ -544,6 +535,15 @@
     </ClInclude>
     <ClInclude Include="src\Logic\UserSession\LoginImpl.h">
       <Filter>Logic\UserSession</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logic\room\IRoomMgr.h">
+      <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logic\room\Room.h">
+      <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logic\room\RoomMgr.h">
+      <Filter>Logic\room</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -619,17 +619,17 @@
     <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp">
       <Filter>net\socket</Filter>
     </ClCompile>
-    <ClCompile Include="src\room\room.cpp">
-      <Filter>Logic\room</Filter>
-    </ClCompile>
-    <ClCompile Include="src\room\roomMgr.cpp">
-      <Filter>Logic\room</Filter>
-    </ClCompile>
     <ClCompile Include="src\FrameWork\Dialogs\BKWinRoomList.cpp">
       <Filter>FrameWork\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="src\Logic\UserSession\LoginImpl.cpp">
       <Filter>Logic\UserSession</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Logic\room\Room.cpp">
+      <Filter>Logic\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Logic\room\RoomMgr.cpp">
+      <Filter>Logic\room</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

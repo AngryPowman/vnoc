@@ -380,6 +380,9 @@
     <ClInclude Include="src\Global\GlobalCenter.h" />
     <ClInclude Include="src\Global\GlobalDefine.h" />
     <ClInclude Include="src\Global\IGlobal.h" />
+    <ClInclude Include="src\Logic\room\IRoomMgr.h" />
+    <ClInclude Include="src\Logic\room\Room.h" />
+    <ClInclude Include="src\Logic\room\RoomMgr.h" />
     <ClInclude Include="src\Logic\UserSession\ILogin.h" />
     <ClInclude Include="src\Logic\UserSession\LoginImpl.h" />
     <ClInclude Include="src\net\INet.h" />
@@ -388,9 +391,6 @@
     <ClInclude Include="src\net\Socket\ISocket.h" />
     <ClInclude Include="src\net\Socket\SockWnd.h" />
     <ClInclude Include="src\net\Socket\VNOCSocket.h" />
-    <ClInclude Include="src\room\IRoomMgr.h" />
-    <ClInclude Include="src\room\room.h" />
-    <ClInclude Include="src\room\roomMgr.h" />
     <ClInclude Include="src\util\bind.hpp" />
     <ClInclude Include="src\util\BLog.h" />
     <ClInclude Include="src\util\CBuffer.h" />
@@ -469,6 +469,8 @@
     <ClCompile Include="src\FrameWork\FrameWork.cpp" />
     <ClCompile Include="src\Global\GlobalCenter.cpp" />
     <ClCompile Include="src\Global\GlobalLog.cpp" />
+    <ClCompile Include="src\Logic\room\Room.cpp" />
+    <ClCompile Include="src\Logic\room\RoomMgr.cpp" />
     <ClCompile Include="src\Logic\UserSession\LoginImpl.cpp" />
     <ClCompile Include="src\net\Net.cpp" />
     <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp" />
@@ -488,8 +490,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\room\room.cpp" />
-    <ClCompile Include="src\room\roomMgr.cpp" />
     <ClCompile Include="src\util\BLog.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|x64'">NotUsing</PrecompiledHeader>
