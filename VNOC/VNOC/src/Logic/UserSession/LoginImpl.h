@@ -1,6 +1,6 @@
 #pragma once
 #include "ILogin.h"
-#include "../FrameBase.hpp"
+#include "../../FrameWork/FrameBase.hpp"
 #include "../../net/INet.h"
 
 class CLoginImpl

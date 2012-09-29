@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "LoginImpl.h"
-#include "BKWinLogin.h"
+#include "../../FrameWork/Dialogs/BKWinLogin.h"
+#include "../../FrameWork/Dialogs/BKWinRoomList.h"
 
 #include "../../../../../VisualLeakDetector/include/vld.h"
 
@@ -84,6 +85,9 @@ BOOL CLoginImpl::OnLogin( XMessage* pMsg )
 
 HRESULT CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 {
+	CRoomListWnd wnd;
+	wnd.DoModal();
+	return S_FALSE;
 	INetCenter* pNetCenter = NULL;
 	Global->GetINetCenter(&pNetCenter);
 	if (pNetCenter)

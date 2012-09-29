@@ -90,9 +90,6 @@
     <None Include="res\tab_normal_ex.bmp">
       <Filter>Resource Files\BKres</Filter>
     </None>
-    <None Include="res\autoopt_done.png">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
     <None Include="res\beikesafe.ico">
       <Filter>Resource Files\BKres</Filter>
     </None>
@@ -133,9 +130,6 @@
       <Filter>Resource Files\BKres</Filter>
     </None>
     <None Include="res\def_skin.xml">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
-    <None Include="res\def_skin.xml.bak">
       <Filter>Resource Files\BKres</Filter>
     </None>
     <None Include="res\def_string.xml">
@@ -183,9 +177,6 @@
     <None Include="res\dlgfile_opt.xml">
       <Filter>Resource Files\BKres</Filter>
     </None>
-    <None Include="res\dlgfile_opt.xml.bak">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
     <None Include="res\exam_status_icon.png">
       <Filter>Resource Files\BKres</Filter>
     </None>
@@ -225,21 +216,6 @@
     <None Include="res\msgbox_body_bg.bmp">
       <Filter>Resource Files\BKres</Filter>
     </None>
-    <None Include="res\no_runtask.png">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
-    <None Include="res\regedit.ico">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
-    <None Include="res\run_remain.ico">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
-    <None Include="res\run_system.ico">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
-    <None Include="res\run_unknown.ico">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
     <None Include="res\runopt_listheader.bmp">
       <Filter>Resource Files\BKres</Filter>
     </None>
@@ -265,9 +241,6 @@
       <Filter>Resource Files\BKres</Filter>
     </None>
     <None Include="res\sysopt_listbk.bmp">
-      <Filter>Resource Files\BKres</Filter>
-    </None>
-    <None Include="res\sysopt_more.bmp">
       <Filter>Resource Files\BKres</Filter>
     </None>
     <None Include="res\tab_left.bmp">
@@ -554,12 +527,6 @@
     <ClInclude Include="src\util\DbgHelper.hpp">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="src\FrameWork\Dialogs\ILogin.h">
-      <Filter>Logic\UserSession</Filter>
-    </ClInclude>
-    <ClInclude Include="src\FrameWork\Dialogs\LoginImpl.h">
-      <Filter>Logic\UserSession</Filter>
-    </ClInclude>
     <ClInclude Include="src\room\room.h">
       <Filter>Logic\room</Filter>
     </ClInclude>
@@ -568,6 +535,15 @@
     </ClInclude>
     <ClInclude Include="src\room\IRoomMgr.h">
       <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\BKWinRoomList.h">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logic\UserSession\ILogin.h">
+      <Filter>Logic\UserSession</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logic\UserSession\LoginImpl.h">
+      <Filter>Logic\UserSession</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -643,14 +619,17 @@
     <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp">
       <Filter>net\socket</Filter>
     </ClCompile>
-    <ClCompile Include="src\FrameWork\Dialogs\LoginImpl.cpp">
-      <Filter>Logic\UserSession</Filter>
-    </ClCompile>
     <ClCompile Include="src\room\room.cpp">
       <Filter>Logic\room</Filter>
     </ClCompile>
     <ClCompile Include="src\room\roomMgr.cpp">
       <Filter>Logic\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameWork\Dialogs\BKWinRoomList.cpp">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Logic\UserSession\LoginImpl.cpp">
+      <Filter>Logic\UserSession</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -660,10 +639,5 @@
     <ResourceCompile Include="src\BKWin\bkres\bkres.rc">
       <Filter>BKWin\BKRes</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="res\beikesafe.manifest">
-      <Filter>Resource Files\BKres</Filter>
-    </Manifest>
   </ItemGroup>
 </Project>
