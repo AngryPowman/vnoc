@@ -5,7 +5,7 @@
 
 #include "../../../../../VisualLeakDetector/include/vld.h"
 
-CLoginImpl::CLoginImpl(void)
+CLoginImpl::CLoginImpl(void) : CFrameBase(module_LoginData)
 {
 	m_frame = NULL;
 }
@@ -33,6 +33,7 @@ HRESULT CLoginImpl::Show( BOOL bShow/*=TRUE*/ )
 		count = VLDGetLeaksCount();
 	if (bShow)
 	{
+		//CRoomListWnd wnd;
 		CLoginWnd wnd;
 		wnd.DoModal();
 	}
@@ -72,15 +73,13 @@ HRESULT CLoginImpl::GetCurrentUser(CString& username,CString& cookie)
 	return E_NOTIMPL;
 }
 
-BOOL CLoginImpl::OnLogin( XMessage* pMsg )
+VOID CLoginImpl::OnLogin( XMessage* pMsg )
 {
 	XMessage_Login* pData = dynamic_cast<XMessage_Login*>(pMsg);
 	if (pData)
 	{
 		Login(pData->username,pData->pwd);
-		return TRUE;
 	}
-	return FALSE;
 }
 
 HRESULT CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
@@ -120,5 +119,10 @@ HRESULT CLoginImpl::OnNetMessage( const CMessage& msg )
 		break;
 	}
 	return S_OK;
+}
+
+VOID CLoginImpl::OnShowWnd( XMessage* pMsg )
+{
+	Show();
 }
 

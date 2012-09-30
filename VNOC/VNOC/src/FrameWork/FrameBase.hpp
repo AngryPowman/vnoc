@@ -2,15 +2,45 @@
 #include "IFrameWork.h"
 #include <atlcomcli.h>
 
-class CFrameBase : public IFrameAdapter
+#define HR_NOTPROCESSED	MAKE_HRESULT(1,0x590c,0x590c)
+
+struct XMessage : public IRefCountImpl
+{
+	XMessage(LPCTSTR msgID,FrameModule destModule=module_Any,IFrameModule* srcFrameModule=NULL)
+		: msgID(msgID),destModule(destModule),result(HR_NOTPROCESSED)
+	{
+		if (srcFrameModule)
+		{
+			srcModule = srcFrameModule->GetModuleType();
+		}
+	}
+	VOID MarkProcessed(HRESULT result)
+	{
+		ATLASSERT(result != HR_NOTPROCESSED);
+		this->result = result;
+	}
+	BOOL IsProcessed()
+	{
+		return result != HR_NOTPROCESSED;
+	}
+
+	CString		msgID;
+	FrameModule	destModule;
+	FrameModule srcModule;
+
+	HRESULT	result;
+};
+
+class CFrameBase : public IFrameModule
 {
 public:
-	CFrameBase()
+	CFrameBase(FrameModule module)
+		: m_moduleType(module)
 	{
 		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		Global->PtrAssert(pFrameWork);
-		pFrameWork->AddActor(this);
+		pFrameWork->RegisterModule(this);
 	}
 	virtual ~CFrameBase()
 	{
@@ -18,7 +48,7 @@ public:
 		Global->GetIFrameModule(&pFrameWork);
 		if (pFrameWork)
 		{
-			pFrameWork->RemoveActor(this);
+			pFrameWork->RemoveModule(this);
 		}
 	}
 	VOID SendXMessage(XMessage* msg)
@@ -26,23 +56,34 @@ public:
 		ATLASSERT(msg);
 		CComPtr<IFrameWork> pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
+		Global->PtrAssert(pFrameWork);
 		pFrameWork->SendXMessage(msg);
 	}
+	FrameModule GetModuleType()
+	{
+		return m_moduleType;
+	}
+	virtual BOOL IsView()
+	{
+		return GetModuleType()>module_ViewBegin && GetModuleType()<module_ViewEnd;
+	}
+	STDMETHOD( Initialize(IModule* UpperFrame=NULL){return S_OK;} );
+	STDMETHOD( UnInitialize(){return S_OK;} );
+	STDMETHOD( Run(){return S_OK;} );
+	STDMETHOD( Terminate(){return S_OK;} );
+protected:
+	FrameModule	m_moduleType;
 };
 
-#define Begin_XMessage(_class)	BOOL _class::ProcessXMessage(XMessage* pmsg){
+#define Begin_XMessage(_class)	virtual VOID _class::ProcessXMessage(XMessage* pmsg){
 #define OnXMessage(_msg,_proc)	if(pmsg->msgID==_msg) \
 { \
-	if(_proc(pmsg)) \
-		return TRUE; \
+	_proc(pmsg); \
+	if(pmsg->IsProcessed()) \
+		return; \
 }else
-#define OnUIXMessage(_uiid,_msg,_proc)	if(_uiid==pmsg->uiID && pmsg->msgID==_msg) \
-{ \
-	if(_proc(pmsg)) \
-	return TRUE; \
-}else
-#define Chain_XMessage(_class)	{}{BOOL bRet = _class::ProcessXMessage(pmsg);if(bRet)return bRet;}
-#define End_XMessage()			{}return FALSE;}
+#define Chain_XMessage(_class)	{}{_class::ProcessXMessage(pmsg);if(pmsg->IsProcessed())return;}
+#define End_XMessage()			{}}
 
 //////////////////////////////////////////////////////////////////////////
 // Messages
@@ -63,3 +104,7 @@ struct XMessage_Login_Result : public XMessage
 	DWORD	userToken;
 	BYTE	guid[16];
 };
+
+#define XMessageID_ShowLogin	_T("ShowLogin")
+struct XMessage_ShowLogin : public XMessage
+{};

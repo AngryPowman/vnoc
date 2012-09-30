@@ -2,53 +2,44 @@
 #include "../Base/IModule.h"
 #include "ResDefine.h"
 
-typedef DWORD BkWin_UIID;
-
 enum FrameModule
 {
 	module_Invalid=-1,
+	module_FrameWork=0,
+	module_Any,
 
-	module_ViewBegin,
+	module_ViewBegin=256,
 	module_LoginWin,
+	module_RoomListWin,
 	module_ViewEnd,
 
-	module_DataBegin,
+	module_DataBegin=65536,
 	module_LoginData,
+	module_RoomListData,
 	module_DataEnd
 };
 
-struct XMessage : public IRefCountImpl
-{
-	XMessage(LPCTSTR msgID):msgID(msgID){}
-	CString		msgID;
-	BkWin_UIID	uiID;
-	FrameModule	module;
+struct XMessage;
 
-	HRESULT	result;
-};
-
-interface IFrameAdapter
+interface IFrameModule : public IModule
 {
 public:
-	// 返回TRUE则表明消息不需要再往其它actor传递了。
-	virtual BOOL ProcessXMessage(XMessage* pMsg) = 0;
+	virtual FrameModule GetModuleType() = 0;
+	virtual VOID SendXMessage(XMessage* msg) = 0;
+	virtual VOID ProcessXMessage(XMessage* pMsg) = 0;
 };
 
-interface IFrameWork : public IModule
+interface IFrameWork : public IModule,public IRefCountImpl
 {
 public:
 	// 注册模块。
-	STDMETHOD( RegisterModule	(IModule* iModule,FrameModule module) = 0 );
+	STDMETHOD( RegisterModule	(IFrameModule* iModule) = 0 );
 	// 获取模块
-	STDMETHOD( GetModule		(IModule** piModule,FrameModule module) = 0 );
+	STDMETHOD( GetModule		(IFrameModule** piModule,FrameModule module) = 0 );
 	// 删除模块
-	STDMETHOD( RemoveModule		(IModule* iModule) = 0);
+	STDMETHOD( RemoveModule		(IFrameModule* iModule) = 0);
 	//
 	STDMETHOD( SendXMessage		(XMessage* msg) = 0);
-	//
-	STDMETHOD( AddActor			(IFrameAdapter* actor) = 0 );
-	//
-	STDMETHOD( RemoveActor		(IFrameAdapter* actor) = 0 );
 };
 
 template<class retType>

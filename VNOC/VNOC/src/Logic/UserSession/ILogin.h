@@ -1,12 +1,6 @@
 #pragma once
 #include "../../Base/IModule.h"
 
-interface ILoginUI : public IModule
-{
-	STDMETHOD( SetAccount(LPCTSTR username) = 0);
-	STDMETHOD( OnLoginResult(BOOL success) = 0);
-};
-
 interface ILogin : public IModule
 {
 public:

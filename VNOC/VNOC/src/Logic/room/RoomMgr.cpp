@@ -2,7 +2,7 @@
 #include "RoomMgr.h"
 #include "../../FrameWork/Dialogs/BKWinRoomList.h"
 
-CRoomMgr::CRoomMgr()
+CRoomMgr::CRoomMgr() : CFrameBase(module_RoomListData)
 {
 
 }

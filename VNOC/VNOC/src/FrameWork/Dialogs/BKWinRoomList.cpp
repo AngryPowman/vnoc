@@ -9,9 +9,8 @@ BEGIN_MSG_MAP_EX_IMP(CRoomListWnd)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP();
 
-CRoomListWnd::CRoomListWnd() : CBkDialogImpl(BKDlg_RoomListWin)
+CRoomListWnd::CRoomListWnd() : CBkDialogImpl(BKDlg_RoomListWin),CFrameBase(module_RoomListWin)
 {
-
 }
 
 void CRoomListWnd::OnBkBtnClose()

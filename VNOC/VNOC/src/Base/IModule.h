@@ -1,7 +1,7 @@
 #pragma once
 #include "IRefCountImpl.h"
 
-interface IModule : public IRefCountImpl
+interface IModule
 {
 public:
 	// UpperFrame提供了上层的接口，比如子模块会收到Frame模块的接口。请使用GetiModule而非QueryInterface来转换。
