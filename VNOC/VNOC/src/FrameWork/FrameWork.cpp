@@ -15,10 +15,11 @@ CFrameWork::~CFrameWork()
 HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
 	m_loginModule = new CLoginImpl;
-	m_loginModule->AddRef();
 	m_loginModule->Initialize(this);
-	m_loginModule->Run();
-	RegisterModule(m_loginModule,module_LoginWin);
+	RegisterModule(m_loginModule);
+	m_roomMgr = new CRoomMgr;
+	m_roomMgr->Initialize(this);
+	RegisterModule(m_roomMgr);
 
 	BkFontPool::SetDefaultFont(_T("Courier New"), -12);
 	BkSkin::LoadSkins(IDR_XML_SKIN_DEF);
@@ -35,14 +36,16 @@ HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 
 HRESULT CFrameWork::UnInitialize()
 {
-	m_loginModule->UnInitialize();
-	m_loginModule->Release();
+	_ClearModule();
+	delete m_loginModule;
+	delete m_roomMgr;
 	return S_OK;
 }
 
 HRESULT CFrameWork::Run()
 {
-	m_loginModule->Show(SW_SHOW);
+	XMessage msgFirstShow(XMessageID_ShowLogin);
+	SendXMessage(&msgFirstShow);
 	return S_OK;
 }
 
@@ -51,22 +54,24 @@ HRESULT CFrameWork::Terminate()
 	return S_OK;
 }
 
-HRESULT CFrameWork::RegisterModule( IModule* iModule,FrameModule module )
+HRESULT CFrameWork::RegisterModule( IFrameModule* iModule )
 {
+	FrameModule module;
+	module = iModule->GetModuleType();
+	ATLASSERT(module != module_Invalid);
 	Util::CAutoCS ac(m_mapcs);
 	m_map[module] = iModule;
 	return S_OK;
 }
 
-HRESULT CFrameWork::GetModule( IModule** piModule,FrameModule module )
+HRESULT CFrameWork::GetModule( IFrameModule** piModule,FrameModule module )
 {
 	Util::CAutoCS ac(m_mapcs);
 	if (piModule == NULL)
 	{
-		//
 		return E_INVALIDARG;
 	}
-	IModule* var = _FindModule(module);
+	IFrameModule* var = _FindModule(module);
 	if (var)
 	{
 		*piModule = var;
@@ -75,7 +80,7 @@ HRESULT CFrameWork::GetModule( IModule** piModule,FrameModule module )
 	return E_FAIL;
 }
 
-HRESULT CFrameWork::RemoveModule( IModule* iModule )
+HRESULT CFrameWork::RemoveModule( IFrameModule* iModule )
 {
 	Util::CAutoCS ac(m_mapcs);
 
@@ -91,7 +96,7 @@ HRESULT CFrameWork::RemoveModule( IModule* iModule )
 	return S_OK;
 }
 
-IModule* CFrameWork::_FindModule( FrameModule module )
+IFrameModule* CFrameWork::_FindModule( FrameModule module )
 {
 	Util::CAutoCS ac(m_mapcs);
 	auto i = m_map.find(module);
@@ -104,42 +109,39 @@ IModule* CFrameWork::_FindModule( FrameModule module )
 
 HRESULT CFrameWork::SendXMessage( XMessage* pMsg )
 {
-	Util::CAutoCS ac(m_listcs);
-	auto i = m_actorList.begin();
-	while (i != m_actorList.end())
-	{
-		BOOL bRet = (*i)->ProcessXMessage(pMsg);
-		if (bRet)
+	Util::CAutoCS ac(m_mapcs);
+	if (pMsg->destModule == module_Any)
+	{ // broadcast
+		for (auto i=m_map.begin(); i!=m_map.end() && !pMsg->IsProcessed(); ++i)
 		{
-			i = m_actorList.end();
+			i->second->ProcessXMessage(pMsg);
+		}
+	}
+	else
+	{
+		auto i = m_map.find(pMsg->destModule);
+		if (i != m_map.end())
+		{
+			i->second->ProcessXMessage(pMsg);
 		}
 		else
 		{
-			++i;
+			return S_FALSE;
 		}
 	}
 	return S_OK;
 }
 
-HRESULT CFrameWork::AddActor( IFrameAdapter* actor )
+VOID CFrameWork::_ClearModule()
 {
-	Util::CAutoCS ac(m_listcs);
-	auto i = m_actorList.begin();
-	while (i != m_actorList.end())
+	for (auto i=m_map.begin(); i!=m_map.end(); ++i)
 	{
-		if (*i == actor)
+		IFrameModule* pModule = i->second;
+		if (pModule)
 		{
-			return S_OK;
+			pModule->Terminate();
+			pModule->UnInitialize();
 		}
-		++i;
 	}
-	m_actorList.push_front(actor);
-	return S_OK;
 }
 
-HRESULT CFrameWork::RemoveActor( IFrameAdapter* actor )
-{
-	Util::CAutoCS ac(m_listcs);
-	m_actorList.remove(actor);
-	return S_OK;
-}

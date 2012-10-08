@@ -19,6 +19,7 @@ CGlobalCenter::~CGlobalCenter(void)
 
 HRESULT CGlobalCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
+	setlocale(LC_ALL,"chs");
 	_InitializeLog();		// 所有地方都依赖log，所以当最先初始化
 	_InitializeConfig();
 	_InitializeNetCenter();
@@ -37,6 +38,7 @@ HRESULT CGlobalCenter::UnInitialize()
 
 HRESULT CGlobalCenter::Run()
 {
+	m_pFrameWork->Run();
 	return S_OK;
 }
 
@@ -61,6 +63,7 @@ void CGlobalCenter::_InitializeConfig()
 	m_configFilePath = m_configFilePath.Left(nPos);
 
 	m_config.Initialize(NULL);
+	m_config.Run();
 	m_configFilePath += PathSplit;
 	m_configFilePath += CONFIGXMLFILE;
 	Global->Logf(LogFile_General,_T("配置XML的路径为:%s\n"),m_configFilePath);

@@ -7,6 +7,8 @@ class CLoginWnd:public CBkDialogImpl<CLoginWnd>
 	,public CFrameBase
 {
 public:
+	CLoginWnd();
+public:
 	void	OnBkBtnClose();
 	void	OnLoginClick();
 	BOOL	OnLoginResult(XMessage* pMsg);

@@ -1,0 +1,12 @@
+﻿<layer width="600" height="400" appwin="1">
+	<header class="msgboxhead" width="full" height="31">
+		<icon src="101" pos="5,7"/>
+		<text class="dlgtitle" pos="28,10">房间列表</text>
+		<imgbtn id="10001" class="linkimage" skin="closeonlybtn" pos="-43,0"/>
+	</header>
+	<footer class="msgboxfoot" width="full" height="55">
+	</footer>
+	<body class="msgboxbody" width="full" height="full">
+		<list pos="10,10" width="300" height="300" />
+	</body>
+</layer>

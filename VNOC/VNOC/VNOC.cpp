@@ -27,15 +27,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	::CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
 	Global->Initialize();
 
-	CComPtr<IFrameWork> pFrame;
-	Global->GetIFrameModule(&pFrame);
-	if (pFrame)
-	{
-		pFrame->Run();
-	}
 	Global->Run();
 
 	Global->UnInitialize();
 	::CoUninitialize();
+	_Module.Term();
 	return 0;
 }

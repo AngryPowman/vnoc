@@ -242,7 +242,6 @@
   <ItemGroup>
     <None Include="bkwinres.rc2" />
     <None Include="config\config.xml" />
-    <None Include="res\autoopt_done.png" />
     <None Include="res\beikesafe.ico" />
     <None Include="res\btn_sys_close.bmp" />
     <None Include="res\btn_sys_close.png" />
@@ -257,7 +256,6 @@
     <None Include="res\clear_bk.bmp" />
     <None Include="res\clear_panel.bmp" />
     <None Include="res\def_skin.xml" />
-    <None Include="res\def_skin.xml.bak" />
     <None Include="res\def_string.xml" />
     <None Include="res\def_style.xml" />
     <None Include="res\dlgfile_foot.xml" />
@@ -267,7 +265,6 @@
     <None Include="res\dlgfile_opt.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="res\dlgfile_opt.xml.bak" />
     <None Include="res\dlg_main.xml">
       <SubType>Designer</SubType>
     </None>
@@ -293,12 +290,7 @@
     <None Include="res\loading_runopt.png" />
     <None Include="res\msgbox_bg.bmp" />
     <None Include="res\msgbox_body_bg.bmp" />
-    <None Include="res\no_runtask.png" />
-    <None Include="res\regedit.ico" />
     <None Include="res\runopt_listheader.bmp" />
-    <None Include="res\run_remain.ico" />
-    <None Include="res\run_system.ico" />
-    <None Include="res\run_unknown.ico" />
     <None Include="res\scan_result_list_bar.bmp" />
     <None Include="res\small.ico" />
     <None Include="res\startuptime_setting.png" />
@@ -307,7 +299,6 @@
     <None Include="res\status_icon.png" />
     <None Include="res\stat_runopt.bmp" />
     <None Include="res\sysopt_listbk.bmp" />
-    <None Include="res\sysopt_more.bmp" />
     <None Include="res\tab_left.bmp" />
     <None Include="res\tab_left_splitter.bmp" />
     <None Include="res\tab_normal.bmp" />
@@ -381,8 +372,7 @@
     <ClInclude Include="src\config\ConfigDefine.h" />
     <ClInclude Include="src\config\IConfig.h" />
     <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h" />
-    <ClInclude Include="src\FrameWork\Dialogs\ILogin.h" />
-    <ClInclude Include="src\FrameWork\Dialogs\LoginImpl.h" />
+    <ClInclude Include="src\FrameWork\Dialogs\BKWinRoomList.h" />
     <ClInclude Include="src\FrameWork\FrameWork.h" />
     <ClInclude Include="src\FrameWork\IFrameWork.h" />
     <ClInclude Include="src\FrameWork\ResDefine.h" />
@@ -390,15 +380,17 @@
     <ClInclude Include="src\Global\GlobalCenter.h" />
     <ClInclude Include="src\Global\GlobalDefine.h" />
     <ClInclude Include="src\Global\IGlobal.h" />
+    <ClInclude Include="src\Logic\room\IRoomMgr.h" />
+    <ClInclude Include="src\Logic\room\Room.h" />
+    <ClInclude Include="src\Logic\room\RoomMgr.h" />
+    <ClInclude Include="src\Logic\UserSession\ILogin.h" />
+    <ClInclude Include="src\Logic\UserSession\LoginImpl.h" />
     <ClInclude Include="src\net\INet.h" />
     <ClInclude Include="src\net\Net.h" />
     <ClInclude Include="src\net\Socket\AsyncSocketEx.h" />
     <ClInclude Include="src\net\Socket\ISocket.h" />
     <ClInclude Include="src\net\Socket\SockWnd.h" />
     <ClInclude Include="src\net\Socket\VNOCSocket.h" />
-    <ClInclude Include="src\room\IRoomMgr.h" />
-    <ClInclude Include="src\room\room.h" />
-    <ClInclude Include="src\room\roomMgr.h" />
     <ClInclude Include="src\util\bind.hpp" />
     <ClInclude Include="src\util\BLog.h" />
     <ClInclude Include="src\util\CBuffer.h" />
@@ -473,10 +465,13 @@
     </ClCompile>
     <ClCompile Include="src\config\Config.cpp" />
     <ClCompile Include="src\FrameWork\Dialogs\BKWinLogin.cpp" />
-    <ClCompile Include="src\FrameWork\Dialogs\LoginImpl.cpp" />
+    <ClCompile Include="src\FrameWork\Dialogs\BKWinRoomList.cpp" />
     <ClCompile Include="src\FrameWork\FrameWork.cpp" />
     <ClCompile Include="src\Global\GlobalCenter.cpp" />
     <ClCompile Include="src\Global\GlobalLog.cpp" />
+    <ClCompile Include="src\Logic\room\Room.cpp" />
+    <ClCompile Include="src\Logic\room\RoomMgr.cpp" />
+    <ClCompile Include="src\Logic\UserSession\LoginImpl.cpp" />
     <ClCompile Include="src\net\Net.cpp" />
     <ClCompile Include="src\net\Socket\AsyncSocketEx.cpp" />
     <ClCompile Include="src\net\Socket\SockWnd.cpp">
@@ -495,8 +490,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\room\room.cpp" />
-    <ClCompile Include="src\room\roomMgr.cpp" />
     <ClCompile Include="src\util\BLog.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|x64'">NotUsing</PrecompiledHeader>
@@ -558,9 +551,6 @@
   <ItemGroup>
     <ResourceCompile Include="src\BKWin\bkres\bkres.rc" />
     <ResourceCompile Include="VNOC.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="res\beikesafe.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

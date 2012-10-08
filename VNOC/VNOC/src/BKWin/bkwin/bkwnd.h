@@ -85,7 +85,7 @@ public:
     {
 		::EnterCriticalSection(&ms_lockWndMap);
 
-        const _BkWndHandlePool::CPair *pairRet = _Instance()->m_mapPool.Lookup(hBkWnd);
+        const _BkWndHandlePool::CPair *pairRet = _Instance().m_mapPool.Lookup(hBkWnd);
 
 		::LeaveCriticalSection(&ms_lockWndMap);
 
@@ -112,8 +112,8 @@ public:
 
 			::EnterCriticalSection(&ms_lockWndMap);
 
-            HBKWND hBkWndNext = ++ _Instance()->m_hNextWnd;
-            _Instance()->m_mapPool[hBkWndNext] = pBkWnd;
+            HBKWND hBkWndNext = ++ _Instance().m_hNextWnd;
+            _Instance().m_mapPool[hBkWndNext] = pBkWnd;
 
 			::LeaveCriticalSection(&ms_lockWndMap);
 
@@ -131,7 +131,7 @@ public:
 
 		::EnterCriticalSection(&ms_lockWndMap);
 
-		BOOL bRet = (BOOL)_Instance()->m_mapPool.RemoveKey(hBkWnd);
+		BOOL bRet = (BOOL)_Instance().m_mapPool.RemoveKey(hBkWnd);
 
 		::LeaveCriticalSection(&ms_lockWndMap);
 
@@ -142,7 +142,7 @@ public:
     {
 		::EnterCriticalSection(&ms_lockWndMap);
 
-		size_t nRet = _Instance()->m_mapPool.GetCount();
+		size_t nRet = _Instance().m_mapPool.GetCount();
 
 		::LeaveCriticalSection(&ms_lockWndMap);
 
@@ -153,7 +153,7 @@ public:
     {
 		::EnterCriticalSection(&ms_lockWndMap);
 
-        POSITION pos = _Instance()->m_mapRadioPool[lpszGroupName].AddTail(pbkWnd);
+        POSITION pos = _Instance().m_mapRadioPool[lpszGroupName].AddTail(pbkWnd);
 
 		::LeaveCriticalSection(&ms_lockWndMap);
 
@@ -164,7 +164,7 @@ public:
     {
 		::EnterCriticalSection(&ms_lockWndMap);
 
-        CAtlList<CBkWindow *> &ListGroup = _Instance()->m_mapRadioPool[lpszGroupName];
+        CAtlList<CBkWindow *> &ListGroup = _Instance().m_mapRadioPool[lpszGroupName];
 
         POSITION posCurrent = NULL, pos = ListGroup.GetHeadPosition();
 
@@ -184,7 +184,7 @@ public:
 
     static void SelectRadio(CBkWindow* pbkWnd, LPCSTR lpszGroupName, CBkWindow **ppbkWndLastSelect);
 //     {
-//         CAtlList<CBkWindow *> &ListGroup = _Instance()->m_mapRadioPool[lpszGroupName];
+//         CAtlList<CBkWindow *> &ListGroup = _Instance().m_mapRadioPool[lpszGroupName];
 // 
 //         pbkWnd->ModifyState(BkWndState_Check, 0);
 // 
@@ -209,14 +209,12 @@ public:
 
 protected:
 
-    static BkWnds* ms_pInstance;
+    static BkWnds ms_instance;
 	static CRITICAL_SECTION ms_lockWndMap;
 
-    static BkWnds* _Instance()
+    static BkWnds& _Instance()
     {
-        if (!ms_pInstance)
-            ms_pInstance = new BkWnds;
-        return ms_pInstance;
+        return ms_instance;
     }
 
 //     static BkWnds& _Instance()
@@ -233,7 +231,7 @@ protected:
     HBKWND m_hNextWnd;
 };
 
-__declspec(selectany) BkWnds* BkWnds::ms_pInstance = NULL;
+__declspec(selectany) BkWnds BkWnds::ms_instance;
 __declspec(selectany) CRITICAL_SECTION BkWnds::ms_lockWndMap;
 
 //////////////////////////////////////////////////////////////////////////
@@ -1187,11 +1185,11 @@ inline CBkWindow* BkWnds::GetWindow(UINT uCmdID, HWND hWndInContainer/* = NULL*/
 
 	::EnterCriticalSection(&ms_lockWndMap);
 
-    POSITION pos = _Instance()->m_mapPool.GetStartPosition();
+    POSITION pos = _Instance().m_mapPool.GetStartPosition();
 
     while (pos)
     {
-        const _BkWndHandlePool::CPair *pairRet = _Instance()->m_mapPool.GetNext(pos);
+        const _BkWndHandlePool::CPair *pairRet = _Instance().m_mapPool.GetNext(pos);
 
         if (pairRet->m_value->GetCmdID() == uCmdID)
         {
@@ -1213,7 +1211,7 @@ inline void BkWnds::SelectRadio(CBkWindow* pbkWnd, LPCSTR lpszGroupName, CBkWind
 {
 	::EnterCriticalSection(&ms_lockWndMap);
 
-    CAtlList<CBkWindow *> &ListGroup = _Instance()->m_mapRadioPool[lpszGroupName];
+    CAtlList<CBkWindow *> &ListGroup = _Instance().m_mapRadioPool[lpszGroupName];
 
     pbkWnd->ModifyState(BkWndState_Check, 0);
 

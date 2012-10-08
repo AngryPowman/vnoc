@@ -23,10 +23,6 @@ DEFINE_XML(IDR_BK_MORE_BKWIN,							600, 					"res\\dlg_more_bkwin.xml")
 
 DEFINE_ICO(IDI_BEIKESAFE,                  	 			100, 					"res\\beikesafe.ico")
 DEFINE_ICO(IDI_SMALL,                      	 			101, 					"res\\small.ico")
-DEFINE_ICO(IDI_RUN_SYSTEM,                 	 			102, 					"res\\run_system.ico")
-DEFINE_ICO(IDI_RUN_UNKNOWN,                	 			103, 					"res\\run_unknown.ico")
-DEFINE_ICO(IDI_REGEDIT,                    	 			104, 					"res\\regedit.ico")
-DEFINE_ICO(IDI_RUN_REMAIN,								105,					"res\\run_remain.ico")
 
 //////////////////////////////////////////////////////////////////////////
 // PNG 
@@ -61,11 +57,8 @@ DEFINE_BMP(IDB_SYSOPT_LIST_HEADERBK,		8035,	"res\\sysopt_listbk.bmp")
 DEFINE_BMP(IDB_LOADINFO_DLGBK,				8036,	"res\\loadinfo_dlgbk.bmp")
 
 // Ìí¼Ó
-DEFINE_PNG(IDP_AUTOPOT_BMP_NOITEM,						20005,					"res\\autoopt_done.png")
-DEFINE_PNG(IDP_RUNOPT_NO_RUNTASK,						20006,					"res\\no_runtask.png")
 DEFINE_BMP(IDB_RUNOPT_STATUS,							20007,					"res\\stat_runopt.bmp")
 DEFINE_PNG(IDP_RUNOPT_LOADING_TIP,						20008,					"res\\loading_runopt.png")
-DEFINE_BMP(IDB_RUNOPT_MOREOPT,							20009,					"res\\sysopt_more.bmp")
 DEFINE_BMP(IDB_RUNOPT_LIST_HEADER,						20010,					"res\\runopt_listheader.bmp")
 DEFINE_BMP(IDB_RUNOPT_PANEL_DELAY,						20011,					"res\\loaddlg_panel.bmp")
 DEFINE_PNG(IDP_RUNOPT_STARTUPTIME_SETTING,				20012,					"res\\startuptime_setting.png")

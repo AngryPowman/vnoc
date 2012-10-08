@@ -1,5 +1,5 @@
 #pragma once
-#include "../Base/IModule.h"
+#include "../../Base/IModule.h"
 #include "room.h"
 #include <list>
 
@@ -11,6 +11,7 @@ typedef std::list<RoomID> RoomList;
 interface IRoomMgr : public IModule
 {
 public:
+	STDMETHOD( Show(BOOL bShow=TRUE) = 0 );
 	// 创建房间
 	STDMETHOD( CreateRoom(RoomID& id) = 0 );
 	STDMETHOD( GetRoom(RoomID id,CRoomBase* room) = 0 );

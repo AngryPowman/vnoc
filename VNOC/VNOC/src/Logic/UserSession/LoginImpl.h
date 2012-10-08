@@ -1,12 +1,13 @@
 #pragma once
 #include "ILogin.h"
-#include "../FrameBase.hpp"
+#include "../../FrameWork/FrameBase.hpp"
 #include "../../net/INet.h"
 
 class CLoginImpl
 	: public ILogin
 	, public CFrameBase
 	, public INetListener
+	, public IRefCountImpl
 {
 public:
 	CLoginImpl(void);
@@ -24,7 +25,8 @@ public:
 
 	STDMETHOD( OnNetMessage(const CMessage& msg));
 protected:
-	BOOL OnLogin(XMessage* pMsg);
+	VOID OnLogin(XMessage* pMsg);
+	VOID OnShowWnd(XMessage* pMsg);
 
 private:
 	IFrameWork* m_frame;
@@ -32,6 +34,7 @@ private:
 public:
 	Begin_XMessage(CLoginImpl)
 		OnXMessage(XMessageID_Login,OnLogin)
+		OnXMessage(XMessageID_ShowLogin,OnShowWnd)
 	End_XMessage()
 };
 

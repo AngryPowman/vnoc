@@ -1,9 +1,11 @@
 #pragma once
 #include "IFrameWork.h"
-#include "Dialogs/LoginImpl.h"
 #include <atlsync.h>
 #include <map>
 #include <list>
+
+#include "../Logic/UserSession/LoginImpl.h"
+#include "../Logic/room/RoomMgr.h"
 
 class CFrameWork : public IFrameWork
 {
@@ -15,20 +17,18 @@ public:
 	STDMETHOD( UnInitialize() );
 	STDMETHOD( Run() );
 	STDMETHOD( Terminate() );
-	STDMETHOD( RegisterModule	(IModule* iModule,FrameModule module) );
-	STDMETHOD( GetModule		(IModule** piModule,FrameModule module) );
-	STDMETHOD( RemoveModule		(IModule* iModule) );
+	STDMETHOD( RegisterModule	(IFrameModule* iModule) );
+	STDMETHOD( GetModule		(IFrameModule** piModule,FrameModule module) );
+	STDMETHOD( RemoveModule		(IFrameModule* iModule) );
 	STDMETHOD( SendXMessage		(XMessage* pMsg) );
-	STDMETHOD( AddActor			(IFrameAdapter* actor));
-	STDMETHOD( RemoveActor		(IFrameAdapter* actor));
 private:
-	IModule* _FindModule(FrameModule module);
+	IFrameModule* _FindModule(FrameModule module);
+	VOID _ClearModule();
 private:
-	typedef std::map<FrameModule,IModule*>	ModuleMap;
+	typedef std::map<FrameModule,IFrameModule*>	ModuleMap;
 	ModuleMap m_map;
 	ATL::CCriticalSection		m_mapcs;
-	std::list<IFrameAdapter*>	m_actorList;
-	ATL::CCriticalSection		m_listcs;
 
 	CLoginImpl*	m_loginModule;
+	CRoomMgr*	m_roomMgr;
 };
