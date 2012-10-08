@@ -14,12 +14,7 @@ CFrameWork::~CFrameWork()
 
 HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
-	m_loginModule = new CLoginImpl;
-	m_loginModule->Initialize(this);
-	RegisterModule(m_loginModule);
-	m_roomMgr = new CRoomMgr;
-	m_roomMgr->Initialize(this);
-	RegisterModule(m_roomMgr);
+	_LoadModule();
 
 	BkFontPool::SetDefaultFont(_T("Courier New"), -12);
 	BkSkin::LoadSkins(IDR_XML_SKIN_DEF);
@@ -37,8 +32,6 @@ HRESULT CFrameWork::Initialize( IModule* UpperFrame/*=NULL*/ )
 HRESULT CFrameWork::UnInitialize()
 {
 	_ClearModule();
-	delete m_loginModule;
-	delete m_roomMgr;
 	return S_OK;
 }
 
@@ -84,15 +77,21 @@ HRESULT CFrameWork::RemoveModule( IFrameModule* iModule )
 {
 	Util::CAutoCS ac(m_mapcs);
 
-	for (auto i=m_map.begin(); i!=m_map.end(); ++i)
+	for (auto i=m_map.begin(); i!=m_map.end();)
 	{
-		if (i->second == iModule)
+		if (!iModule || (i->second==iModule))
 		{
-			m_map.erase(i);
-			return S_OK;
+			if (i->second)
+			{
+				delete i->second;
+			}
+			i = m_map.erase(i);
+		}
+		else
+		{
+			++i;
 		}
 	}
-	ATLASSERT(FALSE && "删除不存在的模块");
 	return S_OK;
 }
 
@@ -134,14 +133,27 @@ HRESULT CFrameWork::SendXMessage( XMessage* pMsg )
 
 VOID CFrameWork::_ClearModule()
 {
-	for (auto i=m_map.begin(); i!=m_map.end(); ++i)
+	RemoveModule(NULL);
+}
+
+VOID CFrameWork::_LoadModule()
+{
+	IFrameModule *pModule=NULL;
+	CFrameModuleFactory::CreateFrameModule(module_LoginData,&pModule);
+	if (pModule)
 	{
-		IFrameModule* pModule = i->second;
-		if (pModule)
-		{
-			pModule->Terminate();
-			pModule->UnInitialize();
-		}
+		pModule->Initialize(this);
+		pModule->Run();
+		RegisterModule(pModule);
+		pModule=NULL;
+	}
+	CFrameModuleFactory::CreateFrameModule(module_LoginWin,&pModule);
+	if (pModule)
+	{
+		pModule->Initialize(this);
+		pModule->Run();
+		RegisterModule(pModule);
+		pModule=NULL;
 	}
 }
 

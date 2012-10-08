@@ -17,6 +17,7 @@ protected:
 	VOID	Disable();
 	VOID	Enable();
 	VOID	OnTimer(UINT_PTR id);
+	VOID	OnShowWnd(XMessage* pmsg);
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
@@ -27,6 +28,7 @@ public:
 	BEGIN_MSG_MAP_EX_DECLARE(CLoginWnd)
 
 	Begin_XMessage(CLoginWnd)
+		OnXMessage(XMessageID_ShowLogin,OnShowWnd)
 		OnXMessage(XMessageID_Login_Result,OnLoginResult);
 	End_XMessage()
 };

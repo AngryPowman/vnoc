@@ -88,7 +88,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -96,7 +95,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -115,7 +113,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_VLD;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -373,6 +371,7 @@
     <ClInclude Include="src\config\IConfig.h" />
     <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h" />
     <ClInclude Include="src\FrameWork\Dialogs\BKWinRoomList.h" />
+    <ClInclude Include="src\FrameWork\FrameModuleFactory.h" />
     <ClInclude Include="src\FrameWork\FrameWork.h" />
     <ClInclude Include="src\FrameWork\IFrameWork.h" />
     <ClInclude Include="src\FrameWork\ResDefine.h" />

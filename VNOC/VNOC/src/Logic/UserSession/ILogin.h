@@ -4,7 +4,6 @@
 interface ILogin : public IModule
 {
 public:
-	STDMETHOD( Show(BOOL bShow=TRUE) = 0 );
 	// 指定要显示的登陆的账户
 	STDMETHOD( SetAccount(LPCTSTR userName) = 0);
 	// 当前登陆情况。如果没有用户登陆，username将是空
