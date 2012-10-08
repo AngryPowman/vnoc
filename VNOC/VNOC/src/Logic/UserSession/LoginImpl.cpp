@@ -90,7 +90,7 @@ HRESULT CLoginImpl::OnNetMessage( const CMessage& msg )
 		if (msgReal)
 		{
 			XMessage_Login_Result loginResult;
-			loginResult.success = msgReal->GetLoginResult()?TRUE:FALSE;
+			loginResult.success = msgReal->GetLoginResult()?FALSE:TRUE;
 			loginResult.userToken = msgReal->GetToken();
 			BYTE* pGuid = msgReal->GetATLGUID();
 			if (pGuid && 
