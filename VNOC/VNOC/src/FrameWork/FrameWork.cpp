@@ -54,6 +54,7 @@ HRESULT CFrameWork::RegisterModule( IFrameModule* iModule )
 	ATLASSERT(module != module_Invalid);
 	Util::CAutoCS ac(m_mapcs);
 	m_map[module] = iModule;
+	iModule->AddRef();
 	return S_OK;
 }
 
@@ -83,7 +84,7 @@ HRESULT CFrameWork::RemoveModule( IFrameModule* iModule )
 		{
 			if (i->second)
 			{
-				delete i->second;
+				i->second->Release();
 			}
 			i = m_map.erase(i);
 		}
