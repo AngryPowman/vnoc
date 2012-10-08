@@ -37,19 +37,9 @@ public:
 	CFrameBase(FrameModule module)
 		: m_moduleType(module)
 	{
-		CComPtr<IFrameWork> pFrameWork;
-		Global->GetIFrameModule(&pFrameWork);
-		Global->PtrAssert(pFrameWork);
-		pFrameWork->RegisterModule(this);
 	}
 	virtual ~CFrameBase()
 	{
-		CComPtr<IFrameWork> pFrameWork;
-		Global->GetIFrameModule(&pFrameWork);
-		if (pFrameWork)
-		{
-			pFrameWork->RemoveModule(this);
-		}
 	}
 	VOID SendXMessage(XMessage* msg)
 	{

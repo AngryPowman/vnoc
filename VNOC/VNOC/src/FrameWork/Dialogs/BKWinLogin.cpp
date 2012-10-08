@@ -109,3 +109,8 @@ VOID CLoginWnd::OnTimer( UINT_PTR id )
 	MessageBox(_T("µÇÂ½³¬Ê±"));
 	Enable();
 }
+
+VOID CLoginWnd::OnShowWnd( XMessage* pmsg )
+{
+	DoModal();
+}

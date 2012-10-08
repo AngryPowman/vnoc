@@ -7,7 +7,6 @@ class CLoginImpl
 	: public ILogin
 	, public CFrameBase
 	, public INetListener
-	, public IRefCountImpl
 {
 public:
 	CLoginImpl(void);
@@ -17,7 +16,6 @@ public:
 	STDMETHOD( UnInitialize() );
 	STDMETHOD( Run() );
 	STDMETHOD( Terminate() );
-	STDMETHOD( Show(BOOL bShow=TRUE) );
 	STDMETHOD( SetAccount(LPCTSTR userName) );
 	STDMETHOD( Login(LPCTSTR username,LPCTSTR pwd) );
 	STDMETHOD( GetCurrentUser(CString& userName,CString& cookie) );
@@ -26,7 +24,6 @@ public:
 	STDMETHOD( OnNetMessage(const CMessage& msg));
 protected:
 	VOID OnLogin(XMessage* pMsg);
-	VOID OnShowWnd(XMessage* pMsg);
 
 private:
 	IFrameWork* m_frame;
@@ -34,7 +31,6 @@ private:
 public:
 	Begin_XMessage(CLoginImpl)
 		OnXMessage(XMessageID_Login,OnLogin)
-		OnXMessage(XMessageID_ShowLogin,OnShowWnd)
 	End_XMessage()
 };
 

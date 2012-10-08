@@ -3,8 +3,6 @@
 #include "../../FrameWork/Dialogs/BKWinLogin.h"
 #include "../../FrameWork/Dialogs/BKWinRoomList.h"
 
-#include "../../../../../VisualLeakDetector/include/vld.h"
-
 CLoginImpl::CLoginImpl(void) : CFrameBase(module_LoginData)
 {
 	m_frame = NULL;
@@ -24,20 +22,6 @@ HRESULT CLoginImpl::Run()
 HRESULT CLoginImpl::Terminate()
 {
 	netHelper.StopListen();
-	return S_OK;
-}
-
-HRESULT CLoginImpl::Show( BOOL bShow/*=TRUE*/ )
-{
-	UINT count=0;
-		count = VLDGetLeaksCount();
-	if (bShow)
-	{
-		//CRoomListWnd wnd;
-		CLoginWnd wnd;
-		wnd.DoModal();
-	}
-	count = VLDGetLeaksCount();
 	return S_OK;
 }
 
@@ -119,10 +103,5 @@ HRESULT CLoginImpl::OnNetMessage( const CMessage& msg )
 		break;
 	}
 	return S_OK;
-}
-
-VOID CLoginImpl::OnShowWnd( XMessage* pMsg )
-{
-	Show();
 }
 
