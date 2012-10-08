@@ -84,6 +84,8 @@ HRESULT CFrameWork::RemoveModule( IFrameModule* iModule )
 		{
 			if (i->second)
 			{
+				i->second->Terminate();
+				i->second->UnInitialize();
 				i->second->Release();
 			}
 			i = m_map.erase(i);
@@ -149,6 +151,22 @@ VOID CFrameWork::_LoadModule()
 		pModule=NULL;
 	}
 	CFrameModuleFactory::CreateFrameModule(module_LoginWin,&pModule);
+	if (pModule)
+	{
+		pModule->Initialize(this);
+		pModule->Run();
+		RegisterModule(pModule);
+		pModule=NULL;
+	}
+	CFrameModuleFactory::CreateFrameModule(module_RoomListData,&pModule);
+	if (pModule)
+	{
+		pModule->Initialize(this);
+		pModule->Run();
+		RegisterModule(pModule);
+		pModule=NULL;
+	}
+	CFrameModuleFactory::CreateFrameModule(module_RoomListWin,&pModule);
 	if (pModule)
 	{
 		pModule->Initialize(this);
