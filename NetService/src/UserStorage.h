@@ -1,5 +1,6 @@
 #pragma once
 #include "UserInfo.hpp"
+#include <string.h>
 
 
 
