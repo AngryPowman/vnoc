@@ -3,6 +3,7 @@
 #include "UserInfo.hpp"
 #include "UserStorage.h"
 #include <string>
+#include <string.h>
 #define NULLPOINT			-1
 #define LOGIN_OK			1
 #define TEST_FALSE			2
@@ -45,7 +46,7 @@ public:
 			++i;
 		} while (i < nPassLen);
 
-		if ((int)pUserInfo == 0)
+		if (pUserInfo == 0)
 		{
 			return NULLPOINT;
 		}

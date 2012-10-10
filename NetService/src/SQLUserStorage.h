@@ -1,6 +1,6 @@
 #pragma once
 #include "UserStorage.h"
-#include "Mysql\MysqlWrapper.h"
+#include "mysql/MysqlWrapper.h"
 #pragma comment(lib, "../lib/libmysql.lib")
 
 class sUserStorage :public UserStorage

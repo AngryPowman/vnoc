@@ -12,7 +12,7 @@ CXXFLAGS=-std=c++0x $(INCS)
 LDFLAGS := $(LIBS)
 
 PO_OBJ=cmdline.o options_description.o utf8_codecvt_facet.o config_file.o parsers.o value_semantic.o convert.o positional_options.o variables_map.o split.o
-Server_OBJ=VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage.o MsgDef.o VnocProtocol.o Config.o $(PO_OBJ) 
+Server_OBJ=VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage.o MsgDef.o VnocProtocol.o Config.o UserManage.o UserStorage.o SQLUserStorage.o FileUserStorage.o $(PO_OBJ) 
 
 all : Server EchoTestServer
 
