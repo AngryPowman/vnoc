@@ -1,1 +1,1 @@
-devenv.exe ./VNOC VNOC.sln
+"%VS10PATH%/devenv.com" ./VNOC/VNOC.sln /build
