@@ -22,6 +22,7 @@ enum FrameModule
 struct XMessage;
 
 interface IFrameModule : public IModule
+	, public IRefCountImpl
 {
 public:
 	virtual FrameModule GetModuleType() = 0;

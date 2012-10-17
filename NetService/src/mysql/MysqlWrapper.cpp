@@ -171,7 +171,7 @@ long MWType::asLong() const
 double MWType::asDoubule() const
 {
 	double Ret = 0;
-	sscanf_s(m_Data.c_str(),"%lf",&Ret);
+	sscanf(m_Data.c_str(),"%lf",&Ret);
 	return Ret;
 }
 

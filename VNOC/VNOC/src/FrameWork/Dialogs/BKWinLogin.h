@@ -18,6 +18,8 @@ protected:
 	VOID	Enable();
 	VOID	OnTimer(UINT_PTR id);
 	VOID	OnShowWnd(XMessage* pmsg);
+protected:
+	INT	m_loginState;
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)

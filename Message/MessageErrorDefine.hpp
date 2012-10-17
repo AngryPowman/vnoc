@@ -3,20 +3,13 @@
 //////////////////////////////////////////////////////////////////////////
 // cs交互数据中的错误码定义
 
-typedef unsigned int MsgErrorCode;
+const wchar_t* GetErrorDescription(MsgErrorCode errCode);
 
-
-
-struct MessageErrorInfo
+enum VNOCMessageErrorEnum
 {
-	MsgErrorCode	errorCode;
-	std::wstring	errorMsg;
+	MsgError_None,
+	MsgError_General_NetLinkFail,
+	MsgError_General_NetLinkTimeout,
 };
-/*
-#define DefineMsgError(_id,_msg)	{_id,_T(_msg)}
 
-MessageErrorInfo ErrorInfoList[]
-{
-	DefineMsgError(MsgError_None,"没有错误"),
-};
-*/
+

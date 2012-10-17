@@ -12,7 +12,7 @@ END_MSG_MAP_IMP();
 
 CLoginWnd::CLoginWnd() : CBkDialogImpl(BKDlg_LoginWin),CFrameBase(module_LoginWin)
 {
-
+	m_loginState = 0;
 }
 
 void CLoginWnd::OnBkBtnClose()
@@ -23,6 +23,7 @@ void CLoginWnd::OnBkBtnClose()
 void CLoginWnd::OnLoginClick()
 {
 	Disable();
+	m_loginState = 1;
 	SetTimer(TimerID_LoginTimeout,5000);
 	CString userName;
 	CString pwd;
@@ -44,7 +45,7 @@ void CLoginWnd::OnLoginClick()
 BOOL CLoginWnd::OnLoginResult( XMessage* pMsg )
 {
 	XMessage_Login_Result *pResult = dynamic_cast<XMessage_Login_Result*>(pMsg);
-	if (pResult)
+	if (pResult && m_loginState==1)
 	{
 		if (pResult->success == TRUE)
 		{
@@ -54,6 +55,8 @@ BOOL CLoginWnd::OnLoginResult( XMessage* pMsg )
 		{
 			MessageBox(_T("µÇÂ½Ê§°Ü!"));
 		}
+		m_loginState = 2;
+		Enable();
 	}
 	return TRUE;
 }
@@ -105,8 +108,12 @@ VOID CLoginWnd::Enable()
 
 VOID CLoginWnd::OnTimer( UINT_PTR id )
 {
-	KillTimer(id);
-	MessageBox(_T("µÇÂ½³¬Ê±"));
+	if (m_loginState == 1)
+	{
+		KillTimer(id);
+		MessageBox(_T("µÇÂ½³¬Ê±"));
+	}
+	m_loginState = 0;
 	Enable();
 }
 
