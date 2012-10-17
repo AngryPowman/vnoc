@@ -1,1 +1,1 @@
-@exit /b 0
+devenv.exe ./VNOC VNOC.sln
