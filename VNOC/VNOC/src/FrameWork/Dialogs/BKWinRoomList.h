@@ -11,7 +11,10 @@ public:
 public:
 	void	OnBkBtnClose();
 	VOID	OnShowWnd(XMessage* pmsg);
+	LRESULT OnInitDialog(HWND hWnd, LPARAM lparam);
 protected:
+	CListViewCtrl m_ctlList;
+private:
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
@@ -23,4 +26,6 @@ public:
 	Begin_XMessage(CRoomListWnd)
 	OnXMessage(XMessageID_ShowRoomList,OnShowWnd)
 	End_XMessage()
+
+
 };

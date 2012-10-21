@@ -1,4 +1,4 @@
-﻿<layer width="600" height="400" appwin="1">
+﻿<layer width="1000" height="618" appwin="1">
 	<header class="msgboxhead" width="full" height="31">
 		<icon src="101" pos="5,7"/>
 		<text class="dlgtitle" pos="28,10">房间列表</text>
@@ -8,5 +8,8 @@
 	</footer>
 	<body class="msgboxbody" width="full" height="full">
 		<list pos="10,10" width="300" height="300" />
+		<tab title="列表控件" width="full" height="full" crtext="FFFFFF">  
+                <realwnd id="101" ctrlid="101" pos="10,10,-10,-5" />  
+        </tab>  
 	</body>
 </layer>
