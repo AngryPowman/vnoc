@@ -10,6 +10,7 @@ public:
 	CRoomListWnd();
 public:
 	void	OnBkBtnClose();
+	VOID	OnShowWnd(XMessage* pmsg);
 protected:
 
 public:
@@ -20,5 +21,6 @@ public:
 	BEGIN_MSG_MAP_EX_DECLARE(CRoomListWnd)
 
 	Begin_XMessage(CRoomListWnd)
+	OnXMessage(XMessageID_ShowRoomList,OnShowWnd)
 	End_XMessage()
 };
