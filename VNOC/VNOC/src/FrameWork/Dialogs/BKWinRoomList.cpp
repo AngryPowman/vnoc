@@ -25,12 +25,13 @@ VOID CRoomListWnd::OnShowWnd( XMessage* pmsg )
 }
 
 LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
-{
+{/*
 	CRect rec;
 	rec.left = 10;
 	rec.top = 40;
 	rec.right = 200;
 	rec.bottom = 750;
+	
 	m_ctlList.Create(m_hWnd, rec, NULL, WS_CLIPCHILDREN | WS_CHILD |
 					 LVS_REPORT | LVS_SINGLESEL);
 	m_ctlList.ShowWindow(SW_SHOW);
@@ -51,6 +52,6 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 	m_ctlList.InsertItem(line++, _T("ฝฬสา 10"));
 	m_ctlList.InsertItem(line++, _T("ฝฬสา 11"));
 	m_ctlList.InsertItem(line++, _T("ฝฬสา 12"));
-
+	*/
 	return 0;
 }

@@ -33,6 +33,7 @@
 
 #define _WTL_NO_CSTRING
 
+
 #include "src/BKWin/wtl/atlapp.h"
 #include "src/BKWin/wtl/atlframe.h"
 #include "src/BKWin/wtl/atlctrls.h"
@@ -40,8 +41,9 @@
 #include "src/BKWin/wtl/atldlgs.h"
 #include "src/BKWin/wtl/atlcrack.h"
 #include "src/BKWin/wtl/atlmisc.h"
-#include "src/BKWin/bkwin/bkatldefine.h"
 
+#include "src/BKWin/bkwin/bkatldefine.h"
+#include "src/BKWin/bkwin/bklistview.h"
 #include "src/BKWin/bkwin/bkdlgview.h"
 #include "src/BKWin/bkwin/bkwnddlgfile.h"
 #include "src/BKWin/bkres/bkres.h"
