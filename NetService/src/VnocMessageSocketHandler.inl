@@ -93,20 +93,15 @@ void VnocMessageSocketHandler<ConnectionT>::ReadBodyHandler(char *messageBuffer,
             ret = (**i)(msg.get(), this->ctx_) || ret;
         }
     }
+    //wait for next message
+    readHeader();
 
-    if (ret == 0){
-        //message is not handled, we need post a read opeartion
-        readHeader();
-    }
 }
 
 template <typename ConnectionT>
 void VnocMessageSocketHandler<ConnectionT>::SendHandler(char* buffer, const asio::error_code& error, size_t bytes_transferred)
 {
     delete []buffer;
-    if (!error){
-        readHeader();
-    }
 }
 
  template <typename ConnectionT>
