@@ -98,3 +98,9 @@ struct XMessage_Login_Result : public XMessage
 #define XMessageID_ShowLogin	_T("ShowLogin")
 struct XMessage_ShowLogin : public XMessage
 {};
+
+#define XMessageID_ShowRoomList	_T("ShowRoomList")
+struct XMessage_ShowRoomList : public XMessage
+{
+	XMessage_ShowRoomList():XMessage(XMessageID_ShowRoomList){}
+};

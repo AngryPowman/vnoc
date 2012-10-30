@@ -1,6 +1,8 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+@copy "./vnoc.conf" "./%1/vnoc.conf" 
+
 @if "%1"=="RELEASE" goto gRelease
 cd
 xcopy /e/c/y "../VisualLeakDetector/bin/win32" "Debug" > nul

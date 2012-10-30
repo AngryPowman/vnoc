@@ -17,3 +17,8 @@ void CRoomListWnd::OnBkBtnClose()
 {
 	EndDialog(0);
 }
+
+VOID CRoomListWnd::OnShowWnd( XMessage* pmsg )
+{
+	DoModal();
+}
