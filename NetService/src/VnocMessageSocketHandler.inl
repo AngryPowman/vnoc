@@ -99,9 +99,9 @@ void VnocMessageSocketHandler<ConnectionT>::ReadBodyHandler(char *messageBuffer,
 }
 
 template <typename ConnectionT>
-void VnocMessageSocketHandler<ConnectionT>::SendHandler(char* buffer, const asio::error_code& error, size_t bytes_transferred)
+void VnocMessageSocketHandler<ConnectionT>::SendHandler(smart_buf buffer, const asio::error_code& error, size_t bytes_transferred)
 {
-    delete []buffer;
+
 }
 
  template <typename ConnectionT>
@@ -110,7 +110,7 @@ void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(const CMessage *msg)
     PackMessage packer;
     size_t length = packer.GetMessageLen(msg);
     assert(length != 0);
-    char *pack = new char[length];
+    smart_buf pack(new char[length]);
     packer.Pack(msg, (byte*)pack, length);
     connection_->send(pack, length,
         std::bind(&VnocMessageSocketHandler::SendHandler, this, pack,

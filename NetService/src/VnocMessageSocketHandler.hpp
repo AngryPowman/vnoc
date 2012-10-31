@@ -6,6 +6,7 @@
 #include "SocketHandler.hpp"
 #include "../../Message/MsgDef.h"
 #include "VnocProtocol.hpp"
+#include "util.hpp"
 #include <ezlogger_headers.hpp>
 
 template <typename ConnectionT>
@@ -23,7 +24,7 @@ public:
 private:
     void ReadHeaderHandler(const asio::error_code& error, size_t bytes_transferred);
     void ReadBodyHandler(char *messageBuffer, const asio::error_code& error, size_t bytes_transferred);
-    void SendHandler(char* buffer, const asio::error_code& error, size_t bytes_transferred);
+    void SendHandler(smart_buf buffer, const asio::error_code& error, size_t bytes_transferred);
 
     //post a read operation to wait for message header.
     void readHeader();
