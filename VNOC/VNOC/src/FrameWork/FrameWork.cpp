@@ -37,7 +37,7 @@ HRESULT CFrameWork::UnInitialize()
 
 HRESULT CFrameWork::Run()
 {
-	XMessage msgFirstShow(XMessageID_ShowLogin);
+	XMessage_ShowLogin msgFirstShow;
 	SendXMessage(&msgFirstShow);
 	return S_OK;
 }
@@ -141,38 +141,21 @@ VOID CFrameWork::_ClearModule()
 
 VOID CFrameWork::_LoadModule()
 {
+	_LoadModule(module_LoginData);
+	_LoadModule(module_LoginWin);
+	_LoadModule(module_RoomListData);
+	_LoadModule(module_RoomListWin);
+}
+
+VOID CFrameWork::_LoadModule( FrameModule module )
+{
 	IFrameModule *pModule=NULL;
-	CFrameModuleFactory::CreateFrameModule(module_LoginData,&pModule);
+	CFrameModuleFactory::CreateFrameModule(module,&pModule);
 	if (pModule)
 	{
 		pModule->Initialize(this);
 		pModule->Run();
 		RegisterModule(pModule);
-		pModule=NULL;
-	}
-	CFrameModuleFactory::CreateFrameModule(module_LoginWin,&pModule);
-	if (pModule)
-	{
-		pModule->Initialize(this);
-		pModule->Run();
-		RegisterModule(pModule);
-		pModule=NULL;
-	}
-	CFrameModuleFactory::CreateFrameModule(module_RoomListData,&pModule);
-	if (pModule)
-	{
-		pModule->Initialize(this);
-		pModule->Run();
-		RegisterModule(pModule);
-		pModule=NULL;
-	}
-	CFrameModuleFactory::CreateFrameModule(module_RoomListWin,&pModule);
-	if (pModule)
-	{
-		pModule->Initialize(this);
-		pModule->Run();
-		RegisterModule(pModule);
-		pModule=NULL;
 	}
 }
 

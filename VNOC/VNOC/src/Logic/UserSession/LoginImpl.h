@@ -30,7 +30,7 @@ private:
 	CNetListenerHelper netHelper;
 public:
 	Begin_XMessage(CLoginImpl)
-		OnXMessage(XMessageID_Login,OnLogin)
+		OnXMessage(XMessage_Login,OnLogin)
 	End_XMessage()
 };
 

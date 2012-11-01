@@ -6,14 +6,15 @@
 
 struct XMessage : public IRefCountImpl
 {
-	XMessage(LPCTSTR msgID,FrameModule destModule=module_Any,IFrameModule* srcFrameModule=NULL)
-		: msgID(msgID),destModule(destModule),result(HR_NOTPROCESSED)
+	virtual VOID GetID(CString& id) = 0;
+
+	XMessage()
+		: destModule(module_Any)
+		, srcModule(module_Any)
+		, result(HR_NOTPROCESSED)
 	{
-		if (srcFrameModule)
-		{
-			srcModule = srcFrameModule->GetModuleType();
-		}
 	}
+
 	VOID MarkProcessed(HRESULT result)
 	{
 		ATLASSERT(result != HR_NOTPROCESSED);
@@ -24,7 +25,6 @@ struct XMessage : public IRefCountImpl
 		return result != HR_NOTPROCESSED;
 	}
 
-	CString		msgID;
 	FrameModule	destModule;
 	FrameModule srcModule;
 
@@ -65,42 +65,72 @@ protected:
 	FrameModule	m_moduleType;
 };
 
-#define Begin_XMessage(_class)	virtual VOID _class::ProcessXMessage(XMessage* pmsg){
-#define OnXMessage(_msg,_proc)	if(pmsg->msgID==_msg) \
-{ \
-	_proc(pmsg); \
-	if(pmsg->IsProcessed()) \
-		return; \
-}else
-#define Chain_XMessage(_class)	{}{_class::ProcessXMessage(pmsg);if(pmsg->IsProcessed())return;}
-#define End_XMessage()			{}}
+#define Begin_XMessage(_class)	\
+	virtual VOID _class::ProcessXMessage(XMessage* pmsg) \
+	{ \
+		if (! pmsg){return;} \
+		CString msgID; \
+		pmsg->GetID(msgID); \
+
+#define OnXMessage(_msg,_proc)	\
+		if( _msg::Static_IsTypeOf(msgID) ) \
+		{ \
+			_proc(pmsg); \
+		}else /*I'm incase of 'elseif'*/
+
+#define Chain_XMessage(_class)	\
+		{} \
+		{ \
+			_class::ProcessXMessage(pmsg); \
+		}
+
+#define End_XMessage()	 \
+		{} \
+	}
+
+#define ImTheMessageOf(_msg)	\
+public: \
+	virtual VOID GetID(CString& id) \
+	{ \
+		Static_GetID(id); \
+	} \
+	static VOID Static_GetID(CString& id) \
+	{ \
+		id = #_msg; \
+	} \
+	static BOOL Static_IsTypeOf(LPCTSTR id) \
+	{ \
+		CString tempID; \
+		Static_GetID(tempID); \
+		return (tempID.CompareNoCase(id)==0)? TRUE: FALSE; \
+	}
 
 //////////////////////////////////////////////////////////////////////////
 // Messages
 
-#define XMessageID_Login	_T("Login")
 struct XMessage_Login : public XMessage
 {
-	XMessage_Login():XMessage(XMessageID_Login){}
+	ImTheMessageOf(XMessage_Login);
+
 	CString username;
 	CString pwd;
 };
 
-#define XMessageID_Login_Result	_T("LoginResult")
 struct XMessage_Login_Result : public XMessage
 {
-	XMessage_Login_Result():XMessage(XMessageID_Login_Result){}
+	ImTheMessageOf(XMessage_Login_Result);
+
 	BOOL success;
 	DWORD	userToken;
 	BYTE	guid[16];
 };
 
-#define XMessageID_ShowLogin	_T("ShowLogin")
 struct XMessage_ShowLogin : public XMessage
-{};
+{
+	ImTheMessageOf(XMessage_ShowLogin);
+};
 
-#define XMessageID_ShowRoomList	_T("ShowRoomList")
 struct XMessage_ShowRoomList : public XMessage
 {
-	XMessage_ShowRoomList():XMessage(XMessageID_ShowRoomList){}
+	ImTheMessageOf(XMessage_ShowRoomList);
 };

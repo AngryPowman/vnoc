@@ -23,6 +23,7 @@ public:
 private:
 	IFrameModule* _FindModule(FrameModule module);
 	VOID _LoadModule();
+	VOID _LoadModule(FrameModule module);
 	VOID _ClearModule();
 private:
 	typedef std::map<FrameModule,IFrameModule*>	ModuleMap;

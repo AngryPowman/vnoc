@@ -26,12 +26,12 @@
 // TODO: reference additional headers your program requires here
 #include "../../TinyXML/tinyxml.h"
 
+#define _WTL_NO_CSTRING
+
 #include <atlbase.h>
 #include <atlwin.h>
 #include <atlstr.h>
 #include <atltrace.h>
-
-#define _WTL_NO_CSTRING
 
 #include "src/BKWin/wtl/atlapp.h"
 #include "src/BKWin/wtl/atlframe.h"

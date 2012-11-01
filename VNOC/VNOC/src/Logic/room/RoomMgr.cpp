@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "RoomMgr.h"
-#include "../../FrameWork/Dialogs/BKWinRoomList.h"
 
 CRoomMgr::CRoomMgr() : CFrameBase(module_RoomListData)
 {
@@ -49,8 +48,6 @@ HRESULT CRoomMgr::FreeRoom( RoomID id )
 
 HRESULT CRoomMgr::Show( BOOL bShow/*=TRUE*/ )
 {
-	CRoomListWnd wnd;
-	wnd.DoModal();
 	return S_OK;
 }
 

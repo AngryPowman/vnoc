@@ -5,20 +5,32 @@
 
 BEGIN_MSG_MAP_EX_IMP(CRoomListWnd)
 	MSG_BK_NOTIFY(IDC_RICHVIEW_WIN)
-	CHAIN_MSG_MAP(CBkDialogImpl<CRoomListWnd>)
+	MSG_WM_INITDIALOG(OnInitDialog)
+	CHAIN_MSG_MAP(CBkListViewImpl<CRoomListWnd>)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP();
 
-CRoomListWnd::CRoomListWnd() : CBkDialogImpl(BKDlg_RoomListWin),CFrameBase(module_RoomListWin)
+CRoomListWnd::CRoomListWnd() : CBkListViewImpl(),CFrameBase(module_RoomListWin)
 {
+	SetXml("RoomListWin.xml");
 }
 
 void CRoomListWnd::OnBkBtnClose()
 {
-	EndDialog(0);
 }
 
 VOID CRoomListWnd::OnShowWnd( XMessage* pmsg )
 {
-	DoModal();
+}
+
+LRESULT CRoomListWnd::OnInitDialog( HWND hWnd,LPARAM lparam )
+{
+	CRect rec;
+	rec.left = 0;
+	rec.top = 50;
+	rec.right = 500;
+	rec.bottom = 500;
+
+
+	return 0;
 }
