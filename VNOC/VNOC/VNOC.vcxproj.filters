@@ -634,6 +634,9 @@
     <ClCompile Include="src\Logic\room\RoomMgr.cpp">
       <Filter>Logic\room</Filter>
     </ClCompile>
+    <ClCompile Include="src\Vulfix\ListViewCtrlEx.cpp">
+      <Filter>BKWin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VNOC.rc">
