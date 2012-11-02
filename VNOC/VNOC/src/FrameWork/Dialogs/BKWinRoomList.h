@@ -2,9 +2,8 @@
 #include "../../BKWin/wtlhelper/whwindow.h"
 #include "../../net/INet.h"
 #include "../FrameBase.hpp"
-#include "../../BKWin/bkwin/bklistview.h"
 
-class CRoomListWnd:public CBkListViewImpl<CRoomListWnd>
+class CRoomListWnd:public CBkDialogImpl<CRoomListWnd>
 	,public CFrameBase
 {
 public:
@@ -12,8 +11,11 @@ public:
 public:
 	void	OnBkBtnClose();
 	VOID	OnShowWnd(XMessage* pmsg);
-	LRESULT OnInitDialog(HWND hWnd,LPARAM lparam);
+	LRESULT OnInitDialog(HWND hWnd, LPARAM lparam);
 protected:
+	CListViewCtrl m_ctlList;
+	CListViewCtrlEx m_wndListCtrlVul;
+private:
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
@@ -25,4 +27,6 @@ public:
 	Begin_XMessage(CRoomListWnd)
 	OnXMessage(XMessage_ShowRoomList,OnShowWnd)
 	End_XMessage()
+
+
 };

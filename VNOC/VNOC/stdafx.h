@@ -26,12 +26,13 @@
 // TODO: reference additional headers your program requires here
 #include "../../TinyXML/tinyxml.h"
 
-#define _WTL_NO_CSTRING
-
 #include <atlbase.h>
 #include <atlwin.h>
 #include <atlstr.h>
 #include <atltrace.h>
+
+#define _WTL_NO_CSTRING
+
 
 #include "src/BKWin/wtl/atlapp.h"
 #include "src/BKWin/wtl/atlframe.h"
@@ -40,11 +41,18 @@
 #include "src/BKWin/wtl/atldlgs.h"
 #include "src/BKWin/wtl/atlcrack.h"
 #include "src/BKWin/wtl/atlmisc.h"
-#include "src/BKWin/bkwin/bkatldefine.h"
 
+#include "src/BKWin/bkwin/bkatldefine.h"
+#include "src/BKWin/bkwin/bklistview.h"
 #include "src/BKWin/bkwin/bkdlgview.h"
 #include "src/BKWin/bkwin/bkwnddlgfile.h"
 #include "src/BKWin/bkres/bkres.h"
 
+#include "src/Vulfix/ListViewCtrlEx.h"
+//#include "src/Vulfix/RichEditCtrlEx.h"
+//#include "src/Vulfix/HyperTextCtrl.h"
+
+
 #include "src/util/util.h"
 #include "src/Global/IGlobal.h"
+

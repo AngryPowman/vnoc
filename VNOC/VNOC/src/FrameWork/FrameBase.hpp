@@ -1,6 +1,7 @@
 #pragma once
 #include "IFrameWork.h"
 #include <atlcomcli.h>
+#include <list>
 
 #define HR_NOTPROCESSED	MAKE_HRESULT(1,0x590c,0x590c)
 
