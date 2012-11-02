@@ -108,6 +108,14 @@ public: \
 //////////////////////////////////////////////////////////////////////////
 // Messages
 
+// 特殊消息，获取模块所监听的消息列表
+struct XMessage_GetListenList : public XMessage
+{
+	ImTheMessageOf(XMessage_GetListenList);
+
+	std::list<CString>	msgIDList;
+};
+
 struct XMessage_Login : public XMessage
 {
 	ImTheMessageOf(XMessage_Login);
