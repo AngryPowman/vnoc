@@ -1,3 +1,5 @@
+#include "../../VisualLeakDetector/include/vld.h"
+
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
 #include <cppunit/TestResult.h>
