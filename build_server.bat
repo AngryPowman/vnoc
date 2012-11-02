@@ -16,8 +16,8 @@
 @echo .
 @echo .
 @echo ================	Unit Test	=================
-@echo "%ServerSrcDir%/testRunner.exe"
-"%ServerSrcDir%/testRunner.exe"
+@echo "%ServerSrcDir%\testRunner.exe"
+"%ServerSrcDir%\testRunner.exe"
 
 @echo .
 @echo .
