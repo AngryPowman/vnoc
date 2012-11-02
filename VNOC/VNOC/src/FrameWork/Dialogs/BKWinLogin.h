@@ -30,7 +30,7 @@ public:
 	BEGIN_MSG_MAP_EX_DECLARE(CLoginWnd)
 
 	Begin_XMessage(CLoginWnd)
-		OnXMessage(XMessageID_ShowLogin,OnShowWnd)
-		OnXMessage(XMessageID_Login_Result,OnLoginResult);
+		OnXMessage(XMessage_ShowLogin,OnShowWnd)
+		OnXMessage(XMessage_Login_Result,OnLoginResult);
 	End_XMessage()
 };

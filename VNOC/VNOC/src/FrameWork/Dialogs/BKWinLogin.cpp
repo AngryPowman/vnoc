@@ -52,6 +52,7 @@ BOOL CLoginWnd::OnLoginResult( XMessage* pMsg )
 		if (pResult->success == TRUE)
 		{
 			MessageBox(_T("³É¹¦µÇÂ½!"));
+			OnBkBtnClose();
 		}
 		else
 		{
