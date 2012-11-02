@@ -112,7 +112,8 @@ void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(const CMessage *msg)
     assert(length != 0);
     smart_buf pack(new char[length]);
     packer.Pack(msg, (byte*)pack, length);
-    connection_->send(pack, length,
+    char * buf = pack;
+    connection_->send(buf, length,
         std::bind(&VnocMessageSocketHandler::SendHandler, this, pack,
             std::placeholders::_1,
             std::placeholders::_2));
