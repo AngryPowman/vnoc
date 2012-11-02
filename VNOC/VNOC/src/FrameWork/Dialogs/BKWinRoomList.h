@@ -14,6 +14,7 @@ public:
 	LRESULT OnInitDialog(HWND hWnd, LPARAM lparam);
 protected:
 	CListViewCtrl m_ctlList;
+	CListViewCtrlEx m_wndListCtrlVul;
 private:
 
 public:

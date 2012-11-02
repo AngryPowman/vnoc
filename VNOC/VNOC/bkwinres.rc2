@@ -48,6 +48,7 @@ DEFINE_BMP(IDB_FRAME_PANEL,                 107, "res\\frame_panel.bmp")
 DEFINE_BMP(IDB_STATUS_ICON,                 111, "res\\status_icon.bmp")
 DEFINE_BMP(IDB_SCAN_RESULT_LIST_BAR,		122, "res\\scan_result_list_bar.bmp")
 DEFINE_BMP(IDB_BITMAP_LISTCTRL_HEADER,					210, 					"res\\listctrl_header.bmp")
+DEFINE_BMP(IDB_BITMAP_MINUS_PLUS,						212, 					"res\\minus_plus.bmp")
 DEFINE_BMP(IDB_BITMAP_LISTCTRL_CHECK,					211, 					"res\\listctrl_check.bmp")
 DEFINE_BMP(IDB_BITMAP_LISTCTRL_RADIO,					213, 					"res\\listctrl_radio.bmp")
 
@@ -56,6 +57,7 @@ DEFINE_BMP(IDB_SOFTMGR_CLEAR_BK, 			8034, 	"res\\clear_bk.bmp")
 DEFINE_BMP(IDB_SYSOPT_LIST_HEADERBK,		8035,	"res\\sysopt_listbk.bmp")
 DEFINE_BMP(IDB_LOADINFO_DLGBK,				8036,	"res\\loadinfo_dlgbk.bmp")
 
+//////////////////////////////////////////////////////////////////////////
 // Ìí¼Ó
 DEFINE_BMP(IDB_RUNOPT_STATUS,							20007,					"res\\stat_runopt.bmp")
 DEFINE_PNG(IDP_RUNOPT_LOADING_TIP,						20008,					"res\\loading_runopt.png")
