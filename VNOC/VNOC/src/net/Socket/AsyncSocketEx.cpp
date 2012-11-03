@@ -152,7 +152,11 @@ public:
 
 		m_hWnd=CreateWindow(_T("CAsyncSocketEx Helper Window"), _T("CAsyncSocketEx Helper Window"), 0, 0, 0, 0, 0, 0, 0, 0, GetModuleHandle(0));
 		ASSERT(m_hWnd);
+#ifdef WIN64
+#pragma message("sockEx not support X64")
+#else
 		SetWindowLong(m_hWnd, GWL_USERDATA, (LONG)this);
+#endif
 	};
 
 	virtual ~CAsyncSocketExHelperWindow()
@@ -249,7 +253,12 @@ public:
 		{
 			//Verify parameters
 			ASSERT(hWnd);
-			CAsyncSocketExHelperWindow *pWnd=(CAsyncSocketExHelperWindow *)GetWindowLong(hWnd, GWL_USERDATA);
+			CAsyncSocketExHelperWindow *pWnd=NULL;
+#ifdef WIN64
+#pragma message("sockEx not support X64")
+#else
+			pWnd = (CAsyncSocketExHelperWindow *)GetWindowLong(hWnd, GWL_USERDATA);
+#endif
 			ASSERT(pWnd);
 
 			if (message<static_cast<UINT>(WM_SOCKETEX_NOTIFY+pWnd->m_nWindowDataSize)) //Index is within socket storage
@@ -379,7 +388,12 @@ public:
 
 			//Verify parameters
 			ASSERT(hWnd);
-			CAsyncSocketExHelperWindow *pWnd=(CAsyncSocketExHelperWindow *)GetWindowLong(hWnd, GWL_USERDATA);
+			CAsyncSocketExHelperWindow *pWnd=NULL;
+#ifdef WIN64
+#pragma message("sockEx not support X64")
+#else
+			pWnd = (CAsyncSocketExHelperWindow *)GetWindowLong(hWnd, GWL_USERDATA);
+#endif
 			ASSERT(pWnd);
 
 			CAsyncSocketEx *pSocket;
