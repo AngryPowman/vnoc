@@ -12,8 +12,8 @@
 @echo .
 @echo .
 @echo .
-@echo ================	Digital Sigin	================
-
+@echo ================	Unit Test	================
+"%ClientSrcDir%\testRunner.exe"
 @echo .
 @echo .
 @echo .
