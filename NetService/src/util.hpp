@@ -12,7 +12,7 @@ public:
     ~smart_buf(){
         delete[] buf_;
     }
-    smart_buf(smart_buf &&other)
+    smart_buf(const smart_buf &other)
     {
         if (&other != this){
             this->buf_ = other.buf_;
@@ -26,7 +26,7 @@ public:
         return (unsigned char*)buf_;
     }
 private:
-    char *buf_;
+    mutable char *buf_;
 };
 
 

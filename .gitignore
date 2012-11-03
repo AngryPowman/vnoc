@@ -41,3 +41,17 @@
 /NetService/Release
 /NetService/x64
 /NetService/.cproject
+/cpptestresults.xml
+/VNOC/Release
+/vnoc/ipch
+/VNOC/VNOC/Debug/VNOC_manifest.rc
+/NetService/EchoTestServer/x64
+/NetService/EchoTestServer/Debug
+/NetService/EchoTestServer/Release
+/NetService/cpptestresults.xml
+/NetService/src/test/testRunner/cpptestresults.xml
+/NetService/src/test/testRunner/Debug
+/NetService/src/test/testRunner/Release
+/NetService/src/test/testRunner/x64
+/VNOC/Release
+/VNOC/Release
