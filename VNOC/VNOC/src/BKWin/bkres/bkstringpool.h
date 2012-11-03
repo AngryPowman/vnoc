@@ -31,7 +31,7 @@ public:
 
     static LPCTSTR Get(UINT uResID)
     {
-        const _TypeStringResPool::CPair* pPair = _Instance()->m_mapString.Lookup(uResID);
+        const _TypeStringResPool::CPair* pPair = _Instance().m_mapString.Lookup(uResID);
         if (!pPair)
         {
             BKRES_ASSERT(FALSE, L"Failed loading string %u", uResID);
@@ -78,7 +78,7 @@ public:
             uStringID = (UINT)(ULONG)::StrToIntA(lpszStringID);
 
             {
-                _Instance()->m_mapString[uStringID] = CA2T(pXmlChild->GetText(), CP_UTF8);
+                _Instance().m_mapString[uStringID] = CA2T(pXmlChild->GetText(), CP_UTF8);
             }
         }
 
@@ -87,7 +87,7 @@ public:
 
     static size_t GetCount()
     {
-        return _Instance()->m_mapString.GetCount();
+        return _Instance().m_mapString.GetCount();
     }
 
 protected:
@@ -96,11 +96,10 @@ protected:
 
     static BkString* ms_pInstance;
 
-    static BkString* _Instance()
+    static BkString& _Instance()
     {
-        if (!ms_pInstance)
-            ms_pInstance = new BkString;
-        return ms_pInstance;
+		static BkString instance;
+		return instance;
     }
 };
 
@@ -130,4 +129,4 @@ public:
     CAtlArray<UINT> m_arrStringID;
 };
 
-__declspec(selectany) BkString* BkString::ms_pInstance = NULL;
+// __declspec(selectany) BkString* BkString::ms_pInstance = NULL;

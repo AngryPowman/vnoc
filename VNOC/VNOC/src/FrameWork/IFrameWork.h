@@ -27,7 +27,7 @@ interface IFrameModule : public IModule
 public:
 	virtual FrameModule GetModuleType() = 0;
 	virtual VOID SendXMessage(XMessage* msg) = 0;
-	virtual VOID ProcessXMessage(XMessage* pMsg) = 0;
+	virtual VOID ProcessXMessage(XMessage* pMsg,XMessage* pMsgGetList=NULL) = 0;
 };
 
 interface IFrameWork : public IModule,public IRefCountImpl
