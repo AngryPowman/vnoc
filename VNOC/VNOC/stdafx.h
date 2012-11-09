@@ -47,11 +47,7 @@
 #include "src/BKWin/bkwin/bkdlgview.h"
 #include "src/BKWin/bkwin/bkwnddlgfile.h"
 #include "src/BKWin/bkres/bkres.h"
-
-#include "src/Vulfix/ListViewCtrlEx.h"
-//#include "src/Vulfix/RichEditCtrlEx.h"
-//#include "src/Vulfix/HyperTextCtrl.h"
-
+#include "src/BKWin/bkwin/ListViewCtrlEx.h"
 
 #include "src/util/util.h"
 #include "src/Global/IGlobal.h"

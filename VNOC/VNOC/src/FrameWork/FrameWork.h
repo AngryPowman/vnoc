@@ -3,6 +3,7 @@
 #include <atlsync.h>
 #include <map>
 #include <list>
+#include <set>
 
 #include "../FrameWork/FrameModuleFactory.h"
 
@@ -21,12 +22,17 @@ public:
 	STDMETHOD( RemoveModule		(IFrameModule* iModule) );
 	STDMETHOD( SendXMessage		(XMessage* pMsg) );
 private:
+	typedef std::map<FrameModule,IFrameModule*>	ModuleMap;
+	typedef std::map<CString,std::set<FrameModule>> XMessageMap;
+
 	IFrameModule* _FindModule(FrameModule module);
 	VOID _LoadModule();
 	VOID _LoadModule(FrameModule module);
 	VOID _ClearModule();
+	VOID _GetModulesListenList();
 private:
-	typedef std::map<FrameModule,IFrameModule*>	ModuleMap;
 	ModuleMap m_map;
-	ATL::CCriticalSection		m_mapcs;
+	ATL::CCriticalSection	m_mapcs;
+	XMessageMap m_msgMap;
+	ATL::CCriticalSection	m_msgMapCS;
 };

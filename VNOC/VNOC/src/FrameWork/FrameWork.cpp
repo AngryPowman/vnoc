@@ -114,9 +114,18 @@ HRESULT CFrameWork::SendXMessage( XMessage* pMsg )
 	Util::CAutoCS ac(m_mapcs);
 	if (pMsg->destModule == module_Any)
 	{ // broadcast
-		for (auto i=m_map.begin(); i!=m_map.end() && !pMsg->IsProcessed(); ++i)
+		Util::CAutoCS ac(m_msgMapCS);
+
+		CString strID;
+		pMsg->GetID(strID);
+		auto& moduleSet = m_msgMap[strID];
+		for (auto i=moduleSet.begin(); i!=moduleSet.end() && !pMsg->IsProcessed(); ++i)
 		{
-			i->second->ProcessXMessage(pMsg);
+			CComPtr<IFrameModule> pModule = m_map[*i];
+			if (pModule)
+			{
+				pModule->ProcessXMessage(pMsg);
+			}
 		}
 	}
 	else
@@ -145,6 +154,8 @@ VOID CFrameWork::_LoadModule()
 	_LoadModule(module_LoginWin);
 	_LoadModule(module_RoomListData);
 	_LoadModule(module_RoomListWin);
+
+	_GetModulesListenList();
 }
 
 VOID CFrameWork::_LoadModule( FrameModule module )
@@ -156,6 +167,24 @@ VOID CFrameWork::_LoadModule( FrameModule module )
 		pModule->Initialize(this);
 		pModule->Run();
 		RegisterModule(pModule);
+	}
+}
+
+VOID CFrameWork::_GetModulesListenList()
+{
+	m_msgMap.clear();
+	XMessage_GetListenList msg;
+	Util::CAutoCS ac(m_mapcs);
+	for (auto i=m_map.begin(); i!=m_map.end(); ++i)
+	{
+		msg.msgIDList.clear();
+		i->second->ProcessXMessage(NULL,&msg);
+
+		Util::CAutoCS ac(m_msgMapCS);
+		for (auto j=msg.msgIDList.begin(); j!=msg.msgIDList.end(); ++j)
+		{
+			m_msgMap[*j].insert( i->first );
+		}
 	}
 }
 

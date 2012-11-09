@@ -67,14 +67,34 @@ protected:
 };
 
 #define Begin_XMessage(_class)	\
-	virtual VOID _class::ProcessXMessage(XMessage* pmsg) \
+	virtual VOID _class::ProcessXMessage(XMessage* pmsg,XMessage* pMsgGetList=NULL) \
 	{ \
-		if (! pmsg){return;} \
 		CString msgID; \
-		pmsg->GetID(msgID); \
+		XMessage_GetListenList* pListMsg=NULL; \
+		if (!pMsgGetList) \
+		{ \
+			if (!pmsg) \
+				return; \
+			pmsg->GetID(msgID); \
+		} \
+		else \
+		{ \
+			pListMsg = dynamic_cast<XMessage_GetListenList*>(pMsgGetList); \
+			if (!pListMsg) \
+			{ \
+				return; \
+			} \
+		} \
 
 #define OnXMessage(_msg,_proc)	\
-		if( _msg::Static_IsTypeOf(msgID) ) \
+		if (pListMsg) \
+		{ \
+			CString id; \
+			_msg::Static_GetID(id); \
+			pListMsg->msgIDList.push_back(id); \
+		} \
+		else \
+		if ( pmsg && _msg::Static_IsTypeOf(msgID) ) \
 		{ \
 			_proc(pmsg); \
 		}else /*I'm incase of 'elseif'*/

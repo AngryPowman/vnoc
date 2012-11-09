@@ -548,6 +548,9 @@
     <ClInclude Include="src\FrameWork\FrameModuleFactory.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
+    <ClInclude Include="src\BKWin\bkwin\ListViewCtrlEx.h">
+      <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -634,8 +637,8 @@
     <ClCompile Include="src\Logic\room\RoomMgr.cpp">
       <Filter>Logic\room</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vulfix\ListViewCtrlEx.cpp">
-      <Filter>BKWin</Filter>
+    <ClCompile Include="src\BKWin\bkwin\ListViewCtrlEx.cpp">
+      <Filter>BKWin\BKWin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
