@@ -167,6 +167,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Message\BaseMessage.h" />
+    <ClInclude Include="..\Message\MessageParser.h" />
+    <ClInclude Include="..\Message\MSG_UNION.h" />
+    <ClInclude Include="..\Message\PackMessage.h" />
     <ClInclude Include="src\AsioTcpConnection.hpp" />
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Config.hpp" />
@@ -185,8 +189,8 @@
     <ClInclude Include="src\VnocProtocol.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\Message\MessageParser.cpp" />
-    <ClCompile Include="..\Message\MsgDef.cpp" />
     <ClCompile Include="..\Message\PackMessage.cpp" />
     <ClCompile Include="..\program_options\cmdline.cpp" />
     <ClCompile Include="..\program_options\config_file.cpp" />
