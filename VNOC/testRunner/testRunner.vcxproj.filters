@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\test\testRunner.cpp" />
+    <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
+    <ClCompile Include="..\..\Message\BaseMessage.cpp" />
+    <ClCompile Include="..\..\Message\MessageParser.cpp" />
+    <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\test\testPackMessage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="MSG_CLASS">
+      <UniqueIdentifier>{1458035b-95b8-4a3f-83db-a39e12c93127}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Message\MSG_ACI.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACL.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ALI.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_APS.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_AVC.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RCI.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RCL.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RLI.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RPS.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RVC.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\BaseMessage.h" />
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
+    <ClInclude Include="..\..\Message\MessageParser.h" />
+    <ClInclude Include="..\..\Message\PackMessage.h" />
+    <ClInclude Include="..\..\Message\MSG_UNION.h" />
+  </ItemGroup>
+</Project>
