@@ -21,6 +21,8 @@
 *.opensdf
 *.cache
 *.lib
+*.o
+tags
 
 !libmysql.lib
 !mysqlclient.lib

@@ -1,4 +1,4 @@
-@echo off
+@echo off 
 
 @set ServerDestDir=.\Artifacts\Server\
 @set ServerSrcDir=.\NetService\Release
