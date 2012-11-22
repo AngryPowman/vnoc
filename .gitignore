@@ -36,15 +36,11 @@ tags
 /NetService/Debug
 /NetService/x64
 /NetService/Release
-/NetService/Debug
-
 /NetService/.project
-/NetService/Debug
-/NetService/Release
-/NetService/x64
 /NetService/.cproject
 /cpptestresults.xml
 /VNOC/Release
+/VNOC/Debug
 /vnoc/ipch
 /VNOC/VNOC/Debug/VNOC_manifest.rc
 /NetService/EchoTestServer/x64
@@ -55,5 +51,5 @@ tags
 /NetService/src/test/testRunner/Debug
 /NetService/src/test/testRunner/Release
 /NetService/src/test/testRunner/x64
-/VNOC/Release
-/VNOC/Release
+/VNOC/VNOC/Release
+/VNOC/VNOC/Debug
