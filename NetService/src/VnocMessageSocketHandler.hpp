@@ -4,7 +4,7 @@
 #include <memory>
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
-#include "../../Message/MsgDef.h"
+#include "../../Message/MSG_UNION.h"
 #include "VnocProtocol.hpp"
 #include "util.hpp"
 #include <ezlogger_headers.hpp>

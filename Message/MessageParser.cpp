@@ -169,7 +169,7 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 		{
 			tmpComlLen[index] = _Messsage->m_ComListLen[j];
 		}
-		ParamLen += byteToInt(tmpComlLen,4);
+		ParamLen += BigLittleSwap32(byteToInt(tmpComlLen,4));
 		memset(tmpComlLen,0,MSG_CLASS_PARAM);
 	}
 
@@ -190,14 +190,15 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 
 			memset(tmpComlLen,0,MSG_CLASS_PARAM);
 
-			_Messsage->m_ComCommandList[i].clear();
+			_Messsage->m_ComCommandList[i].second.clear();
 			if (i == 0)
 			{
 				TmpIndex = (PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount)) + 1;
 			}
+			_Messsage->m_ComCommandList[i].first = tmpCmlListLen[i];
 			for (int index = 0; index < tmpCmlListLen[i]; index++, TmpIndex++ )
 			{
-				_Messsage->m_ComCommandList[i].push_back(lpszData[TmpIndex]);
+				_Messsage->m_ComCommandList[i].second.push_back(lpszData[TmpIndex]);
 				VerifyPos++;
 			}
 		}

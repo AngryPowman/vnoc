@@ -2,8 +2,7 @@
 
 #pragma once
 
-#include "MsgDef.h"
-
+#include "MSG_UNION.h"
 
 class CMessageParser
 {

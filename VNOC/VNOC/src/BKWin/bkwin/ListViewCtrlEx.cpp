@@ -167,6 +167,7 @@ LRESULT CHeaderCtrlEx::OnMouseMove( UINT nFlags, CPoint point )
 }
 
 CListViewCtrlEx::CListViewCtrlEx( void )
+    : m_strEmptyString(_T(""))
 {
 	m_hWndObserver = NULL;
 	m_nHoverItem = -1;
@@ -179,7 +180,6 @@ CListViewCtrlEx::CListViewCtrlEx( void )
 	m_bitmapExpand.Attach( BkBmpPool::GetBitmap(IDB_BITMAP_MINUS_PLUS) );
 	m_bitmapRadio.Attach( BkBmpPool::GetBitmap(IDB_BITMAP_LISTCTRL_RADIO) );
 	CreateBitmapMask(m_bitmapRadio, m_bitmapRadioMask, 0, 0, 0);
-	m_strEmptyString = BkString::Get(5163);
 
 	m_uHeight = 30;
 }

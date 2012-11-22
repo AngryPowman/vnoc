@@ -49,6 +49,18 @@
     <ClInclude Include="src\SQLUserStorage.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="..\Message\BaseMessage.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Message\MessageParser.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Message\MSG_UNION.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Message\PackMessage.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">
@@ -58,15 +70,6 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="src\VNOCServer.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Message\MessageParser.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Message\MsgDef.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Message\PackMessage.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="src\VnocProtocol.cpp">
@@ -121,6 +124,15 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="src\UserManage.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Message\BaseMessage.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Message\MessageParser.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Message\PackMessage.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
