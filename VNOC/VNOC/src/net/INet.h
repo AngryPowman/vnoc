@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../base/IModule.h"
-#include "../../../../Message/MsgDef.h"
+#include "../../../../Message/MSG_UNION.h"
 
 #include <vector>
 

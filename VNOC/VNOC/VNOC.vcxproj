@@ -307,9 +307,20 @@
     <None Include="VNOC.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Message\BaseMessage.h" />
     <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
     <ClInclude Include="..\..\Message\MessageParser.h" />
-    <ClInclude Include="..\..\Message\MsgDef.h" />
+    <ClInclude Include="..\..\Message\MSG_ACI.h" />
+    <ClInclude Include="..\..\Message\MSG_ACL.h" />
+    <ClInclude Include="..\..\Message\MSG_ALI.h" />
+    <ClInclude Include="..\..\Message\MSG_APS.h" />
+    <ClInclude Include="..\..\Message\MSG_AVC.h" />
+    <ClInclude Include="..\..\Message\MSG_RCI.h" />
+    <ClInclude Include="..\..\Message\MSG_RCL.h" />
+    <ClInclude Include="..\..\Message\MSG_RLI.h" />
+    <ClInclude Include="..\..\Message\MSG_RPS.h" />
+    <ClInclude Include="..\..\Message\MSG_RVC.h" />
+    <ClInclude Include="..\..\Message\MSG_UNION.h" />
     <ClInclude Include="..\..\Message\PackMessage.h" />
     <ClInclude Include="..\..\TinyXML\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\tinyxml.h" />
@@ -409,29 +420,14 @@
     <ClInclude Include="VNOC.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Message\BaseMessage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Message\MessageParser.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\Message\MsgDef.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Message\PackMessage.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\TinyXML\tinystr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

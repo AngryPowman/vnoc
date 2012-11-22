@@ -159,8 +159,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\..\..\..\Message\MessageParser.cpp" />
-    <ClCompile Include="..\..\..\..\Message\MsgDef.cpp" />
     <ClCompile Include="..\..\..\..\Message\PackMessage.cpp" />
     <ClCompile Include="..\..\FileUserStorage.cpp" />
     <ClCompile Include="..\..\UserManage.cpp" />

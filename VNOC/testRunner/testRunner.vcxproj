@@ -10,6 +10,31 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Message\BaseMessage.cpp" />
+    <ClCompile Include="..\..\Message\MessageParser.cpp" />
+    <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\test\testPackMessage.cpp" />
+    <ClCompile Include="..\test\testRunner.cpp" />
+    <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Message\BaseMessage.h" />
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
+    <ClInclude Include="..\..\Message\MessageParser.h" />
+    <ClInclude Include="..\..\Message\MSG_ACI.h" />
+    <ClInclude Include="..\..\Message\MSG_ACL.h" />
+    <ClInclude Include="..\..\Message\MSG_ALI.h" />
+    <ClInclude Include="..\..\Message\MSG_APS.h" />
+    <ClInclude Include="..\..\Message\MSG_AVC.h" />
+    <ClInclude Include="..\..\Message\MSG_RCI.h" />
+    <ClInclude Include="..\..\Message\MSG_RCL.h" />
+    <ClInclude Include="..\..\Message\MSG_RLI.h" />
+    <ClInclude Include="..\..\Message\MSG_RPS.h" />
+    <ClInclude Include="..\..\Message\MSG_RVC.h" />
+    <ClInclude Include="..\..\Message\MSG_UNION.h" />
+    <ClInclude Include="..\..\Message\PackMessage.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -81,19 +106,6 @@
       <AdditionalDependencies>cppunit.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Message\MessageParser.cpp" />
-    <ClCompile Include="..\..\Message\MsgDef.cpp" />
-    <ClCompile Include="..\..\Message\PackMessage.cpp" />
-    <ClCompile Include="..\test\testPackMessage.cpp" />
-    <ClCompile Include="..\test\testRunner.cpp" />
-    <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\Message\MessageParser.h" />
-    <ClInclude Include="..\..\..\Message\MsgDef.h" />
-    <ClInclude Include="..\..\..\Message\PackMessage.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

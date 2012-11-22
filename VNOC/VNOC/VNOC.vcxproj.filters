@@ -70,6 +70,9 @@
     <Filter Include="Logic\room">
       <UniqueIdentifier>{d540b725-8c4e-44e8-a158-7632bd34cbfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="net\MessageParser\MSG_CLASS">
+      <UniqueIdentifier>{0134d767-6eef-4585-ba77-f15462b58656}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="small.ico">
@@ -494,15 +497,6 @@
     <ClInclude Include="src\net\Socket\SockWnd.h">
       <Filter>net\socket</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Message\MessageParser.h">
-      <Filter>net\MessageParser</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Message\MsgDef.h">
-      <Filter>net\MessageParser</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Message\PackMessage.h">
-      <Filter>net\MessageParser</Filter>
-    </ClInclude>
     <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h">
       <Filter>FrameWork\Dialogs</Filter>
     </ClInclude>
@@ -550,6 +544,48 @@
     </ClInclude>
     <ClInclude Include="src\BKWin\bkwin\ListViewCtrlEx.h">
       <Filter>BKWin\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACI.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACL.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ALI.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_APS.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_AVC.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RCI.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RCL.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RLI.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RPS.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RVC.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\BaseMessage.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageParser.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_UNION.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\PackMessage.h">
+      <Filter>net\MessageParser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -610,15 +646,6 @@
     <ClCompile Include="src\net\Socket\SockWnd.cpp">
       <Filter>net\socket</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Message\MessageParser.cpp">
-      <Filter>net\MessageParser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Message\MsgDef.cpp">
-      <Filter>net\MessageParser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Message\PackMessage.cpp">
-      <Filter>net\MessageParser</Filter>
-    </ClCompile>
     <ClCompile Include="src\FrameWork\Dialogs\BKWinLogin.cpp">
       <Filter>FrameWork\Dialogs</Filter>
     </ClCompile>
@@ -639,6 +666,15 @@
     </ClCompile>
     <ClCompile Include="src\BKWin\bkwin\ListViewCtrlEx.cpp">
       <Filter>BKWin\BKWin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\BaseMessage.cpp">
+      <Filter>net\MessageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MessageParser.cpp">
+      <Filter>net\MessageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\PackMessage.cpp">
+      <Filter>net\MessageParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
