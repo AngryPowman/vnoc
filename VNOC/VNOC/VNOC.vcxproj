@@ -253,6 +253,7 @@
     <None Include="res\btn_sys_restore.png" />
     <None Include="res\btn_tab.bmp" />
     <None Include="res\btn_virscan_bg.bmp" />
+    <None Include="res\ClassroomWin.xml" />
     <None Include="res\clear_bk.bmp" />
     <None Include="res\clear_panel.bmp" />
     <None Include="res\def_skin.xml" />
@@ -383,6 +384,7 @@
     <ClInclude Include="src\config\Config.h" />
     <ClInclude Include="src\config\ConfigDefine.h" />
     <ClInclude Include="src\config\IConfig.h" />
+    <ClInclude Include="src\FrameWork\Dialogs\BKWinClassroom.h" />
     <ClInclude Include="src\FrameWork\Dialogs\BKWinLogin.h" />
     <ClInclude Include="src\FrameWork\Dialogs\BKWinRoomList.h" />
     <ClInclude Include="src\FrameWork\FrameModuleFactory.h" />
@@ -466,6 +468,7 @@
     </ClCompile>
     <ClCompile Include="src\BKWin\bkwin\ListViewCtrlEx.cpp" />
     <ClCompile Include="src\config\Config.cpp" />
+    <ClCompile Include="src\FrameWork\Dialogs\BKWinClassroom.cpp" />
     <ClCompile Include="src\FrameWork\Dialogs\BKWinLogin.cpp" />
     <ClCompile Include="src\FrameWork\Dialogs\BKWinRoomList.cpp" />
     <ClCompile Include="src\FrameWork\FrameWork.cpp" />
