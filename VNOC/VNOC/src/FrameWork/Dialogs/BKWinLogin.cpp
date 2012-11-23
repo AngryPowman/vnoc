@@ -24,9 +24,9 @@ void CLoginWnd::OnBkBtnClose()
 
 void CLoginWnd::OnLoginClick()
 {
-	Disable();
-	m_loginState = 1;
-	SetTimer(TimerID_LoginTimeout,5000);
+	//Disable();
+	//m_loginState = 1;
+	//SetTimer(TimerID_LoginTimeout,5000);
 	CString userName;
 	CString pwd;
 	CBkWindow* pUsernameEdit = NULL;
@@ -37,10 +37,21 @@ void CLoginWnd::OnLoginClick()
 	{
 		userName = pUsernameEdit->GetInnerText();
 		pwd = pPwdEdit->GetInnerText();
-		XMessage_Login msg;
-		msg.username = userName;
-		msg.pwd = pwd;
-		SendXMessage(&msg);
+		if ("" != userName && "" != pwd)
+		{
+			Disable();
+			m_loginState = 1;
+			SetTimer(TimerID_LoginTimeout,5000);
+
+			XMessage_Login msg;
+			msg.username = userName;
+			msg.pwd = pwd;
+			SendXMessage(&msg);
+		}
+		else
+		{
+			MessageBox(TEXT("用户名或密码不能为空"));
+		}
 	}
 }
 
