@@ -2,6 +2,7 @@
 
 #include "Dialogs/BKWinLogin.h"
 #include "Dialogs/BKWinRoomList.h"
+#include "Dialogs\BKWinClassroom.h"
 #include "../Logic/room/RoomMgr.h"
 #include "../Logic/UserSession/LoginImpl.h"
 
@@ -34,6 +35,9 @@ public:
 			break;
 		case module_RoomListWin:
 			*ppModule = new CRoomListWnd;
+			break;
+		case module_ClassroomWin:
+			*ppModule = new CClassroomWnd;
 			break;
 		default:
 			ATLASSERT(FALSE && "invalid module");
