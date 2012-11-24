@@ -1,9 +1,19 @@
 #include "stdafx.h"
 #include "ListViewCtrlEx.h"
 #include <algorithm>
+#include "../bkres/bkres.h"
+//#include "beikesafetipdlg.h"
+//#include "KAutoSync.h"
 
 #define COLOR_LIST_LINK				RGB(40,100,165)	
 #define LEFT_MARGIN_TEXT_COLUMN		2
+#define XX_TIMER_ID_TIPS			1
+
+
+enum {
+	WMH_LISTEX_HOVERCHANGED = WM_USER + 0x300,
+	WMH_LISTEX_LINK
+};
 
 void CreateBitmapMask( CBitmap &pBmpSource, CBitmap &pBmpMask, COLORREF clrpTransColor, int iTransPixelX, int iTransPixelY)
 {
@@ -128,9 +138,9 @@ void CHeaderCtrlEx::OnPaint( CDCHandle )
 		
 		GetItem(i, &hdItem);
 		UINT uFormat = DT_SINGLELINE | DT_END_ELLIPSIS | DT_VCENTER;
-		UINT uAlign = DT_LEFT;
-		if(hdItem.fmt & HDF_CENTER)
-			uAlign = DT_CENTER;
+		UINT uAlign = DT_CENTER;
+		if(hdItem.fmt & DT_LEFT)
+			uAlign = DT_LEFT;
 		else if(hdItem.fmt & HDF_RIGHT)
 			uAlign = DT_RIGHT;
 		uFormat |= uAlign;
@@ -167,10 +177,10 @@ LRESULT CHeaderCtrlEx::OnMouseMove( UINT nFlags, CPoint point )
 }
 
 CListViewCtrlEx::CListViewCtrlEx( void )
-    : m_strEmptyString(_T(""))
 {
 	m_hWndObserver = NULL;
 	m_nHoverItem = -1;
+	m_nHoverSubItem = -1;
 
 	m_fontLink.Attach( BkFontPool::GetFont(FALSE,TRUE,FALSE,0) );
 	m_fontBold.Attach( BkFontPool::GetFont(TRUE,FALSE,FALSE) );
@@ -179,9 +189,12 @@ CListViewCtrlEx::CListViewCtrlEx( void )
 	m_bitmapCheck.Attach( BkBmpPool::GetBitmap(IDB_BITMAP_LISTCTRL_CHECK) );
 	m_bitmapExpand.Attach( BkBmpPool::GetBitmap(IDB_BITMAP_MINUS_PLUS) );
 	m_bitmapRadio.Attach( BkBmpPool::GetBitmap(IDB_BITMAP_LISTCTRL_RADIO) );
+//	m_bitmapCombo.Attach(BkBmpPool::GetBitmap(IDB_BITMAP_LISTCTRL_COMBO));
 	CreateBitmapMask(m_bitmapRadio, m_bitmapRadioMask, 0, 0, 0);
+	m_strEmptyString = _T("没有内容");
 
-	m_uHeight = 30;
+	m_bOnlyShowRisk = false;
+	::InitializeCriticalSection(&m_hListLock);
 }
 
 CListViewCtrlEx::~CListViewCtrlEx( void )
@@ -193,7 +206,10 @@ CListViewCtrlEx::~CListViewCtrlEx( void )
 	m_bitmapExpand.Detach();
 	m_bitmapRadio.Detach();
 	m_fontDef.Detach();
+	m_bitmapCombo.Detach();
 	m_bitmapRadioMask.DeleteObject();
+
+	::DeleteCriticalSection(&m_hListLock);
 }
 
 HWND CListViewCtrlEx::Create( HWND hWndParent, _U_RECT rect /*= NULL*/, LPCTSTR szWindowName /*= NULL*/, DWORD dwStyle /*= 0*/, DWORD dwExStyle /*= 0*/, _U_MENUorID MenuOrID /*= 0U*/, LPVOID lpCreateParam /*= NULL*/ )
@@ -205,7 +221,7 @@ HWND CListViewCtrlEx::Create( HWND hWndParent, _U_RECT rect /*= NULL*/, LPCTSTR 
 	m_ctlHeader.SetHeight(25);
 	m_ctlHeader.ModifyStyle(HDS_FULLDRAG, 0, 0);
 
-	_super::SetBkColor(BACKGROUND_COLOR);
+	_super::SetBkColor(RGB(0xfb,0xfc,0xfd));
 	return hWnd;
 }
 
@@ -250,7 +266,7 @@ void CListViewCtrlEx::ClearRadioCheck()
 	for(int i=0; i<_super::GetItemCount(); ++i)
 	{
 		TListItem *pItem = _GetItemData( i );
-		if( pItem->dwFlags & LISTITEM_RADIOBOX )
+		if( pItem && pItem->dwFlags & LISTITEM_RADIOBOX )
 		{
 			_super::SetCheckState(i, FALSE);
 		}
@@ -312,9 +328,118 @@ int CListViewCtrlEx::Append( LPCTSTR strItem, DWORD dwFlags /*=0*/, E_SubItemTyp
 	return nItem;
 }
 
+int CListViewCtrlEx::Append(LPCTSTR strItem, HICON hIcon, LEVEL nLevel /*= enumLevelSafe*/, DWORD dwFlags /*= 0*/ )
+{
+	//KAutoSync autoCS(&m_hListLock);
+
+
+	if (!m_bOnlyShowRisk || nLevel == enumLevelRisk)
+		_super::AddItem(_super::GetItemCount(), 0, _T(""));
+
+	TListItem *pitem = new TListItem;
+	pitem->dwFlags = dwFlags;
+	pitem->nLevel = nLevel;
+	pitem->subItems.push_back( TListSubItem(strItem, hIcon) );
+	pitem->nRiskRefIndex = -1;
+	m_arrItems.push_back( pitem );
+
+	if (pitem->nLevel == enumLevelRisk)
+	{
+		m_RiskItemIDArray.Add(m_arrItems.size() - 1);
+		m_arrItems[m_arrItems.size() - 1]->nRiskRefIndex = m_RiskItemIDArray.GetSize();
+	}
+	else if (pitem->nLevel == enumLevelUnknown)
+	{
+		m_UnknownItemIDArray.Add(m_arrItems.size() - 1);
+	}
+
+	return m_arrItems.size() - 1;
+}
+
+int CListViewCtrlEx::Append(LPCTSTR strItem, HICON hIcon, DWORD dwMapId, DWORD dwFlags /*= 0*/ )
+{
+	//KAutoSync autoCS(&m_hListLock);
+
+
+	_super::AddItem(_super::GetItemCount(), 0, _T(""));
+
+	TListItem *pitem = new TListItem;
+	pitem->dwFlags = dwFlags;
+	pitem->dwMapId = dwMapId;
+	pitem->subItems.push_back( TListSubItem(strItem, hIcon) );
+	m_arrItems.push_back( pitem );
+
+	return m_arrItems.size() - 1;
+}
+
+void CListViewCtrlEx::SetOnlyShowRisk(bool bShowRisk)
+{
+	//m_bOnlyShowRisk = bShowRisk;
+	//if (m_arrItems.size())
+	//	m_ActorRefresh.Startup(this);
+}
+
+DWORD CListViewCtrlEx::GetAllSafeCount()
+{
+	return m_arrItems.size() - m_RiskItemIDArray.GetSize() - m_UnknownItemIDArray.GetSize();
+}
+
+DWORD CListViewCtrlEx::GetAllRiskCount()
+{
+	return m_RiskItemIDArray.GetSize();
+}
+
+DWORD CListViewCtrlEx::GetAllUnknownCount()
+{
+	return m_UnknownItemIDArray.GetSize();
+}
+
+
+LRESULT CListViewCtrlEx::OnDeleteAll(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam)
+{
+	_super::DeleteAllItems();
+	return 0;
+}
+
+LRESULT CListViewCtrlEx::OnAddItem(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam)
+{
+	_super::AddItem(_super::GetItemCount(), 0, _T(""));
+	return 0;
+}
+/*
+void CListViewCtrlEx::OnActivate(KActor* pActor)
+{
+	if (m_ActorRefresh.IsActive())
+	{
+		if (m_bOnlyShowRisk)
+		{
+			PostMessage(MSG_DEL_ALL);
+			for (int i = 0; i < m_RiskItemIDArray.GetSize(); i++)
+			{
+				if (m_ActorRefresh.WaitForStop(1))
+					return;
+
+				PostMessage(MSG_ADD_ITEM);
+			}
+		}
+		else
+		{
+			PostMessage(MSG_DEL_ALL);
+			for (int i = 0; i < m_arrItems.size(); i++)
+			{
+				if (m_ActorRefresh.WaitForStop(1))
+					return;
+
+				PostMessage(MSG_ADD_ITEM);
+			}
+		}
+
+	}
+}
+*/
 int CListViewCtrlEx::AppendTitleItem(int nItem, LPCTSTR strItem, CRect rc, E_SubItemType itemType, COLORREF clr, LPCTSTR szURL )
 {
-	BOOL bValid = (nItem >= 0) && (nItem < m_arrItems.size());
+	BOOL bValid = nItem>=0 && nItem<m_arrItems.size();
 	ATLASSERT(bValid);
 	if( !bValid )
 		return -1;
@@ -335,6 +460,17 @@ int CListViewCtrlEx::AppendSubItem( int nItem, LPCTSTR strItem, E_SubItemType it
 	m_arrItems[nItem]->subItems.push_back( TListSubItem(strItem, itemType) );
 	return m_arrItems[nItem]->subItems.size();
 }
+
+int CListViewCtrlEx::AppendSubItem( int nItem, LPCTSTR strItem, DWORD dwImg, E_SubItemType itemType)
+{
+	BOOL bValid = nItem>=0 && nItem<m_arrItems.size();
+	ATLASSERT(bValid);
+	if( !bValid )
+		return -1;
+	m_arrItems[nItem]->subItems.push_back( TListSubItem(strItem, dwImg, itemType) );
+	return m_arrItems[nItem]->subItems.size();
+}
+
 
 bool CListViewCtrlEx::SetSubItem( int nItem, int nSubItem, LPCTSTR lpszItem, E_SubItemType itemType/*=SUBITEM_TEXT*/, BOOL bRedraw )
 {
@@ -404,6 +540,15 @@ bool CListViewCtrlEx::SetItemCheckX( int nItem, DWORD dwFlags )
 
 BOOL CListViewCtrlEx::DeleteItem( int nItem )
 {
+	if(nItem < 0 || nItem >= m_arrItems.size())
+		return FALSE;
+
+
+	//KAutoSync autoCS(&m_hListLock);
+
+	if (m_arrItems[nItem]->nRiskRefIndex != -1)
+		m_RiskItemIDArray.RemoveAt(m_arrItems[nItem]->nRiskRefIndex);
+
 	TListItemPtrs::iterator it = m_arrItems.begin();
 	if(nItem>0)
 		std::advance(it, nItem);
@@ -419,15 +564,27 @@ VOID CListViewCtrlEx::DeleteItem( LPDELETEITEMSTRUCT )
 
 BOOL CListViewCtrlEx::DeleteAllItems()
 {
+	//KAutoSync autoCS(&m_hListLock);
+//	m_ActorRefresh.Stop();
+
 	for(TListItemPtrs::iterator it=m_arrItems.begin(); it!=m_arrItems.end(); ++it)
 		delete *it;
 	m_arrItems.clear();
+	m_RiskItemIDArray.RemoveAll();
+	m_UnknownItemIDArray.RemoveAll();
 	return _super::DeleteAllItems();
 }
 
+
+BOOL CListViewCtrlEx::InSubItemCheckBox(const POINT& pt, int nItem )
+{
+	return _PtInSubItemCheckBox(pt, nItem);
+}
+
+
 LRESULT CListViewCtrlEx::OnClick( int idCtrl, LPNMHDR pnmh, BOOL& bHandled )
 {
-	bHandled = TRUE;
+	bHandled = FALSE;
 	
 	LPNMITEMACTIVATE lpnmitem = (LPNMITEMACTIVATE) pnmh;
 
@@ -477,6 +634,12 @@ LRESULT CListViewCtrlEx::OnClick( int idCtrl, LPNMHDR pnmh, BOOL& bHandled )
 				GetItemRect( lpnmitem->iItem, &rcItem, LVIR_BOUNDS);
 				InvalidateRect( rcItem );
 			}
+
+			/*const TListSubItem *pSubItem = _GetSubItemData(lpnmitem->iItem,lpnmitem->iSubItem);
+			if(pSubItem->type==SUBITEM_COMBO)
+			{
+				
+			}*/
 		}
 	}
 	return 0;
@@ -503,16 +666,63 @@ void CListViewCtrlEx::OnPaint( CDCHandle )
 
 void CListViewCtrlEx::OnMouseMove(UINT nFlags, CPoint point)
 {
+	TRACKMOUSEEVENT trkMouse;
+	trkMouse.cbSize = sizeof( TRACKMOUSEEVENT );
+	trkMouse.dwFlags = TME_LEAVE;
+	trkMouse.hwndTrack = m_hWnd;
+
+	// notify when the mouse leaves button
+	_TrackMouseEvent( &trkMouse );
+
 	CRect	rcItem;
-	SetMsgHandled(FALSE);
 	
 	LVHITTESTINFO hti;
 	hti.pt = point;
 	SubItemHitTest( &hti );
-	if( m_nHoverItem!=hti.iItem )
+
+	if( m_nHoverItem != hti.iItem || m_nHoverSubItem != hti.iSubItem)
 	{
 		m_nHoverItem = hti.iItem;
+		m_nHoverSubItem = hti.iSubItem;
 		_FireEvent(WMH_LISTEX_HOVERCHANGED, m_nHoverItem);
+
+		KillTimer(XX_TIMER_ID_TIPS);
+		//CBkSafeTip::Hide();
+	}
+
+	static CPoint ptLast;
+	if (ptLast != point && hti.iItem != -1)
+		SetTimer(XX_TIMER_ID_TIPS, 200);
+
+	ptLast = point;
+}
+
+void CListViewCtrlEx::OnMouseLeave()
+{
+	KillTimer(XX_TIMER_ID_TIPS);
+	//CBkSafeTip::Hide();
+}
+
+void CListViewCtrlEx::OnTimer(UINT_PTR nIDEvent)
+{
+	if (nIDEvent == XX_TIMER_ID_TIPS)
+	{
+		CPoint	ptx;
+		CPoint	ptxbak;
+		::GetCursorPos(&ptx);
+		ptxbak		= ptx;
+		ptxbak.y	-= 25;
+		ScreenToClient(&ptx);
+
+		LVHITTESTINFO hti;
+		hti.pt = ptx;
+		SubItemHitTest( &hti );
+
+		const TListItem* pItem = _GetItemData( hti.iItem );
+		//if (pItem && hti.iSubItem >= 0 && hti.iSubItem < pItem->subItems.size())
+		//	CBkSafeTip::Show(pItem->subItems[hti.iSubItem].str, ptxbak, m_hWnd);
+
+		KillTimer(nIDEvent);
 	}
 }
 
@@ -530,26 +740,26 @@ BOOL CListViewCtrlEx::OnSetCursor(CWindow wnd, UINT nHitTest, UINT message)
 	return TRUE;
 }
 
-// void CListViewCtrlEx::MeasureItem( LPMEASUREITEMSTRUCT lpMes )
-// {
-// 	/*
-// 	const TListItem *pItem = _GetItemData( lpMes->itemID );
-// 	if(pItem)
-// 	{
-// 		if(pItem->dwFlags&LISTITEM_TITLE)
-// 			lpMes->itemHeight = 30;
-// 		else
-// 			lpMes->itemHeight = 28;
-// 	}
-// 	*/
-// 
-// 	lpMes->itemHeight = 24;
-// }
+void CListViewCtrlEx::MeasureItem( LPMEASUREITEMSTRUCT lpMes )
+{
+	/*
+	const TListItem *pItem = _GetItemData( lpMes->itemID );
+	if(pItem)
+	{
+		if(pItem->dwFlags&LISTITEM_TITLE)
+			lpMes->itemHeight = 30;
+		else
+			lpMes->itemHeight = 28;
+	}
+	*/
+
+	lpMes->itemHeight = 24;
+}
 
 void CListViewCtrlEx::DrawItem( LPDRAWITEMSTRUCT lpdis )
 {
 	int nItem = lpdis->itemID;
-	const TListItem *pItem = _GetItemData( nItem );
+	TListItem* pItem = _GetItemData( nItem );
 	if(!pItem)
 		return;
 	if(pItem->dwFlags & LISTITEM_TITLE)
@@ -671,6 +881,11 @@ void CListViewCtrlEx::_DrawTitleItem( LPDRAWITEMSTRUCT lpdis, const TListItem *p
 			dc.SelectFont(m_fontLink);
 			dc.SetTextColor(COLOR_LIST_LINK);
 		}
+		else
+		{
+			dc.SetTextColor( subItem.clr);
+			dc.SelectFont(m_fontDef);
+		}
 
 		CString strTitle = subItem.str;	
 		DWORD	nFlag=DT_SINGLELINE|DT_LEFT|DT_NOPREFIX|DT_END_ELLIPSIS;
@@ -701,7 +916,9 @@ void CListViewCtrlEx::_DrawTitleItem( LPDRAWITEMSTRUCT lpdis, const TListItem *p
 
 void CListViewCtrlEx::_DrawNormalItem( LPDRAWITEMSTRUCT lpdis, const TListItem *pItem )
 {
-	ATLASSERT(pItem);
+	if (!pItem)
+		return;
+
 	int nItem = lpdis->itemID;
 
 	CDCHandle dc;
@@ -753,7 +970,7 @@ void CListViewCtrlEx::_DrawNormalItem( LPDRAWITEMSTRUCT lpdis, const TListItem *
 		rcSubItem.left += LEFT_MARGIN_TEXT_COLUMN;
 		rcSubItem.right -= 3;
 		const TListSubItem &subItem = pItem->subItems[i];
-		if(subItem.type==SUBITEM_LINK)
+		if(subItem.type == SUBITEM_LINK)
 		{
 			dc.SelectFont(m_fontLink);
 			dc.SetTextColor(COLOR_LIST_LINK);
@@ -767,8 +984,86 @@ void CListViewCtrlEx::_DrawNormalItem( LPDRAWITEMSTRUCT lpdis, const TListItem *
 		}
 		else
 		{
-			dc.SetTextColor( subItem.clr );
-			dc.DrawText( subItem.str, -1, &rcSubItem, DT_SINGLELINE|DT_LEFT|DT_NOPREFIX|DT_END_ELLIPSIS|DT_VCENTER);
+			if (subItem.type == SUBITEM_ICON && subItem.nImg != NULL)
+			{
+				dc.DrawIconEx( rcSubItem.left, rcSubItem.top + 3, (HICON)subItem.nImg, 16 , 16, 0, 0, DI_NORMAL );
+				rcSubItem.left = rcSubItem.left + 18;
+			}
+			else if (subItem.type == SUBITEM_PNG)
+			{
+				Gdiplus::Image* pImg = BkPngPool::Get(subItem.nImg);
+				if (pImg)
+				{
+					Gdiplus::Graphics graphics(dc);
+
+					SIZE size = {0, 0};
+					if (pImg)
+					{
+						size.cx = pImg->GetWidth();
+						size.cy = pImg->GetHeight();
+					}
+
+					graphics.DrawImage(pImg, Gdiplus::Rect(rcSubItem.left, rcSubItem.top + 5, size.cx, size.cy));
+				}
+				rcSubItem.left = rcSubItem.left + 18;
+			}else if(subItem.type==SUBITEM_COMBO)
+			{
+				CDC	dcTmp;
+				dcTmp.CreateCompatibleDC(dc);
+				HBITMAP hBmpOld	= dcTmp.SelectBitmap(m_bitmapCombo);
+				dc.BitBlt(rcSubItem.right-20, rcSubItem.top + 3, 20, 20, dcTmp, 0, 0, SRCCOPY);
+				dcTmp.SelectBitmap(hBmpOld);
+				dcTmp.DeleteDC();
+			}
+
+			UINT uFormat = DT_SINGLELINE|DT_LEFT|DT_NOPREFIX|DT_PATH_ELLIPSIS|DT_VCENTER;
+			if (i == 3)
+			{
+				if (pItem->nLevel == enumLevelRisk)
+				{
+					rcSubItem.DeflateRect(2, 3);
+
+					CPen penBorder;
+					penBorder.CreatePen( PS_SOLID, 1, RGB(224, 0, 0) );
+					CBrush bshInterior;
+					bshInterior.CreateSolidBrush( RGB(224, 0, 0)  );
+
+					HPEN hOldPen = dc.SelectPen( penBorder );
+					HBRUSH hOldBrush = dc.SelectBrush( bshInterior );
+
+					dc.RoundRect( rcSubItem, CPoint( 3, 3 ) );
+					dc.SelectPen(hOldPen);
+					dc.SelectBrush(hOldBrush);
+					dc.SetTextColor( RGB(255, 255, 255) );
+				}
+				else if (pItem->nLevel == enumLevelUnknown)
+				{
+					rcSubItem.DeflateRect(2, 3);
+
+					CPen penBorder;
+					penBorder.CreatePen( PS_SOLID, 1, RGB(250, 115, 5) );
+					CBrush bshInterior;
+					bshInterior.CreateSolidBrush( RGB(250, 115, 5)  );
+
+					HPEN hOldPen = dc.SelectPen( penBorder );
+					HBRUSH hOldBrush = dc.SelectBrush( bshInterior );
+
+					dc.RoundRect( rcSubItem, CPoint( 3, 3 ) );
+					dc.SelectPen(hOldPen);
+					dc.SelectBrush(hOldBrush);
+					dc.SetTextColor( RGB(255, 255, 255) );
+				}
+				else
+					dc.SetTextColor( subItem.clr );
+
+				uFormat = DT_SINGLELINE|DT_CENTER|DT_NOPREFIX|DT_PATH_ELLIPSIS|DT_VCENTER;
+			}
+			else
+				dc.SetTextColor( subItem.clr );
+	
+			dc.DrawText( subItem.str, -1, &rcSubItem, uFormat);
+			if (subItem.type == SUBITEM_ICON || subItem.type == SUBITEM_PNG)
+				rcSubItem.left = rcSubItem.left - 18;
 
 			CRect	rcProbeItem;
 			dc.DrawText( subItem.str, -1, &rcProbeItem, DT_SINGLELINE|DT_LEFT|DT_NOPREFIX|DT_VCENTER|DT_CALCRECT);
@@ -781,7 +1076,10 @@ void CListViewCtrlEx::_DrawNormalItem( LPDRAWITEMSTRUCT lpdis, const TListItem *
 	penx.CreatePen(PS_SOLID,1,pItem->clrBtmGapLine);
 	HPEN	penOld = dc.SelectPen(penx);
 	dc.MoveTo( lpdis->rcItem.left, lpdis->rcItem.bottom-1 );
-	dc.LineTo( lpdis->rcItem.right, lpdis->rcItem.bottom-1);
+	CRect rcClient;
+	GetClientRect(rcClient);
+
+	dc.LineTo( lpdis->rcItem.left + rcClient.Width(), lpdis->rcItem.bottom-1);
 	dc.SelectPen(penOld);
 
 	dc.SelectFont(hOldFont);
@@ -804,16 +1102,34 @@ const CListViewCtrlEx::TListSubItem * CListViewCtrlEx::_GetSubItemData( int nIte
 
 const CListViewCtrlEx::TListItem * CListViewCtrlEx::_GetItemData( int nItem ) const
 {
-	if(nItem>=0 && nItem<m_arrItems.size())
+	if (nItem < 0 || nItem >= m_arrItems.size())
+		return NULL;
+
+	if (m_bOnlyShowRisk)
+	{
+		if (nItem >= m_RiskItemIDArray.GetSize())
+			return NULL;
+	
+		return m_arrItems[m_RiskItemIDArray[nItem]];
+	}
+	else
 		return m_arrItems[nItem];
-	return NULL;
 }
 
 CListViewCtrlEx::TListItem * CListViewCtrlEx::_GetItemData( int nItem )
 {
-	if(nItem>=0 && nItem<m_arrItems.size())
+	if (nItem < 0 || nItem >= m_arrItems.size())
+		return NULL;
+
+	if (m_bOnlyShowRisk)
+	{
+		if (nItem >= m_RiskItemIDArray.GetSize())
+			return NULL;
+
+		return m_arrItems[m_RiskItemIDArray[nItem]];
+	}
+	else
 		return m_arrItems[nItem];
-	return NULL;
 }
 
 BOOL CListViewCtrlEx::_PtInSubItemCheckBox( const POINT& pt, int nItem )
@@ -822,10 +1138,9 @@ BOOL CListViewCtrlEx::_PtInSubItemCheckBox( const POINT& pt, int nItem )
 	if( nItem>=0 && nItem<_super::GetItemCount() && GetItemRect(nItem, &rcItem, LVIR_BOUNDS) )
 	{
 		TListItem *pItem = _GetItemData(nItem);
-		ATLASSERT(pItem);
 
 		// 
-		if( pItem->dwFlags&(LISTITEM_CHECKBOX|LISTITEM_RADIOBOX) )
+		if( pItem && pItem->dwFlags&(LISTITEM_CHECKBOX|LISTITEM_RADIOBOX) )
 		{
 			RECT rcCheckBox = _GetRectCheckBox( rcItem );
 			return PtInRect(&rcCheckBox, pt);
@@ -857,7 +1172,8 @@ bool CListViewCtrlEx::_PtInSubItemLink( const POINT &pt, int nItem, int& nSubIte
 	if( nItem>=0 && nItem<_super::GetItemCount() )
 	{
 		TListItem *pItem = _GetItemData(nItem);
-		ATLASSERT(pItem);
+		if (!pItem)
+			return false;
 
 		if ( pItem->dwFlags & LISTITEM_TITLE )
 		{
@@ -901,7 +1217,7 @@ int CListViewCtrlEx::_DrawCheckBox( CDCHandle &dc, RECT &rcItem, BOOL bChecked, 
 		
 		RECT rcCheckBox = _GetRectCheckBox( rcItem );
 		HBITMAP hBmpOld = NULL;
-		int x=rcCheckBox.left, y=rcCheckBox.top, nWidth=13, nHeight=13, xSrc=bChecked ? 0 : 13, ySrc=0;
+		int x=rcCheckBox.left + 3, y=rcCheckBox.top, nWidth=13, nHeight=13, xSrc=bChecked ? 0 : 13, ySrc=0;
 		
 		if(dwFlags&LISTITEM_CHECKBOX)
 		{
@@ -927,7 +1243,7 @@ RECT CListViewCtrlEx::_GetRectCheckBox( RECT &rcItem )
 {
 	INT nHeight = rcItem.bottom - rcItem.top;
 	int nTop = rcItem.top + (nHeight-13)/2;
-	RECT rcCheckBox = {rcItem.left+6, nTop, rcItem.left+6+13, nTop+13};
+	RECT rcCheckBox = {rcItem.left+3, nTop, rcItem.left+3+13, nTop+13};
 	return rcCheckBox;
 }
 
@@ -1066,6 +1382,8 @@ BOOL CListViewCtrlEx::_ExpandItem( TListItem * pItem, INT iItem, BOOL expand )
 		for( int i=iItem+1; i<_super::GetItemCount(); ++i)
 		{
 			TListItem *p = _GetItemData( i );
+			if (!p)
+				break;
 			if(p->dwFlags & LISTITEM_TITLE)
 				break;
 			
@@ -1087,21 +1405,4 @@ BOOL CListViewCtrlEx::_ExpandItem( TListItem * pItem, INT iItem, BOOL expand )
 		return TRUE;
 	}
 	return FALSE;
-}
-
-//设置行高，如果给定的值,m_uHeight=0认为是一个无效的值，不会设置生效
-void CListViewCtrlEx::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
-{
-	if (0 == m_uHeight)
-		return;
-
-	lpMeasureItemStruct->itemHeight = m_uHeight;
-}
-
-UINT CListViewCtrlEx::SetItemHeight(UINT uHeight /* = 30 */)
-{
-	UINT u = m_uHeight;
-	m_uHeight = uHeight;
-
-	return u;
 }

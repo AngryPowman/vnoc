@@ -163,3 +163,8 @@ struct XMessage_ShowRoomList : public XMessage
 {
 	ImTheMessageOf(XMessage_ShowRoomList);
 };
+
+struct XMessage_ShowClassroom : public XMessage
+{
+	ImTheMessageOf(XMessage_ShowClassroom);
+};

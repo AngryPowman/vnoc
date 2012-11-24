@@ -1,34 +1,12 @@
 #pragma once
 
-
 #include "src/BKWin/wtl/atlcrack.h"
-//#include "src/Vulfix/BeikeVulfix.h"
 #include <vector>
+//#include "KActor.h"
 
 
-
-const COLORREF black = RGB(0,0,0);
-const COLORREF red = RGB(255,0,0);
-const COLORREF green = RGB(0,255,0);
-const COLORREF blue = RGB(0,0,255);
-const COLORREF yellow = RGB(255,255,0);
-const COLORREF brown = RGB(0xb2, 0x5d, 0x25);
-const COLORREF BACKGROUND_COLOR = RGB(0xfb,0xfc,0xfd);
-
-enum {
-	WMH_INIT_SCAN = WM_USER + 0x100,
-	WMH_SCAN_START,
-	WMH_SCAN_DONE,
-	WMH_REPAIR_DONE,
-	WMH_SCAN_FIXED_BEGIN,
-	WMH_SCAN_FIXED_DONE,
-	WMH_SCAN_SOFT_BEGIN,
-	WMH_SCAN_SOFT_DONE,
-	WMH_VULFIX_BASE = WM_USER + 0x200,
-	
-	WMH_LISTEX_HOVERCHANGED = WM_USER + 0x300,
-	WMH_LISTEX_LINK
-};
+#define MSG_DEL_ALL		(WM_APP + 200)
+#define MSG_ADD_ITEM	(WM_APP + 201)
 
 class CHeaderCtrlEx : public CWindowImpl<CHeaderCtrlEx, CHeaderCtrl>
 {
@@ -65,6 +43,9 @@ enum E_SubItemType
 {
 	SUBITEM_TEXT,
 	SUBITEM_LINK,
+	SUBITEM_ICON,
+	SUBITEM_PNG,
+	SUBITEM_COMBO
 };
 
 enum E_ListItemType
@@ -95,6 +76,12 @@ class CListViewCtrlEx :
 	typedef CWindowImpl<CListViewCtrlEx, CListViewCtrl> _super;
 
 public:
+	typedef enum _LEVEL
+	{
+		enumLevelSafe,
+		enumLevelRisk,
+		enumLevelUnknown
+	} LEVEL;
 	struct TListItem;
 	struct TListSubItem;
 	typedef std::vector<TListItem*> TListItemPtrs;
@@ -106,27 +93,50 @@ public:
 			nMarginLeft = 2;
 			clr = RGB(0,0,0);
 			rcOffset = CRect(0,0,0,0);
+			nImg = 0;
 		}
 
-		TListSubItem(LPCTSTR szText, CRect rc, E_SubItemType aType=SUBITEM_TEXT)
+		TListSubItem(LPCTSTR szText, CRect rc, E_SubItemType aType = SUBITEM_TEXT)
 			: str(szText), type(aType), rcOffset(rc)
 		{
+			nImg = 0;
 		}
 
-		TListSubItem(LPCTSTR szText, E_SubItemType aType=SUBITEM_TEXT)
+		TListSubItem(LPCTSTR szText, E_SubItemType aType = SUBITEM_TEXT)
 			: str(szText), type(aType)
+		{
+			rcOffset = CRect(0,0,0,0);
+			nMarginLeft = 2;
+			clr = RGB(0,0,0);
+			nImg = 0;
+			ATLASSERT(szText);
+		}
+
+		TListSubItem(LPCTSTR szText, HICON hIcon, E_SubItemType aType = SUBITEM_ICON)
+			: str(szText), nImg((DWORD)hIcon), type(aType)
 		{
 			rcOffset = CRect(0,0,0,0);
 			nMarginLeft = 2;
 			clr = RGB(0,0,0);
 			ATLASSERT(szText);
 		}
+
+		TListSubItem(LPCTSTR szText, DWORD nImgId, E_SubItemType aType = SUBITEM_PNG)
+			: str(szText), nImg(nImgId), type(aType)
+		{
+			rcOffset = CRect(0,0,0,0);
+			nMarginLeft = 2;
+			clr = RGB(0,0,0);
+			ATLASSERT(szText);
+		}
+
 		E_SubItemType type;
 		CString str;
 		COLORREF clr;
 		int	nMarginLeft;
 		CRect	rcOffset;
 		CString	strUrl;
+		DWORD	nImg;
 	};
 	
 	struct TListItem
@@ -135,7 +145,7 @@ public:
 		TListItem()
 		{
 			dwFlags		=0;
-			clrBg		=RGB(0xfb,0xfc,0xfd);
+			clrBg		= RGB(0xfb,0xfc,0xfd);
 			clrBtmGapLine=RGB(234,233,225);
 			nLeftmargin	=10;
 			nTopMargin	=-1;
@@ -159,10 +169,14 @@ public:
 		COLORREF	clrBg;
 		COLORREF	clrBtmGapLine;
 		TListSubItems subItems;
+
+		LEVEL		nLevel;
+		DWORD		dwMapId;
 		
 		BOOL _isclapsed;
 		TListItemPtrs _clapsed_items;
 		DWORD_PTR _itemData;
+		int			nRiskRefIndex;
 	};
 
 public:
@@ -172,15 +186,21 @@ public:
 	
 protected:
 	CFont m_fontLink, m_fontBold, m_fontTitle, m_fontDef;
-	CBitmap m_bitmapCheck, m_bitmapExpand, m_bitmapRadio;
+	CBitmap m_bitmapCheck, m_bitmapExpand, m_bitmapRadio,m_bitmapCombo;
 	CBitmap m_bitmapRadioMask;
 	int m_nHoverItem;
+	int m_nHoverSubItem;
 	
 	TListItemPtrs m_arrItems;
 	HWND m_hWndObserver;
 
 	CString m_strEmptyString;
-	
+	bool	m_bOnlyShowRisk;
+	CSimpleArray<DWORD>	m_RiskItemIDArray;
+	CSimpleArray<DWORD>	m_UnknownItemIDArray;
+	CRITICAL_SECTION	m_hListLock;
+	//KActor				m_ActorRefresh;
+
 public:
 	HWND Create(HWND hWndParent, _U_RECT rect = NULL, LPCTSTR szWindowName = NULL,
 		DWORD dwStyle = 0, DWORD dwExStyle = 0,
@@ -230,7 +250,10 @@ public:
 	int AppendTitle(LPCTSTR strItem, COLORREF clr, UINT uFlags=0);	
 	int AppendTitleItem(int nItem, LPCTSTR strItem, CRect rc, E_SubItemType itemType, COLORREF clr, LPCTSTR szURL);
 	int Append(LPCTSTR strItem, DWORD dwFlags=0, E_SubItemType itemType=SUBITEM_TEXT);	
-	int AppendSubItem(int nItem, LPCTSTR strItem, E_SubItemType itemType=SUBITEM_TEXT);	
+	int Append(LPCTSTR strItem, HICON hIcon, LEVEL nLevel = enumLevelSafe, DWORD dwFlags = 0);	
+	int Append(LPCTSTR strItem, HICON hIcon, DWORD dwMapId, DWORD dwFlags = 0);	
+	int AppendSubItem(int nItem, LPCTSTR strItem, E_SubItemType itemType = SUBITEM_TEXT);	
+	int AppendSubItem(int nItem, LPCTSTR strItem, DWORD dwImg, E_SubItemType itemType);
 	bool SetSubItem(int nItem, int nSubItem, LPCTSTR lpszItem, E_SubItemType itemType=SUBITEM_TEXT, BOOL bRedraw=TRUE);
 	bool GetSubItemText(int nItem, int nSubItem, CString &str);
 	bool SetSubItemColor(int nItem, int nSubItem, COLORREF clr, BOOL bRedraw=TRUE);
@@ -239,18 +262,29 @@ public:
 	BOOL DeleteAllItems();
 	void SetEmptyString(LPCTSTR szEmptyString);
 	void ExpandGroup(INT nItem, BOOL bExpand);
-	void MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct);
-	UINT SetItemHeight(UINT uHeight = 30);
+	
+	void SetOnlyShowRisk(bool bShowRisk);
+	DWORD GetAllSafeCount();
+	DWORD GetAllRiskCount();
+	DWORD GetAllUnknownCount();
+
+	//////////////////////////z////////////////////////////////////////////////
+	//  µœ÷IActorCallBack
+	//virtual void	OnActivate(KActor* pActor);
 
 public:
 	BEGIN_MSG_MAP(CListViewCtrlEx)   
 		MSG_WM_PAINT(OnPaint)
 		MSG_WM_MOUSEMOVE(OnMouseMove)
+		MSG_WM_MOUSELEAVE(OnMouseLeave)
 		MSG_WM_SETCURSOR(OnSetCursor)
+		//MSG_WM_TIMER(OnTimer)
 		NOTIFY_CODE_HANDLER(NM_CLICK, OnClick)
 		NOTIFY_CODE_HANDLER(HDN_DIVIDERDBLCLICK , OnTrackDbClickHeader)
 		NOTIFY_CODE_HANDLER(HDN_TRACK , OnTrackMoveHeader)
 		NOTIFY_CODE_HANDLER(HDN_ENDTRACK , OnHeaderEndTrack)
+		MESSAGE_HANDLER_EX(MSG_DEL_ALL, OnDeleteAll)
+		MESSAGE_HANDLER_EX(MSG_ADD_ITEM, OnAddItem)
 		REFLECTED_NOTIFY_CODE_HANDLER(NM_CLICK, OnClick)
 		CHAIN_MSG_MAP_ALT(COwnerDraw<CListViewCtrlEx>, 1)	
 		DEFAULT_REFLECTION_HANDLER()
@@ -258,13 +292,18 @@ public:
 	
 	void OnPaint(CDCHandle dc);
 	void OnMouseMove(UINT nFlags, CPoint point);
+	void OnMouseLeave();
+	void OnTimer(UINT_PTR nIDEvent);
 	BOOL OnSetCursor(CWindow wnd, UINT nHitTest, UINT message);
 	LRESULT OnClick(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);
 		
 	LRESULT OnTrackDbClickHeader(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);	
 	LRESULT OnTrackMoveHeader(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);	
 	LRESULT OnHeaderEndTrack(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);
-	
+	LRESULT	OnDeleteAll(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam);
+	LRESULT	OnAddItem(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam);
+
+	void MeasureItem(LPMEASUREITEMSTRUCT lpMes);
 	void DrawItem ( LPDRAWITEMSTRUCT lpdis );
 	VOID DeleteItem(LPDELETEITEMSTRUCT );
 
@@ -272,6 +311,7 @@ public:
 	const TListItem *_GetItemData(int nItem) const;
 	TListItem *_GetItemData(int nItem);
 	const TListSubItem *_GetSubItemData(int nItem, int nSubItem);
+	BOOL InSubItemCheckBox(const POINT& pt, int nItem );
 
 protected:
 	void _DrawTitleItem( LPDRAWITEMSTRUCT lpdis, const TListItem *pItem );
@@ -290,7 +330,4 @@ protected:
 	BOOL _ExpandItem( TListItem * pItem, INT iItem, BOOL expand );
 protected:
 	CRBMap<int,DWORD>	m_columnMaxWidth;
-
-private:
-		UINT m_uHeight;
 };

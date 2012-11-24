@@ -154,6 +154,8 @@ VOID CFrameWork::_LoadModule()
 	_LoadModule(module_LoginWin);
 	_LoadModule(module_RoomListData);
 	_LoadModule(module_RoomListWin);
+	_LoadModule(module_ClassroomWinData);
+	_LoadModule(module_ClassroomWin);
 
 	_GetModulesListenList();
 }
