@@ -162,6 +162,7 @@ public:
 		CPPUNIT_ASSERT(memcmp(msg_avc->GetCaptcha(),testParamO,16) == 0);
 		CPPUNIT_ASSERT(msg_avc->GetLoginTag() == 0x1e);
 		CPPUNIT_ASSERT(msg_avc->GetCaptchaType() == 0x1e);
+		delete msg_avc;
 	}
 
 	void MSGRVCParseTest()
@@ -214,6 +215,7 @@ public:
 
 		CPPUNIT_ASSERT(memcmp(msg_rvc->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 		CPPUNIT_ASSERT(memcmp(msg_rvc->GetMachineAddress(),testParamO,16) == 0);
+		delete msg_rvc;
 	}
 
 	void MSGRLIParseTest()
@@ -287,6 +289,7 @@ public:
 		CPPUNIT_ASSERT(memcmp(msg_rli->GetAccountNumber(),testParamT,16) == 0);
 
 		CPPUNIT_ASSERT(memcmp(msg_rli->GetPassword(),testParamS,16) == 0);
+		delete msg_rli;
 
 	}
 
@@ -370,6 +373,7 @@ public:
 		CPPUNIT_ASSERT(msg_rps->GetHeadForm() == 'A');
 
 		CPPUNIT_ASSERT(memcmp(msg_rps->GetHeadPortrait(),testParamS,sizeof(byte) * 16) == 0);
+		delete msg_rps;
 
 	}
 
@@ -423,6 +427,7 @@ public:
 		CPPUNIT_ASSERT(memcmp(msg_aps->GetGUID(),testParamO,sizeof(byte) * 16) == 0);
 
 		CPPUNIT_ASSERT(memcmp(msg_aps->GetMessageSynchro(),testParamO,sizeof(byte) * 16) == 0);
+		delete msg_aps;
 	}
 
 	void MSGALIParseTest()
@@ -488,7 +493,7 @@ public:
 		CPPUNIT_ASSERT(msg_ali->GetLoginResult() == 0x1E);
 
 		CPPUNIT_ASSERT(memcmp(msg_ali->GetATLGUID(),testParamT,sizeof(byte) * 16) == 0);
-
+		delete msg_ali;
 	}
 
 };

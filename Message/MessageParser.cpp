@@ -152,7 +152,9 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 		_Messsage->m_ComListLen.push_back(lpszData[nPos]);
 	}
 
-	int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
+	//int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
+	std::vector<int> tmpCmlListLen;
+	tmpCmlListLen.resize(_Messsage->m_CmlCount);
 
 	byte tmpComlLen[MSG_CLASS_PARAM] = {0};
 
@@ -203,13 +205,6 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 			}
 		}
 	}
-
-	if (tmpCmlListLen != NULL)
-	{
-		delete [] tmpCmlListLen;
-		tmpCmlListLen = NULL;
-	}
-
 	return VerifyPos;
 }
 
