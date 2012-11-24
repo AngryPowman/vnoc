@@ -400,6 +400,7 @@
     <ClInclude Include="src\Logic\room\RoomMgr.h" />
     <ClInclude Include="src\Logic\UserSession\ILogin.h" />
     <ClInclude Include="src\Logic\UserSession\LoginImpl.h" />
+    <ClInclude Include="src\Logic\UserSession\StrMatch.hpp" />
     <ClInclude Include="src\net\INet.h" />
     <ClInclude Include="src\net\Net.h" />
     <ClInclude Include="src\net\Socket\AsyncSocketEx.h" />

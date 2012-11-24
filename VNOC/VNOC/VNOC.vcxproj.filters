@@ -593,6 +593,9 @@
     <ClInclude Include="src\FrameWork\Dialogs\BKWinClassroom.h">
       <Filter>FrameWork\Dialogs</Filter>
     </ClInclude>
+    <ClInclude Include="src\Logic\UserSession\StrMatch.hpp">
+      <Filter>Logic\UserSession</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
