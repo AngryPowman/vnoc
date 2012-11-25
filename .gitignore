@@ -53,3 +53,7 @@ tags
 /NetService/src/test/testRunner/x64
 /VNOC/VNOC/Release
 /VNOC/VNOC/Debug
+/VNOC/VNOC/VldMemLeakCheck
+/VNOC/Release
+/VNOC/Debug
+/VNOC/VldMemLeakCheck
