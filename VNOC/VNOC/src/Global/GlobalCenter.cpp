@@ -19,7 +19,7 @@ CGlobalCenter::~CGlobalCenter(void)
 
 HRESULT CGlobalCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
-	setlocale(LC_ALL,"chs");
+	//setlocale(LC_ALL,"chs");
 	_InitializeLog();		// 所有地方都依赖log，所以当最先初始化
 	_InitializeConfig();
 	_InitializeNetCenter();

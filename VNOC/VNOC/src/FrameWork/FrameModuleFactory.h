@@ -39,6 +39,10 @@ public:
 		case module_ClassroomWin:
 			*ppModule = new CClassroomWnd;
 			break;
+		case module_ClassroomWinData:
+			// TODO: 没有找到对应的类, 在此添加相应处理
+			//       May like this: *ppModule = new CClassroom???
+			break;
 		default:
 			ATLASSERT(FALSE && "invalid module");
 			return E_FAIL;
