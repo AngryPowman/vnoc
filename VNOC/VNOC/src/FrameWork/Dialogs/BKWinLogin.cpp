@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BKWinLogin.h"
+#include "..\..\Logic\UserSession\StrMatch.hpp"
 
 #define TimerID_LoginTimeout	0
 
@@ -37,7 +38,8 @@ void CLoginWnd::OnLoginClick()
 	{
 		userName = pUsernameEdit->GetInnerText();
 		pwd = pPwdEdit->GetInnerText();
-		if ("" != userName && "" != pwd)
+		if (IsStringMatch(userName.GetString()) &&
+			IsStringMatch(pwd.GetString(), MATCH_TYPE_PWD))
 		{
 			Disable();
 			m_loginState = 1;
@@ -50,7 +52,7 @@ void CLoginWnd::OnLoginClick()
 		}
 		else
 		{
-			MessageBox(TEXT("用户名或密码不能为空"));
+			MessageBox(TEXT("请输入有效的用户名或密码"));
 		}
 	}
 }
