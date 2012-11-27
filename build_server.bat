@@ -11,7 +11,7 @@
 @echo .
 @echo ================	Build Server	=================
 "%VS11PATH%\devenv.com" .\NetService\server.sln /rebuild "Release"
-
+if ERRORLEVEL 1 exit /b 1
 @echo .
 @echo .
 @echo .

@@ -1,15 +1,11 @@
-ï»¿<layer width="1000" height="618" appwin="1">
+<layer width="750" height="513" appwin="1">
 	<header class="msgboxhead" width="full" height="31">
 		<icon src="101" pos="5,7"/>
-		<text class="dlgtitle" pos="28,10">æˆ¿é—´åˆ—è¡¨</text>
+		<text class="dlgtitle" pos="28,10">½ÌÊÒ</text>
 		<imgbtn id="10001" class="linkimage" skin="closeonlybtn" pos="-43,0"/>
 	</header>
 	<footer class="msgboxfoot" width="full" height="55">
 	</footer>
 	<body class="msgboxbody" width="full" height="full">
-        <realwnd id="1001" pos="10,1,330,562" ctrlid="1001" crbg1="FBFCFD" />
 	</body>
 </layer>
-
-
-

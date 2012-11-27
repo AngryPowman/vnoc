@@ -11,11 +11,13 @@ enum FrameModule
 	module_ViewBegin=256,
 	module_LoginWin,
 	module_RoomListWin,
+	module_ClassroomWin,
 	module_ViewEnd,
 
 	module_DataBegin=65536,
 	module_LoginData,
 	module_RoomListData,
+	module_ClassroomWinData,
 	module_DataEnd
 };
 

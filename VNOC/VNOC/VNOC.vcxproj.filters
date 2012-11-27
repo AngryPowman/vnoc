@@ -252,6 +252,9 @@
     <None Include="config\config.xml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\ClassroomWin.xml">
+      <Filter>Resource Files\BKres</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -587,6 +590,12 @@
     <ClInclude Include="..\..\Message\PackMessage.h">
       <Filter>net\MessageParser</Filter>
     </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\BKWinClassroom.h">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logic\UserSession\StrMatch.hpp">
+      <Filter>Logic\UserSession</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -675,6 +684,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Message\PackMessage.cpp">
       <Filter>net\MessageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameWork\Dialogs\BKWinClassroom.cpp">
+      <Filter>FrameWork\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
