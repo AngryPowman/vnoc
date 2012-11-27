@@ -36,7 +36,7 @@ void IntTobyte(int in_int,byte* out_byte)
 
 int  CMessage::GetMessageType() const 
 {
-	return _MessageType();
+	return _MessageType(m_Command);
 }
 
 bool CMessage::GetBeginTab() const
@@ -208,10 +208,10 @@ bool CMessage::SetDataLen(uint in_Int)
 
 
 
-int  CMessage::_MessageType() const
+int  CMessage::_MessageType(byte in_Comand) const
 {
 	int  _type = 0;
-	switch(m_Command)
+	switch(in_Comand)
 	{
 	case MSG_AVC_COM: _type =  MSG_AVC_TYPE; 
 		break;
