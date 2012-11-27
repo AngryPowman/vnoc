@@ -104,8 +104,10 @@ int PackMessage::_Tail(const CMessage* const msg_clss,byte* buf,int index,size_t
 
 int PackMessage::_CreateCommandLenList( byte* buf,int in_index)
 {
-	byte* ComLenList = new byte[m_CommandLenList.size() * 4];
-	memset(ComLenList,0,m_CommandLenList.size() * 4);
+	//byte* ComLenList = new byte[m_CommandLenList.size() * 4];
+	std::vector<byte> ComLenList;
+	ComLenList.resize(m_CommandLenList.size() * 4);
+	//memset(ComLenList,0,m_CommandLenList.size() * 4);
 	for (int i = 0,index = 0; i < (int)m_CommandLenList.size();i++)
 	{
 		byte tmpComLen[4] = {0};
@@ -121,11 +123,6 @@ int PackMessage::_CreateCommandLenList( byte* buf,int in_index)
 	for (int i = 0; i < (int)(m_CommandLenList.size() * 4);in_index++, i++)
 	{
 		buf[in_index] = ComLenList[i];
-	}
-	if (ComLenList != NULL)
-	{
-		delete [] ComLenList;
-		ComLenList = NULL;
 	}
 	return in_index;
 }
