@@ -11,43 +11,22 @@ using namespace std;
 CMessage* CMessageParser::_MessageType()
 {
 	CMessage* msg_str = NULL;
-	switch (_GetMessageType())
+	switch (m_Instruct)
 	{
-	case MSG_AVC_TYPE: msg_str = new MSG_AVC; 
+	case MSG_AVC_COM: msg_str = new MSG_AVC; 
 		break;
-	case MSG_ALI_TYPE: msg_str = new MSG_ALI; 
+	case MSG_ALI_COM: msg_str = new MSG_ALI; 
 		break;
-	case MSG_RVC_TYPE: msg_str = new MSG_RVC; 
+	case MSG_RVC_COM: msg_str = new MSG_RVC; 
 		break;
-	case MSG_RLI_TYPE: msg_str = new MSG_RLI;
+	case MSG_RLI_COM: msg_str = new MSG_RLI;
 		break;
-	case MSG_RPS_TYPE: msg_str = new MSG_RPS;
+	case MSG_RPS_COM: msg_str = new MSG_RPS;
 	    break;
-	case MSG_APS_TYPE: msg_str = new MSG_APS;
+	case MSG_APS_COM: msg_str = new MSG_APS;
 		break;
 	}
 	return msg_str;
-}
-
-int  CMessageParser::_GetMessageType()
-{
-	int  _type = 0;
-	switch(m_Instruct)
-	{
-	case MSG_AVC_COM: _type =  MSG_AVC_TYPE; 
-		break;
-	case MSG_ALI_COM: _type =  MSG_ALI_TYPE; 
-		break;
-	case MSG_RVC_COM: _type =  MSG_RVC_TYPE; 
-		break;
-	case MSG_RLI_COM: _type =  MSG_RLI_TYPE;
-		break;
-	case MSG_RPS_COM: _type =  MSG_RPS_TYPE;
-		break;
-	case MSG_APS_COM: _type =  MSG_APS_TYPE;
-		break;
-	}
-	return _type;
 }
 
 int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
@@ -152,7 +131,9 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 		_Messsage->m_ComListLen.push_back(lpszData[nPos]);
 	}
 
-	int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
+	//int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
+	std::vector<int> tmpCmlListLen;
+	tmpCmlListLen.resize(_Messsage->m_CmlCount);
 
 	byte tmpComlLen[MSG_CLASS_PARAM] = {0};
 
@@ -203,13 +184,6 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 			}
 		}
 	}
-
-	if (tmpCmlListLen != NULL)
-	{
-		delete [] tmpCmlListLen;
-		tmpCmlListLen = NULL;
-	}
-
 	return VerifyPos;
 }
 

@@ -39,7 +39,6 @@ private:
 	int _Tail(CMessage* _Messsage,byte* lpszData,int ParamLen,size_t len);
 
 	CMessage* _MessageType();
-	int  _GetMessageType();
 
 	int _CheckUpLen(int Index,size_t len)
 	{

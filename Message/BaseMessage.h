@@ -314,6 +314,8 @@ protected:
 
 protected:
 
+	int _MessageType(byte in_Command) const;
+
 	int MateParam( std::string in_str ) const;
 
 	EnumFunList m_ParamMate;
@@ -344,7 +346,6 @@ private:
 
 	void   _Initialization();
 	void   _Close();
-	int _MessageType() const;
 };
 
 
