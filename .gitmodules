@@ -1,3 +1,6 @@
 [submodule "NetService/dependencies/libmysql"]
 	path = NetService/dependencies/libmysql
 	url = git://github.com/Tydus/libmysql
+[submodule "zpublic"]
+	path = zpublic
+	url = https://github.com/zapline/zpublic.git
