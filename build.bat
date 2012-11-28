@@ -5,12 +5,7 @@
 
 @set ClientDestDir=.\Artifacts\Client\
 @set ClientSrcDir=.\VNOC\Release
-@echo ================	Update module	=================
-git.exe submodule update --init ""
-@echo .
-@echo .
-@echo .
-git.exe submodule update --init ""
+
 @echo ================	Build Client	=================
 "%VS10PATH%\devenv.com" .\VNOC\VNOC.sln /rebuild "Release|Win32"
 if ERRORLEVEL 1 exit /b 1
