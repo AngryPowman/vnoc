@@ -22,7 +22,7 @@ VOID CClassroomWnd::OnShowWnd( XMessage* pmsg )
 
 LRESULT CClassroomWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 {
-	MessageBox(_T("classroom"));
+	MessageBox(_T("用了 BKDlg_RoomListWin 暂时代替为这个窗口的xml资源. 假如用 BKDlg_ClassroomWin 生成窗口会出错."));
 
 	return 0;
 }
