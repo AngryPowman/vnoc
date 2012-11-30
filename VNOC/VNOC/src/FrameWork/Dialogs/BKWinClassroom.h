@@ -7,14 +7,14 @@ class CClassroomWnd : public CBkDialogImpl<CClassroomWnd>,
 					  public CFrameBase
 {
 public:	
-	CClassroomWnd::CClassroomWnd() : CBkDialogImpl<CClassroomWnd>(BKDlg_ClassroomWin),
+	CClassroomWnd::CClassroomWnd() : CBkDialogImpl<CClassroomWnd>(BKDlg_RoomListWin),
 								   CFrameBase(module_ClassroomWin)
 	{
 	}
 
 public:
 	void	OnBkBtnClose();
-	VOID	OnShowWnd(XMessage* pmsg);
+	void	OnShowWnd(XMessage* pmsg);
 	LRESULT OnInitDialog(HWND hWnd, LPARAM lparam);
 
 protected:

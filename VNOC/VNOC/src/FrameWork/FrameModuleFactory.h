@@ -3,8 +3,10 @@
 #include "Dialogs/BKWinLogin.h"
 #include "Dialogs/BKWinRoomList.h"
 #include "Dialogs\BKWinClassroom.h"
+#include "../Logic/room/Room.h"
 #include "../Logic/room/RoomMgr.h"
 #include "../Logic/UserSession/LoginImpl.h"
+
 
 class CFrameModuleFactory
 {
@@ -36,12 +38,11 @@ public:
 		case module_RoomListWin:
 			*ppModule = new CRoomListWnd;
 			break;
+		case module_ClassroomWinData:
+			*ppModule = new CRoomBase;
+			break;
 		case module_ClassroomWin:
 			*ppModule = new CClassroomWnd;
-			break;
-		case module_ClassroomWinData:
-			// TODO: 没有找到对应的类, 在此添加相应处理
-			//       May like this: *ppModule = new CClassroom???
 			break;
 		default:
 			ATLASSERT(FALSE && "invalid module");

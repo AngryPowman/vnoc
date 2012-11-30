@@ -1,14 +1,16 @@
 #pragma once
 // 定义房间
-#include "../../Base/IRefCountImpl.h"
+//#include "../../Base/IRefCountImpl.h"
+#include "../../FrameWork/FrameBase.hpp"
 #include <atlstr.h>
 #include <atltime.h>
 
 typedef CString UserID;
 
-class CRoomBase : public IRefCountImpl
+class CRoomBase : public CFrameBase
 {
 public:
+	CRoomBase();
 	CRoomBase(CString ID);
 	~CRoomBase();
 public:
@@ -37,8 +39,11 @@ public:
 	// 关闭房间强制所有用户退出
 	virtual HRESULT		Free();
 
+	Begin_XMessage(CRoomBase)
+	End_XMessage()
+
 private:
-	CRoomBase(const CRoomBase&){};
+	CRoomBase(const CRoomBase&) : CFrameBase(module_ClassroomWinData) {};
 	CRoomBase& operator=(const CRoomBase&){return *this;};
 
 protected:
