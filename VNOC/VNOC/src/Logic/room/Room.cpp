@@ -1,7 +1,12 @@
 #include "stdafx.h"
 #include "room.h"
 
-CRoomBase::CRoomBase( CString ID )
+CRoomBase::CRoomBase() : CFrameBase(module_ClassroomWinData)
+{
+
+}
+
+CRoomBase::CRoomBase( CString ID ) : CFrameBase(module_ClassroomWinData)
 {
 
 }
