@@ -14,3 +14,6 @@
 
 #include "MSG_ALI.h"
 #include "MSG_RLI.h"
+
+#include "MSG_APG.h"
+#include "MSG_RPG.h"

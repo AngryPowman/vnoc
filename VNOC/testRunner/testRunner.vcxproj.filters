@@ -49,5 +49,14 @@
     <ClInclude Include="..\..\Message\MessageParser.h" />
     <ClInclude Include="..\..\Message\PackMessage.h" />
     <ClInclude Include="..\..\Message\MSG_UNION.h" />
+    <ClInclude Include="..\..\Message\MSG_RPG.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_APG.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACS.h">
+      <Filter>MSG_CLASS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
