@@ -61,6 +61,9 @@
     <ClInclude Include="..\Message\PackMessage.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include=".\src\VnocRoomManager.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">
@@ -133,6 +136,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Message\PackMessage.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include=".\src\VnocRoomManager.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

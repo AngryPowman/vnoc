@@ -178,6 +178,7 @@
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
+    <ClInclude Include=".\src\VnocRoomManager.hpp" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
     <ClInclude Include="src\SocketServer.hpp" />
     <ClInclude Include=".\src\UserManage.hpp" />
@@ -212,6 +213,7 @@
     <ClCompile Include="src\UserManage.cpp" />
     <ClCompile Include="src\UserStorage.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
+    <ClCompile Include=".\src\VnocRoomManager.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
   </ItemGroup>
   <ItemGroup>
