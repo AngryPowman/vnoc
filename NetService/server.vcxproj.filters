@@ -64,6 +64,9 @@
     <ClInclude Include=".\src\VnocRoomManager.hpp">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="src\RclMessageHandler.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">

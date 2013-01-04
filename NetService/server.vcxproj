@@ -177,6 +177,7 @@
     <ClInclude Include="src\FileUserStorage.h" />
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
+    <ClInclude Include="src\RclMessageHandler.hpp" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
     <ClInclude Include=".\src\VnocRoomManager.hpp" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />

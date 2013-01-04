@@ -5,6 +5,7 @@
 #include "MockTcpConnection.hpp"
 #include "../RvcMessageHandler.hpp"
 #include "../RliMessageHandler.hpp"
+#include "../RclMessageHandler.hpp"
 #include "../FileUserStorage.h"
 #include "../UserManage.hpp"
 
@@ -112,6 +113,13 @@ public:
         const char *sendBuf = conn_->getSendBuf();
         //return an AVC message
         CPPUNIT_ASSERT(sendBuf[24]==0x17);
+    }
+    void testRCL()
+    {
+        RclMessageHandler rclhandler(protocol_);
+        VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
+        handler.setProtocol(protocol_);
+        handler.start();
     }
 
 };
