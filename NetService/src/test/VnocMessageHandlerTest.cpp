@@ -8,12 +8,15 @@
 #include "../RclMessageHandler.hpp"
 #include "../FileUserStorage.h"
 #include "../UserManage.hpp"
+#include "../../Message/MSG_UNION.h"
+#include "../../Message/PackMessage.h"
 
 class VnocMessageHandlerTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( VnocMessageHandlerTest );
     CPPUNIT_TEST( testRVC );
     CPPUNIT_TEST( testRLI );
+    CPPUNIT_TEST( testRCL );
     CPPUNIT_TEST_SUITE_END();
     MockTcpConnection *conn_;
     VnocProtocol *protocol_;
@@ -120,6 +123,19 @@ public:
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
+        MSG_RCL rclMessage;
+        PackMessage packer;
+        int len = packer.GetMessageLen(&rclMessage);
+        char *buf = new char[len];
+        packer.Pack(&rclMessage, (byte *)buf, len);
+        conn_->setRecv(buf, len);
+        const char *sendBuf = conn_->getSendBuf();
+        //return an ACL message
+        CMessageParser parser;
+        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
+        CPPUNIT_ASSERT(msg->GetMessageType()==MSG_ACL_TYPE);
+        delete msg;
+        delete buf;
     }
 
 };
