@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Message\BaseMessage.h" />
+    <ClInclude Include="..\..\Message\MessageDef.h" />
     <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
     <ClInclude Include="..\..\Message\MessageParser.h" />
     <ClInclude Include="..\..\Message\MSG_ACI.h" />

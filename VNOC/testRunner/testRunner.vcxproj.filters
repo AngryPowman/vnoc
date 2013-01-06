@@ -58,5 +58,6 @@
     <ClInclude Include="..\..\Message\MSG_ACS.h">
       <Filter>MSG_CLASS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Message\MessageDef.h" />
   </ItemGroup>
 </Project>

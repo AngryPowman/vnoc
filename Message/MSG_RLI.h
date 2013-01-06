@@ -17,7 +17,7 @@ public:
 		ADD_PARAM_LIST("VerificationCode")
 		ADD_PARAM_LIST("AccountNumber")
 		ADD_PARAM_LIST("Password")
-		INIT_PARAM_OBJEDT(22)
+		INIT_PARAM_OBJEDT(MSG_RLI_COM)
 		END_PARAM_LIST
 	}
 	virtual ~MSG_RLI(){}
