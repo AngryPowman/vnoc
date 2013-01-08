@@ -12,6 +12,9 @@
     <Filter Include="MSG_CLASS">
       <UniqueIdentifier>{1458035b-95b8-4a3f-83db-a39e12c93127}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NMessage">
+      <UniqueIdentifier>{c475a9b2-cee8-4f5c-bcc0-45a3406e8d80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Message\MSG_ACI.h">
@@ -59,5 +62,38 @@
       <Filter>MSG_CLASS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Message\MessageDef.h" />
+    <ClInclude Include="..\..\NMessage\BaseMessage.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\BufferMessage.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IReadMessage.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageHead.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageTail.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\PackMessage.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\ParserMessage.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageBody.h">
+      <Filter>NMessage</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

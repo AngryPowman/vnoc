@@ -38,6 +38,17 @@
     <ClInclude Include="..\..\Message\MSG_RVC.h" />
     <ClInclude Include="..\..\Message\MSG_UNION.h" />
     <ClInclude Include="..\..\Message\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\BaseMessage.h" />
+    <ClInclude Include="..\..\NMessage\BufferMessage.h" />
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h" />
+    <ClInclude Include="..\..\NMessage\IReadMessage.h" />
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h" />
+    <ClInclude Include="..\..\NMessage\Message.h" />
+    <ClInclude Include="..\..\NMessage\MessageBody.h" />
+    <ClInclude Include="..\..\NMessage\MessageHead.h" />
+    <ClInclude Include="..\..\NMessage\MessageTail.h" />
+    <ClInclude Include="..\..\NMessage\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\ParserMessage.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}</ProjectGuid>
