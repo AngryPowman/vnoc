@@ -1,40 +1,32 @@
-
 #ifndef  VNOC_C_MESSAGE_BASE
 #define  VNOC_C_MESSAGE_BASE
 
 #include "IBaseMessage.h"
-#include <string>
-
-using std::string;
-
-typedef unsigned int byte;
-typedef unsigned int uint;
-typedef std::basic_string<byte>     ByteArr;
+#include <map>
 
 namespace VNOC
 {
 namespace Message
 {
 
-
-class BaseMessage:public IMessage
+class BaseMessage : public IMessage
 {
 public:
+    BaseMessage();
+    virtual ~BaseMessage();
 
-    BaseMessage(){}
-    virtual ~BaseMessage(){}
-
-    int       Read(ByteArr& out_Data)  const;
-    
-    int         Write(byte* in_Data_ptr,uint  in_len);
+    virtual MsgStatus Read(
+        IN const MsgDataName& name,
+        OUT MsgDataValue& value);
+    virtual MsgStatus Write(
+        IN const MsgDataName& name,
+        IN const MsgDataValue& value);
 
 private:
-
-    ByteArr         m_Data;
-
+    std::map<MsgDataName, MsgDataValue> m_mapMsgData;
 };
-
 
 }// namespace Message
 }// namespace VNOC
+
 #endif

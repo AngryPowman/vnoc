@@ -1,5 +1,3 @@
-
-
 #ifndef  VNOC_I_MESSAGE_BASE
 #define  VNOC_I_MESSAGE_BASE
 
@@ -11,21 +9,23 @@ namespace VNOC
 namespace Message
 {
 
-class IMessage:public IReadMessage,IWriteMessage
+class IMessage
+    : public IReadMessage
+    , public IWriteMessage
 {
 public:
-
-    IMessage(){}
     virtual ~IMessage(){}
 
 public:
-
-    virtual int         Read(){}
-
-    virtual int         Write(){}
-
+    virtual MsgStatus Read(
+        IN const MsgDataName& name,
+        OUT MsgDataValue& value) = 0;
+    virtual MsgStatus Write(
+        IN const MsgDataName& name,
+        IN const MsgDataValue& value) = 0;
 };
 
 }// namespace Message
 }// namespace VNOC
+
 #endif
