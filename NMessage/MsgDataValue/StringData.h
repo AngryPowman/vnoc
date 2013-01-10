@@ -16,7 +16,7 @@ public:
     virtual ~StringData(){}
 
      virtual MsgStatus ToString(
-        OUT string& Value
+        OUT std::string& Value
         )
      {
          Value = m_Value;
@@ -25,7 +25,7 @@ public:
 
 private:
 
-    string      m_Value;
+    std::string      m_Value;
 
 };
 

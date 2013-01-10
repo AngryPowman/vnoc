@@ -8,6 +8,8 @@ namespace VNOC
 namespace Message
 {
 
+class ArrayData;
+
 class IWriteMessage
 {
 public:

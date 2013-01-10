@@ -15,60 +15,31 @@ public:
     ArrayData(){}
     virtual ~ArrayData(){}
 
-    virtual MsgStatus WriteList(
-        IN const ArrayData ValueList
-        )
-    {
-        if (ValueList.Empty())
-        {
-            return MsgStatus_Err;
-        }
-        std::copy(ValueList.Begin(),ValueList.End(),m_pValueArr.begin());
-        return  MsgStatus_Ok;
-    }
-
-    virtual MsgStatus ReadList(
-        IN ArrayData& ValueList
-        )
-    {
-        if (m_pValueArr.empty())
-        {
-            return MsgStatus_Err;
-        }
-        auto Itr = m_pValueArr.begin();
-        for (; Itr != m_pValueArr.end(); Itr++ )
-        {
-            ValueList.Push(*Itr);
-        }
-        return MsgStatus_Ok;
-    }
-
-    virtual size_t Size(){
+    size_t Size(){
         return m_pValueArr.size();
     }
 
-    virtual bool Empty(){
+    bool Empty(){
         return m_pValueArr.empty();
     }
 
-    virtual typename const vector::iterator Begin() const {
+    typename const std::vector<MsgDataValue*>::iterator Begin() const {
         return m_pValueArr.begin();
     }
 
-    virtual typename const vector::iterator End() const {
+    typename const std::vector<MsgDataValue*>::iterator End() const {
         return m_pValueArr.end();
     }
 
-    virtual void Push( 
+    void Push( 
         IN MsgDataValue Value
         ) 
     {
-        return m_pValueArr.push_back(Value);
+        return m_pValueArr.push_back(&Value);
     }
 
 private:
     std::vector<MsgDataValue*>                  m_pValueArr;
-    const vector<MsgDataValue*>::iterator       m_pValueArrItr;
 };
 
 }// namespace Message
