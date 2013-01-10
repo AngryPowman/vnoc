@@ -3,7 +3,6 @@
 
 #include "MsgDataValue.h"
 
-
 namespace VNOC
 {
 namespace Message
@@ -15,13 +14,13 @@ public:
     StringData(){}
     virtual ~StringData(){}
 
-     virtual MsgStatus ToString(
+    virtual MsgStatus ToString(
         OUT std::string& Value
         )
-     {
+    {
          Value = m_Value;
          return MsgStatus_Ok;
-     }
+    }
 private:
     std::string      m_Value;
 };

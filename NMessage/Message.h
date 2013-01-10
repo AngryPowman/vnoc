@@ -13,9 +13,6 @@ class Message:public BaseMessage
 public:
     Message(){}
     virtual ~Message(){}
-
-public:
-protected:
 };
 
 }// namespace Message

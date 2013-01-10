@@ -3,7 +3,6 @@
 
 #include "MsgDataValue.h"
 
-
 namespace VNOC
 {
 namespace Message

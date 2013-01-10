@@ -3,7 +3,6 @@
 
 #include "../MessageDef.h"
 
-
 namespace VNOC
 {
 namespace Message
@@ -16,29 +15,29 @@ public:
     virtual ~ArrayData(){}
 
     size_t Size(){
-        return m_pValueArr.size();
+        return m_arrValuePtr.size();
     }
 
     bool Empty(){
-        return m_pValueArr.empty();
+        return m_arrValuePtr.empty();
     }
 
     typename const std::vector<MsgDataValue*>::iterator Begin() const {
-        return m_pValueArr.begin();
+        return m_arrValuePtr.begin();
     }
 
     typename const std::vector<MsgDataValue*>::iterator End() const {
-        return m_pValueArr.end();
+        return m_arrValuePtr.end();
     }
 
     void Push( 
         IN MsgDataValue Value
         ) 
     {
-        return m_pValueArr.push_back(&Value);
+        return m_arrValuePtr.push_back(&Value);
     }
 private:
-    std::vector<MsgDataValue*>                  m_pValueArr;
+    std::vector<MsgDataValue*>                  m_arrValuePtr;
 };
 
 }// namespace Message
