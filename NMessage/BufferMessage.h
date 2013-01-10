@@ -14,15 +14,8 @@ public:
     CMessageBuffer(){}
     virtual ~CMessageBuffer(){}
 public:
-    
-    MessageHead m_Head;
-    MessageTail m_Tail;
-    MessageBody m_Body;
-
 private:
-
     Message* m_Message_ptr;
-
 };
 
 }// namespace Message

@@ -30,7 +30,6 @@ public:
     virtual MsgStatus WriteArr(
         IN const MsgDataName& name,
         IN const ArrayData& value);
-
 private:
     std::map<MsgDataName, MsgDataValue> m_mapMsgData;
     std::map<MsgDataName, ArrayData>    m_mapMsgDataArr;

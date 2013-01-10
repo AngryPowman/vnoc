@@ -22,10 +22,8 @@ public:
         Value = m_Value;
         return MsgStatus_Ok;
     }
-
 private:
     uint8      m_Value;
-
 };
 
 }// namespace Message

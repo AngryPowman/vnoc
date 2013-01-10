@@ -22,11 +22,8 @@ public:
          Value = m_Value;
          return MsgStatus_Ok;
      }
-
 private:
-
     std::string      m_Value;
-
 };
 
 }// namespace Message

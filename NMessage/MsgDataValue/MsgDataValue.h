@@ -16,7 +16,6 @@ typedef     int     MessageType;
 class MsgDataValue
 {
 public:
-
     MsgDataValue(){}
     virtual ~MsgDataValue(){}
 
@@ -29,8 +28,6 @@ public:
     virtual MsgStatus ToInt32(){ return MsgStatus_Unk;}
 
     virtual MsgStatus ToByte(){ return MsgStatus_Unk;}
-
-    virtual MsgStatus WriteList(){ return MsgStatus_Unk;}
 
     virtual MsgStatus ReadList(){ return MsgStatus_Unk;}
 

@@ -37,7 +37,6 @@ public:
     {
         return m_pValueArr.push_back(&Value);
     }
-
 private:
     std::vector<MsgDataValue*>                  m_pValueArr;
 };
