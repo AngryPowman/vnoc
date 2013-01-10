@@ -12,11 +12,16 @@ namespace Message
 class UInt16Data:public MsgDataValue
 {
 public:
+    UInt16Data(){}
+    virtual ~UInt16Data(){};
 
     virtual MsgStatus ToUInt16(
-        OUT uint16&  Value
+        OUT uint16& Value
         )
-    { return MsgStatus_Ok;}
+    {
+        Value = m_Value;
+        return MsgStatus_Ok;
+    }
 
 private:
 

@@ -14,6 +14,7 @@
     <ClCompile Include="..\..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp" />
     <ClCompile Include="..\test\testPackMessage.cpp" />
     <ClCompile Include="..\test\testRunner.cpp" />
     <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
@@ -45,8 +46,15 @@
     <ClInclude Include="..\..\NMessage\IWriteMessage.h" />
     <ClInclude Include="..\..\NMessage\Message.h" />
     <ClInclude Include="..\..\NMessage\MessageBody.h" />
+    <ClInclude Include="..\..\NMessage\MessageDef.h" />
     <ClInclude Include="..\..\NMessage\MessageHead.h" />
     <ClInclude Include="..\..\NMessage\MessageTail.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h" />
     <ClInclude Include="..\..\NMessage\PackMessage.h" />
     <ClInclude Include="..\..\NMessage\ParserMessage.h" />
   </ItemGroup>

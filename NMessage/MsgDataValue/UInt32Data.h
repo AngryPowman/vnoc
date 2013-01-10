@@ -12,14 +12,18 @@ namespace Message
 class UInt32Data:public MsgDataValue
 {
 public:
+    UInt32Data(){}
+    virtual ~UInt32Data(){};
 
     virtual MsgStatus ToUInt32(
-        OUT uint32&  Value
+        OUT uint32& Value
         )
-    { return MsgStatus_Ok;}
+    {
+        Value = m_Value;
+        return MsgStatus_Ok;
+    }
 
 private:
-
     uint32      m_Value;
 
 };

@@ -12,11 +12,16 @@ namespace Message
 class StringData:public MsgDataValue
 {
 public:
+    StringData(){}
+    virtual ~StringData(){};
 
      virtual MsgStatus ToString(
-        OUT string&  Value
+        OUT string& Value
         )
-     { return MsgStatus_Ok;}
+     {
+         Value = m_Value;
+         return MsgStatus_Ok;
+     }
 
 private:
 
