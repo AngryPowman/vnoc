@@ -19,7 +19,7 @@ public:
 
 private:
 
-    ByteArr  m_Tail;
+    //ByteArr  m_Tail;
 
 };
 
