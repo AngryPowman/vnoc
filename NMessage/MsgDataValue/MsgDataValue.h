@@ -1,5 +1,3 @@
-
-
 #ifndef  VNOC_I_MESSAGE_DATA
 #define  VNOC_I_MESSAGE_DATA
 
@@ -21,18 +19,13 @@ public:
 
     virtual MsgStatus ToStr(){ return MsgStatus_Unk;}
 
+    virtual MsgStatus ToUInt8(){ return MsgStatus_Unk;}
+
     virtual MsgStatus ToUInt16(){ return MsgStatus_Unk;}
 
     virtual MsgStatus ToUInt32(){ return MsgStatus_Unk;}
 
     virtual MsgStatus ToInt32(){ return MsgStatus_Unk;}
-
-    virtual MsgStatus ToByte(){ return MsgStatus_Unk;}
-
-    virtual MsgStatus ReadList(){ return MsgStatus_Unk;}
-
-private:
-
 };
 
 }// namespace Message

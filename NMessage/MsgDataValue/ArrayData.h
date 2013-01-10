@@ -14,21 +14,13 @@ public:
     ArrayData(){}
     virtual ~ArrayData(){}
 
-    size_t Size(){
-        return m_arrValuePtr.size();
-    }
+    size_t Size(){ return m_arrValuePtr.size();}
 
-    bool Empty(){
-        return m_arrValuePtr.empty();
-    }
+    bool Empty(){ return m_arrValuePtr.empty();}
 
-    typename const std::vector<MsgDataValue*>::iterator Begin() const {
-        return m_arrValuePtr.begin();
-    }
+    typename const std::vector<MsgDataValue*>::iterator Begin() const { return m_arrValuePtr.begin();}
 
-    typename const std::vector<MsgDataValue*>::iterator End() const {
-        return m_arrValuePtr.end();
-    }
+    typename const std::vector<MsgDataValue*>::iterator End() const { return m_arrValuePtr.end();}
 
     void Push( 
         IN MsgDataValue Value
