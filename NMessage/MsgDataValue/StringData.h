@@ -13,7 +13,7 @@ class StringData:public MsgDataValue
 {
 public:
     StringData(){}
-    virtual ~StringData(){};
+    virtual ~StringData(){}
 
      virtual MsgStatus ToString(
         OUT string& Value
@@ -28,8 +28,6 @@ private:
     string      m_Value;
 
 };
-
-
 
 }// namespace Message
 }// namespace VNOC

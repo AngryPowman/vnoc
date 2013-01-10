@@ -13,7 +13,7 @@ class UInt8Data:public MsgDataValue
 {
 public:
     UInt8Data(){}
-    virtual ~UInt8Data(){};
+    virtual ~UInt8Data(){}
 
     virtual MsgStatus ToByte(
         OUT uint8& Value
@@ -27,8 +27,6 @@ private:
     uint8      m_Value;
 
 };
-
-
 
 }// namespace Message
 }// namespace VNOC

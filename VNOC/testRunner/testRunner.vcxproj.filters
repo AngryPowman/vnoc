@@ -7,9 +7,6 @@
     <ClCompile Include="..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\Message\PackMessage.cpp" />
     <ClCompile Include="..\test\testPackMessage.cpp" />
-    <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp">
-      <Filter>NMessage\MsgDataValueCpp</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MSG_CLASS">
@@ -18,16 +15,10 @@
     <Filter Include="NMessage">
       <UniqueIdentifier>{c475a9b2-cee8-4f5c-bcc0-45a3406e8d80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NMessage\Messageh">
+    <Filter Include="NMessage\Message">
       <UniqueIdentifier>{8e271453-930a-4a81-961b-e1387dab85f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NMessage\Messagcpp">
-      <UniqueIdentifier>{82005cb4-32b5-4aca-bea3-ec076f54f000}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NMessage\MsgDataValueCpp">
-      <UniqueIdentifier>{8afd528a-0c91-4fe2-8368-39c3a678360f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NMessage\MsgDataValueh">
+    <Filter Include="NMessage\MsgDataValue">
       <UniqueIdentifier>{114efdda-8cad-4b82-99a7-b5c85baea7af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -78,58 +69,49 @@
     </ClInclude>
     <ClInclude Include="..\..\Message\MessageDef.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h">
-      <Filter>NMessage\MsgDataValueh</Filter>
+      <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h">
-      <Filter>NMessage\MsgDataValueh</Filter>
+      <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h">
-      <Filter>NMessage\MsgDataValueh</Filter>
+      <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h">
-      <Filter>NMessage\MsgDataValueh</Filter>
+      <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h">
-      <Filter>NMessage\MsgDataValueh</Filter>
+      <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
-      <Filter>NMessage\MsgDataValueh</Filter>
+      <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\BaseMessage.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\BufferMessage.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\IBaseMessage.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\IReadMessage.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\IWriteMessage.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\Message.h">
-      <Filter>NMessage\Messageh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MessageBody.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MessageDef.h">
-      <Filter>NMessage\Messageh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MessageTail.h">
-      <Filter>NMessage\Messageh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MessageHead.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\PackMessage.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\ParserMessage.h">
-      <Filter>NMessage\Messageh</Filter>
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

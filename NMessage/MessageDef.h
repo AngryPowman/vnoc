@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+#include "MsgDataValue/ArrayData.h"
+
 using std::vector;
 using std::string;
 

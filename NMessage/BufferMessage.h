@@ -25,7 +25,6 @@ private:
 
 };
 
-
 }// namespace Message
 }// namespace VNOC
 

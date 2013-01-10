@@ -26,7 +26,6 @@ protected:
     MessageBody m_Body;
 };
 
-
 }// namespace Message
 }// namespace VNOC
 

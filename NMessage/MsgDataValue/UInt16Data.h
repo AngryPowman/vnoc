@@ -13,7 +13,7 @@ class UInt16Data:public MsgDataValue
 {
 public:
     UInt16Data(){}
-    virtual ~UInt16Data(){};
+    virtual ~UInt16Data(){}
 
     virtual MsgStatus ToUInt16(
         OUT uint16& Value
@@ -28,8 +28,6 @@ private:
     uint16      m_Value;
 
 };
-
-
 
 }// namespace Message
 }// namespace VNOC

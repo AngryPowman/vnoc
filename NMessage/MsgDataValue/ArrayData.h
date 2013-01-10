@@ -9,50 +9,67 @@ namespace VNOC
 namespace Message
 {
 
-template<class ValueType>
-class ArrayData :public MsgDataValue
+class ArrayData
 {
 public:
     ArrayData(){}
-    virtual ~ArrayData(){};
+    virtual ~ArrayData(){}
 
     virtual MsgStatus WriteList(
-        IN const ArrayData<ValueType> ValueList
-        );
+        IN const ArrayData ValueList
+        )
+    {
+        if (ValueList.Empty())
+        {
+            return MsgStatus_Err;
+        }
+        std::copy(ValueList.Begin(),ValueList.End(),m_pValueArr.begin());
+        return  MsgStatus_Ok;
+    }
 
     virtual MsgStatus ReadList(
-        IN ArrayData<ValueType>& ValueList
-        );
+        IN ArrayData& ValueList
+        )
+    {
+        if (m_pValueArr.empty())
+        {
+            return MsgStatus_Err;
+        }
+        auto Itr = m_pValueArr.begin();
+        for (; Itr != m_pValueArr.end(); Itr++ )
+        {
+            ValueList.Push(*Itr);
+        }
+        return MsgStatus_Ok;
+    }
 
     virtual size_t Size(){
-        return m_ValueArr.size();
+        return m_pValueArr.size();
     }
 
     virtual bool Empty(){
-        return m_ValueArr.empty();
+        return m_pValueArr.empty();
     }
 
-    virtual const vector<ValueType>::iterator Begin() const {
-        return m_ValueArr.begin();
+    virtual typename const vector::iterator Begin() const {
+        return m_pValueArr.begin();
     }
 
-    virtual const vector<ValueType>::iterator End() const {
-        return m_ValueArr.end();
+    virtual typename const vector::iterator End() const {
+        return m_pValueArr.end();
     }
 
     virtual void Push( 
-        IN ValueType Value
+        IN MsgDataValue Value
         ) 
     {
-        return m_ValueArr.push_back(Value);
+        return m_pValueArr.push_back(Value);
     }
 
 private:
-    vector<ValueType>      m_ValueArr;
-
+    std::vector<MsgDataValue*>                  m_pValueArr;
+    const vector<MsgDataValue*>::iterator       m_pValueArrItr;
 };
-
-
 
 }// namespace Message
 }// namespace VNOC

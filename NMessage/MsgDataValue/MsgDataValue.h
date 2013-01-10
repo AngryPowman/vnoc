@@ -36,12 +36,7 @@ public:
 
 private:
 
-    MessageName     m_Name;
-    MessageType     m_type;
-
 };
-
-
 
 }// namespace Message
 }// namespace VNOC

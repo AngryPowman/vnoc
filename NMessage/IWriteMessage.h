@@ -17,6 +17,10 @@ public:
     virtual MsgStatus Write(
         IN const MsgDataName& name,
         IN const MsgDataValue& value) = 0;
+
+    virtual MsgStatus WriteArr(
+        IN const MsgDataName& name,
+        IN const ArrayData& value) = 0;
 };
 
 }// namespace Message
