@@ -18,9 +18,9 @@ public:
 
     bool Empty(){ return m_arrValuePtr.empty();}
 
-    typename const std::vector<MsgDataValue*>::iterator Begin() const { return m_arrValuePtr.begin();}
+    std::vector<MsgDataValue*>::const_iterator Begin() const { return m_arrValuePtr.begin();}
 
-    typename const std::vector<MsgDataValue*>::iterator End() const { return m_arrValuePtr.end();}
+    std::vector<MsgDataValue*>::const_iterator End() const { return m_arrValuePtr.end();}
 
     void Push( 
         IN MsgDataValue Value

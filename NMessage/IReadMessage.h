@@ -2,6 +2,8 @@
 #define  VNOC_I_MESSAGE_READ
 
 #include "MessageDef.h"
+#include "MsgDataValue/MsgDataValue.h"
+#include "MsgDataValue/ArrayData.h"
 
 namespace VNOC
 {

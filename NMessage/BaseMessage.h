@@ -16,23 +16,25 @@ public:
     virtual ~BaseMessage(){}
 
     virtual MsgStatus Read(
-        IN const MsgDataName& name,
-        OUT MsgDataValue& value);
+        IN const MsgDataName name,
+        OUT MsgDataValue** value);
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName& name,
-        OUT ArrayData& value);
+        IN  const MsgDataName name,
+        OUT ArrayData** value);
 
     virtual MsgStatus Write(
-        IN const MsgDataName& name,
-        IN const MsgDataValue& value);
+        IN const MsgDataName name,
+        IN const MsgDataValue value);
 
     virtual MsgStatus WriteArr(
-        IN const MsgDataName& name,
-        IN const ArrayData& value);
+        IN const MsgDataName name,
+        IN const ArrayData value);
 private:
     std::map<MsgDataName, MsgDataValue> m_mapMsgData;
     std::map<MsgDataName, ArrayData>    m_mapMsgDataArr;
+    std::map<MsgDataNameInt, MsgDataValue> m_mapMsgIntData;
+    std::map<MsgDataNameInt, ArrayData>    m_mapMsgIntDataArr;
 };
 
 }// namespace Message

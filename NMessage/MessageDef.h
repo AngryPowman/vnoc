@@ -11,9 +11,8 @@ namespace VNOC
 {
 namespace Message
 {
-
-typedef int     MsgDataName;
-typedef int     MsgDataValue;
+typedef std::string         MsgDataName;
+typedef int                 MsgDataNameInt;
 typedef unsigned char       uint8;
 typedef unsigned short      uint16;
 typedef unsigned int        uint32;
