@@ -19,12 +19,12 @@ public:
 
 public:
     virtual MsgStatus Read(
-        IN const MsgDataName& name,
-        OUT MsgDataValue& value) = 0;
+        IN const MsgDataName name,
+        OUT MsgDataValue*& value) = 0;
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName& name,
-        OUT ArrayData& value) = 0;
+        IN  const MsgDataName name,
+        OUT ArrayData*& value) = 0;
 };
 
 }// namespace Message
