@@ -1,0 +1,12 @@
+<root>
+	<msg name="MSG_ALI" id="33">
+		<item type="data" name="LoginResult" type="byte" />
+		<item type="data" name="Token" type="dword" />
+		<!-- 16 of byte -->
+		<item type="data" name="ATLGUID" type="16" />
+		<!--item type="data" name="ATLGUID" type="string" /-->
+	</msg>
+	<msg name="MSG_ACL" id="31">
+		<item type="list" name="RoomList" type="dword" />
+	</msg>
+</root>

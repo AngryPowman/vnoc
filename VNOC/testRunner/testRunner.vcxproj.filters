@@ -1,16 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\test\testRunner.cpp" />
-    <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
     <ClCompile Include="..\..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\Message\PackMessage.cpp" />
-    <ClCompile Include="..\test\testPackMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\NBaseMessage.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\testPackMessage.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\NMessageTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\testRunner.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MSG_CLASS">
       <UniqueIdentifier>{1458035b-95b8-4a3f-83db-a39e12c93127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NMessage">
+      <UniqueIdentifier>{c475a9b2-cee8-4f5c-bcc0-45a3406e8d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NMessage\Message">
+      <UniqueIdentifier>{8e271453-930a-4a81-961b-e1387dab85f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NMessage\MsgDataValue">
+      <UniqueIdentifier>{114efdda-8cad-4b82-99a7-b5c85baea7af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{eaff412d-cf65-46d7-a18c-c02b9cf4c6bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +84,52 @@
     </ClInclude>
     <ClInclude Include="..\..\Message\MSG_ACS.h">
       <Filter>MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageDef.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\BufferMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IReadMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageDef.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\PackMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\ParserMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\NBaseMessage.h">
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

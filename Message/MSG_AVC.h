@@ -15,7 +15,7 @@ public:
 		ADD_PARAM_LIST("LoginTag")
 		ADD_PARAM_LIST("CaptchaType")
 		ADD_PARAM_LIST("Captcha")
-		INIT_PARAM_OBJEDT(21)
+		INIT_PARAM_OBJEDT(MSG_AVC_COM)
 		END_PARAM_LIST
 	}
 

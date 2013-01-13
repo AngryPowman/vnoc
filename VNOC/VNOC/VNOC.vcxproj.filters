@@ -596,6 +596,9 @@
     <ClInclude Include="src\Logic\UserSession\StrMatch.hpp">
       <Filter>Logic\UserSession</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Message\MessageDef.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

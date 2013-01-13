@@ -19,7 +19,7 @@ public:
 			ADD_PARAM_LIST("HeadForm")
 			ADD_PARAM_LIST("HeadPortrait")
 			ADD_PARAM_LIST("EmailAddress")
-			INIT_PARAM_OBJEDT(18)
+			INIT_PARAM_OBJEDT(MSG_RPG_COM)
 			END_PARAM_LIST
 	}
 

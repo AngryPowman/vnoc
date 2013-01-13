@@ -14,7 +14,7 @@ public:
 		//0x14
 		BEGIN_PARAM_LIST
 		ADD_PARAM_LIST("MachineAddress")
-		INIT_PARAM_OBJEDT(20)
+		INIT_PARAM_OBJEDT(MSG_RVC_COM)
 		END_PARAM_LIST
 	}
 	virtual ~MSG_RVC(){}

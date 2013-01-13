@@ -14,12 +14,16 @@
     <ClCompile Include="..\..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\NBaseMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
+    <ClCompile Include="..\test\NMessageTest.cpp" />
     <ClCompile Include="..\test\testPackMessage.cpp" />
     <ClCompile Include="..\test\testRunner.cpp" />
     <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Message\BaseMessage.h" />
+    <ClInclude Include="..\..\Message\MessageDef.h" />
     <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
     <ClInclude Include="..\..\Message\MessageParser.h" />
     <ClInclude Include="..\..\Message\MSG_ACI.h" />
@@ -37,6 +41,21 @@
     <ClInclude Include="..\..\Message\MSG_RVC.h" />
     <ClInclude Include="..\..\Message\MSG_UNION.h" />
     <ClInclude Include="..\..\Message\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\NBaseMessage.h" />
+    <ClInclude Include="..\..\NMessage\BufferMessage.h" />
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h" />
+    <ClInclude Include="..\..\NMessage\IReadMessage.h" />
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h" />
+    <ClInclude Include="..\..\NMessage\Message.h" />
+    <ClInclude Include="..\..\NMessage\MessageDef.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h" />
+    <ClInclude Include="..\..\NMessage\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\ParserMessage.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}</ProjectGuid>
