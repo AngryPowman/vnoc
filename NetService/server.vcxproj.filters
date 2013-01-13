@@ -61,6 +61,27 @@
     <ClInclude Include="..\Message\PackMessage.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Common.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GlobalDefinition.h">
+      <Filter>source\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Room.h">
+      <Filter>source\modules\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RoomFactory.h">
+      <Filter>source\modules\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RoomManager.h">
+      <Filter>source\modules\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Student.h">
+      <Filter>source\modules\obj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AsioTcpServer.cpp">
@@ -135,6 +156,15 @@
     <ClCompile Include="..\Message\PackMessage.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="src\RoomManager.cpp">
+      <Filter>source\modules\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Room.cpp">
+      <Filter>source\modules\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Student.cpp">
+      <Filter>source\modules\obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -145,6 +175,15 @@
     </Filter>
     <Filter Include="source\po">
       <UniqueIdentifier>{def1898a-4f9c-4311-bf47-46283aca1628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules">
+      <UniqueIdentifier>{92577f27-b8e6-42e9-9ffd-bd169d758e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\room">
+      <UniqueIdentifier>{5ccd4261-0374-44c1-861c-61b0aa95e1e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\obj">
+      <UniqueIdentifier>{3024ed16-4ff3-4cc4-b9bc-df016cf13f03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
