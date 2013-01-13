@@ -1,7 +1,7 @@
 #ifndef  VNOC_C_MESSAGE_MSG
 #define  VNOC_C_MESSAGE_MSG
 
-#include "BaseMessage.h"
+#include "NBaseMessage.h"
 
 namespace VNOC
 {

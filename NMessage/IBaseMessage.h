@@ -18,19 +18,19 @@ public:
 
 public:
     virtual MsgStatus Read(
-        IN const MsgDataName& name,
-        OUT MsgDataValue& value) = 0;
+        IN const MsgDataName name,
+        OUT MsgDataValue*& value) = 0;
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName& name,
-        OUT ArrayData& value) = 0;
+        IN  const MsgDataName name,
+        OUT ArrayData*& value) = 0;
 
     virtual MsgStatus Write(
-        IN const MsgDataName& name,
+        IN const MsgDataName name,
         IN const MsgDataValue& value) = 0;
 
     virtual MsgStatus WriteArr(
-        IN const MsgDataName& name,
+        IN const MsgDataName name,
         IN const ArrayData& value) = 0;
 };
 
