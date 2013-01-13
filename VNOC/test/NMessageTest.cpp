@@ -21,12 +21,21 @@ public:
 public:
     void TestNMessage()
     {
-        VNOC::Message::UInt16Data Data;
-        VNOC::Message::UInt16Data* pReadData = NULL;
+        VNOC::Message::UInt16Data Data(8);
+        VNOC::Message::MsgDataValue* pReadData = NULL;
         VNOC::Message::BaseMessage BaseTest;
         BaseTest.Write("10",Data);
-        BaseTest.Read("10",(VNOC::Message::MsgDataValue *&)pReadData);
-        CPPUNIT_ASSERT(pReadData != NULL);
+        BaseTest.Read("10", &pReadData);
+        uint16 num = 0;
+        pReadData->ToUInt16(num);
+        CPPUNIT_ASSERT(num == 8);
+
+        VNOC::Message::StringData strData(std::string("hello"));
+        BaseTest.Write("11", strData);
+        BaseTest.Read("11", &pReadData);
+        std::string str = "";
+        pReadData->ToStr(str);
+        CPPUNIT_ASSERT(str == "hello");
     }
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( testNMessage );
