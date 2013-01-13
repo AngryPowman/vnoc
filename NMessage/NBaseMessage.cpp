@@ -8,7 +8,7 @@ VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Read(
     auto tmpItr = m_mapMsgData.find(name);
     if (tmpItr != m_mapMsgData.end())
     {
-        value = &(tmpItr->second);
+        value = tmpItr->second;
     }
     return MsgStatus_Ok;
 }
@@ -21,25 +21,25 @@ VNOC::Message::MsgStatus VNOC::Message::BaseMessage::ReadArr(
     auto tmpItr = m_mapMsgDataArr.find(name);
     if (tmpItr != m_mapMsgDataArr.end())
     {
-        value = &(tmpItr->second);
+        value = tmpItr->second;
     }
     return MsgStatus_Ok;
 }
 
 VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Write(
     IN const MsgDataName name,
-    IN const MsgDataValue& value
+    IN const MsgDataValue value
     )
 {
-    m_mapMsgData[name] = value;
+    m_mapMsgData[name] = (MsgDataValue*)&value;
     return MsgStatus_Ok;
 }
 
 VNOC::Message::MsgStatus VNOC::Message::BaseMessage::WriteArr(
     IN const MsgDataName name,
-    IN const ArrayData& value
+    IN const ArrayData value
     )
 {
-    m_mapMsgDataArr[name] = value;
+    m_mapMsgDataArr[name] = (ArrayData*)&value;
     return MsgStatus_Ok;
 }

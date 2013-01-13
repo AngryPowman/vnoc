@@ -26,6 +26,7 @@ public:
         VNOC::Message::BaseMessage BaseTest;
         BaseTest.Write("10",Data);
         BaseTest.Read("10",(VNOC::Message::MsgDataValue *&)pReadData);
+        CPPUNIT_ASSERT(pReadData != NULL);
     }
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( testNMessage );
