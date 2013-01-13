@@ -22,7 +22,7 @@ VOID CClassroomWnd::OnShowWnd( XMessage* pmsg )
 
 LRESULT CClassroomWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 {
-	MessageBox(_T("classroom"));
+	MessageBox(_T("≥ı ºªØΩÃ “."));
 
 	return 0;
 }
