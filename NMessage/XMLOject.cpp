@@ -1,9 +1,24 @@
 #include "XMLObject.h"
 
+namespace VNOC
+{
+namespace Message
+{
 
-VNOC::Message::XMLItem* VNOC::Message::XMLObject::GetItem( 
-    std::string strName
-    )
+XMLObject::XMLObject(const char* pName, int nId)
+    : m_strName(pName)
+    , m_Id(nId)
+{
+}
+
+XMLObject::XMLObject(const XMLObject& obj)
+{
+    m_strName = obj.m_strName;
+    m_Id = obj.m_Id;
+    m_mapParamList = obj.m_mapParamList;
+}
+
+XMLItem* XMLObject::GetItem( std::string strName)
 {
     auto Itr = m_mapParamList.find(strName);
     if (Itr != m_mapParamList.end())
@@ -13,10 +28,7 @@ VNOC::Message::XMLItem* VNOC::Message::XMLObject::GetItem(
     return 0;
 }
 
-VNOC::Message::MsgStatus VNOC::Message::XMLObject::SetItem(
-    std::string strName,
-    XMLItem itemObject
-    )
+MsgStatus XMLObject::SetItem(std::string strName,XMLItem itemObject)
 {
     if (strName.empty())
     {
@@ -25,3 +37,6 @@ VNOC::Message::MsgStatus VNOC::Message::XMLObject::SetItem(
     m_mapParamList[strName] = itemObject;
     return MsgStatus_Ok;
 }
+
+}// namespace Message
+}// namespace VNOC

@@ -48,7 +48,7 @@ public:
         xml.LoadFile("../test/msgdef.xml");
         test = xml.GetOjbect("MSG_ALI");
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
-        CPPUNIT_ASSERT(test->GetId() == "33");
+        CPPUNIT_ASSERT(test->GetId() == 33);
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetName() == "LoginResult");
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == "data");
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == "byte");

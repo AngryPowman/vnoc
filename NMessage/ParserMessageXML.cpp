@@ -1,8 +1,22 @@
 #include "ParaserMessageXML.h"
+#include <stdlib.h>
 
-VNOC::Message::MsgStatus VNOC::Message::ParserMessageXML::LoadFile(
-    const char* strPath
-    )
+namespace VNOC
+{
+    namespace Message
+    {
+
+ParserMessageXML::ParserMessageXML()
+{
+
+}
+
+ParserMessageXML::~ParserMessageXML()
+{
+
+}
+
+MsgStatus ParserMessageXML::LoadFile(const char* strPath)
 {
     if (strPath == NULL)
     {
@@ -10,59 +24,43 @@ VNOC::Message::MsgStatus VNOC::Message::ParserMessageXML::LoadFile(
     }
     if(m_xmlTiny.LoadFile(strPath))
     {
-        _Parser();
-        return MsgStatus_Ok;
+        return _Parser() ? MsgStatus_Ok: MsgStatus_Err;
     }
     return MsgStatus_Err;
 }
 
-void VNOC::Message::ParserMessageXML::_Parser()
+bool ParserMessageXML::_Parser()
 {
     int MsgCount = 0;
     TiXmlElement* msgItem = NULL;
     TiXmlElement * msg = m_xmlTiny.RootElement();
-    m_RootName = msg->Value();
-    if (m_RootName != "vnoc")
+    std::string sRootName = msg->Value();
+    if (sRootName != "vnoc")
     {
-        return;
+        return false;
     }
-    for (
-        msg = m_xmlTiny.FirstChild("vnoc")->FirstChildElement();
+    for (msg = m_xmlTiny.FirstChild("vnoc")->FirstChildElement();
         msg != NULL;
-        msg = msg->NextSiblingElement()
-        )
+        msg = msg->NextSiblingElement())
     {
-        VNOC::Message::XMLObject objXML;
         if (strcmp(msg->Value(),"msg") == 0)
         {
             //msg
-            //name
-            if (msg->Attribute("name")!= NULL)
-            {
-                m_NameList.push_back(msg->Attribute("name"));
-                objXML.SetName(msg->Attribute("name"));
-            }
-            else
-            {
-                m_NameList.push_back("NULL");
-            }
-            //id
-            if (msg->Attribute("id") != NULL)
-            {
-                m_IdList.push_back(msg->Attribute("id"));
-                objXML.SetId(msg->Attribute("id"));
-            }
-            else
-            {
-                m_IdList.push_back("NULL");
-            }
+            const char* pName = msg->Attribute("name");
+            const char* pId = msg->Attribute("id");
+            if (!pName || !pId)
+                return false;
+
+            int nId = atoi(pId);
+            XMLObject objXML(pName, nId);
+            m_MsgIdList[std::string(pName)] = nId;
+
             //item
             for (msgItem = msg->FirstChild()->ToElement();
                 msgItem != NULL;
-                msgItem = msgItem->NextSiblingElement()
-                )
+                msgItem = msgItem->NextSiblingElement())
             {
-                VNOC::Message::XMLItem   ItemXML;
+                XMLItem ItemXML;
                 if (msgItem->Attribute("mtype") != NULL)
                 {
                     ItemXML.SetMType(msgItem->Attribute("mtype"));
@@ -77,25 +75,39 @@ void VNOC::Message::ParserMessageXML::_Parser()
                 {
                     ItemXML.SetType(msgItem->Attribute("type"));
                 }
-                objXML.SetItem(ItemXML.GetName(),ItemXML);
+                objXML.SetItem(ItemXML.GetName(), ItemXML);
             }
+
+            m_MsgObjectList.insert(std::make_pair(objXML.GetId(), objXML));
         }
-        m_MsgObjectList[objXML.GetName()] = objXML;
     }
-    for (uint32 index = 0; index < m_NameList.size(); index++)
-    {
-        m_MsgIdList[m_NameList[index]] = m_IdList[index];
-    }
+    return true;
 }
 
-VNOC::Message::XMLObject* VNOC::Message::ParserMessageXML::GetOjbect(
-    std::string strName 
-    )
+XMLObject* ParserMessageXML::GetOjbect(const std::string& strName)
 {
-    auto Itr = m_MsgObjectList.find(strName);
+    auto itFind = m_MsgIdList.find(strName);
+    if (itFind != m_MsgIdList.end())
+    {
+        auto Itr = m_MsgObjectList.find(itFind->second);
+        if (Itr != m_MsgObjectList.end())
+        {
+            return &(Itr->second);
+        }
+    }
+
+    return 0;
+}
+
+XMLObject* ParserMessageXML::GetOjbect(int nId)
+{
+    auto Itr = m_MsgObjectList.find(nId);
     if (Itr != m_MsgObjectList.end())
     {
         return &(Itr->second);
     }
     return 0;
 }
+
+}// namespace Message
+}// namespace VNOC

@@ -17,23 +17,20 @@ namespace Message
 class ParserMessageXML
 {
 public:
-    ParserMessageXML(){}
-    virtual ~ParserMessageXML(){}
+    ParserMessageXML();
+    virtual ~ParserMessageXML();
 
-    MsgStatus LoadFile( const char* strPath );
+    MsgStatus LoadFile(const char* strPath);
 
-    void SetObject(std::string strName,std::string strValue);
+    XMLObject* GetOjbect(const std::string& strName);
+    XMLObject* GetOjbect(int nId);
 
-    XMLObject* GetOjbect(std::string strName);
 private:
-    void _Parser();
+    bool _Parser();
 private:
     TiXmlDocument m_xmlTiny;
-    std::string m_RootName;
-    std::map<std::string,std::string > m_MsgIdList;
-    std::map<std::string,XMLObject > m_MsgObjectList;
-    std::vector<std::string> m_NameList;
-    std::vector<std::string> m_IdList;
+    std::map<std::string, int> m_MsgIdList;
+    std::map<int, XMLObject> m_MsgObjectList;
 };
 
 }// namespace Message
