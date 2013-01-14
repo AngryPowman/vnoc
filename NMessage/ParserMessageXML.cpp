@@ -32,6 +32,7 @@ void VNOC::Message::ParserMessageXML::_Parser()
         msg = msg->NextSiblingElement()
         )
     {
+        VNOC::Message::XMLObject objXML;
         if (strcmp(msg->Value(),"msg") == 0)
         {
             //msg
@@ -39,6 +40,7 @@ void VNOC::Message::ParserMessageXML::_Parser()
             if (msg->Attribute("name")!= NULL)
             {
                 m_NameList.push_back(msg->Attribute("name"));
+                objXML.SetName(msg->Attribute("name"));
             }
             else
             {
@@ -48,46 +50,52 @@ void VNOC::Message::ParserMessageXML::_Parser()
             if (msg->Attribute("id") != NULL)
             {
                 m_IdList.push_back(msg->Attribute("id"));
+                objXML.SetId(msg->Attribute("id"));
             }
             else
             {
                 m_IdList.push_back("NULL");
             }
+            //item
+            for (msgItem = msg->FirstChild()->ToElement();
+                msgItem != NULL;
+                msgItem = msgItem->NextSiblingElement()
+                )
+            {
+                VNOC::Message::XMLItem   ItemXML;
+                if (msgItem->Attribute("mtype") != NULL)
+                {
+                    ItemXML.SetMType(msgItem->Attribute("mtype"));
+                }
+                //name
+                if (msgItem->Attribute("name") != NULL)
+                {
+                    ItemXML.SetName(msgItem->Attribute("name"));
+                }
+                //type
+                if (msgItem->Attribute("type") != NULL )
+                {
+                    ItemXML.SetType(msgItem->Attribute("type"));
+                }
+                objXML.SetItem(ItemXML.GetName(),ItemXML);
+            }
         }
+        m_MsgObjectList[objXML.GetName()] = objXML;
     }
-    //item
-    for (
-        msgItem = m_xmlTiny.FirstChild("vnoc")->FirstChild("msg")->FirstChildElement();
-        msgItem != NULL;
-        msgItem = msgItem->NextSiblingElement()
-        )
+    for (uint32 index = 0; index < m_NameList.size(); index++)
     {
-        //mname
-        if (msgItem->Attribute("mtype") != NULL)
-        {
-            m_ItmeTypeOList.push_back(msgItem->Attribute("mtype"));
-        }
-        else
-        {
-            m_ItmeTypeOList.push_back("NULL");
-        }
-        //name
-        if (msgItem->Attribute("name") != NULL)
-        {
-            m_ItmeNameList.push_back(msgItem->Attribute("name"));
-        }
-        else
-        {
-            m_ItmeNameList.push_back("NULL");
-        }
-        //type
-        if (msgItem->Attribute("type") != NULL )
-        {
-            m_ItmeTypeTList.push_back(msgItem->Attribute("type"));
-        }
-        else
-        {
-            m_ItmeTypeTList.push_back("NULL");
-        }
+        m_MsgIdList[m_NameList[index]] = m_IdList[index];
     }
+}
+
+VNOC::Message::XMLObject* VNOC::Message::ParserMessageXML::GetOjbect(
+    std::string strName 
+    )
+{
+    auto Itr = m_MsgObjectList.find(strName);
+    if (Itr != m_MsgObjectList.end())
+    {
+        return &(Itr->second);
+    }
+    return 0;
 }

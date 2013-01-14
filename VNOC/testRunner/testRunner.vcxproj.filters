@@ -49,6 +49,9 @@
     <ClCompile Include="..\..\TinyXML\tinyxmlparser.cpp">
       <Filter>TinyXML</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NMessage\XMLOject.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MSG_CLASS">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="..\..\TinyXML\tinyxml.h">
       <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\XMLObject.h">
+      <Filter>NMessage\Message</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

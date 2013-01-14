@@ -18,6 +18,7 @@
     <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp" />
+    <ClCompile Include="..\..\NMessage\XMLOject.cpp" />
     <ClCompile Include="..\..\NMessage\NBaseMessage.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
     <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="..\..\Message\MSG_RVC.h" />
     <ClInclude Include="..\..\Message\MSG_UNION.h" />
     <ClInclude Include="..\..\Message\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\XMLObject.h" />
     <ClInclude Include="..\..\NMessage\NBaseMessage.h" />
     <ClInclude Include="..\..\NMessage\BufferMessage.h" />
     <ClInclude Include="..\..\NMessage\IBaseMessage.h" />
