@@ -1,0 +1,10 @@
+<vnoc>
+<msg name="MSG_ALI" id="33">
+<item mtype="data" name="LoginResult" type="byte" />
+<item mtype="data" name="Token" type="dword" />
+<item mtype="data" name="ATLGUID" type="16" />
+</msg>
+<msg name="MSG_ACL" id="31">
+<item mtype="list" name="RoomList" type="dword" />
+</msg>
+</vnoc>

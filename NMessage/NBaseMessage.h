@@ -25,11 +25,11 @@ public:
 
     virtual MsgStatus Write(
         IN const MsgDataName name,
-        IN const MsgDataValue value);
+        IN const MsgDataValue& value);
 
     virtual MsgStatus WriteArr(
         IN const MsgDataName name,
-        IN const ArrayData value);
+        IN const ArrayData& value);
 private:
     std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
     std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;

@@ -15,6 +15,7 @@ class ArrayData;
 class IReadMessage
 {
 public:
+    IReadMessage(){}
     virtual ~IReadMessage(){}
 
 public:

@@ -14,6 +14,7 @@ class IMessage
     , public IWriteMessage
 {
 public:
+    IMessage(){}
     virtual ~IMessage(){}
 
 public:
@@ -27,11 +28,11 @@ public:
 
     virtual MsgStatus Write(
         IN const MsgDataName name,
-        IN const MsgDataValue value) = 0;
+        IN const MsgDataValue& value) = 0;
 
     virtual MsgStatus WriteArr(
         IN const MsgDataName name,
-        IN const ArrayData value) = 0;
+        IN const ArrayData& value) = 0;
 };
 
 }// namespace Message

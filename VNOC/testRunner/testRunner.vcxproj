@@ -14,8 +14,17 @@
     <ClCompile Include="..\..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp" />
     <ClCompile Include="..\..\NMessage\NBaseMessage.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
+    <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp" />
+    <ClCompile Include="..\..\TinyXML\tinystr.cpp" />
+    <ClCompile Include="..\..\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="..\test\NMessageTest.cpp" />
     <ClCompile Include="..\test\testPackMessage.cpp" />
     <ClCompile Include="..\test\testRunner.cpp" />
@@ -55,7 +64,10 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h" />
     <ClInclude Include="..\..\NMessage\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\ParaserMessageXML.h" />
     <ClInclude Include="..\..\NMessage\ParserMessage.h" />
+    <ClInclude Include="..\..\TinyXML\tinystr.h" />
+    <ClInclude Include="..\..\TinyXML\tinyxml.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}</ProjectGuid>

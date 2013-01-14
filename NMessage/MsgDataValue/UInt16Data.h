@@ -14,6 +14,13 @@ public:
     UInt16Data(){}
     virtual ~UInt16Data(){}
 
+    UInt16Data(
+                IN uint16 Value
+                )
+    {
+        SetValue(Value);
+    }
+
     virtual MsgStatus ToUInt16(
         OUT uint16& Value
         )
@@ -21,6 +28,9 @@ public:
         Value = m_Value;
         return MsgStatus_Ok;
     }
+
+    void SetValue(
+        IN uint16 Value);
 private:
     uint16      m_Value;
 };

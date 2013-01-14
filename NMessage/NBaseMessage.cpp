@@ -28,7 +28,7 @@ VNOC::Message::MsgStatus VNOC::Message::BaseMessage::ReadArr(
 
 VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Write(
     IN const MsgDataName name,
-    IN const MsgDataValue value
+    IN const MsgDataValue& value
     )
 {
     m_mapMsgData[name] = (MsgDataValue*)&value;
@@ -37,7 +37,7 @@ VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Write(
 
 VNOC::Message::MsgStatus VNOC::Message::BaseMessage::WriteArr(
     IN const MsgDataName name,
-    IN const ArrayData value
+    IN const ArrayData& value
     )
 {
     m_mapMsgDataArr[name] = (ArrayData*)&value;
