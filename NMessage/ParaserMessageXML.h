@@ -22,9 +22,8 @@ public:
 
     MsgStatus LoadFile(const char* strPath);
 
-    XMLObject* GetOjbect(const std::string& strName);
-    XMLObject* GetOjbect(int nId);
-
+    XMLObject* GetObject(const std::string& strName);
+    XMLObject* GetObject(int nId);
 private:
     bool _Parser();
 private:

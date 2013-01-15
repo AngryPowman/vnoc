@@ -1,7 +1,7 @@
 #include "NBaseMessage.h"
 
 VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Read(
-    IN const MsgDataName name,
+    IN const MsgDataName& name,
     OUT MsgDataValue*& value
     )
 {
@@ -13,8 +13,8 @@ VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Read(
     return MsgStatus_Ok;
 }
 
-VNOC::Message::MsgStatus VNOC::Message::BaseMessage::ReadArr(
-    IN const MsgDataName name,
+VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Read(
+    IN const MsgDataName& name,
     OUT ArrayData*& value
     )
 {
@@ -27,19 +27,19 @@ VNOC::Message::MsgStatus VNOC::Message::BaseMessage::ReadArr(
 }
 
 VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Write(
-    IN const MsgDataName name,
+    IN const MsgDataName& name,
     IN const MsgDataValue& value
     )
 {
-    m_mapMsgData[name] = (MsgDataValue*)&value;
+    m_mapMsgData[std::string(name)] = (MsgDataValue*)&value;
     return MsgStatus_Ok;
 }
 
-VNOC::Message::MsgStatus VNOC::Message::BaseMessage::WriteArr(
-    IN const MsgDataName name,
+VNOC::Message::MsgStatus VNOC::Message::BaseMessage::Write(
+    IN const MsgDataName& name,
     IN const ArrayData& value
     )
 {
-    m_mapMsgDataArr[name] = (ArrayData*)&value;
+    m_mapMsgDataArr[std::string(name)] = (ArrayData*)&value;
     return MsgStatus_Ok;
 }

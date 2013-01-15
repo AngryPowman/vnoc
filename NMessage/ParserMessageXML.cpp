@@ -3,8 +3,8 @@
 
 namespace VNOC
 {
-    namespace Message
-    {
+namespace Message
+{
 
 ParserMessageXML::ParserMessageXML()
 {
@@ -63,7 +63,15 @@ bool ParserMessageXML::_Parser()
                 XMLItem ItemXML;
                 if (msgItem->Attribute("mtype") != NULL)
                 {
-                    ItemXML.SetMType(msgItem->Attribute("mtype"));
+                    std::string strMType = msgItem->Attribute("mtype");
+                    if (strMType == "data")
+                    {
+                        ItemXML.SetMType(MsgDataMType_Data);
+                    }
+                    if (strMType == "list")
+                    {
+                        ItemXML.SetMType(MsgDataMType_List);
+                    }
                 }
                 //name
                 if (msgItem->Attribute("name") != NULL)
@@ -73,18 +81,29 @@ bool ParserMessageXML::_Parser()
                 //type
                 if (msgItem->Attribute("type") != NULL )
                 {
-                    ItemXML.SetType(msgItem->Attribute("type"));
+                    std::string strType = msgItem->Attribute("type");
+                    if (strType == "dword")
+                    {
+                        ItemXML.SetType(MsgDataType_Dword);
+                    }
+                    if (strType == "string")
+                    {
+                        ItemXML.SetType(MsgDataType_String);
+                    }
+                    if (strType == "byte")
+                    {
+                        ItemXML.SetType(MsgDataType_Byte);
+                    }
                 }
                 objXML.SetItem(ItemXML.GetName(), ItemXML);
             }
-
             m_MsgObjectList.insert(std::make_pair(objXML.GetId(), objXML));
         }
     }
     return true;
 }
 
-XMLObject* ParserMessageXML::GetOjbect(const std::string& strName)
+XMLObject* ParserMessageXML::GetObject(const std::string& strName)
 {
     auto itFind = m_MsgIdList.find(strName);
     if (itFind != m_MsgIdList.end())
@@ -95,11 +114,10 @@ XMLObject* ParserMessageXML::GetOjbect(const std::string& strName)
             return &(Itr->second);
         }
     }
-
     return 0;
 }
 
-XMLObject* ParserMessageXML::GetOjbect(int nId)
+XMLObject* ParserMessageXML::GetObject(int nId)
 {
     auto Itr = m_MsgObjectList.find(nId);
     if (Itr != m_MsgObjectList.end())

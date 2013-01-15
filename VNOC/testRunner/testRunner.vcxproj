@@ -14,6 +14,7 @@
     <ClCompile Include="..\..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\Message.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp" />

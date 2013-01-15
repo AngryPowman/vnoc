@@ -52,6 +52,9 @@
     <ClCompile Include="..\..\NMessage\XMLOject.cpp">
       <Filter>NMessage\Message</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NMessage\Message.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MSG_CLASS">

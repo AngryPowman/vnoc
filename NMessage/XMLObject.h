@@ -17,36 +17,24 @@ public:
     XMLItem(){}
     virtual ~XMLItem(){}
 
-    std::string GetMType() { return m_strMType;}
+    MsgDataMType GetMType();
 
-    std::string GetType() { return m_strType;}
+    MsgDataType GetType();
 
-    std::string GetName() { return m_strName;}
+    std::string GetName();
 
     void SetMType(
-        std::string strValue
-        )
-    {
-        m_strMType = strValue;
-    }
+        IN MsgDataMType strValue);
 
     void SetType(
-        std::string strValue
-        )
-    {
-        m_strType = strValue;
-    }
+        IN MsgDataType strValue);
 
     void SetName(
-        std::string strValue
-        )
-    {
-        m_strName = strValue;
-    }
+        IN const std::string& strValue);
 private:
     std::string m_strName;
-    std::string m_strMType;
-    std::string m_strType;
+    MsgDataMType m_strMType;
+    MsgDataType m_strType;
 };
 
 class XMLObject
@@ -56,23 +44,25 @@ public:
 
     XMLObject(const XMLObject& obj);
 
-    virtual ~XMLObject(){}
+    virtual ~XMLObject();
 
-    std::string GetName() { return m_strName;}
+    std::string GetName();
 
-    int GetId() { return m_Id;}
+    int GetId();
 
-    XMLItem* GetItem(std::string strName);
+    XMLItem* GetItem(
+        IN const std::string& strName);
 
-    MsgStatus SetItem(std::string strName, XMLItem itemObject);
-
+    MsgStatus SetItem(
+        IN const std::string& strName,
+        IN XMLItem itemObject);
 private:
     int m_Id;
     std::string m_strName;
     std::map<std::string, XMLItem> m_mapParamList;
 };
 
-}
-}
+}// namespace Message
+}// namespace VNOC
 
 #endif

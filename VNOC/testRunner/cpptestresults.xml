@@ -9,50 +9,53 @@
       <Name>testNMessage::TestNMessageXML</Name>
     </Test>
     <Test id="3">
-      <Name>testPackMessage::MSGAVCPackTest</Name>
+      <Name>testNMessage::TestNMessageUser</Name>
     </Test>
     <Test id="4">
-      <Name>testPackMessage::MSGRVCPackTest</Name>
+      <Name>testPackMessage::MSGAVCPackTest</Name>
     </Test>
     <Test id="5">
-      <Name>testPackMessage::MSGALIPackTest</Name>
+      <Name>testPackMessage::MSGRVCPackTest</Name>
     </Test>
     <Test id="6">
-      <Name>testPackMessage::MSGRLIPackTest</Name>
+      <Name>testPackMessage::MSGALIPackTest</Name>
     </Test>
     <Test id="7">
-      <Name>testPackMessage::MSGAPSPackTest</Name>
+      <Name>testPackMessage::MSGRLIPackTest</Name>
     </Test>
     <Test id="8">
-      <Name>testPackMessage::MSGRPSPackTest</Name>
+      <Name>testPackMessage::MSGAPSPackTest</Name>
     </Test>
     <Test id="9">
-      <Name>testPackMessage::MSGACIPackTest</Name>
+      <Name>testPackMessage::MSGRPSPackTest</Name>
     </Test>
     <Test id="10">
-      <Name>Vnocp1MessageParserTest::MSGParserCheckTest</Name>
+      <Name>testPackMessage::MSGACIPackTest</Name>
     </Test>
     <Test id="11">
-      <Name>Vnocp1MessageParserTest::MSGAVCParseTest</Name>
+      <Name>Vnocp1MessageParserTest::MSGParserCheckTest</Name>
     </Test>
     <Test id="12">
-      <Name>Vnocp1MessageParserTest::MSGRVCParseTest</Name>
+      <Name>Vnocp1MessageParserTest::MSGAVCParseTest</Name>
     </Test>
     <Test id="13">
-      <Name>Vnocp1MessageParserTest::MSGALIParseTest</Name>
+      <Name>Vnocp1MessageParserTest::MSGRVCParseTest</Name>
     </Test>
     <Test id="14">
-      <Name>Vnocp1MessageParserTest::MSGRLIParseTest</Name>
+      <Name>Vnocp1MessageParserTest::MSGALIParseTest</Name>
     </Test>
     <Test id="15">
-      <Name>Vnocp1MessageParserTest::MSGAPSParseTest</Name>
+      <Name>Vnocp1MessageParserTest::MSGRLIParseTest</Name>
     </Test>
     <Test id="16">
+      <Name>Vnocp1MessageParserTest::MSGAPSParseTest</Name>
+    </Test>
+    <Test id="17">
       <Name>Vnocp1MessageParserTest::MSGRPSParseTest</Name>
     </Test>
   </SuccessfulTests>
   <Statistics>
-    <Tests>16</Tests>
+    <Tests>17</Tests>
     <FailuresTotal>0</FailuresTotal>
     <Errors>0</Errors>
     <Failures>0</Failures>

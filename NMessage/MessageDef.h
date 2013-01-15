@@ -20,6 +20,21 @@ typedef char                int8;
 typedef short               int16;
 typedef int                 int32;
 
+typedef enum _MsgDataMType
+{
+    MsgDataMType_Null,
+    MsgDataMType_Data,
+    MsgDataMType_List,
+}MsgDataMType;
+
+typedef enum _MsgDataType
+{
+    MsgDataType_Null,
+    MsgDataType_String,
+    MsgDataType_Dword,
+    MsgDataType_Byte,
+}MsgDataType;
+
 typedef enum _MsgStatus
 {
    MsgStatus_Ok,
