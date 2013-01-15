@@ -50,12 +50,11 @@ public:
 
     int GetId();
 
-    XMLItem* GetItem(
-        IN const std::string& strName);
+    XMLItem* GetItem(const std::string& strName);
 
     MsgStatus SetItem(
         IN const std::string& strName,
-        IN XMLItem itemObject);
+        IN const XMLItem& itemObject);
 private:
     int m_Id;
     std::string m_strName;

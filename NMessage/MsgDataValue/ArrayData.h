@@ -18,13 +18,17 @@ public:
 
     bool Empty(){ return m_arrValuePtr.empty();}
 
-    std::vector<MsgDataValue*>::const_iterator Begin() const { return m_arrValuePtr.begin();}
+    std::vector<MsgDataValue*>::const_iterator Begin() const
+    {
+        return m_arrValuePtr.begin();
+    }
 
-    std::vector<MsgDataValue*>::const_iterator End() const { return m_arrValuePtr.end();}
+    std::vector<MsgDataValue*>::const_iterator End() const 
+    {
+        return m_arrValuePtr.end();
+    }
 
-    void Push( 
-        IN MsgDataValue Value
-        ) 
+    void Push(MsgDataValue Value) 
     {
         return m_arrValuePtr.push_back(&Value);
     }

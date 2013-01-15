@@ -14,16 +14,9 @@ public:
     UInt8Data(){}
     virtual ~UInt8Data(){}
 
-    virtual MsgStatus ToByte(
-        OUT uint8& Value
-        )
-    {
-        Value = m_Value;
-        return MsgStatus_Ok;
-    }
+    virtual MsgStatus ToByte(uint8& Value);
 
-    void SetValue(
-        IN uint8 Value);
+    void SetValue(uint8 Value);
 private:
     uint8      m_Value;
 };

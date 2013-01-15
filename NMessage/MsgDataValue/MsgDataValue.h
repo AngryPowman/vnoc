@@ -17,33 +17,13 @@ public:
     MsgDataValue(){}
     virtual ~MsgDataValue(){}
 
-    virtual MsgStatus ToStr(
-        OUT std::string& Value
-        )
-    {
-        return MsgStatus_Unk;
-    }
+    virtual MsgStatus ToStr(std::string& Value) { return MsgStatus_Unk;}
 
-    virtual MsgStatus ToUInt8(
-        OUT uint8& Value
-        )
-    { 
-        return MsgStatus_Unk;
-    }
+    virtual MsgStatus ToUInt8(uint8& Value) { return MsgStatus_Unk;}
 
-    virtual MsgStatus ToUInt16(
-        OUT uint16& Value
-        )
-    { 
-        return MsgStatus_Unk;
-    }
+    virtual MsgStatus ToUInt16(uint16& Value) { return MsgStatus_Unk;}
 
-    virtual MsgStatus ToUInt32(
-        OUT uint32& Value
-        )
-    { 
-        return MsgStatus_Unk;
-    }
+    virtual MsgStatus ToUInt32(uint32& Value) { return MsgStatus_Unk;}
 };
 
 }// namespace Message

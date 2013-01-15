@@ -61,30 +61,19 @@ typedef enum _MsgDataMType
     MsgDataMType_List,
 }MsgDataMType;
 
-typedef enum _MsgDataMType_XML
-{
-    MsgDataMType_XML_Data = "data",
-    MsgDataMType_XML_List = "List",
-}_MsgDataMType_XML;
+#define MsgDataMType_XML_Data     "data"
+#define MsgDataMType_XML_List     "List"
 
-typedef enum _MsgDataObject_XML
-{
-    MsgDataObject_XML_Name = "name",
-    MsgDataObject_XML_Id = "id",
-    MsgDataObject_XML_MType = "mtype",
-    MsgDataObject_XML_Type = "type",
-    MsgDataObject_XML_Root = "vnoc",
-    MsgDataObject_XML_Msg = "msg",
-}_MsgDataMType_XML;
+#define MsgDataObject_XML_Name    "name"
+#define MsgDataObject_XML_Id      "id"
+#define MsgDataObject_XML_MType   "mtype"
+#define MsgDataObject_XML_Type    "type"
+#define MsgDataObject_XML_Root    "vnoc"
+#define MsgDataObject_XML_Msg     "msg"
 
-typedef enum _MsgDataType_XML
-{
-    MsgDataType_XML_Dword = "dword",
-    MsgDataType_XML_Byte = "byte",
-    MsgDataType_XML_String = "string",
-}_MsgDataType_XML;
-
-typedef enum 
+#define MsgDataType_XML_Dword     "dword"
+#define MsgDataType_XML_Byte      "byte"
+#define MsgDataType_XML_String    "string"
 
 typedef enum _MsgDataType
 {

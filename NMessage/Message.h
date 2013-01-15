@@ -14,18 +14,14 @@ class Message:public BaseMessage
 {
 public:
     Message();
-    Message(
-        IN const char* strPath);
+    Message(const char* strPath);
     virtual ~Message();
 
-    MsgStatus LoadXML(
-        IN const char* strPath);
+    MsgStatus LoadXML(const char* strPath);
 
-    bool SetMessage(
-        IN const std::string& strName);
+    bool SetMessage(const std::string& strName);
 
-    bool SetMessage(
-        IN int nId);
+    bool SetMessage(int nId);
 
     MsgStatus Write(
         IN const std::string& strName,

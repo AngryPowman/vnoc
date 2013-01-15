@@ -13,8 +13,7 @@ Message::~Message()
 {
 }
 
-Message::Message(
-    IN const char* strPath) : m_XML(NULL)
+Message::Message(const char* strPath) : m_XML(NULL)
 {
     if (strPath == NULL)
     {
@@ -23,8 +22,7 @@ Message::Message(
     m_ParserXML.LoadFile(strPath);
 }
 
-MsgStatus Message::LoadXML(
-    IN const char* strPath)
+MsgStatus Message::LoadXML(const char* strPath)
 {
     if (strPath == NULL)
     {
@@ -33,9 +31,7 @@ MsgStatus Message::LoadXML(
     return m_ParserXML.LoadFile(strPath);
 }
 
-bool Message::SetMessage(
-    IN const std::string& strName
-    )
+bool Message::SetMessage(const std::string& strName)
 {
     m_XML = m_ParserXML.GetObject(strName);
     if (m_XML != NULL)
@@ -45,9 +41,7 @@ bool Message::SetMessage(
     return false;
 }
 
-bool Message::SetMessage(
-    IN int nId
-    )
+bool Message::SetMessage(int nId)
 {
     m_XML = m_ParserXML.GetObject(nId);
     if (m_XML != NULL)

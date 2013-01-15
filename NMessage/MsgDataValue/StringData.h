@@ -14,20 +14,9 @@ public:
     StringData(){}
     virtual ~StringData(){}
 
-    StringData(
-        IN std::string Value
-        )
-    {
-        SetValue(Value);
-    }
+    StringData(std::string Value) { SetValue(Value);}
 
-    virtual MsgStatus ToStr(
-        OUT std::string& Value
-        )
-    {
-         Value = m_Value;
-         return MsgStatus_Ok;
-    }
+    virtual MsgStatus ToStr(std::string& Value);
 
     void SetValue(
         IN std::string Value);

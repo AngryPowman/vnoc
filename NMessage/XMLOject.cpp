@@ -5,23 +5,17 @@ namespace VNOC
 namespace Message
 {
 //XMLITEM
-void XMLItem::SetMType(
-    IN MsgDataMType strValue
-    )
+void XMLItem::SetMType(MsgDataMType strValue)
 {
     m_strMType = strValue;
 }
 
-void XMLItem::SetType(
-    IN MsgDataType strValue
-    )
+void XMLItem::SetType(MsgDataType strValue)
 {
     m_strType = strValue;
 }
 
-void XMLItem::SetName(
-    IN const std::string& strValue
-    )
+void XMLItem::SetName(const std::string& strValue)
 {
     m_strName = strValue;
 }
@@ -41,9 +35,7 @@ MsgDataType XMLItem::GetType()
     return m_strType;
 }
 //XMLOBJECT
-XMLObject::XMLObject(
-    IN const char* pName, int nId
-    )
+XMLObject::XMLObject(const char* pName, int nId)
     : m_strName(pName)
     , m_Id(nId)
 {
@@ -53,18 +45,14 @@ XMLObject::~XMLObject()
 {
 }
 
-XMLObject::XMLObject(
-    IN const XMLObject& obj
-    )
+XMLObject::XMLObject(const XMLObject& obj)
 {
     m_strName = obj.m_strName;
     m_Id = obj.m_Id;
     m_mapParamList = obj.m_mapParamList;
 }
 
-XMLItem* XMLObject::GetItem(
-    IN const std::string& strName
-    )
+XMLItem* XMLObject::GetItem(const std::string& strName)
 {
     auto Itr = m_mapParamList.find(strName);
     if (Itr != m_mapParamList.end())
@@ -86,7 +74,7 @@ int XMLObject::GetId()
 
 MsgStatus XMLObject::SetItem(
     IN const std::string& strName,
-    IN XMLItem itemObject
+    IN const XMLItem& itemObject
     )
 {
     if (strName.empty())

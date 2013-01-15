@@ -14,16 +14,9 @@ public:
     UInt32Data(){}
     virtual ~UInt32Data(){}
 
-    virtual MsgStatus ToUInt32(
-        OUT uint32& Value
-        )
-    {
-        Value = m_Value;
-        return MsgStatus_Ok;
-    }
+    virtual MsgStatus ToUInt32(uint32& Value);
 
-    void SetValue(
-        IN uint32 Value);
+    void SetValue(uint32 Value);
 private:
     uint32      m_Value;
 };
