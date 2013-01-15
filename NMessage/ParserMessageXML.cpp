@@ -109,7 +109,7 @@ bool ParserMessageXML::_Parser()
     return true;
 }
 
-XMLObject* ParserMessageXML::GetObject(const std::string& strName)
+XMLObject* ParserMessageXML::GetMsgObject(const std::string& strName)
 {
     auto itFind = m_MsgIdList.find(strName);
     if (itFind != m_MsgIdList.end())
@@ -123,7 +123,7 @@ XMLObject* ParserMessageXML::GetObject(const std::string& strName)
     return 0;
 }
 
-XMLObject* ParserMessageXML::GetObject(int nId)
+XMLObject* ParserMessageXML::GetMsgObject(int nId)
 {
     auto Itr = m_MsgObjectList.find(nId);
     if (Itr != m_MsgObjectList.end())

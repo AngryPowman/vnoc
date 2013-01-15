@@ -4,7 +4,7 @@ namespace VNOC
 {
 namespace Message
 {
-//XMLITEM
+
 void XMLItem::SetMType(MsgDataMType strValue)
 {
     m_strMType = strValue;
@@ -34,7 +34,7 @@ MsgDataType XMLItem::GetType()
 {
     return m_strType;
 }
-//XMLOBJECT
+
 XMLObject::XMLObject(const char* pName, int nId)
     : m_strName(pName)
     , m_Id(nId)

@@ -85,7 +85,7 @@ bool VNOC::Message::CMessage::SetMessage(
     IN ParserMessageXML& parserXML
     )
 {
-    m_xmlObject = parserXML.GetObject(strName);
+    m_xmlObject = parserXML.GetMsgObject(strName);
     if (m_xmlObject != NULL)
     {
         return true;
@@ -97,7 +97,7 @@ bool VNOC::Message::CMessage::SetMessage(
     IN int nId,
     IN ParserMessageXML& parserXML )
 {
-    m_xmlObject = parserXML.GetObject(nId);
+    m_xmlObject = parserXML.GetMsgObject(nId);
     if (m_xmlObject != NULL)
     {
         return true;
