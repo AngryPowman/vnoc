@@ -1,6 +1,6 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include "../../NMessage/NBaseMessage.h"
+#include "../../NMessage/CMessage.h"
 #include "../../NMessage/MsgDataValue/MsgDataValue.h"
 #include "../../NMessage/MsgDataValue/StringData.h"
 #include "../../NMessage/MsgDataValue/UInt16Data.h"
@@ -50,7 +50,7 @@ public:
         xml.LoadFile("../test/msgdef.xml");
         test = xml.GetObject("MSG_ALI");
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
-        CPPUNIT_ASSERT(test->GetId() == 33);
+        CPPUNIT_ASSERT(test->GetId() == 23);
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetName() == "LoginResult");
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == VNOC::Message::MsgDataMType_Data);
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == VNOC::Message::MsgDataType_Byte);

@@ -1,7 +1,7 @@
 #ifndef  VNOC_C_MESSAGE_MSG
 #define  VNOC_C_MESSAGE_MSG
 
-#include "NBaseMessage.h"
+#include "CMessage.h"
 #include "ParaserMessageXML.h"
 #include <string>
 

@@ -23,7 +23,7 @@ public:
         IN const MsgDataName& name,
         OUT MsgDataValue*& value) = 0;
 
-    virtual MsgStatus Read(
+    virtual MsgStatus ReadArr(
         IN  const MsgDataName& name,
         OUT ArrayData*& value) = 0;
 };

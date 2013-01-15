@@ -93,7 +93,7 @@ MsgStatus XMLObject::SetItem(
     {
         return MsgStatus_Err;
     }
-    m_mapParamList[std::string(strName)] = itemObject;
+    m_mapParamList[strName] = itemObject;
     return MsgStatus_Ok;
 }
 

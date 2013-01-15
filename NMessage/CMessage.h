@@ -2,6 +2,7 @@
 #define  VNOC_C_MESSAGE_BASE
 
 #include "IBaseMessage.h"
+#include "ParaserMessageXML.h"
 #include <map>
 
 namespace VNOC
@@ -15,11 +16,13 @@ public:
     BaseMessage(){}
     virtual ~BaseMessage(){}
 
+    //MsgStatus Set
+
     virtual MsgStatus Read(
         IN const MsgDataName& name,
         OUT MsgDataValue*& value);
 
-    virtual MsgStatus Read(
+    virtual MsgStatus ReadArr(
         IN  const MsgDataName& name,
         OUT ArrayData*& value);
 
@@ -27,14 +30,12 @@ public:
         IN const MsgDataName& name,
         IN const MsgDataValue& value);
 
-    virtual MsgStatus Write(
+    virtual MsgStatus WriteArr(
         IN const MsgDataName& name,
         IN const ArrayData& value);
 private:
     std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
     std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;
-    std::map<MsgDataNameInt, MsgDataValue> m_mapMsgIntData;
-    std::map<MsgDataNameInt, ArrayData>    m_mapMsgIntDataArr;
 };
 
 }// namespace Message

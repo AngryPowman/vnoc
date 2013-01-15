@@ -35,62 +35,76 @@ bool ParserMessageXML::_Parser()
     TiXmlElement* msgItem = NULL;
     TiXmlElement * msg = m_xmlTiny.RootElement();
     std::string sRootName = msg->Value();
-    if (sRootName != "vnoc")
+    if (sRootName != MsgDataObject_XML_Root)
     {
         return false;
     }
-    for (msg = m_xmlTiny.FirstChild("vnoc")->FirstChildElement();
+    TiXmlNode* msgNode = m_xmlTiny.FirstChild(MsgDataObject_XML_Root);
+    if (msgNode == NULL)
+    {
+        return false;
+    }
+    for (msg = msgNode->FirstChildElement();
         msg != NULL;
         msg = msg->NextSiblingElement())
     {
-        if (strcmp(msg->Value(),"msg") == 0)
+        if (strcmp(msg->Value(),MsgDataObject_XML_Msg) == 0)
         {
             //msg
-            const char* pName = msg->Attribute("name");
-            const char* pId = msg->Attribute("id");
+            const char* pName = msg->Attribute(MsgDataObject_XML_Name);
+            const char* pId = msg->Attribute(MsgDataObject_XML_Id);
             if (!pName || !pId)
-                return false;
+            {
+                continue;
+            }
 
             int nId = atoi(pId);
             XMLObject objXML(pName, nId);
             m_MsgIdList[std::string(pName)] = nId;
 
             //item
-            for (msgItem = msg->FirstChild()->ToElement();
+            TiXmlNode* tmpNode = msg->FirstChild();
+            if (tmpNode == NULL)
+            {
+                continue;
+            }
+            for (msgItem = tmpNode->ToElement();
                 msgItem != NULL;
                 msgItem = msgItem->NextSiblingElement())
             {
                 XMLItem ItemXML;
-                if (msgItem->Attribute("mtype") != NULL)
+                if (msgItem->Attribute(MsgDataObject_XML_MType) != NULL)
                 {
-                    std::string strMType = msgItem->Attribute("mtype");
-                    if (strMType == "data")
+                    std::string strMType = msgItem->Attribute(MsgDataObject_XML_MType);
+                    if (strMType == MsgDataMType_XML_Data)
                     {
                         ItemXML.SetMType(MsgDataMType_Data);
                     }
-                    if (strMType == "list")
+                    if (strMType == MsgDataMType_XML_List)
                     {
                         ItemXML.SetMType(MsgDataMType_List);
                     }
                 }
+
                 //name
-                if (msgItem->Attribute("name") != NULL)
+                if (msgItem->Attribute(MsgDataObject_XML_Name) != NULL)
                 {
-                    ItemXML.SetName(msgItem->Attribute("name"));
+                    ItemXML.SetName(msgItem->Attribute(MsgDataObject_XML_Name));
                 }
+
                 //type
-                if (msgItem->Attribute("type") != NULL )
+                if (msgItem->Attribute(MsgDataObject_XML_Type) != NULL )
                 {
-                    std::string strType = msgItem->Attribute("type");
-                    if (strType == "dword")
+                    std::string strType = msgItem->Attribute(MsgDataObject_XML_Type);
+                    if (strType == MsgDataType_XML_Dword)
                     {
                         ItemXML.SetType(MsgDataType_Dword);
                     }
-                    if (strType == "string")
+                    if (strType == MsgDataType_XML_String)
                     {
                         ItemXML.SetType(MsgDataType_String);
                     }
-                    if (strType == "byte")
+                    if (strType == MsgDataType_XML_Byte)
                     {
                         ItemXML.SetType(MsgDataType_Byte);
                     }

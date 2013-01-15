@@ -23,7 +23,7 @@ public:
         IN const MsgDataName& name,
         IN const MsgDataValue& value) = 0;
 
-    virtual MsgStatus Write(
+    virtual MsgStatus WriteArr(
         IN const MsgDataName& name,
         IN const ArrayData& value) = 0;
 };
