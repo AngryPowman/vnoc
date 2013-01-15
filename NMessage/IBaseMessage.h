@@ -14,6 +14,7 @@ class IMessage
     , public IWriteMessage
 {
 public:
+    IMessage(){}
     virtual ~IMessage(){}
 
 public:

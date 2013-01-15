@@ -14,13 +14,23 @@ public:
     StringData(){}
     virtual ~StringData(){}
 
-    virtual MsgStatus ToString(
+    StringData(
+        IN std::string Value
+        )
+    {
+        SetValue(Value);
+    }
+
+    virtual MsgStatus ToStr(
         OUT std::string& Value
         )
     {
          Value = m_Value;
          return MsgStatus_Ok;
     }
+
+    void SetValue(
+        IN std::string Value);
 private:
     std::string      m_Value;
 };

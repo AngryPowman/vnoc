@@ -15,6 +15,7 @@ class ArrayData;
 class IWriteMessage
 {
 public:
+    IWriteMessage(){}
     virtual ~IWriteMessage(){}
 
 public:

@@ -21,6 +21,9 @@ public:
         Value = m_Value;
         return MsgStatus_Ok;
     }
+
+    void SetValue(
+        IN uint32 Value);
 private:
     uint32      m_Value;
 };

@@ -22,6 +22,36 @@
     <ClCompile Include="..\test\testRunner.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinystr.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxml.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlerror.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlparser.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\XMLOject.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MSG_CLASS">
@@ -38,6 +68,9 @@
     </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{eaff412d-cf65-46d7-a18c-c02b9cf4c6bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{0156e8d2-d62a-4273-a30b-8b0fa6271448}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +162,18 @@
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\NBaseMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\ParaserMessageXML.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinystr.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinyxml.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\XMLObject.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
   </ItemGroup>
