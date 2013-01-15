@@ -50,19 +50,15 @@ bool ParserMessageXML::_Parser()
     {
         if (strcmp(msg->Value(),MsgDataObject_XML_Msg) == 0)
         {
-            //msg
             const char* pName = msg->Attribute(MsgDataObject_XML_Name);
             const char* pId = msg->Attribute(MsgDataObject_XML_Id);
             if (!pName || !pId)
             {
                 continue;
             }
-
             int nId = atoi(pId);
             XMLObject objXML(pName, nId);
             m_MsgIdList[std::string(pName)] = nId;
-
-            //item
             TiXmlNode* tmpNode = msg->FirstChild();
             if (tmpNode == NULL)
             {
@@ -85,14 +81,10 @@ bool ParserMessageXML::_Parser()
                         ItemXML.SetMType(MsgDataMType_List);
                     }
                 }
-
-                //name
                 if (msgItem->Attribute(MsgDataObject_XML_Name) != NULL)
                 {
                     ItemXML.SetName(msgItem->Attribute(MsgDataObject_XML_Name));
                 }
-
-                //type
                 if (msgItem->Attribute(MsgDataObject_XML_Type) != NULL )
                 {
                     std::string strType = msgItem->Attribute(MsgDataObject_XML_Type);
