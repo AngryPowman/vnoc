@@ -18,8 +18,7 @@ public:
 
     virtual MsgStatus ToStr(std::string& Value);
 
-    void SetValue(
-        IN std::string Value);
+    void SetValue(std::string Value);
 private:
     std::string      m_Value;
 };

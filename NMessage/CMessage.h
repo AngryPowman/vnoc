@@ -10,13 +10,21 @@ namespace VNOC
 namespace Message
 {
 
-class BaseMessage : public IMessage
+class CMessage : public IMessage
 {
 public:
-    BaseMessage(){}
-    virtual ~BaseMessage(){}
+    CMessage() : m_xmlObject(NULL) {}
+    virtual ~CMessage(){}
 
     //MsgStatus Set
+
+    bool SetMessage(
+        IN const std::string& strName,
+        IN ParserMessageXML& parserXML);
+
+    bool SetMessage(
+        IN int nId,
+        IN ParserMessageXML& parserXML);
 
     virtual MsgStatus Read(
         IN const MsgDataName& name,
@@ -36,6 +44,7 @@ public:
 private:
     std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
     std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;
+    XMLObject* m_xmlObject;
 };
 
 }// namespace Message

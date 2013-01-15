@@ -49,9 +49,6 @@
     <ClCompile Include="..\..\NMessage\XMLOject.cpp">
       <Filter>NMessage\Message</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NMessage\Message.cpp">
-      <Filter>NMessage\Message</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\NMessage\CMessage.cpp">
       <Filter>NMessage\Message</Filter>
     </ClCompile>
@@ -150,9 +147,6 @@
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\IWriteMessage.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\Message.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MessageDef.h">

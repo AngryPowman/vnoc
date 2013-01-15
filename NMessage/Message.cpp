@@ -63,7 +63,7 @@ MsgStatus Message::Write(
     XMLItem* Item = m_XML->GetItem(strName);
     if (Item != NULL)
     {
-        return BaseMessage::Write(strName,strValue);
+        return CMessage::Write(strName,strValue);
     }
     return MsgStatus_Err;
 }
@@ -80,7 +80,7 @@ MsgStatus Message::Write(
     XMLItem* Item = m_XML->GetItem(strName);
     if (Item != NULL)
     {
-        return BaseMessage::WriteArr(strName,strValue);
+        return CMessage::WriteArr(strName,strValue);
     }
     return MsgStatus_Err;
 }
@@ -97,7 +97,7 @@ MsgStatus Message::Read(
     XMLItem* Item = m_XML->GetItem(strName);
     if (Item != NULL)
     {
-        return BaseMessage::Read(strName,strValue);
+        return CMessage::Read(strName,strValue);
     }
     return MsgStatus_Err;
 }
@@ -114,7 +114,7 @@ MsgStatus Message::Read(
     XMLItem* Item = m_XML->GetItem(strName);
     if (Item != NULL)
     {
-        return BaseMessage::ReadArr(strName,strValue);
+        return CMessage::ReadArr(strName,strValue);
     }
     return MsgStatus_Err;
 }
