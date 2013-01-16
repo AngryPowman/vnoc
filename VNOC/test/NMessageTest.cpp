@@ -8,6 +8,7 @@
 #include "../../NMessage/XMLObject.h"
 #include <Windows.h>
 #include <string.h>
+#include "atlstr.h"
 
 void get_filelist(char *foldname,std::vector<std::string>& flist)
 {
@@ -46,7 +47,14 @@ public:
         VNOC::Message::MsgDataValue* pReadData = NULL;
         VNOC::Message::CMessage BaseTest;
         VNOC::Message::ParserMessageXML xml;
-        CPPUNIT_ASSERT(xml.LoadFile("./test/msgdef.xml") == VNOC::Message::MsgStatus_Ok);
+
+        WCHAR szFile[MAX_PATH] = {0};
+        ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
+        ::PathRemoveFileSpec(szFile);
+        ::PathAppend(szFile, L"./../test/msgdef.xml");
+        CPPUNIT_ASSERT(::PathFileExists(szFile));
+
+        CPPUNIT_ASSERT(xml.LoadFile(CW2A(szFile)) == VNOC::Message::MsgStatus_Ok);
         BaseTest.SetMessage("MSG_ALI",xml);
         BaseTest.Write("LoginResult",Data);
         BaseTest.Read("LoginResult",pReadData);
@@ -65,17 +73,12 @@ public:
     {
         VNOC::Message::XMLObject* test = NULL;
         VNOC::Message::ParserMessageXML xml;
-        char szPath[MAX_PATH + 1] = {0};
-        ::GetModuleFileNameA(NULL,szPath,MAX_PATH);
-        std::string vstrPath = szPath;
-        std::string vstrDisposePath;
-        int Pos = vstrPath.find("vnoc");
-        vstrDisposePath.resize(Pos + 4);
-        std::copy(vstrPath.begin(),vstrPath.begin()+(Pos + 4),vstrDisposePath.begin());
-        vstrDisposePath += "/VNOC/test/msgdef.xml";
-        OutputDebugStringA(szPath);
-        std::cout<<szPath<<std::endl;
-        CPPUNIT_ASSERT(xml.LoadFile("../../test/msgdef.xml") == VNOC::Message::MsgStatus_Ok);
+        WCHAR szFile[MAX_PATH] = {0};
+        ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
+        ::PathRemoveFileSpec(szFile);
+        ::PathAppend(szFile, L"./../test/msgdef.xml");
+        CPPUNIT_ASSERT(::PathFileExists(szFile));
+        CPPUNIT_ASSERT(xml.LoadFile(CW2A(szFile)) == VNOC::Message::MsgStatus_Ok);
         test = xml.GetMsgObject("MSG_ALI");
 
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
