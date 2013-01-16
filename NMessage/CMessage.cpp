@@ -1,6 +1,11 @@
 #include "CMessage.h"
 
-VNOC::Message::MsgStatus VNOC::Message::CMessage::Read(
+namespace VNOC
+{
+namespace Message
+{
+
+MsgStatus CMessage::Read(
     IN const MsgDataName& name,
     OUT MsgDataValue*& value
     )
@@ -22,7 +27,7 @@ VNOC::Message::MsgStatus VNOC::Message::CMessage::Read(
     return MsgStatus_Err;
 }
 
-VNOC::Message::MsgStatus VNOC::Message::CMessage::ReadArr(
+MsgStatus CMessage::ReadArr(
     IN const MsgDataName& name,
     OUT ArrayData*& value
     )
@@ -44,7 +49,7 @@ VNOC::Message::MsgStatus VNOC::Message::CMessage::ReadArr(
     return MsgStatus_Err;
 }
 
-VNOC::Message::MsgStatus VNOC::Message::CMessage::Write(
+MsgStatus CMessage::Write(
     IN const MsgDataName& name,
     IN const MsgDataValue& value
     )
@@ -62,7 +67,7 @@ VNOC::Message::MsgStatus VNOC::Message::CMessage::Write(
     return MsgStatus_Err;
 }
 
-VNOC::Message::MsgStatus VNOC::Message::CMessage::WriteArr(
+MsgStatus CMessage::WriteArr(
     IN const MsgDataName& name,
     IN const ArrayData& value
     )
@@ -80,7 +85,7 @@ VNOC::Message::MsgStatus VNOC::Message::CMessage::WriteArr(
     return MsgStatus_Err;
 }
 
-bool VNOC::Message::CMessage::SetMessage(
+bool CMessage::SetMessage(
     IN const std::string& strName,
     IN ParserMessageXML& parserXML
     )
@@ -93,7 +98,7 @@ bool VNOC::Message::CMessage::SetMessage(
     return false;
 }
 
-bool VNOC::Message::CMessage::SetMessage(
+bool CMessage::SetMessage(
     IN int nId,
     IN ParserMessageXML& parserXML )
 {
@@ -104,3 +109,16 @@ bool VNOC::Message::CMessage::SetMessage(
     }
     return false;
 }
+
+CMessage::CMessage() : m_xmlObject(NULL)
+{
+
+}
+
+CMessage::~CMessage()
+{
+
+}
+
+}// namespace Message
+}// namespace VNOC

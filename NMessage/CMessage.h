@@ -13,10 +13,8 @@ namespace Message
 class CMessage : public IMessage
 {
 public:
-    CMessage() : m_xmlObject(NULL) {}
-    virtual ~CMessage(){}
-
-    //MsgStatus Set
+    CMessage();
+    virtual ~CMessage();
 
     bool SetMessage(
         IN const std::string& strName,
@@ -41,6 +39,7 @@ public:
     virtual MsgStatus WriteArr(
         IN const MsgDataName& name,
         IN const ArrayData& value);
+
 private:
     std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
     std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;

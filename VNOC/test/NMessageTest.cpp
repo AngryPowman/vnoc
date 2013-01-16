@@ -84,6 +84,8 @@ public:
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == VNOC::Message::MsgDataMType_Data);
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == VNOC::Message::MsgDataType_Uint8);
     }
+
+
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( testNMessage );
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(testNMessage, "testNMessage");
