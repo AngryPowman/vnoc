@@ -11,6 +11,18 @@ namespace VNOC
 {
 namespace Message
 {
+
+#ifndef DISALLOW_COPY_AND_ASSIGN
+#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
+    TypeName(const TypeName&);             \
+    void operator=(const TypeName&);
+#endif
+
+#ifndef DISALLOW_ASSIGN
+#define DISALLOW_ASSIGN(TypeName) \
+    void operator=(const TypeName&);
+#endif
+
 typedef std::string         MsgDataName;
 typedef int                 MsgDataNameInt;
 typedef unsigned char       uint8;

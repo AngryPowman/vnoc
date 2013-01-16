@@ -11,16 +11,17 @@ namespace Message
 class StringData:public MsgDataValue
 {
 public:
-    StringData(){}
     virtual ~StringData(){}
+    StringData();
+    StringData(const std::string& Value);
 
-    StringData(std::string Value) { SetValue(Value);}
+    virtual MsgStatus ToStr(OUT std::string& Value);
 
-    virtual MsgStatus ToStr(std::string& Value);
+    void SetValue(IN const std::string& Value);
 
-    void SetValue(std::string Value);
 private:
-    std::string      m_Value;
+    DISALLOW_ASSIGN(StringData);
+    std::string m_Value;
 };
 
 }// namespace Message
