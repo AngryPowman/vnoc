@@ -24,7 +24,7 @@ bool DisposePath(
     ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
     ::PathRemoveFileSpec(szFile);
     ::PathAppend(szFile, strPath);
-    strConvertDir = CW2A(strPath);
+    strConvertDir = CW2A(szFile);
     return !strConvertDir.empty();
 }
 
