@@ -33,8 +33,6 @@ MsgStatus ParserMessageXML::LoadFile(const char* strPath)
 
 bool ParserMessageXML::_Parser(TiXmlDocument& xmlTiny)
 {
-    int MsgCount = 0;
-    TiXmlElement* msgItem = NULL;
     TiXmlElement* msg = xmlTiny.RootElement();
     std::string sRootName = msg->Value();
     if (sRootName != MsgDataObject_XML_Root)
@@ -66,6 +64,8 @@ bool ParserMessageXML::_Parser(TiXmlDocument& xmlTiny)
             {
                 continue;
             }
+
+            TiXmlElement* msgItem = NULL;
             for (msgItem = tmpNode->ToElement();
                 msgItem != NULL;
                 msgItem = msgItem->NextSiblingElement())
@@ -90,17 +90,21 @@ bool ParserMessageXML::_Parser(TiXmlDocument& xmlTiny)
                 if (msgItem->Attribute(MsgDataObject_XML_Type) != NULL )
                 {
                     std::string strType = msgItem->Attribute(MsgDataObject_XML_Type);
-                    if (strType == MsgDataType_XML_Dword)
+                    if (strType == MsgDataType_XML_Uint32)
                     {
-                        ItemXML.SetType(MsgDataType_Dword);
+                        ItemXML.SetType(MsgDataType_Uint32);
                     }
-                    if (strType == MsgDataType_XML_String)
+                    else if (strType == MsgDataType_XML_Uint16)
+                    {
+                        ItemXML.SetType(MsgDataType_Uint16);
+                    }
+                    else if (strType == MsgDataType_XML_Uint8)
+                    {
+                        ItemXML.SetType(MsgDataType_Uint8);
+                    }
+                    else if (strType == MsgDataType_XML_String)
                     {
                         ItemXML.SetType(MsgDataType_String);
-                    }
-                    if (strType == MsgDataType_XML_Byte)
-                    {
-                        ItemXML.SetType(MsgDataType_Byte);
                     }
                 }
                 objXML.SetItem(ItemXML.GetName(), ItemXML);

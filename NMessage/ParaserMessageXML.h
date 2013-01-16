@@ -25,9 +25,10 @@ public:
 
     XMLObject* GetMsgObject(const std::string& strName);
     XMLObject* GetMsgObject(int nId);
+
 private:
     bool _Parser(TiXmlDocument& xmlTiny);
-private:
+
     std::map<std::string, int> m_MsgIdList;
     std::map<int, XMLObject> m_MsgObjectList;
 };

@@ -83,16 +83,18 @@ typedef enum _MsgDataMType
 #define MsgDataObject_XML_Root    "vnoc"
 #define MsgDataObject_XML_Msg     "msg"
 
-#define MsgDataType_XML_Dword     "dword"
-#define MsgDataType_XML_Byte      "byte"
+#define MsgDataType_XML_Uint32    "uint32"
+#define MsgDataType_XML_Uint16    "uint16"
+#define MsgDataType_XML_Uint8     "uint8"
 #define MsgDataType_XML_String    "string"
 
 typedef enum _MsgDataType
 {
     MsgDataType_Null,
     MsgDataType_String,
-    MsgDataType_Dword,
-    MsgDataType_Byte,
+    MsgDataType_Uint8,
+    MsgDataType_Uint16,
+    MsgDataType_Uint32,
 }MsgDataType;
 
 typedef enum _MsgStatus

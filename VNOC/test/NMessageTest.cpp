@@ -82,7 +82,7 @@ public:
         CPPUNIT_ASSERT(test->GetId() == 23);
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetName() == "LoginResult");
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == VNOC::Message::MsgDataMType_Data);
-        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == VNOC::Message::MsgDataType_Byte);
+        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == VNOC::Message::MsgDataType_Uint8);
     }
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( testNMessage );

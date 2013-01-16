@@ -14,11 +14,9 @@
 	<msg name="MSG_RLI" id="22">
 	</msg>
 	<msg name="MSG_ALI" id="23">
-		<item mtype="data" name="LoginResult" type="byte" />
-		<item mtype="data" name="Token" type="dword" />
-		<!-- 16 of byte -->
-		<item mtype="data" name="ATLGUID" type="16" />
-		<!--item type="data" name="ATLGUID" type="string" /-->
+		<item mtype="data" name="LoginResult" type="uint8" />
+		<item mtype="data" name="Token" type="uint32" />
+		<item mtype="data" name="ATLGUID" type="string" />
 	</msg>
 	<msg name="MSG_RPS" id="24">
 	</msg>
@@ -35,7 +33,7 @@
 	<msg name="MSG_RCL" id="30">
 	</msg>
 	<msg name="MSG_ACL" id="31">
-		<item mtype="list" name="RoomList" type="dword" />
+		<item mtype="list" name="RoomList" type="uint32" />
 	</msg>
 	<msg name="MSG_RCI" id="32">
 	</msg>
