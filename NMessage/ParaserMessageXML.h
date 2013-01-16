@@ -5,9 +5,10 @@
 #include <vector>
 #include <map>
 #include <tchar.h>
-#include "../TinyXML/tinyxml.h"
 #include "MessageDef.h"
 #include "XMLObject.h"
+
+class TiXmlDocument;
 
 namespace VNOC
 {
@@ -25,9 +26,8 @@ public:
     XMLObject* GetMsgObject(const std::string& strName);
     XMLObject* GetMsgObject(int nId);
 private:
-    bool _Parser();
+    bool _Parser(TiXmlDocument& xmlTiny);
 private:
-    TiXmlDocument m_xmlTiny;
     std::map<std::string, int> m_MsgIdList;
     std::map<int, XMLObject> m_MsgObjectList;
 };

@@ -1,4 +1,5 @@
 #include "ParaserMessageXML.h"
+#include "../TinyXML/tinyxml.h"
 #include <stdlib.h>
 
 namespace VNOC
@@ -22,24 +23,25 @@ MsgStatus ParserMessageXML::LoadFile(const char* strPath)
     {
         return MsgStatus_Err;
     }
-    if(m_xmlTiny.LoadFile(strPath))
+    TiXmlDocument xmlTiny;
+    if(xmlTiny.LoadFile(strPath))
     {
-        return _Parser() ? MsgStatus_Ok: MsgStatus_Err;
+        return _Parser(xmlTiny) ? MsgStatus_Ok: MsgStatus_Err;
     }
     return MsgStatus_Err;
 }
 
-bool ParserMessageXML::_Parser()
+bool ParserMessageXML::_Parser(TiXmlDocument& xmlTiny)
 {
     int MsgCount = 0;
     TiXmlElement* msgItem = NULL;
-    TiXmlElement * msg = m_xmlTiny.RootElement();
+    TiXmlElement* msg = xmlTiny.RootElement();
     std::string sRootName = msg->Value();
     if (sRootName != MsgDataObject_XML_Root)
     {
         return false;
     }
-    TiXmlNode* msgNode = m_xmlTiny.FirstChild(MsgDataObject_XML_Root);
+    TiXmlNode* msgNode = xmlTiny.FirstChild(MsgDataObject_XML_Root);
     if (msgNode == NULL)
     {
         return false;
