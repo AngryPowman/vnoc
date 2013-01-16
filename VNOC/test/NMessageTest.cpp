@@ -8,21 +8,30 @@
 #include "../../NMessage/XMLObject.h"
 #include <Windows.h>
 #include <string.h>
-#include "atlstr.h"
 
-void get_filelist(char *foldname,std::vector<std::string>& flist)
+bool DisposePath(
+    IN const char* strPath,
+    OUT std::string& strConvertDir
+    )
 {
-    HANDLE file;
-    WIN32_FIND_DATA fileData;
-    char line[1024];
-    wchar_t fn[1000];
-    mbstowcs(fn,(const char*)foldname,999);
-    file = FindFirstFile(fn, &fileData);
-    FindNextFile(file, &fileData);
-    while(FindNextFile(file, &fileData)){
-        wcstombs(line,(const wchar_t*)fileData.cFileName,259);
-        flist.push_back(line);
+    if (!strPath)
+    {
+        return false;
     }
+    char szFile[MAX_PATH] = {0};
+    ::GetModuleFileNameA(NULL, szFile, MAX_PATH - 1);
+    std::string strFile = szFile;
+    int Pos = strFile.rfind("\\");
+    if (Pos == std::string::npos)
+    {
+        return false;
+    }
+    strConvertDir.clear();
+    strConvertDir.resize(Pos);
+    std::copy(strFile.begin(), strFile.begin() + Pos,strConvertDir.begin());
+    strConvertDir += "\\";
+    strConvertDir += strPath;
+    return true;
 }
 
 class testNMessage : public CppUnit::TestFixture
@@ -48,13 +57,9 @@ public:
         VNOC::Message::CMessage BaseTest;
         VNOC::Message::ParserMessageXML xml;
 
-        WCHAR szFile[MAX_PATH] = {0};
-        ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
-        ::PathRemoveFileSpec(szFile);
-        ::PathAppend(szFile, L"./../test/msgdef.xml");
-        CPPUNIT_ASSERT(::PathFileExists(szFile));
-
-        CPPUNIT_ASSERT(xml.LoadFile(CW2A(szFile)) == VNOC::Message::MsgStatus_Ok);
+        std::string strPath;
+        CPPUNIT_ASSERT(DisposePath("../test/msgdef.xml",strPath) == true);
+        CPPUNIT_ASSERT(xml.LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
         BaseTest.SetMessage("MSG_ALI",xml);
         BaseTest.Write("LoginResult",Data);
         BaseTest.Read("LoginResult",pReadData);
@@ -73,12 +78,10 @@ public:
     {
         VNOC::Message::XMLObject* test = NULL;
         VNOC::Message::ParserMessageXML xml;
-        WCHAR szFile[MAX_PATH] = {0};
-        ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
-        ::PathRemoveFileSpec(szFile);
-        ::PathAppend(szFile, L"./../test/msgdef.xml");
-        CPPUNIT_ASSERT(::PathFileExists(szFile));
-        CPPUNIT_ASSERT(xml.LoadFile(CW2A(szFile)) == VNOC::Message::MsgStatus_Ok);
+        std::string strPath;
+
+        CPPUNIT_ASSERT(DisposePath("../test/msgdef.xml",strPath) == true);
+        CPPUNIT_ASSERT(xml.LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
         test = xml.GetMsgObject("MSG_ALI");
 
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
