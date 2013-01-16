@@ -9,6 +9,21 @@
 #include <Windows.h>
 #include <string.h>
 
+void get_filelist(char *foldname,std::vector<std::string>& flist)
+{
+    HANDLE file;
+    WIN32_FIND_DATA fileData;
+    char line[1024];
+    wchar_t fn[1000];
+    mbstowcs(fn,(const char*)foldname,999);
+    file = FindFirstFile(fn, &fileData);
+    FindNextFile(file, &fileData);
+    while(FindNextFile(file, &fileData)){
+        wcstombs(line,(const wchar_t*)fileData.cFileName,259);
+        flist.push_back(line);
+    }
+}
+
 class testNMessage : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( testNMessage );
@@ -31,17 +46,7 @@ public:
         VNOC::Message::MsgDataValue* pReadData = NULL;
         VNOC::Message::CMessage BaseTest;
         VNOC::Message::ParserMessageXML xml;
-        char szPath[MAX_PATH + 1] = {0};
-        ::GetModuleFileNameA(NULL,szPath,MAX_PATH);
-        std::string vstrPath = szPath;
-        std::string vstrDisposePath;
-        int Pos = vstrPath.find("vnoc");
-        vstrDisposePath.resize(Pos + 4);
-        std::copy(vstrPath.begin(),vstrPath.begin()+(Pos + 4),vstrDisposePath.begin());
-        OutputDebugStringA(szPath);
-        std::cout<<szPath<<std::endl;
-        vstrDisposePath += "/VNOC/test/msgdef.xml";
-        CPPUNIT_ASSERT(xml.LoadFile("../../test/msgdef.xml") == VNOC::Message::MsgStatus_Ok);
+        CPPUNIT_ASSERT(xml.LoadFile("./test/msgdef.xml") == VNOC::Message::MsgStatus_Ok);
         BaseTest.SetMessage("MSG_ALI",xml);
         BaseTest.Write("LoginResult",Data);
         BaseTest.Read("LoginResult",pReadData);
