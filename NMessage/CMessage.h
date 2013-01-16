@@ -27,16 +27,19 @@ public:
 
     virtual MsgStatus Write(
         IN const MsgDataName& name,
-        IN const MsgDataValue& value);
+        IN MsgDataValue* pValue);
 
     virtual MsgStatus WriteArr(
         IN const MsgDataName& name,
-        IN const ArrayData& value);
+        IN ArrayData* pValue);
 
     virtual bool IsValid();
 
 private:
     CMessage();
+
+    void _InitDataMap();
+    void _ReleaseMap();
 
     std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
     std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;

@@ -28,11 +28,11 @@ public:
 
     virtual MsgStatus Write(
         IN const MsgDataName& name,
-        IN const MsgDataValue& value) = 0;
+        IN MsgDataValue* pValue) = 0;
 
     virtual MsgStatus WriteArr(
         IN const MsgDataName& name,
-        IN const ArrayData& value) = 0;
+        IN ArrayData* pValue) = 0;
 
     virtual bool IsValid() = 0;
 };

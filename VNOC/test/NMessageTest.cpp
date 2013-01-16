@@ -11,6 +11,8 @@
 #include <shlwapi.h>
 #include <atlstr.h>
 
+using namespace VNOC::Message;
+
 bool DisposePath(
     IN const wchar_t* strPath,
     OUT std::string& strConvertDir
@@ -46,22 +48,23 @@ public:
 public:
     void TestNMessage()
     {
-        VNOC::Message::UInt16Data Data(8);
-        VNOC::Message::MsgDataValue* pReadData = NULL;
+        MsgDataValue* pUInt16 = new UInt16Data(8);
+        MsgDataValue* pReadData = NULL;
 
         std::string strPath;
         CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
-        CPPUNIT_ASSERT(VNOC::Message::ParserMessageXML::Instance().LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
+        CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile(strPath.c_str()) == MsgStatus_Ok);
 
-        VNOC::Message::CMessage BaseTest("MSG_ALI");
-        BaseTest.Write("LoginResult",Data);
-        BaseTest.Read("LoginResult",pReadData);
-        VNOC::Message::uint16 num = 0;
+        CMessage BaseTest("MSG_ALI");
+        BaseTest.Write("LoginResult", pUInt16);
+        CPPUNIT_ASSERT(BaseTest.Write("LoginResult2", pUInt16) != MsgStatus_Ok);
+        CPPUNIT_ASSERT(BaseTest.Read("LoginResult", pReadData) == MsgStatus_Ok);
+        uint16 num = 0;
         pReadData->ToUInt16(num);
         CPPUNIT_ASSERT(num == 8);
 
-        VNOC::Message::StringData strData(std::string("hello"));
-        BaseTest.Write("ATLGUID", strData);
+        MsgDataValue* pStr = new StringData(std::string("hello"));
+        BaseTest.Write("ATLGUID", pStr);
         BaseTest.Read("ATLGUID", pReadData);
         std::string str = "";
         pReadData->ToStr(str);
@@ -69,10 +72,10 @@ public:
     }
     void TestNMessageXML()
     {
-        VNOC::Message::XMLObject* test = NULL;
+        XMLObject* test = NULL;
         std::string strPath;
 
-        test = VNOC::Message::ParserMessageXML::Instance().GetMsgObject("MSG_ALI");
+        test = ParserMessageXML::Instance().GetMsgObject("MSG_ALI");
 
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
         CPPUNIT_ASSERT(test->GetId() == 23);
