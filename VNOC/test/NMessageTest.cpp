@@ -39,7 +39,7 @@ public:
         vstrDisposePath.resize(Pos + 4);
         std::copy(vstrPath.begin(),vstrPath.begin()+(Pos + 4),vstrDisposePath.begin());
         vstrDisposePath += "/VNOC/test/msgdef.xml";
-        CPPUNIT_ASSERT(xml.LoadFile(vstrDisposePath.c_str()) == VNOC::Message::MsgStatus_Ok);
+        CPPUNIT_ASSERT(xml.LoadFile("../test/msgdef.xml") == VNOC::Message::MsgStatus_Ok);
         BaseTest.SetMessage("MSG_ALI",xml);
         BaseTest.Write("LoginResult",Data);
         BaseTest.Read("LoginResult",pReadData);
@@ -66,7 +66,8 @@ public:
         vstrDisposePath.resize(Pos + 4);
         std::copy(vstrPath.begin(),vstrPath.begin()+(Pos + 4),vstrDisposePath.begin());
         vstrDisposePath += "/VNOC/test/msgdef.xml";
-        CPPUNIT_ASSERT(xml.LoadFile(vstrDisposePath.c_str()) == VNOC::Message::MsgStatus_Ok);
+        std::cout<<szPath<<std::endl;
+        CPPUNIT_ASSERT(xml.LoadFile("../test/msgdef.xml") == VNOC::Message::MsgStatus_Ok);
         test = xml.GetMsgObject("MSG_ALI");
 
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
