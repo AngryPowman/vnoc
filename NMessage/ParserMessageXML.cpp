@@ -17,6 +17,12 @@ ParserMessageXML::~ParserMessageXML()
 
 }
 
+ParserMessageXML& ParserMessageXML::Instance()
+{
+    static ParserMessageXML inst;
+    return inst;
+}
+
 MsgStatus ParserMessageXML::LoadFile(const char* strPath)
 {
     if (strPath == NULL)

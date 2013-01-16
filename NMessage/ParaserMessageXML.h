@@ -18,7 +18,8 @@ namespace Message
 class ParserMessageXML
 {
 public:
-    ParserMessageXML();
+    static ParserMessageXML& Instance();
+
     virtual ~ParserMessageXML();
 
     MsgStatus LoadFile(const char* strPath);
@@ -27,6 +28,7 @@ public:
     XMLObject* GetMsgObject(int nId);
 
 private:
+    ParserMessageXML();
     bool _Parser(TiXmlDocument& xmlTiny);
 
     std::map<std::string, int> m_MsgIdList;

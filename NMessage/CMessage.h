@@ -2,8 +2,8 @@
 #define  VNOC_C_MESSAGE_BASE
 
 #include "IBaseMessage.h"
-#include "ParaserMessageXML.h"
 #include <map>
+#include "XMLObject.h"
 
 namespace VNOC
 {
@@ -13,16 +13,9 @@ namespace Message
 class CMessage : public IMessage
 {
 public:
-    CMessage();
+    CMessage(const std::string& strName);
+    CMessage(int nId);
     virtual ~CMessage();
-
-    bool SetMessage(
-        IN const std::string& strName,
-        IN ParserMessageXML& parserXML);
-
-    bool SetMessage(
-        IN int nId,
-        IN ParserMessageXML& parserXML);
 
     virtual MsgStatus Read(
         IN const MsgDataName& name,
@@ -40,7 +33,11 @@ public:
         IN const MsgDataName& name,
         IN const ArrayData& value);
 
+    virtual bool IsValid();
+
 private:
+    CMessage();
+
     std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
     std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;
     XMLObject* m_xmlObject;

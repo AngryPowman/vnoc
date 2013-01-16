@@ -48,13 +48,12 @@ public:
     {
         VNOC::Message::UInt16Data Data(8);
         VNOC::Message::MsgDataValue* pReadData = NULL;
-        VNOC::Message::CMessage BaseTest;
-        VNOC::Message::ParserMessageXML xml;
 
         std::string strPath;
         CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
-        CPPUNIT_ASSERT(xml.LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
-        BaseTest.SetMessage("MSG_ALI",xml);
+        CPPUNIT_ASSERT(VNOC::Message::ParserMessageXML::Instance().LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
+
+        VNOC::Message::CMessage BaseTest("MSG_ALI");
         BaseTest.Write("LoginResult",Data);
         BaseTest.Read("LoginResult",pReadData);
         VNOC::Message::uint16 num = 0;
@@ -71,12 +70,9 @@ public:
     void TestNMessageXML()
     {
         VNOC::Message::XMLObject* test = NULL;
-        VNOC::Message::ParserMessageXML xml;
         std::string strPath;
 
-        CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
-        CPPUNIT_ASSERT(xml.LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
-        test = xml.GetMsgObject("MSG_ALI");
+        test = VNOC::Message::ParserMessageXML::Instance().GetMsgObject("MSG_ALI");
 
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
         CPPUNIT_ASSERT(test->GetId() == 23);

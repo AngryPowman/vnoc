@@ -1,4 +1,5 @@
 #include "CMessage.h"
+#include "ParaserMessageXML.h"
 
 namespace VNOC
 {
@@ -85,39 +86,29 @@ MsgStatus CMessage::WriteArr(
     return MsgStatus_Err;
 }
 
-bool CMessage::SetMessage(
-    IN const std::string& strName,
-    IN ParserMessageXML& parserXML
-    )
-{
-    m_xmlObject = parserXML.GetMsgObject(strName);
-    if (m_xmlObject != NULL)
-    {
-        return true;
-    }
-    return false;
-}
-
-bool CMessage::SetMessage(
-    IN int nId,
-    IN ParserMessageXML& parserXML )
-{
-    m_xmlObject = parserXML.GetMsgObject(nId);
-    if (m_xmlObject != NULL)
-    {
-        return true;
-    }
-    return false;
-}
-
 CMessage::CMessage() : m_xmlObject(NULL)
 {
 
 }
 
+CMessage::CMessage( const std::string& strName )
+{
+    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(strName);
+}
+
+CMessage::CMessage( int nId )
+{
+    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(nId);
+}
+
 CMessage::~CMessage()
 {
 
+}
+
+bool CMessage::IsValid()
+{
+    return m_xmlObject != NULL;
 }
 
 }// namespace Message

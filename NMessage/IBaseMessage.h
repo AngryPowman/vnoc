@@ -33,6 +33,8 @@ public:
     virtual MsgStatus WriteArr(
         IN const MsgDataName& name,
         IN const ArrayData& value) = 0;
+
+    virtual bool IsValid() = 0;
 };
 
 }// namespace Message
