@@ -8,9 +8,11 @@
 #include "../../NMessage/XMLObject.h"
 #include <Windows.h>
 #include <string.h>
+#include <shlwapi.h>
+#include <atlstr.h>
 
 bool DisposePath(
-    IN const char* strPath,
+    IN const wchar_t* strPath,
     OUT std::string& strConvertDir
     )
 {
@@ -18,20 +20,12 @@ bool DisposePath(
     {
         return false;
     }
-    char szFile[MAX_PATH] = {0};
-    ::GetModuleFileNameA(NULL, szFile, MAX_PATH - 1);
-    std::string strFile = szFile;
-    int Pos = strFile.rfind("\\");
-    if (Pos == std::string::npos)
-    {
-        return false;
-    }
-    strConvertDir.clear();
-    strConvertDir.resize(Pos);
-    std::copy(strFile.begin(), strFile.begin() + Pos,strConvertDir.begin());
-    strConvertDir += "\\";
-    strConvertDir += strPath;
-    return true;
+    TCHAR szFile[MAX_PATH] = {0};
+    ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
+    ::PathRemoveFileSpec(szFile);
+    ::PathAppend(szFile, strPath);
+    strConvertDir = CW2A(strPath);
+    return !strConvertDir.empty();
 }
 
 class testNMessage : public CppUnit::TestFixture
@@ -58,7 +52,7 @@ public:
         VNOC::Message::ParserMessageXML xml;
 
         std::string strPath;
-        CPPUNIT_ASSERT(DisposePath("../test/msgdef.xml",strPath) == true);
+        CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
         CPPUNIT_ASSERT(xml.LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
         BaseTest.SetMessage("MSG_ALI",xml);
         BaseTest.Write("LoginResult",Data);
@@ -80,7 +74,7 @@ public:
         VNOC::Message::ParserMessageXML xml;
         std::string strPath;
 
-        CPPUNIT_ASSERT(DisposePath("../test/msgdef.xml",strPath) == true);
+        CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
         CPPUNIT_ASSERT(xml.LoadFile(strPath.c_str()) == VNOC::Message::MsgStatus_Ok);
         test = xml.GetMsgObject("MSG_ALI");
 
