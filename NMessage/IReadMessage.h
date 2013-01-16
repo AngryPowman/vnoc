@@ -26,6 +26,8 @@ public:
     virtual MsgStatus ReadArr(
         IN  const MsgDataName& name,
         OUT ArrayData*& value) = 0;
+
+    virtual int MsgId() = 0;
 };
 
 }// namespace Message

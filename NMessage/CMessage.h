@@ -25,6 +25,8 @@ public:
         IN  const MsgDataName& name,
         OUT ArrayData*& value);
 
+    virtual int MsgId();
+
     virtual MsgStatus Write(
         IN const MsgDataName& name,
         IN MsgDataValue* pValue);

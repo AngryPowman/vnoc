@@ -55,6 +55,9 @@
     <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp">
       <Filter>NMessage\MsgDataValue</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NMessage\Message2Pack.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MSG_CLASS">
@@ -140,9 +143,6 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
       <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\BufferMessage.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NMessage\IBaseMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
@@ -153,9 +153,6 @@
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MessageDef.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\PackMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\ParserMessage.h">
@@ -174,6 +171,9 @@
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\CMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message2Pack.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
   </ItemGroup>

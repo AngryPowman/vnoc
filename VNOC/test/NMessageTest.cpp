@@ -10,6 +10,8 @@
 #include <string.h>
 #include <shlwapi.h>
 #include <atlstr.h>
+#include "../../NMessage/MsgDataValue/UInt32Data.h"
+#include "../../NMessage/Message2Pack.h"
 
 using namespace VNOC::Message;
 
@@ -35,6 +37,7 @@ class testNMessage : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE( testNMessage );
     CPPUNIT_TEST( TestNMessage );
     CPPUNIT_TEST( TestNMessageXML );
+    CPPUNIT_TEST( TestPack );
     CPPUNIT_TEST_SUITE_END();
 public:
     void setUp()
@@ -80,8 +83,20 @@ public:
         CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
         CPPUNIT_ASSERT(test->GetId() == 23);
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetName() == "LoginResult");
-        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == VNOC::Message::MsgDataMType_Data);
-        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == VNOC::Message::MsgDataType_Uint8);
+        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == MsgDataMType_Data);
+        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == MsgDataType_Uint8);
+    }
+
+    void TestPack()
+    {
+        CMessage2Pack m2p;
+        CMessage BaseTest("MSG_ALI");
+        BaseTest.Write("LoginResult", new UInt16Data(8));
+        BaseTest.Write("Token", new UInt32Data(811));
+        BaseTest.Write("ATLGUID", new StringData("hello"));
+        int nSize = 0;
+        CPPUNIT_ASSERT(m2p.GetPackSize(&BaseTest, nSize) == MsgStatus_Ok);
+        CPPUNIT_ASSERT(nSize == 22); // 8(head) + 4Token + 1LoginResult + 4ATLGUID +5hello
     }
 
 

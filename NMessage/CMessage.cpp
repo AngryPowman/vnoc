@@ -160,5 +160,15 @@ void CMessage::_ReleaseMap()
     m_mapMsgDataArr.clear();
 }
 
+int CMessage::MsgId()
+{
+    int nId = 0;
+    if (m_xmlObject)
+    {
+        nId = m_xmlObject->GetId();
+    }
+    return nId;
+}
+
 }// namespace Message
 }// namespace VNOC

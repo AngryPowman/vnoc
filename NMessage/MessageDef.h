@@ -1,8 +1,10 @@
 #ifndef  VNOC_MESSAGE_DEF
 #define  VNOC_MESSAGE_DEF
 
+#ifndef IN
 #define  IN
 #define  OUT
+#endif
 
 #include <string>
 #include <vector>
@@ -24,7 +26,6 @@ namespace Message
 #endif
 
 typedef std::string         MsgDataName;
-typedef int                 MsgDataNameInt;
 typedef unsigned char       uint8;
 typedef unsigned short      uint16;
 typedef unsigned int        uint32;
