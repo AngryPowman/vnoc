@@ -8,7 +8,7 @@ namespace VNOC
 namespace Message
 {
 
-class StringData:public MsgDataValue
+class StringData : public MsgDataValue
 {
 public:
     virtual ~StringData(){}
