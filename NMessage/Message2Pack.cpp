@@ -136,13 +136,13 @@ int CMessage2Pack::_GetArrSize( XMLItem& item, IReadMessage* pMsg )
             }
             break;
         case MsgDataType_Uint8:
-            nSize = 5 * pReadArr->Size();
+            nSize = pReadArr->Size();
             break;
         case MsgDataType_Uint16:
-            nSize = 6 * pReadArr->Size();
+            nSize = 2 * pReadArr->Size();
             break;
         case MsgDataType_Uint32:
-            nSize = 8 * pReadArr->Size();
+            nSize = 4 * pReadArr->Size();
             break;
         }
     }
