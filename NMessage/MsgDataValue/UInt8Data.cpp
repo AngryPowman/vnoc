@@ -1,12 +1,31 @@
 #include "UInt8Data.h"
 
-void VNOC::Message::UInt8Data::SetValue(uint8 Value)
+namespace VNOC
+{
+namespace Message
+{
+
+void UInt8Data::SetValue(uint8 Value)
 {
     m_Value = Value;
 }
 
-VNOC::Message::MsgStatus VNOC::Message::UInt8Data::ToByte(uint8& Value)
+MsgStatus UInt8Data::ToUInt8(uint8& Value)
 {
     Value = m_Value;
     return MsgStatus_Ok;
 }
+
+UInt8Data::UInt8Data(uint8 Value)
+    : m_Value(Value)
+{
+
+}
+
+UInt8Data::~UInt8Data()
+{
+
+}
+
+}// namespace Message
+}// namespace VNOC
