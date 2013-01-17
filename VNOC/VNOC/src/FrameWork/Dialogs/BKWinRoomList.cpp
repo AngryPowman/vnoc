@@ -7,7 +7,7 @@ BEGIN_MSG_MAP_EX_IMP(CRoomListWnd)
 	MSG_BK_NOTIFY(IDC_RICHVIEW_WIN)
 	MSG_WM_INITDIALOG(OnInitDialog)
 	CHAIN_MSG_MAP(CBkDialogImpl<CRoomListWnd>)
-	NOTIFY_CODE_HANDLER(NM_CLICK, OnListItemClick)
+	NOTIFY_CODE_HANDLER(NM_DBLCLK, OnListItemDblClick)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP();
 
@@ -32,42 +32,17 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 		0, 1001/*realwnd id = 1001*/, NULL)  ==  NULL){
 		return ERROR;
 	}
-	SetListData();	
+	ColumnInit();
 	return TRUE;
 }
 
-
-LRESULT CRoomListWnd::SetListData()
-{
-    ColumnInit();
-    ListItemData *pItemData = new ListItemData();
-    LRESULT ret = AppendListItem(pItemData);
-    delete pItemData;
-    return ret;
-}
-
-
 void CRoomListWnd::ColumnInit()
 { 
-    m_wndListCtrl.InsertColumn(0, L"教室列表", LVCFMT_LEFT, 80);
-    m_wndListCtrl.InsertColumn(1, L"教师", LVCFMT_LEFT, 80);
-    m_wndListCtrl.InsertColumn(2, L"在线人数", LVCFMT_LEFT, 80);
-    m_wndListCtrl.InsertColumn(3, L"授课时间", LVCFMT_LEFT, 80);
+    m_wndListCtrl.InsertColumn(0, L"ID", LVCFMT_LEFT, 40);
+    m_wndListCtrl.InsertColumn(1, L"教室名字", LVCFMT_LEFT, 270);
 }
 
-
-LRESULT CRoomListWnd::AppendListItem(ListItemData* pItemData)
-{
-	int nItem = m_wndListCtrl.Append(pItemData->strIRoomOrder, NULL, 0, SUBITEM_TEXT);
-	m_wndListCtrl.AppendSubItem(nItem, pItemData->strITeacher);
-	m_wndListCtrl.AppendSubItem(nItem, pItemData->strIPeople);
-	m_wndListCtrl.AppendSubItem(nItem, pItemData->strITime);
-
-	return nItem;
-}
-
-
-LRESULT CRoomListWnd::OnListItemClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled)
+LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled)
 {
 	LPNMITEMACTIVATE lpnmItem = (LPNMITEMACTIVATE)pnmh;
 
