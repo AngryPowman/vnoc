@@ -37,26 +37,22 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 }
 
 
-LRESULT CRoomListWnd::SetListData(/*Here will add some parameters from server to set List*/)
+LRESULT CRoomListWnd::SetListData()
 {
-	ColumnData* pColData = new ColumnData;
-	ListItemData* pItemData = new ListItemData;
-	
-	ColumnInit(pColData);
-	return AppendListItem(pItemData);
+    ColumnInit();
+    ListItemData *pItemData = new ListItemData();
+    LRESULT ret = AppendListItem(pItemData);
+    delete pItemData;
+    return ret;
 }
 
 
-BOOL CRoomListWnd::ColumnInit(ColumnData* pColData)
+void CRoomListWnd::ColumnInit()
 { 
-		m_wndListCtrl.InsertColumn(0, pColData->strCRoomOrder, LVCFMT_LEFT, 80);
-		m_wndListCtrl.InsertColumn(1, pColData->strCTeacher, LVCFMT_LEFT, 80);
-		m_wndListCtrl.InsertColumn(2, pColData->strCPeople, LVCFMT_LEFT, 80);
-		m_wndListCtrl.InsertColumn(3, pColData->strCTime, LVCFMT_LEFT, 80);
-
-		delete pColData;
-	
-	return TRUE;
+    m_wndListCtrl.InsertColumn(0, L"教室列表", LVCFMT_LEFT, 80);
+    m_wndListCtrl.InsertColumn(1, L"教师", LVCFMT_LEFT, 80);
+    m_wndListCtrl.InsertColumn(2, L"在线人数", LVCFMT_LEFT, 80);
+    m_wndListCtrl.InsertColumn(3, L"授课时间", LVCFMT_LEFT, 80);
 }
 
 
@@ -66,13 +62,6 @@ LRESULT CRoomListWnd::AppendListItem(ListItemData* pItemData)
 	m_wndListCtrl.AppendSubItem(nItem, pItemData->strITeacher);
 	m_wndListCtrl.AppendSubItem(nItem, pItemData->strIPeople);
 	m_wndListCtrl.AppendSubItem(nItem, pItemData->strITime);
-
-	int nTestItem = m_wndListCtrl.Append(_T("VVV"), NULL, 0, LISTITEM_CHECKBOX); // nTestItem just be one sample, if CHECKBOX will have not used, it will delete.
-	m_wndListCtrl.AppendSubItem(nTestItem, _T("NNN"));
-	m_wndListCtrl.AppendSubItem(nTestItem, _T("OOO"));
-	m_wndListCtrl.AppendSubItem(nTestItem, _T("CCC"));
-
-	delete pItemData;
 
 	return nItem;
 }
