@@ -58,6 +58,9 @@
     <ClCompile Include="..\..\NMessage\Message2Pack.cpp">
       <Filter>NMessage\Message</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NMessage\BufferMessage.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MSG_CLASS">
@@ -174,6 +177,9 @@
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\Message2Pack.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\BufferMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
   </ItemGroup>
