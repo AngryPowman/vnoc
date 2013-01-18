@@ -23,7 +23,7 @@ public:
 		ADD_PARAM_LIST("RoomPeopleNum")
 		ADD_PARAM_LIST("RoomPeopleList")
 		ADD_PARAM_LIST("RoomManageID")
-		INIT_PARAM_OBJEDT(33)
+		INIT_PARAM_OBJEDT(MSG_ACI_COM)
 		END_PARAM_LIST
 	}
 

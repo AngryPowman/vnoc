@@ -18,7 +18,7 @@ public:
 		ADD_PARAM_LIST("Autograph")
 		ADD_PARAM_LIST("HeadForm")
 		ADD_PARAM_LIST("HeadPortrait")
-		INIT_PARAM_OBJEDT(24)
+		INIT_PARAM_OBJEDT(MSG_RPS_COM)
 		END_PARAM_LIST
 	}
 

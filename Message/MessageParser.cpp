@@ -25,6 +25,18 @@ CMessage* CMessageParser::_MessageType()
 	    break;
 	case MSG_APS_COM: msg_str = new MSG_APS;
 		break;
+	case MSG_RPG_COM: msg_str = new MSG_RPG;
+		break;
+	case MSG_APG_COM: msg_str = new MSG_APG;
+		break;
+	case MSG_RCI_COM: msg_str = new MSG_RCI;
+		break;
+	case MSG_ACI_COM: msg_str = new MSG_ACI;
+		break;
+	case MSG_ACL_COM: msg_str = new MSG_ACL;
+		break;
+	case MSG_RCL_COM: msg_str = new MSG_RCL;
+		break;
 	}
 	return msg_str;
 }
