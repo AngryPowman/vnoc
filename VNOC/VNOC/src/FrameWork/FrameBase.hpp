@@ -169,7 +169,7 @@ struct XMessage_ShowRoomList_Result : public XMessage
 {
     ImTheMessageOf(XMessage_ShowRoomList_Result);
 
-    std::vector<int> id;
+    std::vector<int> roomID;
 };
 
 struct XMessage_ShowClassroom : public XMessage

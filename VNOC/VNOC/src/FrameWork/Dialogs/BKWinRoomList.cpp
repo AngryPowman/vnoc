@@ -71,5 +71,16 @@ LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHan
 
 void CRoomListWnd::OnShowRoomListResult( XMessage *pmsg )
 {
-
+    XMessage_ShowRoomList_Result *pResult = dynamic_cast<XMessage_ShowRoomList_Result*>(pmsg);
+    if(pResult)
+    {
+        int nItem = 0;
+        CString buf;
+        for(auto itr = pResult->roomID.begin(); itr != pResult->roomID.end(); itr++)
+        {
+            buf.Format(_T("%d"), *itr);
+            nItem = m_wndListCtrl.Append(buf);
+            m_wndListCtrl.AppendSubItem(nItem, _T("这里是教室名称"));
+        }
+    }
 }
