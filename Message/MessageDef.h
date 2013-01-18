@@ -142,6 +142,5 @@ typedef std::vector<byte> ByteArr;
 
 #define GetParam_t_int_r(x,len)  { return BigLittleSwap32(byteToInt(GetParam(Mate_Param(x)),len)); }
 
-
 #endif
 

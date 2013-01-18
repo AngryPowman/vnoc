@@ -12,6 +12,7 @@
 #include <atlstr.h>
 #include "../../NMessage/MsgDataValue/UInt32Data.h"
 #include "../../NMessage/Message2Pack.h"
+#include "../../NMessage/NMSG_ALI.h"
 
 using namespace VNOC::Message;
 

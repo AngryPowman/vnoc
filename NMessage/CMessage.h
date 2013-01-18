@@ -37,9 +37,10 @@ public:
 
     virtual bool IsValid();
 
-private:
+protected:
     CMessage();
 
+private:
     void _InitDataMap();
     void _ReleaseMap();
 

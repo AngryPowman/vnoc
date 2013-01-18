@@ -81,6 +81,9 @@
     <Filter Include="TinyXML">
       <UniqueIdentifier>{0156e8d2-d62a-4273-a30b-8b0fa6271448}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NMessage\ProduseMessage">
+      <UniqueIdentifier>{b4bbbddc-f76d-4f9b-91a2-9d6de088e000}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Message\MSG_ACI.h">
@@ -181,6 +184,15 @@
     </ClInclude>
     <ClInclude Include="..\..\NMessage\BufferMessage.h">
       <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\NMSG_ACL.h">
+      <Filter>NMessage\ProduseMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\NMSG_AVC.h">
+      <Filter>NMessage\ProduseMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\NMSG_ALI.h">
+      <Filter>NMessage\ProduseMessage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

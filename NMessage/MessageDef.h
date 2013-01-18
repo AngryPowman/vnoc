@@ -75,7 +75,7 @@ typedef enum _MsgDataMType
 }MsgDataMType;
 
 #define MsgDataMType_XML_Data     "data"
-#define MsgDataMType_XML_List     "List"
+#define MsgDataMType_XML_List     "list"
 
 #define MsgDataObject_XML_Name    "name"
 #define MsgDataObject_XML_Id      "id"

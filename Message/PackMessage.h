@@ -22,7 +22,7 @@ public:
 
 	int GetMessageLen(const CMessage* const msg);
 
-private:	
+private:
 
 	int _Head(const CMessage* const msg_clss,byte* buf, size_t len);
 
