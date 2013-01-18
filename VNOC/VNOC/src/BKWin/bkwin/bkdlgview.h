@@ -1742,7 +1742,7 @@ public:
             hWnd = m_hWnd;
 
         return hWnd;
-    }
+     }
 
     UINT_PTR DoModal(HWND hWndParent = NULL, LPRECT rect = NULL)
     {

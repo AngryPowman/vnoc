@@ -7,7 +7,7 @@ BEGIN_MSG_MAP_EX_IMP(CRoomListWnd)
 	MSG_BK_NOTIFY(IDC_RICHVIEW_WIN)
 	MSG_WM_INITDIALOG(OnInitDialog)
 	CHAIN_MSG_MAP(CBkDialogImpl<CRoomListWnd>)
-	NOTIFY_CODE_HANDLER(NM_DBLCLK, OnListItemDblClick)
+	NOTIFY_HANDLER(DlgControl_RoomListWin_ListCtl_RoomList ,NM_DBLCLK, OnListItemDblClick)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP();
 
@@ -29,24 +29,27 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 	if(m_wndListCtrl.Create( 
 		GetViewHWND(), NULL, NULL, 
 		WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SINGLESEL ,  
-		0, 1001/*realwnd id = 1001*/, NULL)  ==  NULL){
-		return ERROR;
-	}
+		0, DlgControl_RoomListWin_ListCtl_RoomList, NULL)  ==  NULL)
+    {
+        return ERROR;
+    }
+    XMessage_ShowRoomList msg;
+    SendXMessage(&msg);
 	ColumnInit();
 	return TRUE;
 }
 
 void CRoomListWnd::ColumnInit()
 { 
-    m_wndListCtrl.InsertColumn(0, L"ID", LVCFMT_LEFT, 40);
-    m_wndListCtrl.InsertColumn(1, L"教室名字", LVCFMT_LEFT, 270);
+    m_wndListCtrl.InsertColumn(0, _T("ID"), LVCFMT_LEFT, 40);
+    m_wndListCtrl.InsertColumn(1, _T("教室名字"), LVCFMT_LEFT, 270);
 }
 
 LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled)
 {
 	LPNMITEMACTIVATE lpnmItem = (LPNMITEMACTIVATE)pnmh;
 
-	if(1001 == idRealWnd){ // 点击教室列表
+	if(DlgControl_RoomListWin_ListCtl_RoomList == idRealWnd){ // 点击教室列表
 		char strCheckBox[30];
 		if(m_wndListCtrl.InSubItemCheckBox(lpnmItem->ptAction, lpnmItem->iItem)){
 			sprintf(strCheckBox, "CHECKBOX CHANGED: %d", !m_wndListCtrl.GetCheckState(lpnmItem->iItem));
@@ -66,4 +69,9 @@ LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHan
 
 	bHandled = FALSE;
 	return 0;
+}
+
+void CRoomListWnd::OnShowRoomListResult( XMessage *pmsg )
+{
+
 }

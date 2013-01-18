@@ -21,6 +21,7 @@ public:
 private:
     CListViewCtrlEx m_wndListCtrl;
     void ColumnInit();
+    void OnShowRoomListResult(XMessage *pmsg);
 
 public:
     BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
@@ -31,5 +32,6 @@ public:
 
     Begin_XMessage(CRoomListWnd)
         OnXMessage(XMessage_ShowRoomList, OnShowWnd)
+        OnXMessage(XMessage_ShowRoomList_Result, OnShowRoomListResult)
     End_XMessage()
 };

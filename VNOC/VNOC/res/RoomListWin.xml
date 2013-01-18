@@ -7,7 +7,7 @@
 	<footer class="msgboxfoot" width="full" height="55">
 	</footer>
 	<body class="msgboxbody" width="full" height="full">
-        <realwnd id="1001" pos="10,1,330,562" ctrlid="1001" crbg1="FBFCFD" />
+        <realwnd id="10002" pos="10,1,330,562" ctrlid="10002" crbg1="FBFCFD" />
 	</body>
 </layer>
 
