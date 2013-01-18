@@ -33,8 +33,6 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
     {
         return ERROR;
     }
-    XMessage_ShowRoomList msg;
-    SendXMessage(&msg);
 	ColumnInit();
 	return TRUE;
 }
