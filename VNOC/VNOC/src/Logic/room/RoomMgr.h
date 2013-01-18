@@ -4,6 +4,7 @@
 
 class CRoomMgr : public IRoomMgr
 	, public CFrameBase
+    , INetListener
 {
 public:
 	CRoomMgr();
@@ -17,9 +18,18 @@ public:
 	STDMETHOD( Show(BOOL bShow=TRUE) );
 	STDMETHOD( CreateRoom(RoomID& id) );
 	STDMETHOD( GetRoom(RoomID id,CRoomBase* room) );
-	STDMETHOD( GetRoomList(RoomList& list) );
+	STDMETHOD( GetRoomList() );
 	STDMETHOD( FreeRoom(RoomID id) );
 
+    STDMETHOD( OnNetMessage(const CMessage& msg));
+
+    VOID OnGetRoomList(XMessage *pMsg);
+
 	Begin_XMessage(CRoomMgr)
+        OnXMessage(XMessage_ShowRoomList, OnGetRoomList)
 	End_XMessage()
+
+private:
+    IFrameWork *m_frame;
+    CNetListenerHelper netHelper;
 };

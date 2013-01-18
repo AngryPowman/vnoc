@@ -1,21 +1,22 @@
 #pragma once
-#include "../../Base/IModule.h"
-#include "room.h"
 #include <list>
+#include "../../Base/IModule.h"
+#include "Room.h"
+#include "../../net/INet.h"
 
 
-typedef CString RoomID;
-// ·¿¼äÁÐ±í
-typedef std::list<RoomID> RoomList;
+typedef int RoomID;
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+typedef std::vector<RoomID> RoomList;
 
 interface IRoomMgr : public IModule
 {
 public:
 	STDMETHOD( Show(BOOL bShow=TRUE) = 0 );
-	// ´´½¨·¿¼ä
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	STDMETHOD( CreateRoom(RoomID& id) = 0 );
 	STDMETHOD( GetRoom(RoomID id,CRoomBase* room) = 0 );
-	STDMETHOD( GetRoomList(RoomList& list) = 0 );
-	// ¹Ø±Õ·¿¼ä
+	STDMETHOD( GetRoomList() = 0 );
+	// ï¿½Ø±Õ·ï¿½ï¿½ï¿½
 	STDMETHOD( FreeRoom(RoomID id) = 0);
 };
