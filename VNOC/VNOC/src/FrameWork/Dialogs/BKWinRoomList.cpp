@@ -7,7 +7,7 @@ BEGIN_MSG_MAP_EX_IMP(CRoomListWnd)
 	MSG_BK_NOTIFY(IDC_RICHVIEW_WIN)
 	MSG_WM_INITDIALOG(OnInitDialog)
 	CHAIN_MSG_MAP(CBkDialogImpl<CRoomListWnd>)
-	NOTIFY_CODE_HANDLER(NM_CLICK, OnListItemClick)
+	NOTIFY_CODE_HANDLER(NM_DBLCLK, OnListItemDblClick)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP();
 
@@ -30,44 +30,49 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 		GetViewHWND(), NULL, NULL, 
 		WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SINGLESEL ,  
 		0, 1001/*realwnd id = 1001*/, NULL)  ==  NULL){
-		return ERROR;
+		return S_FALSE;
 	}
-	SetListData();	
-	return TRUE;
+
+	ColumnData* pColData = new ColumnData;
+	_ColumnInit(pColData);
+	delete pColData;
+
+	ListItemData* pItemData = new ListItemData;
+	_SetListData(pItemData);
+	delete pItemData;
+
+	return S_OK;
 }
 
 
-LRESULT CRoomListWnd::SetListData()
-{
-    ColumnInit();
-    ListItemData *pItemData = new ListItemData();
-    LRESULT ret = AppendListItem(pItemData);
-    delete pItemData;
-    return ret;
-}
-
-
-void CRoomListWnd::ColumnInit()
+LRESULT CRoomListWnd::_ColumnInit(ColumnData* pColData)
 { 
-    m_wndListCtrl.InsertColumn(0, L"教室列表", LVCFMT_LEFT, 80);
-    m_wndListCtrl.InsertColumn(1, L"教师", LVCFMT_LEFT, 80);
-    m_wndListCtrl.InsertColumn(2, L"在线人数", LVCFMT_LEFT, 80);
-    m_wndListCtrl.InsertColumn(3, L"授课时间", LVCFMT_LEFT, 80);
+	m_wndListCtrl.InsertColumn(0, pColData->strColumn1, LVCFMT_LEFT, 80);
+	m_wndListCtrl.InsertColumn(1, pColData->strColumn2, LVCFMT_LEFT, 80);
+	m_wndListCtrl.InsertColumn(2, pColData->strColumn3, LVCFMT_LEFT, 80);
+	m_wndListCtrl.InsertColumn(3, pColData->strColumn4, LVCFMT_LEFT, 80);
+
+	return S_OK;
 }
 
 
-LRESULT CRoomListWnd::AppendListItem(ListItemData* pItemData)
+LRESULT CRoomListWnd::_SetListData(ListItemData* pItemData)
 {
-	int nItem = m_wndListCtrl.Append(pItemData->strIRoomOrder, NULL, 0, SUBITEM_TEXT);
-	m_wndListCtrl.AppendSubItem(nItem, pItemData->strITeacher);
-	m_wndListCtrl.AppendSubItem(nItem, pItemData->strIPeople);
-	m_wndListCtrl.AppendSubItem(nItem, pItemData->strITime);
+	int nItem = m_wndListCtrl.Append(pItemData->strItemData1, NULL, 0, SUBITEM_TEXT);
+	m_wndListCtrl.AppendSubItem(nItem, pItemData->strItemData2);
+	m_wndListCtrl.AppendSubItem(nItem, pItemData->strItemData3);
+	m_wndListCtrl.AppendSubItem(nItem, pItemData->strItemData4);
+
+	int nTestItem = m_wndListCtrl.Append(_T("VVV"), NULL, 0, LISTITEM_CHECKBOX); // nTestItem just be one sample, if CHECKBOX will have not used, it will delete.
+	m_wndListCtrl.AppendSubItem(nTestItem, _T("NNN"));
+	m_wndListCtrl.AppendSubItem(nTestItem, _T("OOO"));
+	m_wndListCtrl.AppendSubItem(nTestItem, _T("CCC"));
 
 	return nItem;
 }
 
 
-LRESULT CRoomListWnd::OnListItemClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled)
+LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled)
 {
 	LPNMITEMACTIVATE lpnmItem = (LPNMITEMACTIVATE)pnmh;
 
@@ -92,3 +97,4 @@ LRESULT CRoomListWnd::OnListItemClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandle
 	bHandled = FALSE;
 	return 0;
 }
+

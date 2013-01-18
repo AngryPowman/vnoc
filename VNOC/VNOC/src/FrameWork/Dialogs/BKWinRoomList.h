@@ -3,16 +3,34 @@
 #include "../../net/INet.h"
 #include "../FrameBase.hpp"
 
+struct ColumnData
+{
+	ColumnData()
+	: strColumn1(_T("Column1")), strColumn2(_T("Column2"))
+	, strColumn3(_T("Column3")),  strColumn4(_T("Column4"))	
+	{
+	}
+
+	CString strColumn1, strColumn2, strColumn3, strColumn4;
+};
+
 struct ListItemData
 {
-	CString strIRoomOrder, strITeacher, strIPeople, strITime;
+	ListItemData()
+	: strItemData1("NULL"), strItemData2("NULL")
+	, strItemData3("NULL"), strItemData4("NULL")	
+	{
+	}
+
+	CString strItemData1, strItemData2, strItemData3, strItemData4;
 };
+
 
 class CRoomListWnd : public CBkDialogImpl<CRoomListWnd>
 	,public CFrameBase
 {
 public:
-	CRoomListWnd::CRoomListWnd() : CBkDialogImpl<CRoomListWnd>(BKDlg_RoomListWin), CFrameBase(module_RoomListWin)
+	CRoomListWnd::CRoomListWnd() : CBkDialogImpl<CRoomListWnd>(BKDlg_RoomListWin),CFrameBase(module_RoomListWin)
 	{
 	}
 
@@ -21,17 +39,14 @@ public:
 	void	OnBkBtnClose();
 	void	OnShowWnd(XMessage* pmsg);
 	LRESULT OnInitDialog(HWND hWnd, LPARAM lparam);
-	LRESULT OnListItemClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled);
-	LRESULT SetListData();
+	LRESULT OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled);
 
-protected:	
-	LRESULT		AppendListItem(ListItemData* pItemData);
-
-protected:
+private:
 	CListViewCtrlEx m_wndListCtrl;
 
 private:
-    void ColumnInit();
+	LRESULT	_ColumnInit(ColumnData* pColData);
+	LRESULT _SetListData(ListItemData* pItemData);
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)

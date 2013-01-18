@@ -1,4 +1,4 @@
-﻿<layer width="1000" height="618" appwin="1">
+﻿idth="1000" height="618" appwin="1">
 	<header class="msgboxhead" width="full" height="31">
 		<icon src="101" pos="5,7"/>
 		<text class="dlgtitle" pos="28,10">房间列表</text>
@@ -7,9 +7,8 @@
 	<footer class="msgboxfoot" width="full" height="55">
 	</footer>
 	<body class="msgboxbody" width="full" height="full">
-        <realwnd id="1001" pos="10,1,330,562" ctrlid="1001" crbg1="FBFCFD" />
+		<text pos ="100, 10" font = "40">教室ID: </text>
+		<edit id="10111" pos="150,5,180,35" show="1"/>
+        <realwnd id="1001" pos="20,40,330,570" ctrlid="1001" crbg1="FBFCFD" />
 	</body>
 </layer>
-
-
-
