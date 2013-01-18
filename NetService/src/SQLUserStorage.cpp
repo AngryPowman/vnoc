@@ -20,11 +20,20 @@ sUserStorage ::sUserStorage ()
 	int port = Config::getInstance()->getValue("sql_port");
 
 	SaveConnLog(host, name, password, db, port);
+	EZLOGGERVLSTREAM(axter::log_often)<<"Save Connection Log that host is: "<<
+									  host<<
+									  " name is: "<<
+									  name<<
+									  " passWord is: "<<
+									  password<<
+									  " db is: "<<
+									  db<<
+									  " port is"<<
+									  port<<endl;
 
 	if (conn.Connect(host, name, password, db, port) == MW_SQL_ERR)
 	{
 		bIsConn = false;
-//		EZLOGGERSTREAM<<"Connet MySQL Data Base failure"<<std::endl;
 		return;
 	}
 	bIsConn = true;
