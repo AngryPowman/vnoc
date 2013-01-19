@@ -52,11 +52,11 @@ DEFINE_BMP(IDB_BITMAP_LISTCTRL_HEADER,					210, 					"res\\listctrl_header.bmp")
 DEFINE_BMP(IDB_BITMAP_MINUS_PLUS,						212, 					"res\\minus_plus.bmp")
 DEFINE_BMP(IDB_BITMAP_LISTCTRL_CHECK,					211, 					"res\\listctrl_check.bmp")
 DEFINE_BMP(IDB_BITMAP_LISTCTRL_RADIO,					213, 					"res\\listctrl_radio.bmp")
-
-DEFINE_PNG(IDP_LOADINFO_TIP,							8020,   "res\\loadinfo_tip_softmgr.png")
-DEFINE_BMP(IDB_SOFTMGR_CLEAR_BK, 						8034, 	"res\\clear_bk.bmp")
-DEFINE_BMP(IDB_SYSOPT_LIST_HEADERBK,					8035,	"res\\sysopt_listbk.bmp")
-DEFINE_BMP(IDB_LOADINFO_DLGBK,							8036,	"res\\loadinfo_dlgbk.bmp")
+DEFINE_PNG(IDP_ROOMLIST_PANE,							214,					"res\\frame_roomlistpane.png")
+DEFINE_PNG(IDP_LOADINFO_TIP,							8020,   				"res\\loadinfo_tip_softmgr.png")
+DEFINE_BMP(IDB_SOFTMGR_CLEAR_BK, 						8034, 					"res\\clear_bk.bmp")
+DEFINE_BMP(IDB_SYSOPT_LIST_HEADERBK,					8035,					"res\\sysopt_listbk.bmp")
+DEFINE_BMP(IDB_LOADINFO_DLGBK,							8036,					"res\\loadinfo_dlgbk.bmp")
 
 //////////////////////////////////////////////////////////////////////////
 // Ìí¼Ó
