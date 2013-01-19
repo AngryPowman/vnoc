@@ -89,6 +89,7 @@ HRESULT CRoomMgr::OnNetMessage( const CMessage& msg )
         {
             XMessage_ShowRoomList_Result result;
             msgReal->GetRoomList(result.roomID);
+            SendXMessage(&result);
         }
     }
     return S_OK;
