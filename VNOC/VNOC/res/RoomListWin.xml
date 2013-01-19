@@ -1,4 +1,4 @@
-﻿idth="1000" height="618" appwin="1">
+﻿<layer title="RoomList" width="800" height="570" appwin="1">
 	<header class="msgboxhead" width="full" height="31">
 		<icon src="101" pos="5,7"/>
 		<text class="dlgtitle" pos="28,10">房间列表</text>
@@ -7,12 +7,9 @@
 	<footer class="msgboxfoot" width="full" height="55">
 	</footer>
 	<body class="msgboxbody" width="full" height="full">
-<<<<<<< HEAD
-		<text pos ="100, 10" font = "40">教室ID: </text>
-		<edit id="10111" pos="150,5,180,35" show="1"/>
-        <realwnd id="1001" pos="20,40,330,570" ctrlid="1001" crbg1="FBFCFD" />
-=======
-        <realwnd id="10002" pos="10,1,330,562" ctrlid="10002" crbg1="FBFCFD" />
->>>>>>> 7aa76e5dbc908b411dbd846326f64c20f85f7acd
+		<text pos="80, 20" font1="1004" crtext="6d6d6e" class="examtitle">教室ID:</text>
+		<edit id="10111" pos="150,5,230,25" show="1"/>
+		<button id="10004" class="normalbtn" pos="240,5,300,25" font1="0202" crtext="425e63">查找</button>
+        <realwnd id="1001" pos="20,40,330,500" ctrlid="1001" crbg1="FBFCFD" />
 	</body>
 </layer>
