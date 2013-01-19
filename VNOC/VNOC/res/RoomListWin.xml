@@ -1,15 +1,25 @@
-﻿<layer title="RoomList" width="800" height="570" appwin="1">
-	<header class="msgboxhead" width="full" height="31">
-		<icon src="101" pos="5,7"/>
-		<text class="dlgtitle" pos="28,10">房间列表</text>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layer title="RoomList" width="800" height="570" appwin="1">
+	<header class="dlg_header" width="full" height="30">
+		
+		<dlg pos="0,0,-0,-0" crbg="78F0E7">
+		<img pos="8,8" skin="little_logo"/>
+		</dlg>
+		<text class="dlgtitle" pos="88,10">教室列表</text>
 		<imgbtn id="10001" class="linkimage" skin="closeonlybtn" pos="-43,0"/>
 	</header>
-	<footer class="msgboxfoot" width="full" height="55">
+	
+	<footer class="dlg_footer" width="full" height="40">
+	<dlg pos="0,0,-0,-0.1" crbg="78F0F2">
+    </dlg>
 	</footer>
-	<body class="msgboxbody" width="full" height="full">
-		<text pos="80, 20" font1="1004" crtext="6d6d6e" class="examtitle">教室ID:</text>
-		<edit id="10111" pos="150,5,230,25" show="1"/>
-		<button id="10004" class="normalbtn" pos="240,5,300,25" font1="0202" crtext="425e63">查找</button>
-        <realwnd id="1001" pos="20,40,330,500" ctrlid="1001" crbg1="FBFCFD" />
+	
+	<body class="dlg_body" width="full" height="full">
+		<dlg pos="0,0,-0,-0" crbg="AFF9E9">
+				<text pos="80, 20" font1="1004" crtext="6d6d6e" class="examtitle">教室ID:</text>
+				<edit id="10111" pos="150,5,230,25" show="1"/>
+				<button id="10004" class="normalbtn" pos="240,5,300,25" font1="0202" crtext="425e63">查找</button>
+				<realwnd id="1001" pos="0,170,270,500" ctrlid="1001" crbg1="FBFCFD" />
+		</dlg>
 	</body>
 </layer>

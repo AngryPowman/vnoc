@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<layer width="800" height="494" appwin="1">
+	<header class="msgboxhead" width="full" height="31">
+		<icon src="101" pos="5,7"/>
+		<text class="dlgtitle" pos="28,10">教室</text>
+		<imgbtn id="10001" class="linkimage" skin="closeonlybtn" pos="-43,0"/>
+	</header>
+	<footer class="msgboxfoot" width="full" height="55">
+	</footer>
+	<body class="msgboxbody" width="full" height="full">
+		
+	</body>
+</layer>
+
+
