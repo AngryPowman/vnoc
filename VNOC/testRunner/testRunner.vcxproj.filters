@@ -7,9 +7,6 @@
     <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp">
       <Filter>NMessage\MsgDataValue</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NMessage\NBaseMessage.cpp">
-      <Filter>NMessage\Message</Filter>
-    </ClCompile>
     <ClCompile Include="..\test\Vnocp1MessageParserTest.cpp">
       <Filter>Test</Filter>
     </ClCompile>
@@ -21,6 +18,48 @@
     </ClCompile>
     <ClCompile Include="..\test\testRunner.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinystr.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxml.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlerror.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\tinyxmlparser.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\XMLOject.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\CMessage.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\Message2Pack.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\BufferMessage.cpp">
+      <Filter>NMessage\Message</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +77,9 @@
     </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{eaff412d-cf65-46d7-a18c-c02b9cf4c6bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{0156e8d2-d62a-4273-a30b-8b0fa6271448}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +146,6 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
       <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\BufferMessage.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NMessage\IBaseMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
@@ -116,19 +155,31 @@
     <ClInclude Include="..\..\NMessage\IWriteMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\Message.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NMessage\MessageDef.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\PackMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\ParserMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\NBaseMessage.h">
+    <ClInclude Include="..\..\NMessage\ParaserMessageXML.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinystr.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\tinyxml.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\XMLObject.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\CMessage.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message2Pack.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\BufferMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
   </ItemGroup>

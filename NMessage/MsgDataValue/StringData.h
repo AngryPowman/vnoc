@@ -8,21 +8,20 @@ namespace VNOC
 namespace Message
 {
 
-class StringData:public MsgDataValue
+class StringData : public MsgDataValue
 {
 public:
-    StringData(){}
     virtual ~StringData(){}
+    StringData();
+    StringData(const std::string& Value);
 
-    virtual MsgStatus ToString(
-        OUT std::string& Value
-        )
-    {
-         Value = m_Value;
-         return MsgStatus_Ok;
-    }
+    virtual MsgStatus ToStr(OUT std::string& Value);
+
+    void SetValue(IN const std::string& Value);
+
 private:
-    std::string      m_Value;
+    DISALLOW_ASSIGN(StringData);
+    std::string m_Value;
 };
 
 }// namespace Message

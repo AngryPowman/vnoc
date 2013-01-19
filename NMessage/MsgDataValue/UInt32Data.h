@@ -8,21 +8,19 @@ namespace VNOC
 namespace Message
 {
 
-class UInt32Data:public MsgDataValue
+class UInt32Data : public MsgDataValue
 {
 public:
-    UInt32Data(){}
-    virtual ~UInt32Data(){}
+    UInt32Data(uint32 Value = 0);
+    virtual ~UInt32Data();
 
-    virtual MsgStatus ToUInt32(
-        OUT uint32& Value
-        )
-    {
-        Value = m_Value;
-        return MsgStatus_Ok;
-    }
+    virtual MsgStatus ToUInt32(OUT uint32& Value);
+
+    void SetValue(IN uint32 Value);
+
 private:
-    uint32      m_Value;
+    DISALLOW_ASSIGN(UInt32Data);
+    uint32 m_Value;
 };
 
 }// namespace Message

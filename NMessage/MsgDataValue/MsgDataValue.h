@@ -8,24 +8,19 @@ namespace VNOC
 namespace Message
 {
 
-typedef     int     MessageName;
-typedef     int     MessageType;
-
 class MsgDataValue
 {
 public:
-    MsgDataValue(){}
-    virtual ~MsgDataValue(){}
+    MsgDataValue();
+    virtual ~MsgDataValue();
 
-    virtual MsgStatus ToStr(){ return MsgStatus_Unk;}
+    virtual MsgStatus ToStr(OUT std::string& Value);
 
-    virtual MsgStatus ToUInt8(){ return MsgStatus_Unk;}
+    virtual MsgStatus ToUInt8(OUT uint8& Value);
 
-    virtual MsgStatus ToUInt16(){ return MsgStatus_Unk;}
+    virtual MsgStatus ToUInt16(OUT uint16& Value);
 
-    virtual MsgStatus ToUInt32(){ return MsgStatus_Unk;}
-
-    virtual MsgStatus ToInt32(){ return MsgStatus_Unk;}
+    virtual MsgStatus ToUInt32(OUT uint32& Value);
 };
 
 }// namespace Message

@@ -15,16 +15,17 @@ class ArrayData;
 class IWriteMessage
 {
 public:
+    IWriteMessage(){}
     virtual ~IWriteMessage(){}
 
 public:
     virtual MsgStatus Write(
-        IN const MsgDataName name,
-        IN const MsgDataValue& value) = 0;
+        IN const MsgDataName& name,
+        IN MsgDataValue* pValue) = 0;
 
     virtual MsgStatus WriteArr(
-        IN const MsgDataName name,
-        IN const ArrayData& value) = 0;
+        IN const MsgDataName& name,
+        IN ArrayData* pValue) = 0;
 };
 
 }// namespace Message

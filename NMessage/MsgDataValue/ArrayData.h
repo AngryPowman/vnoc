@@ -8,28 +8,26 @@ namespace VNOC
 namespace Message
 {
 
+class MsgDataValue;
+
 class ArrayData
 {
 public:
-    ArrayData(){}
-    virtual ~ArrayData(){}
+    ArrayData();
+    virtual ~ArrayData();
 
-    size_t Size(){ return m_arrValuePtr.size();}
+    size_t Size();
 
-    bool Empty(){ return m_arrValuePtr.empty();}
+    bool Empty();
 
-    std::vector<MsgDataValue*>::const_iterator Begin() const { return m_arrValuePtr.begin();}
+    std::vector<MsgDataValue*>::const_iterator Begin() const;
 
-    std::vector<MsgDataValue*>::const_iterator End() const { return m_arrValuePtr.end();}
+    std::vector<MsgDataValue*>::const_iterator End() const;
 
-    void Push( 
-        IN MsgDataValue Value
-        ) 
-    {
-        return m_arrValuePtr.push_back(&Value);
-    }
+    void Push(IN MsgDataValue* pValue);
+
 private:
-    std::vector<MsgDataValue*>                  m_arrValuePtr;
+    std::vector<MsgDataValue*> m_arrValuePtr;
 };
 
 }// namespace Message

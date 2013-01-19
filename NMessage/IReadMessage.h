@@ -15,16 +15,19 @@ class ArrayData;
 class IReadMessage
 {
 public:
+    IReadMessage(){}
     virtual ~IReadMessage(){}
 
 public:
     virtual MsgStatus Read(
-        IN const MsgDataName name,
+        IN const MsgDataName& name,
         OUT MsgDataValue*& value) = 0;
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName name,
+        IN  const MsgDataName& name,
         OUT ArrayData*& value) = 0;
+
+    virtual int MsgId() = 0;
 };
 
 }// namespace Message
