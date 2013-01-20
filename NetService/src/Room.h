@@ -33,7 +33,7 @@ public:
     const VNOCUserMap& getUserMap() const;
     void         setPoolObjId(uint32 poolObjId);
     uint32       getPoolObjId() const;
-    void         setValid(bool valid);
+    void         setIsValid(bool valid);
     bool         getIsValid() const;
 
 private:

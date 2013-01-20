@@ -10,7 +10,7 @@ RoomPool::RoomPool()
 
 RoomPool::~RoomPool()
 {
-
+    destroy();
 }
 
 bool RoomPool::initPool(uint32 size = DEFAULT_ROOM_POOL_SIZE, uint32 incrSize = DEFAULT_ROOM_POOL_INCREASE_SIZE)
@@ -71,6 +71,7 @@ Room* RoomPool::acquire()
     if (room != NULL && room->getIsValid() == false)
     {
         room->setPoolObjId(_offset);
-        room->setValid(true);
+        room->setRoomID(_offset);
+        room->setIsValid(true);
     }
 }

@@ -142,7 +142,7 @@ uint32 Room::getPoolObjId() const
     return _poolObjId;
 }
 
-void Room::setValid(bool valid)
+void Room::setIsValid(bool valid)
 {
     _isValid = valid;
 }
