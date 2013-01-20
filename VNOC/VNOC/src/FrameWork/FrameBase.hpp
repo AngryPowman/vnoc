@@ -160,14 +160,25 @@ struct XMessage_ShowLogin : public XMessage
 	ImTheMessageOf(XMessage_ShowLogin);
 };
 
-struct XMessage_ShowRoomList : public XMessage
+struct XMessage_ShowRoomListWnd : public XMessage
 {
-	ImTheMessageOf(XMessage_ShowRoomList);
+	ImTheMessageOf(XMessage_ShowRoomListWnd);
 };
 
-struct XMessage_ShowRoomList_Result : public XMessage
+
+struct XMessage_ShowRoomListWnd_Result : public XMessage
 {
-    ImTheMessageOf(XMessage_ShowRoomList_Result);
+    ImTheMessageOf(XMessage_ShowRoomListWnd_Result);
+};
+
+struct XMessage_GetRoomList : public XMessage
+{
+    ImTheMessageOf(XMessage_GetRoomList);
+};
+
+struct XMessage_GetRoomList_Result : public XMessage
+{
+    ImTheMessageOf(XMessage_GetRoomList);
 
     std::vector<int> roomID;
 };

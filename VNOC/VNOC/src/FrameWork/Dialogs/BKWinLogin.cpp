@@ -19,7 +19,7 @@ CLoginWnd::CLoginWnd() : CBkDialogImpl(BKDlg_LoginWin),CFrameBase(module_LoginWi
 void CLoginWnd::OnBkBtnClose()
 {
 	EndDialog(0);
-	XMessage_ShowRoomList msg;
+	XMessage_ShowRoomListWnd msg;
 	SendXMessage(&msg);
 }
 

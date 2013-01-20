@@ -87,7 +87,7 @@ HRESULT CRoomMgr::OnNetMessage( const CMessage& msg )
         const MSG_ACL* msgReal = dynamic_cast<const MSG_ACL*>(&msg);
         if(msgReal)
         {
-            XMessage_ShowRoomList_Result result;
+            XMessage_GetRoomList_Result result;
             msgReal->GetRoomList(result.roomID);
             SendXMessage(&result);
         }

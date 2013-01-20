@@ -32,7 +32,8 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 		0, DlgControl_RoomListWin_Realwnd, NULL)  ==  NULL){
 		return S_FALSE;
 	}
-	
+	XMessage_GetRoomList msg;
+    SendXMessage(&msg);
 	_ColumnInit();
 
 	return S_OK;
@@ -73,9 +74,9 @@ LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHan
 	return S_OK;
 }
 
-LRESULT CRoomListWnd::OnShowRoomListResult( XMessage *pmsg )
+LRESULT CRoomListWnd::OnGetRoomListResult( XMessage *pmsg )
 {
-    XMessage_ShowRoomList_Result *pResult = dynamic_cast<XMessage_ShowRoomList_Result*>(pmsg);
+    XMessage_GetRoomList_Result *pResult = dynamic_cast<XMessage_GetRoomList_Result*>(pmsg);
     if(pResult)
     {
         int nItem = 0;

@@ -26,7 +26,7 @@ public:
     VOID OnGetRoomList(XMessage *pMsg);
 
 	Begin_XMessage(CRoomMgr)
-        OnXMessage(XMessage_ShowRoomList, OnGetRoomList)
+        OnXMessage(XMessage_GetRoomList, OnGetRoomList)
 	End_XMessage()
 
 private:

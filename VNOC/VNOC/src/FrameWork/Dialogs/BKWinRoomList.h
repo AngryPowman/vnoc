@@ -40,7 +40,7 @@ public:
 	void	OnShowWnd(XMessage* pmsg);
 	LRESULT OnInitDialog(HWND hWnd, LPARAM lparam);
 	LRESULT OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled);
-	LRESULT OnShowRoomListResult(XMessage *pmsg);
+	LRESULT OnGetRoomListResult(XMessage *pmsg);
 
 private:
 	CListViewCtrlEx m_wndListCtrl;
@@ -55,7 +55,7 @@ public:
 	
 	BEGIN_MSG_MAP_EX_DECLARE(CRoomListWnd)
 		Begin_XMessage(CRoomListWnd)
-		OnXMessage(XMessage_ShowRoomList,OnShowWnd)
-		OnXMessage(XMessage_ShowRoomList_Result, OnShowRoomListResult)
+		OnXMessage(XMessage_ShowRoomListWnd,OnShowWnd)
+		OnXMessage(XMessage_GetRoomList_Result, OnGetRoomListResult)
 	End_XMessage()
 };
