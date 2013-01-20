@@ -61,4 +61,7 @@ typedef unsigned long long uint64;
 #define NEWLINE "\n"
 #endif
 
+#ifndef SAFE_DELETE
+#define SAFE_DELETE(x)	if(NULL != (x)) { delete (x); (x)=NULL; }
+#endif
 #endif

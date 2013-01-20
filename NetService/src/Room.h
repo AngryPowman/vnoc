@@ -4,9 +4,9 @@
 #include "Common.h"
 #include "GlobalDefinition.h"
 
-class Student;
+class VNOCUser;
 
-typedef std::map<RoomID_t, Student*> StudentMap;
+typedef std::map<RoomID_t, VNOCUser*> VNOCUserMap;
 
 class Room
 {
@@ -15,26 +15,35 @@ public:
 	~Room();
 
 public:
+    void cleanup();
+
+public:
 	GUID_t       getRoomID() const;
 	void         setRoomID(GUID_t roomId);
-	void         setMaxStudent(uint16 maxCount);
-	uint16       getMaxStudent() const;
+	void         setMaxUserCount(uint16 maxCount);
+	uint16       getMaxUserCount() const;
 	void         setRoomName(std::string roomName);
 	std::string  getRoomName() const;
-    uint16       getOnlineStudentCount() const;
-    bool         addStudent(Student* student);
-    bool         removeStudent(GUID_t studentId);
-    bool         isStudentExists(GUID_t studentId) const;
+    uint16       getOnlineCount() const;
+    bool         addUser(VNOCUser* user);
+    bool         removeUser(GUID_t guid);
+    bool         isUserExists(GUID_t guid) const;
     bool         isFull() const;
-    Student*     getStudent(GUID_t studentId);
-    const StudentMap& getStudentList() const; 
+    VNOCUser*    getUser(GUID_t guid);
+    const VNOCUserMap& getUserMap() const;
+    void         setPoolObjId(uint32 poolObjId);
+    uint32       getPoolObjId() const;
+    void         setValid(bool valid);
+    bool         getIsValid() const;
 
 private:
 	RoomID_t _roomId;
-	StudentMap _studentMap;
-    uint16 _maxStudentCount;
+	VNOCUserMap _userMap;
+    uint16 _maxUserCount;
     std::string _roomName;
     static Room _instance;
+    uint32 _poolObjId;
+    bool _isValid;
 };
 
 #endif

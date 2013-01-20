@@ -73,14 +73,17 @@
     <ClInclude Include="src\Room.h">
       <Filter>source\modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\RoomFactory.h">
-      <Filter>source\modules\room</Filter>
-    </ClInclude>
     <ClInclude Include="src\RoomManager.h">
       <Filter>source\modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\Student.h">
+    <ClInclude Include="src\VNOCUser.h">
       <Filter>source\modules\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RoomPool.h">
+      <Filter>source\modules\room</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RoolPool.cpp">
+      <Filter>source\modules\room</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +165,7 @@
     <ClCompile Include="src\Room.cpp">
       <Filter>source\modules\room</Filter>
     </ClCompile>
-    <ClCompile Include="src\Student.cpp">
+    <ClCompile Include="src\VNOCUser.cpp">
       <Filter>source\modules\obj</Filter>
     </ClCompile>
   </ItemGroup>

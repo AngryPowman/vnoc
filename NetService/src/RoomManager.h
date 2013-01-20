@@ -8,6 +8,7 @@ class Room;
 class RoomManager
 {
 	typedef std::map<RoomID_t, Room*> RoomMap;
+
 public:
     static RoomManager& instance();
 	~RoomManager();
@@ -19,6 +20,9 @@ public:
 	void init();
     void fini();
     void release();
+
+    //obj
+    Room* acquire();
 
     //manage
     bool  add(Room* room);

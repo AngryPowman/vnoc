@@ -1,5 +1,5 @@
 #include "Room.h"
-#include "Student.h"
+#include "VNOCUser.h"
 #include "GlobalDefinition.h"
 
 Room::Room()
@@ -11,6 +11,13 @@ Room::~Room()
 {
 }
 
+void Room::cleanup()
+{
+    _roomId = 0;
+    _userMap.clear();
+    _maxUserCount = 0;
+    _roomName = "";
+}
 
 GUID_t Room::getRoomID() const
 {
@@ -23,17 +30,17 @@ void Room::setRoomID(GUID_t roomId)
     _roomId = roomId;
 }
 
-void Room::setMaxStudent(uint16 maxCount)
+void Room::setMaxUserCount(uint16 maxCount)
 {
-    if (maxCount <= MAX_STUDENT_COUNT)
+    if (maxCount <= MAX_ROOM_USER_LIMIT)
     {
-        _maxStudentCount = maxCount;
+        _maxUserCount = maxCount;
     }
 }
 
-uint16 Room::getMaxStudent() const
+uint16 Room::getMaxUserCount() const
 {
-    return _maxStudentCount;
+    return _maxUserCount;
 }
 
 void Room::setRoomName(std::string roomName)
@@ -49,21 +56,21 @@ std::string Room::getRoomName() const
     return _roomName;
 }
 
-uint16 Room::getOnlineStudentCount() const
+uint16 Room::getOnlineCount() const
 {
-    return _studentMap.size();
+    return _userMap.size();
 }
 
-bool Room::addStudent(Student* student)
+bool Room::addUser(VNOCUser* user)
 {
-    assert(student != NULL);
-    GUID_t studentId = student->getUniqueID();
+    assert(user != NULL);
+    GUID_t userId = user->getUniqueID();
 
     if (isFull() == false)
     {
-        if (isStudentExists(studentId) == false)
+        if (isUserExists(userId) == false)
         {
-            _studentMap.insert(std::make_pair(studentId, student));
+            _userMap.insert(std::make_pair(userId, user));
             return true;
         }
         else
@@ -76,22 +83,22 @@ bool Room::addStudent(Student* student)
     return false;
 }
 
-bool Room::removeStudent(GUID_t studentId)
+bool Room::removeUser(GUID_t guid)
 {
-    auto iter = _studentMap.find(studentId);
-    if (iter != _studentMap.end())
+    auto iter = _userMap.find(guid);
+    if (iter != _userMap.end())
     {
-        _studentMap.erase(iter);
+        _userMap.erase(iter);
         return true;
     }
 
     return false;
 }
 
-bool Room::isStudentExists(GUID_t studentId) const
+bool Room::isUserExists(GUID_t studentId) const
 {
-    auto iter = _studentMap.find(studentId);
-    if (iter != _studentMap.end())
+    auto iter = _userMap.find(studentId);
+    if (iter != _userMap.end())
     {
         return true;
     }
@@ -101,7 +108,7 @@ bool Room::isStudentExists(GUID_t studentId) const
 
 bool Room::isFull() const
 {
-    if (getOnlineStudentCount() >= getMaxStudent())
+    if (getOnlineCount() >= getMaxUserCount())
     {
         return true;
     }
@@ -109,18 +116,39 @@ bool Room::isFull() const
     return false;
 }
 
-Student* Room::getStudent(GUID_t studentId)
+VNOCUser* Room::getUser(GUID_t guid)
 {
-    if (isStudentExists(studentId) == true)
+    if (isUserExists(guid) == true)
     {
-        auto iter = _studentMap.find(studentId);
+        auto iter = _userMap.find(guid);
         return iter->second;
     }
 
     return NULL;
 }
 
-const StudentMap& Room::getStudentList() const
+const VNOCUserMap& Room::getUserMap() const
 {
-    return _studentMap;
+    return _userMap;
+}
+
+void Room::setPoolObjId(uint32 poolObjId)
+{
+    _poolObjId = poolObjId;
+}
+
+uint32 Room::getPoolObjId() const
+{
+    return _poolObjId;
+}
+
+void Room::setValid(bool valid)
+{
+    _isValid = valid;
+}
+
+
+bool Room::getIsValid() const
+{
+    return _isValid;
 }

@@ -181,19 +181,20 @@
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
+    <ClInclude Include="src\RoolPool.cpp" />
     <ClInclude Include="src\Room.h" />
-    <ClInclude Include="src\RoomFactory.h" />
     <ClInclude Include="src\RoomManager.h" />
+    <ClInclude Include="src\RoomPool.h" />
     <ClInclude Include="src\RvcMessageHandler.hpp" />
     <ClInclude Include="src\SocketServer.hpp" />
     <ClInclude Include=".\src\UserManage.hpp" />
     <ClInclude Include="src\SQLUserStorage.h" />
-    <ClInclude Include="src\Student.h" />
     <ClInclude Include="src\UserInfo.hpp" />
     <ClInclude Include=".\src\UserStorage.h" />
     <ClInclude Include="src\util.hpp" />
     <ClInclude Include="src\VnocMessageSocketHandler.hpp" />
     <ClInclude Include="src\VnocProtocol.hpp" />
+    <ClInclude Include="src\VNOCUser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Message\BaseMessage.cpp" />
@@ -218,11 +219,11 @@
     <ClCompile Include="src\Room.cpp" />
     <ClCompile Include="src\RoomManager.cpp" />
     <ClCompile Include="src\SQLUserStorage.cpp" />
-    <ClCompile Include="src\Student.cpp" />
     <ClCompile Include="src\UserManage.cpp" />
     <ClCompile Include="src\UserStorage.cpp" />
     <ClCompile Include="src\VnocProtocol.cpp" />
     <ClCompile Include="src\VNOCServer.cpp" />
+    <ClCompile Include="src\VNOCUser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\VnocMessageSocketHandler.inl" />
