@@ -431,9 +431,6 @@
     <ClInclude Include="src\FrameWork\FrameWork.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
-    <ClInclude Include="src\FrameWork\IFrameWork.h">
-      <Filter>FrameWork</Filter>
-    </ClInclude>
     <ClInclude Include="src\Base\IModule.h">
       <Filter>Base</Filter>
     </ClInclude>
@@ -598,6 +595,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Message\MessageDef.h">
       <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\IFrameWork.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

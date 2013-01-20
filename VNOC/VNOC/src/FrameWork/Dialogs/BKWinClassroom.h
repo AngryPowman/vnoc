@@ -7,7 +7,7 @@ class CClassroomWnd : public CBkDialogImpl<CClassroomWnd>,
 					  public CFrameBase
 {
 public:	
-	CClassroomWnd::CClassroomWnd() : CBkDialogImpl<CClassroomWnd>(BKDlg_RoomListWin),
+	CClassroomWnd::CClassroomWnd() : CBkDialogImpl<CClassroomWnd>(BKDlg_ClassroomWin),
 								   CFrameBase(module_ClassroomWin)
 	{
 	}

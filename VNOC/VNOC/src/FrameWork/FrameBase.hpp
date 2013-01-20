@@ -2,6 +2,7 @@
 #include "IFrameWork.h"
 #include <atlcomcli.h>
 #include <list>
+#include <vector>
 
 #define HR_NOTPROCESSED	MAKE_HRESULT(1,0x590c,0x590c)
 
@@ -162,6 +163,13 @@ struct XMessage_ShowLogin : public XMessage
 struct XMessage_ShowRoomList : public XMessage
 {
 	ImTheMessageOf(XMessage_ShowRoomList);
+};
+
+struct XMessage_ShowRoomList_Result : public XMessage
+{
+    ImTheMessageOf(XMessage_ShowRoomList_Result);
+
+    std::vector<int> roomID;
 };
 
 struct XMessage_ShowClassroom : public XMessage

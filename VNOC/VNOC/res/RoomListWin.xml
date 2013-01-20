@@ -1,15 +1,43 @@
-﻿<layer width="1000" height="618" appwin="1">
-	<header class="msgboxhead" width="full" height="31">
-		<icon src="101" pos="5,7"/>
-		<text class="dlgtitle" pos="28,10">房间列表</text>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layer title="RoomList" width="800" height="570" appwin="1">
+	<header class="dlg_header" width="full" height="60">
+		
+		<dlg pos="0,0,-0,-0" crbg="78F0E7">
+		<img pos="8,8" skin="little_logo"/>
+		</dlg>
+		<text class="dlgtitle" pos="88,10" crtext="3F89D9" font="0404">教室列表</text>
 		<imgbtn id="10001" class="linkimage" skin="closeonlybtn" pos="-43,0"/>
 	</header>
-	<footer class="msgboxfoot" width="full" height="55">
+	
+	<footer class="dlg_footer" width="full" height="30">
+	<dlg pos="0,0,-0,-0.1" crbg="78F0F2">
+    </dlg>
 	</footer>
-	<body class="msgboxbody" width="full" height="full">
-        <realwnd id="1001" pos="10,1,330,562" ctrlid="1001" crbg1="FBFCFD" />
+	
+	<body class="dlg_body" width="full" height="full">
+			<dlg pos="0,0,-0,-0" crbg="AFF9E9">
+						
+					<dlg  pos="0,129,271,480" class="panel" width="full" height="full" crbg="78f078">
+						<tabctrl id="10641" cursel="0" tabwidth="100" tabheight="100"  iconskin="roomlist_pane" frameskin="panelgray" tabspacing="1" tabpos="1" framepos="1" pos="0,0,-0,-1" icon-x="0" icon-y="20" text-x="0" text-y="25">
+							<tab id="12000" title="常用教室" width="full" height="full" class1="tabpage" >	
+								<dlg pos="0,0,-0,-0" crbg="DFF9E9">
+									<edit id="10111" pos="10,5,195,35" show="1"/>			
+									<button id="10004" class="normalbtn" pos="200,2,266,35" font="0200" crtext="425e63">查找教室</button>
+									<realwnd id="1001" pos="1,45,270,350" ctrlid="1001" crbg1="FBFCFD" />
+								</dlg>
+							</tab>	
+							
+							<tab id="12000" title="教室信息" width="full" height="full" class1="tabpage" >	
+								<dlg pos="1,1,-1,-1" crbg="DFF9E9">
+									<dlg pos="1,2,70,60" class=panel>
+										<realwnd id=2002 ctrlid=2002 pos="2,2,-2,-2"/>
+									</dlg>
+								</dlg>
+							</tab>	
+						</tabctrl>
+					</dlg>
+					
+				
+			</dlg>
 	</body>
 </layer>
-
-
-

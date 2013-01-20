@@ -3,7 +3,7 @@
 
 CRoomMgr::CRoomMgr() : CFrameBase(module_RoomListData)
 {
-
+    m_frame = NULL;
 }
 
 CRoomMgr::~CRoomMgr()
@@ -13,22 +13,32 @@ CRoomMgr::~CRoomMgr()
 
 HRESULT CRoomMgr::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
-	return E_NOTIMPL;
+    m_frame = dynamic_cast<IFrameWork*>(UpperFrame);
+    ATLASSERT(m_frame);
+    m_frame->AddRef();
+	return S_OK;
 }
 
 HRESULT CRoomMgr::UnInitialize()
 {
-	return E_NOTIMPL;
+	if(m_frame)
+    {
+        m_frame->Release();
+    }
+    return S_OK;
 }
 
 HRESULT CRoomMgr::Run()
 {
-	return E_NOTIMPL;
+	netHelper.AddFilter(MSG_ACL_TYPE, this);
+    netHelper.StartListen();
+    return S_OK;
 }
 
 HRESULT CRoomMgr::Terminate()
 {
-	return E_NOTIMPL;
+	netHelper.StopListen();
+    return S_OK;
 }
 
 HRESULT CRoomMgr::CreateRoom( RoomID& id )
@@ -51,8 +61,37 @@ HRESULT CRoomMgr::Show( BOOL bShow/*=TRUE*/ )
 	return S_OK;
 }
 
-HRESULT CRoomMgr::GetRoomList( RoomList& list )
+HRESULT CRoomMgr::GetRoomList()
 {
-	return E_NOTIMPL;
+    INetCenter *pNetCenter = NULL;
+    Global->GetINetCenter(&pNetCenter);
+    if(pNetCenter)
+    {
+        MSG_RCL netMsg;
+        pNetCenter->SendServer(netMsg);
+        return S_OK;
+    }
+	return E_FAIL;
+}
+
+VOID CRoomMgr::OnGetRoomList( XMessage *pMsg )
+{
+    GetRoomList();
+}
+
+HRESULT CRoomMgr::OnNetMessage( const CMessage& msg )
+{
+    switch(msg.GetMessageType())
+    {
+    case MSG_ACL_TYPE:
+        const MSG_ACL* msgReal = dynamic_cast<const MSG_ACL*>(&msg);
+        if(msgReal)
+        {
+            XMessage_ShowRoomList_Result result;
+            msgReal->GetRoomList(result.roomID);
+            SendXMessage(&result);
+        }
+    }
+    return S_OK;
 }
 
