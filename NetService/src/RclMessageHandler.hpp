@@ -23,7 +23,7 @@ public:
         //temporary room data
         std::vector<int32> roomList;
         //roomList.resize(100);
-        for (uint32 i = 0; i < roomList.size(); ++i)
+        for (uint32 i = 0; i < 1000; ++i)
         {
             //Room& room = roomList[i];
             //room.setRoomID(10000 + i);
