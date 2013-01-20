@@ -3,6 +3,7 @@
 #include <ezlogger_headers.hpp>
 #include <iostream>
 #include <string.h>
+using namespace std;
 void sUserStorage ::SaveConnLog(string host,string name,string password,string db,int port /*= 3306*/ )
 {
 	EZLOGGERSTREAM<<"MySQL host :"<<host<<std::endl;
