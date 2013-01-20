@@ -12,9 +12,10 @@ public:
     ~RoomPool();
 
 public:
-    bool initPool(uint32 size = DEFAULT_ROOM_POOL_SIZE, uint32 incrSize = DEFAULT_ROOM_POOL_INCREASE_SIZE);
-    void destroy();
+    bool  initPool(uint32 size = DEFAULT_ROOM_POOL_SIZE, uint32 incrSize = DEFAULT_ROOM_POOL_INCREASE_SIZE);
+    void  destroy();
     Room* acquire();
+    void  release(uint32 poolObjId);
 
 private:
     std::vector<Room*> _roomObjPool;

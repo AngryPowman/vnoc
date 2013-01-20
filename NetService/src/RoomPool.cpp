@@ -75,3 +75,22 @@ Room* RoomPool::acquire()
         room->setIsValid(true);
     }
 }
+
+void  RoomPool::release(uint32 poolObjId)
+{
+    if (_roomObjPool[poolObjId] == NULL)
+    {
+        return;
+    }
+
+    if (poolObjId >= _offset)
+    {
+        return;
+    }
+
+    _offset--;
+    Room* room = _roomObjPool[poolObjId];
+    
+    _roomObjPool[_offset] = room;
+
+}

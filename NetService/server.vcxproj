@@ -171,7 +171,6 @@
     <ClInclude Include="..\Message\MessageParser.h" />
     <ClInclude Include="..\Message\MSG_UNION.h" />
     <ClInclude Include="..\Message\PackMessage.h" />
-    <ClInclude Include="Common.h" />
     <ClInclude Include="src\AsioTcpConnection.hpp" />
     <ClInclude Include="src\AsioTcpServer.hpp" />
     <ClInclude Include="src\Common.h" />
@@ -180,8 +179,9 @@
     <ClInclude Include="src\GlobalDefinition.h" />
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
+    <ClInclude Include="src\RclMessageHandler.hpp" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
-    <ClInclude Include="src\RoolPool.cpp" />
+    <ClInclude Include="src\RoomPool.cpp" />
     <ClInclude Include="src\Room.h" />
     <ClInclude Include="src\RoomManager.h" />
     <ClInclude Include="src\RoomPool.h" />
