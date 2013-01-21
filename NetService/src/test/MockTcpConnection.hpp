@@ -110,7 +110,7 @@ private:
     char* recvBuf_;
     size_t recvBufLen;
     size_t sendLen_;
-    char sendBuf_[1024];
+    char sendBuf_[102400];
     bool isReadSome_;
     size_t receivedLenth_;
 };
