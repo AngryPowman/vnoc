@@ -67,6 +67,10 @@ protected:
 	FrameModule	m_moduleType;
 };
 
+#define CarelessXMessage(_class) \
+	virtual VOID _class::ProcessXMessage(XMessage* pmsg,XMessage* pMsgGetList=NULL) \
+	{}
+
 #define Begin_XMessage(_class)	\
 	virtual VOID _class::ProcessXMessage(XMessage* pmsg,XMessage* pMsgGetList=NULL) \
 	{ \

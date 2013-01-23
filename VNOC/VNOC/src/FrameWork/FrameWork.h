@@ -26,6 +26,8 @@ private:
 	typedef std::map<CString,std::set<FrameModule>> XMessageMap;
 
 	IFrameModule* _FindModule(FrameModule module);
+	VOID _InitUILib();
+	VOID _InitTest();
 	VOID _LoadModule();
 	VOID _LoadModule(FrameModule module);
 	VOID _ClearModule();

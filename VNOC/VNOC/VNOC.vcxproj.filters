@@ -73,6 +73,21 @@
     <Filter Include="net\MessageParser\MSG_CLASS">
       <UniqueIdentifier>{0134d767-6eef-4585-ba77-f15462b58656}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CppUnitTest">
+      <UniqueIdentifier>{5a703d45-6df3-4ac6-a37a-4064a708db61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppUnitTest\NMessage">
+      <UniqueIdentifier>{ce4f211f-e55b-4853-9367-4c77751b9467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppUnitTest\NMessage\Message">
+      <UniqueIdentifier>{ae29c17c-09ed-47d7-a718-a8e6ff0856fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppUnitTest\NMessage\MsgDataValue">
+      <UniqueIdentifier>{e5936607-d79d-4961-8a13-0ca7b7076bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppUnitTest\Tester">
+      <UniqueIdentifier>{f56a5009-597e-42d8-9373-44a7dd777c04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="small.ico">
@@ -254,6 +269,9 @@
     </None>
     <None Include="res\ClassroomWin.xml">
       <Filter>Resource Files\BKres</Filter>
+    </None>
+    <None Include="src\CppUintTest\msgdef.xml">
+      <Filter>CppUnitTest\Tester</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -515,9 +533,6 @@
     <ClInclude Include="src\util\bind.hpp">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp">
-      <Filter>Global</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\DbgHelper.hpp">
       <Filter>util</Filter>
     </ClInclude>
@@ -545,13 +560,28 @@
     <ClInclude Include="src\BKWin\bkwin\ListViewCtrlEx.h">
       <Filter>BKWin\BKWin</Filter>
     </ClInclude>
+    <ClInclude Include="src\FrameWork\Dialogs\BKWinClassroom.h">
+      <Filter>FrameWork\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logic\UserSession\StrMatch.hpp">
+      <Filter>Logic\UserSession</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameWork\IFrameWork.h">
+      <Filter>Global</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Message\MSG_ACI.h">
       <Filter>net\MessageParser\MSG_CLASS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Message\MSG_ACL.h">
       <Filter>net\MessageParser\MSG_CLASS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACS.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Message\MSG_ALI.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_APG.h">
       <Filter>net\MessageParser\MSG_CLASS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Message\MSG_APS.h">
@@ -569,6 +599,9 @@
     <ClInclude Include="..\..\Message\MSG_RLI.h">
       <Filter>net\MessageParser\MSG_CLASS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RPG.h">
+      <Filter>net\MessageParser\MSG_CLASS</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Message\MSG_RPS.h">
       <Filter>net\MessageParser\MSG_CLASS</Filter>
     </ClInclude>
@@ -576,6 +609,12 @@
       <Filter>net\MessageParser\MSG_CLASS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Message\BaseMessage.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageDef.h">
+      <Filter>net\MessageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp">
       <Filter>net\MessageParser</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Message\MessageParser.h">
@@ -587,17 +626,56 @@
     <ClInclude Include="..\..\Message\PackMessage.h">
       <Filter>net\MessageParser</Filter>
     </ClInclude>
-    <ClInclude Include="src\FrameWork\Dialogs\BKWinClassroom.h">
-      <Filter>FrameWork\Dialogs</Filter>
+    <ClInclude Include="..\..\NMessage\BufferMessage.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="src\Logic\UserSession\StrMatch.hpp">
-      <Filter>Logic\UserSession</Filter>
+    <ClInclude Include="..\..\NMessage\XMLObject.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Message\MessageDef.h">
-      <Filter>net\MessageParser</Filter>
+    <ClInclude Include="..\..\NMessage\CMessage.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="src\FrameWork\IFrameWork.h">
-      <Filter>Global</Filter>
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IReadMessage.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageDef.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message2Pack.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\ParaserMessageXML.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\ParserMessage.h">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CppUintTest\testRunner.h">
+      <Filter>CppUnitTest\Tester</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -679,8 +757,8 @@
     <ClCompile Include="src\BKWin\bkwin\ListViewCtrlEx.cpp">
       <Filter>BKWin\BKWin</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Message\BaseMessage.cpp">
-      <Filter>net\MessageParser</Filter>
+    <ClCompile Include="src\FrameWork\Dialogs\BKWinClassroom.cpp">
+      <Filter>FrameWork\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Message\MessageParser.cpp">
       <Filter>net\MessageParser</Filter>
@@ -688,8 +766,53 @@
     <ClCompile Include="..\..\Message\PackMessage.cpp">
       <Filter>net\MessageParser</Filter>
     </ClCompile>
-    <ClCompile Include="src\FrameWork\Dialogs\BKWinClassroom.cpp">
-      <Filter>FrameWork\Dialogs</Filter>
+    <ClCompile Include="..\..\Message\BaseMessage.cpp">
+      <Filter>net\MessageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\BufferMessage.cpp">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\Message2Pack.cpp">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\XMLOject.cpp">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\CMessage.cpp">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp">
+      <Filter>CppUnitTest\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp">
+      <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CppUintTest\testPackMessage.cpp">
+      <Filter>CppUnitTest\Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CppUintTest\Vnocp1MessageParserTest.cpp">
+      <Filter>CppUnitTest\Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CppUintTest\NMessageTest.cpp">
+      <Filter>CppUnitTest\Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CppUintTest\testRunner.cpp">
+      <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,8 @@
 #endif
 #endif
 
+#ifndef CPPTEST
+
 CAppModule _Module;
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
@@ -34,3 +36,21 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	_Module.Term();
 	return 0;
 }
+
+#else
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	IGlobal::GlobalDeliver();
+
+	::CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
+	Global->Initialize();
+
+	Global->Run();
+
+	Global->UnInitialize();
+	::CoUninitialize();
+	return 0;
+}
+
+#endif

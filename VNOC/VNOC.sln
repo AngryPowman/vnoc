@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppunit_vs10", "..\cppunit-1.12.1\src\cppunit\cppunit_vs10.vcxproj", "{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testRunner", "testRunner\testRunner.vcxproj", "{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VNOC", "VNOC\VNOC.vcxproj", "{06E90441-F473-4E9E-99C9-F482C1073E0E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74} = {AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VNOC", "VNOC\VNOC.vcxproj", "{06E90441-F473-4E9E-99C9-F482C1073E0E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CppTest|Win32 = CppTest|Win32
+		CppTest|Win64 = CppTest|Win64
 		Debug|Win32 = Debug|Win32
 		Debug|Win64 = Debug|Win64
 		Release|Win32 = Release|Win32
@@ -20,25 +20,19 @@ Global
 		VldMemLeakCheck|Win64 = VldMemLeakCheck|Win64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.CppTest|Win32.ActiveCfg = Debug|Win32
+		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.CppTest|Win32.Build.0 = Debug|Win32
+		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.CppTest|Win64.ActiveCfg = CppTest|Win32
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.Debug|Win32.ActiveCfg = Debug|Win32
-		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.Debug|Win32.Build.0 = Debug|Win32
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.Debug|Win64.ActiveCfg = Debug|Win32
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.Release|Win32.ActiveCfg = Release|Win32
-		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.Release|Win32.Build.0 = Release|Win32
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.Release|Win64.ActiveCfg = Release|Win32
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.VldMemLeakCheck|Win32.ActiveCfg = Debug|Win32
-		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.VldMemLeakCheck|Win32.Build.0 = Debug|Win32
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.VldMemLeakCheck|Win64.ActiveCfg = Debug|Win32
 		{AB80C2A2-C5AA-C26C-F881-FF1B4E698B74}.VldMemLeakCheck|Win64.Build.0 = Debug|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Debug|Win32.Build.0 = Debug|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Debug|Win64.ActiveCfg = Debug|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Release|Win32.ActiveCfg = Release|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Release|Win32.Build.0 = Release|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.Release|Win64.ActiveCfg = Release|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.VldMemLeakCheck|Win32.ActiveCfg = Debug|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.VldMemLeakCheck|Win32.Build.0 = Debug|Win32
-		{5857152D-B7F5-4175-AD8C-DEA94DEDA32B}.VldMemLeakCheck|Win64.ActiveCfg = Release|Win32
+		{06E90441-F473-4E9E-99C9-F482C1073E0E}.CppTest|Win32.ActiveCfg = CppTest|Win32
+		{06E90441-F473-4E9E-99C9-F482C1073E0E}.CppTest|Win32.Build.0 = CppTest|Win32
+		{06E90441-F473-4E9E-99C9-F482C1073E0E}.CppTest|Win64.ActiveCfg = CppTest|Win32
 		{06E90441-F473-4E9E-99C9-F482C1073E0E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{06E90441-F473-4E9E-99C9-F482C1073E0E}.Debug|Win32.Build.0 = Debug|Win32
 		{06E90441-F473-4E9E-99C9-F482C1073E0E}.Debug|Win64.ActiveCfg = Debug|x64

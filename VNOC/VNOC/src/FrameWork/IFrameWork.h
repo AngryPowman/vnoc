@@ -18,7 +18,10 @@ enum FrameModule
 	module_LoginData,
 	module_RoomListData,
 	module_ClassroomWinData,
-	module_DataEnd
+	module_DataEnd,
+
+	module_CppTest_Main,
+	module_CppTestEnd,
 };
 
 struct XMessage;

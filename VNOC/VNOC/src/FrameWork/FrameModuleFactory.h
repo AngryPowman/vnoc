@@ -7,6 +7,10 @@
 #include "../Logic/room/RoomMgr.h"
 #include "../Logic/UserSession/LoginImpl.h"
 
+#ifdef CPPTEST
+#include "../CppUintTest/testRunner.h"
+#endif
+
 
 class CFrameModuleFactory
 {
@@ -44,6 +48,11 @@ public:
 		case module_ClassroomWin:
 			*ppModule = new CClassroomWnd;
 			break;
+#ifdef CPPTEST
+		case module_CppTest_Main:
+			*ppModule = new CTestRunner;
+			break;
+#endif
 		default:
 			ATLASSERT(FALSE && "invalid module");
 			return E_FAIL;
