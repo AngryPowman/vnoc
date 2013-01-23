@@ -270,9 +270,6 @@
     <None Include="res\ClassroomWin.xml">
       <Filter>Resource Files\BKres</Filter>
     </None>
-    <None Include="src\CppUintTest\msgdef.xml">
-      <Filter>CppUnitTest\Tester</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

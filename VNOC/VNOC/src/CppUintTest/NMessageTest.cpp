@@ -55,7 +55,7 @@ public:
         MsgDataValue* pReadData = NULL;
 
         std::string strPath;
-        CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
+        CPPUNIT_ASSERT(DisposePath(L"msgdef.xml", strPath) == true);
         CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile(strPath.c_str()) == MsgStatus_Ok);
 
         CMessage BaseTest("MSG_ALI");
@@ -80,11 +80,15 @@ public:
 
         test = ParserMessageXML::Instance().GetMsgObject("MSG_ALI");
 
-        CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
-        CPPUNIT_ASSERT(test->GetId() == 23);
-        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetName() == "LoginResult");
-        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == MsgDataMType_Data);
-        CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == MsgDataType_Uint8);
+		CPPUNIT_ASSERT(test);
+		if (test)
+		{
+			CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
+			CPPUNIT_ASSERT(test->GetId() == 23);
+			CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetName() == "LoginResult");
+			CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == MsgDataMType_Data);
+			CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetType() == MsgDataType_Uint8);
+		}
     }
 
     void TestPack()

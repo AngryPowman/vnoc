@@ -383,7 +383,6 @@
     <None Include="res\tab_normal.bmp" />
     <None Include="res\tab_normal_ex.bmp" />
     <None Include="small.ico" />
-    <None Include="src\CppUintTest\msgdef.xml" />
     <None Include="VNOC.ico" />
   </ItemGroup>
   <ItemGroup>
