@@ -12,6 +12,19 @@
 #endif
 #endif
 
+void VnocMain()
+{
+    IGlobal::GlobalDeliver();
+
+    ::CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
+    Global->Initialize();
+
+    Global->Run();
+
+    Global->UnInitialize();
+    ::CoUninitialize();
+}
+
 #ifndef CPPTEST
 
 CAppModule _Module;
@@ -24,15 +37,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	_Module.Init(NULL,hInstance);
-	IGlobal::GlobalDeliver();
-
-	::CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
-	Global->Initialize();
-
-	Global->Run();
-
-	Global->UnInitialize();
-	::CoUninitialize();
+    VnocMain();
 	_Module.Term();
 	return 0;
 }
@@ -41,15 +46,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	IGlobal::GlobalDeliver();
-
-	::CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
-	Global->Initialize();
-
-	Global->Run();
-
-	Global->UnInitialize();
-	::CoUninitialize();
+    VnocMain()
 	return 0;
 }
 
