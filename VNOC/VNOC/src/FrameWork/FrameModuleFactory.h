@@ -49,7 +49,7 @@ public:
 			*ppModule = new CClassroomWnd;
 			break;
 #ifdef CPPTEST
-		case module_CppTest_Main:
+		case module_CppTestMain:
 			*ppModule = new CTestRunner;
 			break;
 #endif

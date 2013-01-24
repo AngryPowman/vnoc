@@ -4,23 +4,24 @@
 
 enum FrameModule
 {
-	module_Invalid=-1,
-	module_FrameWork=0,
+	module_Invalid      = -1,
+	module_FrameWork    = 0,
 	module_Any,
 
-	module_ViewBegin=256,
+	module_ViewBegin    = 1000,
 	module_LoginWin,
 	module_RoomListWin,
 	module_ClassroomWin,
 	module_ViewEnd,
 
-	module_DataBegin=65536,
+	module_DataBegin    = 2000,
 	module_LoginData,
 	module_RoomListData,
 	module_ClassroomWinData,
 	module_DataEnd,
 
-	module_CppTest_Main,
+    module_CppTestBegin = 3000,
+	module_CppTestMain,
 	module_CppTestEnd,
 };
 

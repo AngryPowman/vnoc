@@ -144,15 +144,26 @@ VOID CFrameWork::_ClearModule()
 
 VOID CFrameWork::_LoadModule()
 {
-	_LoadModule(module_LoginData);
-	_LoadModule(module_RoomListData);
-	_LoadModule(module_ClassroomWinData);
+    int i;
+    for (i = module_DataBegin + 1; i < module_DataEnd; ++i)
+    {
+        _LoadModule(static_cast<FrameModule>(i));
+    }
+
 #ifndef CPPTEST
-	_LoadModule(module_LoginWin);
-	_LoadModule(module_RoomListWin);
-	_LoadModule(module_ClassroomWin);
+
+    for (i = module_ViewBegin + 1; i < module_ViewEnd; ++i)
+    {
+        _LoadModule(static_cast<FrameModule>(i));
+    }
+
 #else
-	_LoadModule(module_CppTest_Main);
+
+    for (i = module_CppTestBegin + 1; i < module_CppTestEnd; ++i)
+    {
+        _LoadModule(static_cast<FrameModule>(i));
+    }
+
 #endif
 
 	_GetModulesListenList();

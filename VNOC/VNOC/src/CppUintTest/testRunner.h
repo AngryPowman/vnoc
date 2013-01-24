@@ -3,7 +3,7 @@
 class CTestRunner : public CFrameBase
 {
 public:
-	CTestRunner():CFrameBase(module_CppTest_Main)
+	CTestRunner():CFrameBase(module_CppTestMain)
 	{};
 	STDMETHOD( Run() );
 
