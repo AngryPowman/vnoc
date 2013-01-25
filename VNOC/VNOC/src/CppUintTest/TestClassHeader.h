@@ -3,12 +3,15 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-class CTestBase : public CppUnit::TestFixture
+enum TestUnitID
 {
-public:
+	TestUnit_Begin = module_CppTest_PrivateModule_Begin,
+	TestUnit_UserSession,
+	TestUnit_End = module_CppTest_PrivateModule_End
 };
 
-class CUserSessionTest :public CTestBase ,public CFrameBase
+template<typename TestUnitID TID>
+class CTestBase : public CppUnit::TestFixture ,public CFrameBase
 {
 public:
 	void setUp()
@@ -24,6 +27,12 @@ public:
 		AddRef();	// 防止引用计数为0被销毁
 		pFrameWork->RemoveModule(this);
 	}
+	CTestBase():CFrameBase((FrameModule)(UINT)TID){};
+};
+
+class CUserSessionTest :public CTestBase<TestUnit_UserSession>
+{
+public:
 	VOID	TestLoginRequest();
 	VOID	OnLoginError(XMessage_LoginError* msg);
 
@@ -32,7 +41,7 @@ public:
 	End_XMessage();
 
 	UINT	m_testCount;
-	CUserSessionTest():CFrameBase(module_CppTest_PrivateModule_UserSession), m_testCount(0)
+	CUserSessionTest():CTestBase(), m_testCount(0)
 	{}
 
 	CPPUNIT_TEST_SUITE( CUserSessionTest );

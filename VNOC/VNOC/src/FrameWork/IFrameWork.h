@@ -23,8 +23,8 @@ enum FrameModule
     module_CppTestBegin = 3072,
 	module_CppTestMain,
 	module_CppTestEnd,
-
-	module_CppTest_PrivateModule_UserSession,
+	module_CppTest_PrivateModule_Begin=3584,
+	module_CppTest_PrivateModule_End=4095,
 };
 
 struct XMessage;
