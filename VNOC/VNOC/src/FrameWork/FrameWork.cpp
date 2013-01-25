@@ -31,8 +31,12 @@ HRESULT CFrameWork::UnInitialize()
 
 HRESULT CFrameWork::Run()
 {
-	XMessage_ShowLogin msgFirstShow;
-	SendXMessage(&msgFirstShow);
+#ifndef CPPTEST
+	XMessage_FrameStart firstMessage;
+#else
+	XMessage_StartTest firstMessage;
+#endif
+	SendXMessage(&firstMessage);
 	return S_OK;
 }
 
@@ -49,6 +53,10 @@ HRESULT CFrameWork::RegisterModule( IFrameModule* iModule )
 	Util::CAutoCS ac(m_mapcs);
 	m_map[module] = iModule;
 	iModule->AddRef();
+	
+	_GetModulesListenList(module);
+	iModule->Initialize(this);
+	iModule->Run();
 	return S_OK;
 }
 
@@ -165,8 +173,6 @@ VOID CFrameWork::_LoadModule()
     }
 
 #endif
-
-	_GetModulesListenList();
 }
 
 VOID CFrameWork::_LoadModule( FrameModule module )
@@ -175,26 +181,42 @@ VOID CFrameWork::_LoadModule( FrameModule module )
 	CFrameModuleFactory::CreateFrameModule(module,&pModule);
 	if (pModule)
 	{
-		pModule->Initialize(this);
-		pModule->Run();
 		RegisterModule(pModule);
 	}
 }
 
-VOID CFrameWork::_GetModulesListenList()
+VOID CFrameWork::_GetModulesListenList(FrameModule module)
 {
-	m_msgMap.clear();
-	XMessage_GetListenList msg;
-	Util::CAutoCS ac(m_mapcs);
-	for (auto i=m_map.begin(); i!=m_map.end(); ++i)
+	if (module == module_Any)
 	{
-		msg.msgIDList.clear();
-		i->second->ProcessXMessage(NULL,&msg);
-
-		Util::CAutoCS ac(m_msgMapCS);
-		for (auto j=msg.msgIDList.begin(); j!=msg.msgIDList.end(); ++j)
+		XMessage_GetListenList msg;
+		Util::CAutoCS ac(m_mapcs);
+		for (auto i=m_map.begin(); i!=m_map.end(); ++i)
 		{
-			m_msgMap[*j].insert( i->first );
+			msg.msgIDList.clear();
+			i->second->ProcessXMessage(NULL,&msg);
+
+			Util::CAutoCS ac(m_msgMapCS);
+			for (auto j=msg.msgIDList.begin(); j!=msg.msgIDList.end(); ++j)
+			{
+				m_msgMap[*j].insert( i->first );
+			}
+		}
+	}
+	else
+	{
+		Util::CAutoCS ac(m_mapcs);
+		auto i = m_map.find(module);
+		if (i != m_map.end())
+		{
+			XMessage_GetListenList msg;
+			i->second->ProcessXMessage(NULL,&msg);
+
+			Util::CAutoCS ac(m_msgMapCS);
+			for (auto j=msg.msgIDList.begin(); j!=msg.msgIDList.end(); ++j)
+			{
+				m_msgMap[*j].insert( i->first );
+			}
 		}
 	}
 }

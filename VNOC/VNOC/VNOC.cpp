@@ -37,7 +37,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	_Module.Init(NULL,hInstance);
+
     VnocMain();
+
 	_Module.Term();
 	return 0;
 }

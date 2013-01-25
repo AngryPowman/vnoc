@@ -24,6 +24,7 @@ public:
 	STDMETHOD( OnNetMessage(const CMessage& msg));
 protected:
 	VOID OnLogin(XMessage_Login* pMsg);
+	BOOL CheckLoginRequest(XMessage_Login* pMsg);
 
 private:
 	IFrameWork* m_frame;

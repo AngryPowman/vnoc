@@ -59,7 +59,32 @@ HRESULT CLoginImpl::GetCurrentUser(CString& username,CString& cookie)
 
 VOID CLoginImpl::OnLogin( XMessage_Login* pMsg )
 {
-	Login(pMsg->username,pMsg->pwd);
+	if (CheckLoginRequest(pMsg))
+	{
+		Login(pMsg->username,pMsg->pwd);
+	}
+}
+
+BOOL CLoginImpl::CheckLoginRequest( XMessage_Login* pMsg )
+{
+	CString& userName = pMsg->username;
+	CString& pwd = pMsg->pwd;
+	XMessage_LoginError error;
+	if (userName.GetLength() == 0)
+	{
+		error.result = Result_UserName_LengthError;
+	}
+	else if (userName.Find(_T("sparta")))
+	{
+		error.result = Result_UserName_InvalidChar;
+	}
+	else if (pwd.GetLength() == 0)
+	{
+		error.result = Result_Pwd_LengthError;
+	}
+
+	SendXMessage(&error);
+	return ResultSucceeded(error.result);
 }
 
 HRESULT CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )

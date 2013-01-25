@@ -5,6 +5,7 @@
 #include "../net/INet.h"
 #include "../FrameWork/IFrameWork.h"
 #include "GlobalDefine.h"
+#include "Error.hpp"
 
 interface IGlobal:public IModule
 {

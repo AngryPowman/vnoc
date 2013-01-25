@@ -8,21 +8,23 @@ enum FrameModule
 	module_FrameWork    = 0,
 	module_Any,
 
-	module_ViewBegin    = 1000,
+	module_ViewBegin    = 1024,
 	module_LoginWin,
 	module_RoomListWin,
 	module_ClassroomWin,
 	module_ViewEnd,
 
-	module_DataBegin    = 2000,
+	module_DataBegin    = 2048,
 	module_LoginData,
 	module_RoomListData,
 	module_ClassroomWinData,
 	module_DataEnd,
 
-    module_CppTestBegin = 3000,
+    module_CppTestBegin = 3072,
 	module_CppTestMain,
 	module_CppTestEnd,
+
+	module_CppTest_PrivateModule_UserSession,
 };
 
 struct XMessage;

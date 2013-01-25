@@ -142,12 +142,22 @@ struct XMessage_GetListenList : public XMessage
 	std::list<CString>	msgIDList;
 };
 
+//////////////////////////////////////////////////////////////////////////
+// 登陆相关
+
 struct XMessage_Login : public XMessage
 {
 	ImTheMessageOf(XMessage_Login);
 
 	CString username;
 	CString pwd;
+};
+
+struct XMessage_LoginError : public XMessage
+{
+	ImTheMessageOf(XMessage_LoginError);
+	
+	ResultCode result;
 };
 
 struct XMessage_Login_Result : public XMessage
@@ -163,6 +173,9 @@ struct XMessage_ShowLogin : public XMessage
 {
 	ImTheMessageOf(XMessage_ShowLogin);
 };
+
+//////////////////////////////////////////////////////////////////////////
+// 房间相关
 
 struct XMessage_ShowRoomListWnd : public XMessage
 {
@@ -190,4 +203,17 @@ struct XMessage_GetRoomList_Result : public XMessage
 struct XMessage_ShowClassroom : public XMessage
 {
 	ImTheMessageOf(XMessage_ShowClassroom);
+};
+
+//////////////////////////////////////////////////////////////////////////
+// Framework
+
+struct XMessage_FrameStart : public XMessage
+{
+	ImTheMessageOf(XMessage_FrameStart);
+};
+
+struct XMessage_StartTest : public XMessage
+{
+	ImTheMessageOf(XMessage_StartTest);
 };

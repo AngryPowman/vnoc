@@ -8,7 +8,7 @@
 #include <cppunit/XmlOutputter.h>
 #include <fstream>
 
-HRESULT CTestRunner::Run()
+VOID CTestRunner::StartTest(XMessage_StartTest* msg)
 {
     CppUnit::TestResult    controller;
     CppUnit::TestResultCollector result;
@@ -22,6 +22,4 @@ HRESULT CTestRunner::Run()
     std::ofstream xmlFileOut("cpptestresults.xml");
     CppUnit::XmlOutputter xmlOut(&result, xmlFileOut);
     xmlOut.write();
-
-	return S_OK;
 }

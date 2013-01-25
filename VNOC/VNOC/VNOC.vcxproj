@@ -482,6 +482,7 @@
     <ClInclude Include="src\config\Config.h" />
     <ClInclude Include="src\config\ConfigDefine.h" />
     <ClInclude Include="src\config\IConfig.h" />
+    <ClInclude Include="src\CppUintTest\TestClassHeader.h" />
     <ClInclude Include="src\CppUintTest\testRunner.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -494,6 +495,7 @@
     <ClInclude Include="src\FrameWork\IFrameWork.h" />
     <ClInclude Include="src\FrameWork\ResDefine.h" />
     <ClInclude Include="src\FrameWork\FrameBase.hpp" />
+    <ClInclude Include="src\Global\Error.hpp" />
     <ClInclude Include="src\Global\GlobalCenter.h" />
     <ClInclude Include="src\Global\GlobalDefine.h" />
     <ClInclude Include="src\Global\IGlobal.h" />
@@ -670,6 +672,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\CppUintTest\testRunner.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\CppUintTest\usersessionTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">true</ExcludedFromBuild>

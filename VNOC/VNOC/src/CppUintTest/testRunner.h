@@ -5,7 +5,10 @@ class CTestRunner : public CFrameBase
 public:
 	CTestRunner():CFrameBase(module_CppTestMain)
 	{};
-	STDMETHOD( Run() );
 
-	CarelessXMessage(CTestRunner);
+	VOID StartTest(XMessage_StartTest* msg);
+
+	Begin_XMessage(CTestRunner)
+		OnXMessage(XMessage_StartTest,StartTest)
+	End_XMessage()
 };

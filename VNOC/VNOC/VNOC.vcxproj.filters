@@ -674,6 +674,12 @@
     <ClInclude Include="src\CppUintTest\testRunner.h">
       <Filter>CppUnitTest\Tester</Filter>
     </ClInclude>
+    <ClInclude Include="src\CppUintTest\TestClassHeader.h">
+      <Filter>CppUnitTest\Tester</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Global\Error.hpp">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -809,6 +815,9 @@
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
     <ClCompile Include="src\CppUintTest\testRunner.cpp">
+      <Filter>CppUnitTest\Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CppUintTest\usersessionTest.cpp">
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
   </ItemGroup>

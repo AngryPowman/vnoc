@@ -16,6 +16,11 @@ CLoginWnd::CLoginWnd() : CBkDialogImpl(BKDlg_LoginWin),CFrameBase(module_LoginWi
 	m_loginState = 0;
 }
 
+VOID CLoginWnd::OnFrameStart( XMessage_FrameStart* pmsg )
+{
+	OnShowWnd(NULL);
+}
+
 void CLoginWnd::OnBkBtnClose()
 {
 	EndDialog(0);

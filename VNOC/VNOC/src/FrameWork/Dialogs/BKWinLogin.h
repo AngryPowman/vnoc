@@ -16,6 +16,7 @@ protected:
 	VOID	Disable();
 	VOID	Enable();
 	VOID	OnTimer(UINT_PTR id);
+	VOID	OnFrameStart(XMessage_FrameStart* pmsg);
 	VOID	OnShowWnd(XMessage_ShowLogin* pmsg);
 	VOID	OnLoginResult(XMessage_Login_Result* pMsg);
 protected:
@@ -30,6 +31,7 @@ public:
 	BEGIN_MSG_MAP_EX_DECLARE(CLoginWnd)
 
 	Begin_XMessage(CLoginWnd)
+		OnXMessage(XMessage_FrameStart,OnFrameStart)
 		OnXMessage(XMessage_ShowLogin,OnShowWnd)
 		OnXMessage(XMessage_Login_Result,OnLoginResult);
 	End_XMessage()

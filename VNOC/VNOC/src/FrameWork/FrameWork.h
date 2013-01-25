@@ -31,7 +31,7 @@ private:
 	VOID _LoadModule();
 	VOID _LoadModule(FrameModule module);
 	VOID _ClearModule();
-	VOID _GetModulesListenList();
+	VOID _GetModulesListenList(FrameModule module=module_Any);
 private:
 	ModuleMap m_map;
 	ATL::CCriticalSection	m_mapcs;
