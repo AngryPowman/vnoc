@@ -57,12 +57,11 @@ void CLoginWnd::OnLoginClick()
 	}
 }
 
-BOOL CLoginWnd::OnLoginResult( XMessage* pMsg )
+VOID CLoginWnd::OnLoginResult( XMessage_Login_Result* pMsg )
 {
-	XMessage_Login_Result *pResult = dynamic_cast<XMessage_Login_Result*>(pMsg);
-	if (pResult && m_loginState==1)
+	if (pMsg && m_loginState==1)
 	{
-		if (pResult->success == TRUE)
+		if (pMsg->success == TRUE)
 		{
 			MessageBox(_T("³É¹¦µÇÂ½!"));
 			OnBkBtnClose();
@@ -74,7 +73,6 @@ BOOL CLoginWnd::OnLoginResult( XMessage* pMsg )
 		m_loginState = 2;
 		Enable();
 	}
-	return TRUE;
 }
 
 VOID CLoginWnd::Disable()
@@ -133,7 +131,7 @@ VOID CLoginWnd::OnTimer( UINT_PTR id )
 	Enable();
 }
 
-VOID CLoginWnd::OnShowWnd( XMessage* pmsg )
+VOID CLoginWnd::OnShowWnd( XMessage_ShowLogin* pmsg )
 {
 	DoModal();
 }

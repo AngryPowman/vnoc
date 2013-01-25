@@ -23,7 +23,7 @@ public:
 
 	STDMETHOD( OnNetMessage(const CMessage& msg));
 protected:
-	VOID OnLogin(XMessage* pMsg);
+	VOID OnLogin(XMessage_Login* pMsg);
 
 private:
 	IFrameWork* m_frame;

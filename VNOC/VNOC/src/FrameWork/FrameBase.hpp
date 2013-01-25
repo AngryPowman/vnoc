@@ -101,7 +101,7 @@ protected:
 		else \
 		if ( pmsg && _msg::Static_IsTypeOf(msgID) ) \
 		{ \
-			_proc(pmsg); \
+			_proc((_msg*)pmsg); \
 		}else /*I'm incase of 'elseif'*/
 
 #define Chain_XMessage(_class)	\

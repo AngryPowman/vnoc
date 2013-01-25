@@ -11,13 +11,13 @@ public:
 public:
 	void	OnBkBtnClose();
 	void	OnLoginClick();
-	BOOL	OnLoginResult(XMessage* pMsg);
 
 protected:
 	VOID	Disable();
 	VOID	Enable();
 	VOID	OnTimer(UINT_PTR id);
-	VOID	OnShowWnd(XMessage* pmsg);
+	VOID	OnShowWnd(XMessage_ShowLogin* pmsg);
+	VOID	OnLoginResult(XMessage_Login_Result* pMsg);
 protected:
 	INT	m_loginState;
 

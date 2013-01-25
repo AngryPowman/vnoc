@@ -57,10 +57,9 @@ HRESULT CLoginImpl::GetCurrentUser(CString& username,CString& cookie)
 	return E_NOTIMPL;
 }
 
-VOID CLoginImpl::OnLogin( XMessage* pMsg )
+VOID CLoginImpl::OnLogin( XMessage_Login* pMsg )
 {
-	XMessage_Login* pData = dynamic_cast<XMessage_Login*>(pMsg);
-	Login(pData->username,pData->pwd);
+	Login(pMsg->username,pMsg->pwd);
 }
 
 HRESULT CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
