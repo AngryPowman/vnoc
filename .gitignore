@@ -23,6 +23,7 @@
 *.lib
 *.o
 tags
+cpptestresults.xml
 
 !libmysql.lib
 !mysqlclient.lib
@@ -38,7 +39,6 @@ tags
 /NetService/Release
 /NetService/.project
 /NetService/.cproject
-/cpptestresults.xml
 /VNOC/Release
 /VNOC/Debug
 /vnoc/ipch
@@ -46,8 +46,6 @@ tags
 /NetService/EchoTestServer/x64
 /NetService/EchoTestServer/Debug
 /NetService/EchoTestServer/Release
-/NetService/cpptestresults.xml
-/NetService/src/test/testRunner/cpptestresults.xml
 /NetService/src/test/testRunner/Debug
 /NetService/src/test/testRunner/Release
 /NetService/src/test/testRunner/x64
@@ -57,3 +55,5 @@ tags
 /VNOC/Release
 /VNOC/Debug
 /VNOC/VldMemLeakCheck
+/VNOC/CppTest
+/VNOC/VNOC/CppTest

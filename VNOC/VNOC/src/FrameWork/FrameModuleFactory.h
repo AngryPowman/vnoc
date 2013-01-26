@@ -8,7 +8,7 @@
 #include "../Logic/UserSession/LoginImpl.h"
 
 #ifdef CPPTEST
-#include "../CppUintTest/testRunner.h"
+#include "../CppUnitTest/testRunner.h"
 #endif
 
 

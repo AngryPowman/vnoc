@@ -671,10 +671,10 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h">
       <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
     </ClInclude>
-    <ClInclude Include="src\CppUintTest\testRunner.h">
+    <ClInclude Include="src\CppUnitTest\testRunner.h">
       <Filter>CppUnitTest\Tester</Filter>
     </ClInclude>
-    <ClInclude Include="src\CppUintTest\TestClassHeader.h">
+    <ClInclude Include="src\CppUnitTest\TestClassHeader.h">
       <Filter>CppUnitTest\Tester</Filter>
     </ClInclude>
     <ClInclude Include="src\Global\Error.hpp">
@@ -805,19 +805,19 @@
     <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp">
       <Filter>CppUnitTest\NMessage\MsgDataValue</Filter>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\testPackMessage.cpp">
+    <ClCompile Include="src\CppUnitTest\testPackMessage.cpp">
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\Vnocp1MessageParserTest.cpp">
+    <ClCompile Include="src\CppUnitTest\Vnocp1MessageParserTest.cpp">
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\NMessageTest.cpp">
+    <ClCompile Include="src\CppUnitTest\NMessageTest.cpp">
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\testRunner.cpp">
+    <ClCompile Include="src\CppUnitTest\testRunner.cpp">
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\usersessionTest.cpp">
+    <ClCompile Include="src\CppUnitTest\usersessionTest.cpp">
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
   </ItemGroup>

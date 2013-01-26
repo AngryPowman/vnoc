@@ -482,8 +482,8 @@
     <ClInclude Include="src\config\Config.h" />
     <ClInclude Include="src\config\ConfigDefine.h" />
     <ClInclude Include="src\config\IConfig.h" />
-    <ClInclude Include="src\CppUintTest\TestClassHeader.h" />
-    <ClInclude Include="src\CppUintTest\testRunner.h">
+    <ClInclude Include="src\CppUnitTest\TestClassHeader.h" />
+    <ClInclude Include="src\CppUnitTest\testRunner.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -653,7 +653,7 @@
     </ClCompile>
     <ClCompile Include="src\BKWin\bkwin\ListViewCtrlEx.cpp" />
     <ClCompile Include="src\config\Config.cpp" />
-    <ClCompile Include="src\CppUintTest\NMessageTest.cpp">
+    <ClCompile Include="src\CppUnitTest\NMessageTest.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -662,7 +662,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\testPackMessage.cpp">
+    <ClCompile Include="src\CppUnitTest\testPackMessage.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -671,17 +671,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\testRunner.cpp">
+    <ClCompile Include="src\CppUnitTest\testRunner.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\usersessionTest.cpp">
+    <ClCompile Include="src\CppUnitTest\usersessionTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='VldMemLeakCheck|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\CppUintTest\Vnocp1MessageParserTest.cpp">
+    <ClCompile Include="src\CppUnitTest\Vnocp1MessageParserTest.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
