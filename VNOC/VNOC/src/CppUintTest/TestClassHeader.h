@@ -29,22 +29,3 @@ public:
 	}
 	CTestBase():CFrameBase((FrameModule)(UINT)TID){};
 };
-
-class CUserSessionTest :public CTestBase<TestUnit_UserSession>
-{
-public:
-	VOID	TestLoginRequest();
-	VOID	OnLoginError(XMessage_LoginError* msg);
-
-	Begin_XMessage(CUserSessionTest)
-		OnXMessage(XMessage_LoginError,OnLoginError);
-	End_XMessage();
-
-	UINT	m_testCount;
-	CUserSessionTest():CTestBase(), m_testCount(0)
-	{}
-
-	CPPUNIT_TEST_SUITE( CUserSessionTest );
-	CPPUNIT_TEST( TestLoginRequest );
-	CPPUNIT_TEST_SUITE_END();
-};
