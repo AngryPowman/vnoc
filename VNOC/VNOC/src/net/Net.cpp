@@ -209,6 +209,15 @@ void CNetCenter::OnPackReady( ConstReferenceBuffer buffer )
 	}
 }
 
+HRESULT CNetCenter::MockReceive( const CMessage *mockMsg )
+{
+	if (mockMsg)
+	{
+		_DispatchMessage(mockMsg);
+	}
+	return S_OK;
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 CNetListenerHelper::CNetListenerHelper()

@@ -23,6 +23,7 @@ public:
 	STDMETHOD( Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg) );
 	STDMETHOD( SetListener(MSGTYPE msgType,INetListener *listener) );
 	STDMETHOD( RemoveListener(MSGTYPE msgType,INetListener *listener) );
+	STDMETHOD( MockReceive(const CMessage *mockMsg) );
 
 VNOC_Private:
 	virtual void OnAccept	(int nErrorCode,CAsyncSocketEx* pSock);

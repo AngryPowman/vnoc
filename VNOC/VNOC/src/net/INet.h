@@ -17,6 +17,7 @@ interface INetCenter: public IModule
 	STDMETHOD( Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg) = 0);
 	STDMETHOD( SetListener(MSGTYPE msgType,INetListener *listener) = 0);
 	STDMETHOD( RemoveListener(MSGTYPE msgType,INetListener *listener) = 0);
+	STDMETHOD( MockReceive(const CMessage *mockMsg) = 0);
 };
 
 class CNetListenerHelper
