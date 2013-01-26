@@ -10,7 +10,11 @@ class CUserSessionTest : public CTestBase<TestUnit_UserSession>
 public:
 	UINT	m_testCount;
 	BOOL	m_receivedResult;
-	CUserSessionTest():CTestBase(), m_testCount(0),m_receivedResult(FALSE)
+	BOOL	m_expectResult;
+	CUserSessionTest():CTestBase()
+	, m_testCount(0)
+	, m_receivedResult(FALSE)
+	, m_expectResult(FALSE)
 	{}
 
 	Begin_XMessage(CUserSessionTest)
@@ -41,6 +45,11 @@ public:
 
 		MSG_ALI netMsg;
 		netMsg.SetLoginResult(0);
+		m_expectResult = TRUE;
+		pNetCenter->MockReceive(&netMsg);
+
+		netMsg.SetLoginResult(1);
+		m_expectResult = FALSE;
 		pNetCenter->MockReceive(&netMsg);
 
 		CPPUNIT_ASSERT(m_testCount == 3);
@@ -58,7 +67,7 @@ public:
 
 	VOID OnLoginResult( XMessage_Login_Result* msg)
 	{
-		CPPUNIT_ASSERT(msg->success);
+		CPPUNIT_ASSERT(msg->success == m_expectResult);
 		m_receivedResult = TRUE;
 	}
 };
