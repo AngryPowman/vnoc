@@ -7,6 +7,7 @@ enum TestUnitID
 {
 	TestUnit_Begin = module_CppTest_PrivateModule_Begin,
 	TestUnit_UserSession,
+    TestUnit_RoomMgr,
 	TestUnit_End = module_CppTest_PrivateModule_End
 };
 

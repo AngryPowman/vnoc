@@ -820,6 +820,9 @@
     <ClCompile Include="src\CppUnitTest\usersessionTest.cpp">
       <Filter>CppUnitTest\Tester</Filter>
     </ClCompile>
+    <ClCompile Include="src\CppUnitTest\roommgrTest.cpp">
+      <Filter>CppUnitTest\Tester</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VNOC.rc">
