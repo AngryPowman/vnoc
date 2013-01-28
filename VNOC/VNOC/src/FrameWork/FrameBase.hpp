@@ -98,11 +98,10 @@ protected:
 			_msg::Static_GetID(id); \
 			pListMsg->msgIDList.push_back(id); \
 		} \
-		else \
 		if ( pmsg && _msg::Static_IsTypeOf(msgID) ) \
 		{ \
 			_proc((_msg*)pmsg); \
-		}else /*I'm incase of 'elseif'*/
+		}
 
 #define Chain_XMessage(_class)	\
 		{} \
@@ -195,7 +194,7 @@ struct XMessage_GetRoomList : public XMessage
 
 struct XMessage_GetRoomList_Result : public XMessage
 {
-    ImTheMessageOf(XMessage_GetRoomList);
+    ImTheMessageOf(XMessage_GetRoomList_Result);
 
     std::vector<int> roomID;
 };
