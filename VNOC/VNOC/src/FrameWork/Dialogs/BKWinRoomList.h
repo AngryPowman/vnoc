@@ -3,29 +3,6 @@
 #include "../../net/INet.h"
 #include "../FrameBase.hpp"
 
-struct ColumnData
-{
-	ColumnData()
-	: strColumn1(_T("Column1")), strColumn2(_T("Column2"))
-	, strColumn3(_T("Column3")),  strColumn4(_T("Column4"))	
-	{
-	}
-
-	CString strColumn1, strColumn2, strColumn3, strColumn4;
-};
-
-struct ListItemData
-{
-	ListItemData()
-	: strItemData1("NULL"), strItemData2("NULL")
-	, strItemData3("NULL"), strItemData4("NULL")	
-	{
-	}
-
-	CString strItemData1, strItemData2, strItemData3, strItemData4;
-};
-
-
 class CRoomListWnd : public CBkDialogImpl<CRoomListWnd>
 	,public CFrameBase
 {
