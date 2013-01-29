@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8E8644B5-86CF-4286-9276-8710E6EE974C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Client</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Message\BaseMessage.h" />
+    <ClInclude Include="..\..\Message\MessageDef.h" />
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
+    <ClInclude Include="..\..\Message\MessageParser.h" />
+    <ClInclude Include="..\..\Message\MSG_ACI.h" />
+    <ClInclude Include="..\..\Message\MSG_ACL.h" />
+    <ClInclude Include="..\..\Message\MSG_ACS.h" />
+    <ClInclude Include="..\..\Message\MSG_ALI.h" />
+    <ClInclude Include="..\..\Message\MSG_APG.h" />
+    <ClInclude Include="..\..\Message\MSG_APS.h" />
+    <ClInclude Include="..\..\Message\MSG_AVC.h" />
+    <ClInclude Include="..\..\Message\MSG_RCI.h" />
+    <ClInclude Include="..\..\Message\MSG_RCL.h" />
+    <ClInclude Include="..\..\Message\MSG_RLI.h" />
+    <ClInclude Include="..\..\Message\MSG_RPG.h" />
+    <ClInclude Include="..\..\Message\MSG_RPS.h" />
+    <ClInclude Include="..\..\Message\MSG_RVC.h" />
+    <ClInclude Include="..\..\Message\MSG_UNION.h" />
+    <ClInclude Include="..\..\Message\PackMessage.h" />
+    <ClInclude Include="..\..\ThirdLibs\TinyXML\tinystr.h" />
+    <ClInclude Include="..\..\ThirdLibs\TinyXML\tinyxml.h" />
+    <ClInclude Include="config\Config.h" />
+    <ClInclude Include="config\ConfigDefine.h" />
+    <ClInclude Include="config\IConfig.h" />
+    <ClInclude Include="FrameWork\Error.hpp" />
+    <ClInclude Include="FrameWork\FrameModuleFactory.h" />
+    <ClInclude Include="FrameWork\FrameWork.h" />
+    <ClInclude Include="FrameWork\GlobalCenter.h" />
+    <ClInclude Include="FrameWork\GlobalDefine.h" />
+    <ClInclude Include="FrameWork\IFrameWork.h" />
+    <ClInclude Include="FrameWork\IGlobal.h" />
+    <ClInclude Include="FrameWork\ResDefine.h" />
+    <ClInclude Include="net\INet.h" />
+    <ClInclude Include="net\Net.h" />
+    <ClInclude Include="net\Socket\AsyncSocket.h" />
+    <ClInclude Include="net\Socket\AsyncSocketEx.h" />
+    <ClInclude Include="net\Socket\ISocket.h" />
+    <ClInclude Include="net\Socket\SockWnd.h" />
+    <ClInclude Include="net\Socket\VNOCSocket.h" />
+    <ClInclude Include="util\bind.hpp" />
+    <ClInclude Include="util\BLog.h" />
+    <ClInclude Include="util\CBuffer.h" />
+    <ClInclude Include="util\DbgHelper.hpp" />
+    <ClInclude Include="util\IRefCountImpl.h" />
+    <ClInclude Include="util\MD5.h" />
+    <ClInclude Include="util\MD5ChecksumDefines.h" />
+    <ClInclude Include="util\Performance.h" />
+    <ClInclude Include="util\TaskThread.h" />
+    <ClInclude Include="util\ThreadDefine.h" />
+    <ClInclude Include="util\TLS.h" />
+    <ClInclude Include="util\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Message\BaseMessage.cpp" />
+    <ClCompile Include="..\..\Message\MessageParser.cpp" />
+    <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
+    <ClCompile Include="config\Config.cpp" />
+    <ClCompile Include="FrameWork\FrameWork.cpp" />
+    <ClCompile Include="FrameWork\GlobalCenter.cpp" />
+    <ClCompile Include="FrameWork\GlobalLog.cpp" />
+    <ClCompile Include="FrameWork\Main.cpp" />
+    <ClCompile Include="net\Net.cpp" />
+    <ClCompile Include="net\Socket\AsyncSocket.cpp" />
+    <ClCompile Include="net\Socket\AsyncSocketEx.cpp" />
+    <ClCompile Include="net\Socket\SockWnd.cpp" />
+    <ClCompile Include="net\Socket\VNOCSocket.cpp" />
+    <ClCompile Include="util\BLog.cpp" />
+    <ClCompile Include="util\CBuffer.cpp" />
+    <ClCompile Include="util\MD5.cpp" />
+    <ClCompile Include="util\TaskThread.cpp" />
+    <ClCompile Include="util\TLS.cpp" />
+    <ClCompile Include="util\util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="util\Performance.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

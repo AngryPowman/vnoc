@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{d0789c3a-68a6-4c02-a7e6-d94306dde427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{ee804ca1-3800-4eb0-9a6c-211e434327a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util\Public">
+      <UniqueIdentifier>{9e05fbaf-f4de-42fa-80d0-60c1306a4391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{aa9e61af-0ed6-4e9d-9162-c9c2905669be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net">
+      <UniqueIdentifier>{1f0044bc-9b7a-4c6f-9437-72aec3e2dd27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Socket">
+      <UniqueIdentifier>{90bc5d2c-09b6-44e9-9ee8-0cfd76455bee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config\TinyXML">
+      <UniqueIdentifier>{42bbda5d-e16c-4491-83db-975d02aeac2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Message">
+      <UniqueIdentifier>{c8315cb1-8874-40b5-8ce8-8613e0e9c98b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FrameWork\Error.hpp">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\FrameModuleFactory.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\FrameWork.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\GlobalCenter.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\GlobalDefine.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\IFrameWork.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\IGlobal.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork\ResDefine.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="util\bind.hpp">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\BLog.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\CBuffer.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\DbgHelper.hpp">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\IRefCountImpl.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\MD5.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\MD5ChecksumDefines.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\Performance.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\TaskThread.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\ThreadDefine.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\TLS.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="util\util.h">
+      <Filter>Util\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="config\Config.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="config\ConfigDefine.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="config\IConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="net\INet.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\Net.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\Socket\AsyncSocket.h">
+      <Filter>Net\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="net\Socket\AsyncSocketEx.h">
+      <Filter>Net\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="net\Socket\ISocket.h">
+      <Filter>Net\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="net\Socket\SockWnd.h">
+      <Filter>Net\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="net\Socket\VNOCSocket.h">
+      <Filter>Net\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdLibs\TinyXML\tinystr.h">
+      <Filter>Config\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdLibs\TinyXML\tinyxml.h">
+      <Filter>Config\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageDef.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MessageParser.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACI.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACL.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ACS.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_ALI.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_APG.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_APS.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_AVC.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RCI.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RCL.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RLI.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RPG.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RPS.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_RVC.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\MSG_UNION.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\PackMessage.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Message\BaseMessage.h">
+      <Filter>Net\Message</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FrameWork\FrameWork.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\GlobalCenter.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\GlobalLog.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork\Main.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="util\BLog.cpp">
+      <Filter>Util\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="util\CBuffer.cpp">
+      <Filter>Util\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="util\MD5.cpp">
+      <Filter>Util\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="util\TaskThread.cpp">
+      <Filter>Util\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="util\TLS.cpp">
+      <Filter>Util\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="util\util.cpp">
+      <Filter>Util\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="config\Config.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="net\Net.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\Socket\AsyncSocketEx.cpp">
+      <Filter>Net\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="net\Socket\SockWnd.cpp">
+      <Filter>Net\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="net\Socket\VNOCSocket.cpp">
+      <Filter>Net\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="net\Socket\AsyncSocket.cpp">
+      <Filter>Net\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp">
+      <Filter>Config\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxml.cpp">
+      <Filter>Config\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp">
+      <Filter>Config\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
+      <Filter>Config\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\MessageParser.cpp">
+      <Filter>Net\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\PackMessage.cpp">
+      <Filter>Net\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Message\BaseMessage.cpp">
+      <Filter>Net\Message</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="util\Performance.inl">
+      <Filter>Util\Public</Filter>
+    </None>
+  </ItemGroup>
+</Project>
