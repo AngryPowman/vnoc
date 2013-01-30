@@ -1,57 +1,65 @@
-/*
-用户管理模块
-操作1 用户验证
-操作2 用户注册
-操作3 找回密码
-操作4 上传文件
-操作5 用户下线
-*/
+#pragma once
+
+#include "UserInfo.hpp"
+#include "UserStorage.h"
 #include <string>
+#include <string.h>
 #define NULLPOINT			-1
 #define LOGIN_OK			1
 #define TEST_FALSE			2
+#define ACCOUNT_NULL		3
 
-using namespace std;
-
-struct userinfo
-{
-	//其中有很多用户信息
-};
 class CUserManage
 {
-private:
-	
+
 public:
+	UserStorage *_us;
+	static CUserManage* GetInstance()
+	{
+		return &_instance;
+	}
 	//返回值： LOGIN_OK 登陆成功 TEST_FALSE 验证失败 NULLPOINT 指针无效
 	//如果登陆成功则获得用户信息
-	int Authenticate(string sUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 20)
-{
-	char strPass[20] = "0000000000000000000";
-	
-	if (false)//账号是否存在 查数据库
+	void initial(UserStorage *us)
 	{
-		return TEST_FALSE;
+		_us = us;
 	}
-	
-	int i = 0;
-	do
+	int Authenticate(char* szUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
 	{
-		if (strPass[i] != pPassword[i])
+		if (szUser == NULL)
 		{
 			return TEST_FALSE;
 		}
-		++i;
-	} while (i < nPassLen);
+        strncpy(pUserInfo->strUser, szUser, 40);
+        return LOGIN_OK;
+		if ( !_us->IfUserExist(szUser) )//账号是否存在 查数据库
+		{
+			return ACCOUNT_NULL;
+		}
+		char strPass[41] = {0};	
+		_us->GetPassword(szUser, strPass, 40);
 
-	if ((int)pUserInfo == 0)
-	{
-		return NULLPOINT;
-	}
+		int i = 0; //密码验证
+		do
+		{
+			if (strPass[i] != pPassword[i])
+			{
+				return TEST_FALSE;
+			}
+			++i;
+		} while (i < nPassLen);
 
-	//获得用户信息
-	//userinfo->xx == xx;
-	return LOGIN_OK;
-}
+		if (pUserInfo == 0)
+		{
+			return NULLPOINT;
+		}
 
+		//获得用户信息
+		_us->GetUserInfo(szUser, pUserInfo);
+
+		return LOGIN_OK;
+	}	
+private:
+	static CUserManage _instance;
 };
 

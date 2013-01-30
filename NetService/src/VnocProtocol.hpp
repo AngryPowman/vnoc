@@ -2,7 +2,7 @@
 #ifndef VNOC_PROTOCOL_H
 #define VNOC_PROTOCOL_H
 
-#include "../../Message/MsgDef.h"
+#include "../../Message/MSG_UNION.h"
 #include <string>
 #include <list>
 #include <unordered_map>
