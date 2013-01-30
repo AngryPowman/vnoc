@@ -1,8 +1,12 @@
 #pragma once
 
-//#include "../Logic/room/Room.h"
-//#include "../Logic/room/RoomMgr.h"
-//#include "../Logic/UserSession/LoginImpl.h"
+#include "../Logic/room/Room.h"
+#include "../Logic/room/RoomMgr.h"
+#include "../Logic/UserSession/LoginImpl.h"
+
+#include "../GUI/LoginWin/BKWinLogin.h"
+#include "../GUI/RoomListWin/BKWinRoomList.h"
+#include "../gui/RoomWin/BKWinClassroom.h"
 
 #ifdef CPPTEST
 #include "../CppUnitTest/testRunner.h"
@@ -12,12 +16,6 @@
 class CFrameModuleFactory
 {
 public:
-	/*static CFrameModuleFactory& GetInstance()
-	{
-		static CFrameModuleFactory factory;
-		return factory;
-	}*/
-
 	static ResultCode CreateFrameModule(FrameModule module,IFrameModule** ppModule)
 	{
 		if (!ppModule)
@@ -28,19 +26,19 @@ public:
 		switch(module)
 		{
 		case module_LoginData:
-			//*ppModule = new CLoginImpl;
+			*ppModule = new CLoginImpl;
 			break;
 		case module_LoginWin:
 			//*ppModule = new CLoginWnd;
 			break;
 		case module_RoomListData:
-			//*ppModule = new CRoomMgr;
+			*ppModule = new CRoomMgr;
 			break;
 		case module_RoomListWin:
 			//*ppModule = new CRoomListWnd;
 			break;
 		case module_ClassroomWinData:
-			//*ppModule = new CRoomBase;
+			*ppModule = new CRoomBase;
 			break;
 		case module_ClassroomWin:
 			//*ppModule = new CClassroomWnd;

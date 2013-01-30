@@ -55,22 +55,22 @@ public:
 
 	BOOL Listen(int nConnectionBacklog=5);
 
-	virtual int Receive(void* lpBuf, int nBufLen, int nFlags = 0);
+	virtual int Receive(void* lpBuf, int nBufLen, int nFlags=0);
 
 	int ReceiveFrom(void* lpBuf, int nBufLen,
-		CString& rSocketAddress, UINT& rSocketPort, int nFlags = 0);
+		CString& rSocketAddress, UINT& rSocketPort, int nFlags=0);
 	int ReceiveFrom(void* lpBuf, int nBufLen,
-		SOCKADDR* lpSockAddr, int* lpSockAddrLen, int nFlags = 0);
+		SOCKADDR* lpSockAddr, int* lpSockAddrLen, int nFlags=0);
 
 	enum { receives = 0, sends = 1, both = 2 };
 	BOOL ShutDown(int nHow = sends);
 
-	virtual int Send(const void* lpBuf, int nBufLen, int nFlags = 0);
+	virtual int Send(const void* lpBuf, int nBufLen, int nFlags=0);
 
 	int SendTo(const void* lpBuf, int nBufLen,
-		UINT nHostPort, LPCTSTR lpszHostAddress = NULL, int nFlags = 0);
+		UINT nHostPort, LPCTSTR lpszHostAddress = NULL, int nFlags=0);
 	int SendTo(const void* lpBuf, int nBufLen,
-		const SOCKADDR* lpSockAddr, int nSockAddrLen, int nFlags = 0);
+		const SOCKADDR* lpSockAddr, int nSockAddrLen, int nFlags=0);
 
 	BOOL AsyncSelect(long lEvent =
 		FD_READ | FD_WRITE | FD_OOB | FD_ACCEPT | FD_CONNECT | FD_CLOSE);

@@ -47,7 +47,7 @@ public:
 		IFrameWork* pFrameWork;
 		Global->GetIFrameModule(&pFrameWork);
 		Global->PtrAssert(pFrameWork);
-		pFrameWork->SendXMessage(msg);
+		return pFrameWork->SendXMessage(msg);
 	}
 	FrameModule GetModuleType()
 	{
@@ -66,18 +66,18 @@ protected:
 };
 
 #define CarelessXMessage(_class) \
-	virtual VOID _class::ProcessXMessage(XMessage* pmsg,XMessage* pMsgGetList=NULL) \
-	{}
+	virtual ResultCode _class::ProcessXMessage(XMessage* pmsg,XMessage* pMsgGetList=NULL) \
+	{result Result_NotImpl;}
 
 #define Begin_XMessage(_class)	\
-	virtual VOID _class::ProcessXMessage(XMessage* pmsg,XMessage* pMsgGetList=NULL) \
+	virtual ResultCode _class::ProcessXMessage(XMessage* pmsg,XMessage* pMsgGetList=NULL) \
 	{ \
 		CString msgID; \
 		XMessage_GetListenList* pListMsg=NULL; \
 		if (!pMsgGetList) \
 		{ \
 			if (!pmsg) \
-				return; \
+				return Result_InvalidParam; \
 			pmsg->GetID(msgID); \
 		} \
 		else \
@@ -85,7 +85,7 @@ protected:
 			pListMsg = dynamic_cast<XMessage_GetListenList*>(pMsgGetList); \
 			if (!pListMsg) \
 			{ \
-				return; \
+				return Result_FatalError; \
 			} \
 		} \
 
@@ -109,6 +109,7 @@ protected:
 
 #define End_XMessage()	 \
 		{} \
+		return Result_Success; \
 	}
 
 #define ImTheMessageOf(_msg)	\

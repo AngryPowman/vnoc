@@ -9,7 +9,7 @@
 
 #include <atlcoll.h>
 #include <Uxtheme.h>
-#include <tmschema.h>
+#include "tmschema.h"
 
 class BkWinThemeFunc
 {

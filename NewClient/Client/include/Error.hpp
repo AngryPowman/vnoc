@@ -17,6 +17,7 @@ enum ResultCode
 	Result_Fail,
 	Result_InvalidParam,
 	Result_NotFound,
+	Result_NotImpl,
 	//////////////////////////////////////////////////////////////////////////
 	// ’À∫≈œ‡πÿ
 	Result_UserName_LengthError=1024,

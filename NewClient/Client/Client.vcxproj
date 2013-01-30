@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Console|Win32">
+      <Configuration>Console</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="CppCheck|Win32">
+      <Configuration>CppCheck</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -22,6 +30,18 @@
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -35,11 +55,27 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
     <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
@@ -60,6 +96,60 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CPPCHECK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -76,6 +166,16 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Message\BaseMessage.h" />
@@ -110,6 +210,44 @@
     <ClInclude Include="FrameWork\IFrameWork.h" />
     <ClInclude Include="FrameWork\IGlobal.h" />
     <ClInclude Include="FrameWork\ResDefine.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkatldefine.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkcolor.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkdlgview.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkimage.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bklistbox.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bklistview.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkobject.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkskin.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bktheme.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnd.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndcmnctrl.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnddlg.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnddlgfile.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndedit.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndnotify.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndpanel.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndrichtxt.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndstyle.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndtabctrl.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\listboxbase.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\ListViewCtrlEx.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\Schemadef.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\Tmschema.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\Uxtheme.h" />
+    <ClInclude Include="GUI\LoginWin\BKWinLogin.h" />
+    <ClInclude Include="GUI\RoomListWin\BKWinRoomList.h" />
+    <ClInclude Include="GUI\RoomWin\BKWinClassroom.h" />
+    <ClInclude Include="include\Error.hpp" />
+    <ClInclude Include="include\IModule.h" />
+    <ClInclude Include="include\IRefCountImpl.h" />
+    <ClInclude Include="include\stdafx.h" />
+    <ClInclude Include="include\XMessage.hpp" />
+    <ClInclude Include="Logic\room\IRoomMgr.h" />
+    <ClInclude Include="Logic\room\Room.h" />
+    <ClInclude Include="Logic\room\RoomMgr.h" />
+    <ClInclude Include="Logic\UserSession\ILogin.h" />
+    <ClInclude Include="Logic\UserSession\LoginImpl.h" />
+    <ClInclude Include="Logic\UserSession\StrMatch.hpp" />
     <ClInclude Include="net\INet.h" />
     <ClInclude Include="net\Net.h" />
     <ClInclude Include="net\Socket\AsyncSocket.h" />
@@ -143,6 +281,13 @@
     <ClCompile Include="FrameWork\GlobalCenter.cpp" />
     <ClCompile Include="FrameWork\GlobalLog.cpp" />
     <ClCompile Include="FrameWork\Main.cpp" />
+    <ClCompile Include="GUI\BKWin\bkwin\ListViewCtrlEx.cpp" />
+    <ClCompile Include="GUI\LoginWin\BKWinLogin.cpp" />
+    <ClCompile Include="GUI\RoomListWin\BKWinRoomList.cpp" />
+    <ClCompile Include="GUI\RoomWin\BKWinClassroom.cpp" />
+    <ClCompile Include="Logic\room\Room.cpp" />
+    <ClCompile Include="Logic\room\RoomMgr.cpp" />
+    <ClCompile Include="Logic\UserSession\LoginImpl.cpp" />
     <ClCompile Include="net\Net.cpp" />
     <ClCompile Include="net\Socket\AsyncSocket.cpp" />
     <ClCompile Include="net\Socket\AsyncSocketEx.cpp" />
@@ -157,6 +302,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="util\Performance.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\config.xml" />
+    <Xml Include="Resource\msgdef.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

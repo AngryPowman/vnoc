@@ -4,6 +4,8 @@
 #include "../bkres/bkres.h"
 //#include "beikesafetipdlg.h"
 //#include "KAutoSync.h"
+#pragma warning(push)
+#pragma warning(disable:4018)
 
 #define COLOR_LIST_LINK				RGB(40,100,165)	
 #define LEFT_MARGIN_TEXT_COLUMN		2
@@ -1406,3 +1408,5 @@ BOOL CListViewCtrlEx::_ExpandItem( TListItem * pItem, INT iItem, BOOL expand )
 	}
 	return FALSE;
 }
+
+#pragma warning(pop)

@@ -29,6 +29,33 @@
     <Filter Include="Net\Message">
       <UniqueIdentifier>{c8315cb1-8874-40b5-8ce8-8613e0e9c98b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Logic">
+      <UniqueIdentifier>{fc85c714-2cb6-4c08-8c01-5db94e706643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\room">
+      <UniqueIdentifier>{cdc4c050-f912-4fad-8f7f-630dd0450988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\users">
+      <UniqueIdentifier>{5c89666e-35a4-49e0-81ae-f16bcf0a90ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{61949cca-7673-4e66-b8dc-001242bd142b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Login">
+      <UniqueIdentifier>{77586023-2e26-4c4b-936f-e4e0ef6341c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\RoomList">
+      <UniqueIdentifier>{419fb8d3-fb14-43bb-9e57-07ada4a5de08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Room">
+      <UniqueIdentifier>{75a3ef47-05a4-453f-9af2-822a9b0fe9e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{902b6711-eb72-4a08-96d3-f4f28892bd9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\BKWin">
+      <UniqueIdentifier>{6bf85c6f-0f5b-4813-a78a-f17a43f45725}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Error.hpp">
@@ -184,6 +211,120 @@
     <ClInclude Include="..\..\Message\BaseMessage.h">
       <Filter>Net\Message</Filter>
     </ClInclude>
+    <ClInclude Include="Logic\room\Room.h">
+      <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\room\RoomMgr.h">
+      <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\room\IRoomMgr.h">
+      <Filter>Logic\room</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\UserSession\LoginImpl.h">
+      <Filter>Logic\users</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\UserSession\StrMatch.hpp">
+      <Filter>Logic\users</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\UserSession\ILogin.h">
+      <Filter>Logic\users</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\LoginWin\BKWinLogin.h">
+      <Filter>UI\Login</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\RoomListWin\BKWinRoomList.h">
+      <Filter>UI\RoomList</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\RoomWin\BKWinClassroom.h">
+      <Filter>UI\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Error.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IModule.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IRefCountImpl.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stdafx.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\XMessage.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkobject.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkskin.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bktheme.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnd.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndcmnctrl.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnddlg.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnddlgfile.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndedit.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndnotify.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndpanel.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndrichtxt.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndstyle.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndtabctrl.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\listboxbase.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\ListViewCtrlEx.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\Schemadef.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\Tmschema.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\Uxtheme.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkatldefine.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkcolor.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkdlgview.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bkimage.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bklistbox.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\BKWin\bkwin\bklistview.h">
+      <Filter>UI\BKWin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWork\FrameWork.cpp">
@@ -255,10 +396,39 @@
     <ClCompile Include="..\..\Message\BaseMessage.cpp">
       <Filter>Net\Message</Filter>
     </ClCompile>
+    <ClCompile Include="Logic\room\Room.cpp">
+      <Filter>Logic\room</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\room\RoomMgr.cpp">
+      <Filter>Logic\room</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\UserSession\LoginImpl.cpp">
+      <Filter>Logic\users</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\LoginWin\BKWinLogin.cpp">
+      <Filter>UI\Login</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\RoomListWin\BKWinRoomList.cpp">
+      <Filter>UI\RoomList</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\RoomWin\BKWinClassroom.cpp">
+      <Filter>UI\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\BKWin\bkwin\ListViewCtrlEx.cpp">
+      <Filter>UI\BKWin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="util\Performance.inl">
       <Filter>Util\Public</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\config.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Resource\msgdef.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

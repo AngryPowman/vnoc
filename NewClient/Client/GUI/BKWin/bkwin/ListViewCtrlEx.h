@@ -1,6 +1,6 @@
 #pragma once
 
-#include "src/BKWin/wtl/atlcrack.h"
+#include "../wtl/atlcrack.h"
 #include <vector>
 //#include "KActor.h"
 
