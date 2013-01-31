@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FrameWork.h"
+#include "Factory.h"
 
 CFrameWork::CFrameWork()
 {
@@ -220,7 +221,7 @@ VOID CFrameWork::_GetModulesListenList(FrameModule module)
 
 VOID CFrameWork::_InitUILib()
 {
-/*	BkFontPool::SetDefaultFont(_T("Courier New"), -12);
+	BkFontPool::SetDefaultFont(_T("Courier New"), -12);
 	BkSkin::LoadSkins(IDR_XML_SKIN_DEF);
 	BkStyle::LoadStyles(IDR_BK_STYLE_DEF);
 	CString strPath;
@@ -229,7 +230,7 @@ VOID CFrameWork::_InitUILib()
 	Util::Filesys::SplitPath(strPath,strPath,CString());
 	strPath += BKWinResDir;
 	Global->Logf(LogFile_FrameWork,_T("初始化资源文件夹: %s"),strPath);
-	BkResManager::SetResourcePath(strPath);*/
+	BkResManager::SetResourcePath(strPath);
 }
 
 VOID CFrameWork::_InitTest()

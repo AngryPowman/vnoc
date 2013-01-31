@@ -5,8 +5,6 @@
 #include <list>
 #include <set>
 
-#include "../FrameWork/FrameModuleFactory.h"
-
 class CFrameWork : public IFrameWork
 {
 public:

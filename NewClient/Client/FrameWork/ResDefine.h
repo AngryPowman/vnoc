@@ -1,7 +1,7 @@
 #pragma once
 // 资源定义
 
-#define BKWinResDir	_T("WinRes")
+#define BKWinResDir	_T("../res")
 
 //////////////////////////////////////////////////////////////////////////
 // Dialogs

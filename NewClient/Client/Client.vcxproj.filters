@@ -61,9 +61,6 @@
     <ClInclude Include="FrameWork\Error.hpp">
       <Filter>FrameWork</Filter>
     </ClInclude>
-    <ClInclude Include="FrameWork\FrameModuleFactory.h">
-      <Filter>FrameWork</Filter>
-    </ClInclude>
     <ClInclude Include="FrameWork\FrameWork.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
@@ -325,6 +322,9 @@
     <ClInclude Include="GUI\BKWin\bkwin\bklistview.h">
       <Filter>UI\BKWin</Filter>
     </ClInclude>
+    <ClInclude Include="FrameWork\Factory.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWork\FrameWork.cpp">
@@ -417,6 +417,9 @@
     <ClCompile Include="GUI\BKWin\bkwin\ListViewCtrlEx.cpp">
       <Filter>UI\BKWin</Filter>
     </ClCompile>
+    <ClCompile Include="FrameWork\Factory.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="util\Performance.inl">
@@ -430,5 +433,13 @@
     <Xml Include="Resource\msgdef.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="GUI\BKWin\bkres\bkres.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -203,7 +203,7 @@
     <ClInclude Include="config\ConfigDefine.h" />
     <ClInclude Include="config\IConfig.h" />
     <ClInclude Include="FrameWork\Error.hpp" />
-    <ClInclude Include="FrameWork\FrameModuleFactory.h" />
+    <ClInclude Include="FrameWork\Factory.h" />
     <ClInclude Include="FrameWork\FrameWork.h" />
     <ClInclude Include="FrameWork\GlobalCenter.h" />
     <ClInclude Include="FrameWork\GlobalDefine.h" />
@@ -277,6 +277,7 @@
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="config\Config.cpp" />
+    <ClCompile Include="FrameWork\Factory.cpp" />
     <ClCompile Include="FrameWork\FrameWork.cpp" />
     <ClCompile Include="FrameWork\GlobalCenter.cpp" />
     <ClCompile Include="FrameWork\GlobalLog.cpp" />
@@ -302,6 +303,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="util\Performance.inl" />
+    <ResourceCompile Include="GUI\BKWin\bkres\bkres.rc" />
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resource\config.xml" />
