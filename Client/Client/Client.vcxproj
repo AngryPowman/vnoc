@@ -5,10 +5,6 @@
       <Configuration>Console</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="CppCheck|Win32">
-      <Configuration>CppCheck</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="CppTest|Win32">
       <Configuration>CppTest</Configuration>
       <Platform>Win32</Platform>
@@ -29,12 +25,6 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
@@ -65,9 +55,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -82,26 +69,25 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
     <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>include;W:\Projects\vnoc\cppunit-1.12.1\include;../../ThirdLibs;$(IncludePath)</IncludePath>
-    <LibraryPath>W:\Projects\vnoc\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IntDir>../Temp/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>include;W:\Projects\vnoc\cppunit-1.12.1\include;../../ThirdLibs;$(IncludePath)</IncludePath>
     <LibraryPath>W:\Projects\vnoc\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IntDir>../Temp</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
     <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IntDir>../Temp</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
     <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IntDir>../Temp</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -113,29 +99,6 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
-    </PostBuildEvent>
-    <PreLinkEvent>
-      <Command>prelink.bat $(Configuration) $(Platform)</Command>
-    </PreLinkEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CPPTEST;CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
