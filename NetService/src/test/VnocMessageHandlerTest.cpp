@@ -17,8 +17,14 @@ class VnocMessageHandlerTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( VnocMessageHandlerTest );
     CPPUNIT_TEST( testRVC );
+<<<<<<< HEAD
     CPPUNIT_TEST( testRLIwithPassword );
 	CPPUNIT_TEST( testRLIwithNothing );
+=======
+	CPPUNIT_TEST( testRLIwithNothing );
+	CPPUNIT_TEST( testRLIwithAccountNumber );
+	CPPUNIT_TEST( testRLIwithAccountNumberAndPassword );
+>>>>>>> origin/master
     CPPUNIT_TEST( testRCL );
     CPPUNIT_TEST_SUITE_END();
     MockTcpConnection *conn_;
@@ -53,45 +59,14 @@ public:
 		//return an AVC message
 		CMessageParser parser;
 		CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
+<<<<<<< HEAD
 		CPPUNIT_ASSERT(msg->GetMessageType()==MSG_AVC_TYPE);
+=======
+		CPPUNIT_ASSERT(msg->GetMessageType() == MSG_AVC_TYPE);
 		delete msg;
 		delete buf;
 	}
-
-	void testRLIwithPassword()
-	{
-		RliMessageHandler rlihandler(protocol_);
-		VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
-		handler.setProtocol(protocol_);
-		handler.start();
-		MSG_RLI rliMessage;
-		unsigned char tmp[16] = {0};
-		srand((unsigned int)time(0));
-		for(int i = 0; i < 16; ++i)
-		{
-			tmp[i] = rand() % 256;
-		}
-		rliMessage.SetAccountNumber(tmp, 16);
-		for(int i = 0; i < 16; ++i)
-		{
-			tmp[i] = rand() % 256;
-		}
-		rliMessage.SetPassword(tmp, 16);
-		PackMessage packer;
-		int len = packer.GetMessageLen(&rliMessage);
-		char *buf = new char[len];
-		packer.Pack(&rliMessage, (byte *)buf, len);
-		conn_->setRecv(buf, len);
-		char *sendBuf = (char*)conn_->getSendBuf();
-		//return an ALI message with login-success
-		CMessageParser parser;
-		CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-		CPPUNIT_ASSERT(msg->GetMessageType()==MSG_ALI_TYPE);
-		CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult()==0); 
-		delete msg;
-		delete buf;
-	}
-
+	
 	void testRLIwithNothing()
 	{
 		RliMessageHandler rlihandler(protocol_);
@@ -108,8 +83,103 @@ public:
 		//return an ALI message with login-failure.
 		CMessageParser parser;
 		CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
+		CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
+		CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult() == 1);
+>>>>>>> origin/master
+		delete msg;
+		delete buf;
+	}
+
+<<<<<<< HEAD
+	void testRLIwithPassword()
+=======
+	void testRLIwithAccountNumber()
+>>>>>>> origin/master
+	{
+		RliMessageHandler rlihandler(protocol_);
+		VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
+		handler.setProtocol(protocol_);
+		handler.start();
+		MSG_RLI rliMessage;
+		unsigned char tmp[16] = {0};
+		srand((unsigned int)time(0));
+		for(int i = 0; i < 16; ++i)
+		{
+			tmp[i] = rand() % 256;
+		}
+		rliMessage.SetAccountNumber(tmp, 16);
+<<<<<<< HEAD
+		for(int i = 0; i < 16; ++i)
+		{
+			tmp[i] = rand() % 256;
+		}
+		rliMessage.SetPassword(tmp, 16);
+=======
+>>>>>>> origin/master
+		PackMessage packer;
+		int len = packer.GetMessageLen(&rliMessage);
+		char *buf = new char[len];
+		packer.Pack(&rliMessage, (byte *)buf, len);
+		conn_->setRecv(buf, len);
+		char *sendBuf = (char*)conn_->getSendBuf();
+		//return an ALI message with login-success
+		CMessageParser parser;
+		CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
+<<<<<<< HEAD
+		CPPUNIT_ASSERT(msg->GetMessageType()==MSG_ALI_TYPE);
+=======
+		CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
+>>>>>>> origin/master
+		CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult()==0); 
+		delete msg;
+		delete buf;
+	}
+
+<<<<<<< HEAD
+	void testRLIwithNothing()
+=======
+	void testRLIwithAccountNumberAndPassword()
+>>>>>>> origin/master
+	{
+		RliMessageHandler rlihandler(protocol_);
+		VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
+		handler.setProtocol(protocol_);
+		handler.start();
+		MSG_RLI rliMessage;
+<<<<<<< HEAD
+=======
+		unsigned char tmp[16] = {0};
+		srand((unsigned int)time(0));
+		for(int i = 0; i < 16; ++i)
+		{
+			tmp[i] = rand() % 256;
+		}
+		rliMessage.SetAccountNumber(tmp, 16);
+		for(int i = 0; i < 16; ++i)
+		{
+			tmp[i] = rand() % 256;
+		}
+		rliMessage.SetPassword(tmp, 16);
+>>>>>>> origin/master
+		PackMessage packer;
+		int len = packer.GetMessageLen(&rliMessage);
+		char *buf = new char[len];
+		packer.Pack(&rliMessage, (byte *)buf, len);
+		conn_->setRecv(buf, len);
+		char *sendBuf = (char*)conn_->getSendBuf();
+<<<<<<< HEAD
+		//return an ALI message with login-failure.
+		CMessageParser parser;
+		CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
 		CPPUNIT_ASSERT(msg->GetMessageType()==MSG_ALI_TYPE);
 		CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult()==1);
+=======
+		//return an ALI message with login-success
+		CMessageParser parser;
+		CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
+		CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
+		CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult() == 0); 
+>>>>>>> origin/master
 		delete msg;
 		delete buf;
 	}
@@ -130,7 +200,7 @@ public:
         //return an ACL message
         CMessageParser parser;
         CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-        CPPUNIT_ASSERT(msg->GetMessageType()==MSG_ACL_TYPE);
+        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ACL_TYPE);
         delete msg;
         delete buf;
     }
