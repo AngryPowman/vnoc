@@ -3,10 +3,12 @@
 
 #include "stdafx.h"
 
+//#define USE_VLD
+
 #ifdef USE_VLD
 #ifdef _DEBUG
-#pragma comment(lib,"vld.lib")
-#include "../../VisualLeakDetector/include/vld.h"
+#pragma comment(lib,"VisualLeakDetector/lib/win32/vld.lib")
+#include "VisualLeakDetector/include/vld.h"
 #endif
 #endif
 
@@ -23,7 +25,7 @@ void VnocMain()
     ::CoUninitialize();
 }
 
-#ifndef CPPTEST
+#ifndef CONSOLE
 #include "../GUI/BKWin/wtl/atlapp.h"
 
 CAppModule _Module;

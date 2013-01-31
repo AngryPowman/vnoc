@@ -9,6 +9,10 @@
       <Configuration>CppCheck</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="CppTest|Win32">
+      <Configuration>CppTest</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -36,6 +40,12 @@
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -58,6 +68,9 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -72,8 +85,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppCheck|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
-    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IncludePath>include;W:\Projects\vnoc\cppunit-1.12.1\include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>W:\Projects\vnoc\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>include;W:\Projects\vnoc\cppunit-1.12.1\include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>W:\Projects\vnoc\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -112,11 +130,35 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CPPCHECK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CPPTEST;CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CPPTEST;CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -134,7 +176,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -197,11 +239,30 @@
     <ClInclude Include="..\..\Message\MSG_RVC.h" />
     <ClInclude Include="..\..\Message\MSG_UNION.h" />
     <ClInclude Include="..\..\Message\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\BufferMessage.h" />
+    <ClInclude Include="..\..\NMessage\CMessage.h" />
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h" />
+    <ClInclude Include="..\..\NMessage\IReadMessage.h" />
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h" />
+    <ClInclude Include="..\..\NMessage\Message.h" />
+    <ClInclude Include="..\..\NMessage\Message2Pack.h" />
+    <ClInclude Include="..\..\NMessage\MessageDef.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h" />
+    <ClInclude Include="..\..\NMessage\ParaserMessageXML.h" />
+    <ClInclude Include="..\..\NMessage\ParserMessage.h" />
+    <ClInclude Include="..\..\NMessage\XMLObject.h" />
     <ClInclude Include="..\..\ThirdLibs\TinyXML\tinystr.h" />
     <ClInclude Include="..\..\ThirdLibs\TinyXML\tinyxml.h" />
     <ClInclude Include="config\Config.h" />
     <ClInclude Include="config\ConfigDefine.h" />
     <ClInclude Include="config\IConfig.h" />
+    <ClInclude Include="CppUnitTest\TestClassHeader.h" />
+    <ClInclude Include="CppUnitTest\testRunner.h" />
     <ClInclude Include="FrameWork\Error.hpp" />
     <ClInclude Include="FrameWork\Factory.h" />
     <ClInclude Include="FrameWork\FrameWork.h" />
@@ -272,11 +333,26 @@
     <ClCompile Include="..\..\Message\BaseMessage.cpp" />
     <ClCompile Include="..\..\Message\MessageParser.cpp" />
     <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\BufferMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\CMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\Message2Pack.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp" />
+    <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp" />
+    <ClCompile Include="..\..\NMessage\XMLOject.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxml.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="config\Config.cpp" />
+    <ClCompile Include="CppUnitTest\NMessageTest.cpp" />
+    <ClCompile Include="CppUnitTest\testPackMessage.cpp" />
+    <ClCompile Include="CppUnitTest\testRunner.cpp" />
+    <ClCompile Include="CppUnitTest\Vnocp1MessageParserTest.cpp" />
     <ClCompile Include="FrameWork\Factory.cpp" />
     <ClCompile Include="FrameWork\FrameWork.cpp" />
     <ClCompile Include="FrameWork\GlobalCenter.cpp" />
@@ -288,7 +364,9 @@
     <ClCompile Include="GUI\RoomWin\BKWinClassroom.cpp" />
     <ClCompile Include="Logic\room\Room.cpp" />
     <ClCompile Include="Logic\room\RoomMgr.cpp" />
+    <ClCompile Include="Logic\room\roommgrTest.cpp" />
     <ClCompile Include="Logic\UserSession\LoginImpl.cpp" />
+    <ClCompile Include="Logic\UserSession\usersessionTest.cpp" />
     <ClCompile Include="net\Net.cpp" />
     <ClCompile Include="net\Socket\AsyncSocket.cpp" />
     <ClCompile Include="net\Socket\AsyncSocketEx.cpp" />

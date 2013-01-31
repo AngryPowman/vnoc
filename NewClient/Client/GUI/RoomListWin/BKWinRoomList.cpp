@@ -53,10 +53,10 @@ LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHan
 	LPNMITEMACTIVATE lpnmItem = (LPNMITEMACTIVATE)pnmh;
 
 	if(1001 == idRealWnd){ // 点击教室列表
-		char strCheckBox[30];
+		CString strCheckBox;
 		if(m_wndListCtrl.InSubItemCheckBox(lpnmItem->ptAction, lpnmItem->iItem)){
-			sprintf(strCheckBox, "CHECKBOX CHANGED: %d", !m_wndListCtrl.GetCheckState(lpnmItem->iItem));
-			MessageBoxA(NULL, strCheckBox, "", MB_OK);
+			strCheckBox.Format(_T("CHECKBOX CHANGED: %d"), !m_wndListCtrl.GetCheckState(lpnmItem->iItem));
+			MessageBox(strCheckBox, NULL, MB_OK);
 		}
 
 		//char strListItem[30];

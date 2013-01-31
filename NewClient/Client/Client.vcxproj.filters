@@ -41,20 +41,38 @@
     <Filter Include="UI">
       <UniqueIdentifier>{61949cca-7673-4e66-b8dc-001242bd142b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Login">
-      <UniqueIdentifier>{77586023-2e26-4c4b-936f-e4e0ef6341c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\RoomList">
-      <UniqueIdentifier>{419fb8d3-fb14-43bb-9e57-07ada4a5de08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Room">
-      <UniqueIdentifier>{75a3ef47-05a4-453f-9af2-822a9b0fe9e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Include">
       <UniqueIdentifier>{902b6711-eb72-4a08-96d3-f4f28892bd9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CppTest">
+      <UniqueIdentifier>{d5ace8d4-93aa-4c84-a4fb-0e143fb8b252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\NMessage">
+      <UniqueIdentifier>{2c1f7fac-6a46-4a9a-b8a8-b847694279af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\NMessage\Message">
+      <UniqueIdentifier>{564098b2-c8f6-4da3-a462-67c4223103ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\NMessage\MsgDataValue">
+      <UniqueIdentifier>{6f0b0f68-94bf-405b-9db6-5a1b587429a4}</UniqueIdentifier>
+    </Filter>
     <Filter Include="UI\BKWin">
+      <UniqueIdentifier>{8f1ea992-fb89-4064-ae19-55c353722fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\BKWin\Login">
+      <UniqueIdentifier>{77586023-2e26-4c4b-936f-e4e0ef6341c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\BKWin\Room">
+      <UniqueIdentifier>{75a3ef47-05a4-453f-9af2-822a9b0fe9e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\BKWin\RoomList">
+      <UniqueIdentifier>{419fb8d3-fb14-43bb-9e57-07ada4a5de08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\BKWin\BKWin">
       <UniqueIdentifier>{6bf85c6f-0f5b-4813-a78a-f17a43f45725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Console">
+      <UniqueIdentifier>{45e50712-9fac-4731-a388-90a224ccdb1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -227,13 +245,13 @@
       <Filter>Logic\users</Filter>
     </ClInclude>
     <ClInclude Include="GUI\LoginWin\BKWinLogin.h">
-      <Filter>UI\Login</Filter>
+      <Filter>UI\BKWin\Login</Filter>
     </ClInclude>
     <ClInclude Include="GUI\RoomListWin\BKWinRoomList.h">
-      <Filter>UI\RoomList</Filter>
+      <Filter>UI\BKWin\RoomList</Filter>
     </ClInclude>
     <ClInclude Include="GUI\RoomWin\BKWinClassroom.h">
-      <Filter>UI\Room</Filter>
+      <Filter>UI\BKWin\Room</Filter>
     </ClInclude>
     <ClInclude Include="include\Error.hpp">
       <Filter>Include</Filter>
@@ -251,79 +269,136 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkobject.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkskin.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bktheme.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwnd.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwndcmnctrl.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwnddlg.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwnddlgfile.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwndedit.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwndnotify.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwndpanel.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwndrichtxt.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwndstyle.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkwndtabctrl.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\listboxbase.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\ListViewCtrlEx.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\Schemadef.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\Tmschema.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\Uxtheme.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkatldefine.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkcolor.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkdlgview.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bkimage.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bklistbox.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="GUI\BKWin\bkwin\bklistview.h">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClInclude>
     <ClInclude Include="FrameWork\Factory.h">
       <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="CppUnitTest\TestClassHeader.h">
+      <Filter>CppTest</Filter>
+    </ClInclude>
+    <ClInclude Include="CppUnitTest\testRunner.h">
+      <Filter>CppTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\BufferMessage.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\CMessage.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IReadMessage.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message2Pack.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageDef.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\ParaserMessageXML.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\ParserMessage.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\XMLObject.h">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -406,19 +481,70 @@
       <Filter>Logic\users</Filter>
     </ClCompile>
     <ClCompile Include="GUI\LoginWin\BKWinLogin.cpp">
-      <Filter>UI\Login</Filter>
+      <Filter>UI\BKWin\Login</Filter>
     </ClCompile>
     <ClCompile Include="GUI\RoomListWin\BKWinRoomList.cpp">
-      <Filter>UI\RoomList</Filter>
+      <Filter>UI\BKWin\RoomList</Filter>
     </ClCompile>
     <ClCompile Include="GUI\RoomWin\BKWinClassroom.cpp">
-      <Filter>UI\Room</Filter>
+      <Filter>UI\BKWin\Room</Filter>
     </ClCompile>
     <ClCompile Include="GUI\BKWin\bkwin\ListViewCtrlEx.cpp">
-      <Filter>UI\BKWin</Filter>
+      <Filter>UI\BKWin\BKWin</Filter>
     </ClCompile>
     <ClCompile Include="FrameWork\Factory.cpp">
       <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="CppUnitTest\testRunner.cpp">
+      <Filter>CppTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\BufferMessage.cpp">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\CMessage.cpp">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\Message2Pack.cpp">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\XMLOject.cpp">
+      <Filter>Net\NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\room\roommgrTest.cpp">
+      <Filter>Logic\room</Filter>
+    </ClCompile>
+    <ClCompile Include="CppUnitTest\NMessageTest.cpp">
+      <Filter>Net\NMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="CppUnitTest\testPackMessage.cpp">
+      <Filter>Net\NMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="CppUnitTest\Vnocp1MessageParserTest.cpp">
+      <Filter>Net\NMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\UserSession\usersessionTest.cpp">
+      <Filter>Logic\users</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

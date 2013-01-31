@@ -4,13 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppunit", "..\cppunit-1.12.1\src\cppunit\cppunit.vcxproj", "{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcxproj", "{8E8644B5-86CF-4286-9276-8710E6EE974C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E} = {9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Console|Win32 = Console|Win32
 		Console|x64 = Console|x64
-		CppCheck|Win32 = CppCheck|Win32
-		CppCheck|x64 = CppCheck|x64
+		CppTest|Win32 = CppTest|Win32
+		CppTest|x64 = CppTest|x64
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
 		Release|Win32 = Release|Win32
@@ -20,10 +23,10 @@ Global
 		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.Console|Win32.ActiveCfg = Console|Win32
 		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.Console|x64.ActiveCfg = Console|x64
 		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.Console|x64.Build.0 = Console|x64
-		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppCheck|Win32.ActiveCfg = CppCheck|Win32
-		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppCheck|Win32.Build.0 = CppCheck|Win32
-		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppCheck|x64.ActiveCfg = CppCheck|x64
-		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppCheck|x64.Build.0 = CppCheck|x64
+		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppTest|Win32.ActiveCfg = CppTest|Win32
+		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppTest|Win32.Build.0 = CppTest|Win32
+		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppTest|x64.ActiveCfg = CppTest|x64
+		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.CppTest|x64.Build.0 = CppTest|x64
 		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.Debug|x64.ActiveCfg = Debug|x64
 		{9F0E65B5-A837-D35E-CDB7-44DE0889EE9E}.Debug|x64.Build.0 = Debug|x64
@@ -33,9 +36,9 @@ Global
 		{8E8644B5-86CF-4286-9276-8710E6EE974C}.Console|Win32.ActiveCfg = Console|Win32
 		{8E8644B5-86CF-4286-9276-8710E6EE974C}.Console|Win32.Build.0 = Console|Win32
 		{8E8644B5-86CF-4286-9276-8710E6EE974C}.Console|x64.ActiveCfg = Console|Win32
-		{8E8644B5-86CF-4286-9276-8710E6EE974C}.CppCheck|Win32.ActiveCfg = CppCheck|Win32
-		{8E8644B5-86CF-4286-9276-8710E6EE974C}.CppCheck|Win32.Build.0 = CppCheck|Win32
-		{8E8644B5-86CF-4286-9276-8710E6EE974C}.CppCheck|x64.ActiveCfg = CppCheck|Win32
+		{8E8644B5-86CF-4286-9276-8710E6EE974C}.CppTest|Win32.ActiveCfg = CppTest|Win32
+		{8E8644B5-86CF-4286-9276-8710E6EE974C}.CppTest|Win32.Build.0 = CppTest|Win32
+		{8E8644B5-86CF-4286-9276-8710E6EE974C}.CppTest|x64.ActiveCfg = CppTest|Win32
 		{8E8644B5-86CF-4286-9276-8710E6EE974C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{8E8644B5-86CF-4286-9276-8710E6EE974C}.Debug|Win32.Build.0 = Debug|Win32
 		{8E8644B5-86CF-4286-9276-8710E6EE974C}.Debug|x64.ActiveCfg = Debug|Win32
