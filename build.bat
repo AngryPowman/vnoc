@@ -4,14 +4,14 @@
 @set ServerSrcDir=.\NetService\Release
 
 @set ClientDestDir=.\Artifacts\Client\
-@set ClientSrcDir=.\VNOC\Release
-@set CppTestDir=.\VNOC\CppTest
+@set ClientSrcDir=.\NewClient\Release
+@set CppTestDir=.\NewClient\CppTest
 
 @echo ================	Build Client	=================
 "%VS11PATH%\devenv.com" .\NewClient\VNOC.sln /rebuild "Release|Win32"
 if ERRORLEVEL 1 exit /b 1
-::"%VS10PATH%\devenv.com" .\VNOC\VNOC.sln /rebuild "CppTest|Win32"
-::if ERRORLEVEL 1 exit /b 1
+"%VS11PATH%\devenv.com" .\NewClient\VNOC.sln /rebuild "CppTest|Win32"
+if ERRORLEVEL 1 exit /b 1
 @echo .
 @echo .
 @echo .
@@ -22,8 +22,8 @@ if ERRORLEVEL 1 exit /b 1
 @echo .
 @echo ================	Copy Artifacts	================
 
-::@mkdir "%ClientDestDir%"
-::@xcopy "%ClientSrcDir%" "%ClientDestDir%" /e/c/y
+@mkdir "%ClientDestDir%"
+@xcopy "%ClientSrcDir%" "%ClientDestDir%" /e/c/y
 
 @echo .
 @echo .
