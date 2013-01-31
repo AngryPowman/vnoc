@@ -4,13 +4,13 @@
 @set ServerSrcDir=.\NetService\Release
 
 @set ClientDestDir=.\Artifacts\Client\
-@set ClientSrcDir=.\NewClient\Release
-@set CppTestDir=.\NewClient\CppTest
+@set ClientSrcDir=.\Client\Release
+@set CppTestDir=.\Client\CppTest
 
 @echo ================	Build Client	=================
-"%VS11PATH%\devenv.com" .\NewClient\VNOC.sln /rebuild "Release|Win32"
+"%VS11PATH%\devenv.com" .\Client\VNOC.sln /rebuild "Release|Win32"
 if ERRORLEVEL 1 exit /b 1
-"%VS11PATH%\devenv.com" .\NewClient\VNOC.sln /rebuild "CppTest|Win32"
+"%VS11PATH%\devenv.com" .\Client\VNOC.sln /rebuild "CppTest|Win32"
 if ERRORLEVEL 1 exit /b 1
 @echo .
 @echo .

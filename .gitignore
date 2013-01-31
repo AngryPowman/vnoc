@@ -57,3 +57,4 @@ cpptestresults.xml
 /VNOC/VldMemLeakCheck
 /VNOC/CppTest
 /VNOC/VNOC/CppTest
+/NewClient/Client/*.aps
