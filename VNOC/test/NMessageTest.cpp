@@ -102,7 +102,7 @@ public:
         byte TestBufALI[25] =
         {
         MSG_BEGIN,MSG_VER,0x17,0x00,0x00,0x00,0x19,0x00,0x00,0x00,
-        'h','e','l','l','o',0x08,0x08,0x00,0x00,0x00,
+        0x05,0x00,0x00,0x00,'h','e','l','l','o',0x08,0x08,0x00,0x00,0x00,
         MSG_END
         };
         NMSG_ALI ali;
@@ -112,12 +112,26 @@ public:
         ali.SetATLGUID("hello");
         m2p.PackMessage(&ali,buf);
         byte* TestCompBuf = buf.GetBuffer();
-        CPPUNIT_ASSERT(strcmp((const char*)TestBufALI, (const char*)TestCompBuf) == 0);
 
+        int Success = 1;
+        for (int index = 0; index < buf.GetSize(); index++)
+        {
+            if (TestBufALI[index] != TestCompBuf[index])
+            {
+                Success = 0;
+                std::cout<<index<<std::endl;
+                std::cout<<TestBufALI[index]<<std::endl;
+                std::cout<<TestCompBuf[index]<<std::endl;
+                break;
+            }
+        }
+        CPPUNIT_ASSERT(Success == 1);
+
+        byte TestBuf[100] = {0};
         byte TestBufACL[] =
         {
             MSG_BEGIN,MSG_VER,0x1F,0x00,0x00,0x00,0x1B,0x00,0x00,0x00,
-            0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x03,0x00,0x00,0x00,
+            0x03,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x03,0x00,0x00,0x00,
             MSG_END
         };
         NMSG_ACL acl;
@@ -128,7 +142,22 @@ public:
         acl.SetRoomList(TestArr);
         buf.SetValue(0);
         m2p.PackMessage(&acl,buf);
-        CPPUNIT_ASSERT(strcmp((const char*)TestBufACL, (const char*)buf.GetBuffer()) == 0);
+        TestCompBuf = buf.GetBuffer();
+        memcpy(TestBuf, buf.GetBuffer(), buf.GetSize());
+
+        Success = 1;
+        for (int index = 0; index < buf.GetSize(); index++)
+        {
+            if (TestBufACL[index] != TestCompBuf[index])
+            {
+                Success = 0;
+                std::cout<<index<<std::endl;
+                std::cout<<TestBufACL[index]<<std::endl;
+                std::cout<<TestCompBuf[index]<<std::endl;
+                break;
+            }
+        }
+        CPPUNIT_ASSERT(Success == 1);
     }
 
 
