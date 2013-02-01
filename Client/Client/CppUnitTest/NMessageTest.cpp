@@ -4,7 +4,7 @@
 #include "../../NMessage/CMessage.h"
 #include "../../NMessage/MsgDataValue/MsgDataValue.h"
 #include "../../NMessage/MsgDataValue/StringData.h"
-#include "../../NMessage/ParaserMessageXML.h"
+#include "../../NMessage/ParserMessageXML.h"
 #include "../../NMessage/XMLObject.h"
 #include <Windows.h>
 #include <string.h>
