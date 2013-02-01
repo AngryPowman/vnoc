@@ -1,3 +1,4 @@
+#ifdef CPPTEST
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "../../NMessage/CMessage.h"
@@ -164,3 +165,5 @@ public:
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( testNMessage );
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(testNMessage, "testNMessage");
+
+#endif

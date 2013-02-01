@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Console|Win32">
-      <Configuration>Console</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="CppTest|Win32">
       <Configuration>CppTest</Configuration>
       <Platform>Win32</Platform>
@@ -36,12 +32,6 @@
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -58,17 +48,14 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>include;../../ThirdLibs;$(IncludePath);../../cppunit-1.12.1/include</IncludePath>
-    <LibraryPath>..\..\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath);</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
     <IntDir>../Temp/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">
@@ -77,16 +64,10 @@
     <LibraryPath>..\..\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
     <IntDir>../Temp/</IntDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
-    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
-    <IntDir>../Temp/</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>include;../../ThirdLibs;$(IncludePath);../../cppunit-1.12.1/include</IncludePath>
-    <LibraryPath>..\..\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
     <IntDir>../Temp/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -122,28 +103,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
-    </PostBuildEvent>
-    <PreLinkEvent>
-      <Command>prelink.bat $(Configuration) $(Platform)</Command>
-    </PreLinkEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
       <Command>
