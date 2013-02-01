@@ -56,7 +56,7 @@ public:
         MsgDataValue* pReadData = NULL;
 
         std::string strPath;
-        CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
+        CPPUNIT_ASSERT(DisposePath(L"msgdef.xml", strPath) == true);
         CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile(strPath.c_str()) == MsgStatus_Ok);
 
         CMessage BaseTest("NMSG_ALI");
@@ -114,7 +114,7 @@ public:
         byte* TestCompBuf = buf.GetBuffer();
 
         int Success = 1;
-        for (int index = 0; index < buf.GetSize(); index++)
+        for (uint32 index = 0; index < buf.GetSize(); index++)
         {
             if (TestBufALI[index] != TestCompBuf[index])
             {
@@ -146,7 +146,7 @@ public:
         memcpy(TestBuf, buf.GetBuffer(), buf.GetSize());
 
         Success = 1;
-        for (int index = 0; index < buf.GetSize(); index++)
+        for (uint32 index = 0; index < buf.GetSize(); index++)
         {
             if (TestBufACL[index] != TestCompBuf[index])
             {

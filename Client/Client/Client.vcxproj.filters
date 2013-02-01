@@ -388,15 +388,6 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h">
       <Filter>Net\NMessage\MsgDataValue</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
-      <Filter>Net\NMessage\MsgDataValue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h">
-      <Filter>Net\NMessage\MsgDataValue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h">
-      <Filter>Net\NMessage\MsgDataValue</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h">
       <Filter>Net\NMessage\MsgDataValue</Filter>
     </ClInclude>
@@ -517,15 +508,6 @@
       <Filter>Net\NMessage\MsgDataValue</Filter>
     </ClCompile>
     <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp">
-      <Filter>Net\NMessage\MsgDataValue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp">
-      <Filter>Net\NMessage\MsgDataValue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp">
-      <Filter>Net\NMessage\MsgDataValue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp">
       <Filter>Net\NMessage\MsgDataValue</Filter>
     </ClCompile>
     <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp">

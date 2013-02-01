@@ -8,23 +8,26 @@
 class MSG_ACL:public CMessage
 {
 public:
-	MSG_ACL(){
-		//0x1F
-		BEGIN_PARAM_LIST
-		ADD_PARAM_LIST("RoomIdList")
-		INIT_PARAM_OBJEDT(MSG_ACL_COM)
-		END_PARAM_LIST
-	}
-	virtual ~MSG_ACL(){}
+    MSG_ACL(){
+        //0x1F
+        BEGIN_PARAM_LIST
+            ADD_PARAM_LIST("RoomList")
+            INIT_PARAM_OBJEDT(MSG_ACL_COM)
+            END_PARAM_LIST
+    }
+    virtual ~MSG_ACL(){}
 
 public:
 
-	int  GetRoomIdList(std::vector<int>& RoomList) const
-	GetParam_t_tamp_r("RoomIdList",int,RoomList);
+    int  GetRoomList(std::vector<int>& RoomList) const
+        GetParam_t_tamp_r("RoomList",int,RoomList);
 
-	int GetRoomListSize() const{
-		return (CMessage::GetParamLen(0) / 4);
-	}
+    void SetRoomList(std::vector<int> RoomList)
+        SetParam_t_tamp("RoomList",int,RoomList);
+
+    int GetRoomListSize() const{
+        return (CMessage::GetParamLen(0) / 4);
+    }
 
 };
 

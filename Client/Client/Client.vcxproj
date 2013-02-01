@@ -67,14 +67,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
-    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath);../../cppunit-1.12.1/include</IncludePath>
+    <LibraryPath>..\..\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
     <IntDir>../Temp/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>include;W:\Projects\vnoc\cppunit-1.12.1\include;../../ThirdLibs;$(IncludePath)</IncludePath>
-    <LibraryPath>W:\Projects\vnoc\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IncludePath>include;..\..\cppunit-1.12.1\include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
     <IntDir>../Temp/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Console|Win32'">
@@ -85,8 +85,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
-    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath);../../cppunit-1.12.1/include</IncludePath>
+    <LibraryPath>..\..\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
     <IntDir>../Temp/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -213,9 +213,6 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h" />
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h" />
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h" />
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h" />
     <ClInclude Include="..\..\NMessage\ParaserMessageXML.h" />
     <ClInclude Include="..\..\NMessage\ParserMessage.h" />
     <ClInclude Include="..\..\NMessage\XMLObject.h" />
@@ -302,9 +299,6 @@
     <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp" />
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp" />
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp" />
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp" />
     <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp" />
     <ClCompile Include="..\..\NMessage\XMLOject.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp" />
