@@ -150,7 +150,7 @@ protected:
 			ComTmpList.resize(((int)m_ComCommandList[int_index].second.size() / sizeof(Type)));
 			for (int i = 0,index = 0;index < (int)(m_ComCommandList[int_index].second.size() / sizeof(Type)) ;index++)
 			{
-				for (int j = 0; j < sizeof(Type); i++)
+				for (int j = 0; j < sizeof(Type); j++,i++)
 				{
 					ComTmpList[index].push_back(m_ComCommandList[int_index].second[i]);
 				}

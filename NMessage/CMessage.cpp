@@ -115,6 +115,18 @@ CMessage::CMessage( int nId )
     _InitDataMap();
 }
 
+void CMessage::InitializeMessage( const std::string& strName )
+{
+    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(strName);
+    _InitDataMap();
+}
+
+void CMessage::InitializeMessage( int nId )
+{
+    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(nId);
+    _InitDataMap();
+}
+
 CMessage::~CMessage()
 {
     _ReleaseMap();

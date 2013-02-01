@@ -20,16 +20,58 @@ void ConvertTypeToStr(int IdType, std::string& strType)
     switch (IdType)
     {
     case VNOC::Message::MsgDataType_String:
+        strType = "std::string";
+        break;
+    case VNOC::Message::MsgDataType_Uint8:
+        strType = "uint8";
+        break;
+    case VNOC::Message::MsgDataType_Uint16:
+        strType = "uint16";
+        break;
+    case VNOC::Message::MsgDataType_Uint32:
+        strType = "uint32";
+        break;
+    default:
+        strType = "void";
+    }
+}
+
+void ConvertTypeToMsgDataValue(int IdType, std::string& strType)
+{
+    switch (IdType)
+    {
+    case VNOC::Message::MsgDataType_String:
         strType = "StringData";
         break;
     case VNOC::Message::MsgDataType_Uint8:
-        strType = "UInt8Data";
+        strType = "NumData<uint8>";
         break;
     case VNOC::Message::MsgDataType_Uint16:
-        strType = "UInt16Data";
+        strType = "NumData<uint16>";
         break;
     case VNOC::Message::MsgDataType_Uint32:
-        strType = "UInt32Data";
+        strType = "NumData<uint32>";
+        break;
+    default:
+        strType = "void";
+    }
+}
+
+void ConvertToStyle(int IdType, std::string& strType)
+{
+    switch (IdType)
+    {
+    case VNOC::Message::MsgDataType_String:
+        strType = "ToStr";
+        break;
+    case VNOC::Message::MsgDataType_Uint8:
+        strType = "ToUInt8";
+        break;
+    case VNOC::Message::MsgDataType_Uint16:
+        strType = "ToUInt16";
+        break;
+    case VNOC::Message::MsgDataType_Uint32:
+        strType = "ToUInt32";
         break;
     default:
         strType = "void";
@@ -77,24 +119,24 @@ void DisposeParam(
     strParam += strPattern;
     strParam += Item->GetName();
     strParam += "(";
+    if (strPattern == "Set")
+    {
+        strParam += "const ";
+    }
+    std::string strParamType;
     if (Item->GetMType() == VNOC::Message::MsgDataMType_Data)
     {
-        std::string strParamType;
         ConvertTypeToStr(Item->GetType(), strParamType);
         strParam += strParamType;
     }
     else if (Item->GetMType() == VNOC::Message::MsgDataMType_List)
     {
-        strParam += "ArrayData";
+        ConvertTypeToStr(Item->GetType(), strParamType);
+        strParam += "std::vector<";
+        strParam += strParamType;
+        strParam += ">";
     }
-    if (strPattern == "Get")
-    {
-        strParam += "*& ";
-    }
-    else
-    {
-        strParam += "& ";
-    }
+    strParam += "& ";
     strParam += "Value";
     strParam += ")";
     strParam += "\n";
@@ -102,39 +144,83 @@ void DisposeParam(
     strParam += "{";
     strParam += "\n";
     strParam += "        ";
-    strParam += "return ";
     if (strPattern == "Get")
     {
+        std::string strParamToStyle;
         if (Item->GetMType() == VNOC::Message::MsgDataMType_Data)
         {
+            strParam += "MsgDataValue* pReadValue = NULL;";
+            strParam += "\n        ";
             strParam += "Read(";
         }
         else if (Item->GetMType() == VNOC::Message::MsgDataMType_List)
         {
+            strParam += "ArrayData* pReadValueArr = NULL;";
+            strParam += "\n        ";
             strParam += "ReadArr(";
+        }
+        strParam += "\"";
+        strParam += Item->GetName();
+        strParam += "\"";
+        strParam += ", ";
+        if (Item->GetMType() == VNOC::Message::MsgDataMType_Data)
+        {
+            ConvertToStyle(Item->GetType(),strParamToStyle);
+            strParam += "pReadValue);\n";
+            strParam += "        ";
+            strParam += "return ";
+            strParam += "pReadValue->";
+            strParam += strParamToStyle;
+            strParam += "(Value);";
+        }
+        else if (Item->GetMType() == VNOC::Message::MsgDataMType_List)
+        {
+            ConvertTypeToStr(Item->GetType(), strParamType);
+            strParam += "pReadValueArr);\n        ";
+            strParam += "pReadValueArr->GetArr_vec<";
+            strParam += strParamType;
+            strParam += ">(Value);\n";
+            strParam += "        ";
+            strParam += "return MsgStatus_Ok;";
         }
     }
     else if (strPattern == "Set")
     {
         if (Item->GetMType() == VNOC::Message::MsgDataMType_Data)
         {
+            strParam += "return ";
             strParam += "Write(";
         }
         else if (Item->GetMType() == VNOC::Message::MsgDataMType_List)
         {
+            ConvertTypeToStr(Item->GetType(), strParamType);
+            strParam += "ArrayData* ValueArr = new ArrayData;";
+            strParam += "\n        ";
+            strParam += "ValueArr->Push<";
+            strParam += strParamType;
+            strParam += ">(Value);";
+            strParam += "\n        ";
+            strParam += "return ";
             strParam += "WriteArr(";
         }
+        strParam += "\"";
+        strParam += Item->GetName();
+        strParam += "\"";
+        strParam += ", ";
+        if (Item->GetMType() == VNOC::Message::MsgDataMType_Data)
+        {
+            std::string strMsgDataValueType;
+            strParam += "new ";
+            ConvertTypeToMsgDataValue(Item->GetType(), strMsgDataValueType);
+            strParam += strMsgDataValueType;
+            strParam += "(Value)";
+        }
+        else if (Item->GetMType() == VNOC::Message::MsgDataMType_List)
+        {
+            strParam += "ValueArr";
+        }
+        strParam += ");";
     }
-    strParam += "\"";
-    strParam += Item->GetName();
-    strParam += "\"";
-    strParam += ", ";
-    if (strPattern == "Set")
-    {
-        strParam += "&";
-    }
-    strParam += "Value";
-    strParam += ");";
     strParam += "\n";
     strParam += "    ";
     strParam += "}";

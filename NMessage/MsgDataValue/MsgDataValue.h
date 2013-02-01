@@ -21,6 +21,12 @@ public:
     virtual MsgStatus ToUInt16(OUT uint16& Value);
 
     virtual MsgStatus ToUInt32(OUT uint32& Value);
+
+    virtual MsgStatus ToInt8(OUT int8& Value);
+
+    virtual MsgStatus ToInt16(OUT int16& Value);
+
+    virtual MsgStatus ToInt32(OUT int32& Value);
 };
 
 }// namespace Message

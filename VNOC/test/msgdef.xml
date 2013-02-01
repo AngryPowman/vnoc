@@ -9,11 +9,12 @@
 	</msg>
 	<msg name="MSG_RVC" id="20">
 	</msg>
-	<msg name="MSG_AVC" id="21">
+	<msg name="NMSG_AVC" id="21">
+		<item mtype="list" name="Test" type="string" />
 	</msg>
 	<msg name="MSG_RLI" id="22">
 	</msg>
-	<msg name="MSG_ALI" id="23">
+	<msg name="NMSG_ALI" id="23">
 		<item mtype="data" name="LoginResult" type="uint8" />
 		<item mtype="data" name="Token" type="uint32" />
 		<item mtype="data" name="ATLGUID" type="string" />
@@ -32,7 +33,7 @@
 	</msg>
 	<msg name="MSG_RCL" id="30">
 	</msg>
-	<msg name="MSG_ACL" id="31">
+	<msg name="NMSG_ACL" id="31">
 		<item mtype="list" name="RoomList" type="uint32" />
 	</msg>
 	<msg name="MSG_RCI" id="32">

@@ -2,6 +2,8 @@
 #define  VNOC_I_MESSAGE_DATA_ARRAY
 
 #include "../MessageDef.h"
+#include "NumData.hpp"
+#include "StringData.h"
 
 namespace VNOC
 {
@@ -25,6 +27,12 @@ public:
     std::vector<MsgDataValue*>::const_iterator End() const;
 
     void Push(IN MsgDataValue* pValue);
+
+    template<typename T>
+    void Push(const std::vector<T>& vecArr);
+
+    template<typename T>
+    void GetArr_vec(std::vector<T>& vecArr);
 
 private:
     std::vector<MsgDataValue*> m_arrValuePtr;

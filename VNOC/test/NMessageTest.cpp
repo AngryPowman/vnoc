@@ -3,16 +3,16 @@
 #include "../../NMessage/CMessage.h"
 #include "../../NMessage/MsgDataValue/MsgDataValue.h"
 #include "../../NMessage/MsgDataValue/StringData.h"
-#include "../../NMessage/MsgDataValue/UInt16Data.h"
 #include "../../NMessage/ParaserMessageXML.h"
 #include "../../NMessage/XMLObject.h"
 #include <Windows.h>
 #include <string.h>
 #include <shlwapi.h>
 #include <atlstr.h>
-#include "../../NMessage/MsgDataValue/UInt32Data.h"
+#include "../../NMessage/MsgDataValue/NumData.hpp"
 #include "../../NMessage/Message2Pack.h"
 #include "../../NMessage/NMSG_ALI.h"
+#include "../../NMessage/NMSG_ACL.h"
 
 using namespace VNOC::Message;
 
@@ -52,14 +52,14 @@ public:
 public:
     void TestNMessage()
     {
-        MsgDataValue* pUInt16 = new UInt16Data(8);
+        MsgDataValue* pUInt16 = new NumData<uint16>(8);
         MsgDataValue* pReadData = NULL;
 
         std::string strPath;
         CPPUNIT_ASSERT(DisposePath(L"../test/msgdef.xml", strPath) == true);
         CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile(strPath.c_str()) == MsgStatus_Ok);
 
-        CMessage BaseTest("MSG_ALI");
+        CMessage BaseTest("NMSG_ALI");
         BaseTest.Write("LoginResult", pUInt16);
         CPPUNIT_ASSERT(BaseTest.Write("LoginResult2", pUInt16) != MsgStatus_Ok);
         CPPUNIT_ASSERT(BaseTest.Read("LoginResult", pReadData) == MsgStatus_Ok);
@@ -79,9 +79,9 @@ public:
         XMLObject* test = NULL;
         std::string strPath;
 
-        test = ParserMessageXML::Instance().GetMsgObject("MSG_ALI");
+        test = ParserMessageXML::Instance().GetMsgObject("NMSG_ALI");
 
-        CPPUNIT_ASSERT(test->GetName() == "MSG_ALI");
+        CPPUNIT_ASSERT(test->GetName() == "NMSG_ALI");
         CPPUNIT_ASSERT(test->GetId() == 23);
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetName() == "LoginResult");
         CPPUNIT_ASSERT(test->GetItem("LoginResult")->GetMType() == MsgDataMType_Data);
@@ -91,13 +91,44 @@ public:
     void TestPack()
     {
         CMessage2Pack m2p;
-        CMessage BaseTest("MSG_ALI");
-        BaseTest.Write("LoginResult", new UInt16Data(8));
-        BaseTest.Write("Token", new UInt32Data(811));
+        CMessage BaseTest("NMSG_ALI");
+        BaseTest.Write("LoginResult", new NumData<uint16>(8));
+        BaseTest.Write("Token", new NumData<uint32>(811));
         BaseTest.Write("ATLGUID", new StringData("hello"));
         int nSize = 0;
         CPPUNIT_ASSERT(m2p.GetPackSize(&BaseTest, nSize) == MsgStatus_Ok);
-        CPPUNIT_ASSERT(nSize == 22); // 8(head) + 4Token + 1LoginResult + 4ATLGUID +5hello
+        CPPUNIT_ASSERT(nSize == 25);
+
+        byte TestBufALI[25] =
+        {
+        MSG_BEGIN,MSG_VER,0x17,0x00,0x00,0x00,0x19,0x00,0x00,0x00,
+        'h','e','l','l','o',0x08,0x08,0x00,0x00,0x00,
+        MSG_END
+        };
+        NMSG_ALI ali;
+        CBufferMessage buf;
+        ali.SetLoginResult(8);
+        ali.SetToken(8);
+        ali.SetATLGUID("hello");
+        m2p.PackMessage(&ali,buf);
+        byte* TestCompBuf = buf.GetBuffer();
+        CPPUNIT_ASSERT(strcmp((const char*)TestBufALI, (const char*)TestCompBuf) == 0);
+
+        byte TestBufACL[] =
+        {
+            MSG_BEGIN,MSG_VER,0x1F,0x00,0x00,0x00,0x1B,0x00,0x00,0x00,
+            0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x03,0x00,0x00,0x00,
+            MSG_END
+        };
+        NMSG_ACL acl;
+        std::vector<uint32> TestArr;
+        TestArr.push_back(1);
+        TestArr.push_back(2);
+        TestArr.push_back(3);
+        acl.SetRoomList(TestArr);
+        buf.SetValue(0);
+        m2p.PackMessage(&acl,buf);
+        CPPUNIT_ASSERT(strcmp((const char*)TestBufACL, (const char*)buf.GetBuffer()) == 0);
     }
 
 

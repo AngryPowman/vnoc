@@ -3,10 +3,7 @@
 #include "MessageDef.h"
 #include "CMessage.h"
 #include "MsgDataValue/StringData.h"
-#include "MsgDataValue/UInt32Data.h"
-#include "MsgDataValue/UInt16Data.h"
-#include "MsgDataValue/UInt8Data.h"
-#include "MsgDataValue/ArrayData.h"
+#include "MsgDataValue/NumData.hpp"
 //测试中文
 ///> Generate by MessageProduse. DO NOT EDIT!
 
@@ -20,39 +17,45 @@ class NMSG_ALI : public CMessage
 public:
     NMSG_ALI()
     {
-        CMessage("NMSG_ALI");
+        InitializeMessage("NMSG_ALI");
     }
 
     virtual ~NMSG_ALI(){}
 
-    MsgStatus SetATLGUID(ArrayData& Value)
+    MsgStatus SetATLGUID(const std::string& Value)
     {
-        return WriteArr("ATLGUID", &Value);
+        return Write("ATLGUID", new StringData(Value));
     }
 
-    MsgStatus SetLoginResult(UInt8Data& Value)
+    MsgStatus SetLoginResult(const uint8& Value)
     {
-        return Write("LoginResult", &Value);
+        return Write("LoginResult", new NumData<uint8>(Value));
     }
 
-    MsgStatus SetToken(UInt32Data& Value)
+    MsgStatus SetToken(const uint32& Value)
     {
-        return Write("Token", &Value);
+        return Write("Token", new NumData<uint32>(Value));
     }
 
-    MsgStatus GetATLGUID(ArrayData*& Value)
+    MsgStatus GetATLGUID(std::string& Value)
     {
-        return ReadArr("ATLGUID", Value);
+        MsgDataValue* pReadValue = NULL;
+        Read("ATLGUID", pReadValue);
+        return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetLoginResult(UInt8Data*& Value)
+    MsgStatus GetLoginResult(uint8& Value)
     {
-        return Read("LoginResult", (MsgDataValue*&)Value);
+        MsgDataValue* pReadValue = NULL;
+        Read("LoginResult", pReadValue);
+        return pReadValue->ToUInt8(Value);
     }
 
-    MsgStatus GetToken(UInt32Data*& Value)
+    MsgStatus GetToken(uint32& Value)
     {
-        return Read("Token", (MsgDataValue*&)Value);
+        MsgDataValue* pReadValue = NULL;
+        Read("Token", pReadValue);
+        return pReadValue->ToUInt32(Value);
     }
 };
 

@@ -19,16 +19,7 @@
     <ClCompile Include="..\test\testRunner.cpp">
       <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt16Data.cpp">
-      <Filter>NMessage\MsgDataValue</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp">
-      <Filter>NMessage\MsgDataValue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt8Data.cpp">
-      <Filter>NMessage\MsgDataValue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\NMessage\MsgDataValue\UInt32Data.cpp">
       <Filter>NMessage\MsgDataValue</Filter>
     </ClCompile>
     <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp">
@@ -60,6 +51,12 @@
     </ClCompile>
     <ClCompile Include="..\..\NMessage\BufferMessage.cpp">
       <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\Message2Parser.cpp">
+      <Filter>NMessage\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NMessage\MsgDataValue\NumData.hpp">
+      <Filter>NMessage\MsgDataValue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,15 +137,6 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h">
       <Filter>NMessage\MsgDataValue</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt16Data.h">
-      <Filter>NMessage\MsgDataValue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt32Data.h">
-      <Filter>NMessage\MsgDataValue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MsgDataValue\UInt8Data.h">
-      <Filter>NMessage\MsgDataValue</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NMessage\IBaseMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
@@ -156,12 +144,6 @@
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\IWriteMessage.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\MessageDef.h">
-      <Filter>NMessage\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\ParserMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\ParaserMessageXML.h">
@@ -185,13 +167,22 @@
     <ClInclude Include="..\..\NMessage\BufferMessage.h">
       <Filter>NMessage\Message</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageDef.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message2Parser.h">
+      <Filter>NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nmessage\msgdatavalue\NumData_t.hpp">
+      <Filter>NMessage\MsgDataValue</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\NMessage\NMSG_ACL.h">
       <Filter>NMessage\ProduseMessage</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\NMSG_AVC.h">
+    <ClInclude Include="..\..\NMessage\NMSG_ALI.h">
       <Filter>NMessage\ProduseMessage</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\NMSG_ALI.h">
+    <ClInclude Include="..\..\NMessage\NMSG_AVC.h">
       <Filter>NMessage\ProduseMessage</Filter>
     </ClInclude>
   </ItemGroup>

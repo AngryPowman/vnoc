@@ -3,10 +3,7 @@
 #include "MessageDef.h"
 #include "CMessage.h"
 #include "MsgDataValue/StringData.h"
-#include "MsgDataValue/UInt32Data.h"
-#include "MsgDataValue/UInt16Data.h"
-#include "MsgDataValue/UInt8Data.h"
-#include "MsgDataValue/ArrayData.h"
+#include "MsgDataValue/NumData.hpp"
 //测试中文
 ///> Generate by MessageProduse. DO NOT EDIT!
 
@@ -20,19 +17,24 @@ class NMSG_ACL : public CMessage
 public:
     NMSG_ACL()
     {
-        CMessage("NMSG_ACL");
+        InitializeMessage("NMSG_ACL");
     }
 
     virtual ~NMSG_ACL(){}
 
-    MsgStatus SetRoomList(ArrayData& Value)
+    MsgStatus SetRoomList(const std::vector<uint32>& Value)
     {
-        return WriteArr("RoomList", &Value);
+        ArrayData* ValueArr = new ArrayData;
+        ValueArr->Push<uint32>(Value);
+        return WriteArr("RoomList", ValueArr);
     }
 
-    MsgStatus GetRoomList(ArrayData*& Value)
+    MsgStatus GetRoomList(std::vector<uint32>& Value)
     {
-        return ReadArr("RoomList", Value);
+        ArrayData* pReadValueArr = NULL;
+        ReadArr("RoomList", pReadValueArr);
+        pReadValueArr->GetArr_vec<uint32>(Value);
+        return MsgStatus_Ok;
     }
 };
 

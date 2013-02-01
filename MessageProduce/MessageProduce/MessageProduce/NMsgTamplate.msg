@@ -3,10 +3,7 @@
 #include "MessageDef.h"
 #include "CMessage.h"
 #include "MsgDataValue/StringData.h"
-#include "MsgDataValue/UInt32Data.h"
-#include "MsgDataValue/UInt16Data.h"
-#include "MsgDataValue/UInt8Data.h"
-#include "MsgDataValue/ArrayData.h"
+#include "MsgDataValue/NumData.hpp"
 //测试中文
 ///> Generate by MessageProduse. DO NOT EDIT!
 
@@ -20,7 +17,7 @@ class ?Name : public CMessage
 public:
     ?Name()
     {
-        CMessage("?Name");
+        InitializeMessage("?Name");
     }
 
     virtual ~?Name(){}

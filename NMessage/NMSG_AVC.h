@@ -3,10 +3,7 @@
 #include "MessageDef.h"
 #include "CMessage.h"
 #include "MsgDataValue/StringData.h"
-#include "MsgDataValue/UInt32Data.h"
-#include "MsgDataValue/UInt16Data.h"
-#include "MsgDataValue/UInt8Data.h"
-#include "MsgDataValue/ArrayData.h"
+#include "MsgDataValue/NumData.hpp"
 //测试中文
 ///> Generate by MessageProduse. DO NOT EDIT!
 
@@ -20,19 +17,24 @@ class NMSG_AVC : public CMessage
 public:
     NMSG_AVC()
     {
-        CMessage("NMSG_AVC");
+        InitializeMessage("NMSG_AVC");
     }
 
     virtual ~NMSG_AVC(){}
 
-    MsgStatus SetTest(ArrayData& Value)
+    MsgStatus SetTest(const std::vector<std::string>& Value)
     {
-        return WriteArr("Test", &Value);
+        ArrayData* ValueArr = new ArrayData;
+        ValueArr->Push<std::string>(Value);
+        return WriteArr("Test", ValueArr);
     }
 
-    MsgStatus GetTest(ArrayData*& Value)
+    MsgStatus GetTest(std::vector<std::string>& Value)
     {
-        return ReadArr("Test", Value);
+        ArrayData* pReadValueArr = NULL;
+        ReadArr("Test", pReadValueArr);
+        pReadValueArr->GetArr_vec<std::string>(Value);
+        return MsgStatus_Ok;
     }
 };
 
