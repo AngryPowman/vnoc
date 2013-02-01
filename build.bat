@@ -16,7 +16,7 @@ if ERRORLEVEL 1 exit /b 1
 @echo .
 @echo .
 @echo ================	Unit Test	================
-::"%CppTestDir%\vnoc.exe"
+"%CppTestDir%\Client.exe"
 @echo .
 @echo .
 @echo .
