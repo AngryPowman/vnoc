@@ -107,5 +107,14 @@ void CBufferMessage::SetValue(IN uint8 Value)
     }
 }
 
+bool CBufferMessage::Empty()
+{
+    if (!m_pBuffer && !m_attachtag)
+    {
+        return true;
+    }
+    return false;
+}
+
 }// namespace Message
 }// namespace VNOC

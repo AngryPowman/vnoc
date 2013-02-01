@@ -1,7 +1,7 @@
 #ifndef  VNOC_C_MESSAGE_BUFFER
 #define  VNOC_C_MESSAGE_BUFFER
 
-#include "CMessage.h"
+#include "MessageDef.h"
 
 namespace VNOC
 {
@@ -32,8 +32,11 @@ public:
 
     void Clear();
 
+    bool Empty();
+
 private:
     void _Free();
+
 private:
     DISALLOW_COPY_AND_ASSIGN(CBufferMessage);
     uint32 m_Size;

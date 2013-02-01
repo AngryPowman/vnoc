@@ -1,6 +1,4 @@
-#ifdef CPPTEST
-#include "Stdafx.h"
-#include "testRunner.h"
+//#include "../../VisualLeakDetector/include/vld.h"
 
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
@@ -8,8 +6,9 @@
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/XmlOutputter.h>
 #include <fstream>
+using namespace std;
 
-VOID CTestRunner::StartTest(XMessage_StartTest* msg)
+int main( int argc, char **argv)
 {
     CppUnit::TestResult    controller;
     CppUnit::TestResultCollector result;
@@ -19,10 +18,10 @@ VOID CTestRunner::StartTest(XMessage_StartTest* msg)
     runner.addTest( registry.makeTest() );
     runner.eventManager().addListener( &result );
     runner.run();
- 
-    std::ofstream xmlFileOut("cpptestresults.xml");
+  
+    ofstream xmlFileOut("cpptestresults.xml");
     CppUnit::XmlOutputter xmlOut(&result, xmlFileOut);
     xmlOut.write();
-}
 
-#endif
+    return 0;
+}

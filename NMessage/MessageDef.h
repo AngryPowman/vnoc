@@ -6,6 +6,20 @@
 #define  OUT
 #endif
 
+#ifndef EMPTY_TEMPTALE_DEFINE
+#define  EMPTY_TEMPTALE_DEFINE template<>
+#endif
+
+// 短整型大小端互换
+#define BigLittleSwap16(A)        ((((ushort)(A) & 0xff00) >> 8) | \
+    (((ushort)(A) & 0x00ff) << 8))
+
+// 长整型大小端互换
+#define BigLittleSwap32(A)        ((((uint)(A) & 0xff000000) >> 24) | \
+    (((uint)(A) & 0x00ff0000) >> 8) | \
+    (((uint)(A) & 0x0000ff00) << 8) | \
+    (((uint)(A) & 0x000000ff) << 24))
+
 #include <string>
 #include <vector>
 
@@ -13,6 +27,26 @@ namespace VNOC
 {
 namespace Message
 {
+
+#define MSG_BEGIN    0x56 // 'V' 标记消息的开始
+#define MSG_END      0x43 // 'C' 标记消息的结束
+#define MSG_VER      0 // 版本号
+
+#define MSG_HEAD_LEN 10
+#define MSG_TAIL_LEN 1
+
+#define MSG_CLASS_BEGIN                1
+#define MSG_CLASS_END                  1
+#define MSG_CLASS_LEN                  4
+#define MSG_CLASS_VER                  1
+#define MSG_CLASS_SERIAL               2
+#define MSG_CLASS_GUID                 16
+#define MSG_CLASS_COMMAND              4
+#define MSG_CLASS_OBL                  4
+#define MSG_CLASS_PARAMCONST           1
+#define MSG_CLASS_VERIFY               2 // 效验码 未定默认为2个字节
+#define MSG_CLASS_PARAM                4
+#define MSG_CLASS_PARAM_COUNT          4
 
 #ifndef DISALLOW_COPY_AND_ASSIGN
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
@@ -35,7 +69,6 @@ typedef int                 int32;
 
 typedef enum _VMsg
 {
-
     //服务器节点
     MSG_RequestQueryServer              = 1100, //获取一个服务器节点（请求）
     MSG_AnswerQueryServer               = 1101, //获取一个服务器节点（应答）
@@ -75,7 +108,7 @@ typedef enum _MsgDataMType
 }MsgDataMType;
 
 #define MsgDataMType_XML_Data     "data"
-#define MsgDataMType_XML_List     "List"
+#define MsgDataMType_XML_List     "list"
 
 #define MsgDataObject_XML_Name    "name"
 #define MsgDataObject_XML_Id      "id"

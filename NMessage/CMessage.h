@@ -37,9 +37,14 @@ public:
 
     virtual bool IsValid();
 
-private:
+protected:
     CMessage();
 
+    void InitializeMessage(const std::string& strName);
+
+    void InitializeMessage(int nId);
+
+private:
     void _InitDataMap();
     void _ReleaseMap();
 

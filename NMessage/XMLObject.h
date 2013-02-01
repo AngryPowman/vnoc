@@ -1,5 +1,5 @@
-#ifndef VNOC_C_MESSAG_XMLOBJECT
-#define VNOC_C_MESSAG_XMLOBJECT
+#ifndef VNOC_C_MESSAGE_XMLOBJECT
+#define VNOC_C_MESSAGE_XMLOBJECT
 
 #include <map>
 #include <string>

@@ -37,11 +37,11 @@ int PackMessage::_Head(const CMessage* const msg_clss,byte* buf, size_t len)
 	memset(tmpByte,0,4);
 	IntTobyte(msg_clss->GetSerial(),tmpByte);
 	//因为序号只有2位 所以只取低位
-	CHECKUP_DATALEN(index,len);
-	for (int i = 2; i < 4; i++,index++)
-	{
-		buf[index] = tmpByte[ i ];
-	}
+    CHECKUP_DATALEN(index,len);
+    for (int i = 2; i < 4; i++,index++)
+    {
+        buf[index] = tmpByte[ i ];
+    }
 
 
 	memset(tmpByte,0,4);
