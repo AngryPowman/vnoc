@@ -15,10 +15,8 @@
 *.ipch
 *.suo
 *.pdb
-*.manifest
 *.opensdf
 *.cache
-*.lib
 *.o
 *.aps
 *.unsuccessfulbuild
