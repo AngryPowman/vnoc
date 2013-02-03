@@ -47,6 +47,11 @@ void AsioTcpServer::AcceptHandler( AsioTcpConnection *conn, const asio::error_co
     } else 
     {
         EZLOGGERSTREAM<<error.message()<<std::endl;
+        delete conn;
+        new_connection_ = new AsioTcpConnection(io_service_);
+        acceptor_.async_accept(new_connection_->socket(),
+            std::bind(&AsioTcpServer::AcceptHandler, this ,new_connection_,
+                std::placeholders::_1));
     }
 }
 
