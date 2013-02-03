@@ -18,7 +18,7 @@ int main( int argc, char **argv)
     runner.addTest( registry.makeTest() );
     runner.eventManager().addListener( &result );
     runner.run();
-  
+
     ofstream xmlFileOut("cpptestresults.xml");
     CppUnit::XmlOutputter xmlOut(&result, xmlFileOut);
     xmlOut.write();
