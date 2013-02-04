@@ -11,6 +11,7 @@
 #include <atlstr.h>
 #include "../../NMessage/MsgDataValue/NumData.hpp"
 #include "../../NMessage/Message2Pack.h"
+#include "../../NMessage/Message2Parser.h"
 #include "../../NMessage/NMSG_ALI.h"
 #include "../../NMessage/NMSG_ACL.h"
 
@@ -39,6 +40,7 @@ class testNMessage : public CppUnit::TestFixture
     CPPUNIT_TEST( TestNMessage );
     CPPUNIT_TEST( TestNMessageXML );
     CPPUNIT_TEST( TestPack );
+    CPPUNIT_TEST( TestParser );
     CPPUNIT_TEST_SUITE_END();
 public:
     void setUp()
@@ -127,7 +129,6 @@ public:
         }
         CPPUNIT_ASSERT(Success == 1);
 
-        byte TestBuf[100] = {0};
         byte TestBufACL[] =
         {
             MSG_BEGIN,MSG_VER,0x1F,0x00,0x00,0x00,0x1B,0x00,0x00,0x00,
@@ -143,7 +144,6 @@ public:
         buf.SetValue(0);
         m2p.PackMessage(&acl,buf);
         TestCompBuf = buf.GetBuffer();
-        memcpy(TestBuf, buf.GetBuffer(), buf.GetSize());
 
         Success = 1;
         for (int index = 0; index < buf.GetSize(); index++)
@@ -159,8 +159,48 @@ public:
         }
         CPPUNIT_ASSERT(Success == 1);
     }
+    void TestParser()
+    {
+        CMessage2Parser m2parser;
+        NMSG_ALI ali;
+        CBufferMessage buf;
+        std::vector<uint32> RoomList;
+        std::string strATLGUID;
+        uint32 Token = 0;
+        uint8 LoginResult = 0;
+        byte TestBufALI[25] =
+        {
+            MSG_BEGIN,MSG_VER,0x17,0x00,0x00,0x00,0x19,0x00,0x00,0x00,
+            0x05,0x00,0x00,0x00,'h','e','l','l','o',0x08,0x08,0x00,0x00,0x00,
+            MSG_END
+        };
+        buf.Alloc(25);
+        buf.Copy(TestBufALI, 25);
+        CPPUNIT_ASSERT(m2parser.Parser(&ali, buf)  == MsgStatus_Ok);
+        ali.GetATLGUID(strATLGUID);
+        ali.GetToken(Token);
+        ali.GetLoginResult(LoginResult);
+        CPPUNIT_ASSERT(strATLGUID == "hello");
+        CPPUNIT_ASSERT(Token == 8);
+        CPPUNIT_ASSERT(LoginResult == 8);
 
-
+        NMSG_ACL acl;
+        byte TestBufACL[] =
+        {
+            MSG_BEGIN,MSG_VER,0x1F,0x00,0x00,0x00,0x1B,0x00,0x00,0x00,
+            0x03,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x03,0x00,0x00,0x00,
+            MSG_END
+        };
+        buf.Alloc(sizeof(TestBufACL));
+        buf.SetValue(0);
+        buf.Copy(TestBufACL, sizeof(TestBufACL));
+        CPPUNIT_ASSERT(m2parser.Parser(&acl, buf) == MsgStatus_Ok);
+        acl.GetRoomList(RoomList);
+        CPPUNIT_ASSERT(RoomList[0] == 1);
+        CPPUNIT_ASSERT(RoomList[1] == 2);
+        CPPUNIT_ASSERT(RoomList[2] == 3);
+        CPPUNIT_ASSERT(RoomList.size() == 3);
+    }
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( testNMessage );
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(testNMessage, "testNMessage");
