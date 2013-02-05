@@ -26,6 +26,8 @@ cpptestresults.xml
 !libmysql.lib
 !mysqlclient.lib
 
+/cppunit-1.12.1/lib/cppunitd.lib
+/cppunit-1.12.1/src/cppunit/Debug
 /NetService/src/test/testRunner/x64
 /NetService/src/test/testRunner/Debug
 /NetService/src/test/testRunner/Release
