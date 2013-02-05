@@ -4,6 +4,7 @@
 
 Room::Room()
 {
+    cleanup();
 }
 
 
@@ -17,6 +18,7 @@ void Room::cleanup()
     _userMap.clear();
     _maxUserCount = 0;
     _roomName = "";
+    _isValid = false;
 }
 
 GUID_t Room::getRoomID() const
