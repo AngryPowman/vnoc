@@ -7,6 +7,7 @@ class RoomPoolTest : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE( RoomPoolTest );
     CPPUNIT_TEST( testInitPool );
     CPPUNIT_TEST( testAcquire );
+    CPPUNIT_TEST( testRelease );
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -40,7 +41,12 @@ public:
     {
         RoomPool rPool;
         rPool.initPool();
-        
+        for(int i = 0; i < 256; ++i)
+            rPool.acquire();
+        for(int i = 64; i < 128; ++i)
+            rPool.release(i);
+        for(int i = 0; i < 64; ++i)
+            CPPUNIT_ASSERT(rPool.acquire() != NULL);
     }
 
 };
