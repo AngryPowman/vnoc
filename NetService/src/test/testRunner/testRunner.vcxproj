@@ -167,6 +167,7 @@
     <ClCompile Include="..\..\UserStorage.cpp" />
     <ClCompile Include="..\..\VnocProtocol.cpp" />
     <ClCompile Include="..\EchoTestHandlerTest.cpp" />
+    <ClCompile Include="..\RoomPoolTest.cpp" />
     <ClCompile Include="..\testRunner.cpp" />
     <ClCompile Include="..\testUserManage.cpp" />
     <ClCompile Include="..\VnocMessageHandlerTest.cpp" />
