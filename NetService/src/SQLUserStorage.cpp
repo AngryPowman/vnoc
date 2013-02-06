@@ -3,6 +3,7 @@
 #include <ezlogger_headers.hpp>
 #include <iostream>
 #include <string.h>
+using namespace std;
 void sUserStorage ::SaveConnLog(string host,string name,string password,string db,int port /*= 3306*/ )
 {
 	EZLOGGERSTREAM<<"MySQL host :"<<host<<std::endl;
@@ -20,11 +21,20 @@ sUserStorage ::sUserStorage ()
 	int port = Config::getInstance()->getValue("sql_port");
 
 	SaveConnLog(host, name, password, db, port);
+	EZLOGGERVLSTREAM(axter::log_often)<<"Save Connection Log that host is: "<<
+									  host<<
+									  " name is: "<<
+									  name<<
+									  " passWord is: "<<
+									  password<<
+									  " db is: "<<
+									  db<<
+									  " port is"<<
+									  port<<endl;
 
 	if (conn.Connect(host, name, password, db, port) == MW_SQL_ERR)
 	{
 		bIsConn = false;
-//		EZLOGGERSTREAM<<"Connet MySQL Data Base failure"<<std::endl;
 		return;
 	}
 	bIsConn = true;

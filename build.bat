@@ -9,6 +9,7 @@
 @echo ================	Build Client	=================
 "%VS10PATH%\devenv.com" .\VNOC\VNOC.sln /rebuild "Release|Win32"
 if ERRORLEVEL 1 exit /b 1
+
 @echo .
 @echo .
 @echo .

@@ -2,6 +2,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include "../UserManage.hpp"
 #include "../FileUserStorage.h"
+#include "../Room.cpp"
 
 class CUserManageTest : public CppUnit::TestFixture
 {

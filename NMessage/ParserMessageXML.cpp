@@ -1,5 +1,5 @@
-#include "ParaserMessageXML.h"
-#include "../TinyXML/tinyxml.h"
+#include "ParserMessageXML.h"
+#include "../ThirdLibs/TinyXML/tinyxml.h"
 #include <stdlib.h>
 
 namespace VNOC

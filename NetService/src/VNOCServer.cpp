@@ -31,5 +31,5 @@ int main()
 }
 
 #ifdef WIN32
-#include "../../VisualLeakDetector/include/vld.h"
+#include "../../ThirdLibs/VisualLeakDetector/include/vld.h"
 #endif

@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="CppTest|Win32">
+      <Configuration>CppTest</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8E8644B5-86CF-4286-9276-8710E6EE974C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Client</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath);</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IntDir>../Temp/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>include;..\..\cppunit-1.12.1\include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\cppunit-1.12.1\lib;../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IntDir>../Temp/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>include;../../ThirdLibs;$(IncludePath)</IncludePath>
+    <LibraryPath>../../ThirdLibs;$(LibraryPath)</LibraryPath>
+    <IntDir>../Temp/</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CppTest|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CPPTEST;CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>postDispatch.bat $(Configuration) $(Platform)</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>prelink.bat $(Configuration) $(Platform)</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Message\BaseMessage.h" />
+    <ClInclude Include="..\..\Message\MessageDef.h" />
+    <ClInclude Include="..\..\Message\MessageErrorDefine.hpp" />
+    <ClInclude Include="..\..\Message\MessageParser.h" />
+    <ClInclude Include="..\..\Message\MSG_ACI.h" />
+    <ClInclude Include="..\..\Message\MSG_ACL.h" />
+    <ClInclude Include="..\..\Message\MSG_ACS.h" />
+    <ClInclude Include="..\..\Message\MSG_ALI.h" />
+    <ClInclude Include="..\..\Message\MSG_APG.h" />
+    <ClInclude Include="..\..\Message\MSG_APS.h" />
+    <ClInclude Include="..\..\Message\MSG_AVC.h" />
+    <ClInclude Include="..\..\Message\MSG_RCI.h" />
+    <ClInclude Include="..\..\Message\MSG_RCL.h" />
+    <ClInclude Include="..\..\Message\MSG_RLI.h" />
+    <ClInclude Include="..\..\Message\MSG_RPG.h" />
+    <ClInclude Include="..\..\Message\MSG_RPS.h" />
+    <ClInclude Include="..\..\Message\MSG_RVC.h" />
+    <ClInclude Include="..\..\Message\MSG_UNION.h" />
+    <ClInclude Include="..\..\Message\PackMessage.h" />
+    <ClInclude Include="..\..\NMessage\BufferMessage.h" />
+    <ClInclude Include="..\..\NMessage\CMessage.h" />
+    <ClInclude Include="..\..\NMessage\IBaseMessage.h" />
+    <ClInclude Include="..\..\NMessage\IReadMessage.h" />
+    <ClInclude Include="..\..\NMessage\IWriteMessage.h" />
+    <ClInclude Include="..\..\NMessage\Message2Pack.h" />
+    <ClInclude Include="..\..\NMessage\Message2Parser.h" />
+    <ClInclude Include="..\..\NMessage\MessageDef.h" />
+    <ClInclude Include="..\..\NMessage\MessageUnion.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\NumData.hpp" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\NumData_t.hpp" />
+    <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerClassInfo.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerClassList.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerLogin.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerProfileSync.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerRegister.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerVerificationCode.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestClassInfo.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestClassList.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestLogin.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestProfileSync.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestRegister.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestVerificationCode.h" />
+    <ClInclude Include="..\..\NMessage\Pack2Message.h" />
+    <ClInclude Include="..\..\NMessage\ParserMessageXML.h" />
+    <ClInclude Include="..\..\NMessage\ParserMessage.h" />
+    <ClInclude Include="..\..\NMessage\XMLObject.h" />
+    <ClInclude Include="..\..\ThirdLibs\TinyXML\tinystr.h" />
+    <ClInclude Include="..\..\ThirdLibs\TinyXML\tinyxml.h" />
+    <ClInclude Include="config\Config.h" />
+    <ClInclude Include="config\ConfigDefine.h" />
+    <ClInclude Include="config\IConfig.h" />
+    <ClInclude Include="CppUnitTest\TestClassHeader.h" />
+    <ClInclude Include="CppUnitTest\testRunner.h" />
+    <ClInclude Include="FrameWork\Error.hpp" />
+    <ClInclude Include="FrameWork\Factory.h" />
+    <ClInclude Include="FrameWork\FrameWork.h" />
+    <ClInclude Include="FrameWork\GlobalCenter.h" />
+    <ClInclude Include="FrameWork\GlobalDefine.h" />
+    <ClInclude Include="FrameWork\IFrameWork.h" />
+    <ClInclude Include="FrameWork\IGlobal.h" />
+    <ClInclude Include="FrameWork\ResDefine.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkatldefine.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkcolor.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkdlgview.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkimage.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bklistbox.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bklistview.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkobject.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkskin.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bktheme.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnd.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndcmnctrl.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnddlg.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwnddlgfile.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndedit.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndnotify.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndpanel.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndrichtxt.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndstyle.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\bkwndtabctrl.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\listboxbase.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\ListViewCtrlEx.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\Schemadef.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\Tmschema.h" />
+    <ClInclude Include="GUI\BKWin\bkwin\Uxtheme.h" />
+    <ClInclude Include="GUI\LoginWin\BKWinLogin.h" />
+    <ClInclude Include="GUI\RoomListWin\BKWinRoomList.h" />
+    <ClInclude Include="GUI\RoomWin\BKWinClassroom.h" />
+    <ClInclude Include="include\Error.hpp" />
+    <ClInclude Include="include\IModule.h" />
+    <ClInclude Include="include\IRefCountImpl.h" />
+    <ClInclude Include="include\stdafx.h" />
+    <ClInclude Include="include\XMessage.hpp" />
+    <ClInclude Include="Logic\room\IRoomMgr.h" />
+    <ClInclude Include="Logic\room\Room.h" />
+    <ClInclude Include="Logic\room\RoomMgr.h" />
+    <ClInclude Include="Logic\UserSession\ILogin.h" />
+    <ClInclude Include="Logic\UserSession\LoginImpl.h" />
+    <ClInclude Include="Logic\UserSession\StrMatch.hpp" />
+    <ClInclude Include="net\INet.h" />
+    <ClInclude Include="net\Net.h" />
+    <ClInclude Include="net\Socket\AsyncSocket.h" />
+    <ClInclude Include="net\Socket\AsyncSocketEx.h" />
+    <ClInclude Include="net\Socket\ISocket.h" />
+    <ClInclude Include="net\Socket\SockWnd.h" />
+    <ClInclude Include="net\Socket\VNOCSocket.h" />
+    <ClInclude Include="util\bind.hpp" />
+    <ClInclude Include="util\BLog.h" />
+    <ClInclude Include="util\CBuffer.h" />
+    <ClInclude Include="util\DbgHelper.hpp" />
+    <ClInclude Include="util\IRefCountImpl.h" />
+    <ClInclude Include="util\MD5.h" />
+    <ClInclude Include="util\MD5ChecksumDefines.h" />
+    <ClInclude Include="util\Performance.h" />
+    <ClInclude Include="util\TaskThread.h" />
+    <ClInclude Include="util\ThreadDefine.h" />
+    <ClInclude Include="util\TLS.h" />
+    <ClInclude Include="util\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Message\BaseMessage.cpp" />
+    <ClCompile Include="..\..\Message\MessageParser.cpp" />
+    <ClCompile Include="..\..\Message\PackMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\BufferMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\CMessage.cpp" />
+    <ClCompile Include="..\..\NMessage\Message2Pack.cpp" />
+    <ClCompile Include="..\..\NMessage\Message2Parser.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
+    <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp" />
+    <ClCompile Include="..\..\NMessage\Pack2Message.cpp" />
+    <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp" />
+    <ClCompile Include="..\..\NMessage\XMLObject.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
+    <ClCompile Include="config\Config.cpp" />
+    <ClCompile Include="CppUnitTest\NMessageTest.cpp" />
+    <ClCompile Include="CppUnitTest\testPackMessage.cpp" />
+    <ClCompile Include="CppUnitTest\testRunner.cpp" />
+    <ClCompile Include="CppUnitTest\Vnocp1MessageParserTest.cpp" />
+    <ClCompile Include="FrameWork\Factory.cpp" />
+    <ClCompile Include="FrameWork\FrameWork.cpp" />
+    <ClCompile Include="FrameWork\GlobalCenter.cpp" />
+    <ClCompile Include="FrameWork\GlobalLog.cpp" />
+    <ClCompile Include="FrameWork\Main.cpp" />
+    <ClCompile Include="GUI\BKWin\bkwin\ListViewCtrlEx.cpp" />
+    <ClCompile Include="GUI\LoginWin\BKWinLogin.cpp" />
+    <ClCompile Include="GUI\RoomListWin\BKWinRoomList.cpp" />
+    <ClCompile Include="GUI\RoomWin\BKWinClassroom.cpp" />
+    <ClCompile Include="Logic\room\Room.cpp" />
+    <ClCompile Include="Logic\room\RoomMgr.cpp" />
+    <ClCompile Include="Logic\room\roommgrTest.cpp" />
+    <ClCompile Include="Logic\UserSession\LoginImpl.cpp" />
+    <ClCompile Include="Logic\UserSession\usersessionTest.cpp" />
+    <ClCompile Include="net\Net.cpp" />
+    <ClCompile Include="net\Socket\AsyncSocket.cpp" />
+    <ClCompile Include="net\Socket\AsyncSocketEx.cpp" />
+    <ClCompile Include="net\Socket\SockWnd.cpp" />
+    <ClCompile Include="net\Socket\VNOCSocket.cpp" />
+    <ClCompile Include="util\BLog.cpp" />
+    <ClCompile Include="util\CBuffer.cpp" />
+    <ClCompile Include="util\MD5.cpp" />
+    <ClCompile Include="util\TaskThread.cpp" />
+    <ClCompile Include="util\TLS.cpp" />
+    <ClCompile Include="util\util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="util\Performance.inl" />
+    <ResourceCompile Include="GUI\BKWin\bkres\bkres.rc" />
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resource\config.xml" />
+    <Xml Include="Resource\msgdef.xml" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

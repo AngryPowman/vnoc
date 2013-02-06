@@ -1,164 +1,207 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="src\AsioTcpConnection.hpp">
-      <Filter>header</Filter>
+    <ClInclude Include="src\GlobalDefinition.h">
+      <Filter>modules</Filter>
     </ClInclude>
-    <ClInclude Include="src\AsioTcpServer.hpp">
-      <Filter>header</Filter>
+    <ClInclude Include="src\Room.h">
+      <Filter>modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\NetService.h">
-      <Filter>header</Filter>
+    <ClInclude Include="src\RoomManager.h">
+      <Filter>modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\SocketServer.hpp">
-      <Filter>header</Filter>
+    <ClInclude Include="src\VNOCUser.h">
+      <Filter>modules\obj</Filter>
     </ClInclude>
-    <ClInclude Include="src\util.hpp">
-      <Filter>header</Filter>
+    <ClInclude Include="src\RoomPool.h">
+      <Filter>modules\room</Filter>
     </ClInclude>
-    <ClInclude Include="src\VnocProtocol.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\VnocMessageSocketHandler.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RliMessageHandler.hpp">
-      <Filter>header</Filter>
+    <ClInclude Include="src\RoomPool.cpp">
+      <Filter>modules\room</Filter>
     </ClInclude>
     <ClInclude Include="src\RvcMessageHandler.hpp">
-      <Filter>header</Filter>
+      <Filter>handlers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Config.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mysql\MysqlWrapper.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UserInfo.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include=".\src\UserManage.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include=".\src\UserStorage.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\FileUserStorage.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SQLUserStorage.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Message\BaseMessage.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Message\MessageParser.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Message\MSG_UNION.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Message\PackMessage.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include=".\src\VnocRoomManager.hpp">
-      <Filter>header</Filter>
+    <ClInclude Include="src\RliMessageHandler.hpp">
+      <Filter>handlers</Filter>
     </ClInclude>
     <ClInclude Include="src\RclMessageHandler.hpp">
-      <Filter>header</Filter>
+      <Filter>handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AsioTcpConnection.hpp">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AsioTcpServer.hpp">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VnocMessageSocketHandler.hpp">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Message\BaseMessage.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config.hpp">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Message\MessageParser.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VnocProtocol.hpp">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Common.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Message\MSG_UNION.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SQLUserStorage.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mysql\MysqlWrapper.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileUserStorage.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SocketServer.hpp">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include=".\src\UserStorage.h">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include=".\src\UserManage.hpp">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInfo.hpp">
+      <Filter>database</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NetService.h">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Message\PackMessage.h">
+      <Filter>message</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AsioTcpServer.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="src\NetService.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="src\VNOCServer.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="src\VnocProtocol.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="..\program_options\cmdline.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\config_file.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\options_description.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\parsers.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\positional_options.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\split.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\value_semantic.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\variables_map.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\winmain.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\convert.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
     <ClCompile Include="..\program_options\utf8_codecvt_facet.cpp">
-      <Filter>source\po</Filter>
+      <Filter>common\po</Filter>
     </ClCompile>
-    <ClCompile Include="src\Config.cpp">
-      <Filter>source</Filter>
+    <ClCompile Include="src\RoomManager.cpp">
+      <Filter>modules\room</Filter>
     </ClCompile>
-    <ClCompile Include="src\mysql\MysqlWrapper.cpp">
-      <Filter>source</Filter>
+    <ClCompile Include="src\Room.cpp">
+      <Filter>modules\room</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VNOCUser.cpp">
+      <Filter>modules\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AsioTcpServer.cpp">
+      <Filter>service</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VNOCServer.cpp" />
+    <ClCompile Include="..\Message\BaseMessage.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NetService.cpp">
+      <Filter>service</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VnocProtocol.cpp">
+      <Filter>service</Filter>
     </ClCompile>
     <ClCompile Include="src\UserStorage.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="src\FileUserStorage.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SQLUserStorage.cpp">
-      <Filter>source</Filter>
+      <Filter>database</Filter>
     </ClCompile>
     <ClCompile Include="src\UserManage.cpp">
-      <Filter>source</Filter>
+      <Filter>database</Filter>
     </ClCompile>
-    <ClCompile Include="..\Message\BaseMessage.cpp">
-      <Filter>source</Filter>
+    <ClCompile Include="src\SQLUserStorage.cpp">
+      <Filter>database</Filter>
     </ClCompile>
     <ClCompile Include="..\Message\MessageParser.cpp">
-      <Filter>source</Filter>
+      <Filter>message</Filter>
     </ClCompile>
     <ClCompile Include="..\Message\PackMessage.cpp">
-      <Filter>source</Filter>
+      <Filter>message</Filter>
     </ClCompile>
-    <ClCompile Include=".\src\VnocRoomManager.cpp">
-      <Filter>source</Filter>
+    <ClCompile Include="src\mysql\MysqlWrapper.cpp">
+      <Filter>database</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileUserStorage.cpp">
+      <Filter>database</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Config.cpp">
+      <Filter>config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="source">
-      <UniqueIdentifier>{c6301850-38aa-4a4c-978f-a2463b9e0c87}</UniqueIdentifier>
+    <Filter Include="handlers">
+      <UniqueIdentifier>{bb5a4351-106e-413d-8eff-2ce37b97bd8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="header">
-      <UniqueIdentifier>{393855ef-cd99-460d-b224-78fd97847471}</UniqueIdentifier>
+    <Filter Include="service">
+      <UniqueIdentifier>{22bc2e4a-f0a8-4e88-afd0-f89104921b77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\po">
+    <Filter Include="message">
+      <UniqueIdentifier>{ffa6ecef-1bba-4e99-81ca-aee1b537d022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{507323fa-5a96-4da0-b999-afb35d6b8ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{f4513da3-85ef-48ab-958e-6f1ef56a8483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="database">
+      <UniqueIdentifier>{1fa30f25-1661-46e4-8224-9ba60b64c9a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules">
+      <UniqueIdentifier>{92577f27-b8e6-42e9-9ffd-bd169d758e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\room">
+      <UniqueIdentifier>{5ccd4261-0374-44c1-861c-61b0aa95e1e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\obj">
+      <UniqueIdentifier>{3024ed16-4ff3-4cc4-b9bc-df016cf13f03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\po">
       <UniqueIdentifier>{def1898a-4f9c-4311-bf47-46283aca1628}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\VnocMessageSocketHandler.inl">
-      <Filter>header</Filter>
+      <Filter>service</Filter>
     </None>
   </ItemGroup>
 </Project>

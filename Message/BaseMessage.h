@@ -118,7 +118,7 @@ protected:
 		for (int index = 0,ParamPos = 0; index <  (int)PeopleLen;index++)
 		{
 			IntTobyte(PeopleList[index],tmpByte);
-			for (int i = 0; i < sizeof(Type); i++,ParamPos++)
+			for (int i = 0; i < sizeof(Type); (i++,ParamPos++))
 			{
 				tmpParam[ParamPos] = tmpByte[i];
 			}
@@ -150,7 +150,7 @@ protected:
 			ComTmpList.resize(((int)m_ComCommandList[int_index].second.size() / sizeof(Type)));
 			for (int i = 0,index = 0;index < (int)(m_ComCommandList[int_index].second.size() / sizeof(Type)) ;index++)
 			{
-				for (int j = 0; j < sizeof(Type); j++,i++)
+				for (int j = 0; j < sizeof(Type); (i++,j++))
 				{
 					ComTmpList[index].push_back(m_ComCommandList[int_index].second[i]);
 				}
@@ -158,7 +158,14 @@ protected:
 
 			for (int i = 0; i < (int)ComTmpList.size(); i++)
 			{
-				PeopleList.push_back(byteToInt((byte*)ComTmpList[i].data(),sizeof(Type)));
+				byte* tempBytes = new byte[sizeof(Type)];
+				memset(tempBytes,0,sizeof(Type));
+				for (int j=0; j<sizeof(Type); ++j)
+				{
+					tempBytes[sizeof(Type)-j-1] = ComTmpList[i][j];
+				}
+				PeopleList.push_back(byteToInt(tempBytes,sizeof(Type)));
+				delete[] tempBytes;
 			}
 		}
 		return 0;
