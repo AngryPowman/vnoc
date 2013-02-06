@@ -17,7 +17,8 @@ class VnocMessageHandlerTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( VnocMessageHandlerTest );
     CPPUNIT_TEST( testRVC );
-    CPPUNIT_TEST( testRLIwithNothing );
+    CPPUNIT_TEST( testRLIdefault );
+    CPPUNIT_TEST( testRLIwithEmptyAccountNumber );
     CPPUNIT_TEST( testRLIwithAccountNumber );
     CPPUNIT_TEST( testRLIwithAccountNumberAndPassword );
     CPPUNIT_TEST( testRCL );
@@ -59,13 +60,37 @@ public:
         delete buf;
     }
 
-    void testRLIwithNothing()
+    void testRLIdefault()
     {
         RliMessageHandler rlihandler(protocol_);
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RLI rliMessage;
+        PackMessage packer;
+        int len = packer.GetMessageLen(&rliMessage);
+        char *buf = new char[len];
+        packer.Pack(&rliMessage, (byte *)buf, len);
+        conn_->setRecv(buf, len);
+        char *sendBuf = (char*)conn_->getSendBuf();
+        //return an ALI message with login-failure.
+        CMessageParser parser;
+        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
+        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
+        CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult() == 1);
+        delete msg;
+        delete buf;
+    }
+
+    void testRLIwithEmptyAccountNumber()
+    {
+        RliMessageHandler rlihandler(protocol_);
+        VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
+        handler.setProtocol(protocol_);
+        handler.start();
+        MSG_RLI rliMessage;
+        byte emptyAccount[1] = { 0 };
+        rliMessage.SetAccountNumber(emptyAccount, 0);
         PackMessage packer;
         int len = packer.GetMessageLen(&rliMessage);
         char *buf = new char[len];
