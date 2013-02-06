@@ -373,9 +373,6 @@
     <ClInclude Include="..\..\NMessage\MessageDef.h">
       <Filter>Net\NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\ParserMessage.h">
-      <Filter>Net\NMessage\Message</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NMessage\XMLObject.h">
       <Filter>Net\NMessage\Message</Filter>
     </ClInclude>
@@ -389,9 +386,6 @@
       <Filter>Net\NMessage\MsgDataValue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\ParserMessageXML.h">
-      <Filter>Net\NMessage\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\NMessage\Pack2Message.h">
       <Filter>Net\NMessage\Message</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NMessage\MsgDataValue\NumData.hpp">
@@ -577,9 +571,6 @@
       <Filter>Logic\users</Filter>
     </ClCompile>
     <ClCompile Include="..\..\NMessage\XMLObject.cpp">
-      <Filter>Net\NMessage\Message</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\NMessage\Pack2Message.cpp">
       <Filter>Net\NMessage\Message</Filter>
     </ClCompile>
     <ClCompile Include="..\..\NMessage\Message2Parser.cpp">

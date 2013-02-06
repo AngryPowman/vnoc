@@ -1,5 +1,5 @@
 #include "Message2Parser.h"
-#include "ParaserMessageXML.h"
+#include "ParserMessageXML.h"
 
 namespace VNOC
 {

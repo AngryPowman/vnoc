@@ -187,9 +187,7 @@
     <ClInclude Include="..\..\NMessage\MSG_RequestProfileSync.h" />
     <ClInclude Include="..\..\NMessage\MSG_RequestRegister.h" />
     <ClInclude Include="..\..\NMessage\MSG_RequestVerificationCode.h" />
-    <ClInclude Include="..\..\NMessage\Pack2Message.h" />
     <ClInclude Include="..\..\NMessage\ParserMessageXML.h" />
-    <ClInclude Include="..\..\NMessage\ParserMessage.h" />
     <ClInclude Include="..\..\NMessage\XMLObject.h" />
     <ClInclude Include="..\..\ThirdLibs\TinyXML\tinystr.h" />
     <ClInclude Include="..\..\ThirdLibs\TinyXML\tinyxml.h" />
@@ -275,7 +273,6 @@
     <ClCompile Include="..\..\NMessage\MsgDataValue\ArrayData.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
     <ClCompile Include="..\..\NMessage\MsgDataValue\StringData.cpp" />
-    <ClCompile Include="..\..\NMessage\Pack2Message.cpp" />
     <ClCompile Include="..\..\NMessage\ParserMessageXML.cpp" />
     <ClCompile Include="..\..\NMessage\XMLObject.cpp" />
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinystr.cpp" />
