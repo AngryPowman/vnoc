@@ -74,6 +74,9 @@
     <Filter Include="UI\Console">
       <UniqueIdentifier>{45e50712-9fac-4731-a388-90a224ccdb1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Net\NMessage\Message\Produce">
+      <UniqueIdentifier>{331cbf62-e92c-4964-8105-34a937d88b39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork\Error.hpp">
@@ -370,9 +373,6 @@
     <ClInclude Include="..\..\NMessage\MessageDef.h">
       <Filter>Net\NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\ParserMessage.h">
-      <Filter>Net\NMessage\Message</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NMessage\XMLObject.h">
       <Filter>Net\NMessage\Message</Filter>
     </ClInclude>
@@ -388,8 +388,53 @@
     <ClInclude Include="..\..\NMessage\ParserMessageXML.h">
       <Filter>Net\NMessage\Message</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NMessage\Pack2Message.h">
+    <ClInclude Include="..\..\NMessage\MsgDataValue\NumData.hpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MsgDataValue\NumData_t.hpp">
+      <Filter>Net\NMessage\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\Message2Parser.h">
       <Filter>Net\NMessage\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_AnswerClassInfo.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_AnswerClassList.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_AnswerLogin.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_AnswerProfileSync.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_AnswerRegister.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_AnswerVerificationCode.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_RequestClassInfo.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_RequestClassList.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_RequestLogin.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_RequestProfileSync.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_RequestRegister.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_RequestVerificationCode.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageUnion.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -528,7 +573,7 @@
     <ClCompile Include="..\..\NMessage\XMLObject.cpp">
       <Filter>Net\NMessage\Message</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NMessage\Pack2Message.cpp">
+    <ClCompile Include="..\..\NMessage\Message2Parser.cpp">
       <Filter>Net\NMessage\Message</Filter>
     </ClCompile>
   </ItemGroup>

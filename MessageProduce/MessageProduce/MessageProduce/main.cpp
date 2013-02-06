@@ -58,6 +58,7 @@ bool DisposeMessage(
         return false;
     }
     std::string strTamplate;
+    std::vector<std::string> vecUnion;
     char* lpszTamplate = new char[file.GetFileSize() + 1];
     memset(lpszTamplate, 0, file.GetFileSize() + 1);
     file.Read(lpszTamplate, 1, file.GetFileSize());
@@ -100,12 +101,28 @@ bool DisposeMessage(
                 strTargetPath += "/";
                 strTargetPath += obj->GetName();
                 strTargetPath += ".h";
+                vecUnion.push_back(obj->GetName() + ".h");
                 if (VNOC::Message::ProduceFile(strTargetPath.c_str(), strSrc))
                 {
                     std::cout<<">>>>>>>>>> Produse ------->    "<<obj->GetName()<<std::endl;
                 }
             }
         }
+    }
+
+    std::string strUnionPath = lpTargetPath;
+    strUnionPath += "/MessageUnion.h";
+    std::string strUninBuff;
+    strUninBuff = "#ifndef VNOC_D_MESSSAGE_UNION\n";
+    strUninBuff += "#define VNOC_D_MESSSAGE_UNION\n\n";
+    for (auto It = vecUnion.begin(); It != vecUnion.end(); It++)
+    {
+        strUninBuff += "#include \"" + (*It) + "\"\n";
+    }
+    strUninBuff += "\n#endif";
+    if (VNOC::Message::ProduceFile(strUnionPath.c_str(), strUninBuff))
+    {
+        std::cout<<">>>>>>>>>> Produse ------->    MessageUnion.h"<<std::endl;
     }
     if (lpszTamplate != NULL)
     {

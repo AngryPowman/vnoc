@@ -48,6 +48,9 @@ namespace Message
 #define MSG_CLASS_PARAM                4
 #define MSG_CLASS_PARAM_COUNT          4
 
+#define MSG_COMMAND_INDEX  MSG_CLASS_VER + MSG_CLASS_BEGIN
+#define MSG_PACKSIZE_INDEX MSG_COMMAND_INDEX + MSG_CLASS_COMMAND
+
 #ifndef DISALLOW_COPY_AND_ASSIGN
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
     TypeName(const TypeName&);             \
@@ -136,6 +139,8 @@ typedef enum _MsgStatus
    MsgStatus_Ok,
    MsgStatus_Err,
    MsgStatus_Unk,
+   MsgStatus_FormatFailure,
+   MsgStatus_TypeErr,
 }MsgStatus;
 
 }// namespace Message
