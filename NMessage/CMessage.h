@@ -37,6 +37,10 @@ public:
 
     virtual bool IsValid();
 
+    CMessage& Copy(IReadMessage& lhs, int MessageId = 0);
+
+    CMessage& Copy(IReadMessage& lhs,const std::string MessageName);
+
 protected:
     CMessage();
 

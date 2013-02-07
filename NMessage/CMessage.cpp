@@ -182,5 +182,167 @@ int CMessage::MsgId()
     return nId;
 }
 
+CMessage& CMessage::Copy(IReadMessage& lhs, int MessageId /* = 0 */)
+{
+    if (MessageId = 0)
+    {
+        InitializeMessage(lhs.MsgId());
+    }
+    else
+    {
+        InitializeMessage(MessageId);
+    }
+    MsgDataValue* lpReadValue = NULL;
+    ArrayData* lpReadValueArr = NULL;
+    m_mapMsgData.clear();
+    m_mapMsgDataArr.clear();
+    XMLObject* XmlObject = ParserMessageXML::Instance().GetMsgObject(lhs.MsgId());
+    if (!XmlObject)
+    {
+        return (*this);
+    }
+    for (auto It = XmlObject->ParamBegin(); It != XmlObject->ParamEnd(); It++)
+    {
+        switch (It->second.GetMType())
+        {
+        case MsgDataMType_Data:
+            lhs.Read(It->second.GetName(), lpReadValue);
+            switch (It->second.GetType())
+            {
+            case MsgDataType_String:
+                if (lpReadValue != NULL)
+                {
+                    std::string strValute;
+                    lpReadValue->ToStr(strValute);
+                    Write(It->second.GetName(), new StringData(strValute));
+                }
+                break;
+            case MsgDataType_Uint8:
+                if (lpReadValue != NULL)
+                {
+                    uint8 NumValute;
+                    lpReadValue->ToUInt8(NumValute);
+                    Write(It->second.GetName(), new NumData<uint8>(NumValute));
+                }
+                break;
+            case MsgDataType_Uint16:
+                if (lpReadValue != NULL)
+                {
+                    uint16 NumValute;
+                    lpReadValue->ToUInt16(NumValute);
+                    Write(It->second.GetName(), new NumData<uint16>(NumValute));
+                }
+                break;
+            case MsgDataType_Uint32:
+                if (lpReadValue != NULL)
+                {
+                    uint32 NumValute;
+                    lpReadValue->ToUInt32(NumValute);
+                    Write(It->second.GetName(), new NumData<uint32>(NumValute));
+                }
+                break;
+            }
+            break;
+        case MsgDataMType_List:
+            lhs.ReadArr(It->second.GetName(), lpReadValueArr);
+            if (lpReadValueArr != NULL)
+            {
+                ArrayData* lpWriteArr = new ArrayData;
+                for (auto ArrIt = lpReadValueArr->Begin();
+                    ArrIt != lpReadValueArr->End();
+                    ArrIt++
+                    )
+                {
+                    lpWriteArr->Push((*ArrIt));
+                }
+                WriteArr(It->second.GetName(), lpWriteArr);
+            }
+            break;
+        }
+    }
+    return (*this);
+}
+
+CMessage& CMessage::Copy(IReadMessage& lhs,const std::string MessageName)
+{
+    if (MessageName.empty())
+    {
+        InitializeMessage(lhs.MsgId());
+    }
+    else
+    {
+        InitializeMessage(MessageName);
+    }
+    MsgDataValue* lpReadValue = NULL;
+    ArrayData* lpReadValueArr = NULL;
+    m_mapMsgData.clear();
+    m_mapMsgDataArr.clear();
+    XMLObject* XmlObject = ParserMessageXML::Instance().GetMsgObject(lhs.MsgId());
+    if (!XmlObject)
+    {
+        return (*this);
+    }
+    for (auto It = XmlObject->ParamBegin(); It != XmlObject->ParamEnd(); It++)
+    {
+        switch (It->second.GetMType())
+        {
+        case MsgDataMType_Data:
+            lhs.Read(It->second.GetName(), lpReadValue);
+            switch (It->second.GetType())
+            {
+            case MsgDataType_String:
+                if (lpReadValue != NULL)
+                {
+                    std::string strValute;
+                    lpReadValue->ToStr(strValute);
+                    m_mapMsgData[It->second.GetName()] = new StringData(strValute);
+                }
+                break;
+            case MsgDataType_Uint8:
+                if (lpReadValue != NULL)
+                {
+                    uint8 NumValute;
+                    lpReadValue->ToUInt8(NumValute);
+                    m_mapMsgData[It->second.GetName()] = new NumData<uint8>(NumValute);
+                }
+                break;
+            case MsgDataType_Uint16:
+                if (lpReadValue != NULL)
+                {
+                    uint16 NumValute;
+                    lpReadValue->ToUInt16(NumValute);
+                    m_mapMsgData[It->second.GetName()] = new NumData<uint16>(NumValute);
+                }
+                break;
+            case MsgDataType_Uint32:
+                if (lpReadValue != NULL)
+                {
+                    uint32 NumValute;
+                    lpReadValue->ToUInt32(NumValute);
+                    m_mapMsgData[It->second.GetName()] = new NumData<uint32>(NumValute);
+                }
+                break;
+            }
+            break;
+        case MsgDataMType_List:
+            lhs.ReadArr(It->second.GetName(), lpReadValueArr);
+            if (lpReadValueArr != NULL)
+            {
+                ArrayData* lpWriteArr = new ArrayData;
+                for (auto ArrIt = lpReadValueArr->Begin();
+                    ArrIt != lpReadValueArr->End();
+                    ArrIt++
+                    )
+                {
+                    lpWriteArr->Push((*ArrIt));
+                }
+                m_mapMsgDataArr[It->second.GetName()] = lpWriteArr;
+            }
+            break;
+        }
+    }
+    return (*this);
+}
+
 }// namespace Message
 }// namespace VNOC

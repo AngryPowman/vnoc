@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_RequestVerificationCode");
     }
 
+    MSG_RequestVerificationCode(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_RequestVerificationCode");
+    }
+
     virtual ~MSG_RequestVerificationCode(){}
 
     MsgStatus SetMachineAddress(const std::string& Value)

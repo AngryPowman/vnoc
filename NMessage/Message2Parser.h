@@ -19,7 +19,7 @@ public:
 
     MsgStatus Parser(OUT IWriteMessage* pMsg, IN const CBufferMessage& pBuf);
     bool IsVaild(IN const CBufferMessage& pBuf);
-    int GetMsgType();
+    static int GetMsgType(IN const CBufferMessage& pBuf);
 
 private:
     MsgStatus _ParserHead(IWriteMessage* pMsg, const CBufferMessage& pBuf);

@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_RequestProfileSync");
     }
 
+    MSG_RequestProfileSync(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_RequestProfileSync");
+    }
+
     virtual ~MSG_RequestProfileSync(){}
 
     MsgStatus SetAutograph(const std::string& Value)

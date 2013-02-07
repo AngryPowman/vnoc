@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_RequestClassList");
     }
 
+    MSG_RequestClassList(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_RequestClassList");
+    }
+
     virtual ~MSG_RequestClassList(){}
 
     MsgStatus SetUserType(const uint32& Value)

@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_AnswerClassList");
     }
 
+    MSG_AnswerClassList(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_AnswerClassList");
+    }
+
     virtual ~MSG_AnswerClassList(){}
 
     MsgStatus SetRoomIdList(const std::vector<uint32>& Value)

@@ -237,9 +237,22 @@ int CMessage2Parser::_ByteToInt(uint8* pData)
     return retint;
 }
 
-int CMessage2Parser::GetMsgType()
+int CMessage2Parser::GetMsgType(IN const CBufferMessage& pBuf)
 {
-    return m_MsgId;
+    int MsgID = 0;
+	uint8* pData = pBuf.GetBuffer();
+    uint8 NumByte[4] = {0};
+    if (!pData)
+    {
+        return MsgStatus_Err;
+    }
+
+    for (int index = 0; index < MSG_CLASS_COMMAND; index++)
+    {
+        NumByte[index] = pData[MSG_COMMAND_INDEX + index];
+    }
+    MsgID = *(int*)&NumByte;
+	return MsgID;
 }
 
 }

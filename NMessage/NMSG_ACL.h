@@ -20,6 +20,11 @@ public:
         InitializeMessage("NMSG_ACL");
     }
 
+    NMSG_ACL(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "NMSG_ACL");
+    }
+
     virtual ~NMSG_ACL(){}
 
     MsgStatus SetRoomList(const std::vector<uint32>& Value)

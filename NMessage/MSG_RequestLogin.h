@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_RequestLogin");
     }
 
+    MSG_RequestLogin(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_RequestLogin");
+    }
+
     virtual ~MSG_RequestLogin(){}
 
     MsgStatus SetAccountNumber(const std::string& Value)

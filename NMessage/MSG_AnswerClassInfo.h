@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_AnswerClassInfo");
     }
 
+    MSG_AnswerClassInfo(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_AnswerClassInfo");
+    }
+
     virtual ~MSG_AnswerClassInfo(){}
 
     MsgStatus SetRoomID(const uint32& Value)
