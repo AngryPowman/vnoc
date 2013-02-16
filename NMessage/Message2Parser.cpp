@@ -94,7 +94,7 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
     std::vector<uint8> vecUint8Param;
     std::vector<uint16> vecUint16Param;
     std::vector<uint32> vecUint32Param;
-    ArrayData* pArrData = new ArrayData;
+    ArrayData* pArrData = NULL;
     uint8 NumByte[4] = {0};
     XMLObject* Xml = ParserMessageXML::Instance().GetMsgObject(m_MsgId);
     if (!Xml)
@@ -103,6 +103,7 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
     }
     for (auto It = Xml->ParamBegin(); It != Xml->ParamEnd(); It++)
     {
+        pArrData = new ArrayData;
         switch (It->second.GetMType())
         {
         case MsgDataMType_Data:
@@ -240,7 +241,7 @@ int CMessage2Parser::_ByteToInt(uint8* pData)
 int CMessage2Parser::GetMsgType(IN const CBufferMessage& pBuf)
 {
     int MsgID = 0;
-	uint8* pData = pBuf.GetBuffer();
+    uint8* pData = pBuf.GetBuffer();
     uint8 NumByte[4] = {0};
     if (!pData)
     {

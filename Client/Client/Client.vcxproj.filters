@@ -576,6 +576,9 @@
     <ClCompile Include="..\..\NMessage\Message2Parser.cpp">
       <Filter>Net\NMessage\Message</Filter>
     </ClCompile>
+    <ClCompile Include="CppUnitTest\MSG_Message_Test.cpp">
+      <Filter>Net\NMessage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="util\Performance.inl">
