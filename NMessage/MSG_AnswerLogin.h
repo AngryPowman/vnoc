@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_AnswerLogin");
     }
 
+    MSG_AnswerLogin(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_AnswerLogin");
+    }
+
     virtual ~MSG_AnswerLogin(){}
 
     MsgStatus SetATLGUID(const std::string& Value)

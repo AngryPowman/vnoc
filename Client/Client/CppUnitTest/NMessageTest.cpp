@@ -201,6 +201,19 @@ public:
         CPPUNIT_ASSERT(RoomList[1] == 2);
         CPPUNIT_ASSERT(RoomList[2] == 3);
         CPPUNIT_ASSERT(RoomList.size() == 3);
+
+        CMessage NewParserAcl(CMessage2Parser::GetMsgType(buf));
+        CPPUNIT_ASSERT(m2parser.Parser(&NewParserAcl, buf) == MsgStatus_Ok);
+        if (CMessage2Parser::GetMsgType(buf) == 31)
+        {
+            NMSG_ACL NewParserAcl_Child(NewParserAcl);
+            RoomList.clear();
+            NewParserAcl_Child.GetRoomList(RoomList);
+            CPPUNIT_ASSERT(RoomList[0] == 1);
+            CPPUNIT_ASSERT(RoomList[1] == 2);
+            CPPUNIT_ASSERT(RoomList[2] == 3);
+            CPPUNIT_ASSERT(RoomList.size() == 3);
+        }
     }
 };
 CPPUNIT_TEST_SUITE_REGISTRATION ( testNMessage );

@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_AnswerProfileSync");
     }
 
+    MSG_AnswerProfileSync(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_AnswerProfileSync");
+    }
+
     virtual ~MSG_AnswerProfileSync(){}
 
     MsgStatus SetMessageSynchro(const std::string& Value)

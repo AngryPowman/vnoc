@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_AnswerVerificationCode");
     }
 
+    MSG_AnswerVerificationCode(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_AnswerVerificationCode");
+    }
+
     virtual ~MSG_AnswerVerificationCode(){}
 
     MsgStatus SetCaptcha(const std::string& Value)

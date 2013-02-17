@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_RequestRegister");
     }
 
+    MSG_RequestRegister(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_RequestRegister");
+    }
+
     virtual ~MSG_RequestRegister(){}
 
     MsgStatus SetAutograph(const std::string& Value)

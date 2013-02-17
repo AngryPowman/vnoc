@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_AnswerRegister");
     }
 
+    MSG_AnswerRegister(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_AnswerRegister");
+    }
+
     virtual ~MSG_AnswerRegister(){}
 
     MsgStatus SetRetTag(const uint32& Value)

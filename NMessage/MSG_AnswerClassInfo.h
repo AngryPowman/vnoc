@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_AnswerClassInfo");
     }
 
+    MSG_AnswerClassInfo(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_AnswerClassInfo");
+    }
+
     virtual ~MSG_AnswerClassInfo(){}
 
     MsgStatus SetRoomID(const uint32& Value)
@@ -47,11 +52,6 @@ public:
         ArrayData* ValueArr = new ArrayData;
         ValueArr->Push<uint32>(Value);
         return WriteArr("RoomPeopleListId", ValueArr);
-    }
-
-    MsgStatus SetRoomPeopleNumM(const uint32& Value)
-    {
-        return Write("RoomPeopleNumM", new NumData<uint32>(Value));
     }
 
     MsgStatus SetRoomPeopleNumMax(const uint32& Value)
@@ -108,13 +108,6 @@ public:
         ReadArr("RoomPeopleListId", pReadValueArr);
         pReadValueArr->GetArr_vec<uint32>(Value);
         return MsgStatus_Ok;
-    }
-
-    MsgStatus GetRoomPeopleNumM(uint32& Value)
-    {
-        MsgDataValue* pReadValue = NULL;
-        Read("RoomPeopleNumM", pReadValue);
-        return pReadValue->ToUInt32(Value);
     }
 
     MsgStatus GetRoomPeopleNumMax(uint32& Value)

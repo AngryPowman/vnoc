@@ -20,6 +20,11 @@ public:
         InitializeMessage("MSG_RequestClassInfo");
     }
 
+    MSG_RequestClassInfo(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "MSG_RequestClassInfo");
+    }
+
     virtual ~MSG_RequestClassInfo(){}
 
     MsgStatus SetRoomID(const uint32& Value)
