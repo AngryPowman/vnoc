@@ -191,7 +191,6 @@ public:
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RequestLogin rliMessage;
-        rliMessage.SetPassword("1111");
         rliMessage.SetAccountNumber("asd");
         CBufferMessage buff;
         CMessage2Pack packer;
