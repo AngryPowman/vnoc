@@ -17,8 +17,9 @@ template <typename ConnectionT>
 VnocMessageSocketHandler<ConnectionT>::~VnocMessageSocketHandler()
 {
     EZLOGGERVLSTREAM(axter::log_often)<<"delete connection Handler."<<endl;
-	delete ctx_;
-	delete connection_;
+    CUserManage::GetInstance()->deleteOnlineUser(ctx_->userName.c_str());
+    delete ctx_;
+    delete connection_;
 }
 
 template <typename ConnectionT>
@@ -49,18 +50,18 @@ void VnocMessageSocketHandler<ConnectionT>::ReadHeaderHandler(const asio::error_
         readHeader();
         return;
     }
-	if (headerData_[0] != 'V'){
-	    EZLOGGERVLSTREAM(axter::log_often)<<"This is not VNOC header."<<endl;
+    if (headerData_[0] != 'V'){
+        EZLOGGERVLSTREAM(axter::log_often)<<"This is not VNOC header."<<endl;
         readHeader();
         return;
-	}
+    }
     size_t package_len = *(int *)(headerData_ + 2);
     if (package_len <= MSG_HEAD_LEN) {
         EZLOGGERVLSTREAM(axter::log_often)<<"package_len <= HEAD_LEN"<<endl;
         readHeader();
         return;
     }
-	if (package_len > MAX_PACKAGE_LEN) {
+    if (package_len > MAX_PACKAGE_LEN) {
         EZLOGGERVLSTREAM(axter::log_often)<<"package_len > MAX_PACKAGE_LEN"<<endl;
         readHeader();
         return;
@@ -70,8 +71,8 @@ void VnocMessageSocketHandler<ConnectionT>::ReadHeaderHandler(const asio::error_
     EZLOGGERVLSTREAM(axter::log_often)<<"get correct header, lenth:"<<package_len<<endl;
     connection_->recv(&messageBuffer[MSG_HEAD_LEN], package_len - MSG_HEAD_LEN, 
         std::bind(&VnocMessageSocketHandler::ReadBodyHandler, this, messageBuffer,
-            std::placeholders::_1,
-            std::placeholders::_2));
+        std::placeholders::_1,
+        std::placeholders::_2));
 }
 
 template <typename ConnectionT>
@@ -108,7 +109,7 @@ void VnocMessageSocketHandler<ConnectionT>::SendHandler(smart_buf buffer, const 
 
 }
 
- template <typename ConnectionT>
+template <typename ConnectionT>
 void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(IReadMessage *msg)
 {
     CMessage2Pack m2Pack;
@@ -122,7 +123,7 @@ void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(IReadMessage *msg)
     char *buf = pack;
     connection_->send(buf, length,
         std::bind(&VnocMessageSocketHandler::SendHandler, this, pack,
-            std::placeholders::_1,
-            std::placeholders::_2));
+        std::placeholders::_1,
+        std::placeholders::_2));
     EZLOGGERVLSTREAM(axter::log_often)<<"send vnoc message type:"<< msg->MsgId()<<" lenght: "<<length<<endl;
 }
