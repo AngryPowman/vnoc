@@ -21,8 +21,8 @@ public:
     {
         return &_instance;
     }
-    //返回值： LOGIN_OK 登陆成功 TEST_FALSE 验证失败 NULLPOINT 指针无效
-    //如果登陆成功则获得用户信息
+    //return value： LOGIN_OK(login-success) TEST_FALSE(verification-failure) NULLPOINT(null-pointer)
+    //get the user's information if login-success.
     void initial(UserStorage *us)
     {
         _us = us;
@@ -38,18 +38,18 @@ public:
         
         if(insertOnlineUser(szUser) == false)
         {
-            return HAS_LOGINED;//用户已登录，拒绝本次登录请求
+            return HAS_LOGINED;//this user has logined, deny this login request.
         }
         
         return LOGIN_OK;
-        if ( !_us->IfUserExist(szUser) )//账号是否存在 查数据库
+        if ( !_us->IfUserExist(szUser) )//check the username in the database
         {
             return ACCOUNT_NULL;
         }
         char strPass[41] = {0};	
         _us->GetPassword(szUser, strPass, 40);
 
-        int i = 0; //密码验证
+        int i = 0; //verify the password
         do
         {
             if (strPass[i] != pPassword[i])
@@ -64,7 +64,7 @@ public:
             return NULLPOINT;
         }
 
-        //获得用户信息
+        //get the user's information
         _us->GetUserInfo(szUser, pUserInfo);
 
         return LOGIN_OK;
