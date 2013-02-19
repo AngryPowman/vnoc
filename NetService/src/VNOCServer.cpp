@@ -14,11 +14,13 @@
 #include <string>
 #include "SQLUserStorage.h"
 #include "UserManage.hpp"
+#include "../../NMessage/ParserMessageXML.h"
 using namespace std;
-
+using namespace VNOC::Message;
 
 int main()
 {
+    ParserMessageXML::Instance().LoadFile("msgdef.xml");
     Config::getInstance()->Initialize("vnoc.conf");
     cout<<"port:"<<Config::getInstance()->getValue("port")<<endl;
     sUserStorage us;
@@ -31,5 +33,5 @@ int main()
 }
 
 #ifdef WIN32
-#include "../../ThirdLibs/VisualLeakDetector/include/vld.h"
+//#include "../../ThirdLibs/VisualLeakDetector/include/vld.h"
 #endif

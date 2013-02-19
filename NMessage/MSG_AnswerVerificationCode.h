@@ -32,14 +32,14 @@ public:
         return Write("Captcha", new StringData(Value));
     }
 
-    MsgStatus SetCaptchaType(const uint8& Value)
+    MsgStatus SetCaptchaType(const Define::uint8& Value)
     {
-        return Write("CaptchaType", new NumData<uint8>(Value));
+        return Write("CaptchaType", new NumData<Define::uint8>(Value));
     }
 
-    MsgStatus SetLoginTag(const uint8& Value)
+    MsgStatus SetLoginTag(const Define::uint8& Value)
     {
-        return Write("LoginTag", new NumData<uint8>(Value));
+        return Write("LoginTag", new NumData<Define::uint8>(Value));
     }
 
     MsgStatus GetCaptcha(std::string& Value)
@@ -49,14 +49,14 @@ public:
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetCaptchaType(uint8& Value)
+    MsgStatus GetCaptchaType(Define::uint8& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("CaptchaType", pReadValue);
         return pReadValue->ToUInt8(Value);
     }
 
-    MsgStatus GetLoginTag(uint8& Value)
+    MsgStatus GetLoginTag(Define::uint8& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("LoginTag", pReadValue);

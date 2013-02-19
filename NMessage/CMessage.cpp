@@ -6,6 +6,8 @@ namespace VNOC
 namespace Message
 {
 
+using namespace VNOC::Message::Define;
+
 MsgStatus CMessage::Read(
     IN const MsgDataName& name,
     OUT MsgDataValue*& value

@@ -27,12 +27,12 @@ public:
 
     virtual ~MSG_RequestClassInfo(){}
 
-    MsgStatus SetRoomID(const uint32& Value)
+    MsgStatus SetRoomID(const Define::uint32& Value)
     {
-        return Write("RoomID", new NumData<uint32>(Value));
+        return Write("RoomID", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetRoomID(uint32& Value)
+    MsgStatus GetRoomID(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomID", pReadValue);

@@ -5,6 +5,8 @@ namespace VNOC
 namespace Message
 {
 
+using namespace Define;
+
 ArrayData::ArrayData()
 {
 
@@ -44,6 +46,11 @@ void ArrayData::Push( MsgDataValue* pValue )
 template<>
 void ArrayData::Push<std::string>( const std::vector<std::string>& vecArr )
 {
+    if (vecArr.empty())
+    {
+        Push(new StringData(""));
+        return;
+    }
     for (auto It = vecArr.begin(); It != vecArr.end(); It++)
     {
         Push(new StringData(*It));
@@ -53,6 +60,11 @@ void ArrayData::Push<std::string>( const std::vector<std::string>& vecArr )
 template<>
 void ArrayData::Push<uint8>( const std::vector<uint8>& vecArr )
 {
+    if (vecArr.empty())
+    {
+        Push(new NumData<uint8>(0));
+        return;
+    }
     for (auto It = vecArr.begin(); It != vecArr.end(); It++)
     {
         Push(new NumData<uint8>(*It));
@@ -62,6 +74,11 @@ void ArrayData::Push<uint8>( const std::vector<uint8>& vecArr )
 template<>
 void ArrayData::Push<uint16>( const std::vector<uint16>& vecArr )
 {
+    if (vecArr.empty())
+    {
+        Push(new NumData<uint16>(0));
+        return;
+    }
     for (auto It = vecArr.begin(); It != vecArr.end(); It++)
     {
         Push(new NumData<uint16>(*It));
@@ -71,6 +88,11 @@ void ArrayData::Push<uint16>( const std::vector<uint16>& vecArr )
 template<>
 void ArrayData::Push<uint32>( const std::vector<uint32>& vecArr )
 {
+    if (vecArr.empty())
+    {
+        Push(new NumData<uint32>(0));
+        return;
+    }
     for (auto It = vecArr.begin(); It != vecArr.end(); It++)
     {
         Push(new NumData<uint32>(*It));

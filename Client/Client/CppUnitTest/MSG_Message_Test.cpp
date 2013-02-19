@@ -15,6 +15,7 @@
 #include "../../NMessage/BufferMessage.h"
 
 using namespace VNOC::Message;
+using namespace VNOC::Message::Define;
 
 CMessage2Pack g_m2pack;
 CMessage2Parser g_m2parser;
@@ -52,6 +53,7 @@ class MSG_Message_Test : public CppUnit::TestFixture
     CPPUNIT_TEST( MSG_RequestProfileSync_Test );
     CPPUNIT_TEST( MSG_RequestRegister_Test );
     CPPUNIT_TEST( MSG_RequestVerificationCode_Test );
+    CPPUNIT_TEST( MSG_NULL_Test );
     CPPUNIT_TEST_SUITE_END();
 public:
     void setUp()
@@ -355,7 +357,7 @@ public:
         std::string strHeadPortrait;
         std::string strNickName;
         std::string strEmailAddress;
-        TMRr.SetRank(10);
+        TMRr.SetRank(0);
         TMRr.SetHeadForm(20);
         TMRr.SetAutograph("!!!!!!!!!!!!!!!!!!!!!");
         TMRr.SetHeadPortrait("lalala");
@@ -369,7 +371,7 @@ public:
         MSG_RequestRegister TParserRr(parserMsg);
 
         TParserRr.GetRank(Rank);
-        CPPUNIT_ASSERT(Rank == 10);
+        CPPUNIT_ASSERT(Rank == 0);
         TParserRr.GetHeadForm(HeadForm);
         CPPUNIT_ASSERT(HeadForm == 20);
         TParserRr.GetAutograph(strAutograph);
@@ -387,16 +389,151 @@ public:
         CBufferMessage buf;
         std::string strMachineAddress;
         MSG_RequestVerificationCode TMRvc;
-        TMRvc.SetMachineAddress("q q q q q F F");
+        TMRvc.SetMachineAddress("");
 
         g_m2pack.PackMessage(&TMRvc, buf);
         CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
         CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_RequestVerificationCode_Id);
         g_m2parser.Parser(&parserMsg, buf);
-        MSG_RequestVerificationCode TParserRvc(parserMsg);
 
+        MSG_RequestVerificationCode TParserRvc(parserMsg);
         TParserRvc.GetMachineAddress(strMachineAddress);
-        CPPUNIT_ASSERT(strMachineAddress == "q q q q q F F");
+        CPPUNIT_ASSERT(strMachineAddress == "");
+    }
+
+    void MSG_NULL_Test()
+    {
+        //NoArrayData Test NULL
+        CBufferMessage buf;
+        MSG_RequestRegister TMRr;
+        char t[1000] = {0};
+        uint8 Rank = 0;
+        uint8 HeadForm = 0;
+        std::string strAutograph;
+        std::string strHeadPortrait;
+        std::string strNickName;
+        std::string strEmailAddress;
+        //TMRr.SetRank(10);
+        //TMRr.SetHeadForm(20);
+        //TMRr.SetAutograph("!!!!!!!!!!!!!!!!!!!!!");
+        TMRr.SetHeadPortrait("");
+        TMRr.SetNickname("¼ÌÐøyahoooooooooooooooooooooooooooooooooooo");
+        TMRr.SetEmailAddress("123456@123.com");
+
+        g_m2pack.PackMessage(&TMRr, buf);
+        memcpy(t, buf.GetBuffer(), buf.GetSize());
+        CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+        CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_RequestRegister_Id);
+        g_m2parser.Parser(&parserMsg, buf);
+        MSG_RequestRegister TParserRr(parserMsg);
+
+        TParserRr.GetRank(Rank);
+        CPPUNIT_ASSERT(Rank == 0);
+        TParserRr.GetHeadForm(HeadForm);
+        CPPUNIT_ASSERT(HeadForm == 0);
+        TParserRr.GetAutograph(strAutograph);
+        CPPUNIT_ASSERT(strAutograph == "");
+        TParserRr.GetHeadPortrait(strHeadPortrait);
+        CPPUNIT_ASSERT(strHeadPortrait == "");
+        TParserRr.GetNickname(strNickName);
+        CPPUNIT_ASSERT(strNickName == "¼ÌÐøyahoooooooooooooooooooooooooooooooooooo");
+        TMRr.GetEmailAddress(strEmailAddress);
+        CPPUNIT_ASSERT(strEmailAddress == "123456@123.com");
+
+        //ArrayData Test NULL
+        buf.Clear();
+        MSG_AnswerClassList TMAcl;
+        std::vector<uint32> RoomIdList;
+        std::vector<uint32> RoomStateList;
+        std::vector<std::string> RoomNameList;
+        //RoomIdList.push_back(111);
+        //RoomIdList.push_back(1112);
+        //RoomIdList.push_back(11123);
+        TMAcl.SetRoomIdList(RoomIdList);
+        RoomStateList.push_back(111);
+        RoomStateList.push_back(1112);
+        RoomStateList.push_back(1113);
+        TMAcl.SetRoomStateList(RoomStateList);
+        RoomNameList.push_back("");
+        RoomNameList.push_back("");
+        RoomNameList.push_back("");
+        TMAcl.SetRoomNameList(RoomNameList);
+        RoomIdList.clear();
+        RoomNameList.clear();
+        RoomStateList.clear();
+
+        g_m2pack.PackMessage(&TMAcl, buf);
+        CMessage arrparserMsg(CMessage2Parser::GetMsgType(buf));
+        CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_AnswerClassList_Id);
+        g_m2parser.Parser(&arrparserMsg, buf);
+        MSG_AnswerClassList TParserAcl(arrparserMsg);
+
+        TParserAcl.GetRoomIdList(RoomIdList);
+        CPPUNIT_ASSERT(RoomIdList[0] == 0);
+        //CPPUNIT_ASSERT(RoomIdList[1] == 1112);
+        //CPPUNIT_ASSERT(RoomIdList[2] == 11123);
+        TParserAcl.GetRoomStateList(RoomStateList);
+        CPPUNIT_ASSERT(RoomStateList[0] == 111);
+        CPPUNIT_ASSERT(RoomStateList[1] == 1112);
+        CPPUNIT_ASSERT(RoomStateList[2] == 1113);
+        TParserAcl.GetRoomNameList(RoomNameList);
+        CPPUNIT_ASSERT(RoomNameList[0] == "");
+        CPPUNIT_ASSERT(RoomNameList[1] == "");
+        CPPUNIT_ASSERT(RoomNameList[2] == "");
+
+        //ArrayData And NO-ArrayData
+        buf.Clear();
+        MSG_AnswerClassInfo TMAci;
+        std::vector<uint32> PeopListId;
+        TMAci.SetRoomName("À²À²À²");
+        TMAci.SetRoomID(22);
+        TMAci.SetRoomManageId(12);
+        //TMAci.SetRoomPassword("123456789");
+        TMAci.SetRoomRank(10);
+        TMAci.SetRoomPeopleNumMax(1000);
+        TMAci.SetRoomType(25);
+        TMAci.SetRoomState(100);
+        PeopListId.push_back(1);
+        PeopListId.push_back(2);
+        PeopListId.push_back(3);
+        TMAci.SetRoomPeopleListId(PeopListId);
+        PeopListId.clear();
+
+        g_m2pack.PackMessage(&TMAci, buf);
+        CMessage AparserMsg(CMessage2Parser::GetMsgType(buf));
+        CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_AnswerClassInfo_Id);
+        g_m2parser.Parser(&AparserMsg, buf);
+        MSG_AnswerClassInfo TParserAci(AparserMsg);
+
+        uint32 RoomId = 0;
+        uint32 RoomRank = 0;
+        uint32 RoomType = 0;
+        uint32 RoomState = 0;
+        uint32 RoomPeopleNumMax = 0;
+        uint32 RoomManageId = 0;
+        std::string strRoomName;
+        std::string strPassword;
+
+        TParserAci.GetRoomName(strRoomName);
+        CPPUNIT_ASSERT(strRoomName == "À²À²À²");
+        TParserAci.GetRoomID(RoomId);
+        CPPUNIT_ASSERT(RoomId == 22);
+        TParserAci.GetRoomRank(RoomRank);
+        CPPUNIT_ASSERT(RoomRank == 10);
+        TParserAci.GetRoomPeopleNumMax(RoomPeopleNumMax);
+        CPPUNIT_ASSERT(RoomPeopleNumMax == 1000);
+        TParserAci.GetRoomPassword(strPassword);
+        CPPUNIT_ASSERT(strPassword == "");
+        TParserAci.GetRoomState(RoomState);
+        CPPUNIT_ASSERT(RoomState == 100);
+        TParserAci.GetRoomManageId(RoomManageId);
+        CPPUNIT_ASSERT(RoomManageId == 12);
+        TParserAci.GetRoomType(RoomType);
+        CPPUNIT_ASSERT(RoomType == 25);
+        TParserAci.GetRoomPeopleListId(PeopListId);
+        CPPUNIT_ASSERT(PeopListId[0] == 1);
+        CPPUNIT_ASSERT(PeopListId[1] == 2);
+        CPPUNIT_ASSERT(PeopListId[2] == 3);
     }
 };
 

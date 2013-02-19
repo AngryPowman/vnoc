@@ -61,19 +61,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\NMessage\ParserMessageXML.cpp" />
-    <ClCompile Include="..\..\..\NMessage\XMLOject.cpp" />
-    <ClCompile Include="..\..\..\TinyXML\tinystr.cpp" />
-    <ClCompile Include="..\..\..\TinyXML\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\TinyXML\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\TinyXML\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\NMessage\XMLObject.cpp" />
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinystr.cpp" />
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MessageFile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\NMessage\ParaserMessageXML.h" />
+    <ClInclude Include="..\..\..\NMessage\ParserMessageXML.h" />
     <ClInclude Include="..\..\..\NMessage\XMLObject.h" />
-    <ClInclude Include="..\..\..\TinyXML\tinystr.h" />
-    <ClInclude Include="..\..\..\TinyXML\tinyxml.h" />
+    <ClInclude Include="..\..\..\ThirdLibs\TinyXML\tinystr.h" />
+    <ClInclude Include="..\..\..\ThirdLibs\TinyXML\tinyxml.h" />
     <ClInclude Include="Dispose.hpp" />
     <ClInclude Include="MessageFile.h" />
   </ItemGroup>

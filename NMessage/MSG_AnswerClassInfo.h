@@ -27,14 +27,14 @@ public:
 
     virtual ~MSG_AnswerClassInfo(){}
 
-    MsgStatus SetRoomID(const uint32& Value)
+    MsgStatus SetRoomID(const Define::uint32& Value)
     {
-        return Write("RoomID", new NumData<uint32>(Value));
+        return Write("RoomID", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus SetRoomManageId(const uint32& Value)
+    MsgStatus SetRoomManageId(const Define::uint32& Value)
     {
-        return Write("RoomManageId", new NumData<uint32>(Value));
+        return Write("RoomManageId", new NumData<Define::uint32>(Value));
     }
 
     MsgStatus SetRoomName(const std::string& Value)
@@ -47,41 +47,41 @@ public:
         return Write("RoomPassword", new StringData(Value));
     }
 
-    MsgStatus SetRoomPeopleListId(const std::vector<uint32>& Value)
+    MsgStatus SetRoomPeopleListId(const std::vector<Define::uint32>& Value)
     {
         ArrayData* ValueArr = new ArrayData;
-        ValueArr->Push<uint32>(Value);
+        ValueArr->Push<Define::uint32>(Value);
         return WriteArr("RoomPeopleListId", ValueArr);
     }
 
-    MsgStatus SetRoomPeopleNumMax(const uint32& Value)
+    MsgStatus SetRoomPeopleNumMax(const Define::uint32& Value)
     {
-        return Write("RoomPeopleNumMax", new NumData<uint32>(Value));
+        return Write("RoomPeopleNumMax", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus SetRoomRank(const uint32& Value)
+    MsgStatus SetRoomRank(const Define::uint32& Value)
     {
-        return Write("RoomRank", new NumData<uint32>(Value));
+        return Write("RoomRank", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus SetRoomState(const uint32& Value)
+    MsgStatus SetRoomState(const Define::uint32& Value)
     {
-        return Write("RoomState", new NumData<uint32>(Value));
+        return Write("RoomState", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus SetRoomType(const uint32& Value)
+    MsgStatus SetRoomType(const Define::uint32& Value)
     {
-        return Write("RoomType", new NumData<uint32>(Value));
+        return Write("RoomType", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetRoomID(uint32& Value)
+    MsgStatus GetRoomID(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomID", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomManageId(uint32& Value)
+    MsgStatus GetRoomManageId(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomManageId", pReadValue);
@@ -102,36 +102,36 @@ public:
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetRoomPeopleListId(std::vector<uint32>& Value)
+    MsgStatus GetRoomPeopleListId(std::vector<Define::uint32>& Value)
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomPeopleListId", pReadValueArr);
-        pReadValueArr->GetArr_vec<uint32>(Value);
+        pReadValueArr->GetArr_vec<Define::uint32>(Value);
         return MsgStatus_Ok;
     }
 
-    MsgStatus GetRoomPeopleNumMax(uint32& Value)
+    MsgStatus GetRoomPeopleNumMax(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomPeopleNumMax", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomRank(uint32& Value)
+    MsgStatus GetRoomRank(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomRank", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomState(uint32& Value)
+    MsgStatus GetRoomState(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomState", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomType(uint32& Value)
+    MsgStatus GetRoomType(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomType", pReadValue);

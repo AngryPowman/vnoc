@@ -14,19 +14,19 @@ public:
     CBufferMessage();
     virtual ~CBufferMessage();
 
-    uint8* Alloc(IN uint32 nSize);
+    Define::uint8* Alloc(IN Define::uint32 nSize);
 
-    uint8* GetBuffer() const;
+    Define::uint8* GetBuffer() const;
 
-    uint32 GetSize() const;
+    Define::uint32 GetSize() const;
 
-    const CBufferMessage& Copy(IN const void* Src, uint32 nSize);
+    const CBufferMessage& Copy(IN const void* Src, Define::uint32 nSize);
 
     const CBufferMessage& Copy(IN const CBufferMessage& Src);
 
-    void SetValue(uint8 Value);
+    void SetValue(Define::uint8 Value);
 
-    void Attach(IN void* lpBuff, IN uint32 nSize);
+    void Attach(IN void* lpBuff, IN Define::uint32 nSize);
 
     void Detach();
 
@@ -39,8 +39,8 @@ private:
 
 private:
     DISALLOW_COPY_AND_ASSIGN(CBufferMessage);
-    uint32 m_Size;
-    uint8* m_pBuffer;
+    Define::uint32 m_Size;
+    Define::uint8* m_pBuffer;
     bool m_attachtag;
 };
 

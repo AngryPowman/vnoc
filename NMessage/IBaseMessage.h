@@ -19,21 +19,21 @@ public:
 
 public:
     virtual MsgStatus Read(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         OUT MsgDataValue*& value) = 0;
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName& name,
+        IN  const Define::MsgDataName& name,
         OUT ArrayData*& value) = 0;
 
     virtual int MsgId() = 0;
 
     virtual MsgStatus Write(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN MsgDataValue* pValue) = 0;
 
     virtual MsgStatus WriteArr(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN ArrayData* pValue) = 0;
 
     virtual bool IsValid() = 0;

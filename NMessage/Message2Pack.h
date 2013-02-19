@@ -33,19 +33,23 @@ private:
         IReadMessage* pMsg,
         std::string ParamName,
         std::vector<int>& vecParamLen,
-        std::vector<std::vector<uint8> >& vecParamList);
+        std::vector<std::vector<Define::uint8> >& vecParamList);
     MsgStatus _PushMessageListParam(
         XMLItem& item,
         IReadMessage* pMsg,
         std::string ParamName,
         std::vector<int>& vecParamLen,
-        std::vector<std::vector<uint8> >& vecParamList);
+        std::vector<std::vector<Define::uint8> >& vecParamList);
     MsgStatus _PackParam(
         XMLObject* pXmlObj,
         CBufferMessage& pBuf,
         int& nPackPos,
         std::vector<int>& vecParamLen,
-        std::vector<std::vector<uint8> >& vecParamList);
+        std::vector<std::vector<Define::uint8> >& vecParamList);
+    MsgStatus _Occupy(
+        XMLItem& item,
+        std::vector<int>& vecParamLen,
+        std::vector<std::vector<Define::uint8> >& vecParamList);
 };
 
 }// namespace Message

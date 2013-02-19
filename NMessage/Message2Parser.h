@@ -25,7 +25,7 @@ private:
     MsgStatus _ParserHead(IWriteMessage* pMsg, const CBufferMessage& pBuf);
     MsgStatus _ParserTail(IWriteMessage* pMsg, const CBufferMessage& pBuf);
     MsgStatus _ParserParam(IWriteMessage* pMsg, const CBufferMessage& pBuf);
-    int _ByteToInt(uint8* pData);
+    int _ByteToInt(Define::uint8* pData);
 
 private:
     int m_MsgId;

@@ -11,19 +11,22 @@ public:
         protocol_->RegisterMessageHandler(this);
     }
 
-    virtual MSGTYPE getMessageType() const
+    virtual VMsg getMessageType() const
     {
-        return MSG_RLI_TYPE;
+        return MSG_RequestLogin_Id;
     }
 
-    virtual int operator()(const CMessage *msg, MessageContext *ctx)
+    virtual int operator()(IReadMessage *msg, MessageContext *ctx)
     {
 		int LoginResult;
-        MSG_ALI aliMessage;
-		const MSG_RLI * rliMessage = dynamic_cast<const MSG_RLI *>(msg);
+        MSG_AnswerLogin aliMessage;
+        std::string strAccountNumber;
+        std::string strPassword;
+		MSG_RequestLogin rliMessage(*msg);
 		userinfo UserInfo = {0};
-
-		LoginResult = CUserManage::GetInstance()->Authenticate((char*)rliMessage->GetAccountNumber(), (char*)rliMessage->GetPassword(), &UserInfo);
+        rliMessage.GetAccountNumber(strAccountNumber);
+        rliMessage.GetPassword(strPassword);
+        LoginResult = CUserManage::GetInstance()->Authenticate(strAccountNumber.c_str(), strPassword.c_str(), &UserInfo);
 		if (LOGIN_OK == LoginResult)
 		{
 		aliMessage.SetLoginResult(0); //µÇÂ½³É¹¦

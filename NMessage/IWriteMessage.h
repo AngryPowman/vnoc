@@ -20,11 +20,11 @@ public:
 
 public:
     virtual MsgStatus Write(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN MsgDataValue* pValue) = 0;
 
     virtual MsgStatus WriteArr(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN ArrayData* pValue) = 0;
 };
 

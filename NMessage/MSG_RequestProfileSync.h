@@ -32,9 +32,9 @@ public:
         return Write("Autograph", new StringData(Value));
     }
 
-    MsgStatus SetHeadForm(const uint8& Value)
+    MsgStatus SetHeadForm(const Define::uint8& Value)
     {
-        return Write("HeadForm", new NumData<uint8>(Value));
+        return Write("HeadForm", new NumData<Define::uint8>(Value));
     }
 
     MsgStatus SetHeadPortrait(const std::string& Value)
@@ -47,9 +47,9 @@ public:
         return Write("Nickname", new StringData(Value));
     }
 
-    MsgStatus SetRank(const uint8& Value)
+    MsgStatus SetRank(const Define::uint8& Value)
     {
-        return Write("Rank", new NumData<uint8>(Value));
+        return Write("Rank", new NumData<Define::uint8>(Value));
     }
 
     MsgStatus GetAutograph(std::string& Value)
@@ -59,7 +59,7 @@ public:
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetHeadForm(uint8& Value)
+    MsgStatus GetHeadForm(Define::uint8& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("HeadForm", pReadValue);
@@ -80,7 +80,7 @@ public:
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetRank(uint8& Value)
+    MsgStatus GetRank(Define::uint8& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("Rank", pReadValue);

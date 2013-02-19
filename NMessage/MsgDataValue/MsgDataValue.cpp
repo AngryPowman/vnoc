@@ -5,6 +5,8 @@ namespace VNOC
 namespace Message
 {
 
+using namespace Define;
+
 MsgDataValue::MsgDataValue()
 {
 
