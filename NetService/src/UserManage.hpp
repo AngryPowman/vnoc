@@ -29,14 +29,11 @@ public:
     }
     int Authenticate(const char* szUser,const char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
     {
-        if (szUser == NULL)
+        if (szUser == NULL || strcmp(szUser, "") == 0)
         {
             return TEST_FALSE;
         }
-        if (strcmp(szUser, "") == 0 || strcmp(pPassword, "") == 0)
-        {
-            return TEST_FALSE;
-        }
+
         strncpy(pUserInfo->strUser, szUser, 40);
         
         if(insertOnlineUser(szUser) == false)

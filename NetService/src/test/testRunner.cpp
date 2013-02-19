@@ -5,7 +5,7 @@
 #include <cppunit/TestResult.h>
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/XmlOutputter.h>
-#include <ostream>
+#include <fstream>
 using namespace std;
 
 int main( int argc, char **argv)
