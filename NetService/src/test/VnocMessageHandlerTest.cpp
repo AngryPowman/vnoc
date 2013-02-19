@@ -55,8 +55,8 @@ public:
         protocol_ = new VnocProtocol();
         CUserManage::GetInstance()->initial(&us);
         std::string strPath;
-        //CPPUNIT_ASSERT(_TDisposePath(L"NewMsgdef.xml", strPath) == true);
-        CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile("../NewMsgdef.xml") == MsgStatus_Ok);
+        CPPUNIT_ASSERT(_TDisposePath(L"../NewMsgdef.xml", strPath) == true);
+        CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile(strPath.c_str()) == MsgStatus_Ok);
     }
     void tearDown()
     {
