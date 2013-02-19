@@ -10,18 +10,20 @@ public:
     {
         protocol_->RegisterMessageHandler(this);
     }
-    virtual MSGTYPE getMessageType() const
+    virtual VMsg getMessageType() const
     {
-        return MSG_RCL_TYPE;
+        return MSG_RequestClassList_Id;
     }
-    virtual int operator()(const CMessage *msg, MessageContext *ctx)
+    virtual int operator()(IReadMessage *msg, MessageContext *ctx)
     {
         std::cout << "handle RclMessageHandler" << endl;
-        MSG_ACL aclMessage;
-        const MSG_RCL * rclMessage = dynamic_cast<const MSG_RCL *>(msg);
+        MSG_AnswerClassList aclMessage;
+        MSG_RequestClassList rclMessage(*msg);
 
         //temporary room data
-        std::vector<int32> roomList;
+        std::vector<uint32> roomList;
+        std::vector<std::string> roomNameList;
+        std::vector<uint32> roomStateList;
         //roomList.resize(100);
         for (uint32 i = 0; i < 200; ++i)
         {
@@ -30,10 +32,13 @@ public:
             //room.setPoolObjId(i);
             //room.setIsValid(true);
             roomList.push_back(10000 + i);
+            roomNameList.push_back("!!!");
+            roomStateList.push_back(i);
         }
 
-        aclMessage.SetRoomList(roomList);
-        
+        aclMessage.SetRoomIdList(roomList);
+        aclMessage.SetRoomNameList(roomNameList);
+        aclMessage.SetRoomStateList(roomStateList);
         protocol_->SendVnocMessage(&aclMessage, ctx);
         return 1;
     }

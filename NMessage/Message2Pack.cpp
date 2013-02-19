@@ -6,6 +6,8 @@ namespace VNOC
 namespace Message
 {
 
+using namespace VNOC::Message::Define;
+
 CMessage2Pack::CMessage2Pack()
 {
 
@@ -154,7 +156,14 @@ int CMessage2Pack::_GetStringSize( XMLItem& item, MsgDataValue* pReadStr )
     std::string strData;
     if (pReadStr && pReadStr->ToStr(strData) == MsgStatus_Ok)
     {
-        return 4 + strData.size();
+        if (strData.empty())
+        {
+            return 4 + 1;
+        }
+        else
+        {
+            return 4 + strData.size();
+        }
     }
     else
     {
@@ -173,6 +182,10 @@ int CMessage2Pack::_GetArrSize( XMLItem& item, IReadMessage* pMsg )
         switch (item.GetType())
         {
         case MsgDataType_String:
+            if (pReadArr == NULL)
+            {
+                return 1;
+            }
             for (std::vector<MsgDataValue*>::const_iterator it = pReadArr->Begin();
                 it != pReadArr->End();
                 ++it)
@@ -186,12 +199,24 @@ int CMessage2Pack::_GetArrSize( XMLItem& item, IReadMessage* pMsg )
             }
             break;
         case MsgDataType_Uint8:
+            if (pReadArr == NULL)
+            {
+                return 1;
+            }
             nSize = pReadArr->Size();
             break;
         case MsgDataType_Uint16:
+            if (pReadArr == NULL)
+            {
+                return 2 * 1;
+            }
             nSize = 2 * pReadArr->Size();
             break;
         case MsgDataType_Uint32:
+            if (pReadArr == NULL)
+            {
+                return 4 * 1;
+            }
             nSize = 4 * pReadArr->Size();
             break;
         }
@@ -218,7 +243,7 @@ MsgStatus CMessage2Pack::_PushMessageDataParam(
     pMsg->Read(ParamName, pReadValue);
     if (pReadValue == NULL)
     {
-        return MsgStatus_Err;
+        return _Occupy(item, vecParamLen, vecParamList);
     }
     switch (item.GetType())
     {
@@ -287,14 +312,17 @@ MsgStatus CMessage2Pack::_PushMessageListParam(
     uint16 uint16Param = 0;
     uint32 uint32Param = 0;
     pMsg->ReadArr(ParamName, pReadArrValue);
-    vecParamLen.push_back(pReadArrValue->Size());
-    if (pReadArrValue->Empty())
+    if (pReadArrValue == NULL)
     {
         vecParamLen.push_back(1);
-        vecParam.push_back(MsgPack_Unk);
-        return MsgStatus_Ok;
+        return _Occupy(item, vecParamLen, vecParamList);
     }
-
+    else if (pReadArrValue->Empty())
+    {
+        vecParamLen.push_back(1);
+        return _Occupy(item, vecParamLen, vecParamList);
+    }
+    vecParamLen.push_back(pReadArrValue->Size());
     switch(item.GetType())
     {
     case MsgDataType_String:
@@ -304,9 +332,16 @@ MsgStatus CMessage2Pack::_PushMessageListParam(
             )
         {
             static_cast<MsgDataValue*>(*It)->ToStr(strParam);
-            vecParam.resize(strParam.size());
-            vecParamLen.push_back(strParam.length());
-            std::copy(strParam.begin(), strParam.end(), vecParam.begin());
+            if (!strParam.empty())
+            {
+                vecParam.resize(strParam.size());
+                vecParamLen.push_back(strParam.size());
+                std::copy(strParam.begin(), strParam.end(), vecParam.begin());
+            }
+            else
+            {
+                vecParamLen.push_back(1);
+            }
             vecParamList.push_back(vecParam);
             vecParam.clear();
         }
@@ -380,16 +415,16 @@ int CMessage2Pack::_PackHead(int PackMsgId, CBufferMessage& pBuf)
     ///>版本号 暂用一个字节存储
     Buff[nPackPos] = MSG_VER;
     nPackPos++;
-    ///>消息ID uint32
-    pByte = (uint8*)&PackMsgId;
-    for (uint32 index = 0; index < MSG_CLASS_COMMAND; index++)
+    ///>包体大小 uint32
+    pByte = (uint8*)&nPackSize;
+    for (uint32 index = 0; index < MSG_CLASS_LEN; index++)
     {
         Buff[nPackPos] = pByte[index];
         nPackPos++;
     }
-    ///>包体大小 uint32
-    pByte = (uint8*)&nPackSize;
-    for (uint32 index = 0; index < MSG_CLASS_LEN; index++)
+    ///>消息ID uint32
+    pByte = (uint8*)&PackMsgId;
+    for (uint32 index = 0; index < MSG_CLASS_COMMAND; index++)
     {
         Buff[nPackPos] = pByte[index];
         nPackPos++;
@@ -421,6 +456,10 @@ MsgStatus CMessage2Pack::_PackParam(
     )
 {
     if (pXmlObj == NULL)
+    {
+        return MsgStatus_Err;
+    }
+    if (vecParamLen.empty() || vecParamList.empty())
     {
         return MsgStatus_Err;
     }
@@ -495,10 +534,18 @@ MsgStatus CMessage2Pack::_PackParam(
                         Buff[nPackPos] = pByte[index];
                         nPackPos++;
                     }
-                    for (uint32 index = 0; index < vecParamList[nPackParamIndex].size(); index++)
+                    if (vecParamList[nPackParamIndex].empty())
                     {
-                        Buff[nPackPos] = vecParamList[nPackParamIndex][index];
+                        Buff[nPackPos] = MsgPack_Unk;
                         nPackPos++;
+                    }
+                    else
+                    {
+                        for (uint32 index = 0; index < vecParamList[nPackParamIndex].size(); index++)
+                        {
+                            Buff[nPackPos] = vecParamList[nPackParamIndex][index];
+                            nPackPos++;
+                        }
                     }
                 }
                 else
@@ -520,6 +567,45 @@ MsgStatus CMessage2Pack::_PackParam(
             return MsgStatus_Err;
         }
     }
+    return MsgStatus_Ok;
+}
+
+MsgStatus CMessage2Pack::_Occupy(
+    XMLItem& item,
+    std::vector<int>& vecParamLen,
+    std::vector<std::vector<Define::uint8> >& vecParamList
+    )
+{
+    std::vector<uint8> vecParam;
+    switch (item.GetType())
+    {
+    case MsgDataType_String:
+        vecParamLen.push_back(1);
+        vecParam.push_back(MsgPack_Unk);
+        break;
+    case MsgDataType_Uint8:
+        vecParamLen.push_back(sizeof(uint8));
+        for (int index = 0; index < sizeof(uint8); index++)
+        {
+            vecParam.push_back(MsgPack_Unk);
+        }
+        break;
+    case MsgDataType_Uint16:
+        vecParamLen.push_back(sizeof(uint16));
+        for (int index = 0; index < sizeof(uint16); index++)
+        {
+            vecParam.push_back(MsgPack_Unk);
+        }
+        break;
+    case MsgDataType_Uint32:
+        vecParamLen.push_back(sizeof(uint32));
+        for (int index = 0; index < sizeof(uint32); index++)
+        {
+            vecParam.push_back(MsgPack_Unk);
+        }
+        break;
+    }
+    vecParamList.push_back(vecParam);
     return MsgStatus_Ok;
 }
 

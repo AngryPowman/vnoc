@@ -18,21 +18,21 @@ public:
     virtual ~CMessage();
 
     virtual MsgStatus Read(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         OUT MsgDataValue*& value);
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName& name,
+        IN  const Define::MsgDataName& name,
         OUT ArrayData*& value);
 
     virtual int MsgId();
 
     virtual MsgStatus Write(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN MsgDataValue* pValue);
 
     virtual MsgStatus WriteArr(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         IN ArrayData* pValue);
 
     virtual bool IsValid();
@@ -52,8 +52,8 @@ private:
     void _InitDataMap();
     void _ReleaseMap();
 
-    std::map<MsgDataName, MsgDataValue*> m_mapMsgData;
-    std::map<MsgDataName, ArrayData*>    m_mapMsgDataArr;
+    std::map<Define::MsgDataName, MsgDataValue*> m_mapMsgData;
+    std::map<Define::MsgDataName, ArrayData*>    m_mapMsgDataArr;
     XMLObject* m_xmlObject;
 };
 

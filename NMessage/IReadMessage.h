@@ -20,11 +20,11 @@ public:
 
 public:
     virtual MsgStatus Read(
-        IN const MsgDataName& name,
+        IN const Define::MsgDataName& name,
         OUT MsgDataValue*& value) = 0;
 
     virtual MsgStatus ReadArr(
-        IN  const MsgDataName& name,
+        IN  const Define::MsgDataName& name,
         OUT ArrayData*& value) = 0;
 
     virtual int MsgId() = 0;

@@ -14,52 +14,52 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="头文件\TinyXml">
-      <UniqueIdentifier>{49448c83-b42b-4a69-a937-1f889aaad127}</UniqueIdentifier>
+      <UniqueIdentifier>{17c480fe-b060-471c-825c-f59cdf6ac549}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NMessage\ParserMessageXML.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NMessage\XMLOject.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\TinyXML\tinystr.cpp">
-      <Filter>头文件\TinyXml</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\TinyXML\tinyxml.cpp">
-      <Filter>头文件\TinyXml</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\TinyXML\tinyxmlerror.cpp">
-      <Filter>头文件\TinyXml</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\TinyXML\tinyxmlparser.cpp">
-      <Filter>头文件\TinyXml</Filter>
-    </ClCompile>
     <ClCompile Include="MessageFile.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinystr.cpp">
+      <Filter>头文件\TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinyxml.cpp">
+      <Filter>头文件\TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp">
+      <Filter>头文件\TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
+      <Filter>头文件\TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NMessage\XMLObject.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NMessage\ParserMessageXML.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\NMessage\ParaserMessageXML.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NMessage\XMLObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\TinyXML\tinystr.h">
-      <Filter>头文件\TinyXml</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\TinyXML\tinyxml.h">
-      <Filter>头文件\TinyXml</Filter>
-    </ClInclude>
     <ClInclude Include="MessageFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Dispose.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ThirdLibs\TinyXML\tinystr.h">
+      <Filter>头文件\TinyXml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ThirdLibs\TinyXML\tinyxml.h">
+      <Filter>头文件\TinyXml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NMessage\ParserMessageXML.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NMessage\XMLObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

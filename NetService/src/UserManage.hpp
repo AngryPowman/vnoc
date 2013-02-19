@@ -24,12 +24,16 @@ public:
 	{
 		_us = us;
 	}
-	int Authenticate(char* szUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
+	int Authenticate(const char* szUser,const char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
 	{
 		if (szUser == NULL)
 		{
 			return TEST_FALSE;
 		}
+        if (strcmp(szUser, "") == 0 || strcmp(pPassword, "") == 0)
+        {
+            return TEST_FALSE;
+        }
         strncpy(pUserInfo->strUser, szUser, 40);
         return LOGIN_OK;
 		if ( !_us->IfUserExist(szUser) )//账号是否存在 查数据库

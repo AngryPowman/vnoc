@@ -15,17 +15,17 @@ public:
     NumData(TUIntType Value) : m_Value(Value) {}
     virtual ~NumData() {}
 
-    MsgStatus ToUInt8(TUIntType& Value) {return MsgStatus_Err;}
+    MsgStatus ToUInt8(Define::uint8& Value) {return MsgStatus_Err;}
 
-    MsgStatus ToUInt16(uint16& Value) {return MsgStatus_Err;}
+    MsgStatus ToUInt16(Define::uint16& Value) {return MsgStatus_Err;}
 
-    MsgStatus ToUInt32(uint32& Value) {return MsgStatus_Err;}
+    MsgStatus ToUInt32(Define::uint32& Value) {return MsgStatus_Err;}
 
-    MsgStatus ToInt8(int8& Value) {return MsgStatus_Err;}
+    MsgStatus ToInt8(Define::int8& Value) {return MsgStatus_Err;}
 
-    MsgStatus ToInt16(int16& Value) {return MsgStatus_Err;}
+    MsgStatus ToInt16(Define::int16& Value) {return MsgStatus_Err;}
 
-    MsgStatus ToInt32(int32& Value) {return MsgStatus_Err;}
+    MsgStatus ToInt32(Define::int32& Value) {return MsgStatus_Err;}
 
     void SetValue(IN TUIntType& Value)
     {

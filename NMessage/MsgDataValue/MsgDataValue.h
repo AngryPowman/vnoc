@@ -16,17 +16,17 @@ public:
 
     virtual MsgStatus ToStr(OUT std::string& Value);
 
-    virtual MsgStatus ToUInt8(OUT uint8& Value);
+    virtual MsgStatus ToUInt8(OUT Define::uint8& Value);
 
-    virtual MsgStatus ToUInt16(OUT uint16& Value);
+    virtual MsgStatus ToUInt16(OUT Define::uint16& Value);
 
-    virtual MsgStatus ToUInt32(OUT uint32& Value);
+    virtual MsgStatus ToUInt32(OUT Define::uint32& Value);
 
-    virtual MsgStatus ToInt8(OUT int8& Value);
+    virtual MsgStatus ToInt8(OUT Define::int8& Value);
 
-    virtual MsgStatus ToInt16(OUT int16& Value);
+    virtual MsgStatus ToInt16(OUT Define::int16& Value);
 
-    virtual MsgStatus ToInt32(OUT int32& Value);
+    virtual MsgStatus ToInt32(OUT Define::int32& Value);
 };
 
 }// namespace Message

@@ -1,10 +1,12 @@
 
-#include "../../Message/MessageParser.h"
-#include "../../Message/PackMessage.h"
+#include "../../NMessage/Message2Parser.h"
+#include "../../NMessage/Message2Pack.h"
+#include "../../NMessage/BufferMessage.h"
 #include <ezlogger_headers.hpp>
 #include "VnocProtocol.hpp"
 const size_t MAX_PACKAGE_LEN = 1024*1024U;
 using namespace std;
+using namespace VNOC::Message;
 template <typename ConnectionT>
 VnocMessageSocketHandler<ConnectionT>::VnocMessageSocketHandler(ConnectionT *connection):connection_(connection)
 {
@@ -42,7 +44,7 @@ void VnocMessageSocketHandler<ConnectionT>::ReadHeaderHandler(const asio::error_
         delete this;
         return;
     }
-    if (bytes_transferred != HEADER_LEN) {
+    if (bytes_transferred != MSG_HEAD_LEN) {
         EZLOGGERVLSTREAM(axter::log_often)<<"header lenth miss match"<<endl;
         readHeader();
         return;
@@ -52,8 +54,8 @@ void VnocMessageSocketHandler<ConnectionT>::ReadHeaderHandler(const asio::error_
         readHeader();
         return;
 	}
-    size_t package_len = htonl(*(int *)(headerData_+4));
-    if (package_len <= HEADER_LEN) {
+    size_t package_len = *(int *)(headerData_ + 2);
+    if (package_len <= MSG_HEAD_LEN) {
         EZLOGGERVLSTREAM(axter::log_often)<<"package_len <= HEAD_LEN"<<endl;
         readHeader();
         return;
@@ -62,11 +64,11 @@ void VnocMessageSocketHandler<ConnectionT>::ReadHeaderHandler(const asio::error_
         EZLOGGERVLSTREAM(axter::log_often)<<"package_len > MAX_PACKAGE_LEN"<<endl;
         readHeader();
         return;
-    } 
+    }
     char *messageBuffer ( new char[package_len]);
-    memcpy(messageBuffer, headerData_, HEADER_LEN);
+    memcpy(messageBuffer, headerData_, MSG_HEAD_LEN);
     EZLOGGERVLSTREAM(axter::log_often)<<"get correct header, lenth:"<<package_len<<endl;
-    connection_->recv(&messageBuffer[HEADER_LEN], package_len - HEADER_LEN, 
+    connection_->recv(&messageBuffer[MSG_HEAD_LEN], package_len - MSG_HEAD_LEN, 
         std::bind(&VnocMessageSocketHandler::ReadBodyHandler, this, messageBuffer,
             std::placeholders::_1,
             std::placeholders::_2));
@@ -75,22 +77,24 @@ void VnocMessageSocketHandler<ConnectionT>::ReadHeaderHandler(const asio::error_
 template <typename ConnectionT>
 void VnocMessageSocketHandler<ConnectionT>::ReadBodyHandler(char *messageBuffer, const asio::error_code& error, size_t bytes_transferred){
     EZLOGGERVLSTREAM(axter::log_often)<<"received: "<<bytes_transferred<<endl;
-    std::unique_ptr<char[]> safe_buf(messageBuffer);
+    CBufferMessage safe_buf;
+    safe_buf.Copy(messageBuffer, bytes_transferred + MSG_HEAD_LEN);
     if (error) {
         delete this;
         return;
     }
     //process the message here
     EZLOGGERVLSTREAM(axter::log_often)<<"receve message body"<<endl;
-    CMessageParser parser;
-    std::unique_ptr<CMessage> msg(parser.Parse((byte*)safe_buf.get(), bytes_transferred + HEADER_LEN));
+    CMessage2Parser m2Parser;
+    CMessage msg(CMessage2Parser::GetMsgType(safe_buf));
+    m2Parser.Parser(&msg, safe_buf);
     int ret=0;
-    if (msg){
-        int type = msg->GetMessageType();
+    if (msg.IsValid()){
+        int type = msg.MsgId();
         EZLOGGERVLSTREAM(axter::log_often)<<"message type: "<<type<<endl;
-        auto handlers = protocol_->getHandler((MSGTYPE)type);
-        for(auto i = handlers.begin(); i != handlers.end(); ++i){
-            ret = (**i)(msg.get(), this->ctx_) || ret;
+        auto handlers = protocol_->getHandler((VMsg)type);
+        for(auto message_handler = handlers.begin(); message_handler != handlers.end(); ++message_handler){
+            ret = (**message_handler)(&msg, this->ctx_) || ret;
         }
     }
     //wait for next message
@@ -105,17 +109,20 @@ void VnocMessageSocketHandler<ConnectionT>::SendHandler(smart_buf buffer, const 
 }
 
  template <typename ConnectionT>
-void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(const CMessage *msg)
+void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(IReadMessage *msg)
 {
-    PackMessage packer;
-    size_t length = packer.GetMessageLen(msg);
+    CMessage2Pack m2Pack;
+    CBufferMessage PackBuff;
+    m2Pack.PackMessage(msg, PackBuff);
+    size_t length = PackBuff.GetSize();
     assert(length != 0);
+    assert(PackBuff.GetBuffer() != NULL);
     smart_buf pack(new char[length]);
-    packer.Pack(msg, (byte*)pack, length);
+    memcpy((char*)pack, PackBuff.GetBuffer(), length);
     char *buf = pack;
     connection_->send(buf, length,
         std::bind(&VnocMessageSocketHandler::SendHandler, this, pack,
             std::placeholders::_1,
             std::placeholders::_2));
-    EZLOGGERVLSTREAM(axter::log_often)<<"send vnoc message type:"<< msg->GetMessageType()<<" lenght: "<<length<<endl;
+    EZLOGGERVLSTREAM(axter::log_often)<<"send vnoc message type:"<< msg->MsgId()<<" lenght: "<<length<<endl;
 }

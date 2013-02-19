@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Message">
+      <UniqueIdentifier>{4fde6400-70fe-44a3-adac-64bb5050f940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Message\MsgDataValue">
+      <UniqueIdentifier>{76b98a06-4d93-40c6-83c8-9ec3980b8efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tinyxml">
+      <UniqueIdentifier>{2a5c846d-5123-4a5d-97e9-bc6275cb280c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\testRunner.cpp">
@@ -39,17 +48,100 @@
     <ClCompile Include="..\..\UserManage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Message\BaseMessage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Message\MessageParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Message\PackMessage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\RoomPoolTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\MsgDataValue\ArrayData.cpp">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\MsgDataValue\MsgDataValue.cpp">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\MsgDataValue\StringData.cpp">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\BufferMessage.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\CMessage.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\Message2Pack.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\Message2Parser.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\ParserMessageXML.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\NMessage\XMLObject.cpp">
+      <Filter>Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinystr.cpp">
+      <Filter>Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxml.cpp">
+      <Filter>Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp">
+      <Filter>Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
+      <Filter>Tinyxml</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\ArrayData.h">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\MsgDataValue.h">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\NumData.hpp">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\NumData_t.hpp">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\StringData.h">
+      <Filter>Message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\BufferMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\CMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\IBaseMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\IReadMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\IWriteMessage.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\Message2Pack.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\Message2Parser.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\MessageDef.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\ParserMessageXML.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\NMessage\XMLObject.h">
+      <Filter>Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinystr.h">
+      <Filter>Tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinyxml.h">
+      <Filter>Tinyxml</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

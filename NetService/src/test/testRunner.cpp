@@ -1,4 +1,4 @@
-#include "../../ThirdLibs/VisualLeakDetector/include/vld.h"
+//#include "../../ThirdLibs/VisualLeakDetector/include/vld.h"
 
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>

@@ -37,23 +37,14 @@
     <ClInclude Include="src\VnocMessageSocketHandler.hpp">
       <Filter>service</Filter>
     </ClInclude>
-    <ClInclude Include="..\Message\BaseMessage.h">
-      <Filter>message</Filter>
-    </ClInclude>
     <ClInclude Include="src\Config.hpp">
       <Filter>config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Message\MessageParser.h">
-      <Filter>message</Filter>
     </ClInclude>
     <ClInclude Include="src\VnocProtocol.hpp">
       <Filter>service</Filter>
     </ClInclude>
     <ClInclude Include="src\Common.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Message\MSG_UNION.h">
-      <Filter>message</Filter>
     </ClInclude>
     <ClInclude Include="src\SQLUserStorage.h">
       <Filter>database</Filter>
@@ -82,8 +73,59 @@
     <ClInclude Include="src\util.hpp">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Message\PackMessage.h">
+    <ClInclude Include="..\NMessage\Message2Pack.h">
       <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\Message2Parser.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\MessageUnion.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\BufferMessage.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\MsgDataValue\ArrayData.h">
+      <Filter>message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\MsgDataValue\MsgDataValue.h">
+      <Filter>message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\MsgDataValue\NumData.hpp">
+      <Filter>message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\MsgDataValue\NumData_t.hpp">
+      <Filter>message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\MsgDataValue\StringData.h">
+      <Filter>message\MsgDataValue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\CMessage.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\IBaseMessage.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\IReadMessage.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\IWriteMessage.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\MessageDef.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\ParserMessageXML.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NMessage\XMLObject.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdLibs\TinyXML\tinystr.h">
+      <Filter>Tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdLibs\TinyXML\tinyxml.h">
+      <Filter>Tinyxml</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -133,9 +175,6 @@
       <Filter>service</Filter>
     </ClCompile>
     <ClCompile Include="src\VNOCServer.cpp" />
-    <ClCompile Include="..\Message\BaseMessage.cpp">
-      <Filter>message</Filter>
-    </ClCompile>
     <ClCompile Include="src\NetService.cpp">
       <Filter>service</Filter>
     </ClCompile>
@@ -151,12 +190,6 @@
     <ClCompile Include="src\SQLUserStorage.cpp">
       <Filter>database</Filter>
     </ClCompile>
-    <ClCompile Include="..\Message\MessageParser.cpp">
-      <Filter>message</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Message\PackMessage.cpp">
-      <Filter>message</Filter>
-    </ClCompile>
     <ClCompile Include="src\mysql\MysqlWrapper.cpp">
       <Filter>database</Filter>
     </ClCompile>
@@ -165,6 +198,45 @@
     </ClCompile>
     <ClCompile Include="src\Config.cpp">
       <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\Message2Pack.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\Message2Parser.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\BufferMessage.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\MsgDataValue\ArrayData.cpp">
+      <Filter>message\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\MsgDataValue\MsgDataValue.cpp">
+      <Filter>message\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\MsgDataValue\StringData.cpp">
+      <Filter>message\MsgDataValue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\CMessage.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\ParserMessageXML.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NMessage\XMLObject.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdLibs\TinyXML\tinystr.cpp">
+      <Filter>Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdLibs\TinyXML\tinyxml.cpp">
+      <Filter>Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdLibs\TinyXML\tinyxmlerror.cpp">
+      <Filter>Tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
+      <Filter>Tinyxml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +269,12 @@
     </Filter>
     <Filter Include="common\po">
       <UniqueIdentifier>{def1898a-4f9c-4311-bf47-46283aca1628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\MsgDataValue">
+      <UniqueIdentifier>{ffcd399b-b376-49d1-8c27-c4a83d0867ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tinyxml">
+      <UniqueIdentifier>{612edc88-d65f-4513-a139-0d3150d54afe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

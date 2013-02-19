@@ -27,12 +27,12 @@ public:
 
     virtual ~MSG_AnswerRegister(){}
 
-    MsgStatus SetRetTag(const uint32& Value)
+    MsgStatus SetRetTag(const Define::uint32& Value)
     {
-        return Write("RetTag", new NumData<uint32>(Value));
+        return Write("RetTag", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetRetTag(uint32& Value)
+    MsgStatus GetRetTag(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("RetTag", pReadValue);

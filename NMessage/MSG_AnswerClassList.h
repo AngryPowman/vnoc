@@ -27,10 +27,10 @@ public:
 
     virtual ~MSG_AnswerClassList(){}
 
-    MsgStatus SetRoomIdList(const std::vector<uint32>& Value)
+    MsgStatus SetRoomIdList(const std::vector<Define::uint32>& Value)
     {
         ArrayData* ValueArr = new ArrayData;
-        ValueArr->Push<uint32>(Value);
+        ValueArr->Push<Define::uint32>(Value);
         return WriteArr("RoomIdList", ValueArr);
     }
 
@@ -41,18 +41,18 @@ public:
         return WriteArr("RoomNameList", ValueArr);
     }
 
-    MsgStatus SetRoomStateList(const std::vector<uint32>& Value)
+    MsgStatus SetRoomStateList(const std::vector<Define::uint32>& Value)
     {
         ArrayData* ValueArr = new ArrayData;
-        ValueArr->Push<uint32>(Value);
+        ValueArr->Push<Define::uint32>(Value);
         return WriteArr("RoomStateList", ValueArr);
     }
 
-    MsgStatus GetRoomIdList(std::vector<uint32>& Value)
+    MsgStatus GetRoomIdList(std::vector<Define::uint32>& Value)
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomIdList", pReadValueArr);
-        pReadValueArr->GetArr_vec<uint32>(Value);
+        pReadValueArr->GetArr_vec<Define::uint32>(Value);
         return MsgStatus_Ok;
     }
 
@@ -64,11 +64,11 @@ public:
         return MsgStatus_Ok;
     }
 
-    MsgStatus GetRoomStateList(std::vector<uint32>& Value)
+    MsgStatus GetRoomStateList(std::vector<Define::uint32>& Value)
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomStateList", pReadValueArr);
-        pReadValueArr->GetArr_vec<uint32>(Value);
+        pReadValueArr->GetArr_vec<Define::uint32>(Value);
         return MsgStatus_Ok;
     }
 };

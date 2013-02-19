@@ -27,14 +27,14 @@ public:
         return Write("ATLGUID", new StringData(Value));
     }
 
-    MsgStatus SetLoginResult(const uint8& Value)
+    MsgStatus SetLoginResult(const Define::uint8& Value)
     {
-        return Write("LoginResult", new NumData<uint8>(Value));
+        return Write("LoginResult", new NumData<Define::uint8>(Value));
     }
 
-    MsgStatus SetToken(const uint32& Value)
+    MsgStatus SetToken(const Define::uint32& Value)
     {
-        return Write("Token", new NumData<uint32>(Value));
+        return Write("Token", new NumData<Define::uint32>(Value));
     }
 
     MsgStatus GetATLGUID(std::string& Value)
@@ -44,14 +44,14 @@ public:
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetLoginResult(uint8& Value)
+    MsgStatus GetLoginResult(Define::uint8& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("LoginResult", pReadValue);
         return pReadValue->ToUInt8(Value);
     }
 
-    MsgStatus GetToken(uint32& Value)
+    MsgStatus GetToken(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("Token", pReadValue);

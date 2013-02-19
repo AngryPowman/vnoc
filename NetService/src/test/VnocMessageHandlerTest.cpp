@@ -8,10 +8,31 @@
 #include "../RclMessageHandler.hpp"
 #include "../FileUserStorage.h"
 #include "../UserManage.hpp"
-#include "../../Message/MSG_UNION.h"
-#include "../../Message/PackMessage.h"
+#include <shlwapi.h>
+#include <atlstr.h>
+#include "../../NMessage/MessageUnion.h"
+#include "../../NMessage/Message2Pack.h"
+#include "../../NMessage/Message2Parser.h"
+#include "../../NMessage/ParserMessageXML.h"
 
 #include <ctime>
+
+bool _TDisposePath(
+    IN const wchar_t* strPath,
+    OUT std::string& strConvertDir
+    )
+{
+    if (!strPath)
+    {
+        return false;
+    }
+    TCHAR szFile[MAX_PATH] = {0};
+    ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
+    ::PathRemoveFileSpec(szFile);
+    ::PathAppend(szFile, strPath);
+    strConvertDir = CW2A(szFile);
+    return !strConvertDir.empty();
+}
 
 class VnocMessageHandlerTest : public CppUnit::TestFixture
 {
@@ -33,6 +54,9 @@ public:
         conn_ = new MockTcpConnection;
         protocol_ = new VnocProtocol();
         CUserManage::GetInstance()->initial(&us);
+        std::string strPath;
+        //CPPUNIT_ASSERT(_TDisposePath(L"NewMsgdef.xml", strPath) == true);
+        CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile("../NewMsgdef.xml") == MsgStatus_Ok);
     }
     void tearDown()
     {
@@ -45,19 +69,18 @@ public:
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
-        MSG_RVC rvcMessage;
-        PackMessage packer;
-        int len = packer.GetMessageLen(&rvcMessage);
-        char *buf = new char[len];
-        packer.Pack(&rvcMessage, (byte *)buf, len);
-        conn_->setRecv(buf, len);
+        MSG_RequestVerificationCode rvcMessage;
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        rvcMessage.SetMachineAddress("EASB-ASDASD-ASD");
+        packer.PackMessage(&rvcMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
         const char *sendBuf = conn_->getSendBuf();
         //return an AVC message
-        CMessageParser parser;
-        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_AVC_TYPE);
-        delete msg;
-        delete buf;
+        CMessage2Parser parser;
+        buff.Copy(sendBuf, conn_->getSendLen());
+        CMessage msg(CMessage2Parser::GetMsgType(buff));
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerVerificationCode_Id);
     }
 
     void testRLIdefault()
@@ -66,20 +89,22 @@ public:
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
-        MSG_RLI rliMessage;
-        PackMessage packer;
-        int len = packer.GetMessageLen(&rliMessage);
-        char *buf = new char[len];
-        packer.Pack(&rliMessage, (byte *)buf, len);
-        conn_->setRecv(buf, len);
+        MSG_RequestLogin rliMessage;
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        packer.PackMessage(&rliMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
         char *sendBuf = (char*)conn_->getSendBuf();
         //return an ALI message with login-failure.
-        CMessageParser parser;
-        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
-        CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult() == 1);
-        delete msg;
-        delete buf;
+        CMessage2Parser parser;
+        CBufferMessage Rbuff;
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        MSG_AnswerLogin msg;
+        parser.Parser(&msg, Rbuff);
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerLogin_Id);
+        uint8 LoginResult = 0;
+        msg.GetLoginResult(LoginResult);
+        CPPUNIT_ASSERT(LoginResult == 1);
     }
 
     void testRLIwithEmptyAccountNumber()
@@ -88,22 +113,24 @@ public:
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
-        MSG_RLI rliMessage;
-        byte emptyAccount[1] = { 0 };
-        rliMessage.SetAccountNumber(emptyAccount, 0);
-        PackMessage packer;
-        int len = packer.GetMessageLen(&rliMessage);
-        char *buf = new char[len];
-        packer.Pack(&rliMessage, (byte *)buf, len);
-        conn_->setRecv(buf, len);
+        MSG_RequestLogin rliMessage;
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        rliMessage.SetAccountNumber("!asd");
+        rliMessage.SetVerificationCode("~~");
+        packer.PackMessage(&rliMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
         char *sendBuf = (char*)conn_->getSendBuf();
         //return an ALI message with login-failure.
-        CMessageParser parser;
-        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
-        CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult() == 1);
-        delete msg;
-        delete buf;
+        CMessage2Parser parser;
+        CBufferMessage Rbuff;
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        MSG_AnswerLogin msg;
+        parser.Parser(&msg, Rbuff);
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerLogin_Id);
+        uint8 LoginResult = 0;
+        msg.GetLoginResult(LoginResult);
+        CPPUNIT_ASSERT(LoginResult == 1);
     }
 
     void testRLIwithAccountNumber()
@@ -112,27 +139,24 @@ public:
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
-        MSG_RLI rliMessage;
-        unsigned char tmp[16] = {0};
-        srand((unsigned int)time(0));
-        for(int i = 0; i < 16; ++i)
-        {
-            tmp[i] = rand() % 256;
-        }
-        rliMessage.SetAccountNumber(tmp, 16);
-        PackMessage packer;
-        int len = packer.GetMessageLen(&rliMessage);
-        char *buf = new char[len];
-        packer.Pack(&rliMessage, (byte *)buf, len);
-        conn_->setRecv(buf, len);
+        MSG_RequestLogin rliMessage;
+        rliMessage.SetPassword("#asd");
+        rliMessage.SetVerificationCode("~~");
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        packer.PackMessage(&rliMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
         char *sendBuf = (char*)conn_->getSendBuf();
         //return an ALI message with login-success
-        CMessageParser parser;
-        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
-        CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult()==0);
-        delete msg;
-        delete buf;
+        CMessage2Parser parser;
+        CBufferMessage Rbuff;
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        MSG_AnswerLogin msg;
+        parser.Parser(&msg, Rbuff);
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerLogin_Id);
+        uint8 LoginResult = 0;
+        msg.GetLoginResult(LoginResult);
+        CPPUNIT_ASSERT(LoginResult == 1);
     }
 
     void testRLIwithAccountNumberAndPassword()
@@ -141,32 +165,25 @@ public:
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
-        MSG_RLI rliMessage;
-        unsigned char tmp[16] = {0};
-        srand((unsigned int)time(0));
-        for(int i = 0; i < 16; ++i)
-        {
-            tmp[i] = rand() % 256;
-        }
-        rliMessage.SetAccountNumber(tmp, 16);
-        for(int i = 0; i < 16; ++i)
-        {
-            tmp[i] = rand() % 256;
-        }
-        rliMessage.SetPassword(tmp, 16);
-        PackMessage packer;
-        int len = packer.GetMessageLen(&rliMessage);
-        char *buf = new char[len];
-        packer.Pack(&rliMessage, (byte *)buf, len);
-        conn_->setRecv(buf, len);
+        MSG_RequestLogin rliMessage;
+        rliMessage.SetPassword("1111");
+        rliMessage.SetAccountNumber("!asd");
+        rliMessage.SetVerificationCode("~~");
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        packer.PackMessage(&rliMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
         char *sendBuf = (char*)conn_->getSendBuf();
         //return an ALI message with login-success
-        CMessageParser parser;
-        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ALI_TYPE);
-        CPPUNIT_ASSERT(((MSG_ALI*)msg)->GetLoginResult() == 0);
-        delete msg;
-        delete buf;
+        CMessage2Parser parser;
+        CBufferMessage Rbuff;
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        MSG_AnswerLogin msg;
+        parser.Parser(&msg, Rbuff);
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerLogin_Id);
+        uint8 LoginResult = 0;
+        msg.GetLoginResult(LoginResult);
+        CPPUNIT_ASSERT(LoginResult == 0);
     }
 
     void testRCL()
@@ -175,19 +192,20 @@ public:
         VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
         handler.setProtocol(protocol_);
         handler.start();
-        MSG_RCL rclMessage;
-        PackMessage packer;
-        int len = packer.GetMessageLen(&rclMessage);
-        char *buf = new char[len];
-        packer.Pack(&rclMessage, (byte *)buf, len);
-        conn_->setRecv(buf, len);
-        const char *sendBuf = conn_->getSendBuf();
+        MSG_RequestClassList rclMessage;
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        rclMessage.SetUserType(0);
+        packer.PackMessage(&rclMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
+        char *sendBuf = (char*)conn_->getSendBuf();
         //return an ACL message
-        CMessageParser parser;
-        CMessage *msg = parser.Parse((byte*)sendBuf, conn_->getSendLen());
-        CPPUNIT_ASSERT(msg->GetMessageType() == MSG_ACL_TYPE);
-        delete msg;
-        delete buf;
+        CMessage2Parser parser;
+        CBufferMessage Rbuff;
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        MSG_AnswerClassList msg;
+        parser.Parser(&msg, Rbuff);
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerClassList_Id);
     }
 
 };

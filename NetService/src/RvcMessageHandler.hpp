@@ -10,17 +10,17 @@ public:
         protocol_->RegisterMessageHandler(this);
     }
 
-    virtual MSGTYPE getMessageType() const
+    virtual VMsg getMessageType() const
     {
-        return MSG_RVC_TYPE;
+        return MSG_RequestVerificationCode_Id;
     }
 
-    virtual int operator()(const CMessage *msg, MessageContext *ctx)
+    virtual int operator()(IReadMessage *msg, MessageContext *ctx)
     {
-        MSG_AVC avcMessage;
+        MSG_AnswerVerificationCode avcMessage;
         avcMessage.SetCaptchaType(0);
-        byte captcha[] = {0};
-        avcMessage.SetCaptcha(captcha,sizeof(captcha));
+        std::string strCaptcha;
+        avcMessage.SetCaptcha(strCaptcha);
         avcMessage.SetLoginTag(1);
         protocol_->SendVnocMessage(&avcMessage, ctx);
 		EZLOGGERVLSTREAM(axter::log_often)<<"Server had geted RVC and had sended AVC to client. (RVC)"<<endl;

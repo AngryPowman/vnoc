@@ -6,6 +6,8 @@ namespace VNOC
 namespace Message
 {
 
+using namespace VNOC::Message::Define;
+
 bool CMessage2Parser::IsVaild(IN const CBufferMessage& pBuf)
 {
     uint8* pData = pBuf.GetBuffer();
@@ -57,12 +59,6 @@ MsgStatus CMessage2Parser::_ParserHead(IWriteMessage* pMsg, const CBufferMessage
         return MsgStatus_Err;
     }
 
-    for (int index = 0; index < MSG_CLASS_COMMAND; index++)
-    {
-        NumByte[index] = pData[MSG_COMMAND_INDEX + index];
-    }
-    m_MsgId = _ByteToInt(NumByte);
-    memset(NumByte,0,4);
     for (int index = 0; index < MSG_CLASS_LEN; index++)
     {
         NumByte[index] = pData[MSG_PACKSIZE_INDEX + index];
@@ -71,6 +67,12 @@ MsgStatus CMessage2Parser::_ParserHead(IWriteMessage* pMsg, const CBufferMessage
     {
         return MsgStatus_Err;
     }
+    memset(NumByte,0,4);
+    for (int index = 0; index < MSG_CLASS_COMMAND; index++)
+    {
+        NumByte[index] = pData[MSG_COMMAND_INDEX + index];
+    }
+    m_MsgId = _ByteToInt(NumByte);
     return MsgStatus_Ok;
 }
 
@@ -117,6 +119,11 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                 }
                 for (int index = 0; index < _ByteToInt(NumByte); index++)
                 {
+                    if ((_ByteToInt(NumByte) == 1) && (pData[nParserIndex] == 0))
+                    {
+                        nParserIndex++;
+                        break;
+                    }
                     strParam.push_back(pData[nParserIndex]);
                     nParserIndex++;
                 }
@@ -168,6 +175,11 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                     }
                     for (int index = 0; index < _ByteToInt(NumByte); index++)
                     {
+                        if ((_ByteToInt(NumByte) == 1) && (pData[nParserIndex] == 0))
+                        {
+                            nParserIndex++;
+                            break;
+                        }
                         strParam.push_back(pData[nParserIndex]);
                         nParserIndex++;
                     }

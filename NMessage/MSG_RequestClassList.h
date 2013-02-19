@@ -27,12 +27,12 @@ public:
 
     virtual ~MSG_RequestClassList(){}
 
-    MsgStatus SetUserType(const uint32& Value)
+    MsgStatus SetUserType(const Define::uint32& Value)
     {
-        return Write("UserType", new NumData<uint32>(Value));
+        return Write("UserType", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetUserType(uint32& Value)
+    MsgStatus GetUserType(Define::uint32& Value)
     {
         MsgDataValue* pReadValue = NULL;
         Read("UserType", pReadValue);

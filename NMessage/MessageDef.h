@@ -28,9 +28,21 @@ namespace VNOC
 namespace Message
 {
 
+namespace Define
+{
+
+typedef std::string         MsgDataName;
+typedef unsigned char       uint8;
+typedef unsigned short      uint16;
+typedef unsigned int        uint32;
+typedef char                int8;
+typedef short               int16;
+typedef int                 int32;
+
+}
 #define MSG_BEGIN    0x56 // 'V' 标记消息的开始
 #define MSG_END      0x43 // 'C' 标记消息的结束
-#define MSG_VER      0 // 版本号
+#define MSG_VER      1 // 版本号
 
 #define MSG_HEAD_LEN 10
 #define MSG_TAIL_LEN 1
@@ -48,8 +60,8 @@ namespace Message
 #define MSG_CLASS_PARAM                4
 #define MSG_CLASS_PARAM_COUNT          4
 
-#define MSG_COMMAND_INDEX  MSG_CLASS_VER + MSG_CLASS_BEGIN
-#define MSG_PACKSIZE_INDEX MSG_COMMAND_INDEX + MSG_CLASS_COMMAND
+#define MSG_PACKSIZE_INDEX  MSG_CLASS_VER + MSG_CLASS_BEGIN
+#define MSG_COMMAND_INDEX MSG_PACKSIZE_INDEX + MSG_CLASS_LEN
 
 #ifndef DISALLOW_COPY_AND_ASSIGN
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
@@ -62,16 +74,9 @@ namespace Message
     void operator=(const TypeName&);
 #endif
 
-typedef std::string         MsgDataName;
-typedef unsigned char       uint8;
-typedef unsigned short      uint16;
-typedef unsigned int        uint32;
-typedef char                int8;
-typedef short               int16;
-typedef int                 int32;
-
 typedef enum _VMsg
 {
+    MSG_TYPE_NULL                               = 0,
     //服务器节点
     MSG_RequestQueryServer_Id              = 1100, //获取一个服务器节点（请求）
     MSG_AnswerQueryServer_Id               = 1101, //获取一个服务器节点（应答）
@@ -101,6 +106,8 @@ typedef enum _VMsg
     MSG_AnswerClassList_Id                 = 6106, //获取班级列表（应答）
     MSG_RequestClassInfo_Id                = 6107, //获取班级信息（请求）
     MSG_AnswerClassInfo_Id                 = 6108, //获取班级信息（应答）
+
+    MSG_TYPE_END,
 }VMsg;
 
 typedef enum _MsgDataMType
@@ -125,7 +132,7 @@ typedef enum _MsgDataMType
 #define MsgDataType_XML_Uint8     "uint8"
 #define MsgDataType_XML_String    "string"
 
-#define MsgPack_Unk '#'
+#define MsgPack_Unk 0
 
 typedef enum _MsgDataType
 {

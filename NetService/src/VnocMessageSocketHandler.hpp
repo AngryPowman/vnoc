@@ -4,10 +4,12 @@
 #include <memory>
 #include "AsioTcpConnection.hpp"
 #include "SocketHandler.hpp"
-#include "../../Message/MSG_UNION.h"
+#include "../../NMessage/MessageUnion.h"
 #include "VnocProtocol.hpp"
 #include "util.hpp"
 #include <ezlogger_headers.hpp>
+
+using namespace VNOC::Message;
 
 template <typename ConnectionT>
 class VnocMessageSocketHandler : public SocketHandler, IVnocMessageProtocolHandler
@@ -19,7 +21,7 @@ public:
     //start handler the message on the connection
     virtual void start();
     void setProtocol(VnocProtocol* protocol){protocol_= protocol;}
-    virtual void SendVnocMessage(const CMessage *msg);
+    virtual void SendVnocMessage(IReadMessage *msg);
 
 private:
     void ReadHeaderHandler(const asio::error_code& error, size_t bytes_transferred);
@@ -29,8 +31,7 @@ private:
     //post a read operation to wait for message header.
     void readHeader();
 
-    const static size_t HEADER_LEN = 30;
-    char headerData_[HEADER_LEN];
+    char headerData_[MSG_HEAD_LEN];
     ConnectionT* connection_;
     MessageContext *ctx_;
     VnocProtocol* protocol_;
