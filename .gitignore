@@ -3,6 +3,7 @@ bin
 Debug
 Release
 /NetService/src/test/testRunner
+/Client/CppTest
 
 # Files to ignore
 *.sdf

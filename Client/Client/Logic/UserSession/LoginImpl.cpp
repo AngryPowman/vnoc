@@ -1,4 +1,5 @@
 #include "StdAfx.h"
+#include <cstdlib>
 #include "LoginImpl.h"
 
 CLoginImpl::CLoginImpl(void) : CFrameBase(module_LoginData)
@@ -12,7 +13,7 @@ CLoginImpl::~CLoginImpl(void)
 
 ResultCode CLoginImpl::Run()
 {
-	netHelper.AddFilter(MSG_ALI_TYPE,this);
+	netHelper.AddFilter(MSG_AnswerLogin_Id,this);
 	netHelper.StartListen();
 	return Result_Success;
 }
@@ -86,32 +87,32 @@ ResultCode CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 	Global->GetINetCenter(&pNetCenter);
 	if (pNetCenter)
 	{
-		MSG_RLI netMsg;
-		netMsg.SetAccountNumber((const byte*)username,_tcslen(username)*sizeof(TCHAR));
-		netMsg.SetPassword((const byte*)pwd,_tcslen(pwd)*sizeof(TCHAR));
+		MSG_RequestLogin netMsg;
+        char buffer[30];
+        wcstombs(buffer, username, sizeof(buffer));
+		netMsg.SetAccountNumber(buffer);
+        wcstombs(buffer, pwd, sizeof(buffer));
+		netMsg.SetPassword(buffer);
 		pNetCenter->SendServer(netMsg);
 		return Result_Success;
 	}
 	return Result_Fail;
 }
 
-ResultCode CLoginImpl::OnNetMessage( const CMessage& msg )
+ResultCode CLoginImpl::OnNetMessage( IReadMessage *msg )
 {
-	switch(msg.GetMessageType())
+	switch(msg->MsgId())
 	{
-	case MSG_ALI_TYPE:
-		const MSG_ALI* msgReal = dynamic_cast<const MSG_ALI*>(&msg);
+	case MSG_AnswerLogin_Id:
+		MSG_AnswerLogin* msgReal = dynamic_cast<MSG_AnswerLogin*>(msg);
 		if (msgReal)
 		{
 			XMessage_Login_Result loginResult;
-			loginResult.success = msgReal->GetLoginResult()?FALSE:TRUE;
-			loginResult.userToken = msgReal->GetToken();
-			BYTE* pGuid = (byte *)msgReal->GetATLGUID();
-			if (pGuid && 
-				msgReal->GetATLGUIDLen()==sizeof(loginResult.guid)/sizeof(loginResult.guid[0]))
-			{
-				memcpy(loginResult.guid,pGuid,sizeof(loginResult.guid)/sizeof(loginResult.guid[0]));
-			}
+            uint8 result;
+            msgReal->GetLoginResult(result);
+            loginResult.success = !result;
+			msgReal->GetToken(loginResult.userToken);
+			msgReal->GetATLGUID(loginResult.guid);
 			SendXMessage(&loginResult);
 		}
 		break;

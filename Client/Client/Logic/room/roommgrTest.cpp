@@ -11,14 +11,12 @@ class CRoomMgrTest : public CTestBase<TestUnit_RoomMgr>
     CPPUNIT_TEST_SUITE_END();
 
 public:
-    std::vector<int> roomlist;
+    std::vector<uint32> roomIdList;
+    std::vector<std::string> roomNameList;
+    std::vector<uint32> roomState;
 
     CRoomMgrTest() : CTestBase()
     {
-        for(int i = 0; i < 10; i++)
-        {
-            roomlist.push_back(i);
-        }
     }
 
     Begin_XMessage(CRoomMgrTest)
@@ -35,14 +33,27 @@ public:
             return;
         }
 
-        MSG_ACL netMsg;
-        netMsg.SetRoomList(roomlist);
+        MSG_AnswerClassList netMsg;
+        roomIdList.push_back(1);
+        roomNameList.push_back("a");
+        roomState.push_back(0);
+
+        roomIdList.push_back(2);
+        roomNameList.push_back("b");
+        roomState.push_back(1);
+
+        netMsg.SetRoomIdList(roomIdList);
+        netMsg.SetRoomNameList(roomNameList);
+        netMsg.SetRoomStateList(roomState);
+
         pNetCenter->MockReceive(&netMsg);
     }
 
     VOID OnGetRoomListResult(XMessage_GetRoomList_Result *pmsg)
     {
-        CPPUNIT_ASSERT(roomlist == pmsg->roomID);
+        CPPUNIT_ASSERT(roomIdList == pmsg->roomIdList);
+        CPPUNIT_ASSERT(roomNameList == pmsg->roomNameList);
+        CPPUNIT_ASSERT(roomState == pmsg->roomStateList);
     }
 };
 

@@ -25,7 +25,7 @@ ResultCode CRoomMgr::UnInitialize()
 
 ResultCode CRoomMgr::Run()
 {
-	netHelper.AddFilter(MSG_ACL_TYPE, this);
+	netHelper.AddFilter(MSG_AnswerClassList_Id, this);
     netHelper.StartListen();
     return Result_Success;
 }
@@ -62,7 +62,7 @@ ResultCode CRoomMgr::GetRoomList()
     Global->GetINetCenter(&pNetCenter);
     if(pNetCenter)
     {
-        MSG_RCL netMsg;
+        MSG_RequestClassList netMsg;
         pNetCenter->SendServer(netMsg);
         return Result_Success;
     }
@@ -74,16 +74,18 @@ VOID CRoomMgr::OnGetRoomList( XMessage *pMsg )
     GetRoomList();
 }
 
-ResultCode CRoomMgr::OnNetMessage( const CMessage& msg )
+ResultCode CRoomMgr::OnNetMessage( IReadMessage *msg )
 {
-    switch(msg.GetMessageType())
+    switch(msg->MsgId())
     {
-    case MSG_ACL_TYPE:
-        const MSG_ACL* msgReal = dynamic_cast<const MSG_ACL*>(&msg);
+    case MSG_AnswerClassList_Id:
+        MSG_AnswerClassList *msgReal = dynamic_cast<MSG_AnswerClassList*>(msg);
         if(msgReal)
         {
             XMessage_GetRoomList_Result result;
-            msgReal->GetRoomList(result.roomID);
+            msgReal->GetRoomIdList(result.roomIdList);
+            msgReal->GetRoomNameList(result.roomNameList);
+            msgReal->GetRoomStateList(result.roomStateList);
             SendXMessage(&result);
         }
     }
