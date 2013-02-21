@@ -16,7 +16,7 @@ bool CMessage2Parser::IsVaild(IN const CBufferMessage& pBuf)
         return false;
     }
 
-    if (pData[pBuf.GetSize() - 1] != MSG_END)
+    if (pData[CMessage2Parser::GetMessageLen(pBuf.GetBuffer(), pBuf.GetSize()) - 1] != MSG_END)
     {
         return false;
     }
@@ -79,7 +79,7 @@ MsgStatus CMessage2Parser::_ParserHead(IWriteMessage* pMsg, const CBufferMessage
 MsgStatus CMessage2Parser::_ParserTail(IWriteMessage* pMsg, const CBufferMessage& pBuf)
 {
     uint8* pData = pBuf.GetBuffer();
-    if (pData[CMessage2Parser::GetMessageLen(pBuf)] == MSG_END)
+    if (pData[CMessage2Parser::GetMessageLen(pBuf.GetBuffer(), pBuf.GetSize()) - 1] != MSG_END)
     {
         return MsgStatus_Err;
     }
@@ -268,10 +268,14 @@ int CMessage2Parser::GetMsgType(IN const CBufferMessage& pBuf)
     return MsgID;
 }
 
-uint32 CMessage2Parser::GetMessageLen(IN const CBufferMessage& pBuf)
+uint32 CMessage2Parser::GetMessageLen(uint8* pData, uint32 nBufferSize)
 {
-    uint8* pData = pBuf.GetBuffer();
     if (!pData)
+    {
+        return MsgStatus_Err;
+    }
+
+    if ((MSG_PACKSIZE_INDEX + 4) > nBufferSize)
     {
         return MsgStatus_Err;
     }
