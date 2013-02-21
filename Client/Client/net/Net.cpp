@@ -90,7 +90,7 @@ ResultCode CNetCenter::IsServerConnected()
     return m_isConnected? Result_Success: Result_Fail;
 }
 
-ResultCode CNetCenter::SendServer( const CMessage &helper )
+ResultCode CNetCenter::SendServer( IReadMessage *helper )
 {
 	if (!m_isConnected)
 	{
@@ -98,10 +98,10 @@ ResultCode CNetCenter::SendServer( const CMessage &helper )
 	}
 	CMessage2Pack packer;
     int len;
-	packer.GetPackSize(const_cast<CMessage *>(&helper), len);
+	packer.GetPackSize(helper, len);
 	CBufferMessage buffer;
 	buffer.Alloc(len);
-	packer.PackMessage(const_cast<CMessage *>(&helper), buffer);
+	packer.PackMessage(helper, buffer);
 	m_serverSocket.Send(buffer.GetBuffer(),len);
 	return Result_Success;
 }

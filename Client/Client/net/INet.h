@@ -15,7 +15,7 @@ interface INetListener
 interface INetCenter: public IModule
 {
     virtual ResultCode IsServerConnected()=0;
-	virtual ResultCode SendServer(const CMessage &helper)=0;
+	virtual ResultCode SendServer(IReadMessage *helper)=0;
 	virtual ResultCode Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg)=0;
 	virtual ResultCode SetListener(VMsg msgType,INetListener *listener)=0;
 	virtual ResultCode RemoveListener(VMsg msgType,INetListener *listener)=0;

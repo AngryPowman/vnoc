@@ -19,7 +19,7 @@ public:
 	virtual ResultCode Terminate();
 
 	virtual ResultCode IsServerConnected();
-	virtual ResultCode SendServer(const CMessage& netMsg);
+	virtual ResultCode SendServer(IReadMessage *helper);
 	virtual ResultCode Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg);
 	virtual ResultCode SetListener(VMsg msgType,INetListener *listener);
 	virtual ResultCode RemoveListener(VMsg msgType,INetListener *listener);

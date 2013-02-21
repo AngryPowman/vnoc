@@ -63,7 +63,7 @@ ResultCode CRoomMgr::GetRoomList()
     if(pNetCenter)
     {
         MSG_RequestClassList netMsg;
-        pNetCenter->SendServer(netMsg);
+        pNetCenter->SendServer(&netMsg);
         return Result_Success;
     }
 	return Result_Fail;
@@ -79,15 +79,13 @@ ResultCode CRoomMgr::OnNetMessage( IReadMessage *msg )
     switch(msg->MsgId())
     {
     case MSG_AnswerClassList_Id:
-        MSG_AnswerClassList *msgReal = dynamic_cast<MSG_AnswerClassList*>(msg);
-        if(msgReal)
-        {
-            XMessage_GetRoomList_Result result;
-            msgReal->GetRoomIdList(result.roomIdList);
-            msgReal->GetRoomNameList(result.roomNameList);
-            msgReal->GetRoomStateList(result.roomStateList);
-            SendXMessage(&result);
-        }
+        MSG_AnswerClassList msgReal(*msg);
+        XMessage_GetRoomList_Result result;
+        msgReal.GetRoomIdList(result.roomIdList);
+        msgReal.GetRoomNameList(result.roomNameList);
+        msgReal.GetRoomStateList(result.roomStateList);
+        SendXMessage(&result);
+        break;
     }
     return Result_Success;
 }

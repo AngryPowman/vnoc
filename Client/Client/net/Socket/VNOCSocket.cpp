@@ -101,7 +101,8 @@ void CVNOCSocket::OnReceive( int nErrorCode )
 VOID CVNOCSocket::_TryParse()
 { // 解析buffer，将数据包分离出来
     CBufferMessage buffer;
-    buffer.Attach(m_buffer.GetBuffer(), m_buffer.GetSize());
+    buffer.Attach(m_buffer.GetBuffer(), 
+        CMessage2Parser::GetMessageLen(m_buffer.GetBuffer(), m_buffer.GetSize()));
     CMessage2Parser parser;
 	if(parser.IsVaild(buffer))
 	{
