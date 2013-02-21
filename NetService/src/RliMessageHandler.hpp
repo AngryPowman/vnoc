@@ -50,6 +50,11 @@ public:
 		aliMessage.SetLoginResult(1);//Ê§°Ü
 		EZLOGGERVLSTREAM(axter::log_often)<<"User's Account is NULL (RLI)"<<endl;
 		}
+        else if(HAS_LOGINED == LoginResult)
+        {
+        aliMessage.SetLoginResult(1);//Ê§°Ü
+		EZLOGGERVLSTREAM(axter::log_often)<<"This user has logined (RLI)"<<endl;
+        }
 
         protocol_->SendVnocMessage(&aliMessage, ctx);
 		EZLOGGERVLSTREAM(axter::log_often)<<"Server had geted RLI and had sended ALI to client. (RLI)"<<endl;

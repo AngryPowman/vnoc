@@ -79,7 +79,7 @@ MsgStatus CMessage2Parser::_ParserHead(IWriteMessage* pMsg, const CBufferMessage
 MsgStatus CMessage2Parser::_ParserTail(IWriteMessage* pMsg, const CBufferMessage& pBuf)
 {
     uint8* pData = pBuf.GetBuffer();
-    if (pData[pBuf.GetSize()] == MSG_END)
+    if (pData[CMessage2Parser::GetMessageLen(pBuf)] == MSG_END)
     {
         return MsgStatus_Err;
     }
@@ -265,7 +265,25 @@ int CMessage2Parser::GetMsgType(IN const CBufferMessage& pBuf)
         NumByte[index] = pData[MSG_COMMAND_INDEX + index];
     }
     MsgID = *(int*)&NumByte;
-	return MsgID;
+    return MsgID;
+}
+
+uint32 CMessage2Parser::GetMessageLen(IN const CBufferMessage& pBuf)
+{
+    uint8* pData = pBuf.GetBuffer();
+    if (!pData)
+    {
+        return MsgStatus_Err;
+    }
+
+    int MsgSize = 0;
+    uint8 NumByte[4] = {0};
+    for (int index = 0; index < MSG_CLASS_LEN; index++)
+    {
+        NumByte[index] = pData[MSG_PACKSIZE_INDEX + index];
+    }
+    MsgSize = *(int*)&NumByte;
+    return MsgSize;
 }
 
 }
