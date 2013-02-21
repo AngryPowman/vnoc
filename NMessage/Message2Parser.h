@@ -19,7 +19,7 @@ public:
 
     MsgStatus Parser(OUT IWriteMessage* pMsg, IN const CBufferMessage& pBuf);
     bool IsVaild(IN const CBufferMessage& pBuf);
-    static Define::uint32 GetMessageLen(IN const CBufferMessage& pBuf);
+    static Define::uint32 GetMessageLen(Define::uint8* pData, Define::uint32 nBufferSize);
     static int GetMsgType(IN const CBufferMessage& pBuf);
 
 private:
