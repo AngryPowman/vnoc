@@ -2,12 +2,13 @@
 #define MOCK_TCP_CONNECTION_H
 #include "../SocketServer.hpp"
 #include <asio.hpp>
+#include <asio/error.hpp>
 #include <memory>
 #include <ezlogger_headers.hpp>
 class EventOperator
 {
 public:
-    virtual void operator()(const asio::error_code& error, size_t bytes_transferred)=0;
+    virtual void operator()(const asio::error_code& error, size_t bytes_transferred) = 0;
 };
 template <class T >
 class HandlerWrapper : public EventOperator
@@ -81,7 +82,7 @@ public:
                 if (len >= recvBufLen){
                     putLen = recvBufLen;
                     len -= recvBufLen;
-                } else {					
+                } else {
                     putLen = len;
                     len = 0;
                 }
@@ -100,8 +101,14 @@ public:
                 }
             }
         }
-
     }
+
+    void close()
+    {
+        asio::error_code ec(asio::error::shut_down);
+        (*recvHandler_)(ec, 0);
+    }
+
     size_t getSendLen(){return sendLen_;}
     const char *getSendBuf(){return sendBuf_;}
 private:

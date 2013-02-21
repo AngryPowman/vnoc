@@ -5,12 +5,15 @@
 #include <string>
 #include <cstring>
 #include <set>
+#include <mutex>
 
 #define NULLPOINT           -1
 #define LOGIN_OK            1
 #define TEST_FALSE          2
 #define ACCOUNT_NULL        3
 #define HAS_LOGINED         4
+
+extern std::mutex userSetMutex;
 
 class CUserManage
 {
@@ -21,7 +24,7 @@ public:
     {
         return &_instance;
     }
-    //return value£º LOGIN_OK(login-success) TEST_FALSE(verification-failure) NULLPOINT(null-pointer)
+    //return value: LOGIN_OK(login-success) TEST_FALSE(verification-failure) NULLPOINT(null-pointer)
     //get the user's information if login-success.
     void initial(UserStorage *us)
     {
@@ -35,8 +38,10 @@ public:
         }
 
         strncpy(pUserInfo->strUser, szUser, 40);
-        
-        if(insertOnlineUser(szUser) == false)
+        userSetMutex.lock();
+        bool usernameInserted = insertOnlineUser(szUser);
+        userSetMutex.unlock();
+        if(usernameInserted == false)
         {
             return HAS_LOGINED;//this user has logined, deny this login request.
         }
@@ -72,7 +77,10 @@ public:
     bool deleteOnlineUser(const char* szUser)
     {
         std::string temp = szUser;
-        return  0 != onlineUsers.erase(temp);
+        userSetMutex.lock();
+        bool deleteResult = 0 != onlineUsers.erase(temp);
+        userSetMutex.unlock();
+        return deleteResult;
     }
 private:
     static CUserManage _instance;
