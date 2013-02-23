@@ -21,7 +21,7 @@ public:
 	virtual ResultCode GetCurrentUser(CString& userName,CString& cookie);
 	virtual ResultCode Logout(LPCTSTR username=NULL);
 
-	virtual ResultCode OnNetMessage(const CMessage& msg);
+	virtual ResultCode OnNetMessage(IReadMessage *msg);
 protected:
 	VOID OnLogin(XMessage_Login* pMsg);
 	BOOL CheckLoginRequest(XMessage_Login* pMsg);

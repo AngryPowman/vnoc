@@ -19,11 +19,11 @@ public:
 	virtual ResultCode Terminate();
 
 	virtual ResultCode IsServerConnected();
-	virtual ResultCode SendServer(const CMessage& netMsg);
+	virtual ResultCode SendServer(IReadMessage *helper);
 	virtual ResultCode Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg);
-	virtual ResultCode SetListener(MSGTYPE msgType,INetListener *listener);
-	virtual ResultCode RemoveListener(MSGTYPE msgType,INetListener *listener);
-	virtual ResultCode MockReceive(const CMessage *mockMsg);
+	virtual ResultCode SetListener(VMsg msgType,INetListener *listener);
+	virtual ResultCode RemoveListener(VMsg msgType,INetListener *listener);
+	virtual ResultCode MockReceive(IReadMessage *mockMsg);
 
 VNOC_Private:
 	virtual void OnAccept	(int nErrorCode,CAsyncSocketEx* pSock);
@@ -32,11 +32,11 @@ VNOC_Private:
 	virtual void OnOutOfBandData	(int nErrorCode,CAsyncSocketEx* pSock);
 	virtual void OnReceive	(int nErrorCode,CAsyncSocketEx* pSock);
 	virtual void OnSend		(int nErrorCode,CAsyncSocketEx* pSock);
-	virtual void OnPackReady(ConstReferenceBuffer buffer);
+	virtual void OnPackReady(const CBufferMessage &buffer);
 private:
 	ResultCode _GetServerAddress();
 	ResultCode _ConnectServer();
-	void _DispatchMessage(const CMessage* pMsg);
+	void _DispatchMessage(IReadMessage* pMsg);
 private:
 	CString	m_serverIP;
 	UINT	m_serverPort;
@@ -44,6 +44,6 @@ private:
 
 	CVNOCSocket m_serverSocket;
 	WSADATA m_wsaData;
-	std::map<MSGTYPE,std::list<INetListener*> >	m_listeners;
+	std::map<VMsg,std::list<INetListener*> >	m_listeners;
 	ATL::CCriticalSection	m_cs;
 };

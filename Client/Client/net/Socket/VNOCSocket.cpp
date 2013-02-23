@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "VNOCSocket.h"
-#include "../../../../Message/MessageParser.h"
+#include "../../../../NMessage/Message2Parser.h"
+#include "../../../../NMessage/BufferMessage.h"
 #include "../../util/util.h"
 
 CSocketImpl::CSocketImpl(ISocketListener *pListener) : m_listener(pListener)
@@ -99,24 +100,21 @@ void CVNOCSocket::OnReceive( int nErrorCode )
 
 VOID CVNOCSocket::_TryParse()
 { // 解析buffer，将数据包分离出来
-	BYTE* pBuffer;
-	DWORD bufSize;
-	pBuffer = m_buffer.GetBuffer();
-	bufSize = m_buffer.GetSize();
-	int checkResult = CMessageParser::Check(pBuffer,bufSize);
-	if (checkResult != -1)
+    CBufferMessage buffer;
+    buffer.Attach(m_buffer.GetBuffer(), 
+        CMessage2Parser::GetMessageLen(m_buffer.GetBuffer(), m_buffer.GetSize()));
+    CMessage2Parser parser;
+	if(parser.IsVaild(buffer))
 	{
-		CBuffer buffer;
-		buffer.Attach(pBuffer,checkResult);
 		IVNOCSocketListener *pListener=NULL;
 		pListener = dynamic_cast<IVNOCSocketListener*>(m_listener);
 		if (pListener)
 		{
 			pListener->OnPackReady(buffer);
 		}
-		buffer.Detach();
-		m_buffer.Get(NULL,checkResult);
+		m_buffer.Get(NULL, buffer.GetSize());
 	}
+    buffer.Detach();
 }
 
 //////////////////////////////////////////////////////////////////////////

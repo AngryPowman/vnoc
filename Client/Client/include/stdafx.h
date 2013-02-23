@@ -45,3 +45,4 @@
 #include "../FrameWork/IGlobal.h"
 #include "../util/util.h"
 #include "XMessage.hpp"
+using namespace VNOC::Message::Define;
