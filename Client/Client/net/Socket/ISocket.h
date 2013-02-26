@@ -1,5 +1,6 @@
 #pragma once
 #include "../../util/CBuffer.h"
+#include "../../../NMessage/BufferMessage.h"
 
 class CAsyncSocketEx;
 
@@ -17,5 +18,5 @@ public:
 interface IVNOCSocketListener : public ISocketListener
 {
 public:
-	virtual void OnPackReady(ConstReferenceBuffer buffer)	=0;
+	virtual void OnPackReady(const CBufferMessage &buffer) = 0;
 };

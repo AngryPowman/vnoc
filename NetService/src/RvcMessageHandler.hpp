@@ -23,7 +23,7 @@ public:
         avcMessage.SetCaptcha(strCaptcha);
         avcMessage.SetLoginTag(1);
         protocol_->SendVnocMessage(&avcMessage, ctx);
-		EZLOGGERVLSTREAM(axter::log_often)<<"Server had geted RVC and had sended AVC to client. (RVC)"<<endl;
+        EZLOGGERVLSTREAM(axter::log_often)<<"Server had geted RVC and had sended AVC to client. (RVC)"<<endl;
         return 1;
     }
 

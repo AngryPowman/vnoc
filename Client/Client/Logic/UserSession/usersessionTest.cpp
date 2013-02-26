@@ -44,12 +44,16 @@ public:
 		msg.username = _T("sparta");
 		SendXMessage(&msg);
 
-		MSG_ALI netMsg;
+		MSG_AnswerLogin netMsg;
 		netMsg.SetLoginResult(0);
+        netMsg.SetToken(1);
+        netMsg.SetATLGUID("aaaaaaaaaaaaaa");
 		m_expectResult = TRUE;
 		pNetCenter->MockReceive(&netMsg);
 
 		netMsg.SetLoginResult(1);
+        netMsg.SetToken(2);
+        netMsg.SetATLGUID("bbbbbbbbbbbbbbbbbbbb");
 		m_expectResult = FALSE;
 		pNetCenter->MockReceive(&netMsg);
 

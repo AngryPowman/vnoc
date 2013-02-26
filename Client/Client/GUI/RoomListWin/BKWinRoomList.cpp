@@ -44,6 +44,7 @@ LRESULT CRoomListWnd::_ColumnInit()
 { 
 	m_wndListCtrl.InsertColumn(0, _T("ID"), LVCFMT_LEFT, 50);
 	m_wndListCtrl.InsertColumn(1, _T("教室昵称"), LVCFMT_LEFT, 270);
+    m_wndListCtrl.InsertColumn(2, _T("状态"), LVCFMT_LEFT, 80);
 
 	return S_OK;
 }
@@ -81,11 +82,13 @@ LRESULT CRoomListWnd::OnGetRoomListResult( XMessage *pmsg )
     {
         int nItem = 0;
         CString buf;
-        for(auto itr = pResult->roomID.begin(); itr != pResult->roomID.end(); itr++)
+        for(int i = 0; i < pResult->roomNameList.size(); i++)
         {
-            buf.Format(_T("%d"), *itr);
+            buf.Format(_T("%d"), pResult->roomIdList[i]);
             nItem = m_wndListCtrl.Append(buf);
-            m_wndListCtrl.AppendSubItem(nItem, _T("这里是教室名称"));
+            m_wndListCtrl.AppendSubItem(nItem, CString(pResult->roomNameList[i].c_str()));
+            buf.Format(_T("%d"), pResult->roomStateList[i]);
+            m_wndListCtrl.AppendSubItem(nItem, buf);
         }
 		return S_OK;
     }

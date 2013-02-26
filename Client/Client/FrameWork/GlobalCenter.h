@@ -57,6 +57,8 @@ private:
 
 	void _InitializeFrameWork();
 	void _UnInitializeFrameWork();
+
+    void _InitializeMessage();
 private:
 	CString	m_appName;
 

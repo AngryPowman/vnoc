@@ -44,6 +44,7 @@ class VnocMessageHandlerTest : public CppUnit::TestFixture
     CPPUNIT_TEST( testRLIwithAccountNumberAndPassword );
     CPPUNIT_TEST( testRLIofLoginTwoTimes );
     CPPUNIT_TEST( testRCL );
+    CPPUNIT_TEST( testUserSetDelete );
     CPPUNIT_TEST_SUITE_END();
     MockTcpConnection *conn_;
     VnocProtocol *protocol_;
@@ -140,7 +141,7 @@ public:
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RequestLogin rliMessage;
-        rliMessage.SetPassword("#asd");
+        rliMessage.SetAccountNumber("testRLIwithAccountNumber");
         CBufferMessage buff;
         CMessage2Pack packer;
         packer.PackMessage(&rliMessage, buff);
@@ -155,7 +156,36 @@ public:
         CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerLogin_Id);
         uint8 LoginResult = 0;
         msg.GetLoginResult(LoginResult);
-        CPPUNIT_ASSERT(LoginResult == 1);
+        CPPUNIT_ASSERT(LoginResult == 0);
+    }
+
+    void testUserSetDelete()
+    {
+        RliMessageHandler rlihandler(protocol_);
+        VnocMessageSocketHandler<MockTcpConnection> *handler = new VnocMessageSocketHandler<MockTcpConnection>(conn_);
+        handler->setProtocol(protocol_);
+        handler->start();
+        MSG_RequestLogin rliMessage;
+        char tempAccountNumber[] = "testUserSetDelete";
+        rliMessage.SetAccountNumber(tempAccountNumber);
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        packer.PackMessage(&rliMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
+        char *sendBuf = (char*)conn_->getSendBuf();
+        //return an ALI message with login-success
+        CMessage2Parser parser;
+        CBufferMessage Rbuff;
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        MSG_AnswerLogin msg;
+        parser.Parser(&msg, Rbuff);
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerLogin_Id);
+        uint8 LoginResult = 0;
+        msg.GetLoginResult(LoginResult);
+        CPPUNIT_ASSERT(LoginResult == 0);
+
+        conn_->close();
+        CPPUNIT_ASSERT(CUserManage::GetInstance()->deleteOnlineUser(tempAccountNumber) == false);
     }
 
     void testRLIwithAccountNumberAndPassword()
@@ -165,8 +195,8 @@ public:
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RequestLogin rliMessage;
-        rliMessage.SetPassword("1111");
-        rliMessage.SetAccountNumber("!asd");
+        rliMessage.SetPassword("testRLIwithAccountNumberAndPassword");
+        rliMessage.SetAccountNumber("testRLIwithAccountNumberAndPassword");
         CBufferMessage buff;
         CMessage2Pack packer;
         packer.PackMessage(&rliMessage, buff);
@@ -191,7 +221,7 @@ public:
         handler.setProtocol(protocol_);
         handler.start();
         MSG_RequestLogin rliMessage;
-        rliMessage.SetAccountNumber("asd");
+        rliMessage.SetAccountNumber("testRLIofLoginTwoTimes");
         CBufferMessage buff;
         CMessage2Pack packer;
         packer.PackMessage(&rliMessage, buff);

@@ -1,5 +1,7 @@
 #pragma once
 #include "../FrameWork/FrameBase.hpp"
+#include "../../../NMessage/MessageDef.h"
+using namespace VNOC::Message::Define;
 
 //////////////////////////////////////////////////////////////////////////
 // Messages
@@ -35,8 +37,8 @@ struct XMessage_Login_Result : public XMessage
 	ImTheMessageOf(XMessage_Login_Result);
 
 	BOOL success;
-	DWORD	userToken;
-	BYTE	guid[16];
+	uint32 userToken;
+	std::string guid;
 };
 
 struct XMessage_ShowLogin : public XMessage
@@ -67,7 +69,9 @@ struct XMessage_GetRoomList_Result : public XMessage
 {
 	ImTheMessageOf(XMessage_GetRoomList_Result);
 
-	std::vector<int> roomID;
+	std::vector<uint32> roomIdList;
+    std::vector<std::string> roomNameList;
+    std::vector<uint32> roomStateList;
 };
 
 struct XMessage_ShowClassroom : public XMessage

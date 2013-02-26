@@ -1,11 +1,12 @@
+# Directories to ignore
+bin
+Debug
+Release
+/NetService/src/test/testRunner
+/Client/CppTest
 
-/NetService/Debug
-/NetService/bin
-/vnoc/Debug
-/C:/Users/tengda/Documents/GitHub/vnoc/VNOC/VNOC.sdf
+# Files to ignore
 *.sdf
-/netservice/Debug
-/netservice/Release
 *.obj
 *.tlog
 *.user
@@ -30,36 +31,8 @@ cpptestresults.xml
 !libmysql.lib
 !mysqlclient.lib
 
-/cppunit-1.12.1/lib/cppunitd.lib
-/cppunit-1.12.1/src/cppunit/Debug
-/NetService/src/test/testRunner/x64
-/NetService/src/test/testRunner/Debug
-/NetService/src/test/testRunner/Release
 /NetService/libmysql.dll
 /NetService/NetService.zip
 /NetService/server.exe
-/NetService/Debug
-/NetService/x64
-/NetService/Release
 /NetService/.project
 /NetService/.cproject
-/cpptestresults.xml
-/VNOC/Release
-/VNOC/Debug
-/vnoc/ipch
-/VNOC/VNOC/Debug/VNOC_manifest.rc
-/NetService/EchoTestServer/x64
-/NetService/EchoTestServer/Debug
-/NetService/EchoTestServer/Release
-/NetService/cpptestresults.xml
-/NetService/src/test/testRunner
-/cpptestresults.xml/NetService
-/src/test/testRunner/Debug
-/NetService/src/test/testRunner/Release
-/NetService/src/test/testRunner/x64
-/VNOC/VNOC/Release
-/VNOC/VNOC/Debug
-/VNOC/VNOC/VldMemLeakCheck
-/VNOC/Release
-/VNOC/Debug
-/VNOC/VldMemLeakCheck

@@ -123,7 +123,7 @@ void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(IReadMessage *msg)
     char *buf = pack;
     connection_->send(buf, length,
         std::bind(&VnocMessageSocketHandler::SendHandler, this, pack,
-        std::placeholders::_1,
-        std::placeholders::_2));
+            std::placeholders::_1,
+            std::placeholders::_2));
     EZLOGGERVLSTREAM(axter::log_often)<<"send vnoc message type:"<< msg->MsgId()<<" lenght: "<<length<<endl;
 }
