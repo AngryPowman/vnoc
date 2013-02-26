@@ -4,7 +4,7 @@
 #include "CMessage.h"
 #include "MsgDataValue/StringData.h"
 #include "MsgDataValue/NumData.hpp"
-//测试中文
+
 ///> Generate by MessageProduse. DO NOT EDIT!
 
 namespace VNOC
@@ -18,6 +18,11 @@ public:
     ?Name()
     {
         InitializeMessage("?Name");
+    }
+
+    ?Name(IReadMessage& Msg)
+    {
+        CMessage::Copy(Msg, "?Name");
     }
 
     virtual ~?Name(){}
