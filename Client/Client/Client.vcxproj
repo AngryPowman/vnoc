@@ -321,6 +321,9 @@
     <Xml Include="Resource\msgdef.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+  <Target Name="Test">
+    <Message Text="Configuration is " />
+    <Message Text="MSBuildToolsPath is " />
+  </Target>
 </Project>

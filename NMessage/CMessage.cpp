@@ -11,7 +11,7 @@ using namespace VNOC::Message::Define;
 MsgStatus CMessage::Read(
     IN const MsgDataName& name,
     OUT MsgDataValue*& value
-    )
+    ) const
 {
     if (!m_xmlObject)
     {
@@ -33,7 +33,7 @@ MsgStatus CMessage::Read(
 MsgStatus CMessage::ReadArr(
     IN const MsgDataName& name,
     OUT ArrayData*& value
-    )
+    ) const
 {
     if (!m_xmlObject)
     {
@@ -134,7 +134,7 @@ CMessage::~CMessage()
     _ReleaseMap();
 }
 
-bool CMessage::IsValid()
+bool CMessage::IsValid() const
 {
     return m_xmlObject != NULL;
 }
@@ -174,7 +174,7 @@ void CMessage::_ReleaseMap()
     m_mapMsgDataArr.clear();
 }
 
-int CMessage::MsgId()
+int CMessage::MsgId() const
 {
     int nId = 0;
     if (m_xmlObject)

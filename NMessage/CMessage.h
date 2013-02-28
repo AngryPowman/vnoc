@@ -19,13 +19,13 @@ public:
 
     virtual MsgStatus Read(
         IN const Define::MsgDataName& name,
-        OUT MsgDataValue*& value);
+        OUT MsgDataValue*& value) const;
 
     virtual MsgStatus ReadArr(
         IN  const Define::MsgDataName& name,
-        OUT ArrayData*& value);
+        OUT ArrayData*& value) const;
 
-    virtual int MsgId();
+    virtual int MsgId() const;
 
     virtual MsgStatus Write(
         IN const Define::MsgDataName& name,
@@ -35,7 +35,7 @@ public:
         IN const Define::MsgDataName& name,
         IN ArrayData* pValue);
 
-    virtual bool IsValid();
+    virtual bool IsValid() const;
 
     CMessage& Copy(IReadMessage& lhs, int MessageId = 0);
 

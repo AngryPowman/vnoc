@@ -74,35 +74,35 @@ public:
         return Write("RoomType", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetRoomID(Define::uint32& Value)
+    MsgStatus GetRoomID(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomID", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomManageId(Define::uint32& Value)
+    MsgStatus GetRoomManageId(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomManageId", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomName(std::string& Value)
+    MsgStatus GetRoomName(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomName", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetRoomPassword(std::string& Value)
+    MsgStatus GetRoomPassword(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomPassword", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetRoomPeopleListId(std::vector<Define::uint32>& Value)
+    MsgStatus GetRoomPeopleListId(std::vector<Define::uint32>& Value) const
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomPeopleListId", pReadValueArr);
@@ -110,28 +110,28 @@ public:
         return MsgStatus_Ok;
     }
 
-    MsgStatus GetRoomPeopleNumMax(Define::uint32& Value)
+    MsgStatus GetRoomPeopleNumMax(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomPeopleNumMax", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomRank(Define::uint32& Value)
+    MsgStatus GetRoomRank(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomRank", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomState(Define::uint32& Value)
+    MsgStatus GetRoomState(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomState", pReadValue);
         return pReadValue->ToUInt32(Value);
     }
 
-    MsgStatus GetRoomType(Define::uint32& Value)
+    MsgStatus GetRoomType(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomType", pReadValue);

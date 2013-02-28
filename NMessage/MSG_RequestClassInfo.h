@@ -32,7 +32,7 @@ public:
         return Write("RoomID", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetRoomID(Define::uint32& Value)
+    MsgStatus GetRoomID(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RoomID", pReadValue);

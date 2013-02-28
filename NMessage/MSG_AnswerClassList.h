@@ -48,7 +48,7 @@ public:
         return WriteArr("RoomStateList", ValueArr);
     }
 
-    MsgStatus GetRoomIdList(std::vector<Define::uint32>& Value)
+    MsgStatus GetRoomIdList(std::vector<Define::uint32>& Value) const
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomIdList", pReadValueArr);
@@ -56,7 +56,7 @@ public:
         return MsgStatus_Ok;
     }
 
-    MsgStatus GetRoomNameList(std::vector<std::string>& Value)
+    MsgStatus GetRoomNameList(std::vector<std::string>& Value) const
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomNameList", pReadValueArr);
@@ -64,7 +64,7 @@ public:
         return MsgStatus_Ok;
     }
 
-    MsgStatus GetRoomStateList(std::vector<Define::uint32>& Value)
+    MsgStatus GetRoomStateList(std::vector<Define::uint32>& Value) const
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomStateList", pReadValueArr);

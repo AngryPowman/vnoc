@@ -42,21 +42,21 @@ public:
         return Write("VerificationCode", new StringData(Value));
     }
 
-    MsgStatus GetAccountNumber(std::string& Value)
+    MsgStatus GetAccountNumber(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("AccountNumber", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetPassword(std::string& Value)
+    MsgStatus GetPassword(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("Password", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetVerificationCode(std::string& Value)
+    MsgStatus GetVerificationCode(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("VerificationCode", pReadValue);

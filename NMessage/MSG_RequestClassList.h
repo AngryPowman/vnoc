@@ -32,7 +32,7 @@ public:
         return Write("UserType", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetUserType(Define::uint32& Value)
+    MsgStatus GetUserType(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("UserType", pReadValue);

@@ -32,7 +32,7 @@ public:
         return Write("RetTag", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetRetTag(Define::uint32& Value)
+    MsgStatus GetRetTag(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("RetTag", pReadValue);

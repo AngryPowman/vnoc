@@ -32,7 +32,7 @@ public:
         return Write("MachineAddress", new StringData(Value));
     }
 
-    MsgStatus GetMachineAddress(std::string& Value)
+    MsgStatus GetMachineAddress(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("MachineAddress", pReadValue);

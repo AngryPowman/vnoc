@@ -20,13 +20,13 @@ public:
 public:
     virtual MsgStatus Read(
         IN const Define::MsgDataName& name,
-        OUT MsgDataValue*& value) = 0;
+        OUT MsgDataValue*& value) const = 0;
 
     virtual MsgStatus ReadArr(
         IN  const Define::MsgDataName& name,
-        OUT ArrayData*& value) = 0;
+        OUT ArrayData*& value) const = 0;
 
-    virtual int MsgId() = 0;
+    virtual int MsgId() const = 0;
 
     virtual MsgStatus Write(
         IN const Define::MsgDataName& name,
@@ -36,7 +36,7 @@ public:
         IN const Define::MsgDataName& name,
         IN ArrayData* pValue) = 0;
 
-    virtual bool IsValid() = 0;
+    virtual bool IsValid() const = 0;
 };
 
 }// namespace Message

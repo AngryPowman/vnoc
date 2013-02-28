@@ -42,21 +42,21 @@ public:
         return Write("LoginTag", new NumData<Define::uint8>(Value));
     }
 
-    MsgStatus GetCaptcha(std::string& Value)
+    MsgStatus GetCaptcha(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("Captcha", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetCaptchaType(Define::uint8& Value)
+    MsgStatus GetCaptchaType(Define::uint8& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("CaptchaType", pReadValue);
         return pReadValue->ToUInt8(Value);
     }
 
-    MsgStatus GetLoginTag(Define::uint8& Value)
+    MsgStatus GetLoginTag(Define::uint8& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("LoginTag", pReadValue);

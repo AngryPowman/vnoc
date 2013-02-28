@@ -52,35 +52,35 @@ public:
         return Write("Rank", new NumData<Define::uint8>(Value));
     }
 
-    MsgStatus GetAutograph(std::string& Value)
+    MsgStatus GetAutograph(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("Autograph", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetHeadForm(Define::uint8& Value)
+    MsgStatus GetHeadForm(Define::uint8& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("HeadForm", pReadValue);
         return pReadValue->ToUInt8(Value);
     }
 
-    MsgStatus GetHeadPortrait(std::string& Value)
+    MsgStatus GetHeadPortrait(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("HeadPortrait", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetNickname(std::string& Value)
+    MsgStatus GetNickname(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("Nickname", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetRank(Define::uint8& Value)
+    MsgStatus GetRank(Define::uint8& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("Rank", pReadValue);

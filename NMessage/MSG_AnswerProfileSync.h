@@ -32,7 +32,7 @@ public:
         return Write("MessageSynchro", new StringData(Value));
     }
 
-    MsgStatus GetMessageSynchro(std::string& Value)
+    MsgStatus GetMessageSynchro(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("MessageSynchro", pReadValue);

@@ -154,7 +154,14 @@ void DisposeParam(
     }
     strParam += "& ";
     strParam += "Value";
-    strParam += ")";
+    if (strPattern == "Set")
+    {
+        strParam += ")";
+    }
+    else
+    {
+        strParam += ") const";
+    }
     strParam += "\n";
     strParam += "    ";
     strParam += "{";
