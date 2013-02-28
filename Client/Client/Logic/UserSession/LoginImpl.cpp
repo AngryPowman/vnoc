@@ -99,7 +99,7 @@ ResultCode CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 	return Result_Fail;
 }
 
-ResultCode CLoginImpl::OnNetMessage( IReadMessage *msg )
+ResultCode CLoginImpl::OnNetMessage( const CMessage *msg )
 {
 	switch(msg->MsgId())
 	{

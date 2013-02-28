@@ -436,6 +436,9 @@
     <ClInclude Include="..\..\NMessage\MessageUnion.h">
       <Filter>Net\NMessage\Message\Produce</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\NMessage\MessageUnionDef.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWork\FrameWork.cpp">
@@ -557,9 +560,6 @@
     </ClCompile>
     <ClCompile Include="Logic\room\roommgrTest.cpp">
       <Filter>Logic\room</Filter>
-    </ClCompile>
-    <ClCompile Include="CppUnitTest\NMessageTest.cpp">
-      <Filter>Net\NMessage</Filter>
     </ClCompile>
     <ClCompile Include="CppUnitTest\testPackMessage.cpp">
       <Filter>Net\NMessage</Filter>

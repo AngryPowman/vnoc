@@ -17,12 +17,36 @@ class MSG_RequestRegister : public CMessage
 public:
     MSG_RequestRegister()
     {
-        InitializeMessage("MSG_RequestRegister");
+        RegisterPort("Autograph", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("EmailAddress", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("HeadForm", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("HeadPortrait", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Nickname", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Rank", MsgDataMType_Data, MsgDataType_Uint8);
+
+        InitializeMessage(MSG_RequestRegister_Id);
     }
 
-    MSG_RequestRegister(IReadMessage& Msg)
+    MSG_RequestRegister(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_RequestRegister");
+        RegisterPort("Autograph", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("EmailAddress", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("HeadForm", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("HeadPortrait", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Nickname", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Rank", MsgDataMType_Data, MsgDataType_Uint8);
+
+        CMessage::Copy(Msg, MSG_RequestRegister_Id);
     }
 
     virtual ~MSG_RequestRegister(){}

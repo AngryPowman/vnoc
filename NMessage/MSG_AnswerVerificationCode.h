@@ -17,12 +17,24 @@ class MSG_AnswerVerificationCode : public CMessage
 public:
     MSG_AnswerVerificationCode()
     {
-        InitializeMessage("MSG_AnswerVerificationCode");
+        RegisterPort("Captcha", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("CaptchaType", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("LoginTag", MsgDataMType_Data, MsgDataType_Uint8);
+
+        InitializeMessage(MSG_AnswerVerificationCode_Id);
     }
 
-    MSG_AnswerVerificationCode(IReadMessage& Msg)
+    MSG_AnswerVerificationCode(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_AnswerVerificationCode");
+        RegisterPort("Captcha", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("CaptchaType", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("LoginTag", MsgDataMType_Data, MsgDataType_Uint8);
+
+        CMessage::Copy(Msg, MSG_AnswerVerificationCode_Id);
     }
 
     virtual ~MSG_AnswerVerificationCode(){}

@@ -20,7 +20,7 @@ public:
         InitializeMessage("NMSG_ACL");
     }
 
-    NMSG_ACL(IReadMessage& Msg)
+    NMSG_ACL(const CMessage& Msg)
     {
         CMessage::Copy(Msg, "NMSG_ACL");
     }

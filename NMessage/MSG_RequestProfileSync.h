@@ -17,12 +17,32 @@ class MSG_RequestProfileSync : public CMessage
 public:
     MSG_RequestProfileSync()
     {
-        InitializeMessage("MSG_RequestProfileSync");
+        RegisterPort("Autograph", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("HeadForm", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("HeadPortrait", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Nickname", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Rank", MsgDataMType_Data, MsgDataType_Uint8);
+
+        InitializeMessage(MSG_RequestProfileSync_Id);
     }
 
-    MSG_RequestProfileSync(IReadMessage& Msg)
+    MSG_RequestProfileSync(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_RequestProfileSync");
+        RegisterPort("Autograph", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("HeadForm", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("HeadPortrait", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Nickname", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Rank", MsgDataMType_Data, MsgDataType_Uint8);
+
+        CMessage::Copy(Msg, MSG_RequestProfileSync_Id);
     }
 
     virtual ~MSG_RequestProfileSync(){}

@@ -90,7 +90,7 @@ ResultCode CNetCenter::IsServerConnected()
     return m_isConnected? Result_Success: Result_Fail;
 }
 
-ResultCode CNetCenter::SendServer( IReadMessage *helper )
+ResultCode CNetCenter::SendServer( const CMessage *helper )
 {
 	if (!m_isConnected)
 	{
@@ -178,7 +178,7 @@ void CNetCenter::OnSend( int nErrorCode,CAsyncSocketEx* pSock )
 	Global->Log(LogFile_Net,_T("OnSend"));
 }
 
-void CNetCenter::_DispatchMessage( IReadMessage* pMsg )
+void CNetCenter::_DispatchMessage( const CMessage* pMsg )
 {
 	Util::CAutoCS ac(m_cs);
     auto i = m_listeners.find(VMsg(pMsg->MsgId()));
@@ -203,7 +203,7 @@ void CNetCenter::OnPackReady(const CBufferMessage &buffer )
 	}
 }
 
-ResultCode CNetCenter::MockReceive( IReadMessage *mockMsg )
+ResultCode CNetCenter::MockReceive( const CMessage *mockMsg )
 {
 	if (mockMsg)
 	{

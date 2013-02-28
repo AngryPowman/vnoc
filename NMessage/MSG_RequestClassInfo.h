@@ -17,12 +17,16 @@ class MSG_RequestClassInfo : public CMessage
 public:
     MSG_RequestClassInfo()
     {
-        InitializeMessage("MSG_RequestClassInfo");
+        RegisterPort("RoomID", MsgDataMType_Data, MsgDataType_Uint32);
+
+        InitializeMessage(MSG_RequestClassInfo_Id);
     }
 
-    MSG_RequestClassInfo(IReadMessage& Msg)
+    MSG_RequestClassInfo(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_RequestClassInfo");
+        RegisterPort("RoomID", MsgDataMType_Data, MsgDataType_Uint32);
+
+        CMessage::Copy(Msg, MSG_RequestClassInfo_Id);
     }
 
     virtual ~MSG_RequestClassInfo(){}

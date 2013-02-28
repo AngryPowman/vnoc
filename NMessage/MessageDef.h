@@ -22,16 +22,35 @@
 
 #include <string>
 #include <vector>
+#include "MessageUnionDef.h"
 
 namespace VNOC
 {
 namespace Message
 {
 
+typedef enum _MsgDataType
+{
+    MsgDataType_Null,
+    MsgDataType_String,
+    MsgDataType_Uint8,
+    MsgDataType_Uint16,
+    MsgDataType_Uint32,
+}MsgDataType;
+
+typedef enum _MsgDataMType
+{
+    MsgDataMType_Null,
+    MsgDataMType_Data,
+    MsgDataMType_List,
+}MsgDataMType;
+
 namespace Define
 {
 
 typedef std::string         MsgDataName;
+typedef MsgDataMType        MsgMType;
+typedef MsgDataType         MsgType;
 typedef unsigned char       uint8;
 typedef unsigned short      uint16;
 typedef unsigned int        uint32;
@@ -74,49 +93,6 @@ typedef int                 int32;
     void operator=(const TypeName&);
 #endif
 
-typedef enum _VMsg
-{
-    MSG_TYPE_NULL                               = 0,
-    //服务器节点
-    MSG_RequestQueryServer_Id              = 1100, //获取一个服务器节点（请求）
-    MSG_AnswerQueryServer_Id               = 1101, //获取一个服务器节点（应答）
-
-    //账号处理
-    MSG_RequestRegister_Id                 = 2100, //注册帐号（请求）
-    MSG_AnswerRegister_Id                  = 2101, //注册帐号（应答）
-
-    //验证码
-    MSG_RequestVerificationCode_Id         = 3101, //获取验证码（请求）
-    MSG_AnswerVerificationCode_Id          = 3102, //获取验证码（应答）
-
-    //登陆
-    MSG_RequestLogin_Id                    = 4101, //登录（请求）
-    MSG_AnswerLogin_Id                     = 4102, //登录（应答）
-
-    //个人
-    MSG_RequestProfileSync_Id              = 5101, //个人信息同步（通知）
-    MSG_AnswerProfileSync_Id               = 5102, //个人信息同步（通知确认）
-
-    //班级
-    MSG_RequestClassSync_Id                = 6101, //班级信息同步（通知）
-    MSG_AnswerClassSync_Id                 = 6102, //班级信息同步（通知确认）
-    MSG_RequestClassSyncResult_Id          = 6103, //班级同步结果（通知）
-    MSG_AnswerClassSyncResult_Id           = 6104, //班级同步结果（通知确认）
-    MSG_RequestClassList_Id                = 6105, //获取班级列表（请求）
-    MSG_AnswerClassList_Id                 = 6106, //获取班级列表（应答）
-    MSG_RequestClassInfo_Id                = 6107, //获取班级信息（请求）
-    MSG_AnswerClassInfo_Id                 = 6108, //获取班级信息（应答）
-
-    MSG_TYPE_END,
-}VMsg;
-
-typedef enum _MsgDataMType
-{
-    MsgDataMType_Null,
-    MsgDataMType_Data,
-    MsgDataMType_List,
-}MsgDataMType;
-
 #define MsgDataMType_XML_Data     "data"
 #define MsgDataMType_XML_List     "list"
 
@@ -133,15 +109,6 @@ typedef enum _MsgDataMType
 #define MsgDataType_XML_String    "string"
 
 #define MsgPack_Unk 0
-
-typedef enum _MsgDataType
-{
-    MsgDataType_Null,
-    MsgDataType_String,
-    MsgDataType_Uint8,
-    MsgDataType_Uint16,
-    MsgDataType_Uint32,
-}MsgDataType;
 
 typedef enum _MsgStatus
 {

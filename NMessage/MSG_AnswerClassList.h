@@ -17,12 +17,24 @@ class MSG_AnswerClassList : public CMessage
 public:
     MSG_AnswerClassList()
     {
-        InitializeMessage("MSG_AnswerClassList");
+        RegisterPort("RoomIdList", MsgDataMType_List, MsgDataType_Uint32);
+
+        RegisterPort("RoomNameList", MsgDataMType_List, MsgDataType_String);
+
+        RegisterPort("RoomStateList", MsgDataMType_List, MsgDataType_Uint32);
+
+        InitializeMessage(MSG_AnswerClassList_Id);
     }
 
-    MSG_AnswerClassList(IReadMessage& Msg)
+    MSG_AnswerClassList(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_AnswerClassList");
+        RegisterPort("RoomIdList", MsgDataMType_List, MsgDataType_Uint32);
+
+        RegisterPort("RoomNameList", MsgDataMType_List, MsgDataType_String);
+
+        RegisterPort("RoomStateList", MsgDataMType_List, MsgDataType_Uint32);
+
+        CMessage::Copy(Msg, MSG_AnswerClassList_Id);
     }
 
     virtual ~MSG_AnswerClassList(){}

@@ -17,12 +17,48 @@ class MSG_AnswerClassInfo : public CMessage
 public:
     MSG_AnswerClassInfo()
     {
-        InitializeMessage("MSG_AnswerClassInfo");
+        RegisterPort("RoomID", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomManageId", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomName", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("RoomPassword", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("RoomPeopleListId", MsgDataMType_List, MsgDataType_Uint32);
+
+        RegisterPort("RoomPeopleNumMax", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomRank", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomState", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomType", MsgDataMType_Data, MsgDataType_Uint32);
+
+        InitializeMessage(MSG_AnswerClassInfo_Id);
     }
 
-    MSG_AnswerClassInfo(IReadMessage& Msg)
+    MSG_AnswerClassInfo(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_AnswerClassInfo");
+        RegisterPort("RoomID", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomManageId", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomName", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("RoomPassword", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("RoomPeopleListId", MsgDataMType_List, MsgDataType_Uint32);
+
+        RegisterPort("RoomPeopleNumMax", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomRank", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomState", MsgDataMType_Data, MsgDataType_Uint32);
+
+        RegisterPort("RoomType", MsgDataMType_Data, MsgDataType_Uint32);
+
+        CMessage::Copy(Msg, MSG_AnswerClassInfo_Id);
     }
 
     virtual ~MSG_AnswerClassInfo(){}

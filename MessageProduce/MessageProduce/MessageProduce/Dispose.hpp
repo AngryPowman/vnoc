@@ -7,6 +7,9 @@
 #include <vector>
 
 #define MESSAGE_TAMPLATE_NAME_TAG "?Name"
+#define MESSAGE_TAMPLATE_ID_TAG "?Id"
+#define MESSAGE_TAMPLATE_REGISTERPORT_TAG "?RegisterPort"
+#define MESSAGE_TAMPLATE_REGISTERPORT "RegisterPort"
 #define MESSAGE_TAMPLATE_PARAM_TAG_SET "?SetParam"
 #define MESSAGE_TAMPLATE_PARAM_TAG_GET "?GetParam"
 
@@ -80,6 +83,42 @@ void ConvertToStyle(int IdType, std::string& strType)
     }
 }
 
+void ConvertTypeToIdName(int IdType, std::string& strType)
+{
+    switch (IdType)
+    {
+    case VNOC::Message::MsgDataType_String:
+        strType = "MsgDataType_String";
+        break;
+    case VNOC::Message::MsgDataType_Uint8:
+        strType = "MsgDataType_Uint8";
+        break;
+    case VNOC::Message::MsgDataType_Uint16:
+        strType = "MsgDataType_Uint16";
+        break;
+    case VNOC::Message::MsgDataType_Uint32:
+        strType = "MsgDataType_Uint32";
+        break;
+    default:
+        strType = "0";
+    }
+}
+
+void ConvertMTypeToIdName(int IdType, std::string& strType)
+{
+    switch (IdType)
+    {
+    case VNOC::Message::MsgDataMType_List:
+        strType = "MsgDataMType_List";
+        break;
+    case VNOC::Message::MsgDataMType_Data:
+        strType = "MsgDataMType_Data";
+        break;
+    default:
+        strType = "0";
+    }
+}
+
 void DisposeName(
     const std::string& strTamplate,
     std::string& strSrc,
@@ -109,6 +148,24 @@ void DisposeName(
         DisposeName(strSrc, strSrc, strName, strValue, Isall);
     }
 }
+
+void DisposePort(
+    VNOC::Message::XMLItem* Item,
+    std::string& strParam
+    )
+{
+    std::string strType, strMType;
+    ConvertTypeToIdName(Item->GetType(), strType);
+    ConvertMTypeToIdName(Item->GetMType() , strMType);
+    strParam += MESSAGE_TAMPLATE_REGISTERPORT;
+    strParam += "(\"";
+    strParam += Item->GetName();
+    strParam += "\", ";
+    strParam += strMType;
+    strParam += ", ";
+    strParam += strType;
+    strParam += ");";
+};
 
 void DisposeParam(
     VNOC::Message::XMLItem* Item,

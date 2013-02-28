@@ -1,10 +1,9 @@
 #ifndef VNOC_MESSAGEPARSER
 #define VNOC_MESSAGEPARSER
 
-#include "XMLObject.h"
 #include "MessageDef.h"
 #include "BufferMessage.h"
-#include "IWriteMessage.h"
+#include "CMessage.h"
 
 namespace VNOC
 {
@@ -17,15 +16,15 @@ public:
     CMessage2Parser() : m_MsgId(0) {}
     virtual ~CMessage2Parser() {}
 
-    MsgStatus Parser(OUT IWriteMessage* pMsg, IN const CBufferMessage& pBuf);
+    MsgStatus Parser(OUT CMessage* pMsg, IN const CBufferMessage& pBuf);
     bool IsVaild(IN const CBufferMessage& pBuf);
     static Define::uint32 GetMessageLen(Define::uint8* pData, Define::uint32 nBufferSize);
     static int GetMsgType(IN const CBufferMessage& pBuf);
 
 private:
-    MsgStatus _ParserHead(IWriteMessage* pMsg, const CBufferMessage& pBuf);
-    MsgStatus _ParserTail(IWriteMessage* pMsg, const CBufferMessage& pBuf);
-    MsgStatus _ParserParam(IWriteMessage* pMsg, const CBufferMessage& pBuf);
+    MsgStatus _ParserHead(CMessage* pMsg, const CBufferMessage& pBuf);
+    MsgStatus _ParserTail(CMessage* pMsg, const CBufferMessage& pBuf);
+    MsgStatus _ParserParam(CMessage* pMsg, const CBufferMessage& pBuf);
     int _ByteToInt(Define::uint8* pData);
 
 private:

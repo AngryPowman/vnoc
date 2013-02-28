@@ -74,7 +74,7 @@ VOID CRoomMgr::OnGetRoomList( XMessage *pMsg )
     GetRoomList();
 }
 
-ResultCode CRoomMgr::OnNetMessage( IReadMessage *msg )
+ResultCode CRoomMgr::OnNetMessage( const CMessage *msg )
 {
     switch(msg->MsgId())
     {

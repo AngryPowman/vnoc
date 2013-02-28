@@ -19,11 +19,11 @@ public:
 	virtual ResultCode Terminate();
 
 	virtual ResultCode IsServerConnected();
-	virtual ResultCode SendServer(IReadMessage *helper);
+	virtual ResultCode SendServer(const CMessage *helper);
 	virtual ResultCode Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg);
 	virtual ResultCode SetListener(VMsg msgType,INetListener *listener);
 	virtual ResultCode RemoveListener(VMsg msgType,INetListener *listener);
-	virtual ResultCode MockReceive(IReadMessage *mockMsg);
+	virtual ResultCode MockReceive(const CMessage *mockMsg);
 
 VNOC_Private:
 	virtual void OnAccept	(int nErrorCode,CAsyncSocketEx* pSock);
@@ -36,7 +36,7 @@ VNOC_Private:
 private:
 	ResultCode _GetServerAddress();
 	ResultCode _ConnectServer();
-	void _DispatchMessage(IReadMessage* pMsg);
+	void _DispatchMessage(const CMessage* pMsg);
 private:
 	CString	m_serverIP;
 	UINT	m_serverPort;

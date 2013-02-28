@@ -17,12 +17,16 @@ class MSG_AnswerRegister : public CMessage
 public:
     MSG_AnswerRegister()
     {
-        InitializeMessage("MSG_AnswerRegister");
+        RegisterPort("RetTag", MsgDataMType_Data, MsgDataType_Uint32);
+
+        InitializeMessage(MSG_AnswerRegister_Id);
     }
 
-    MSG_AnswerRegister(IReadMessage& Msg)
+    MSG_AnswerRegister(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_AnswerRegister");
+        RegisterPort("RetTag", MsgDataMType_Data, MsgDataType_Uint32);
+
+        CMessage::Copy(Msg, MSG_AnswerRegister_Id);
     }
 
     virtual ~MSG_AnswerRegister(){}
