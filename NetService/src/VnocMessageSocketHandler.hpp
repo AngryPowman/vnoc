@@ -21,7 +21,7 @@ public:
     //start handler the message on the connection
     virtual void start();
     void setProtocol(VnocProtocol* protocol){protocol_= protocol;}
-    virtual void SendVnocMessage(IReadMessage *msg);
+    virtual void SendVnocMessage(const CMessage *msg);
 
 private:
     void ReadHeaderHandler(const asio::error_code& error, size_t bytes_transferred);

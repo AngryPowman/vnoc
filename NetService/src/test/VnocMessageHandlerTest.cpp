@@ -13,26 +13,8 @@
 #include "../../NMessage/MessageUnion.h"
 #include "../../NMessage/Message2Pack.h"
 #include "../../NMessage/Message2Parser.h"
-#include "../../NMessage/ParserMessageXML.h"
 
 #include <ctime>
-
-bool _TDisposePath(
-    IN const wchar_t* strPath,
-    OUT std::string& strConvertDir
-    )
-{
-    if (!strPath)
-    {
-        return false;
-    }
-    TCHAR szFile[MAX_PATH] = {0};
-    ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
-    ::PathRemoveFileSpec(szFile);
-    ::PathAppend(szFile, strPath);
-    strConvertDir = CW2A(szFile);
-    return !strConvertDir.empty();
-}
 
 class VnocMessageHandlerTest : public CppUnit::TestFixture
 {
@@ -56,9 +38,6 @@ public:
         conn_ = new MockTcpConnection;
         protocol_ = new VnocProtocol();
         CUserManage::GetInstance()->initial(&us);
-        std::string strPath;
-        CPPUNIT_ASSERT(_TDisposePath(L"../NewMsgdef.xml", strPath) == true);
-        CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile(strPath.c_str()) == MsgStatus_Ok);
     }
     void tearDown()
     {

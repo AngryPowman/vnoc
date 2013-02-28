@@ -110,7 +110,7 @@ void VnocMessageSocketHandler<ConnectionT>::SendHandler(smart_buf buffer, const 
 }
 
 template <typename ConnectionT>
-void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(IReadMessage *msg)
+void VnocMessageSocketHandler<ConnectionT>::SendVnocMessage(const CMessage *msg)
 {
     CMessage2Pack m2Pack;
     CBufferMessage PackBuff;
