@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "GlobalCenter.h"
-#include "../../../NMessage/ParserMessageXML.h"
 
 IGlobal* Global = NULL;		// App全局访问接口
 
@@ -22,7 +21,6 @@ ResultCode CGlobalCenter::Initialize( IModule* UpperFrame/*=NULL*/ )
 {
 	_InitializeLog();		// 所有地方都依赖log，所以当最先初始化
 	_InitializeConfig();
-    _InitializeMessage();
 	_InitializeNetCenter();
 	_InitializeFrameWork();
 	return Result_Success;
@@ -150,13 +148,4 @@ void CGlobalCenter::_UnInitializeFrameWork()
 		m_pFrameWork->Terminate();
 		m_pFrameWork->UnInitialize();
 	}
-}
-
-void CGlobalCenter::_InitializeMessage()
-{
-    TCHAR filename[MAX_PATH] = {0};
-    ::GetModuleFileName(0, filename, MAX_PATH - 1);
-    ::PathRemoveFileSpec(filename);
-    ::PathAppend(filename, _T("NewMsgdef.xml"));
-    ParserMessageXML::Instance().LoadFile(CW2A(filename));
 }

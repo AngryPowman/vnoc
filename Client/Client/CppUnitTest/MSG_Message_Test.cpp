@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include "../../NMessage/MessageUnion.h"
-#include "../../NMessage/NMSG_ACL.h"
 #include "../../NMessage/Message2Pack.h"
 #include "../../NMessage/Message2Parser.h"
 #include "../../NMessage/ParserMessageXML.h"
@@ -20,27 +19,9 @@ using namespace VNOC::Message::Define;
 CMessage2Pack g_m2pack;
 CMessage2Parser g_m2parser;
 
-bool _TDisposePath(
-    IN const wchar_t* strPath,
-    OUT std::string& strConvertDir
-    )
-{
-    if (!strPath)
-    {
-        return false;
-    }
-    TCHAR szFile[MAX_PATH] = {0};
-    ::GetModuleFileName(NULL, szFile, MAX_PATH - 1);
-    ::PathRemoveFileSpec(szFile);
-    ::PathAppend(szFile, strPath);
-    strConvertDir = CW2A(szFile);
-    return !strConvertDir.empty();
-}
-
 class MSG_Message_Test : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE( MSG_Message_Test );
-    CPPUNIT_TEST( _LoadXML );
     CPPUNIT_TEST( MSG_AnswerClassInfo_Test );
     CPPUNIT_TEST( MSG_AnswerClassList_Test );
     CPPUNIT_TEST( MSG_AnswerLogin_Test );
@@ -65,13 +46,6 @@ public:
 
     }
 public:
-
-    void _LoadXML()
-    {
-        std::string strPath;
-        CPPUNIT_ASSERT(_TDisposePath(L"NewMsgdef.xml", strPath) == true);
-        CPPUNIT_ASSERT(ParserMessageXML::Instance().LoadFile(strPath.c_str()) == MsgStatus_Ok);
-    }
 
     void MSG_AnswerClassInfo_Test()
     {

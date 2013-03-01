@@ -17,12 +17,24 @@ class MSG_AnswerLogin : public CMessage
 public:
     MSG_AnswerLogin()
     {
-        InitializeMessage("MSG_AnswerLogin");
+        RegisterPort("ATLGUID", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("LoginResult", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("Token", MsgDataMType_Data, MsgDataType_Uint32);
+
+        InitializeMessage(MSG_AnswerLogin_Id);
     }
 
-    MSG_AnswerLogin(IReadMessage& Msg)
+    MSG_AnswerLogin(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_AnswerLogin");
+        RegisterPort("ATLGUID", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("LoginResult", MsgDataMType_Data, MsgDataType_Uint8);
+
+        RegisterPort("Token", MsgDataMType_Data, MsgDataType_Uint32);
+
+        CMessage::Copy(Msg, MSG_AnswerLogin_Id);
     }
 
     virtual ~MSG_AnswerLogin(){}
@@ -42,21 +54,21 @@ public:
         return Write("Token", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetATLGUID(std::string& Value)
+    MsgStatus GetATLGUID(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("ATLGUID", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetLoginResult(Define::uint8& Value)
+    MsgStatus GetLoginResult(Define::uint8& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("LoginResult", pReadValue);
         return pReadValue->ToUInt8(Value);
     }
 
-    MsgStatus GetToken(Define::uint32& Value)
+    MsgStatus GetToken(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("Token", pReadValue);

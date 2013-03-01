@@ -17,12 +17,16 @@ class MSG_RequestClassList : public CMessage
 public:
     MSG_RequestClassList()
     {
-        InitializeMessage("MSG_RequestClassList");
+        RegisterPort("UserType", MsgDataMType_Data, MsgDataType_Uint32);
+
+        InitializeMessage(MSG_RequestClassList_Id);
     }
 
-    MSG_RequestClassList(IReadMessage& Msg)
+    MSG_RequestClassList(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_RequestClassList");
+        RegisterPort("UserType", MsgDataMType_Data, MsgDataType_Uint32);
+
+        CMessage::Copy(Msg, MSG_RequestClassList_Id);
     }
 
     virtual ~MSG_RequestClassList(){}
@@ -32,7 +36,7 @@ public:
         return Write("UserType", new NumData<Define::uint32>(Value));
     }
 
-    MsgStatus GetUserType(Define::uint32& Value)
+    MsgStatus GetUserType(Define::uint32& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("UserType", pReadValue);

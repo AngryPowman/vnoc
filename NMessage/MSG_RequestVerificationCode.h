@@ -17,12 +17,16 @@ class MSG_RequestVerificationCode : public CMessage
 public:
     MSG_RequestVerificationCode()
     {
-        InitializeMessage("MSG_RequestVerificationCode");
+        RegisterPort("MachineAddress", MsgDataMType_Data, MsgDataType_String);
+
+        InitializeMessage(MSG_RequestVerificationCode_Id);
     }
 
-    MSG_RequestVerificationCode(IReadMessage& Msg)
+    MSG_RequestVerificationCode(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_RequestVerificationCode");
+        RegisterPort("MachineAddress", MsgDataMType_Data, MsgDataType_String);
+
+        CMessage::Copy(Msg, MSG_RequestVerificationCode_Id);
     }
 
     virtual ~MSG_RequestVerificationCode(){}
@@ -32,7 +36,7 @@ public:
         return Write("MachineAddress", new StringData(Value));
     }
 
-    MsgStatus GetMachineAddress(std::string& Value)
+    MsgStatus GetMachineAddress(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("MachineAddress", pReadValue);

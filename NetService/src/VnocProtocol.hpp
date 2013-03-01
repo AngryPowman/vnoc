@@ -16,7 +16,7 @@ using namespace VNOC::Message;
 class IVnocMessageProtocolHandler
 {
 public:
-    virtual void SendVnocMessage(IReadMessage *msg) = 0;
+    virtual void SendVnocMessage(const CMessage *msg) = 0;
 };
 
 struct MessageContext
@@ -29,7 +29,7 @@ class IMessageHandler
 {
 public:
     //if the message is handled, return 1;
-    virtual int operator()(IReadMessage *msg, MessageContext *ctx)=0;
+    virtual int operator()(const CMessage *msg, MessageContext *ctx)=0;
     virtual VMsg getMessageType() const = 0;
 };
 
@@ -41,7 +41,7 @@ public:
     }
     void RegisterMessageHandler(IMessageHandler *MessageHandler);
 	void RegisterSocketHandlerFactory(SocketHandlerFactory *factory);
-    void SendVnocMessage(IReadMessage *msg, MessageContext *ctx);
+    void SendVnocMessage(const CMessage *msg, MessageContext *ctx);
     list<IMessageHandler *>& getHandler(VMsg msgType);
 
 private:

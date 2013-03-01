@@ -1,5 +1,4 @@
 #include "Message2Pack.h"
-#include "ParserMessageXML.h"
 
 namespace VNOC
 {
@@ -30,7 +29,7 @@ array： | 元素个数 : uint32 | 数据s（按前面所述）
 
 ************************************************************************/
 
-MsgStatus CMessage2Pack::GetPackSize( IReadMessage* pMsg, int& nSize )
+MsgStatus CMessage2Pack::GetPackSize(const CMessage* pMsg, int& nSize )
 {
     if (!pMsg)
     {
@@ -41,21 +40,16 @@ MsgStatus CMessage2Pack::GetPackSize( IReadMessage* pMsg, int& nSize )
     {
         return MsgStatus_Err;
     }
-    XMLObject* pXmlObj = ParserMessageXML::Instance().GetMsgObject(nId);
-    if (!pXmlObj)
-    {
-        return MsgStatus_Err;
-    }
     int nLen = MSG_HEAD_LEN + MSG_TAIL_LEN; ///> 总大小+msg id
     int nAdd = 0;
     MsgDataValue* pReadStr = NULL;
-    auto it = pXmlObj->ParamBegin();
-    for (; it != pXmlObj->ParamEnd(); ++it)
+    auto it = pMsg->PortBegin();
+    for (; it != pMsg->PortEnd(); ++it)
     {
-        switch (it->second.GetMType())
+        switch (it->second.first)
         {
         case MsgDataMType_Data:
-            nAdd = _GetDataSize(it->second, pMsg);
+            nAdd = _GetDataSize(it->first, it->second.second, pMsg);
             if (nAdd == 0)
             {
                 return MsgStatus_Err;
@@ -63,7 +57,7 @@ MsgStatus CMessage2Pack::GetPackSize( IReadMessage* pMsg, int& nSize )
             nLen += nAdd;
             break;
         case MsgDataMType_List:
-            nAdd = _GetArrSize(it->second, pMsg);
+            nAdd = _GetArrSize(it->first, it->second.second, pMsg);
             if (nAdd == 0)
             {
                 return MsgStatus_Err;
@@ -78,7 +72,7 @@ MsgStatus CMessage2Pack::GetPackSize( IReadMessage* pMsg, int& nSize )
     return MsgStatus_Ok;
 }
 
-MsgStatus CMessage2Pack::PackMessage(IReadMessage* pMsg, CBufferMessage& pBuf)
+MsgStatus CMessage2Pack::PackMessage(const CMessage* pMsg, CBufferMessage& pBuf)
 {
     if (!pMsg)
     {
@@ -99,29 +93,24 @@ MsgStatus CMessage2Pack::PackMessage(IReadMessage* pMsg, CBufferMessage& pBuf)
     {
         return MsgStatus_Err;
     }
-    XMLObject* pXmlObj = ParserMessageXML::Instance().GetMsgObject(nId);
-    if (!pXmlObj)
-    {
-        return MsgStatus_Err;
-    }
     int nPackPos = _PackHead(nId,pBuf);
     std::vector<int> vecParamLen;
     std::vector<std::vector<uint8> > vecParamList;
-    for (auto It = pXmlObj->ParamBegin(); It != pXmlObj->ParamEnd(); It++)
+    for (auto It = pMsg->PortBegin(); It != pMsg->PortEnd(); It++)
     {
-        switch (It->second.GetMType())
+        switch (It->second.first)
         {
         case MsgDataMType_Data:
-            _PushMessageDataParam(It->second, pMsg,It->first, vecParamLen, vecParamList);
+            _PushMessageDataParam(It->second.second, pMsg,It->first, vecParamLen, vecParamList);
             break;
         case MsgDataMType_List:
-            _PushMessageListParam(It->second, pMsg,It->first, vecParamLen, vecParamList);
+            _PushMessageListParam(It->second.second, pMsg,It->first, vecParamLen, vecParamList);
             break;
         default:
             return MsgStatus_Err;
         }
     }
-    if (_PackParam(pXmlObj, pBuf, nPackPos, vecParamLen, vecParamList) != MsgStatus_Ok)
+    if (_PackParam(pMsg, pBuf, nPackPos, vecParamLen, vecParamList) != MsgStatus_Ok)
     {
         return MsgStatus_Err;
     }
@@ -129,14 +118,14 @@ MsgStatus CMessage2Pack::PackMessage(IReadMessage* pMsg, CBufferMessage& pBuf)
     return MsgStatus_Ok;
 }
 
-int CMessage2Pack::_GetDataSize( XMLItem& item, IReadMessage* pMsg )
+int CMessage2Pack::_GetDataSize(const Define::MsgDataName& strName, MsgDataType eType,const CMessage* pMsg )
 {
     MsgDataValue* pReadStr = NULL;
-    switch (item.GetType())
+    switch (eType)
     {
     case MsgDataType_String:
-        if (pMsg->Read(item.GetName(), pReadStr) == MsgStatus_Ok)
-            return _GetStringSize(item, pReadStr);
+        if (pMsg->Read(strName, pReadStr) == MsgStatus_Ok)
+            return _GetStringSize(pReadStr);
         break;
     case MsgDataType_Uint8:
         return 1;
@@ -151,7 +140,7 @@ int CMessage2Pack::_GetDataSize( XMLItem& item, IReadMessage* pMsg )
     return 0;
 }
 
-int CMessage2Pack::_GetStringSize( XMLItem& item, MsgDataValue* pReadStr )
+int CMessage2Pack::_GetStringSize( MsgDataValue* pReadStr )
 {
     std::string strData;
     if (pReadStr && pReadStr->ToStr(strData) == MsgStatus_Ok)
@@ -172,14 +161,14 @@ int CMessage2Pack::_GetStringSize( XMLItem& item, MsgDataValue* pReadStr )
     return 0;
 }
 
-int CMessage2Pack::_GetArrSize( XMLItem& item, IReadMessage* pMsg )
+int CMessage2Pack::_GetArrSize(const Define::MsgDataName& strName, MsgDataType eType,const CMessage* pMsg )
 {
     int nSize = 0;
     int nAdd = 0;
     ArrayData* pReadArr = NULL;
-    if (pMsg->ReadArr(item.GetName(), pReadArr) == MsgStatus_Ok)
+    if (pMsg->ReadArr(strName, pReadArr) == MsgStatus_Ok)
     {
-        switch (item.GetType())
+        switch (eType)
         {
         case MsgDataType_String:
             if (pReadArr == NULL)
@@ -190,7 +179,7 @@ int CMessage2Pack::_GetArrSize( XMLItem& item, IReadMessage* pMsg )
                 it != pReadArr->End();
                 ++it)
             {
-                nAdd = _GetStringSize(item, static_cast<MsgDataValue*>(*it));
+                nAdd = _GetStringSize(static_cast<MsgDataValue*>(*it));
                 if (nAdd == 0)
                 {
                     return 0;
@@ -225,8 +214,8 @@ int CMessage2Pack::_GetArrSize( XMLItem& item, IReadMessage* pMsg )
 }
 
 MsgStatus CMessage2Pack::_PushMessageDataParam(
-    XMLItem& item,
-    IReadMessage* pMsg,
+    MsgDataType eType,
+    const CMessage* pMsg,
     std::string ParamName,
     std::vector<int>& vecParamLen,
     std::vector<std::vector<uint8> >& vecParamList
@@ -243,9 +232,9 @@ MsgStatus CMessage2Pack::_PushMessageDataParam(
     pMsg->Read(ParamName, pReadValue);
     if (pReadValue == NULL)
     {
-        return _Occupy(item, vecParamLen, vecParamList);
+        return _Occupy(eType, vecParamLen, vecParamList);
     }
-    switch (item.GetType())
+    switch (eType)
     {
     case MsgDataType_String:
         pReadValue->ToStr(strParam);
@@ -297,8 +286,8 @@ MsgStatus CMessage2Pack::_PushMessageDataParam(
 }
 
 MsgStatus CMessage2Pack::_PushMessageListParam(
-    XMLItem& item,
-    IReadMessage* pMsg,
+    MsgDataType eType,
+    const CMessage* pMsg,
     std::string ParamName,
     std::vector<int>& vecParamLen,
     std::vector<std::vector<uint8> >& vecParamList
@@ -315,15 +304,15 @@ MsgStatus CMessage2Pack::_PushMessageListParam(
     if (pReadArrValue == NULL)
     {
         vecParamLen.push_back(1);
-        return _Occupy(item, vecParamLen, vecParamList);
+        return _Occupy(eType, vecParamLen, vecParamList);
     }
     else if (pReadArrValue->Empty())
     {
         vecParamLen.push_back(1);
-        return _Occupy(item, vecParamLen, vecParamList);
+        return _Occupy(eType, vecParamLen, vecParamList);
     }
     vecParamLen.push_back(pReadArrValue->Size());
-    switch(item.GetType())
+    switch(eType)
     {
     case MsgDataType_String:
         for (auto It = pReadArrValue->Begin();
@@ -448,17 +437,13 @@ int CMessage2Pack::_PackTail(int nPackPos,CBufferMessage& pBuf)
 }
 
 MsgStatus CMessage2Pack::_PackParam(
-    XMLObject* pXmlObj,
+    const CMessage* pMsg,
     CBufferMessage& pBuf,
     int& nPackPos,
     std::vector<int>& vecParamLen,
     std::vector<std::vector<uint8> >& vecParamList
     )
 {
-    if (pXmlObj == NULL)
-    {
-        return MsgStatus_Err;
-    }
     if (vecParamLen.empty() || vecParamList.empty())
     {
         return MsgStatus_Err;
@@ -472,12 +457,12 @@ MsgStatus CMessage2Pack::_PackParam(
     uint32 ArrCount = 0;
     int nPackParamIndex = 0;
     int nPackParamLenIndex = 0;
-    for (auto It = pXmlObj->ParamBegin(); It != pXmlObj->ParamEnd(); It++)
+    for (auto It = pMsg->PortBegin(); It != pMsg->PortEnd(); It++)
     {
-        switch (It->second.GetMType())
+        switch (It->second.first)
         {
         case MsgDataMType_Data:
-            if (It->second.GetType() == MsgDataType_String)
+            if (It->second.second == MsgDataType_String)
             {
                 pByte = (uint8*)&vecParamLen[nPackParamLenIndex];
                 for (int index = 0; index < sizeof(uint32); index++)
@@ -491,7 +476,7 @@ MsgStatus CMessage2Pack::_PackParam(
                     nPackPos++;
                 }
             }
-            else if (It->second.GetType() == MsgDataType_Uint8)
+            else if (It->second.second == MsgDataType_Uint8)
             {
                 Buff[nPackPos] = vecParamList[nPackParamIndex][0];
                 nPackPos++;
@@ -526,7 +511,7 @@ MsgStatus CMessage2Pack::_PackParam(
             }
             for (uint32 ArrIndex = 0; ArrIndex < ArrCount; ArrIndex++)
             {
-                if (It->second.GetType() == MsgDataType_String)
+                if (It->second.second == MsgDataType_String)
                 {
                     pByte = (uint8*)&vecParamLen[nPackParamLenIndex];
                     for (int index = 0; index < sizeof(uint32); index++)
@@ -571,13 +556,13 @@ MsgStatus CMessage2Pack::_PackParam(
 }
 
 MsgStatus CMessage2Pack::_Occupy(
-    XMLItem& item,
+    MsgDataType eType,
     std::vector<int>& vecParamLen,
     std::vector<std::vector<Define::uint8> >& vecParamList
     )
 {
     std::vector<uint8> vecParam;
-    switch (item.GetType())
+    switch (eType)
     {
     case MsgDataType_String:
         vecParamLen.push_back(1);

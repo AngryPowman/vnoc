@@ -1,5 +1,5 @@
 #include "Message2Parser.h"
-#include "ParserMessageXML.h"
+#include "MessageUnionFunDef.h"
 
 namespace VNOC
 {
@@ -24,7 +24,7 @@ bool CMessage2Parser::IsVaild(IN const CBufferMessage& pBuf)
 }
 
 MsgStatus CMessage2Parser::Parser(
-    OUT IWriteMessage* pMsg,
+    OUT CMessage* pMsg,
     IN const CBufferMessage& pBuf
     )
 {
@@ -37,12 +37,11 @@ MsgStatus CMessage2Parser::Parser(
     {
         return MsgStatus_Err;
     }
-
+    RegistrePort(pMsg, CMessage2Parser::GetMsgType(pBuf));
     if (_ParserHead(pMsg, pBuf) != MsgStatus_Ok)
     {
         return MsgStatus_FormatFailure;
     }
-
     if (_ParserParam(pMsg, pBuf) != MsgStatus_Ok)
     {
         return MsgStatus_Err;
@@ -50,7 +49,7 @@ MsgStatus CMessage2Parser::Parser(
     return _ParserTail(pMsg, pBuf);
 }
 
-MsgStatus CMessage2Parser::_ParserHead(IWriteMessage* pMsg, const CBufferMessage& pBuf)
+MsgStatus CMessage2Parser::_ParserHead(CMessage* pMsg, const CBufferMessage& pBuf)
 {
     uint8* pData = pBuf.GetBuffer();
     uint8 NumByte[4] = {0};
@@ -76,7 +75,7 @@ MsgStatus CMessage2Parser::_ParserHead(IWriteMessage* pMsg, const CBufferMessage
     return MsgStatus_Ok;
 }
 
-MsgStatus CMessage2Parser::_ParserTail(IWriteMessage* pMsg, const CBufferMessage& pBuf)
+MsgStatus CMessage2Parser::_ParserTail(CMessage* pMsg, const CBufferMessage& pBuf)
 {
     uint8* pData = pBuf.GetBuffer();
     if (pData[CMessage2Parser::GetMessageLen(pBuf.GetBuffer(), pBuf.GetSize()) - 1] != MSG_END)
@@ -86,7 +85,7 @@ MsgStatus CMessage2Parser::_ParserTail(IWriteMessage* pMsg, const CBufferMessage
     return MsgStatus_Ok;
 }
 
-MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessage& pBuf )
+MsgStatus CMessage2Parser::_ParserParam( CMessage* pMsg, const CBufferMessage& pBuf )
 {
     uint8* pData = pBuf.GetBuffer();
     int nParserIndex = MSG_HEAD_LEN;
@@ -98,18 +97,13 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
     std::vector<uint32> vecUint32Param;
     ArrayData* pArrData = NULL;
     uint8 NumByte[4] = {0};
-    XMLObject* Xml = ParserMessageXML::Instance().GetMsgObject(m_MsgId);
-    if (!Xml)
-    {
-        return MsgStatus_Err;
-    }
-    for (auto It = Xml->ParamBegin(); It != Xml->ParamEnd(); It++)
+    for (auto It = pMsg->PortBegin(); It != pMsg->PortEnd(); It++)
     {
         pArrData = new ArrayData;
-        switch (It->second.GetMType())
+        switch (It->second.first)
         {
         case MsgDataMType_Data:
-            switch (It->second.GetType())
+            switch (It->second.second)
             {
             case MsgDataType_String:
                 for (int index = 0; index < sizeof(uint32); index++)
@@ -127,12 +121,12 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                     strParam.push_back(pData[nParserIndex]);
                     nParserIndex++;
                 }
-                pMsg->Write(It->second.GetName(), new StringData(strParam));
+                pMsg->Write(It->first, new StringData(strParam));
                 strParam.clear();
                 memset(NumByte, 0, 4);
                 break;
             case MsgDataType_Uint8:
-                pMsg->Write(It->second.GetName(), new NumData<uint8>(pData[nParserIndex]));
+                pMsg->Write(It->first, new NumData<uint8>(pData[nParserIndex]));
                 nParserIndex++;
                 break;
             case MsgDataType_Uint16:
@@ -141,7 +135,7 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                     NumByte[index] = pData[nParserIndex];
                     nParserIndex++;
                 }
-                pMsg->Write(It->second.GetName(), new NumData<uint16>(_ByteToInt(NumByte)));
+                pMsg->Write(It->first, new NumData<uint16>(_ByteToInt(NumByte)));
                 memset(NumByte, 0, 4);
                 break;
             case MsgDataType_Uint32:
@@ -150,7 +144,7 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                     NumByte[index] = pData[nParserIndex];
                     nParserIndex++;
                 }
-                pMsg->Write(It->second.GetName(), new NumData<uint32>(_ByteToInt(NumByte)));
+                pMsg->Write(It->first, new NumData<uint32>(_ByteToInt(NumByte)));
                 memset(NumByte, 0, 4);
                 break;
             }
@@ -166,7 +160,7 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
 
             for (int index = 0; index < ArrSize; index++)
             {
-                if (It->second.GetType() == MsgDataType_String)
+                if (It->second.second == MsgDataType_String)
                 {
                     for (int index = 0; index < sizeof(uint32); index++)
                     {
@@ -187,12 +181,12 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                     strParam.clear();
                     memset(NumByte, 0, 4);
                 }
-                else if (It->second.GetType() == MsgDataType_Uint8)
+                else if (It->second.second == MsgDataType_Uint8)
                 {
                     vecUint8Param.push_back(pData[nParserIndex]);
                     nParserIndex++;
                 }
-                else if (It->second.GetType() == MsgDataType_Uint16)
+                else if (It->second.second == MsgDataType_Uint16)
                 {
                     for (int index = 0; index < sizeof(uint16); index++)
                     {
@@ -202,7 +196,7 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                     vecUint16Param.push_back(_ByteToInt(NumByte));
                     memset(NumByte, 0, 4);
                 }
-                else if (It->second.GetType() == MsgDataType_Uint32)
+                else if (It->second.second == MsgDataType_Uint32)
                 {
                     for (int index = 0; index < sizeof(uint32); index++)
                     {
@@ -233,7 +227,7 @@ MsgStatus CMessage2Parser::_ParserParam( IWriteMessage* pMsg, const CBufferMessa
                 pArrData->Push(vecUint32Param);
                 vecUint32Param.clear();
             }
-            pMsg->WriteArr(It->second.GetName(), pArrData);
+            pMsg->WriteArr(It->first, pArrData);
             break;
         default:
             return MsgStatus_Err;

@@ -17,12 +17,14 @@ class ?Name : public CMessage
 public:
     ?Name()
     {
-        InitializeMessage("?Name");
+        ?RegisterPort
+        InitializeMessage(?Id);
     }
 
-    ?Name(IReadMessage& Msg)
+    ?Name(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "?Name");
+        ?RegisterPort
+        CMessage::Copy(Msg, ?Id);
     }
 
     virtual ~?Name(){}

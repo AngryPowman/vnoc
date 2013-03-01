@@ -17,12 +17,24 @@ class MSG_AnswerClassList : public CMessage
 public:
     MSG_AnswerClassList()
     {
-        InitializeMessage("MSG_AnswerClassList");
+        RegisterPort("RoomIdList", MsgDataMType_List, MsgDataType_Uint32);
+
+        RegisterPort("RoomNameList", MsgDataMType_List, MsgDataType_String);
+
+        RegisterPort("RoomStateList", MsgDataMType_List, MsgDataType_Uint32);
+
+        InitializeMessage(MSG_AnswerClassList_Id);
     }
 
-    MSG_AnswerClassList(IReadMessage& Msg)
+    MSG_AnswerClassList(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_AnswerClassList");
+        RegisterPort("RoomIdList", MsgDataMType_List, MsgDataType_Uint32);
+
+        RegisterPort("RoomNameList", MsgDataMType_List, MsgDataType_String);
+
+        RegisterPort("RoomStateList", MsgDataMType_List, MsgDataType_Uint32);
+
+        CMessage::Copy(Msg, MSG_AnswerClassList_Id);
     }
 
     virtual ~MSG_AnswerClassList(){}
@@ -48,7 +60,7 @@ public:
         return WriteArr("RoomStateList", ValueArr);
     }
 
-    MsgStatus GetRoomIdList(std::vector<Define::uint32>& Value)
+    MsgStatus GetRoomIdList(std::vector<Define::uint32>& Value) const
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomIdList", pReadValueArr);
@@ -56,7 +68,7 @@ public:
         return MsgStatus_Ok;
     }
 
-    MsgStatus GetRoomNameList(std::vector<std::string>& Value)
+    MsgStatus GetRoomNameList(std::vector<std::string>& Value) const
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomNameList", pReadValueArr);
@@ -64,7 +76,7 @@ public:
         return MsgStatus_Ok;
     }
 
-    MsgStatus GetRoomStateList(std::vector<Define::uint32>& Value)
+    MsgStatus GetRoomStateList(std::vector<Define::uint32>& Value) const
     {
         ArrayData* pReadValueArr = NULL;
         ReadArr("RoomStateList", pReadValueArr);

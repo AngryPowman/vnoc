@@ -21,7 +21,7 @@ public:
 	ResultCode GetRoomList();
 	ResultCode FreeRoom(RoomID id);
 
-    ResultCode OnNetMessage(IReadMessage *msg);
+    ResultCode OnNetMessage(const CMessage &msg);
 
     VOID OnGetRoomList(XMessage *pMsg);
 

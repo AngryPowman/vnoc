@@ -17,12 +17,24 @@ class MSG_RequestLogin : public CMessage
 public:
     MSG_RequestLogin()
     {
-        InitializeMessage("MSG_RequestLogin");
+        RegisterPort("AccountNumber", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Password", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("VerificationCode", MsgDataMType_Data, MsgDataType_String);
+
+        InitializeMessage(MSG_RequestLogin_Id);
     }
 
-    MSG_RequestLogin(IReadMessage& Msg)
+    MSG_RequestLogin(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_RequestLogin");
+        RegisterPort("AccountNumber", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("Password", MsgDataMType_Data, MsgDataType_String);
+
+        RegisterPort("VerificationCode", MsgDataMType_Data, MsgDataType_String);
+
+        CMessage::Copy(Msg, MSG_RequestLogin_Id);
     }
 
     virtual ~MSG_RequestLogin(){}
@@ -42,21 +54,21 @@ public:
         return Write("VerificationCode", new StringData(Value));
     }
 
-    MsgStatus GetAccountNumber(std::string& Value)
+    MsgStatus GetAccountNumber(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("AccountNumber", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetPassword(std::string& Value)
+    MsgStatus GetPassword(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("Password", pReadValue);
         return pReadValue->ToStr(Value);
     }
 
-    MsgStatus GetVerificationCode(std::string& Value)
+    MsgStatus GetVerificationCode(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("VerificationCode", pReadValue);

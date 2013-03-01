@@ -21,13 +21,13 @@ public:
 public:
     virtual MsgStatus Read(
         IN const Define::MsgDataName& name,
-        OUT MsgDataValue*& value) = 0;
+        OUT MsgDataValue*& value) const = 0;
 
     virtual MsgStatus ReadArr(
         IN  const Define::MsgDataName& name,
-        OUT ArrayData*& value) = 0;
+        OUT ArrayData*& value) const = 0;
 
-    virtual int MsgId() = 0;
+    virtual int MsgId() const = 0;
 };
 
 }// namespace Message

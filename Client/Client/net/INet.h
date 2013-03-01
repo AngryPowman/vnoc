@@ -3,23 +3,22 @@
 #include "IModule.h"
 #include "../../../NMessage/MessageUnion.h"
 #include "../../../NMessage/CMessage.h"
-#include "../../../NMessage/IReadMessage.h"
 using namespace VNOC::Message;
 
 
 interface INetListener
 {
-	virtual ResultCode OnNetMessage(IReadMessage *msg)=0;
+	virtual ResultCode OnNetMessage(const CMessage &msg)=0;
 };
 
 interface INetCenter: public IModule
 {
     virtual ResultCode IsServerConnected()=0;
-	virtual ResultCode SendServer(IReadMessage *helper)=0;
+	virtual ResultCode SendServer(const CMessage &helper)=0;
 	virtual ResultCode Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg)=0;
 	virtual ResultCode SetListener(VMsg msgType,INetListener *listener)=0;
 	virtual ResultCode RemoveListener(VMsg msgType,INetListener *listener)=0;
-	virtual ResultCode MockReceive(IReadMessage *mockMsg)=0;
+	virtual ResultCode MockReceive(const CMessage *mockMsg)=0;
 };
 
 class CNetListenerHelper

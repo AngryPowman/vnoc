@@ -20,7 +20,7 @@ list<IMessageHandler *>& VnocProtocol::getHandler(VMsg msgType)
     return handlerMap_[msgType];
 }
 
-void VnocProtocol::SendVnocMessage(IReadMessage *msg, MessageContext *ctx)
+void VnocProtocol::SendVnocMessage(const CMessage *msg, MessageContext *ctx)
 {
     ctx->connection->SendVnocMessage(msg);
 }

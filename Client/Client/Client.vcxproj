@@ -170,6 +170,7 @@
     <ClInclude Include="..\..\NMessage\Message2Parser.h" />
     <ClInclude Include="..\..\NMessage\MessageDef.h" />
     <ClInclude Include="..\..\NMessage\MessageUnion.h" />
+    <ClInclude Include="..\..\NMessage\MessageUnionDef.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\ArrayData.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\MsgDataValue.h" />
     <ClInclude Include="..\..\NMessage\MsgDataValue\NumData.hpp" />
@@ -281,7 +282,6 @@
     <ClCompile Include="..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="config\Config.cpp" />
     <ClCompile Include="CppUnitTest\MSG_Message_Test.cpp" />
-    <ClCompile Include="CppUnitTest\NMessageTest.cpp" />
     <ClCompile Include="CppUnitTest\testPackMessage.cpp" />
     <ClCompile Include="CppUnitTest\testRunner.cpp" />
     <ClCompile Include="CppUnitTest\Vnocp1MessageParserTest.cpp" />
@@ -321,6 +321,9 @@
     <Xml Include="Resource\msgdef.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+  <Target Name="Test">
+    <Message Text="Configuration is " />
+    <Message Text="MSBuildToolsPath is " />
+  </Target>
 </Project>

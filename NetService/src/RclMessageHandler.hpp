@@ -14,7 +14,7 @@ public:
     {
         return MSG_RequestClassList_Id;
     }
-    virtual int operator()(IReadMessage *msg, MessageContext *ctx)
+    virtual int operator()(const CMessage *msg, MessageContext *ctx)
     {
         std::cout << "handle RclMessageHandler" << endl;
         MSG_AnswerClassList aclMessage;

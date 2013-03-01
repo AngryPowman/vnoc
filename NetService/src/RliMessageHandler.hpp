@@ -16,7 +16,7 @@ public:
         return MSG_RequestLogin_Id;
     }
 
-    virtual int operator()(IReadMessage *msg, MessageContext *ctx)
+    virtual int operator()(const CMessage *msg, MessageContext *ctx)
     {
         int LoginResult;
         MSG_AnswerLogin aliMessage;

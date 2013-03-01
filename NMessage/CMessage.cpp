@@ -1,5 +1,4 @@
 #include "CMessage.h"
-#include "ParserMessageXML.h"
 
 namespace VNOC
 {
@@ -11,14 +10,9 @@ using namespace VNOC::Message::Define;
 MsgStatus CMessage::Read(
     IN const MsgDataName& name,
     OUT MsgDataValue*& value
-    )
+    ) const
 {
-    if (!m_xmlObject)
-    {
-        return MsgStatus_Err;
-    }
-    XMLItem* Item = m_xmlObject->GetItem(name);
-    if (Item != NULL)
+    if (IsRegister(name))
     {
         auto tmpItr = m_mapMsgData.find(name);
         if (tmpItr != m_mapMsgData.end())
@@ -33,14 +27,9 @@ MsgStatus CMessage::Read(
 MsgStatus CMessage::ReadArr(
     IN const MsgDataName& name,
     OUT ArrayData*& value
-    )
+    ) const
 {
-    if (!m_xmlObject)
-    {
-        return MsgStatus_Err;
-    }
-    XMLItem* Item = m_xmlObject->GetItem(name);
-    if (Item != NULL)
+    if (IsRegister(name))
     {
         auto tmpItr = m_mapMsgDataArr.find(name);
         if (tmpItr != m_mapMsgDataArr.end())
@@ -57,12 +46,7 @@ MsgStatus CMessage::Write(
     IN MsgDataValue* pValue
     )
 {
-    if (!m_xmlObject)
-    {
-        return MsgStatus_Err;
-    }
-    XMLItem* Item = m_xmlObject->GetItem(name);
-    if (Item != NULL)
+    if (IsRegister(name))
     {
         auto itFind = m_mapMsgData.find(name);
         if (itFind == m_mapMsgData.end())
@@ -81,12 +65,7 @@ MsgStatus CMessage::WriteArr(
     IN ArrayData* pValue
     )
 {
-    if (!m_xmlObject)
-    {
-        return MsgStatus_Err;
-    }
-    XMLItem* Item = m_xmlObject->GetItem(name);
-    if (Item != NULL)
+    if (IsRegister(name))
     {
         auto itFind = m_mapMsgDataArr.find(name);
         if (itFind == m_mapMsgDataArr.end())
@@ -100,33 +79,58 @@ MsgStatus CMessage::WriteArr(
     return MsgStatus_Err;
 }
 
-CMessage::CMessage() : m_xmlObject(NULL)
+CMessage::CMessage() : m_MsgId(0)
 {
 
 }
 
 CMessage::CMessage( const std::string& strName )
 {
-    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(strName);
     _InitDataMap();
 }
 
 CMessage::CMessage( int nId )
 {
-    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(nId);
-    _InitDataMap();
-}
-
-void CMessage::InitializeMessage( const std::string& strName )
-{
-    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(strName);
     _InitDataMap();
 }
 
 void CMessage::InitializeMessage( int nId )
 {
-    m_xmlObject = ParserMessageXML::Instance().GetMsgObject(nId);
+    m_MsgId = nId;
     _InitDataMap();
+}
+
+bool CMessage::IsRegister(const MsgDataName& name) const
+{
+    auto tmpItr = m_mapPort.find(name);
+    if (tmpItr != m_mapPort.end())
+    {
+        return true;
+    }
+    return false;
+}
+
+void CMessage::RegisterPort(
+    const Define::MsgDataName& strName,
+    const Define::MsgMType& strMType,
+    const Define::MsgType& strType
+    )
+{
+    m_mapPort[strName] = std::make_pair(strMType, strType);
+}
+
+std::map<Define::MsgDataName,
+    std::pair<Define::MsgMType,
+    Define::MsgType> >::const_iterator CMessage::PortBegin() const
+{
+    return m_mapPort.begin();
+}
+
+std::map<Define::MsgDataName,
+    std::pair<Define::MsgMType,
+    Define::MsgType> >::const_iterator CMessage::PortEnd() const
+{
+    return m_mapPort.end();
 }
 
 CMessage::~CMessage()
@@ -134,23 +138,27 @@ CMessage::~CMessage()
     _ReleaseMap();
 }
 
-bool CMessage::IsValid()
+bool CMessage::IsValid() const
 {
-    return m_xmlObject != NULL;
+    if (m_MsgId == 0)
+    {
+        return false;
+    }
+    return true;
 }
 
 void CMessage::_InitDataMap()
 {
-    if (m_xmlObject)
+    if (!m_mapPort.empty())
     {
-        auto it = m_xmlObject->ParamBegin();
-        for (; it != m_xmlObject->ParamEnd(); ++it)
+        auto it = m_mapPort.begin();
+        for (; it != m_mapPort.end(); ++it)
         {
-            if (it->second.GetMType() == MsgDataMType_Data)
+            if (it->second.first == MsgDataMType_Data)
             {
                 m_mapMsgData[it->first] = NULL;
             }
-            if (it->second.GetMType() == MsgDataMType_List)
+            if (it->second.first == MsgDataMType_List)
             {
                 m_mapMsgDataArr[it->first] = NULL;
             }
@@ -174,17 +182,34 @@ void CMessage::_ReleaseMap()
     m_mapMsgDataArr.clear();
 }
 
-int CMessage::MsgId()
+int CMessage::MsgId() const
 {
-    int nId = 0;
-    if (m_xmlObject)
-    {
-        nId = m_xmlObject->GetId();
-    }
-    return nId;
+    return m_MsgId;
 }
 
-CMessage& CMessage::Copy(IReadMessage& lhs, int MessageId /* = 0 */)
+CMessage& CMessage::CopyPort(const CMessage& lhs)
+{
+    for (auto It = lhs.PortBegin(); It != lhs.PortEnd(); It++)
+    {
+        m_mapPort[It->first] = It->second;
+    }
+    m_mapMsgData.clear();
+    auto it = m_mapPort.begin();
+    for (; it != m_mapPort.end(); ++it)
+    {
+        if (it->second.first == MsgDataMType_Data)
+        {
+            m_mapMsgData[it->first] = NULL;
+        }
+        if (it->second.first == MsgDataMType_List)
+        {
+            m_mapMsgDataArr[it->first] = NULL;
+        }
+    }
+    return (*this);
+}
+
+CMessage& CMessage::Copy(const CMessage& lhs, int MessageId /* = 0 */)
 {
     if (MessageId = 0)
     {
@@ -198,55 +223,52 @@ CMessage& CMessage::Copy(IReadMessage& lhs, int MessageId /* = 0 */)
     ArrayData* lpReadValueArr = NULL;
     m_mapMsgData.clear();
     m_mapMsgDataArr.clear();
-    XMLObject* XmlObject = ParserMessageXML::Instance().GetMsgObject(lhs.MsgId());
-    if (!XmlObject)
+    m_mapPort.clear();
+    CopyPort(lhs);
+    for (auto It = lhs.PortBegin(); It != lhs.PortEnd(); It++)
     {
-        return (*this);
-    }
-    for (auto It = XmlObject->ParamBegin(); It != XmlObject->ParamEnd(); It++)
-    {
-        switch (It->second.GetMType())
+        switch (It->second.first)
         {
         case MsgDataMType_Data:
-            lhs.Read(It->second.GetName(), lpReadValue);
-            switch (It->second.GetType())
+            lhs.Read(It->first, lpReadValue);
+            switch (It->second.second)
             {
             case MsgDataType_String:
                 if (lpReadValue != NULL)
                 {
                     std::string strValute;
                     lpReadValue->ToStr(strValute);
-                    Write(It->second.GetName(), new StringData(strValute));
+                    Write(It->first, new StringData(strValute));
                 }
                 break;
             case MsgDataType_Uint8:
                 if (lpReadValue != NULL)
                 {
-                    uint8 NumValute;
+                    uint8 NumValute = 0;
                     lpReadValue->ToUInt8(NumValute);
-                    Write(It->second.GetName(), new NumData<uint8>(NumValute));
+                    Write(It->first, new NumData<uint8>(NumValute));
                 }
                 break;
             case MsgDataType_Uint16:
                 if (lpReadValue != NULL)
                 {
-                    uint16 NumValute;
+                    uint16 NumValute = 0;
                     lpReadValue->ToUInt16(NumValute);
-                    Write(It->second.GetName(), new NumData<uint16>(NumValute));
+                    Write(It->first, new NumData<uint16>(NumValute));
                 }
                 break;
             case MsgDataType_Uint32:
                 if (lpReadValue != NULL)
                 {
-                    uint32 NumValute;
+                    uint32 NumValute = 0;
                     lpReadValue->ToUInt32(NumValute);
-                    Write(It->second.GetName(), new NumData<uint32>(NumValute));
+                    Write(It->first, new NumData<uint32>(NumValute));
                 }
                 break;
             }
             break;
         case MsgDataMType_List:
-            lhs.ReadArr(It->second.GetName(), lpReadValueArr);
+            lhs.ReadArr(It->first, lpReadValueArr);
             if (lpReadValueArr != NULL)
             {
                 ArrayData* lpWriteArr = new ArrayData;
@@ -257,88 +279,7 @@ CMessage& CMessage::Copy(IReadMessage& lhs, int MessageId /* = 0 */)
                 {
                     lpWriteArr->Push((*ArrIt));
                 }
-                WriteArr(It->second.GetName(), lpWriteArr);
-            }
-            break;
-        }
-    }
-    return (*this);
-}
-
-CMessage& CMessage::Copy(IReadMessage& lhs,const std::string MessageName)
-{
-    if (MessageName.empty())
-    {
-        InitializeMessage(lhs.MsgId());
-    }
-    else
-    {
-        InitializeMessage(MessageName);
-    }
-    MsgDataValue* lpReadValue = NULL;
-    ArrayData* lpReadValueArr = NULL;
-    m_mapMsgData.clear();
-    m_mapMsgDataArr.clear();
-    XMLObject* XmlObject = ParserMessageXML::Instance().GetMsgObject(lhs.MsgId());
-    if (!XmlObject)
-    {
-        return (*this);
-    }
-    for (auto It = XmlObject->ParamBegin(); It != XmlObject->ParamEnd(); It++)
-    {
-        switch (It->second.GetMType())
-        {
-        case MsgDataMType_Data:
-            lhs.Read(It->second.GetName(), lpReadValue);
-            switch (It->second.GetType())
-            {
-            case MsgDataType_String:
-                if (lpReadValue != NULL)
-                {
-                    std::string strValute;
-                    lpReadValue->ToStr(strValute);
-                    m_mapMsgData[It->second.GetName()] = new StringData(strValute);
-                }
-                break;
-            case MsgDataType_Uint8:
-                if (lpReadValue != NULL)
-                {
-                    uint8 NumValute;
-                    lpReadValue->ToUInt8(NumValute);
-                    m_mapMsgData[It->second.GetName()] = new NumData<uint8>(NumValute);
-                }
-                break;
-            case MsgDataType_Uint16:
-                if (lpReadValue != NULL)
-                {
-                    uint16 NumValute;
-                    lpReadValue->ToUInt16(NumValute);
-                    m_mapMsgData[It->second.GetName()] = new NumData<uint16>(NumValute);
-                }
-                break;
-            case MsgDataType_Uint32:
-                if (lpReadValue != NULL)
-                {
-                    uint32 NumValute;
-                    lpReadValue->ToUInt32(NumValute);
-                    m_mapMsgData[It->second.GetName()] = new NumData<uint32>(NumValute);
-                }
-                break;
-            }
-            break;
-        case MsgDataMType_List:
-            lhs.ReadArr(It->second.GetName(), lpReadValueArr);
-            if (lpReadValueArr != NULL)
-            {
-                ArrayData* lpWriteArr = new ArrayData;
-                for (auto ArrIt = lpReadValueArr->Begin();
-                    ArrIt != lpReadValueArr->End();
-                    ArrIt++
-                    )
-                {
-                    lpWriteArr->Push((*ArrIt));
-                }
-                m_mapMsgDataArr[It->second.GetName()] = lpWriteArr;
+                WriteArr(It->first, lpWriteArr);
             }
             break;
         }

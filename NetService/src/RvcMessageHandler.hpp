@@ -15,7 +15,7 @@ public:
         return MSG_RequestVerificationCode_Id;
     }
 
-    virtual int operator()(IReadMessage *msg, MessageContext *ctx)
+    virtual int operator()(const CMessage *msg, MessageContext *ctx)
     {
         MSG_AnswerVerificationCode avcMessage;
         avcMessage.SetCaptchaType(0);

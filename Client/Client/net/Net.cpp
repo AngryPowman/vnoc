@@ -2,6 +2,7 @@
 #include "Net.h"
 #include "../../../NMessage/Message2Pack.h"
 #include "../../../NMessage/Message2Parser.h"
+#include "../../../NMessage/ParserMessageXML.h"
 
 #include <algorithm>
 
@@ -90,7 +91,7 @@ ResultCode CNetCenter::IsServerConnected()
     return m_isConnected? Result_Success: Result_Fail;
 }
 
-ResultCode CNetCenter::SendServer( IReadMessage *helper )
+ResultCode CNetCenter::SendServer( const CMessage &helper )
 {
 	if (!m_isConnected)
 	{
@@ -98,10 +99,10 @@ ResultCode CNetCenter::SendServer( IReadMessage *helper )
 	}
 	CMessage2Pack packer;
     int len;
-	packer.GetPackSize(helper, len);
+	packer.GetPackSize(&helper, len);
 	CBufferMessage buffer;
 	buffer.Alloc(len);
-	packer.PackMessage(helper, buffer);
+	packer.PackMessage(&helper, buffer);
 	m_serverSocket.Send(buffer.GetBuffer(),len);
 	return Result_Success;
 }
@@ -169,7 +170,7 @@ void CNetCenter::OnReceive( int nErrorCode,CAsyncSocketEx* pSock )
 
 	if (parser.Parser(&msg, buffer) == MsgStatus_Ok)
 	{
-		_DispatchMessage(&msg);
+		_DispatchMessage(msg);
 	}
 }
 
@@ -178,16 +179,16 @@ void CNetCenter::OnSend( int nErrorCode,CAsyncSocketEx* pSock )
 	Global->Log(LogFile_Net,_T("OnSend"));
 }
 
-void CNetCenter::_DispatchMessage( IReadMessage* pMsg )
+void CNetCenter::_DispatchMessage( const CMessage &msg )
 {
 	Util::CAutoCS ac(m_cs);
-    auto i = m_listeners.find(VMsg(pMsg->MsgId()));
+    auto i = m_listeners.find(VMsg(msg.MsgId()));
 	if ( i != m_listeners.end())
 	{
 		auto ii = i->second.begin();
 		for (; ii!=i->second.end();++ii)
 		{
-			(*ii)->OnNetMessage(pMsg);
+			(*ii)->OnNetMessage(msg);
 		}
 	}
 }
@@ -199,15 +200,15 @@ void CNetCenter::OnPackReady(const CBufferMessage &buffer )
 	CMessage msg(parser.GetMsgType(buffer));
 	if(parser.Parser(&msg, buffer) == MsgStatus_Ok)
 	{
-		_DispatchMessage(&msg);
+		_DispatchMessage(msg);
 	}
 }
 
-ResultCode CNetCenter::MockReceive( IReadMessage *mockMsg )
+ResultCode CNetCenter::MockReceive( const CMessage *mockMsg )
 {
 	if (mockMsg)
 	{
-		_DispatchMessage(mockMsg);
+		_DispatchMessage(*mockMsg);
 	}
 	return Result_Success;
 }

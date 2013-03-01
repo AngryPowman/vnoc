@@ -17,12 +17,16 @@ class MSG_AnswerProfileSync : public CMessage
 public:
     MSG_AnswerProfileSync()
     {
-        InitializeMessage("MSG_AnswerProfileSync");
+        RegisterPort("MessageSynchro", MsgDataMType_Data, MsgDataType_String);
+
+        InitializeMessage(MSG_AnswerProfileSync_Id);
     }
 
-    MSG_AnswerProfileSync(IReadMessage& Msg)
+    MSG_AnswerProfileSync(const CMessage& Msg)
     {
-        CMessage::Copy(Msg, "MSG_AnswerProfileSync");
+        RegisterPort("MessageSynchro", MsgDataMType_Data, MsgDataType_String);
+
+        CMessage::Copy(Msg, MSG_AnswerProfileSync_Id);
     }
 
     virtual ~MSG_AnswerProfileSync(){}
@@ -32,7 +36,7 @@ public:
         return Write("MessageSynchro", new StringData(Value));
     }
 
-    MsgStatus GetMessageSynchro(std::string& Value)
+    MsgStatus GetMessageSynchro(std::string& Value) const
     {
         MsgDataValue* pReadValue = NULL;
         Read("MessageSynchro", pReadValue);
