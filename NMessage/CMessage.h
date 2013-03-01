@@ -13,7 +13,6 @@ namespace Message
 class CMessage : public IMessage
 {
 public:
-    CMessage(const std::string& strName);
     CMessage(int nId);
     virtual ~CMessage();
 
