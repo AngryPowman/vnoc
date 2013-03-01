@@ -99,12 +99,12 @@ ResultCode CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 	return Result_Fail;
 }
 
-ResultCode CLoginImpl::OnNetMessage( const CMessage *msg )
+ResultCode CLoginImpl::OnNetMessage( const CMessage &msg )
 {
 	switch(msg->MsgId())
 	{
 	case MSG_AnswerLogin_Id:
-		MSG_AnswerLogin msgReal(*msg);
+		MSG_AnswerLogin msgReal(msg);
 		XMessage_Login_Result loginResult;
         uint8 result;
         msgReal.GetLoginResult(result);

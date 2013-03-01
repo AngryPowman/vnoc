@@ -74,12 +74,12 @@ VOID CRoomMgr::OnGetRoomList( XMessage *pMsg )
     GetRoomList();
 }
 
-ResultCode CRoomMgr::OnNetMessage( const CMessage *msg )
+ResultCode CRoomMgr::OnNetMessage( const CMessage &msg )
 {
-    switch(msg->MsgId())
+    switch(msg.MsgId())
     {
     case MSG_AnswerClassList_Id:
-        MSG_AnswerClassList msgReal(*msg);
+        MSG_AnswerClassList msgReal(msg);
         XMessage_GetRoomList_Result result;
         msgReal.GetRoomIdList(result.roomIdList);
         msgReal.GetRoomNameList(result.roomNameList);

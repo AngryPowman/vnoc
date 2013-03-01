@@ -19,7 +19,7 @@ public:
 	virtual ResultCode Terminate();
 
 	virtual ResultCode IsServerConnected();
-	virtual ResultCode SendServer(const CMessage *helper);
+	virtual ResultCode SendServer(const CMessage &helper);
 	virtual ResultCode Send(LPCTSTR ipv4Addr,DWORD port,const CMessage& netMsg);
 	virtual ResultCode SetListener(VMsg msgType,INetListener *listener);
 	virtual ResultCode RemoveListener(VMsg msgType,INetListener *listener);
@@ -36,7 +36,7 @@ VNOC_Private:
 private:
 	ResultCode _GetServerAddress();
 	ResultCode _ConnectServer();
-	void _DispatchMessage(const CMessage* pMsg);
+	void _DispatchMessage(const CMessage &msg);
 private:
 	CString	m_serverIP;
 	UINT	m_serverPort;
