@@ -63,7 +63,7 @@ ResultCode CRoomMgr::GetRoomList()
     if(pNetCenter)
     {
         MSG_RequestClassList netMsg;
-        pNetCenter->SendServer(&netMsg);
+        pNetCenter->SendServer(netMsg);
         return Result_Success;
     }
 	return Result_Fail;

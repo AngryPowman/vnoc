@@ -93,7 +93,7 @@ ResultCode CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 		netMsg.SetAccountNumber(buffer);
         wcstombs(buffer, pwd, sizeof(buffer));
 		netMsg.SetPassword(buffer);
-		pNetCenter->SendServer(&netMsg);
+		pNetCenter->SendServer(netMsg);
 		return Result_Success;
 	}
 	return Result_Fail;
@@ -101,7 +101,7 @@ ResultCode CLoginImpl::Login( LPCTSTR username,LPCTSTR pwd )
 
 ResultCode CLoginImpl::OnNetMessage( const CMessage &msg )
 {
-	switch(msg->MsgId())
+	switch(msg.MsgId())
 	{
 	case MSG_AnswerLogin_Id:
 		MSG_AnswerLogin msgReal(msg);
