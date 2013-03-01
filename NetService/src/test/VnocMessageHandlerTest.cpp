@@ -58,7 +58,7 @@ public:
         conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
         const char *sendBuf = conn_->getSendBuf();
         //return an AVC message
-        CMessage2Parser parser;
+        CMessage2Parser parser; 
         buff.Copy(sendBuf, conn_->getSendLen());
         CMessage msg(CMessage2Parser::GetMsgType(buff));
         CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerVerificationCode_Id);

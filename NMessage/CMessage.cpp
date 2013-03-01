@@ -84,13 +84,9 @@ CMessage::CMessage() : m_MsgId(0)
 
 }
 
-CMessage::CMessage( const std::string& strName )
-{
-    _InitDataMap();
-}
-
 CMessage::CMessage( int nId )
 {
+    m_MsgId = nId;
     _InitDataMap();
 }
 
@@ -189,6 +185,7 @@ int CMessage::MsgId() const
 
 CMessage& CMessage::CopyPort(const CMessage& lhs)
 {
+    m_MsgId = lhs.MsgId();
     for (auto It = lhs.PortBegin(); It != lhs.PortEnd(); It++)
     {
         m_mapPort[It->first] = It->second;
