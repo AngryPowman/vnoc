@@ -15,8 +15,8 @@ void VnocProtocol::RegisterSocketHandlerFactory(SocketHandlerFactory *factory)
 }
 list<IMessageHandler *>& VnocProtocol::getHandler(VMsg msgType)
 {
-    assert (msgType != MSG_TYPE_NULL);
-    assert (msgType != MSG_TYPE_END);
+    assert (msgType >= MSG_TYPE_NULL);
+    assert (msgType <= MSG_TYPE_END);
     return handlerMap_[msgType];
 }
 
