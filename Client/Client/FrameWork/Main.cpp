@@ -50,6 +50,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 int _tmain(int argc, _TCHAR* argv[])
 {
     VnocMain();
+	getchar();
 	return 0;
 }
 

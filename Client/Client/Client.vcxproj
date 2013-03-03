@@ -178,12 +178,14 @@
     <ClInclude Include="..\..\NMessage\MsgDataValue\StringData.h" />
     <ClInclude Include="..\..\NMessage\MSG_AnswerClassInfo.h" />
     <ClInclude Include="..\..\NMessage\MSG_AnswerClassList.h" />
+    <ClInclude Include="..\..\NMessage\MSG_AnswerEnterClassroom.h" />
     <ClInclude Include="..\..\NMessage\MSG_AnswerLogin.h" />
     <ClInclude Include="..\..\NMessage\MSG_AnswerProfileSync.h" />
     <ClInclude Include="..\..\NMessage\MSG_AnswerRegister.h" />
     <ClInclude Include="..\..\NMessage\MSG_AnswerVerificationCode.h" />
     <ClInclude Include="..\..\NMessage\MSG_RequestClassInfo.h" />
     <ClInclude Include="..\..\NMessage\MSG_RequestClassList.h" />
+    <ClInclude Include="..\..\NMessage\MSG_RequestEnterClassroom.h" />
     <ClInclude Include="..\..\NMessage\MSG_RequestLogin.h" />
     <ClInclude Include="..\..\NMessage\MSG_RequestProfileSync.h" />
     <ClInclude Include="..\..\NMessage\MSG_RequestRegister.h" />

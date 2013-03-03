@@ -62,6 +62,14 @@ void RegistrePort(CMessage* pMsg, int nId)
         pMsgConver = new MSG_AnswerClassInfo;
         pMsg->CopyPort(*pMsgConver);
         break;
+    case MSG_RequestEnterClassroom_Id:
+        pMsgConver = new MSG_RequestEnterClassroom;
+        pMsg->CopyPort(*pMsgConver);
+        break;
+    case MSG_AnswerEnterClassroom_Id:
+        pMsgConver = new MSG_AnswerEnterClassroom;
+        pMsg->CopyPort(*pMsgConver);
+        break;
     }
     if (pMsg != NULL)
     {

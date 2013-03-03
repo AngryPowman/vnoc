@@ -86,4 +86,14 @@
 		<item mtype="list" name="RoomPeopleListId" type="uint32" />
 		<item mtype="data" name="RoomManageId" type="uint32" />
 	</msg>
+	
+	<msg name="MSG_RequestEnterClassroom" id="6109">
+		<item mtype="data" name="VerificationCode" type="string" />
+		<item mtype="data" name="RoomID" type="uint32" />
+		<item mtype="data" name="RoomPassword" type="string" />
+	</msg>
+	
+	<msg name="MSG_AnswerEnterClassroom" id="6110">
+		<item mtype="data" name="RetTag" type="uint32" />
+	</msg>
 </vnoc>
