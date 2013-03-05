@@ -23,7 +23,7 @@
 								<dlg pos="0,0,-0,-0" crbg="DFF9E9">
 									<edit id="10111" pos="10,5,195,35" show="1"/>			
 									<button id="10004" class="normalbtn" pos="200,2,266,35" font="0200" crtext="425e63">查找教室</button>
-									<realwnd id="1001" pos="1,45,270,350" ctrlid="1001" crbg1="FBFCFD" />
+									<realwnd id="10002" pos="1,45,270,350" ctrlid="1001" crbg1="FBFCFD" />
 								</dlg>
 							</tab>	
 							
