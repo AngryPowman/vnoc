@@ -90,6 +90,12 @@
     <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp">
       <Filter>Tinyxml</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\RoomManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VNOCUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\ArrayData.h">
@@ -142,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinyxml.h">
       <Filter>Tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\RoomManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\VNOCUser.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

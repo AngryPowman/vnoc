@@ -127,6 +127,9 @@
     <ClInclude Include="..\ThirdLibs\TinyXML\tinyxml.h">
       <Filter>Tinyxml</Filter>
     </ClInclude>
+    <ClInclude Include="src\RecMessageHandler.hpp">
+      <Filter>handlers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\program_options\cmdline.cpp">

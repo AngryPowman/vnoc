@@ -194,6 +194,7 @@
     <ClInclude Include="src\mysql\MysqlWrapper.h" />
     <ClInclude Include="src\NetService.h" />
     <ClInclude Include="src\RclMessageHandler.hpp" />
+    <ClInclude Include="src\RecMessageHandler.hpp" />
     <ClInclude Include="src\RliMessageHandler.hpp" />
     <ClInclude Include="src\RoomPool.cpp" />
     <ClInclude Include="src\Room.h" />
