@@ -6,6 +6,7 @@
 #include "../RvcMessageHandler.hpp"
 #include "../RliMessageHandler.hpp"
 #include "../RclMessageHandler.hpp"
+#include "../RecMessageHandler.hpp"
 #include "../FileUserStorage.h"
 #include "../UserManage.hpp"
 #include <shlwapi.h>
@@ -13,6 +14,7 @@
 #include "../../NMessage/MessageUnion.h"
 #include "../../NMessage/Message2Pack.h"
 #include "../../NMessage/Message2Parser.h"
+#include "../RoomManager.h"
 
 #include <ctime>
 
@@ -27,6 +29,7 @@ class VnocMessageHandlerTest : public CppUnit::TestFixture
     CPPUNIT_TEST( testRLIofLoginTwoTimes );
     CPPUNIT_TEST( testRCL );
     CPPUNIT_TEST( testUserSetDelete );
+    CPPUNIT_TEST( testREC );
     CPPUNIT_TEST_SUITE_END();
     MockTcpConnection *conn_;
     VnocProtocol *protocol_;
@@ -247,6 +250,46 @@ public:
         MSG_AnswerClassList msg;
         parser.Parser(&msg, Rbuff);
         CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerClassList_Id);
+    }
+
+    void testREC()
+    {
+        RecMessageHandler recHandler(protocol_);
+        VnocMessageSocketHandler<MockTcpConnection> handler(conn_);
+        handler.setProtocol(protocol_);
+        handler.start();
+        MSG_RequestEnterClassroom recMessage;
+        CBufferMessage buff;
+        CMessage2Pack packer;
+        const int someRoomNo = 12345678;
+        recMessage.SetRoomID(someRoomNo);
+        packer.PackMessage(&recMessage, buff);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
+        char *sendBuf = (char*)conn_->getSendBuf();
+        //return an AEC message
+        CMessage2Parser parser;
+        CBufferMessage Rbuff;
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        MSG_AnswerEnterClassroom msg;
+        parser.Parser(&msg, Rbuff);
+        uint32 retTag;
+        msg.GetRetTag( retTag );
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerEnterClassroom_Id);
+        CPPUNIT_ASSERT(retTag == 1);
+        
+        Room roomForTest;
+        roomForTest.setRoomID( someRoomNo );
+        roomForTest.setMaxUserCount( 2 );
+        roomForTest.setIsValid( true );
+        RoomManager::instance().add(&roomForTest);
+        conn_->setRecv((char*)buff.GetBuffer(), buff.GetSize());
+        sendBuf = (char*)conn_->getSendBuf();
+        //return an AEC message
+        Rbuff.Copy(sendBuf, conn_->getSendLen());
+        parser.Parser(&msg, Rbuff);
+        msg.GetRetTag( retTag );
+        CPPUNIT_ASSERT(msg.MsgId() == MSG_AnswerEnterClassroom_Id);
+        CPPUNIT_ASSERT(retTag == 0);
     }
 
 };

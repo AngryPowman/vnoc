@@ -173,9 +173,11 @@
     <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\FileUserStorage.cpp" />
+    <ClCompile Include="..\..\RoomManager.cpp" />
     <ClCompile Include="..\..\UserManage.cpp" />
     <ClCompile Include="..\..\UserStorage.cpp" />
     <ClCompile Include="..\..\VnocProtocol.cpp" />
+    <ClCompile Include="..\..\VNOCUser.cpp" />
     <ClCompile Include="..\EchoTestHandlerTest.cpp" />
     <ClCompile Include="..\RoomPoolTest.cpp" />
     <ClCompile Include="..\testRunner.cpp" />
@@ -200,6 +202,8 @@
     <ClInclude Include="..\..\..\..\NMessage\XMLObject.h" />
     <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinystr.h" />
     <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinyxml.h" />
+    <ClInclude Include="..\..\RoomManager.h" />
+    <ClInclude Include="..\..\VNOCUser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
