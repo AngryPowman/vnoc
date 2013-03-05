@@ -13,6 +13,8 @@
 #include "MSG_AnswerClassList.h "
 #include "MSG_RequestClassInfo.h "
 #include "MSG_AnswerClassInfo.h "
+#include "MSG_RequestEnterClassroom.h "
+#include "MSG_AnswerEnterClassroom.h "
 #include "MessageUnionDef.h "
 
 #endif

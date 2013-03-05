@@ -28,13 +28,15 @@ class MSG_Message_Test : public CppUnit::TestFixture
     CPPUNIT_TEST( MSG_AnswerProfileSync_Test );
     CPPUNIT_TEST( MSG_AnswerRegister_Test );
     CPPUNIT_TEST( MSG_AnswerVerificationCode_Test );
+	CPPUNIT_TEST( MSG_AnswerEnterClassroom_Test );
     CPPUNIT_TEST( MSG_RequestClassInfo_Test );
     CPPUNIT_TEST( MSG_RequestClassList_Test );
     CPPUNIT_TEST( MSG_RequestLogin_Test );
     CPPUNIT_TEST( MSG_RequestProfileSync_Test );
     CPPUNIT_TEST( MSG_RequestRegister_Test );
     CPPUNIT_TEST( MSG_RequestVerificationCode_Test );
-    CPPUNIT_TEST( MSG_NULL_Test );
+	CPPUNIT_TEST( MSG_RequestVerificationCode_Test );
+    CPPUNIT_TEST( MSG_RequestEnterClassroom_Test );
     CPPUNIT_TEST_SUITE_END();
 public:
     void setUp()
@@ -509,6 +511,49 @@ public:
         CPPUNIT_ASSERT(PeopListId[1] == 2);
         CPPUNIT_ASSERT(PeopListId[2] == 3);
     }
+
+	void MSG_RequestEnterClassroom_Test()
+	{
+		CBufferMessage buf;
+		MSG_RequestEnterClassroom TMRec;
+		uint32 nRoomID;
+		std::string strRoomPassword;
+		std::string strVerificationCode;
+		TMRec.SetRoomID(0);
+		TMRec.SetRoomPassword("987654321");
+		TMRec.SetVerificationCode("ABCDEFG");
+
+		g_m2pack.PackMessage(&TMRec, buf);
+		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+		CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_RequestEnterClassroom_Id);
+		g_m2parser.Parser(&parserMsg, buf);
+		MSG_RequestEnterClassroom TParserRec(parserMsg);
+
+		TParserRec.GetRoomID(nRoomID);
+		CPPUNIT_ASSERT(nRoomID == 0);
+		TParserRec.GetRoomPassword(strRoomPassword);
+		CPPUNIT_ASSERT(strRoomPassword == "987654321");
+		TParserRec.GetVerificationCode(strVerificationCode);
+		CPPUNIT_ASSERT(strVerificationCode == "ABCDEFG");
+	}
+	
+	void MSG_AnswerEnterClassroom_Test()
+	{
+		CBufferMessage buf;
+		MSG_AnswerEnterClassroom TMAec;
+	
+		uint32 nRetTag = 0;
+		TMAec.SetRetTag(123405);
+
+		g_m2pack.PackMessage(&TMAec, buf);
+		CMessage parserMsg(CMessage2Parser::GetMsgType(buf));
+		CPPUNIT_ASSERT(CMessage2Parser::GetMsgType(buf) == MSG_AnswerEnterClassroom_Id);
+		g_m2parser.Parser(&parserMsg, buf);
+		MSG_AnswerEnterClassroom TParserAec(parserMsg);
+
+		TParserAec.GetRetTag(nRetTag);
+		CPPUNIT_ASSERT(nRetTag == 123405);
+	}
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION ( MSG_Message_Test );

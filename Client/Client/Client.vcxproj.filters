@@ -439,6 +439,12 @@
     <ClInclude Include="..\..\NMessage\MessageUnionDef.h">
       <Filter>Net\NMessage\Message\Produce</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_AnswerEnterClassroom.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NMessage\MSG_RequestEnterClassroom.h">
+      <Filter>Net\NMessage\Message\Produce</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWork\FrameWork.cpp">
