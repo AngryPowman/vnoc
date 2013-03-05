@@ -20,13 +20,16 @@ public:
 	ResultCode GetRoom(RoomID id,CRoomBase* room);
 	ResultCode GetRoomList();
 	ResultCode FreeRoom(RoomID id);
+    ResultCode EnterRoom(RoomID id, std::string password, std::string verificationCode);
 
     ResultCode OnNetMessage(const CMessage &msg);
 
     VOID OnGetRoomList(XMessage *pMsg);
+    VOID OnEnterRoom(XMessage_EnterRoom *pMsg);
 
 	Begin_XMessage(CRoomMgr)
         OnXMessage(XMessage_GetRoomList, OnGetRoomList)
+        OnXMessage(XMessage_EnterRoom, OnEnterRoom)
 	End_XMessage()
 
 private:

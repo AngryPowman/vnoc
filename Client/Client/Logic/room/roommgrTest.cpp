@@ -8,12 +8,15 @@ class CRoomMgrTest : public CTestBase<TestUnit_RoomMgr>
 {
     CPPUNIT_TEST_SUITE(CRoomMgrTest);
     CPPUNIT_TEST(TestGetRoomList);
+    CPPUNIT_TEST(TestEnterRoom);
     CPPUNIT_TEST_SUITE_END();
 
 public:
     std::vector<uint32> roomIdList;
     std::vector<std::string> roomNameList;
     std::vector<uint32> roomState;
+    uint32 m_expectResult;
+    int m_testCount;
 
     CRoomMgrTest() : CTestBase()
     {
@@ -21,6 +24,7 @@ public:
 
     Begin_XMessage(CRoomMgrTest)
         OnXMessage(XMessage_GetRoomList_Result, OnGetRoomListResult);
+        OnXMessage(XMessage_EnterRoom_Result, OnEnterRoomResult)
     End_XMessage();
 
     VOID TestGetRoomList()
@@ -54,6 +58,32 @@ public:
         CPPUNIT_ASSERT(roomIdList == pmsg->roomIdList);
         CPPUNIT_ASSERT(roomNameList == pmsg->roomNameList);
         CPPUNIT_ASSERT(roomState == pmsg->roomStateList);
+    }
+
+    void TestEnterRoom()
+    {
+        INetCenter* pNetCenter=NULL;
+        Global->GetINetCenter(&pNetCenter);
+        CPPUNIT_ASSERT(pNetCenter);
+        if(!pNetCenter)
+        {
+            return;
+        }
+
+        MSG_AnswerEnterClassroom netMsg;
+        netMsg.SetRetTag(0);
+        m_expectResult = 0;
+        pNetCenter->MockReceive(&netMsg);
+
+        netMsg.SetRetTag(1);
+        m_expectResult = 1;
+        pNetCenter->MockReceive(&netMsg);
+    }
+
+    void OnEnterRoomResult(XMessage_EnterRoom_Result *pmsg)
+    {
+        CPPUNIT_ASSERT(pmsg->retTag == m_expectResult);
+        m_testCount++;
     }
 };
 

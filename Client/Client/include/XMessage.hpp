@@ -79,6 +79,22 @@ struct XMessage_ShowClassroom : public XMessage
 	ImTheMessageOf(XMessage_ShowClassroom);
 };
 
+struct XMessage_EnterRoom : public XMessage
+{
+    ImTheMessageOf(XMessage_EnterRoom);
+
+    uint32 roomId;
+    std::string password;
+    std::string verificationCode;
+};
+
+struct XMessage_EnterRoom_Result : public XMessage
+{
+    ImTheMessageOf(XMessage_EnterRoom_Result);
+
+    uint32 retTag;
+};
+
 //////////////////////////////////////////////////////////////////////////
 // Framework
 

@@ -5,7 +5,7 @@
 #include "../../net/INet.h"
 
 
-typedef int RoomID;
+typedef unsigned int RoomID;
 // 房间列表
 typedef std::vector<RoomID> RoomList;
 
