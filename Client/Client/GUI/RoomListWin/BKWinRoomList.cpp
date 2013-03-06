@@ -7,7 +7,7 @@ BEGIN_MSG_MAP_EX_IMP(CRoomListWnd)
 	MSG_BK_NOTIFY(IDC_RICHVIEW_WIN)
 	MSG_WM_INITDIALOG(OnInitDialog)
 	CHAIN_MSG_MAP(CBkDialogImpl<CRoomListWnd>)
-	NOTIFY_CODE_HANDLER(NM_DBLCLK, OnListItemDblClick)
+	NOTIFY_HANDLER(DlgControl_RoomListWin_ListCtl_RoomList, NM_DBLCLK, OnListItemDblClick)
 	REFLECT_NOTIFICATIONS_EX()
 END_MSG_MAP_IMP();
 
@@ -29,7 +29,7 @@ LRESULT CRoomListWnd::OnInitDialog(HWND hWnd, LPARAM lparam)
 	if(m_wndListCtrl.Create( 
 		GetViewHWND(), NULL, NULL, 
 		WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SINGLESEL ,  
-		0, DlgControl_RoomListWin_Realwnd, NULL)  ==  NULL){
+		0, DlgControl_RoomListWin_ListCtl_RoomList, NULL)  ==  NULL){
 		return S_FALSE;
 	}
 	XMessage_GetRoomList msg;
@@ -52,47 +52,57 @@ LRESULT CRoomListWnd::_ColumnInit()
 LRESULT CRoomListWnd::OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled)
 {
 	LPNMITEMACTIVATE lpnmItem = (LPNMITEMACTIVATE)pnmh;
-
-	if(1001 == idRealWnd){ // 点击教室列表
-		CString strCheckBox;
-		if(m_wndListCtrl.InSubItemCheckBox(lpnmItem->ptAction, lpnmItem->iItem)){
-			strCheckBox.Format(_T("CHECKBOX CHANGED: %d"), !m_wndListCtrl.GetCheckState(lpnmItem->iItem));
-			MessageBox(strCheckBox, NULL, MB_OK);
-		}
-
-		//char strListItem[30];
-		if(m_wndListCtrl.GetSelectedIndex() == lpnmItem->iItem){
-			//sprintf(strListItem, "Clicked id: %d", lpnmItem->iItem);
-			//MessageBoxA(NULL, strListItem, "", MB_OK);
-			EndDialog(0);
-			XMessage_ShowClassroom msg;
-			SendXMessage(&msg);
-		}
-	
+    XMessage_EnterRoom msg;
+    msg.roomId = 1000;
+    msg.password = "123";
+    msg.verificationCode = "111";
+    SendXMessage(&msg);
+    CString roomId;
+    LVCOLUMN column;
+//    m_wndListCtrl.GetItemText(lpnmItem->iItem, lpnmItem->iSubItem, roomId);
+	//char strListItem[30];
+	if(m_wndListCtrl.GetSelectedIndex() == lpnmItem->iItem)
+    {
+		//sprintf(strListItem, "Clicked id: %d", lpnmItem->iItem);
+		//MessageBoxA(NULL, strListItem, "", MB_OK);
+		
+		
 	}
 
 	bHandled = FALSE;
 	return S_OK;
 }
 
-LRESULT CRoomListWnd::OnGetRoomListResult( XMessage *pmsg )
+VOID CRoomListWnd::OnGetRoomListResult( XMessage_GetRoomList_Result *pMsg )
 {
-    XMessage_GetRoomList_Result *pResult = dynamic_cast<XMessage_GetRoomList_Result*>(pmsg);
-    if(pResult)
+    if(pMsg)
     {
         int nItem = 0;
         CString buf;
-        for(int i = 0; i < pResult->roomNameList.size(); i++)
+        for(int i = 0; i < pMsg->roomNameList.size(); i++)
         {
-            buf.Format(_T("%d"), pResult->roomIdList[i]);
+            buf.Format(_T("%d"), pMsg->roomIdList[i]);
             nItem = m_wndListCtrl.Append(buf);
-            m_wndListCtrl.AppendSubItem(nItem, CString(pResult->roomNameList[i].c_str()));
-            buf.Format(_T("%d"), pResult->roomStateList[i]);
+            m_wndListCtrl.AppendSubItem(nItem, CString(pMsg->roomNameList[i].c_str()));
+            buf.Format(_T("%d"), pMsg->roomStateList[i]);
             m_wndListCtrl.AppendSubItem(nItem, buf);
         }
-		return S_OK;
     }
-	
-	return S_FALSE;
 }
 
+VOID CRoomListWnd::OnEnterRoomResult(XMessage_EnterRoom_Result *pMsg)
+{
+    if(pMsg != nullptr)
+    {
+        if(pMsg->retTag == 0)
+        {
+            EndDialog(0);
+            XMessage_ShowClassroom msg;
+		    SendXMessage(&msg);
+        }
+        else
+        {
+            MessageBox(_T("进入失败"));
+        }
+    }
+}

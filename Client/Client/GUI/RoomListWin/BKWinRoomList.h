@@ -17,7 +17,8 @@ public:
 	void	OnShowWnd(XMessage* pmsg);
 	LRESULT OnInitDialog(HWND hWnd, LPARAM lparam);
 	LRESULT OnListItemDblClick(int idRealWnd, LPNMHDR pnmh, BOOL& bHandled);
-	LRESULT OnGetRoomListResult(XMessage *pmsg);
+	VOID OnGetRoomListResult(XMessage_GetRoomList_Result *pMsg);
+    VOID OnEnterRoomResult(XMessage_EnterRoom_Result *pMsg);
 
 private:
 	CListViewCtrlEx m_wndListCtrl;
@@ -34,5 +35,6 @@ public:
 		Begin_XMessage(CRoomListWnd)
 		OnXMessage(XMessage_ShowRoomListWnd,OnShowWnd)
 		OnXMessage(XMessage_GetRoomList_Result, OnGetRoomListResult)
+        OnXMessage(XMessage_EnterRoom_Result, OnEnterRoomResult)
 	End_XMessage()
 };
