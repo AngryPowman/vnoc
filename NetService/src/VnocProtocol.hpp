@@ -2,7 +2,7 @@
 #ifndef VNOC_PROTOCOL_H
 #define VNOC_PROTOCOL_H
 
-#include "../../Message/MsgDef.h"
+#include "../../NMessage/MessageUnion.h"
 #include <string>
 #include <list>
 #include <unordered_map>
@@ -11,6 +11,7 @@
 
 using std::list;
 using std::array;
+using namespace VNOC::Message;
 
 class IVnocMessageProtocolHandler
 {
@@ -29,23 +30,23 @@ class IMessageHandler
 public:
     //if the message is handled, return 1;
     virtual int operator()(const CMessage *msg, MessageContext *ctx)=0;
-    virtual MSGTYPE getMessageType() const = 0;
+    virtual VMsg getMessageType() const = 0;
 };
 
 class VnocProtocol
 {
 public:
     SocketHandlerFactory* getSocketHandlerFactory(){return handlerFactory_;}
-    VnocProtocol (){        
+    VnocProtocol (){
     }
     void RegisterMessageHandler(IMessageHandler *MessageHandler);
 	void RegisterSocketHandlerFactory(SocketHandlerFactory *factory);
     void SendVnocMessage(const CMessage *msg, MessageContext *ctx);
-    list<IMessageHandler *>& getHandler(MSGTYPE msgType);
+    list<IMessageHandler *>& getHandler(VMsg msgType);
 
 private:
     SocketHandlerFactory *handlerFactory_;
-    array<list<IMessageHandler *>,MSGTYPE::MSGTYPE_END > handlerMap_;
+    array<list<IMessageHandler *>, VMsg::MSG_TYPE_END > handlerMap_;
 };
 
 #endif //VNOC_PROTOCOL_H

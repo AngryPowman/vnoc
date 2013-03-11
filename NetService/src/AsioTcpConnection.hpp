@@ -10,7 +10,7 @@ public:
     asio::ip::tcp::socket& socket(){return socket_;} 
     template <typename Handler> int recv(char * buf, size_t len, Handler handler)
     {
-        socket_.async_receive(asio::buffer(buf, len), handler);
+        async_read(socket_, asio::buffer(buf, len), handler);
         return 0;
     }
     template <typename Handler> int read_some(char * buf, size_t len, Handler handler)

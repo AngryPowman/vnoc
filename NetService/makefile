@@ -1,22 +1,32 @@
 # author by AngryPowman, for VNOC server
-# revision : 3
+# revision : 4
+# revisioned by Tydus
 CXX=g++
-VPATH=src:test:../Message:../program_options
-CXXFLAGS=-std=c++0x  
-CUR_DIR = $(shell pwd)
-INCS := $(CUR_DIR)/include
-Server_OBJ=VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage.o MsgDef.o VnocProtocol.o
-%.o : %.cpp
-	$(CXX) -c $(CXXFLAGS) -I$(INCS)  $< -o $@
+LD=g++
+VPATH=src:test:../Message:../program_options:src/mysql
+CUR_DIR := $(shell pwd)
+INCS := -I$(CUR_DIR)/include -I$(CUR_DIR)/dependencies/build/include
+LIBS := -L$(CUR_DIR)/lib -L$(CUR_DIR)/dependencies/build/lib
 
-all : Server test_bin
+CXXFLAGS=-std=c++0x $(INCS)
+LDFLAGS := $(LIBS)
+
+PO_OBJ=cmdline.o options_description.o utf8_codecvt_facet.o config_file.o parsers.o value_semantic.o convert.o positional_options.o variables_map.o split.o
+Server_OBJ=VNOCServer.o NetService.o AsioTcpServer.o MessageParser.o PackMessage.o MsgDef.o VnocProtocol.o Config.o UserManage.o UserStorage.o SQLUserStorage.o FileUserStorage.o MysqlWrapper.o $(PO_OBJ) 
+
+all : Server EchoTestServer
+
+%.o : %.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
 Server : $(Server_OBJ)
-	$(CXX) -lpthread $^ -o bin/$@
-test_bin: EchoTestServer
+	mkdir -p bin
+	$(LD) $(LIBS) -lpthread -lmysql $^ -o bin/$@
 
 EchoTestServer : EchoTestServer.o  AsioTcpServer.o
-	$(CXX) -lpthread $^ -o bin/$@
+	mkdir -p bin
+	$(LD) $(LIBS) -lpthread $^ -o bin/$@
 clean :
 	rm -fr bin/*
-	rm -f *.o
+	rm -f *.o *.obj
 

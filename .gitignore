@@ -1,8 +1,38 @@
+# Directories to ignore
+bin
+Debug
+Release
+/NetService/src/test/testRunner
+/Client/CppTest
 
-/NetService/Debug
-/NetService/bin
-/vnoc/Debug
-/C:/Users/tengda/Documents/GitHub/vnoc/VNOC/VNOC.sdf
-/VNOC/VNOC.sdf
-/netservice/Debug
-/netservice/Release
+# Files to ignore
+*.sdf
+*.obj
+*.tlog
+*.user
+*.log
+*.res
+*.pch
+*.lastbuildstate
+*.idb
+*.ipch
+*.suo
+*.pdb
+*.manifest
+*.opensdf
+*.cache
+*.lib
+*.o
+*.aps
+*.unsuccessfulbuild
+tags
+cpptestresults.xml
+
+!libmysql.lib
+!mysqlclient.lib
+
+/NetService/libmysql.dll
+/NetService/NetService.zip
+/NetService/server.exe
+/NetService/.project
+/NetService/.cproject

@@ -11,43 +11,34 @@ using namespace std;
 CMessage* CMessageParser::_MessageType()
 {
 	CMessage* msg_str = NULL;
-	switch (_GetMessageType())
+	switch (m_Instruct)
 	{
-	case MSG_AVC_TYPE: msg_str = new MSG_AVC; 
+	case MSG_AVC_COM: msg_str = new MSG_AVC; 
 		break;
-	case MSG_ALI_TYPE: msg_str = new MSG_ALI; 
+	case MSG_ALI_COM: msg_str = new MSG_ALI; 
 		break;
-	case MSG_RVC_TYPE: msg_str = new MSG_RVC; 
+	case MSG_RVC_COM: msg_str = new MSG_RVC; 
 		break;
-	case MSG_RLI_TYPE: msg_str = new MSG_RLI;
+	case MSG_RLI_COM: msg_str = new MSG_RLI;
 		break;
-	case MSG_RPS_TYPE: msg_str = new MSG_RPS;
+	case MSG_RPS_COM: msg_str = new MSG_RPS;
 	    break;
-	case MSG_APS_TYPE: msg_str = new MSG_APS;
+	case MSG_APS_COM: msg_str = new MSG_APS;
+		break;
+	case MSG_RPG_COM: msg_str = new MSG_RPG;
+		break;
+	case MSG_APG_COM: msg_str = new MSG_APG;
+		break;
+	case MSG_RCI_COM: msg_str = new MSG_RCI;
+		break;
+	case MSG_ACI_COM: msg_str = new MSG_ACI;
+		break;
+	case MSG_ACL_COM: msg_str = new MSG_ACL;
+		break;
+	case MSG_RCL_COM: msg_str = new MSG_RCL;
 		break;
 	}
 	return msg_str;
-}
-
-int  CMessageParser::_GetMessageType()
-{
-	int  _type = 0;
-	switch(m_Instruct)
-	{
-	case MSG_AVC_COM: _type =  MSG_AVC_TYPE; 
-		break;
-	case MSG_ALI_COM: _type =  MSG_ALI_TYPE; 
-		break;
-	case MSG_RVC_COM: _type =  MSG_RVC_TYPE; 
-		break;
-	case MSG_RLI_COM: _type =  MSG_RLI_TYPE;
-		break;
-	case MSG_RPS_COM: _type =  MSG_RPS_TYPE;
-		break;
-	case MSG_APS_COM: _type =  MSG_APS_TYPE;
-		break;
-	}
-	return _type;
 }
 
 int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
@@ -67,6 +58,8 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 		return -1;
 	}
 
+
+
 	if(lpszData[0] != MSG_BEGIN )
 	{
 	  _Messsage->m_Begin = false;
@@ -82,12 +75,11 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 
 	//取序号
 	CHECLUP_LEN(SER_INDEX + 1, len );
-	for (int index = 0; index < 2; index++)
+	nPos += VER_INDEX + 1;/*开头标记空间*/
+	for (int index = 0; index < 2; index++,nPos++)
 	{
-		_Messsage->m_Serial[index] = (int)lpszData[SER_INDEX - index];
+		_Messsage->m_Serial[index] = (int)lpszData[nPos];
 	}
-	//转换 按照大端存放 
-	LittleSwapBigByte(_Messsage->m_Serial,2);
 
 	//获取包体长度           大端存放
 	for(nPos = 0;nPos < MSG_CLASS_LEN; nPos++)
@@ -102,12 +94,12 @@ int CMessageParser::_Head(CMessage* _Messsage,byte* lpszData,size_t len)
 
 	CHECLUP_LEN(COM_INDEX + 1, len );
 	//获取GUID           小端端存放
-	for(nPos = 0;nPos < MSG_CLASS_GUID; nPos++)
+	nPos += 4;
+	for(int index = 0;index < MSG_CLASS_GUID; nPos++,index++)
 	{
-		_Messsage->m_GUID[nPos] = lpszData[(GUID_INDEX)- nPos];
+		_Messsage->m_GUID[index] = lpszData[ nPos ];
 	}
 	//转换 按照大端存放 
-	LittleSwapBigByte(_Messsage->m_GUID,MSG_CLASS_GUID);
 
 	_Messsage->m_Command = (int)lpszData[COM_INDEX];
 
@@ -145,12 +137,15 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 	_Messsage->m_ComListLen.clear();
 
 	//按照大端存放
-	for(nPos = 0;nPos < (int)(MSG_CLASS_PARAM * _Messsage->m_CmlCount); nPos++)
+	nPos = PAC_INDEX + 1;
+	for(int index = 0;index < (int)(MSG_CLASS_PARAM * _Messsage->m_CmlCount); index++,nPos++)
 	{
-		_Messsage->m_ComListLen.push_back(lpszData[(PAC_INDEX +(MSG_CLASS_PARAM * _Messsage->m_CmlCount)) -nPos]);
+		_Messsage->m_ComListLen.push_back(lpszData[nPos]);
 	}
 
-	int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
+	//int* tmpCmlListLen = new int[_Messsage->m_CmlCount];
+	std::vector<int> tmpCmlListLen;
+	tmpCmlListLen.resize(_Messsage->m_CmlCount);
 
 	byte tmpComlLen[MSG_CLASS_PARAM] = {0};
 
@@ -167,14 +162,14 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 		{
 			tmpComlLen[index] = _Messsage->m_ComListLen[j];
 		}
-		ParamLen += byteToInt(tmpComlLen,4);
+		ParamLen += BigLittleSwap32(byteToInt(tmpComlLen,4));
 		memset(tmpComlLen,0,MSG_CLASS_PARAM);
 	}
 
+	int j = 0;
 	for(int i = 0;i < (int)(_Messsage->m_CmlCount);i++)
 	{
-		int j = i * 4;
-		for (int index = 0; index < MSG_CLASS_PARAM; j++,index++)
+		for (int index = 0; index < MSG_CLASS_PARAM;j++,index++)
 		{
 			tmpComlLen[index] = _Messsage->m_ComListLen[j];
 		}
@@ -182,38 +177,25 @@ int CMessageParser::_Body(CMessage* _Messsage,byte* lpszData,size_t len)
 		if (tmpComlLen != NULL)
 		{
 
-			tmpCmlListLen[i] = byteToInt(tmpComlLen,4);
+			tmpCmlListLen[i] = BigLittleSwap32(byteToInt(tmpComlLen,4));
 			//取参数
-			CHECLUP_LEN((PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + ParamLen) + 1, len );
+			//CHECLUP_LEN((PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + ParamLen) + 1, len );
 
 			memset(tmpComlLen,0,MSG_CLASS_PARAM);
 
-			_Messsage->m_ComCommandList[i].clear();
+			_Messsage->m_ComCommandList[i].second.clear();
 			if (i == 0)
 			{
-				TmpIndex = (PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + ParamLen);
+				TmpIndex = (PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount)) + 1;
 			}
-			else
+			_Messsage->m_ComCommandList[i].first = tmpCmlListLen[i];
+			for (int index = 0; index < tmpCmlListLen[i]; index++, TmpIndex++ )
 			{
-				ParamPos += tmpCmlListLen[i - 1];
-				TmpIndex = ((PAC_INDEX + (MSG_CLASS_PARAM * _Messsage->m_CmlCount) + ParamLen) -  ParamPos);
-			}
-
-			for (int index = 0; index < tmpCmlListLen[i]; index++ )
-			{
-				_Messsage->m_ComCommandList[i].push_back(lpszData[TmpIndex - index]);
+				_Messsage->m_ComCommandList[i].second.push_back(lpszData[TmpIndex]);
 				VerifyPos++;
 			}
-			LittleSwapBigByte(&_Messsage->m_ComCommandList[i]);
 		}
 	}
-
-	if (tmpCmlListLen != NULL)
-	{
-		delete [] tmpCmlListLen;
-		tmpCmlListLen = NULL;
-	}
-
 	return VerifyPos;
 }
 
@@ -280,4 +262,44 @@ CMessage* CMessageParser::Parse(byte* lpszData,size_t len)
 	_Tail(m_MessageStr,lpszData,ParamLen,len);
 
 	return m_MessageStr;
+}
+
+int CMessageParser::Check( byte* lpszDate,size_t len )
+{
+	int Begin = 0;
+	int End   = 0;
+	int index = 0;
+
+	for(index = 0; index < (int)len;index++)
+	{
+		if (lpszDate[index] ==  MSG_BEGIN)
+		{
+			Begin = index;
+			break;
+		}
+	}
+	index = 0;
+	if (lpszDate[len - 1] == MSG_END)
+	{
+		End = len;
+	}
+	else
+	{
+		if (len < 2)
+		{
+			return -1;
+		}
+		else
+		{
+			return Check(lpszDate,len - 1);
+		}
+	}
+
+
+	if ( End  == 0 )
+	{
+		return -1;
+	}
+
+	return End;
 }
