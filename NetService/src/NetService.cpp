@@ -9,6 +9,8 @@
 #include "VnocMessageSocketHandler.hpp"
 #include "RliMessageHandler.hpp"
 #include "RvcMessageHandler.hpp"
+#include "RclMessageHandler.hpp"
+
 
 using namespace std;
 
@@ -29,7 +31,7 @@ bool NetService::start(unsigned int u_port)
     VnocMessageHandlerFactory socketHandlerFactory(protocol_);
     RliMessageHandler rliHandler(protocol_);
     RvcMessageHandler rvcHandler(protocol_);
-    
+    RclMessageHandler rclHandler(protocol_);
     server_= new AsioTcpServer(protocol_->getSocketHandlerFactory());
     server_->start(u_port);
     return true;

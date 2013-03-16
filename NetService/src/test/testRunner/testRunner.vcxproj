@@ -101,7 +101,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <AdditionalDependencies>cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../../../../ThirdLibs/VisualLeakDetector/lib/win32/vld.lib;cppunitd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -159,14 +159,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Message\MessageParser.cpp" />
-    <ClCompile Include="..\..\..\..\Message\MsgDef.cpp" />
-    <ClCompile Include="..\..\..\..\Message\PackMessage.cpp" />
-    <ClCompile Include="..\..\testUserManage.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\BufferMessage.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\CMessage.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\Message2Pack.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\Message2Parser.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\MsgDataValue\ArrayData.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\MsgDataValue\MsgDataValue.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\MsgDataValue\StringData.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\ParserMessageXML.cpp" />
+    <ClCompile Include="..\..\..\..\NMessage\XMLObject.cpp" />
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinystr.cpp" />
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\ThirdLibs\TinyXML\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\FileUserStorage.cpp" />
+    <ClCompile Include="..\..\RoomManager.cpp" />
+    <ClCompile Include="..\..\UserManage.cpp" />
+    <ClCompile Include="..\..\UserStorage.cpp" />
     <ClCompile Include="..\..\VnocProtocol.cpp" />
+    <ClCompile Include="..\..\VNOCUser.cpp" />
     <ClCompile Include="..\EchoTestHandlerTest.cpp" />
+    <ClCompile Include="..\RoomPoolTest.cpp" />
     <ClCompile Include="..\testRunner.cpp" />
+    <ClCompile Include="..\testUserManage.cpp" />
     <ClCompile Include="..\VnocMessageHandlerTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\NMessage\BufferMessage.h" />
+    <ClInclude Include="..\..\..\..\NMessage\CMessage.h" />
+    <ClInclude Include="..\..\..\..\NMessage\IBaseMessage.h" />
+    <ClInclude Include="..\..\..\..\NMessage\IReadMessage.h" />
+    <ClInclude Include="..\..\..\..\NMessage\IWriteMessage.h" />
+    <ClInclude Include="..\..\..\..\NMessage\Message2Pack.h" />
+    <ClInclude Include="..\..\..\..\NMessage\Message2Parser.h" />
+    <ClInclude Include="..\..\..\..\NMessage\MessageDef.h" />
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\ArrayData.h" />
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\MsgDataValue.h" />
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\NumData.hpp" />
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\NumData_t.hpp" />
+    <ClInclude Include="..\..\..\..\NMessage\MsgDataValue\StringData.h" />
+    <ClInclude Include="..\..\..\..\NMessage\ParserMessageXML.h" />
+    <ClInclude Include="..\..\..\..\NMessage\XMLObject.h" />
+    <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinystr.h" />
+    <ClInclude Include="..\..\..\..\ThirdLibs\TinyXML\tinyxml.h" />
+    <ClInclude Include="..\..\RoomManager.h" />
+    <ClInclude Include="..\..\VNOCUser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

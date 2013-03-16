@@ -1,57 +1,93 @@
-/*
-用户管理模块
-操作1 用户验证
-操作2 用户注册
-操作3 找回密码
-操作4 上传文件
-操作5 用户下线
-*/
+#pragma once
+
+#include "UserInfo.hpp"
+#include "UserStorage.h"
 #include <string>
-#define NULLPOINT			-1
-#define LOGIN_OK			1
-#define TEST_FALSE			2
+#include <cstring>
+#include <set>
+#include <mutex>
 
-using namespace std;
+#define NULLPOINT           -1
+#define LOGIN_OK            1
+#define TEST_FALSE          2
+#define ACCOUNT_NULL        3
+#define HAS_LOGINED         4
 
-struct userinfo
-{
-	//其中有很多用户信息
-};
+extern std::mutex userSetMutex;
+
 class CUserManage
 {
-private:
-	
+
 public:
-	//返回值： LOGIN_OK 登陆成功 TEST_FALSE 验证失败 NULLPOINT 指针无效
-	//如果登陆成功则获得用户信息
-	int Authenticate(string sUser, char* pPassword, userinfo* pUserInfo, int nPassLen = 20)
-{
-	char strPass[20] = "0000000000000000000";
-	
-	if (false)//账号是否存在 查数据库
-	{
-		return TEST_FALSE;
-	}
-	
-	int i = 0;
-	do
-	{
-		if (strPass[i] != pPassword[i])
-		{
-			return TEST_FALSE;
-		}
-		++i;
-	} while (i < nPassLen);
+    UserStorage *_us;
+    static CUserManage* GetInstance()
+    {
+        return &_instance;
+    }
+    //return value: LOGIN_OK(login-success) TEST_FALSE(verification-failure) NULLPOINT(null-pointer)
+    //get the user's information if login-success.
+    void initial(UserStorage *us)
+    {
+        _us = us;
+    }
+    int Authenticate(const char* szUser,const char* pPassword, userinfo* pUserInfo, int nPassLen = 40)
+    {
+        if (szUser == NULL || strcmp(szUser, "") == 0)
+        {
+            return TEST_FALSE;
+        }
 
-	if ((int)pUserInfo == 0)
-	{
-		return NULLPOINT;
-	}
+        strncpy(pUserInfo->strUser, szUser, 40);
+        userSetMutex.lock();
+        bool usernameInserted = insertOnlineUser(szUser);
+        userSetMutex.unlock();
+        if(usernameInserted == false)
+        {
+            return HAS_LOGINED;//this user has logined, deny this login request.
+        }
+        
+        return LOGIN_OK;
+        if ( !_us->IfUserExist(szUser) )//check the username in the database
+        {
+            return ACCOUNT_NULL;
+        }
+        char strPass[41] = {0};	
+        _us->GetPassword(szUser, strPass, 40);
 
-	//获得用户信息
-	//userinfo->xx == xx;
-	return LOGIN_OK;
-}
+        int i = 0; //verify the password
+        do
+        {
+            if (strPass[i] != pPassword[i])
+            {
+                return TEST_FALSE;
+            }
+            ++i;
+        } while (i < nPassLen);
 
+        if (pUserInfo == 0)
+        {
+            return NULLPOINT;
+        }
+
+        //get the user's information
+        _us->GetUserInfo(szUser, pUserInfo);
+
+        return LOGIN_OK;
+    }
+    bool deleteOnlineUser(const char* szUser)
+    {
+        std::string temp = szUser;
+        userSetMutex.lock();
+        bool deleteResult = 0 != onlineUsers.erase(temp);
+        userSetMutex.unlock();
+        return deleteResult;
+    }
+private:
+    static CUserManage _instance;
+    std::set<std::string> onlineUsers;
+    bool insertOnlineUser(const char *szUser)
+    {
+        std::string temp = szUser;
+        return onlineUsers.insert(temp).second;
+    }
 };
-

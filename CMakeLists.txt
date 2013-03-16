@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.6)
+project(vnoc)
+list(APPEND CMAKE_CXX_FLAGS "-std=c++11 -Wall")
+add_subdirectory(NMessage)
+add_subdirectory(NetService)
+add_subdirectory(program_options)
