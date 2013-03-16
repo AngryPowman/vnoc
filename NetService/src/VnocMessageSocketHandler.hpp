@@ -8,6 +8,7 @@
 #include "VnocProtocol.hpp"
 #include "util.hpp"
 #include <ezlogger_headers.hpp>
+#include "UserManage.hpp"
 
 using namespace VNOC::Message;
 

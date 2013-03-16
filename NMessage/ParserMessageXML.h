@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <tchar.h>
 #include "MessageDef.h"
 #include "XMLObject.h"
 

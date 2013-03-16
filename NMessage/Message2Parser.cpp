@@ -1,5 +1,6 @@
 #include "Message2Parser.h"
 #include "MessageUnionFunDef.h"
+#include <cstring>
 
 namespace VNOC
 {

@@ -1,5 +1,6 @@
 #include "BufferMessage.h"
 #include <stdlib.h>
+#include <cstring>
 
 namespace VNOC
 {

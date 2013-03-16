@@ -1,12 +1,16 @@
 #ifndef VNOC_C_MESSAGE_UINT
 #define VNOC_C_MESSAGE_UINT
 
-#include "NumData_t.hpp"
+#include "MsgDataValue.h"
+#include <typeinfo>
 
 namespace VNOC
 {
 namespace Message
 {
+
+template<typename TUIntType>
+class NumData;
 
 typedef NumData<Define::int8>    Int8Data;
 typedef NumData<Define::int16>   Int16Data;
@@ -15,47 +19,82 @@ typedef NumData<Define::uint8>   UInt8Data;
 typedef NumData<Define::uint16>  UInt16Data;
 typedef NumData<Define::uint32>  UInt32Data;
 
-EMPTY_TEMPTALE_DEFINE
-MsgStatus UInt8Data::ToUInt8(Define::uint8& Value)
+template<typename TUIntType>
+class NumData : public MsgDataValue
 {
-    Value = m_Value;
-    return MsgStatus_Ok;
-}
+public:
+    NumData(TUIntType Value) : m_Value(Value) {}
+    virtual ~NumData() {}
 
-EMPTY_TEMPTALE_DEFINE
-MsgStatus UInt16Data::ToUInt16(Define::uint16& Value)
-{
-    Value = m_Value;
-    return MsgStatus_Ok;
-}
+    MsgStatus ToUInt8(Define::uint8& Value)
+    {
+        if(typeid(*this) == typeid(UInt8Data))
+        {
+            Value = m_Value;
+            return MsgStatus_Ok;
+        }
+        return MsgStatus_Err;
+    }
 
-EMPTY_TEMPTALE_DEFINE
-MsgStatus UInt32Data::ToUInt32(Define::uint32& Value)
-{
-    Value = m_Value;
-    return MsgStatus_Ok;
-}
+    MsgStatus ToUInt16(Define::uint16& Value)
+    {
+        if(typeid(*this) == typeid(UInt16Data))
+        {
+            Value = m_Value;
+            return MsgStatus_Ok;
+        }
+        return MsgStatus_Err;
+    }
 
-EMPTY_TEMPTALE_DEFINE
-MsgStatus Int8Data::ToInt8(Define::int8& Value)
-{
-    Value = m_Value;
-    return MsgStatus_Ok;
-}
+    MsgStatus ToUInt32(Define::uint32& Value)
+    {
+        if(typeid(*this) == typeid(UInt32Data))
+        {
+            Value = m_Value;
+            return MsgStatus_Ok;
+        }
+        return MsgStatus_Err;
+    }
 
-EMPTY_TEMPTALE_DEFINE
-MsgStatus Int16Data::ToInt16(Define::int16& Value)
-{
-    Value = m_Value;
-    return MsgStatus_Ok;
-}
+    MsgStatus ToInt8(Define::int8& Value)
+    {
+        if(typeid(*this) == typeid(Int8Data))
+        {
+            Value = m_Value;
+            return MsgStatus_Ok;
+        }
+        return MsgStatus_Err;
+    }
 
-EMPTY_TEMPTALE_DEFINE
-MsgStatus Int32Data::ToInt32(Define::int32& Value)
-{
-    Value = m_Value;
-    return MsgStatus_Ok;
-}
+    MsgStatus ToInt16(Define::int16& Value)
+    {
+        if(typeid(*this) == typeid(Int16Data))
+        {
+            Value = m_Value;
+            return MsgStatus_Ok;
+        }
+        return MsgStatus_Err;
+    }
+
+    MsgStatus ToInt32(Define::int32& Value)
+    {
+        if(typeid(*this) == typeid(Int32Data))
+        {
+            Value = m_Value;
+            return MsgStatus_Ok;
+        }
+        return MsgStatus_Err;
+    }
+
+    void SetValue(IN TUIntType& Value)
+    {
+        m_Value = Value;
+    }
+
+private:
+    DISALLOW_ASSIGN(NumData);
+    TUIntType m_Value;
+};
 
 }// namespace Message
 }// namespace VNOC

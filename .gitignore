@@ -1,5 +1,6 @@
 # Directories to ignore
 bin
+[Bb]uild
 Debug
 Release
 /NetService/src/test/testRunner
@@ -36,3 +37,10 @@ cpptestresults.xml
 /NetService/server.exe
 /NetService/.project
 /NetService/.cproject
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
